@@ -11,3 +11,4 @@ log.txt
 *.ipr
 *.iws
 kerby-server
+/bin/
