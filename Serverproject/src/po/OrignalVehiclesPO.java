@@ -1,18 +1,18 @@
 package po;
 
 public class OrignalVehiclesPO {
-	long vehiclecode;
-	long vehiclenum;
+	String vehiclecode;
+	String vehiclenum;
 	long extendtime;
-	public OrignalVehiclesPO(long vehiclecode, long vehiclenum, long extendtime) {
+	public OrignalVehiclesPO(String vehiclecode, String vehiclenum, long extendtime) {
 		this.vehiclecode = vehiclecode;
 		this.vehiclenum = vehiclenum;
 		this.extendtime = extendtime;
 	}
-	public long getVehiclecode() {
+	public String getVehiclecode() {
 		return vehiclecode;
 	}
-	public long getVehiclenum() {
+	public String getVehiclenum() {
 		return vehiclenum;
 	}
 	public long getExtendtime() {

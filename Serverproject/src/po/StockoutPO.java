@@ -3,14 +3,14 @@ import java.io.Serializable;
 
 public class StockoutPO  implements Serializable{
 	long id;
-	long ordercode;
+	String ordercode;
 	long outtime;
 	Hall destination;
 	Loadform loadform;
-	long transcode;
-	long motorcode;
+	String transcode;
+	String motorcode;
 	Formstate documentstate;
-	public StockoutPO(long id,long ordercode, long outtime, Hall destination, Loadform loadform, long transcode, long motorcode) {
+	public StockoutPO(long id,String ordercode, long outtime, Hall destination, Loadform loadform, String transcode, String motorcode) {
 		this.id=id;
 		this.ordercode = ordercode;
 		this.outtime = outtime;
@@ -26,7 +26,7 @@ public class StockoutPO  implements Serializable{
 	public Formstate getDocumentstate() {
 		return documentstate;
 	}
-	public void setOrdercode(long ordercode) {
+	public void setOrdercode(String ordercode) {
 		this.ordercode = ordercode;
 	}
 	public void setOuttime(long outtime) {
@@ -38,16 +38,16 @@ public class StockoutPO  implements Serializable{
 	public void setLoadform(Loadform loadform) {
 		this.loadform = loadform;
 	}
-	public void setTranscode(long transcode) {
+	public void setTranscode(String transcode) {
 		this.transcode = transcode;
 	}
-	public void setMotorcode(long motorcode) {
+	public void setMotorcode(String motorcode) {
 		this.motorcode = motorcode;
 	}
 	public void setDocumentstate(Formstate documentstate) {
 		this.documentstate = documentstate;
 	}
-	public long getOrdercode() {
+	public String getOrdercode() {
 		return ordercode;
 	}
 	public long getOuttime() {
@@ -59,10 +59,10 @@ public class StockoutPO  implements Serializable{
 	public Loadform getLoadform() {
 		return loadform;
 	}
-	public long getTranscode() {
+	public String getTranscode() {
 		return transcode;
 	}
-	public long getMotorcode() {
+	public String getMotorcode() {
 		return motorcode;
 	}
 	

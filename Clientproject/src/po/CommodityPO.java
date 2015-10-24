@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public class CommodityPO  implements Serializable{
 	long id;
-	long ordercode;
+	String ordercode;
 	long intime;
 	CommodityLocation location;
 	long outtime;
-	public CommodityPO(long id, long ordercode, long intime, CommodityLocation location, long outtime) {
+	public CommodityPO(long id, String ordercode, long intime, CommodityLocation location, long outtime) {
 		this.id = id;
 		this.ordercode = ordercode;
 		this.intime = intime;
 		this.location = location;
 		this.outtime = outtime;
 	}
-	public long getOrdercode() {
+	public String getOrdercode() {
 		return ordercode;
 	}
-	public void setOrdercode(long ordercode) {
+	public void setOrdercode(String ordercode) {
 		this.ordercode = ordercode;
 	}
 	public long getIntime() {
@@ -42,6 +42,5 @@ public class CommodityPO  implements Serializable{
 	public long getId() {
 		return id;
 	}
-	
 	
 }

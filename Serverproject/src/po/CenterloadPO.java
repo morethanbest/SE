@@ -1,20 +1,22 @@
 package po;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CenterloadPO  implements Serializable{
 	long id;
 	long loadtime;
-	long motorcode;
+	String motorcode;
 	Hall destination;
-	long vehiclecode;
+	String vehiclecode;
 	String supervisor;
 	String supercargo;
-	long[] allbarcode;
+	List<String> allbarcode;
 	double fee;
 	Formstate documentstate;
-	public CenterloadPO(long id,long loadtime, long motorcode, Hall destination, long vehiclecode, String supervisor,
-			String supercargo, long[] allbarcode, double fee) {
+	public CenterloadPO(long id,long loadtime, String motorcode, Hall destination, String vehiclecode, String supervisor,
+			String supercargo, List<String> allbarcode, double fee) {
+		this.id = id;
 		this.loadtime = loadtime;
 		this.motorcode = motorcode;
 		this.destination = destination;
@@ -31,13 +33,13 @@ public class CenterloadPO  implements Serializable{
 	public void setLoadtime(long loadtime) {
 		this.loadtime = loadtime;
 	}
-	public void setMotorcode(long motorcode) {
+	public void setMotorcode(String motorcode) {
 		this.motorcode = motorcode;
 	}
 	public void setDestination(Hall destination) {
 		this.destination = destination;
 	}
-	public void setVehiclecode(long vehiclecode) {
+	public void setVehiclecode(String vehiclecode) {
 		this.vehiclecode = vehiclecode;
 	}
 	public void setSupervisor(String supervisor) {
@@ -46,7 +48,7 @@ public class CenterloadPO  implements Serializable{
 	public void setSupercargo(String supercargo) {
 		this.supercargo = supercargo;
 	}
-	public void setAllbarcode(long[] allbarcode) {
+	public void setAllbarcode(List<String> allbarcode) {
 		this.allbarcode = allbarcode;
 	}
 	public void setFee(double fee) {
@@ -61,13 +63,13 @@ public class CenterloadPO  implements Serializable{
 	public long getLoadtime() {
 		return loadtime;
 	}
-	public long getMotorcode() {
+	public String getMotorcode() {
 		return motorcode;
 	}
 	public Hall getDestination() {
 		return destination;
 	}
-	public long getVehiclecode() {
+	public String getVehiclecode() {
 		return vehiclecode;
 	}
 	public String getSupervisor() {
@@ -76,7 +78,7 @@ public class CenterloadPO  implements Serializable{
 	public String getSupercargo() {
 		return supercargo;
 	}
-	public long[] getAllbarcode() {
+	public List<String> getAllbarcode() {
 		return allbarcode;
 	}
 	public double getFee() {

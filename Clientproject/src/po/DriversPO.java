@@ -3,14 +3,14 @@ package po;
 import java.io.Serializable;
 
 public class DriversPO  implements Serializable{
-	long drivercode;
+	String drivercode;
 	String drivername;
 	long birthtime;
-	long identifiercode;
-	long cellphone;
+	String identifiercode;
+	String cellphone;
 	String drivergender;
 	long timelimit;
-	public DriversPO(long drivercode, String drivername, long birthtime, long identifiercode, long cellphone,
+	public DriversPO(String drivercode, String drivername, long birthtime, String identifiercode, String cellphone,
 			String drivergender, long timelimit) {
 		this.drivercode = drivercode;
 		this.drivername = drivername;
@@ -20,7 +20,7 @@ public class DriversPO  implements Serializable{
 		this.drivergender = drivergender;
 		this.timelimit = timelimit;
 	}
-	public long getDrivercode() {
+	public String getDrivercode() {
 		return drivercode;
 	}
 	public String getDrivername() {
@@ -29,10 +29,10 @@ public class DriversPO  implements Serializable{
 	public long getBirthtime() {
 		return birthtime;
 	}
-	public long getIdentifiercode() {
+	public String getIdentifiercode() {
 		return identifiercode;
 	}
-	public long getCellphone() {
+	public String getCellphone() {
 		return cellphone;
 	}
 	public String getDrivergender() {
@@ -41,7 +41,7 @@ public class DriversPO  implements Serializable{
 	public long getTimelimit() {
 		return timelimit;
 	}
-	public void setDrivercode(long drivercode) {
+	public void setDrivercode(String drivercode) {
 		this.drivercode = drivercode;
 	}
 	public void setDrivername(String drivername) {
@@ -50,10 +50,10 @@ public class DriversPO  implements Serializable{
 	public void setBirthtime(long birthtime) {
 		this.birthtime = birthtime;
 	}
-	public void setIdentifiercode(long identifiercode) {
+	public void setIdentifiercode(String identifiercode) {
 		this.identifiercode = identifiercode;
 	}
-	public void setCellphone(long cellphone) {
+	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
 	public void setDrivergender(String drivergender) {

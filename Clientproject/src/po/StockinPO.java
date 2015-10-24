@@ -3,22 +3,30 @@ import java.io.Serializable;
 
 public class StockinPO  implements Serializable{
 	long id;
-	long ordercode;
+	String ordercode;
 	long intime;
 	CommodityLocation Location;
+	City destination;
 	Formstate documentstate;
-	public StockinPO(long id, long ordercode, long intime, CommodityLocation location) {
+	public StockinPO(long id, String ordercode, long intime, CommodityLocation location,City destination) {
 		this.id = id;
 		this.ordercode = ordercode;
 		this.intime = intime;
 		Location = location;
+		this.destination = destination;
 		this.documentstate=Formstate.waiting;
 	}
-	public long getOrdercode() {
+	public String getOrdercode() {
 		return ordercode;
 	}
-	public void setOrdercode(long ordercode) {
+	public void setOrdercode(String ordercode) {
 		this.ordercode = ordercode;
+	}
+	public City getDestination() {
+		return destination;
+	}
+	public void setDestination(City destination) {
+		this.destination = destination;
 	}
 	public long getIntime() {
 		return intime;
