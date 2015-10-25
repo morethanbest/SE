@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import vo.AccountVO;
 
-public interface searchAccount {
-	public AccountVO searchAccount(long id, long password)throws RemoteException;
+public interface SearchAccount {
+	public AccountVO searchAccount(long id)throws RemoteException;
 
 }

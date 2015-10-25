@@ -6,10 +6,10 @@ import java.util.List;
 
 import vo.ResultMessage; 
 
-import vo.InboundExamVO;
+import vo.StockinExamVO;
 
 public interface ExamInbounds {
-	public List<InboundExamVO> getInbounds()throws RemoteException;
+	public List<StockinExamVO> getInbounds()throws RemoteException;
 	
-	public ResultMessage InboundsExam (List<InboundExamVO> volist)throws RemoteException;
+	public ResultMessage InboundsExam (List<StockinExamVO> volist)throws RemoteException;
 }

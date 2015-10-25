@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import vo.ResultMessage;
 
-import vo.InboundVO;
+import vo.StockinVO;
 
 public interface InboundBlService {
-	public ResultMessage Inbound(InboundVO vo)throws RemoteException;
+	public ResultMessage Inbound(StockinVO vo)throws RemoteException;
 }

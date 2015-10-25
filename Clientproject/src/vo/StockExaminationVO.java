@@ -2,11 +2,11 @@ package vo;
 
 import java.util.List;
 
-public class StockExamination {
+public class StockExaminationVO {
 	long startTime;
 	long endTime;
 	List<CommodityOutVO> list;
-	public StockExamination(long startTime, long endTime,
+	public StockExaminationVO(long startTime, long endTime,
 			List<CommodityOutVO> list) {
 		super();
 		this.startTime = startTime;

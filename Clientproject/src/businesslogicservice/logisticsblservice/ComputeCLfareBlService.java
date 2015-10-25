@@ -2,9 +2,9 @@ package businesslogicservice.logisticsblservice;
 
 import java.rmi.RemoteException;
 
-import vo.CLfareFareVO;
+import vo.CLFareVO;
 
 public interface ComputeCLfareBlService {
-	public double ComputeCLfare (CLfareFareVO vo)throws RemoteException;
+	public double ComputeCLfare (CLFareVO vo)throws RemoteException;
 
 }
