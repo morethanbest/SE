@@ -1,24 +1,22 @@
 
 package po;
 import java.io.Serializable;
-import java.util.List;
 
 public class LoadPO  implements Serializable{
 	long id;
 	long loadtime;
-	String hallcode;
-	String motorcode;
+	long hallcode;
+	long motorcode;
 	Hall destination;		
-	String vehiclecode;
+	long vehiclecode;
 	String supervisor;
 	String supercargo;
-	List<String> allbarcode;
+	long[] allbarcode;
 	double fee;
 	Formstate documentstate;	
 	
-	public LoadPO(long id,long loadtime,String hallcode,String motorcode,Hall destination,String vehiclecode,String supervisor,
-			String supercargo,List<String> allbarcode,double fee){
-		this.id = id;
+	public LoadPO(long id,long loadtime,long hallcode,long motorcode,Hall destination,long vehiclecode,String supervisor,
+			String supercargo,long[] allbarcode,double fee){
 		this.loadtime=loadtime;
 		this.hallcode=hallcode;
 		this.motorcode=motorcode;
@@ -33,11 +31,11 @@ public class LoadPO  implements Serializable{
 	public long getId() {
 		return id;
 	}
-	public String getVehiclecode() {
+	public long getVehiclecode() {
 		return vehiclecode;
 	}
 
-	public void setVehiclecode(String vehiclecode) {
+	public void setVehiclecode(long vehiclecode) {
 		this.vehiclecode = vehiclecode;
 	}
 
@@ -45,11 +43,11 @@ public class LoadPO  implements Serializable{
 		this.loadtime = loadtime;
 	}
 
-	public void setHallcode(String hallcode) {
+	public void setHallcode(long hallcode) {
 		this.hallcode = hallcode;
 	}
 
-	public void setMotorcode(String motorcode) {
+	public void setMotorcode(long motorcode) {
 		this.motorcode = motorcode;
 	}
 
@@ -65,7 +63,7 @@ public class LoadPO  implements Serializable{
 		this.supercargo = supercargo;
 	}
 
-	public void setAllbarcode(List<String> allbarcode) {
+	public void setAllbarcode(long[] allbarcode) {
 		this.allbarcode = allbarcode;
 	}
 
@@ -83,16 +81,16 @@ public class LoadPO  implements Serializable{
 	public long getLoadtime(){
 		return this.loadtime;
 	}
-	public String getHallcode(){
+	public long getHallcode(){
 		return this.hallcode;
 	}
-	public String getMotorcode(){
+	public long getMotorcode(){
 		return this.motorcode;
 	}
 	public Hall getDestination(){
 		return this.destination;
 	}
-	public String getVehicldecode(){
+	public long getVehicldecode(){
 		return this.vehiclecode;
 	}
 	public String getSupervisor(){
@@ -101,7 +99,7 @@ public class LoadPO  implements Serializable{
 	public String getSupercargo(){
 		return this.supercargo;
 	}
-	public List<String> getAllbarcode(){
+	public long[] getAllbarcode(){
 		return this.allbarcode;
 	}
 	public double getFee(){

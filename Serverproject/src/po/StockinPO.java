@@ -3,42 +3,25 @@ import java.io.Serializable;
 
 public class StockinPO  implements Serializable{
 	long id;
-	String ordercode;
+	long ordercode;
 	long intime;
-	CommodityLocation Location;
-	City destination;
+	long blocknum;
+	long linenum;
+	long shelfnum;
+	long locationnum;
 	Formstate documentstate;
-	public StockinPO(long id, String ordercode, long intime, CommodityLocation location,City destination) {
-		this.id = id;
+	public StockinPO(long id,long ordercode, long intime, long blocknum, long linenum, long shelfnum, long locationnum) {
+		this.id=id;
 		this.ordercode = ordercode;
 		this.intime = intime;
-		Location = location;
-		this.destination = destination;
+		this.blocknum = blocknum;
+		this.linenum = linenum;
+		this.shelfnum = shelfnum;
+		this.locationnum = locationnum;
 		this.documentstate=Formstate.waiting;
 	}
-	public String getOrdercode() {
-		return ordercode;
-	}
-	public void setOrdercode(String ordercode) {
-		this.ordercode = ordercode;
-	}
-	public City getDestination() {
-		return destination;
-	}
-	public void setDestination(City destination) {
-		this.destination = destination;
-	}
-	public long getIntime() {
-		return intime;
-	}
-	public void setIntime(long intime) {
-		this.intime = intime;
-	}
-	public CommodityLocation getLocation() {
-		return Location;
-	}
-	public void setLocation(CommodityLocation location) {
-		Location = location;
+	public long getId() {
+		return id;
 	}
 	public Formstate getDocumentstate() {
 		return documentstate;
@@ -46,9 +29,41 @@ public class StockinPO  implements Serializable{
 	public void setDocumentstate(Formstate documentstate) {
 		this.documentstate = documentstate;
 	}
-	public long getId() {
-		return id;
+	public long getOrdercode() {
+		return ordercode;
 	}
-
+	public void setOrdercode(long ordercode) {
+		this.ordercode = ordercode;
+	}
+	public void setIntime(long intime) {
+		this.intime = intime;
+	}
+	public void setBlocknum(long blocknum) {
+		this.blocknum = blocknum;
+	}
+	public void setLinenum(long linenum) {
+		this.linenum = linenum;
+	}
+	public void setShelfnum(long shelfnum) {
+		this.shelfnum = shelfnum;
+	}
+	public void setLocationnum(long locationnum) {
+		this.locationnum = locationnum;
+	}
+	public long getIntime() {
+		return intime;
+	}
+	public long getBlocknum() {
+		return blocknum;
+	}
+	public long getLinenum() {
+		return linenum;
+	}
+	public long getShelfnum() {
+		return shelfnum;
+	}
+	public long getLocationnum() {
+		return locationnum;
+	}
 	
 }

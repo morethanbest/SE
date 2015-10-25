@@ -5,12 +5,11 @@ import java.io.Serializable;
 public class DeliveryPO  implements Serializable{
 	long id;
 	long arrivaltime;
-	String barcode;
+	long barcode;
 	String delivorinfo;
 	Formstate documentstate;
 	
-	public DeliveryPO(long id,long arrivaltime,String barcode,String delivorinfo){
-		this.id = id;
+	public DeliveryPO(long id,long arrivaltime,long barcode,String delivorinfo){
 		this.arrivaltime=arrivaltime;
 		this.barcode=barcode;
 		this.delivorinfo=delivorinfo;
@@ -27,7 +26,7 @@ public class DeliveryPO  implements Serializable{
 		this.arrivaltime = arrivaltime;
 	}
 
-	public void setBarcode(String barcode) {
+	public void setBarcode(long barcode) {
 		this.barcode = barcode;
 	}
 
@@ -41,7 +40,7 @@ public class DeliveryPO  implements Serializable{
 	public long getArrivaltime(){
 		return this.arrivaltime;
 	}
-	public String getBarcode(){
+	public long getBarcode(){
 		return this.barcode;
 	}
 	public String getDelivorinfo(){

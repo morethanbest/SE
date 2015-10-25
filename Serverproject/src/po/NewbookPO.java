@@ -1,20 +1,16 @@
 package po;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class NewbookPO  implements Serializable{
 	long id;
-	List<OrignalAccountPO> account;
-	List<OrignalCommodityPO> commodity;
-	List<OrignalOrganizationPO> organization;
-	List<OrignalStaffPO> staff;
-	List<OrignalVehiclesPO> vehicles;
-	public NewbookPO(long id, List<OrignalAccountPO> account,
-			List<OrignalCommodityPO> commodity,
-			List<OrignalOrganizationPO> organization,
-			List<OrignalStaffPO> staff, List<OrignalVehiclesPO> vehicles) {
-		super();
+	OrignalAccountPO[] account;
+	OrignalCommodityPO[] commodity;
+	OrignalOrganizationPO organization;
+	OrignalStaffPO staff;
+	OrignalVehiclesPO vehicles;
+	public NewbookPO(long id, OrignalAccountPO[] account, OrignalCommodityPO[] commodity,
+			OrignalOrganizationPO organization, OrignalStaffPO staff, OrignalVehiclesPO vehicles) {
 		this.id = id;
 		this.account = account;
 		this.commodity = commodity;
@@ -25,20 +21,21 @@ public class NewbookPO  implements Serializable{
 	public long getId() {
 		return id;
 	}
-	public List<OrignalAccountPO> getAccount() {
+	public OrignalAccountPO[] getAccount() {
 		return account;
 	}
-	public List<OrignalCommodityPO> getCommodity() {
+	public OrignalCommodityPO[] getCommodity() {
 		return commodity;
 	}
-	public List<OrignalOrganizationPO> getOrganization() {
+	public OrignalOrganizationPO getOrganization() {
 		return organization;
 	}
-	public List<OrignalStaffPO> getStaff() {
+	public OrignalStaffPO getStaff() {
 		return staff;
 	}
-	public List<OrignalVehiclesPO> getVehicles() {
+	public OrignalVehiclesPO getVehicles() {
 		return vehicles;
 	}
-
+	
+	
 }

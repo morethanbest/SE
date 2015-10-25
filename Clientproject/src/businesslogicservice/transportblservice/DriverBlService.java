@@ -16,7 +16,7 @@ public interface DriverBlService {
 	
 	public DriverVO getDriverbyDN (long driverNumber)throws RemoteException;
 	
-	public ResultMessage getDriverbyName (String name)throws RemoteException;
+	public DriverVO getDriverbyName (String name)throws RemoteException;
 	
 	
 }

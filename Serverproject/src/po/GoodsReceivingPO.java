@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class GoodsReceivingPO  implements Serializable{
 	long id;
 	long arrivaltime;
-	String transcode;
+	long transcode;
 	Hall departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 	
-	public GoodsReceivingPO(long id,long arrivaltime,String transcode,Hall departure,Arrivalstate arrivalstate){
+	public GoodsReceivingPO(long id,long arrivaltime,long transcode,Hall departure,Arrivalstate arrivalstate){
 		this.id=id;
 		this.arrivaltime=arrivaltime;
 		this.transcode=transcode;
@@ -29,7 +29,7 @@ public class GoodsReceivingPO  implements Serializable{
 		this.arrivaltime = arrivaltime;
 	}
 
-	public void setTranscode(String transcode) {
+	public void setTranscode(long transcode) {
 		this.transcode = transcode;
 	}
 
@@ -47,7 +47,7 @@ public class GoodsReceivingPO  implements Serializable{
 	public long getArrivaltime(){
 		return this.arrivaltime;
 	}
-	public String getTranscode(){
+	public long getTranscode(){
 		return this.transcode;
 	}
 	public Hall getDeparture(){

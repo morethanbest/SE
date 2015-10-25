@@ -1,14 +1,13 @@
 package po;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class LogisticsPO  implements Serializable{
 	long id;
 	String state;
-	List<String> history;
+	String[] history;
 	long ordernum;
-	public LogisticsPO(long id,String state, List<String> history, long ordernum) {
+	public LogisticsPO(long id,String state, String[] history, long ordernum) {
 		this.id=id;
 		this.state = state;
 		this.history = history;
@@ -23,10 +22,10 @@ public class LogisticsPO  implements Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
-	public List<String> getHistory() {
+	public String[] getHistory() {
 		return history;
 	}
-	public void setHistory(List<String> history) {
+	public void setHistory(String[] history) {
 		this.history = history;
 	}
 	public long getOrdernum() {

@@ -7,13 +7,13 @@ public class OrdersPO  implements Serializable{
 	String sendername;
 	String senderaddress;
 	String senderunit;
-	String senderphone;
-	String sendercellphone;
+	long senderphone;
+	long sendercellphone;
 	String receivername;
 	String receiveraddress;
 	String receiverunit;
-	String receiverphone;
-	String receivercellphone;
+	long receiverphone;
+	long receivercellphone;
 	double numbers;
 	double weight;
 	double volume;
@@ -21,16 +21,16 @@ public class OrdersPO  implements Serializable{
 	double productsize;
 	double packagefee;
 	double totalfee;
-	String ordercode;
+	long ordercode;
 	Ordertype ordertype;
-	String codeofreceiving;
+	long codeofreceiving;
 	String receiver;
 	long receivingtime;
 	Formstate documentstate;	
 	
-	public OrdersPO(long id,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
-			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
-			double volume,String productname,double productsize,double packagefee,double totalfee,String ordercode,Ordertype ordertype){
+	public OrdersPO(long id,String sendername,String senderaddress,String senderunit,long senderphone,long sendercellphone,String receivername,
+			String receiveraddress,String receiverunit,long receiverphone,long receivercellphone,double numbers,double weight,
+			double volume,String productname,double productsize,double packagefee,double totalfee,long ordercode,Ordertype ordertype){
 		this.id=id;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
@@ -51,7 +51,7 @@ public class OrdersPO  implements Serializable{
 		this.totalfee=totalfee;
 		this.ordercode=ordercode;
 		this.ordertype=ordertype;
-		this.codeofreceiving="";
+		this.codeofreceiving=0;
 		this.receiver="";
 		this.receivingtime=0;
 		this.documentstate=Formstate.waiting;
@@ -59,7 +59,7 @@ public class OrdersPO  implements Serializable{
 	public long getId() {
 		return id;
 	}
-	public void setReceive(String codeofreceiving,String receiver,long receivingtime){
+	public void setReceive(long codeofreceiving,String receiver,long receivingtime){
 		this.codeofreceiving=codeofreceiving;
 		this.receiver=receiver;
 		this.receivingtime=receivingtime;
@@ -81,11 +81,11 @@ public class OrdersPO  implements Serializable{
 		this.senderunit = senderunit;
 	}
 
-	public void setSenderphone(String senderphone) {
+	public void setSenderphone(long senderphone) {
 		this.senderphone = senderphone;
 	}
 
-	public void setSendercellphone(String sendercellphone) {
+	public void setSendercellphone(long sendercellphone) {
 		this.sendercellphone = sendercellphone;
 	}
 
@@ -101,11 +101,11 @@ public class OrdersPO  implements Serializable{
 		this.receiverunit = receiverunit;
 	}
 
-	public void setReceiverphone(String receiverphone) {
+	public void setReceiverphone(long receiverphone) {
 		this.receiverphone = receiverphone;
 	}
 
-	public void setReceivercellphone(String receivercellphone) {
+	public void setReceivercellphone(long receivercellphone) {
 		this.receivercellphone = receivercellphone;
 	}
 
@@ -137,7 +137,7 @@ public class OrdersPO  implements Serializable{
 		this.totalfee = totalfee;
 	}
 
-	public void setOrdercode(String ordercode) {
+	public void setOrdercode(long ordercode) {
 		this.ordercode = ordercode;
 	}
 
@@ -158,10 +158,10 @@ public class OrdersPO  implements Serializable{
 	public String getSenderunit(){
 		return this.senderunit;
 	}
-	public String getSenderphone(){
+	public long getSenderphone(){
 		return this.senderphone;
 	}
-	public String getSendercellphone(){
+	public long getSendercellphone(){
 		return this.sendercellphone;
 	}
 	public String getReceivername(){
@@ -173,10 +173,10 @@ public class OrdersPO  implements Serializable{
 	public String getReceiverunit(){
 		return this.receiverunit;
 	}
-	public String getReceiverphone(){
+	public long getReceiverphone(){
 		return this.receiverphone;
 	}
-	public String getReceivercellphone(){
+	public long getReceivercellphone(){
 		return this.sendercellphone;
 	}
 	public double getNumbers(){
@@ -200,13 +200,13 @@ public class OrdersPO  implements Serializable{
 	public double getTotalfee(){
 		return this.totalfee;
 	}
-	public String getOrdercode(){
+	public long getOrdercode(){
 		return this.ordercode;
 	}
 	public Ordertype getOrdertype(){
 		return this.ordertype;
 	}
-	public String getCodeofreceiving(){
+	public long getCodeofreceiving(){
 		return this.codeofreceiving;
 	}
 	public String getReceiver(){
