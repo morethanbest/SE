@@ -13,9 +13,9 @@ public interface VehicleBlService {
 	
 	public ResultMessage revVehicle (VehicleVO vo)throws RemoteException;
 	
-	public VehicleVO getVehiclebyVN (long vehicleNumber)throws RemoteException;
+	public VehicleVO getVehiclebyVN (String vehicleNumber)throws RemoteException;
 	
-	public VehicleVO getVehiclebyPN (long plateNumber)throws RemoteException;
+	public VehicleVO getVehiclebyPN (String plateNumber)throws RemoteException;
 	
 	
 }

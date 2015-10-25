@@ -27,7 +27,7 @@ public class AccoutblService_Stub implements AccountBlService {
 	}
 
 	@Override
-	public AccountVO getAccountbyID(long id, long password) throws RemoteException {
+	public AccountVO getAccountbyID(String id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new AccountVO("abc",100);
 	}

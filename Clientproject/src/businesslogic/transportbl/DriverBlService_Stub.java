@@ -27,7 +27,7 @@ public class DriverBlService_Stub implements DriverBlService {
 	}
 
 	@Override
-	public DriverVO getDriverbyDN(long driverNumber) throws RemoteException {
+	public DriverVO getDriverbyDN(String driverNumber) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new DriverVO("1","abc",1,"321459193621","13214","32153",20150322);
 	}

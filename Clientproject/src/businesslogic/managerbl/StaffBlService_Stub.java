@@ -6,7 +6,7 @@ import po.Job;
 import vo.ResultMessage;
 import vo.StaffVO;
 
-public class StaffBlService implements businesslogicservice.managerblservice.StaffBlService {
+public class StaffBlService_Stub implements businesslogicservice.managerblservice.StaffBlService {
 
 	@Override
 	public ResultMessage addStaff(StaffVO vo) throws RemoteException {

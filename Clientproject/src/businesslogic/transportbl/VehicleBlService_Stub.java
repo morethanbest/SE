@@ -27,13 +27,13 @@ public class VehicleBlService_Stub implements VehicleBlService {
 	}
 
 	@Override
-	public VehicleVO getVehiclebyVN(long vehicleNumber) throws RemoteException {
+	public VehicleVO getVehiclebyVN(String vehicleNumber) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new VehicleVO("1","1",1);
 	}
 
 	@Override
-	public VehicleVO getVehiclebyPN(long plateNumber) throws RemoteException {
+	public VehicleVO getVehiclebyPN(String plateNumber) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new VehicleVO("1","1",1);
 	}
