@@ -13,7 +13,7 @@ public interface AccountBlService {
 	
 	public ResultMessage revAccount(AccountVO vo)throws RemoteException;
 	
-	public AccountVO getAccountbyID(String id)throws RemoteException;
+	public AccountVO getAccountbyID(long id)throws RemoteException;
 	
 
 }

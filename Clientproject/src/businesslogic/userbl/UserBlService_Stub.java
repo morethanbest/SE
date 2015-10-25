@@ -35,7 +35,7 @@ public class UserBlService_Stub implements UserBlService {
 	@Override
 	public UserVO getUserbyID(long id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new UserVO("1","1","1");
+		return new UserVO(1,"1","1","1");
 	}
 
 }
