@@ -11,5 +11,5 @@ public interface DriversDataService {
 	
 	public void updateDriver(DriversPO po)throws RemoteException;
 	
-	public DriversPO findDriver(long identity)throws RemoteException;
+	public DriversPO findDriver(String identity)throws RemoteException;
 }

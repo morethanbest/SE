@@ -17,7 +17,7 @@ public class ArrivalFormDataService_Stub implements ArrivalFormDataService{
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<ArrivalPO> list=new ArrayList<ArrivalPO>();
-		ArrivalPO po=new ArrivalPO(1205656, "02507", 20130417, "0251201411200000002", Hall.Shanghai, Arrivalstate.intact);;
+		ArrivalPO po=new ArrivalPO(1205656, "02507", 20130417, "0251201411200000002", Hall.Shanghai, Arrivalstate.intact);
 		return null;
 	}
 

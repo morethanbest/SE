@@ -14,11 +14,16 @@ public class LogisticsInfoService_Stub implements LogisticsInfoService{
 	public LogisticsPO findLogisticsInfo(long ordernum) throws RemoteException {
 		// TODO Auto-generated method stub
 		//String[] history={"Nanjing hall 02501","Nanjing center 0250"};
+		if(ordernum==2){
 		List<String> history=new ArrayList<String>();
 		history.add("Nanjing hall 02501");
 		history.add("Nanjing center 0250");
 		LogisticsPO po=new LogisticsPO(2201255, "on the hall 02501", history,2);
-		return po;
+		return po;}
+		else{
+			return null;
+			
+		}
 	}
 
 	

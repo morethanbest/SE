@@ -26,9 +26,9 @@ public class VehicleDataService_Stub implements VehicleDataService{
 	}
 
 	@Override
-	public VehiclesPO findVehicle(long identity) throws RemoteException {
+	public VehiclesPO findVehicle(String identity) throws RemoteException {
 		// TODO Auto-generated method stub
-		VehiclesPO po=new VehiclesPO("025000001","À’A 00000",3);
+		VehiclesPO po=new VehiclesPO(identity,"À’A 00000",3);
 		return po;
 	}
 

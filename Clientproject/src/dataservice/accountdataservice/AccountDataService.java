@@ -11,5 +11,5 @@ public interface AccountDataService {
 	
 	public void updateAccount(AccountPO po)throws RemoteException;
 	
-	public AccountPO findAccount(long accountname)throws RemoteException;
+	public AccountPO findAccount(String accountname)throws RemoteException;
 }
