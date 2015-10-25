@@ -16,7 +16,8 @@ public class CenterLoadFormDataService_Stub  implements CenterLoadFormDataServic
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<CenterloadPO> list=new ArrayList<CenterloadPO>();
-		
+		List<String> allbarcode=new ArrayList<String>();
+		allbarcode.add("2014940328");
 
 
 		CenterloadPO po=new CenterloadPO(156646, 20131201, "0251201304120000001", Hall.Shanghai, "0250000001", "ÀîÍú", "ÕÅ¿ª", allbarcode, 200);
