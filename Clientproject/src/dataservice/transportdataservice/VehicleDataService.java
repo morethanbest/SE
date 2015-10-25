@@ -11,5 +11,5 @@ public interface VehicleDataService {
 	
 	public void updateVehicle(VehiclesPO po)throws RemoteException;
 	
-	public VehiclesPO findVehicle(long identity)throws RemoteException;
+	public VehiclesPO findVehicle(String identity)throws RemoteException;
 }

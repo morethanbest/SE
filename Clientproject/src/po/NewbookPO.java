@@ -5,6 +5,7 @@ import java.util.List;
 
 public class NewbookPO  implements Serializable{
 	long id;
+	long time;
 	List<OrignalAccountPO> account;
 	List<OrignalCommodityPO> commodity;
 	List<OrignalOrganizationPO> organization;

@@ -29,9 +29,9 @@ public class AccountDataService_Stub implements AccountDataService{
 	}
 
 	@Override
-	public AccountPO findAccount(long accountname) throws RemoteException {
+	public AccountPO findAccount(String accountname) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new AccountPO(123456,"accountpo1",100.00);
+		return new AccountPO(123456,accountname,100.00);
 	}
 
 	
