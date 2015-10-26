@@ -21,7 +21,7 @@ public class UserBlService_Stub implements UserBlService {
 	}
 
 	@Override
-	public ResultMessage delUser() throws RemoteException {
+	public ResultMessage delUser(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}

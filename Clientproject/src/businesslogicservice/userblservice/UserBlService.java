@@ -11,7 +11,7 @@ public interface UserBlService {
 	
 	public ResultMessage addUser(UserVO vo)throws RemoteException;
 	
-	public ResultMessage delUser()throws RemoteException;
+	public ResultMessage delUser(UserVO vo)throws RemoteException;
 	
 	public ResultMessage revUser(UserVO vo)throws RemoteException;
 	

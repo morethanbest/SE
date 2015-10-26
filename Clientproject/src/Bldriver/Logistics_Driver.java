@@ -9,7 +9,7 @@ import businesslogicservice.logisticsblservice.GetOrderbyONBlService;
 
 public class Logistics_Driver {
     public void drive(GetOrderbyONBlService getOrderbyON) throws RemoteException{
-    	OrderVO vo=getOrderbyON.getOrderbyON(1);
+    	OrderVO vo=getOrderbyON.getOrderbyON("1");
     	if(vo!=null){
     		System.out.println("Search succeeds");
     	}
