@@ -2,11 +2,11 @@ package businesslogic.managerbl;
 
 import java.rmi.RemoteException;
 
-import businesslogicservice.managerblservice.SalaryBlSrevice;
+import businesslogicservice.managerblservice.SalaryBlService;
 import vo.ResultMessage;
 import vo.SalaryVO;
 
-public class SalaryBlService_Stub implements SalaryBlSrevice {
+public class SalaryBlService_Stub implements SalaryBlService {
 
 	@Override
 	public ResultMessage salary(SalaryVO vo) throws RemoteException {

@@ -12,7 +12,7 @@ import vo.StatisticsVO;
 public class Statistics_Stub implements Statistics {
 
 	@Override
-	public StatisticsVO Statistics(long startTime, long endTime) throws RemoteException {
+	public StatisticsVO getStatistics(long startTime, long endTime) throws RemoteException {
 		// TODO Auto-generated method stub
 		List<RecordpayVO> l1=new ArrayList<RecordpayVO>();
 		l1.add(new RecordpayVO(1,1,"a",1,1,1,1,1,"b"));

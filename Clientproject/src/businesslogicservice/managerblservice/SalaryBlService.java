@@ -6,7 +6,7 @@ import vo.ResultMessage;
 
 import vo.SalaryVO;
 
-public interface SalaryBlSrevice {
+public interface SalaryBlService {
 	public ResultMessage salary(SalaryVO vo)throws RemoteException;
 
 }

@@ -7,10 +7,10 @@ import vo.ResultMessage;
 import vo.ConstantsVO;
 
 public interface ConstantsBlService {
-	public ResultMessage addContants (ConstantsVO vo)throws RemoteException;
+	public ResultMessage addConstants (ConstantsVO vo)throws RemoteException;
 	
-	public ResultMessage delContants()throws RemoteException;
+	public ResultMessage delConstants(ConstantsVO vo)throws RemoteException;
 	
-	public ResultMessage revContants (ConstantsVO vo)throws RemoteException;
+	public ResultMessage revConstants (ConstantsVO vo)throws RemoteException;
 
 }
