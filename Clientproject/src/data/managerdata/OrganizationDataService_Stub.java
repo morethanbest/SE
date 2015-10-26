@@ -31,7 +31,7 @@ public class OrganizationDataService_Stub implements OrganizationDataService{
 	public OrganizationPO findOrganization(long organizationid)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		OrganizationPO po=new OrganizationPO(04562, "南京鼓楼",Organization.hall );
+		OrganizationPO po=new OrganizationPO(organizationid, "南京鼓楼",Organization.hall );
 		return po;
 	}
 

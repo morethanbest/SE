@@ -29,7 +29,7 @@ public class ConstantsDataService_Stub implements ConstantsDataService {
 	@Override
 	public ConstantsPO findConstants(long id) throws RemoteException {
 		// TODO Auto-generated method stub
-		ConstantsPO po=new ConstantsPO(00120, "Shanghai--Nanajing", 266);
+		ConstantsPO po=new ConstantsPO(id, "Shanghai--Nanajing", 266);
 		
 		return po;
 	}
