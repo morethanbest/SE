@@ -6,7 +6,7 @@ import businesslogicservice.accountblservice.AccountBlService;
 import vo.AccountVO;
 import vo.ResultMessage;
 
-public class AccoutblService_Stub implements AccountBlService {
+public class AccountblService_Stub implements AccountBlService {
 	
 	@Override
 	public ResultMessage addAccount(AccountVO vo) throws RemoteException {
