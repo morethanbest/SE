@@ -16,7 +16,7 @@ public class OrganizationBlService_Stub implements OrganizationBlService {
 	}
 
 	@Override
-	public ResultMessage delOrganization() throws RemoteException {
+	public ResultMessage delOrganization(OrganizationVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}
