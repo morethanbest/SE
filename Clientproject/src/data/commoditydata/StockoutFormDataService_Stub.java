@@ -7,14 +7,13 @@ import java.util.List;
 import po.Formstate;
 import po.Hall;
 import po.Loadform;
-import po.StockinPO;
 import po.StockoutPO;
 import dataservice.commoditydataservice.StockoutFormDataService;
 
 public class StockoutFormDataService_Stub implements StockoutFormDataService{
 
 	@Override
-	public void updateStockinForm(StockinPO po) throws RemoteException {
+	public void updateStockoutForm(StockoutPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("Update Succeed!\n");
 		

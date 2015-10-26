@@ -8,7 +8,7 @@ import po.StockinPO;
 import po.StockoutPO;
 
 public interface StockoutFormDataService {
-	public void updateStockinForm (StockinPO po)throws RemoteException;
+	public void updateStockoutForm (StockoutPO po)throws RemoteException;
 	
 	public void addStockoutForm (StockoutPO po)throws RemoteException;
 	
