@@ -1,21 +1,22 @@
 package po;
 import java.io.Serializable;
+import java.util.List;
 
 public class RecordtransPO  implements Serializable{
 	long id;
 	long loadtime;
 	long arrivaltime;
-	long transcode;
-	long flightcode;
+	String transcode;
+	String flightcode;
 	Hall departrue;
 	Hall destination;
-	long countercode;
+	String countercode;
 	String supervisor;
-	long[] allcode;
+	List<String> allcode;
 	double fee;
 	Formstate documentstate;
-	public RecordtransPO(long id,long loadtime, long arrivaltime, long transcode, long flightcode, Hall departrue,
-			Hall destination, long countercode, String supervisor, long[] allcode, double fee) {
+	public RecordtransPO(long id,long loadtime, long arrivaltime, String transcode, String flightcode, Hall departrue,
+			Hall destination, String countercode, String supervisor, List<String> allcode, double fee) {
 		this.id=id;
 		this.loadtime = loadtime;
 		this.arrivaltime = arrivaltime;
@@ -47,10 +48,10 @@ public class RecordtransPO  implements Serializable{
 	public void setArrivaltime(long arrivaltime) {
 		this.arrivaltime = arrivaltime;
 	}
-	public void setTranscode(long transcode) {
+	public void setTranscode(String transcode) {
 		this.transcode = transcode;
 	}
-	public void setFlightcode(long flightcode) {
+	public void setFlightcode(String flightcode) {
 		this.flightcode = flightcode;
 	}
 	public void setDepartrue(Hall departrue) {
@@ -59,13 +60,13 @@ public class RecordtransPO  implements Serializable{
 	public void setDestination(Hall destination) {
 		this.destination = destination;
 	}
-	public void setCountercode(long countercode) {
+	public void setCountercode(String countercode) {
 		this.countercode = countercode;
 	}
 	public void setSupervisor(String supervisor) {
 		this.supervisor = supervisor;
 	}
-	public void setAllcode(long[] allcode) {
+	public void setAllcode(List<String> allcode) {
 		this.allcode = allcode;
 	}
 	public void setFee(double fee) {
@@ -74,10 +75,10 @@ public class RecordtransPO  implements Serializable{
 	public long getArrivaltime() {
 		return arrivaltime;
 	}
-	public long getTranscode() {
+	public String getTranscode() {
 		return transcode;
 	}
-	public long getFlightcode() {
+	public String getFlightcode() {
 		return flightcode;
 	}
 	public Hall getDepartrue() {
@@ -86,13 +87,13 @@ public class RecordtransPO  implements Serializable{
 	public Hall getDestination() {
 		return destination;
 	}
-	public long getCountercode() {
+	public String getCountercode() {
 		return countercode;
 	}
 	public String getSupervisor() {
 		return supervisor;
 	}
-	public long[] getAllcode() {
+	public List<String> getAllcode() {
 		return allcode;
 	}
 	public double getFee() {

@@ -16,9 +16,11 @@ public class RecordtransFormDataService_Stub implements RecordtransFormDataServi
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<RecordtransPO> list=new ArrayList<RecordtransPO>();
-		String[] allbarcode={"0125047560"};
-		RecordtransPO po=new RecordtransPO(1228565, 20140214, 20140301, "0251201411200000002", "CZ3903", Hall.Nanjing, Hall.Shanghai, "0122048", "ÀîÍú", allbarcode 200);
-		return null;
+		
+		List<String> allbarcode=new ArrayList<String>();
+		allbarcode.add("2014940328");
+		RecordtransPO po=new RecordtransPO(1228565, 20140214, 20140301, "0251201411200000002", "CZ3903", Hall.Nanjing, Hall.Shanghai, "0122048", "ÀîÍú", allbarcode ,200);
+		return list;
 	}
 
 	@Override

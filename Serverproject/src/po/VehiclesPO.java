@@ -2,27 +2,27 @@ package po;
 import java.io.Serializable;
 
 public class VehiclesPO  implements Serializable{
-	long vehiclecode;
-	long vehiclenum;
+	String vehiclecode;
+	String vehiclenum;
 	long extendtime;
-	public VehiclesPO(long vehiclecode, long vehiclenum, long extendtime) {
+	public VehiclesPO(String vehiclecode, String vehiclenum, long extendtime) {
 		this.vehiclecode = vehiclecode;
 		this.vehiclenum = vehiclenum;
 		this.extendtime = extendtime;
 	}
-	public long getVehiclecode() {
+	public String getVehiclecode() {
 		return vehiclecode;
 	}
-	public long getVehiclenum() {
+	public String getVehiclenum() {
 		return vehiclenum;
 	}
 	public long getExtendtime() {
 		return extendtime;
 	}
-	public void setVehiclecode(long vehiclecode) {
+	public void setVehiclecode(String vehiclecode) {
 		this.vehiclecode = vehiclecode;
 	}
-	public void setVehiclenum(long vehiclenum) {
+	public void setVehiclenum(String vehiclenum) {
 		this.vehiclenum = vehiclenum;
 	}
 	public void setExtendtime(long extendtime) {

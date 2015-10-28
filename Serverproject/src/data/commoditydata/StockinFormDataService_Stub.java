@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.City;
 import po.CommodityLocation;
 import po.Formstate;
 import po.StockinPO;
@@ -22,7 +23,7 @@ public class StockinFormDataService_Stub implements StockinFormDataService{
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<StockinPO> list=new ArrayList<StockinPO>();
-		StockinPO po=new StockinPO(012276, 1204304632, 20130528, new CommodityLocation(120, 45, 77, 15));
+		StockinPO po=new StockinPO(012276, "1204304632", 20130528, new CommodityLocation(120, 45, 77, 15),City.Guangzhou);
 		list.add(po);
 		return list;
 	}

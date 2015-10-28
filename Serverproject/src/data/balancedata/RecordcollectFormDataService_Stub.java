@@ -22,7 +22,9 @@ public class RecordcollectFormDataService_Stub implements RecordcollectFormDataS
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<RecordcollectPO> list=new ArrayList<RecordcollectPO>();
-		long[] allordercode={1112014245};
+		List<String> allordercode=new ArrayList<String>();
+		allordercode.add("1112014245");
+		
 		RecordcollectPO collectpo=new RecordcollectPO(12244, 20140412, 140000.0, "Õı≈Ù", allordercode);
 		
 		list.add(collectpo);
@@ -42,7 +44,9 @@ public class RecordcollectFormDataService_Stub implements RecordcollectFormDataS
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<RecordcollectPO> list=new ArrayList<RecordcollectPO>();
-		long[] allordercode={1112014245};
+		
+		List<String> allordercode=new ArrayList<String>();
+		allordercode.add("1112014245");
 		RecordcollectPO collectpo=new RecordcollectPO(12244, 20140412, 140000.0, "Õı≈Ù", allordercode);
 		
 		list.add(collectpo);

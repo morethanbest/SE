@@ -14,7 +14,7 @@ public class CommodityDataService_Stub implements CommodityDataService{
 	public List<CommodityPO> getallCommodity() throws RemoteException {
 		// TODO Auto-generated method stub
 		List<CommodityPO> list=new ArrayList<CommodityPO>();
-		CommodityPO po=new CommodityPO(102335, 1201836287, 20120722, new CommodityLocation(15, 78, 22, 100),0 );
+		CommodityPO po=new CommodityPO(102335, "1201836287", 20120722, new CommodityLocation(15, 78, 22, 100),0 );
 		list.add(po);
 		return list;
 	}
@@ -24,7 +24,7 @@ public class CommodityDataService_Stub implements CommodityDataService{
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<CommodityPO> list=new ArrayList<CommodityPO>();
-		CommodityPO po=new CommodityPO(102335, 1201836287, 20120722, new CommodityLocation(15, 78, 22, 100),0 );
+		CommodityPO po=new CommodityPO(102335, "1201836287", 20120722, new CommodityLocation(15, 78, 22, 100),0 );
 		list.add(po);
 		return list;
 	}

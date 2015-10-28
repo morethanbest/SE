@@ -3,14 +3,14 @@ package po;
 import java.io.Serializable;
 
 public class ArrivalPO  implements Serializable{
-	long centercode;
+	String centercode;
 	long arrivaltime;
-	long transcode;
+	String transcode;
 	Hall departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 	long id;
-	public ArrivalPO(long id,long centercode, long arrivaltime, long transcode, Hall departure, Arrivalstate arrivalstate) {
+	public ArrivalPO(long id,String centercode, long arrivaltime, String transcode, Hall departure, Arrivalstate arrivalstate) {
 		this.id=id;
 		this.centercode = centercode;
 		this.arrivaltime = arrivaltime;
@@ -22,13 +22,13 @@ public class ArrivalPO  implements Serializable{
 	public long getId() {
 		return id;
 	}
-	public void setCentercode(long centercode) {
+	public void setCentercode(String centercode) {
 		this.centercode = centercode;
 	}
 	public void setArrivaltime(long arrivaltime) {
 		this.arrivaltime = arrivaltime;
 	}
-	public void setTranscode(long transcode) {
+	public void setTranscode(String transcode) {
 		this.transcode = transcode;
 	}
 	public void setDeparture(Hall departure) {
@@ -43,13 +43,13 @@ public class ArrivalPO  implements Serializable{
 	public void setDocumentstate(Formstate documentstate) {
 		this.documentstate = documentstate;
 	}
-	public long getCentercode() {
+	public String getCentercode() {
 		return centercode;
 	}
 	public long getArrivaltime() {
 		return arrivaltime;
 	}
-	public long getTranscode() {
+	public String getTranscode() {
 		return transcode;
 	}
 	public Hall getDeparture() {

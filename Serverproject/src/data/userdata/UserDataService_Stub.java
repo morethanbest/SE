@@ -22,8 +22,8 @@ public class UserDataService_Stub implements UserDataService{
 	@Override
 	public UserPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
-		UserPO po=new UserPO(01532, "уеоЧ", 552530, Level.High);
-		return null;
+		UserPO po=new UserPO(01532, "уеоЧ", "552530", "HIGH");
+		return po;
 	}
 
 	@Override

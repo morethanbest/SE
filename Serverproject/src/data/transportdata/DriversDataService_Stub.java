@@ -26,9 +26,9 @@ public class DriversDataService_Stub implements DriversDataService{
 	}
 
 	@Override
-	public DriversPO findDriver(long identity) throws RemoteException {
+	public DriversPO findDriver(String identity) throws RemoteException {
 		// TODO Auto-generated method stub
-		DriversPO po=new DriversPO(025000001, "ÀîÍú", 19821024, "320682198201240572", "15205300460", "ÄÐ", 6);
+		DriversPO po=new DriversPO(identity, "ÀîÍú", 19821024, "320682198201240572", "15205300460", "ÄÐ", 6);
 		return po;
 	}
 

@@ -2,48 +2,30 @@ package po;
 
 public class OrignalCommodityPO {
 	long id;
-	long ordercode;
+	String ordercode;
 	long intime;
-	long blocknum;
-	long linenum;
-	long shelfnum;
-	long locationnum;
+	CommodityLocation location;
 	long outtime;
-	public OrignalCommodityPO(long id, long ordercode, long intime, long blocknum, long linenum, long shelfnum,
-			long locationnum) {
+	public OrignalCommodityPO(long id, String ordercode, long intime, CommodityLocation location) {
 		this.id = id;
 		this.ordercode = ordercode;
 		this.intime = intime;
-		this.blocknum = blocknum;
-		this.linenum = linenum;
-		this.shelfnum = shelfnum;
-		this.locationnum = locationnum;
-		this.outtime=0;
+		this.outtime = 0;
 	}
 	public long getId() {
 		return id;
 	}
-	public long getOrdercode() {
+	public String getOrdercode() {
 		return ordercode;
 	}
 	public long getIntime() {
 		return intime;
 	}
-	public long getBlocknum() {
-		return blocknum;
-	}
-	public long getLinenum() {
-		return linenum;
-	}
-	public long getShelfnum() {
-		return shelfnum;
-	}
-	public long getLocationnum() {
-		return locationnum;
-	}
 	public long getOuttime() {
 		return outtime;
 	}
-	
+	public CommodityLocation getLocation() {
+		return location;
+	}
 	
 }
