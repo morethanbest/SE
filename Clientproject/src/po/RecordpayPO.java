@@ -4,16 +4,16 @@ import java.io.Serializable;
 public class RecordpayPO  implements Serializable{
 	long id;
 	long paytime;
-	long paysum;
+	double paysum;
 	String payman;
-	long payaccount;
+	String payaccount;
 	double rent;
 	double fee;
 	double salary;
 	double reward;
 	String remark;
 	Formstate documentstate;
-	public RecordpayPO(long id,long paytime, long paysum, String payman, long payaccount, double rent, double fee,
+	public RecordpayPO(long id,long paytime, double paysum, String payman, String payaccount, double rent, double fee,
 			double salary, double reward, String remark) {
 		this.id=id;
 		this.paytime = paytime;
@@ -36,7 +36,7 @@ public class RecordpayPO  implements Serializable{
 	public void setPaytime(long paytime) {
 		this.paytime = paytime;
 	}
-	public long getPaysum() {
+	public double getPaysum() {
 		return paysum;
 	}
 	public void setPaysum(long paysum) {
@@ -48,10 +48,10 @@ public class RecordpayPO  implements Serializable{
 	public void setPayman(String payman) {
 		this.payman = payman;
 	}
-	public long getPayaccount() {
+	public String getPayaccount() {
 		return payaccount;
 	}
-	public void setPayaccount(long payaccount) {
+	public void setPayaccount(String payaccount) {
 		this.payaccount = payaccount;
 	}
 	public double getRent() {

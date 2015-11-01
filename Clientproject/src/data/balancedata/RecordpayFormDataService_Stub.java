@@ -15,7 +15,7 @@ public class RecordpayFormDataService_Stub implements RecordpayFormDataService{
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		List<RecordpayPO> list=new ArrayList<RecordpayPO>();
-		RecordpayPO po=new RecordpayPO(012664, 20131230, 21000, "张丽", 6461335, 3346, 200, 4000, 1000, "nothing");
+		RecordpayPO po=new RecordpayPO(012664, 20131230, 21000, "张丽", "6461335", 3346, 200, 4000, 1000, "nothing");
 		list.add(po);
 		return list;
 	}
@@ -38,7 +38,7 @@ public class RecordpayFormDataService_Stub implements RecordpayFormDataService{
 	public List<RecordpayPO> getallRecordpayForm() throws RemoteException {
 		// TODO Auto-generated method stub
 		List<RecordpayPO> list=new ArrayList<RecordpayPO>();
-		RecordpayPO po=new RecordpayPO(012664, 20131230, 21000, "张丽", 6461335, 3346, 200, 4000, 1000, "nothing");
+		RecordpayPO po=new RecordpayPO(012664, 20131230, 21000.0, "张丽", "6461335", 3346, 200, 4000, 1000, "nothing");
 		list.add(po);
 		return list;
 	}

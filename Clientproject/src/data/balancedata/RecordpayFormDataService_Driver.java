@@ -9,8 +9,8 @@ import dataservice.balancedataservice.RecordpayFormDataService;
 
 public class RecordpayFormDataService_Driver {
 	public void drive(RecordpayFormDataService recordpayFormDataService) throws RemoteException{
-		recordpayFormDataService.addRecordpayForm(new RecordpayPO(012664, 20131230, 21000, "张丽", 6461335, 3346, 200, 4000, 1000, "nothing"));
-		recordpayFormDataService.updateRecordpayForm(new RecordpayPO(012664, 20131230, 21000, "张丽", 6461335, 3346, 200, 4000, 1000, "nothing"));
+		recordpayFormDataService.addRecordpayForm(new RecordpayPO(012664, 20131230, 21000, "张丽", "6461335", 3346, 200, 4000, 1000, "nothing"));
+		recordpayFormDataService.updateRecordpayForm(new RecordpayPO(012664, 20131230, 21000, "张丽", "6461335", 3346, 200, 4000, 1000, "nothing"));
 		List<RecordpayPO> list1 = recordpayFormDataService.getallRecordpayForm();
 		System.out.println("Got it!");
 		System.out.println("It has " + list1.size() + " RecordpayForm");
