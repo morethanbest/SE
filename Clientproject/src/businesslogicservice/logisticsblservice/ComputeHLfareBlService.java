@@ -5,6 +5,6 @@ import java.rmi.RemoteException;
 import vo.HLFareVO;
 
 public interface ComputeHLfareBlService {
-	public double ComputeHLfare (HLFareVO vo)throws RemoteException;
+	public double computeHLfare (HLFareVO vo)throws RemoteException;
 
 }

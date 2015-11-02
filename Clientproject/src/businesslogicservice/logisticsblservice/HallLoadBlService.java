@@ -3,7 +3,6 @@ package businesslogicservice.logisticsblservice;
 import java.rmi.RemoteException;
 
 import vo.ResultMessage; 
-
 import vo.HallLoadVO;
 
 public interface HallLoadBlService {

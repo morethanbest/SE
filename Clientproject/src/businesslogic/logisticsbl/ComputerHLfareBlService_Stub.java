@@ -8,7 +8,7 @@ import vo.HLFareVO;
 public class ComputerHLfareBlService_Stub implements ComputeHLfareBlService {
 
 	@Override
-	public double ComputeHLfare(HLFareVO vo) throws RemoteException {
+	public double computeHLfare(HLFareVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -6,5 +6,5 @@ import vo.CLFareVO;
 
 public interface ComputeCLfareBlService {
 	public double ComputeCLfare (CLFareVO vo)throws RemoteException;
-
+	
 }
