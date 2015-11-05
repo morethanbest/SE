@@ -28,9 +28,9 @@ public class StaffDataService_Stub implements StaffDataService{
 	}
 
 	@Override
-	public StaffPO findStaff(long Staffid) throws RemoteException {
+	public StaffPO findStaff(String name) throws RemoteException {
 		// TODO Auto-generated method stub
-		StaffPO po=new StaffPO(Staffid, "ÀîÍú", Job.transfercenter);
+		StaffPO po=new StaffPO(1, "ï¿½ï¿½ï¿½ï¿½", Job.transfercenter);
 		return po;
 	}
 

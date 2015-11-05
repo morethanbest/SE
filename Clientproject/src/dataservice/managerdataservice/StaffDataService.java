@@ -11,6 +11,6 @@ public interface StaffDataService {
 	
 	public void updateStaff (StaffPO po)throws RemoteException;
 	
-	public StaffPO  findStaff(long Staffid)throws RemoteException;
+	public StaffPO  findStaff(String name)throws RemoteException;
 
 }

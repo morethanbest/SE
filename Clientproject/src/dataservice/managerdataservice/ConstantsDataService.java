@@ -11,5 +11,5 @@ public interface ConstantsDataService {
 
 	public void updateConstants (ConstantsPO po)throws RemoteException;
 	
-	public ConstantsPO  findConstants(long id)throws RemoteException;
+	public ConstantsPO  findConstants(String name)throws RemoteException;
 }

@@ -28,10 +28,10 @@ public class OrganizationDataService_Stub implements OrganizationDataService{
 	}
 
 	@Override
-	public OrganizationPO findOrganization(long organizationid)
+	public OrganizationPO findOrganization(String name)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		OrganizationPO po=new OrganizationPO(organizationid, "ÄÏ¾©¹ÄÂ¥",Organization.hall );
+		OrganizationPO po=new OrganizationPO(1, "ï¿½Ï¾ï¿½ï¿½ï¿½Â¥",Organization.hall );
 		return po;
 	}
 

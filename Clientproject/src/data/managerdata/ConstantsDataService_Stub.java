@@ -27,9 +27,9 @@ public class ConstantsDataService_Stub implements ConstantsDataService {
 	}
 
 	@Override
-	public ConstantsPO findConstants(long id) throws RemoteException {
+	public ConstantsPO findConstants(String name) throws RemoteException {
 		// TODO Auto-generated method stub
-		ConstantsPO po=new ConstantsPO(id, "Shanghai--Nanajing", 266);
+		ConstantsPO po=new ConstantsPO(1, "Shanghai--Nanajing", 266);
 		
 		return po;
 	}

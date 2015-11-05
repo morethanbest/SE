@@ -11,6 +11,6 @@ public interface OrganizationDataService {
 	
 	public void updateOrganization (OrganizationPO po)throws RemoteException;
 	
-	public OrganizationPO  findOrganization(long organizationid)throws RemoteException;
+	public OrganizationPO  findOrganization(String name)throws RemoteException;
 
 }
