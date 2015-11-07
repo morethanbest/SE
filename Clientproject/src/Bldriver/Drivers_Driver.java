@@ -18,7 +18,7 @@ public class Drivers_Driver {
     		System.out.println("addDriver fails");
     	}
     	
-    	ResultMessage result1 =DriverBlService.delDriver();
+    	ResultMessage result1 =DriverBlService.delDriver(vo);
     	if(result1==ResultMessage.success){
     		System.out.println("delDriver succeeds");
     	}

@@ -15,7 +15,7 @@ public class VehicleBlService_Stub implements VehicleBlService {
 	}
 
 	@Override
-	public ResultMessage delVehicle() throws RemoteException {
+	public ResultMessage delVehicle(VehicleVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}

@@ -9,7 +9,7 @@ import vo.VehicleVO;
 public interface VehicleBlService {
 	public ResultMessage addVehicle (VehicleVO vo)throws RemoteException;
 	
-	public ResultMessage delVehicle ()throws RemoteException;
+	public ResultMessage delVehicle (VehicleVO vo)throws RemoteException;
 	
 	public ResultMessage revVehicle (VehicleVO vo)throws RemoteException;
 	

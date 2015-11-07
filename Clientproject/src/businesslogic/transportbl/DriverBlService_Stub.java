@@ -15,7 +15,7 @@ public class DriverBlService_Stub implements DriverBlService {
 	}
 
 	@Override
-	public ResultMessage delDriver() throws RemoteException {
+	public ResultMessage delDriver(DriverVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}

@@ -18,7 +18,7 @@ public class Vehicles_Driver {
     		System.out.println("addVehicle fails");
     	}
     	
-    	ResultMessage result1 =vehicleBlService.delVehicle();
+    	ResultMessage result1 =vehicleBlService.delVehicle(vo);
     	if(result1==ResultMessage.success){
     		System.out.println("delVehicle succeeds");
     	}
