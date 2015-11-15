@@ -9,7 +9,7 @@ import dataservice.managerdataservice.StaffDataService;
 public class StaffDataService_Driver {
 
 	public void drive(StaffDataService staffDataController){
-		StaffPO po=new StaffPO(01235, "ÀîÍú", Job.transfercenter);
+		StaffPO po=new StaffPO(01235, "ï¿½ï¿½ï¿½ï¿½", Job.transfercenter);
 		try {
 			staffDataController.addStaff(po);
 		} catch (RemoteException e) {
@@ -30,7 +30,7 @@ public class StaffDataService_Driver {
 		}
 		
 		try {
-			StaffPO po2=staffDataController.findStaff(422);
+			StaffPO po2=staffDataController.findStaff("422");
 			if(po2==null)
 				System.out.println("No PO Exists");
 			else

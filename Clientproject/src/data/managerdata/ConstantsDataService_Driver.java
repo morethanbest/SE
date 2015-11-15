@@ -29,7 +29,7 @@ public class ConstantsDataService_Driver {
 			System.out.println("Update Failure!");
 		}
 		try {
-			ConstantsPO po2=constantsDataController.findConstants(112);
+			ConstantsPO po2=constantsDataController.findConstants("112");
 			if(po2==null)
 				System.out.println("No PO Exists!");
 			else

@@ -2,14 +2,14 @@ package data.managerdata;
 
 import java.rmi.RemoteException;
 
-import po.Organization;
+import po.Organizationtype;
 import po.OrganizationPO;
 import dataservice.managerdataservice.OrganizationDataService;
 
 public class OrganizationDataService_Driver {
 
 	public void drive(OrganizationDataService organizationDataController){
-		OrganizationPO po=new OrganizationPO(02502, "ÄÏ¾©¹ÄÂ¥",Organization.hall );
+		OrganizationPO po=new OrganizationPO(02502, "ï¿½Ï¾ï¿½ï¿½ï¿½Â¥",Organizationtype.hall );
 		try {
 			organizationDataController.addOrganization(po);
 		} catch (RemoteException e) {
@@ -32,7 +32,7 @@ public class OrganizationDataService_Driver {
 			System.out.println("Update Failure!");
 		}
 		try {
-			OrganizationPO po2=organizationDataController.findOrganization(538652);
+			OrganizationPO po2=organizationDataController.findOrganization("538652");
 			if(po2==null)
 				System.out.println("No PO Exists!");
 			else
