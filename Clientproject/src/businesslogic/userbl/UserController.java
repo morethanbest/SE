@@ -2,40 +2,38 @@ package businesslogic.userbl;
 
 import java.rmi.RemoteException;
 
-import businesslogicservice.userblservice.UserBlService;
 import vo.ResultMessage;
 import vo.UserVO;
+import businesslogicservice.userblservice.UserBlService;
 
-public class UserBlService_Stub implements UserBlService {
+public class UserController implements UserBlService{
 
-	@Override
-	public ResultMessage login(long id, String password) throws RemoteException {
-		// TODO Auto-generated method stub
-		return ResultMessage.success;
+	public UserController() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public ResultMessage addUser(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		return null;
 	}
 
 	@Override
 	public ResultMessage delUser(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		return null;
 	}
 
 	@Override
 	public ResultMessage revUser(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		return null;
 	}
 
 	@Override
 	public UserVO getUserbyID(long id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new UserVO(1,"1","1","1");
+		return null;
 	}
 
 }

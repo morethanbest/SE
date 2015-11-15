@@ -2,40 +2,44 @@ package businesslogic.transportbl;
 
 import java.rmi.RemoteException;
 
-import businesslogicservice.transportblservice.DriverBlService;
 import vo.DriverVO;
 import vo.ResultMessage;
+import businesslogicservice.transportblservice.DriverBlService;
 
-public class DriverBlService_Stub implements DriverBlService {
+public class DriverController implements DriverBlService{
+
+	public DriverController() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public ResultMessage addDriver(DriverVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		return null;
 	}
 
 	@Override
 	public ResultMessage delDriver(DriverVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		return null;
 	}
 
 	@Override
 	public ResultMessage revDriver(DriverVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		return null;
 	}
 
 	@Override
 	public DriverVO getDriverbyDN(String driverNumber) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new DriverVO("1","abc",1,"321459193621","13214","32153",20150322);
+		return null;
 	}
 
 	@Override
 	public DriverVO getDriverbyName(String name) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new DriverVO("1","abc",1,"321459193621","13214","32153",20150322);
+		return null;
 	}
 
 }

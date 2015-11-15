@@ -1,4 +1,4 @@
-package businesslogic.commoditybl;
+package businesslogic.commoditybl.blstub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

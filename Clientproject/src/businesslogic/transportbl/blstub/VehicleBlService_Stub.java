@@ -1,4 +1,4 @@
-package businesslogic.transportbl;
+package businesslogic.transportbl.blstub;
 
 import java.rmi.RemoteException;
 

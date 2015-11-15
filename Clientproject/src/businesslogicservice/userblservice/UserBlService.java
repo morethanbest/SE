@@ -7,7 +7,7 @@ import vo.ResultMessage;
 import vo.UserVO;
 
 public interface UserBlService {
-	public ResultMessage login(long id,String password)throws RemoteException;
+	
 	
 	public ResultMessage addUser(UserVO vo)throws RemoteException;
 	
