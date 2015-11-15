@@ -4,8 +4,9 @@ import java.rmi.RemoteException;
 
 import vo.GoodsRecevingVO;
 import vo.ResultMessage;
+import businesslogicservice.logisticsblservice.GoodsRecevingBlService;
 
-public class GoodsRecevingBlService_Stub implements businesslogicservice.logisticsblservice.GoodsRecevingBlService {
+public class GoodsRecevingBlServiceImpl implements GoodsRecevingBlService {
 
 	@Override
 	public ResultMessage GoodsReceving(GoodsRecevingVO vo) throws RemoteException {
@@ -16,7 +17,7 @@ public class GoodsRecevingBlService_Stub implements businesslogicservice.logisti
 	@Override
 	public ResultMessage update(GoodsRecevingVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return ResultMessage.success;
 	}
 
 }

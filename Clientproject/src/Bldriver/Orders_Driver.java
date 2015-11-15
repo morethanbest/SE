@@ -13,7 +13,7 @@ import businesslogicservice.orderblservice.OrderBlService;
 public class Orders_Driver {
 	 public void drive(OrderBlService orderBlService) throws RemoteException{
 		    OrderVO vo=new OrderVO("1","1","1","1","1","1","1","1","1","1",1,1,1,"1",1,1,"1",Ordertype.economical);
-	    	ResultMessage result=orderBlService.order(vo);
+	    	ResultMessage result=orderBlService.addOrder(vo);
 	    	if(result==ResultMessage.success){
 	    		System.out.println("order succeeds");
 	    	}
@@ -21,7 +21,7 @@ public class Orders_Driver {
 	    		System.out.println("order fails");
 	    	}
 	    	OrderFareVO vo1=new OrderFareVO(null, null, 0, 0, 0, 0, 0, null);
-	    	double result1=orderBlService.order(vo1);
+	    	double result1=orderBlService.orderFare(vo1);
 	    	if(result1==0){
 	    		System.out.println("orderfare succeeds");
 	    	}

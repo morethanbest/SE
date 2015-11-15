@@ -5,11 +5,11 @@ import java.rmi.RemoteException;
 import po.Ordertype;
 import vo.OrderVO;
 import businesslogic.logisticsbl.GetOrderbyONBlService_Stub;
-import businesslogicservice.logisticsblservice.GetOrderbyONBlService;
+import businesslogicservice.logisticsblservice.SearchOrderBlService;
 
 public class Logistics_Driver {
-    public void drive(GetOrderbyONBlService getOrderbyON) throws RemoteException{
-    	OrderVO vo=getOrderbyON.getOrderbyON("1");
+    public void drive(SearchOrderBlService getOrderbyON) throws RemoteException{
+    	OrderVO vo=getOrderbyON.getOrderbyOrderNumber("1");
     	if(vo!=null){
     		System.out.println("Search succeeds");
     	}
@@ -19,7 +19,7 @@ public class Logistics_Driver {
     }
 	public static void main(String[] args) throws RemoteException {
 		// TODO Auto-generated method stub
-		GetOrderbyONBlService getOrderbyON=new GetOrderbyONBlService_Stub();
+		SearchOrderBlService getOrderbyON=new GetOrderbyONBlService_Stub();
 		Logistics_Driver driver=new Logistics_Driver();
 		driver.drive(getOrderbyON);
 	}

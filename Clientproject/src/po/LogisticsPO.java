@@ -7,8 +7,8 @@ public class LogisticsPO  implements Serializable{
 	long id;
 	String state;
 	List<String> history;
-	long ordernum;
-	public LogisticsPO(long id,String state, List<String> history, long ordernum) {
+	String ordernum;
+	public LogisticsPO(long id,String state, List<String> history, String ordernum) {
 		this.id=id;
 		this.state = state;
 		this.history = history;
@@ -29,10 +29,10 @@ public class LogisticsPO  implements Serializable{
 	public void setHistory(List<String> history) {
 		this.history = history;
 	}
-	public long getOrdernum() {
+	public String getOrdernum() {
 		return ordernum;
 	}
-	public void setOrdernum(long ordernum) {
+	public void setOrdernum(String ordernum) {
 		this.ordernum = ordernum;
 	}
 	

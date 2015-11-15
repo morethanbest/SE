@@ -11,9 +11,9 @@ import vo.OrderFareVO;
 import vo.ReceptionVO;
 
 public interface OrderBlService {
-	public ResultMessage order(OrderVO vo)throws RemoteException;
+	public ResultMessage addOrder(OrderVO vo)throws RemoteException;
 	
-	public double order(OrderFareVO vo)throws RemoteException;
+	public double orderFare(OrderFareVO vo)throws RemoteException;
 	
 	public ResultMessage reception (ReceptionVO vo)throws RemoteException;
 

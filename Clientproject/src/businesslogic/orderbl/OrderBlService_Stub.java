@@ -11,13 +11,13 @@ import vo.ResultMessage;
 public class OrderBlService_Stub implements OrderBlService {
 
 	@Override
-	public ResultMessage order(OrderVO vo) throws RemoteException {
+	public ResultMessage addOrder(OrderVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}
 
 	@Override
-	public double order(OrderFareVO vo) throws RemoteException {
+	public double orderFare(OrderFareVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

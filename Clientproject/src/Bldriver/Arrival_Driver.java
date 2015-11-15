@@ -11,7 +11,7 @@ import vo.ResultMessage;
 public class Arrival_Driver {
     public void drive(ArrivalBlService arrivalBlService) throws RemoteException{
     	ArrivalVO vo=new ArrivalVO(null, 0, null, null, null);
-    	ResultMessage result=arrivalBlService.Arrival(vo);
+    	ResultMessage result=arrivalBlService.addArrival(vo);
     	if(result==ResultMessage.success){
     		System.out.println("Arrival succeeds");
     	}

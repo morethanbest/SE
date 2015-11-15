@@ -8,5 +8,5 @@ import vo.GoodsRecevingVO;
 
 public interface GoodsRecevingBlService {
 	public ResultMessage GoodsReceving (GoodsRecevingVO vo)throws RemoteException;
-
+	public ResultMessage update(GoodsRecevingVO vo)throws RemoteException;
 }

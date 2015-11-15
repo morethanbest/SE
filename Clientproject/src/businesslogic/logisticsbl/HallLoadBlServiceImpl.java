@@ -2,12 +2,12 @@ package businesslogic.logisticsbl;
 
 import java.rmi.RemoteException;
 
-import businesslogicservice.logisticsblservice.HallLoadBlService;
 import vo.HLFareVO;
 import vo.HallLoadVO;
 import vo.ResultMessage;
+import businesslogicservice.logisticsblservice.HallLoadBlService;
 
-public class HallLoadBlService_Stub implements HallLoadBlService {
+public class HallLoadBlServiceImpl implements HallLoadBlService {
 
 	@Override
 	public ResultMessage addHallLoadForm(HallLoadVO vo) throws RemoteException {
@@ -24,7 +24,7 @@ public class HallLoadBlService_Stub implements HallLoadBlService {
 	@Override
 	public ResultMessage update(HallLoadVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return ResultMessage.success;
 	}
 
 }

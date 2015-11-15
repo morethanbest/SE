@@ -2,11 +2,11 @@ package businesslogic.logisticsbl;
 
 import java.rmi.RemoteException;
 
-import businesslogicservice.logisticsblservice.RecordtransBlService;
 import vo.RecordtransVO;
 import vo.ResultMessage;
+import businesslogicservice.logisticsblservice.RecordtransBlService;
 
-public class RecordtranBlService_Stub implements RecordtransBlService {
+public class RecordtransBlServiceImpl implements RecordtransBlService {
 
 	@Override
 	public ResultMessage Recordtrans(RecordtransVO vo) throws RemoteException {
@@ -17,7 +17,7 @@ public class RecordtranBlService_Stub implements RecordtransBlService {
 	@Override
 	public ResultMessage update(RecordtransVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return ResultMessage.success;
 	}
 
 }

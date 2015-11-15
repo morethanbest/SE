@@ -18,7 +18,7 @@ public class LogisticsInfoService_Stub implements LogisticsInfoService{
 		List<String> history=new ArrayList<String>();
 		history.add("Nanjing hall 02501");
 		history.add("Nanjing center 0250");
-		LogisticsPO po=new LogisticsPO(2201255, "on the hall 02501", history,2);
+		LogisticsPO po=new LogisticsPO(2201255, "on the hall 02501", history,"2");
 		return po;}
 		else{
 			return null;
