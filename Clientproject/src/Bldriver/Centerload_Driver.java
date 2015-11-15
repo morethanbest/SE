@@ -2,7 +2,7 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.logisticsbl.CenterloadBlService_Stub;
+import businesslogic.logisticsbl.stub.CenterloadBlService_Stub;
 import businesslogicservice.logisticsblservice.CenterloadBlService;
 import vo.CenterloadVO;
 import vo.ResultMessage;

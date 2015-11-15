@@ -37,6 +37,12 @@ public class GoodsReceivingFormDataService_Stub implements GoodsReceivingFormDat
 		System.out.println("Update Succeed!\n");
 	}
 
+	@Override
+	public long findLastID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 }

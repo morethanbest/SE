@@ -34,6 +34,12 @@ public class ArrivalFormDataService_Stub implements ArrivalFormDataService{
 		System.out.println("Add Succeed!\n");
 	}
 
+	@Override
+	public long findLastID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 
 }

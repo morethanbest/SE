@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 import java.util.List;
 
-public class LoadPO  implements Serializable{
+public class HallLoadPO  implements Serializable{
 	long id;
 	long loadtime;
 	String hallcode;
@@ -16,7 +16,7 @@ public class LoadPO  implements Serializable{
 	double fee;
 	Formstate documentstate;	
 	
-	public LoadPO(long id,long loadtime,String hallcode,String motorcode,Hall destination,String vehiclecode,String supervisor,
+	public HallLoadPO(long id,long loadtime,String hallcode,String motorcode,Hall destination,String vehiclecode,String supervisor,
 			String supercargo,List<String> allbarcode,double fee){
 		this.id = id;
 		this.loadtime=loadtime;

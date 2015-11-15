@@ -22,7 +22,7 @@ public class CenterloadBlServiceImplTest {
 	@Test
 	public void testComputeCenterLoadFare() throws RemoteException {
 		CenterloadBlService centerloadBlService = new CenterloadBlServiceImpl();
-		assertEquals(0,centerloadBlService.ComputeCenterLoadFare(null),0.0001);
+		assertEquals(0,centerloadBlService.computeCenterLoadFare(null),0.0001);
 	}
 
 	@Test

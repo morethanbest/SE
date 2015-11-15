@@ -5,14 +5,14 @@ import po.Formstate;
 import po.Hall;
 
 
-public class GoodsRecevingExamVO {
+public class GoodsReceivingExamVO {
 	long arrivaltime;
 	String transcode;
 	Hall departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 	
-	public GoodsRecevingExamVO(long arrivaltime,String transcode,Hall departure,Arrivalstate arrivalstate){
+	public GoodsReceivingExamVO(long arrivaltime,String transcode,Hall departure,Arrivalstate arrivalstate){
 		this.arrivaltime=arrivaltime;
 		this.transcode=transcode;
 		this.departure=departure;

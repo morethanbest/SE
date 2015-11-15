@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import vo.HallLoadVO;
 import vo.ResultMessage;
-import businesslogic.logisticsbl.HallLoadBlService_Stub;
+import businesslogic.logisticsbl.stub.HallLoadBlService_Stub;
 import businesslogicservice.logisticsblservice.HallLoadBlService;
 
 public class Load_Driver {

@@ -6,33 +6,39 @@ import java.util.List;
 
 import po.Formstate;
 import po.Hall;
-import po.LoadPO;
-import dataservice.logisticsdataservice.LoadFormDataService;
+import po.HallLoadPO;
+import dataservice.logisticsdataservice.HallLoadFormDataService;
 
-public class LoadFormDataService_Stub implements LoadFormDataService{
+public class LoadFormDataService_Stub implements HallLoadFormDataService{
 
 	@Override
-	public void addLoadForm(LoadPO po) throws RemoteException {
+	public void addLoadForm(HallLoadPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("Add Succeed!\n");
 	}
 
 	@Override
-	public List<LoadPO> getLoadForm(Formstate state) throws RemoteException {
+	public List<HallLoadPO> getLoadForm(Formstate state) throws RemoteException {
 		// TODO Auto-generated method stub
-		List<LoadPO> list=new ArrayList<LoadPO>();
+		List<HallLoadPO> list=new ArrayList<HallLoadPO>();
 		
 		List<String> allbarcode=new ArrayList<String>();
 		allbarcode.add("2014940328");
-		LoadPO po=new LoadPO(05510, 20131210, "02500", "025002015092100001", Hall.Shanghai, "025000001", "赵发", "张亮", allbarcode, 100);
+		HallLoadPO po=new HallLoadPO(05510, 20131210, "02500", "025002015092100001", Hall.Shanghai, "025000001", "赵发", "张亮", allbarcode, 100);
 		list.add(po);
 		return list;
 	}
 
 	@Override
-	public void updateLoadForm(LoadPO po) throws RemoteException {
+	public void updateLoadForm(HallLoadPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("Update Succeed!\n");
+	}
+
+	@Override
+	public long findLastID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

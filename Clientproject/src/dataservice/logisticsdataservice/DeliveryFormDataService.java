@@ -13,4 +13,5 @@ public interface DeliveryFormDataService {
 	
 	public void addDeliveryForm (DeliveryPO po)throws RemoteException;
 	
+	public long findLastID() throws RemoteException;
 }

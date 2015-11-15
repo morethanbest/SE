@@ -12,4 +12,6 @@ public interface CenterLoadFormDataService {
 	public void updateCenterLoadForm (CenterloadPO po)throws RemoteException;
 	
 	public void addCenterLoadForm (CenterloadPO po)throws RemoteException;
+	
+	public long findLastID() throws RemoteException;
 }

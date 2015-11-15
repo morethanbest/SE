@@ -9,7 +9,7 @@ public class LogisticsInfoService_Driver {
 
 	public void drive(LogisticsInfoService logisticsInfoController) {
 		try {
-			LogisticsPO po=logisticsInfoController.findLogisticsInfo(2);
+			LogisticsPO po=logisticsInfoController.findLogisticsInfo("2");
 			if(po==null)
 				System.out.println("No Logisticsinfo Exists!");
 			else
