@@ -2,10 +2,11 @@ package businesslogic.commoditybl.InboundPack;
 
 import po.City;
 import po.CommodityLocation;
+import po.CommodityPO;
 import po.StockinPO;
 import vo.ResultMessage;
 
-public class InboundForm {
+public class InboundFormMock {
 	
 	
 	
@@ -28,6 +29,8 @@ public class InboundForm {
 	
 	public ResultMessage passform(){
 		StockinPO newpo=new StockinPO(id,ordercode,intime,location,destination);
+		CommodityPO newcommodity=new CommodityPO(id,ordercode,intime,location,-1);
+		
 		ResultMessage result=ResultMessage.success;
 		return result;
 				
@@ -35,7 +38,5 @@ public class InboundForm {
 		
 	}
 	
-//	public int getid(){
-	//	
-	//}
+
 }

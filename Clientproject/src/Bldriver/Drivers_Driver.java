@@ -2,10 +2,11 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.transportbl.DriverBlService_Stub;
-import businesslogicservice.transportblservice.DriverBlService;
 import vo.DriverVO;
 import vo.ResultMessage;
+import businesslogic.transportbl.blstub.DriverBlService_Stub;
+//import businesslogic.transportbl.DriverBlService_Stub;
+import businesslogicservice.transportblservice.DriverBlService;
 
 public class Drivers_Driver {
     public void drive(DriverBlService DriverBlService) throws RemoteException{

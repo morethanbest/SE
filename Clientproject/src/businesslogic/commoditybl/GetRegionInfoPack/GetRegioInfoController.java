@@ -1,4 +1,4 @@
-package businesslogic.commoditybl;
+package businesslogic.commoditybl.GetRegionInfoPack;
 
 import java.rmi.RemoteException;
 
@@ -13,7 +13,11 @@ public class GetRegioInfoController implements GetRegionInfoBlService{
 	@Override
 	public RegionInfoVO getRegionInfo(Region region) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		RegionGetMock regiongetter=new RegionGetMock(null);//change
+		GetRegionInfo regioninfo=new GetRegionInfo(regiongetter);
+		RegionInfoVO vo=regioninfo.getinfo(region);
+		return vo;
+		
+		}
 
 }

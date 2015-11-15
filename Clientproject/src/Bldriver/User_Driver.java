@@ -2,10 +2,11 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.userbl.UserBlService_Stub;
-import businesslogicservice.userblservice.UserBlService;
 import vo.ResultMessage;
 import vo.UserVO;
+import businesslogic.userbl.blstub.UserBlService_Stub;
+//import businesslogic.userbl.UserBlService_Stub;
+import businesslogicservice.userblservice.UserBlService;
 
 public class User_Driver {
 	public void driver(UserBlService userBlservice){

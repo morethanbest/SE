@@ -3,7 +3,8 @@ package Bldriver;
 import java.rmi.RemoteException;
 
 import vo.StockExaminationVO;
-import businesslogic.commoditybl.StockExaminationBlservice_Stub;
+import businesslogic.commoditybl.blstub.StockExaminationBlservice_Stub;
+//import businesslogic.commoditybl.StockExaminationBlservice_Stub;
 import businesslogicservice.commodityblservice.StockExaminationBlService;
 
 

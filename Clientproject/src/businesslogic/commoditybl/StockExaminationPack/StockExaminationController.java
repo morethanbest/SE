@@ -1,4 +1,4 @@
-package businesslogic.commoditybl;
+package businesslogic.commoditybl.StockExaminationPack;
 
 import java.rmi.RemoteException;
 
@@ -13,7 +13,10 @@ public class StockExaminationController implements StockExaminationBlService{
 	public StockExaminationVO StockExamination(long startTime, long endTime)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		FormGetterMock formget=new FormGetterMock(null);///修改传入参数
+		StockExamination exam=new StockExamination(formget);
+		StockExaminationVO vos=exam.examhandle(startTime, endTime);
+		return vos;
 	}
 
 }

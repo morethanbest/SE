@@ -8,7 +8,7 @@ public class UserPO implements Serializable {
 	String username;
 	String password;
 	String level;
-	public UserPO(int id, String username, String password, String level) {
+	public UserPO(long id, String username, String password, String level) {
 		this.id = id;
 		this.username = username;
 		this.password = password;

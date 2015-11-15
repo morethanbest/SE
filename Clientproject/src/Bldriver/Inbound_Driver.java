@@ -2,10 +2,11 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.commoditybl.InboundBlService_Stub;
-import businesslogicservice.commodityblservice.InboundBlService;
 import vo.ResultMessage;
 import vo.StockinVO;
+import businesslogic.commoditybl.blstub.InboundBlService_Stub;
+//import businesslogic.commoditybl.InboundBlService_Stub;
+import businesslogicservice.commodityblservice.InboundBlService;
 
 
 public class Inbound_Driver {

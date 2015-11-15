@@ -14,6 +14,8 @@ public class AddOrganization {
 		this.name=name;
 		this.type=type;
 	}
+	
+	
 	public ResultMessage addOrganization(){
 		OrganizationPO po=new OrganizationPO(id,name,type);
 		ResultMessage result=ResultMessage.success;

@@ -4,7 +4,8 @@ import java.rmi.RemoteException;
 
 import vo.ResultMessage;
 import vo.VehicleVO;
-import businesslogic.transportbl.VehicleBlService_Stub;
+import businesslogic.transportbl.blstub.VehicleBlService_Stub;
+//import businesslogic.transportbl.VehicleBlService_Stub;
 import businesslogicservice.transportblservice.VehicleBlService;
 
 public class Vehicles_Driver {

@@ -17,13 +17,13 @@ public class UserBlService_Stub implements UserBlService {
 	}
 
 	@Override
-	public ResultMessage delUser(UserVO vo) throws RemoteException {
+	public ResultMessage delUser(UserVO vo,long id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}
 
 	@Override
-	public ResultMessage revUser(UserVO vo) throws RemoteException {
+	public ResultMessage revUser(UserVO vo,long id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}

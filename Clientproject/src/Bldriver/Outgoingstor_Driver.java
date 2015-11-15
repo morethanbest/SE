@@ -2,10 +2,11 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.commoditybl.StockoutBlService_Stub;
-import businesslogicservice.commodityblservice.StockoutBlService;
 import vo.ResultMessage;
 import vo.StockoutVO;
+import businesslogic.commoditybl.blstub.StockoutBlService_Stub;
+//import businesslogic.commoditybl.StockoutBlService_Stub;
+import businesslogicservice.commodityblservice.StockoutBlService;
 
 
 public class Outgoingstor_Driver {

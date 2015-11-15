@@ -1,12 +1,14 @@
-package businesslogic.commoditybl.InboundPack;//mock
+package businesslogic.commoditybl.StockoutPack;
 
-public class IdInfo {
+public class IdInfoMock {
+
 	long id;
-	public IdInfo(long id) {
+	public IdInfoMock(long id) {
 		// TODO Auto-generated constructor stub
 		this.id=id;
 	}
 	public long getid(){
 		return this.id;
 	}
+
 }

@@ -1,4 +1,4 @@
-package businesslogic.commoditybl;
+package businesslogic.commoditybl.SubregionPack;
 
 import java.rmi.RemoteException;
 
@@ -14,7 +14,16 @@ public class SubregionController implements SubregionBlService{
 	public ResultMessage Subregion(CommodityLocation beforeLocation,
 			CommodityLocation afterLocation) throws RemoteException {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		
+		
 		return null;
 	}
 
+	
+	
 }

@@ -8,9 +8,9 @@ import vo.ResultMessage;
 import vo.StockinVO;
 
 public class Inbound {
-		InboundForm form;
-		IdInfo idgetter;
-	public Inbound(InboundForm form,IdInfo idgetter) {
+		InboundFormMock form;
+		IdInfoMock idgetter;
+	public Inbound(InboundFormMock form,IdInfoMock idgetter) {
 		// TODO Auto-generated constructor stub
 		this.form=form;
 		this.idgetter=idgetter;

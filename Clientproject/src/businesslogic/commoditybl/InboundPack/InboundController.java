@@ -12,9 +12,9 @@ public class InboundController implements businesslogicservice.commodityblservic
 	@Override
 	public ResultMessage Inbound(StockinVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		InboundForm newform=new InboundForm();
+		InboundFormMock newform=new InboundFormMock();
 		
-		IdInfo idgetter=new IdInfo(5);
+		IdInfoMock idgetter=new IdInfoMock(5);
 		Inbound newinbound=new Inbound(newform,idgetter);
 		
 		ResultMessage result=newinbound.InboundForm(vo);

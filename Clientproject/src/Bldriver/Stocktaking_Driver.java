@@ -2,7 +2,8 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.commoditybl.StocktakingBlService_Stub;
+import businesslogic.commoditybl.blstub.StocktakingBlService_Stub;
+//import businesslogic.commoditybl.StocktakingBlService_Stub;
 import businesslogicservice.commodityblservice.StocktakingBlService;
 
 public class Stocktaking_Driver {

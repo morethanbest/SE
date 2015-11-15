@@ -1,4 +1,4 @@
-package businesslogic.commoditybl;
+package businesslogic.commoditybl.StocktakingPack;
 
 import java.rmi.RemoteException;
 
@@ -12,7 +12,10 @@ public class StocktakingController implements StocktakingBlService{
 	@Override
 	public StocktakingVO Stocktaking() throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		FormGetMock formgetter=new FormGetMock(null);
+		Stocktaking newcheck=new Stocktaking(formgetter);
+		StocktakingVO vo=newcheck.StockFormget();
+		return vo;
 	}
 
 }

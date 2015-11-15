@@ -1,4 +1,4 @@
-package businesslogic.userbl;
+package businesslogic.userbl.UsersloginPack;
 
 import java.rmi.RemoteException;
 
@@ -7,14 +7,22 @@ import businesslogicservice.userblservice.UserloginBlService;
 
 public class UserloginController implements UserloginBlService{
 
-	public UserloginController() {
-		// TODO Auto-generated constructor stub
-	}
+
 
 	@Override
 	public ResultMessage login(long id, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		LoginConfirmMock con=new LoginConfirmMock();
+		Userlogin login=new Userlogin(con);
+		ResultMessage result=login.login();
+		return result;
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
