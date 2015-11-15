@@ -1,4 +1,4 @@
-package businesslogic.managerbl;
+package businesslogic.managerbl.stub;
 
 import java.rmi.RemoteException;
 

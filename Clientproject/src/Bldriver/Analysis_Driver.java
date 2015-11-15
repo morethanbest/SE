@@ -2,9 +2,9 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.managerbl.BalanceviewBlService_Stub;
-import businesslogic.managerbl.SearchAccount_Stub;
-import businesslogic.managerbl.Statistics_Stub;
+import businesslogic.managerbl.stub.BalanceviewBlService_Stub;
+import businesslogic.managerbl.stub.SearchAccount_Stub;
+import businesslogic.managerbl.stub.Statistics_Stub;
 import businesslogicservice.managerblservice.BalanceviewBlService;
 import businesslogicservice.managerblservice.SearchAccount;
 import businesslogicservice.managerblservice.Statistics;

@@ -2,22 +2,22 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.managerbl.OrganizationBlService_Stub;
+import businesslogic.managerbl.stub.OrganizationBlService_Stub;
 import businesslogicservice.managerblservice.OrganizationBlService;
-import po.Organization;
+import po.Organizationtype;
 import vo.OrganizationVO;
 import vo.ResultMessage;
 
 public class Organization_Driver {
 	public void driver(OrganizationBlService organizationBlservice){
 		try{
-			ResultMessage result=organizationBlservice.addOrganization(new OrganizationVO("1",Organization.hall));
+			ResultMessage result=organizationBlservice.addOrganization(new OrganizationVO("1",Organizationtype.hall));
 			if(result==ResultMessage.success)
 				System.out.println("Organization added");
-			result=organizationBlservice.delOrganization(new OrganizationVO("1",Organization.hall));
+			result=organizationBlservice.delOrganization(new OrganizationVO("1",Organizationtype.hall));
 			if(result==ResultMessage.success)
 				System.out.println("Organization deleted");
-			result=organizationBlservice.revOrganization(new OrganizationVO("1",Organization.hall));
+			result=organizationBlservice.revOrganization(new OrganizationVO("1",Organizationtype.hall));
 			if(result==ResultMessage.success)
 				System.out.println("Organization successfully");
 			if(organizationBlservice.getOrganization("a")!=null){

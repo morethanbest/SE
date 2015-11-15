@@ -2,7 +2,7 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.managerbl.ConstantsBlService_Stub;
+import businesslogic.managerbl.stub.ConstantsBlService_Stub;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import vo.ConstantsVO;
 import vo.ResultMessage;

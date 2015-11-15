@@ -1,18 +1,18 @@
 package vo;
 
-import po.Organization;
+import po.Organizationtype;
 
 public class OrganizationVO {
 	String name;
-	Organization type;
-	public OrganizationVO( String name, Organization type) {
+	Organizationtype type;
+	public OrganizationVO( String name, Organizationtype type) {
 		this.name = name;
 		this.type = type;
 	}
 	public String getName() {
 		return name;
 	}
-	public Organization getType() {
+	public Organizationtype getType() {
 		return type;
 	}
 	

@@ -3,8 +3,8 @@ package po;
 public class OrignalOrganizationPO {
 	long id;
 	String name;
-	Organization type;
-	public OrignalOrganizationPO(long id, String name, Organization type) {
+	Organizationtype type;
+	public OrignalOrganizationPO(long id, String name, Organizationtype type) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -15,7 +15,7 @@ public class OrignalOrganizationPO {
 	public String getName() {
 		return name;
 	}
-	public Organization getType() {
+	public Organizationtype getType() {
 		return type;
 	}
 	

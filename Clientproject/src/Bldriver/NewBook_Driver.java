@@ -8,7 +8,7 @@ import businesslogic.accountbl.stub.NewBookBLService_Stub;
 import businesslogicservice.accountblservice.NewBookBlService;
 import po.CommodityLocation;
 import po.Job;
-import po.Organization;
+import po.Organizationtype;
 import vo.AccountVO;
 import vo.CommodityInVO;
 import vo.NewbookVO;
@@ -25,7 +25,7 @@ public class NewBook_Driver {
 			List<CommodityInVO> l2=new ArrayList<CommodityInVO>();
 			l2.add(new CommodityInVO("a",1,new CommodityLocation(1,1,1,1)));
 			List<OrganizationVO> l3=new ArrayList<OrganizationVO>();
-			l3.add(new OrganizationVO("1",Organization.hall));
+			l3.add(new OrganizationVO("1",Organizationtype.hall));
 			List<VehicleVO> l4=new ArrayList<VehicleVO>();
 			l4.add(new VehicleVO("1","1",1));
 			List<StaffVO> l5=new ArrayList<StaffVO>();

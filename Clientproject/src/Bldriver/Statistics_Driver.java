@@ -2,7 +2,7 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.managerbl.Statistics_Stub;
+import businesslogic.managerbl.stub.Statistics_Stub;
 import businesslogicservice.managerblservice.Statistics;
 
 public class Statistics_Driver {

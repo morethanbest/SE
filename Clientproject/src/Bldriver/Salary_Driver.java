@@ -2,7 +2,7 @@ package Bldriver;
 
 import java.rmi.RemoteException;
 
-import businesslogic.managerbl.SalaryBlService_Stub;
+import businesslogic.managerbl.stub.SalaryBlService_Stub;
 import businesslogicservice.managerblservice.SalaryBlService;
 import po.Job;
 import po.SalaryMode;

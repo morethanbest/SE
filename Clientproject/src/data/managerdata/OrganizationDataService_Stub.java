@@ -2,7 +2,7 @@ package data.managerdata;
 
 import java.rmi.RemoteException;
 
-import po.Organization;
+import po.Organizationtype;
 import po.OrganizationPO;
 import dataservice.managerdataservice.OrganizationDataService;
 
@@ -31,7 +31,7 @@ public class OrganizationDataService_Stub implements OrganizationDataService{
 	public OrganizationPO findOrganization(String name)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		OrganizationPO po=new OrganizationPO(1, "�Ͼ���¥",Organization.hall );
+		OrganizationPO po=new OrganizationPO(1, "�Ͼ���¥",Organizationtype.hall );
 		return po;
 	}
 

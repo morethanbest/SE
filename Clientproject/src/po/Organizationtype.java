@@ -1,5 +1,5 @@
 package po;
 
-public enum Organization {
+public enum Organizationtype {
 	hall,transfercenter
 }
