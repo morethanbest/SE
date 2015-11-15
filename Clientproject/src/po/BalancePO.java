@@ -1,12 +1,12 @@
 package po;
 import java.io.Serializable;
 
-public class StocktakingPO  implements Serializable{
+public class BalancePO  implements Serializable{
 	long id;
 	double income;
 	double pay;
 	double allbenefit;
-	public StocktakingPO(long id,double income, double pay, double allbenefit) {
+	public BalancePO(long id,double income, double pay, double allbenefit) {
 		this.id=id;
 		this.income = income;
 		this.pay = pay;
