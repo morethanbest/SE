@@ -5,25 +5,25 @@ import vo.OrganizationVO;
 import vo.ResultMessage;
 
 public class Organization {
-	AddOrganization addo;
-	FindOrganization findo;
-	DelOrganization delo;
-	RevOrganization revo;
-	IdInfo id;
-	public Organization(AddOrganization addo,IdInfo id){
+	MockAddOrganization addo;
+	MockFindOrganization findo;
+	MockDelOrganization delo;
+	MockRevOrganization revo;
+	MockIdInfo id;
+	public Organization(MockAddOrganization addo,MockIdInfo id){
 		this.addo=addo;
 		this.id=id;
 	}
 	
-	public Organization(FindOrganization findo){
+	public Organization(MockFindOrganization findo){
 		this.findo=findo;
 	}
 	
-	public Organization(DelOrganization delo){
+	public Organization(MockDelOrganization delo){
 		this.delo=delo;
 	}
 	
-	public Organization(RevOrganization revo){
+	public Organization(MockRevOrganization revo){
 		this.revo=revo;
 	}
 	
@@ -55,7 +55,7 @@ public class Organization {
 		String name=vo.getName();
 		Organizationtype type=vo.getType();
 		revo.setRevInfo(name, type);
-		ResultMessage result=revo.delete();
+		ResultMessage result=revo.rev();
 		return result;
 	}
 }
