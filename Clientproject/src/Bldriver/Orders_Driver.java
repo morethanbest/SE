@@ -29,7 +29,7 @@ public class Orders_Driver {
 	    		System.out.println("orderfare fails");
 	    	}
 	    	ReceptionVO vo2=new ReceptionVO(null, null, 0);
-	    	ResultMessage result2=orderBlService.reception(vo2);
+//	    	ResultMessage result2=orderBlService.reception(vo2);
 	    	if(result==ResultMessage.success){
 	    		System.out.println("reception succeeds");
 	    	}

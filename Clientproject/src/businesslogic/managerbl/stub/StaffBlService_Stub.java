@@ -14,11 +14,6 @@ public class StaffBlService_Stub implements businesslogicservice.managerblservic
 		return ResultMessage.success;
 	}
 
-	@Override
-	public StaffVO delStaff() throws RemoteException {
-		// TODO Auto-generated method stub
-		return new StaffVO("1",Job.Courier);
-	}
 
 	@Override
 	public ResultMessage revStaff(StaffVO vo) throws RemoteException {
@@ -26,10 +21,17 @@ public class StaffBlService_Stub implements businesslogicservice.managerblservic
 		return ResultMessage.success;
 	}
 
+
 	@Override
-	public ResultMessage getStaff(String name) throws RemoteException {
+	public ResultMessage delStaff(StaffVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
+	}
+
+	@Override
+	public StaffVO getStaff(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return new StaffVO("1",Job.Courier);
 	}
 
 }

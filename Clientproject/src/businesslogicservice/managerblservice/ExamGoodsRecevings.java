@@ -6,11 +6,11 @@ import java.util.List;
 
 import vo.ResultMessage; 
 
-import vo.GoodsRecevingExamVO;
+import vo.GoodsReceivingExamVO;
 
 public interface ExamGoodsRecevings {
-	public List<GoodsRecevingExamVO> getGoodsRecevings()throws RemoteException;
+	public List<GoodsReceivingExamVO> getGoodsRecevings()throws RemoteException;
 	
-	public ResultMessage GoodsRecevingsExam (List<GoodsRecevingExamVO> volist)throws RemoteException;
+	public ResultMessage GoodsRecevingsExam (List<GoodsReceivingExamVO> volist)throws RemoteException;
 
 }

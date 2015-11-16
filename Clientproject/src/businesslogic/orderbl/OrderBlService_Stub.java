@@ -22,10 +22,5 @@ public class OrderBlService_Stub implements OrderBlService {
 		return 0;
 	}
 
-	@Override
-	public ResultMessage reception(ReceptionVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
-		return ResultMessage.success;
-	}
 
 }

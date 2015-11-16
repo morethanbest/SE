@@ -11,5 +11,7 @@ public interface ArrivalFormDataService {
 	
 	public void updateArrivalForm (ArrivalPO po)throws RemoteException;
 	
-	public void addArrivalForm (ArrivalPO po)throws RemoteException;
+	public void addArrivalForm (ArrivalPO po) throws RemoteException;
+	
+	public long findLastID() throws RemoteException;
 }

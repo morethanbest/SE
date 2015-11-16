@@ -4,9 +4,9 @@ import java.rmi.RemoteException;
 
 import vo.ResultMessage; 
 
-import vo.GoodsRecevingVO;
+import vo.GoodsReceivingVO;
 
 public interface GoodsRecevingBlService {
-	public ResultMessage GoodsReceving (GoodsRecevingVO vo)throws RemoteException;
-	public ResultMessage update(GoodsRecevingVO vo)throws RemoteException;
+	public ResultMessage GoodsReceving (GoodsReceivingVO vo)throws RemoteException;
+	public ResultMessage update(GoodsReceivingVO vo)throws RemoteException;
 }

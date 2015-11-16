@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import vo.RecordtransVO;
 import vo.ResultMessage;
-import businesslogic.logisticsbl.RecordtranBlService_Stub;
+import businesslogic.logisticsbl.stub.RecordtranBlService_Stub;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
 
 public class Recordtrans_Driver {

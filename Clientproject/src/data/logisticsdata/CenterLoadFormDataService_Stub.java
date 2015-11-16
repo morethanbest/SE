@@ -39,6 +39,12 @@ public class CenterLoadFormDataService_Stub  implements CenterLoadFormDataServic
 		
 	}
 
+	@Override
+	public long findLastID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 }

@@ -37,6 +37,19 @@ public class RecordtransFormDataService_Stub implements RecordtransFormDataServi
 		System.out.println("Add Succeed!\n");
 	}
 
+	@Override
+	public long findLastID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public RecordtransPO getRecordtransForm(String transNumber)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

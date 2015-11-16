@@ -13,5 +13,7 @@ public interface GoodsReceivingFormDataService {
 	
 	public void updateGoodsReceivingForm (GoodsReceivingPO po)throws RemoteException;
 	
+	public long findLastID() throws RemoteException;
+	
 	
 }

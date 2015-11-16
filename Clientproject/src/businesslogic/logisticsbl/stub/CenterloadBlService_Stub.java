@@ -1,4 +1,4 @@
-package businesslogic.logisticsbl;
+package businesslogic.logisticsbl.stub;
 
 import java.rmi.RemoteException;
 
@@ -15,7 +15,7 @@ public class CenterloadBlService_Stub implements businesslogicservice.logisticsb
 	}
 
 	@Override
-	public double ComputeCenterLoadFare(CLFareVO vo) throws RemoteException {
+	public double computeCenterLoadFare(CLFareVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

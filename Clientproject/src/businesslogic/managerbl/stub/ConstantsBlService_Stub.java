@@ -19,11 +19,17 @@ public class ConstantsBlService_Stub implements ConstantsBlService {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
 	}
-
+	
 	@Override
 	public ResultMessage revConstants(ConstantsVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ResultMessage.success;
+	}
+
+	@Override
+	public ConstantsVO getConstants(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return new ConstantsVO(name,1);
 	}
 
 }

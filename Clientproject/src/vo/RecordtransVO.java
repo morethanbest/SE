@@ -11,11 +11,11 @@ public class RecordtransVO {
 	String flightcode;
 	Hall departrue;
 	Hall destination;
-	long countercode;
+	String countercode;
 	String supervisor;
 	List<String> allcode;
 	public RecordtransVO(long loadtime, long arrivaltime, String transcode, String flightcode, Hall departrue,
-			Hall destination, long countercode, String supervisor, List<String> allcode) {
+			Hall destination, String countercode, String supervisor, List<String> allcode) {
 		this.loadtime = loadtime;
 		this.arrivaltime = arrivaltime;
 		this.transcode = transcode;
@@ -45,7 +45,7 @@ public class RecordtransVO {
 	public Hall getDestination() {
 		return destination;
 	}
-	public long getCountercode() {
+	public String getCountercode() {
 		return countercode;
 	}
 	public String getSupervisor() {

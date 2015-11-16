@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import vo.DeliveryVO;
 import vo.ResultMessage;
-import businesslogic.logisticsbl.DeliveryBlService_Stub;
+import businesslogic.logisticsbl.stub.DeliveryBlService_Stub;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
 
 

@@ -38,7 +38,7 @@ import vo.ArrivalExamVO;
 import vo.CLFormsExamVO;
 import vo.DebitnoteExamVO;
 import vo.DeliveryExamVO;
-import vo.GoodsRecevingExamVO;
+import vo.GoodsReceivingExamVO;
 import vo.HLFormsExamVO;
 import vo.OrderExamVO;
 import vo.RecordcollectExamVO;
@@ -92,8 +92,8 @@ public class Examine_Driver {
 				System.out.println("Deliverys get");
 			}
 			//test GoodsRecevings
-			List<GoodsRecevingExamVO> l5=new ArrayList<GoodsRecevingExamVO>();
-			l5.add(new GoodsRecevingExamVO(1,"1",Hall.Nanjing,Arrivalstate.broken));
+			List<GoodsReceivingExamVO> l5=new ArrayList<GoodsReceivingExamVO>();
+			l5.add(new GoodsReceivingExamVO(1,"1",Hall.Nanjing,Arrivalstate.broken));
 			result=examgoodsrecevings.GoodsRecevingsExam(l5);
 			if(result==ResultMessage.success)
 				System.out.println("GoodsRecevings set");

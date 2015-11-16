@@ -13,4 +13,7 @@ public interface RecordtransFormDataService {
 	
 	public void addRecordtransForm (RecordtransPO po)throws RemoteException;
 	
+	public long findLastID() throws RemoteException;
+	
+	public RecordtransPO getRecordtransForm (String transNumber)throws RemoteException;
 }

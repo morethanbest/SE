@@ -34,6 +34,12 @@ public class DeliveryFormDataService_Stub implements DeliveryFormDataService{
 		
 	}
 
+	@Override
+	public long findLastID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 
 }

@@ -2,10 +2,9 @@ package businesslogicservice.logisticsblservice;
 
 import java.rmi.RemoteException;
 
-import vo.OrderVO;
-import vo.ResultMessage;
+import vo.LogisticsVO;
 
 public interface SearchOrderBlService {
-	public OrderVO getOrderbyOrderNumber(String orderNumber)throws RemoteException;
+	public LogisticsVO getOrderbyOrderNumber(String orderNumber)throws RemoteException;
 
 }
