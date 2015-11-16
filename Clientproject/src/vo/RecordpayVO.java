@@ -4,14 +4,14 @@ public class RecordpayVO {
 	long paytime;
 	long paysum;
 	String payman;
-	long payaccount;
+	String payaccount;
 	double rent;
 	double fee;
 	double salary;
 	double reward;
 	String remark;
 	public RecordpayVO(long paytime, long paysum, String payman,
-			long payaccount, double rent, double fee, double salary,
+			String payaccount, double rent, double fee, double salary,
 			double reward, String remark) {
 		super();
 		this.paytime = paytime;
@@ -33,7 +33,7 @@ public class RecordpayVO {
 	public String getPayman() {
 		return payman;
 	}
-	public long getPayaccount() {
+	public String getPayaccount() {
 		return payaccount;
 	}
 	public double getRent() {
