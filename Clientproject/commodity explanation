@@ -1,0 +1,7 @@
+StockinVO 是作为入库单向下传的
+StockoutVO作为出库单向下传
+CommodityInVO 作为库存根据分区检查的结果向上传的
+CommmodityOutVO 是作为库存查看，库存盘点的结果向上传的
+CommodityPO是一个持久化对象
+入库时  数据层添加入库单时，即添加库存信息，
+出库时，不删除po，只是将里面的出库时间从默认的-1改为当时的出库时间

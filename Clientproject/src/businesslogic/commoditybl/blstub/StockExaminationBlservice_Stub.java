@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import businesslogicservice.commodityblservice.StockExaminationBlService;
+import po.City;
 import po.CommodityLocation;
 import vo.CommodityOutVO;
 import vo.StockExaminationVO;
@@ -15,8 +16,8 @@ public class StockExaminationBlservice_Stub implements StockExaminationBlService
 	public StockExaminationVO StockExamination(long startTime, long endTime) throws RemoteException {
 		// TODO Auto-generated method stub
 		List<CommodityOutVO> l=new ArrayList<CommodityOutVO>();
-		l.add(new CommodityOutVO("1",1,1,new CommodityLocation(1,1,1,1)));
-		return new StockExaminationVO(1,1,l);
+		l.add(new CommodityOutVO("1",1,1,new CommodityLocation(1,1,1,1), City.Beijing));
+		return new StockExaminationVO(1,1,l,0,0,0,0,0);
 	}
 
 }

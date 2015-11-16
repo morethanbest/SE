@@ -13,7 +13,7 @@ import vo.RegionInfoVO;
 public class GetRegionInfoBlService_Stub implements GetRegionInfoBlService {
 
 	@Override
-	public RegionInfoVO getRegionInfo(Region region) throws RemoteException {
+	public RegionInfoVO getRegionInfo(long blocknum) throws RemoteException {
 		// TODO Auto-generated method stub
 		List<CommodityInVO> l=new ArrayList<CommodityInVO>();
 		l.add(new CommodityInVO("a",1,new CommodityLocation(1,1,1,1)));

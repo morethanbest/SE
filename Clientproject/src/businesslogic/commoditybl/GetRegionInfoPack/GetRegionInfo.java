@@ -14,8 +14,8 @@ public class GetRegionInfo {
 		
 	}
 	
-	public RegionInfoVO getinfo(Region region){
-		List<CommodityInVO> list=regiongetter.getInfo(region);
+	public RegionInfoVO getinfo(long blocknum){
+		List<CommodityInVO> list=regiongetter.getInfo(blocknum);
 		RegionInfoVO vo=new RegionInfoVO(list);
 		return vo;
 		

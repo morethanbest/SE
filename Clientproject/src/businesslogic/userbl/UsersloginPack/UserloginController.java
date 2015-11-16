@@ -14,7 +14,7 @@ public class UserloginController implements UserloginBlService{
 		// TODO Auto-generated method stub
 		LoginConfirmMock con=new LoginConfirmMock();
 		Userlogin login=new Userlogin(con);
-		ResultMessage result=login.login();
+		ResultMessage result=login.login(id,password);
 		return result;
 		
 		

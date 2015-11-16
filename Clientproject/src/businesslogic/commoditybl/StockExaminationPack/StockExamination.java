@@ -14,7 +14,12 @@ public class StockExamination {
 	
 	public StockExaminationVO examhandle(long startTime, long endTime){
 		List<CommodityOutVO> list=getter.getform(startTime, endTime);
-		StockExaminationVO vo=new StockExaminationVO(startTime,endTime,list);
+		long stockoutnum=getter.getallstocknum();
+		long stockinnum=getter.getstocinnum();
+		long moneyin=getter.getmoneyin();
+		long moneyout=getter.getmoneyout();
+		long allstocknum=getter.getallstocknum();
+		StockExaminationVO vo=new StockExaminationVO(startTime,endTime,list,stockoutnum,stockinnum,moneyin,moneyout,allstocknum);
 		return vo;
 	}
 

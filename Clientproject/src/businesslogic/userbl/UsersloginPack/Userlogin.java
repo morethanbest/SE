@@ -9,8 +9,8 @@ public class Userlogin {
 		this.con=con;
 	}
 	
-	public ResultMessage login(){
-		ResultMessage result=con.log();
+	public ResultMessage login(long id, String password){
+		ResultMessage result=con.log(id,password);
 		return result;
 	}
 

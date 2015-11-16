@@ -13,7 +13,7 @@ public class RegionGetMock {
 	
 	
 	
-	public List<CommodityInVO> getInfo(Region region){
+	public List<CommodityInVO> getInfo(long blocknum){
 		return list;
 	}
 	

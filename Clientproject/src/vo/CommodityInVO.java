@@ -11,6 +11,7 @@ public class CommodityInVO {
 		this.intime = intime;
 		this.location = location;
 	}
+	
 	public String getOrdercode() {
 		return ordercode;
 	}

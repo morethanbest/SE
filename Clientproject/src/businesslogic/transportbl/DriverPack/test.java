@@ -1,77 +1,58 @@
 package businesslogic.transportbl.DriverPack;
 
+import static org.junit.Assert.*;
+
 import java.rmi.RemoteException;
+
+import org.junit.Test;
 
 import vo.DriverVO;
 import vo.ResultMessage;
-import businesslogicservice.transportblservice.DriverBlService;
 
-public class DriverController implements DriverBlService{
+public class test {
 
-	
-
-	@Override
-	public ResultMessage addDriver(DriverVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
+	@Test
+	public void testAdd() throws RemoteException {
+		DriverVO vo=new DriverVO("012002", "ÀîÍú", 19720123, "465646" ,"13115646","ÄÐ", 3);
 		AddDriverMock add=new AddDriverMock();
 		Driver driver=new Driver(add);
 		ResultMessage result=driver.addDriver(vo);
-		
-		return result;
+		assertEquals(result,ResultMessage.success);
 	}
-
-	
-	
-	
-	@Override
-	public ResultMessage delDriver(DriverVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
+	@Test
+	public void testDel() throws RemoteException {
+		DriverVO vo=new DriverVO("012002", "ÀîÍú", 19720123, "465646" ,"13115646","ÄÐ", 3);
 		DelDriverMock del=new DelDriverMock();
 		Driver driver=new Driver(del);
 		ResultMessage result=driver.delDriver(vo);
-		
-		return result;
+		assertEquals(result,ResultMessage.success);
 	}
-
-	
-	
-	
-	
-	@Override
-	public ResultMessage revDriver(DriverVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
+	@Test
+	public void testRev() throws RemoteException {
+		DriverVO vo=new DriverVO("012002", "ÀîÍú", 19720123, "465646" ,"13115646","ÄÐ", 3);
 		RevDriverMock rev=new RevDriverMock();
 		Driver driver=new Driver(rev);
 		ResultMessage result=driver.revDriver(vo);
-		return result;
+		assertEquals(result,ResultMessage.success);
 	}
-
-	
-	
-	
-	@Override
-	public DriverVO getDriverbyDN(String driverNumber) throws RemoteException {
-		// TODO Auto-generated method stub
+	@Test
+	public void testGetByDN() throws RemoteException {
+		String driverNumber="201463";
 		DriverVO vo=new DriverVO(driverNumber,"abc",1,"321459193621","13214","32153",20150322);
 		FindDriverMock fd=new FindDriverMock(vo);
 		Driver driver=new Driver(fd);
 		DriverVO vogot=driver.getDriverbyDN(driverNumber);
-		return vogot;
-	}
-
-	
-	
-	
-	
-	@Override
-	public DriverVO getDriverbyName(String name) throws RemoteException {
-		// TODO Auto-generated method stub
+		assertEquals(vogot.getDrivercode(),driverNumber);
 		
+	}
+	@Test
+	public void testGetByName() throws RemoteException {
+		String name="ÀîÍú";
 		DriverVO vo=new DriverVO("1",name,1,"321459193621","13214","32153",20150322);
 		FindDriverMock fd=new FindDriverMock(vo);
 		Driver driver=new Driver(fd);
 		DriverVO vogot=driver.getDriverbyName(name);
-		return vogot;
+		assertEquals(vogot.getDrivername(),name);
 	}
 
 }
