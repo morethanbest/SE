@@ -9,7 +9,7 @@ import vo.ResultMessage;
 public class test {
 	@Test
 	public void testRecordpay(){
-		RecordpayVO vo=new RecordpayVO(20150101, 100, "sc", 0, 0, 0, 0, 0, "");
+		RecordpayVO vo=new RecordpayVO(20150101, 100, "sc", "0", 0, 0, 0, 0, " ");
 		MockIdInfo idInfo=new MockIdInfo(1);
 		MockRecord record=new MockRecord();
 		Recordpay recordpay=new Recordpay(idInfo, record);
