@@ -10,13 +10,13 @@ import businesslogicservice.orderblservice.OrderBlService;
 public class Reception_Driver {
 	 public void drive(OrderBlService orderBlService) throws RemoteException{
 		 ReceptionVO vo=new ReceptionVO(null, null, 0);
-	    	ResultMessage result=orderBlService.reception(vo);
+	    /*	ResultMessage result=orderBlService.reception(vo);
 	    	if(result==ResultMessage.success){
 	    		System.out.println("reception succeeds");
 	    	}
 	    	else{
 	    		System.out.println("reception fails");
-	    	}
+	    	}*/
 	 }
 
 	public static void main(String[] args) throws RemoteException {

@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import businesslogic.managerbl.stub.ExamArrivals_Stub;
+/*import businesslogic.managerbl.stub.ExamArrivals_Stub;*/
 import businesslogic.managerbl.stub.ExamCLForms_Stub;
 import businesslogic.managerbl.stub.ExamDebitnotes_Stub;
 import businesslogic.managerbl.stub.ExamDeliverys_Stub;
@@ -55,7 +55,7 @@ public class Examine_Driver {
 		try{
 			//test arrival
 			List<ArrivalExamVO> l1=new ArrayList<ArrivalExamVO>();
-			l1.add(new ArrivalExamVO("1",1,"1",Hall.Nanjing,Arrivalstate.intact));
+			l1.add(new ArrivalExamVO(0, "1",1,"1",Hall.Nanjing,Arrivalstate.intact, null));
 			ResultMessage result=examArrivals.ArrivalsExam(l1);
 			if(result==ResultMessage.success)
 				System.out.println("Arrivals set");
@@ -167,7 +167,7 @@ public class Examine_Driver {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		ExamArrivals examArrivals=new ExamArrivals_Stub();
 		Examine_Driver driver=new Examine_Driver();
 		ExamCLForms examcl=new ExamCLForms_Stub();
@@ -183,5 +183,5 @@ public class Examine_Driver {
 		ExamStockouts examstockouts=new ExamStockouts_Stub();
 		driver.driver(examArrivals,examcl,examdebit,examdeliverys,examgoodsrecevings,examhl,examinbound,examorders,examrecordcollects
 				,examrecordpays,examrecordtrans,examstockouts);
-	}
+	}*/
 }
