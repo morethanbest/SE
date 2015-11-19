@@ -1,4 +1,4 @@
-package businesslogic.userbl.UsersloginPack;
+package businesslogic.userbl.UsersloginPack.Mock;
 
 import vo.ResultMessage;
 

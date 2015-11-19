@@ -12,7 +12,7 @@ public class UserloginController implements UserloginBlService{
 	@Override
 	public ResultMessage login(long id, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		LoginConfirmMock con=new LoginConfirmMock();
+		LoginConfirm con=new LoginConfirm();
 		Userlogin login=new Userlogin(con);
 		ResultMessage result=login.login(id,password);
 		return result;

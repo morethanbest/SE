@@ -6,41 +6,41 @@ import vo.ResultMessage;
 import vo.UserVO;
 
 public class User {
-	private IdInfoMock idgetter;
-	private AddUserMock add;
-	private DelUserMock del;
-	private RevUserMock rev;
-	private FindUserMock find;
+	private IdInfo idgetter;
+	private AddUser add;
+	private DelUser del;
+	private RevUser rev;
+	private FindUser find;
 	
-	public User(AddUserMock add,IdInfoMock idgetter) {
+	public User(AddUser add,IdInfo idgetter) {
 		// TODO Auto-generated constructor stub
 		this.idgetter=idgetter;
 		this.add=add;
 	}
 	
-	public User(DelUserMock del){
+	public User(DelUser del){
 		this.del=del;
 	}
 	
-	public User(RevUserMock rev){
+	public User(RevUser rev){
 		this.rev=rev;
 	}
-	public User(FindUserMock find){
+	public User(FindUser find){
 		this.find=find;
 	}
 	
 	
 	
 	
-	public ResultMessage addUser(UserVO vo) throws RemoteException {
+	public ResultMessage addUser(UserVO vo) throws RemoteException {                              //revise
 		// TODO Auto-generated method stub
 		String username=vo.getUsername();
 		String password=vo.getCode();
 		String level=vo.getLevel();
 		long id=idgetter.getid();
 		
-		add.setUser(id, username, password, level);
-		ResultMessage result=add.adduser();
+		//add.setUser(id, username, password, level);
+		ResultMessage result=add.adduser(username,password,level,id);
 		return result;
 		
 		

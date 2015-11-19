@@ -1,4 +1,4 @@
-package businesslogic.userbl.UsersPack;
+package businesslogic.userbl.UsersPack.Mock;
 
 import vo.UserVO;
 

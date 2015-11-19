@@ -3,8 +3,8 @@ package businesslogic.userbl.UsersloginPack;
 import vo.ResultMessage;
 
 public class Userlogin {
-	LoginConfirmMock con;
-	public Userlogin(LoginConfirmMock con) {
+	LoginConfirm con;
+	public Userlogin(LoginConfirm con) {
 		// TODO Auto-generated constructor stub
 		this.con=con;
 	}

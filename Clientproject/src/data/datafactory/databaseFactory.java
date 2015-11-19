@@ -61,10 +61,16 @@ public  class databaseFactory extends datafactoryserv{
 			DriversData drivers;
 			VehicleData vehicles;
 			//user
-			UsersData user;
-			UserLoginData userlogin;
+			private UsersData user;
+			private UserLoginData userlogin;
+			
+			public UsersData getUsersData(){
+				return this.user;
+			}
 	
-
+			public UserLoginData getUserLogin(){
+				return this.userlogin;
+			}
 	
 
 }
