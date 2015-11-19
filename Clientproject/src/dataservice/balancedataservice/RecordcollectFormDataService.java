@@ -5,13 +5,14 @@ import java.util.List;
 
 import po.Formstate;
 import po.RecordcollectPO;
+import vo.ResultMessage;
 
 public interface RecordcollectFormDataService {
-	public void addRecordcollectForm (RecordcollectPO po)throws RemoteException;
+	public ResultMessage addRecordcollectForm (RecordcollectPO po)throws RemoteException;
 	
 	public List<RecordcollectPO> getRecordcollectForm (Formstate state)throws RemoteException;
 	
-	public void updateRecordcollectForm (RecordcollectPO po)throws RemoteException;
+	public ResultMessage updateRecordcollectForm (RecordcollectPO po)throws RemoteException;
 	
 	public List<RecordcollectPO> getallRecordcollectForm ()throws RemoteException;
 }

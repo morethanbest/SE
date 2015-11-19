@@ -4,18 +4,17 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.Formstate;
-import po.LogisticsPO;
 import po.OrdersPO;
 import vo.ResultMessage;
 
 public interface OrderFormDataService {
-	public void addOrderForm (OrdersPO po)throws RemoteException;
+	public ResultMessage addOrderForm (OrdersPO po)throws RemoteException;
 	
 	public OrdersPO getOrderForm (long ordernum)throws RemoteException;
 	
 	public List<OrdersPO> getOrderForm (Formstate state)throws RemoteException;
 	
-	public void updateOrderForm (OrdersPO po)throws RemoteException;
+	public ResultMessage updateOrderForm (OrdersPO po)throws RemoteException;
 	
 	public long findLastID() throws RemoteException;
 }

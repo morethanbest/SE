@@ -5,13 +5,14 @@ import java.util.List;
 
 import po.Formstate;
 import po.RecordtransPO;
+import vo.ResultMessage;
 
 public interface RecordtransFormDataService {
 	public List<RecordtransPO> getRecordtransForm (Formstate state)throws RemoteException;
 	
-	public void updateRecordtransForm (RecordtransPO po)throws RemoteException;
+	public ResultMessage updateRecordtransForm (RecordtransPO po)throws RemoteException;
 	
-	public void addRecordtransForm (RecordtransPO po)throws RemoteException;
+	public ResultMessage addRecordtransForm (RecordtransPO po)throws RemoteException;
 	
 	public long findLastID() throws RemoteException;
 	

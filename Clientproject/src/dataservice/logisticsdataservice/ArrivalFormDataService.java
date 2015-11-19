@@ -5,13 +5,14 @@ import java.util.List;
 
 import po.ArrivalPO;
 import po.Formstate;
+import vo.ResultMessage;
 
 public interface ArrivalFormDataService {
 	public List<ArrivalPO> getArrivalForm (Formstate state)throws RemoteException;
 	
-	public void updateArrivalForm (ArrivalPO po)throws RemoteException;
+	public ResultMessage updateArrivalForm (ArrivalPO po)throws RemoteException;
 	
-	public void addArrivalForm (ArrivalPO po) throws RemoteException;
+	public ResultMessage addArrivalForm (ArrivalPO po) throws RemoteException;
 	
 	public long findLastID() throws RemoteException;
 }

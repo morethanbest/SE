@@ -5,13 +5,14 @@ import java.util.List;
 
 import po.CenterloadPO;
 import po.Formstate;
+import vo.ResultMessage;
 
 public interface CenterLoadFormDataService {
 	public List<CenterloadPO> getCenterLoadForm (Formstate state)throws RemoteException;
 	
-	public void updateCenterLoadForm (CenterloadPO po)throws RemoteException;
+	public ResultMessage updateCenterLoadForm (CenterloadPO po)throws RemoteException;
 	
-	public void addCenterLoadForm (CenterloadPO po)throws RemoteException;
+	public ResultMessage addCenterLoadForm (CenterloadPO po)throws RemoteException;
 	
 	public long findLastID() throws RemoteException;
 }

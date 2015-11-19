@@ -1,39 +1,39 @@
-package data.balancedata.driversAndStub;
-
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
-
-import po.DebitnotePO;
-import po.Formstate;
-import dataservice.balancedataservice.DebitnoteFormDataService;
-
-public class DebitnoteFormDataService_Stub implements DebitnoteFormDataService{
-
-	@Override
-	public List<DebitnotePO> getDebitnoteForm(Formstate state)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		List<DebitnotePO> list=new ArrayList<DebitnotePO>();
-		DebitnotePO newpo=new DebitnotePO(122345, 20140312,"ÄÏ¾©´óÑ§Ò½Ôº","Àî¸Õ", "ÄÏ¾©´óÑ§", 200000, "ÄÏ¾©ººÖÐÂ·");
-		list.add(newpo);
-		return list;
-	}
-
-	@Override
-	public void updateDebitnoteForm(DebitnotePO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("Update Succeed!\n");
-		
-	}
-
-	@Override
-	public void addDebitnoteForm(DebitnotePO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("Add Succeed!\n");
-		
-	}
-
-	
-
-}
+//package data.balancedata.driversAndStub;
+//
+//import java.rmi.RemoteException;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import po.DebitnotePO;
+//import po.Formstate;
+//import dataservice.balancedataservice.DebitnoteFormDataService;
+//
+//public class DebitnoteFormDataService_Stub implements DebitnoteFormDataService{
+//
+//	@Override
+//	public List<DebitnotePO> getDebitnoteForm(Formstate state)
+//			throws RemoteException {
+//		// TODO Auto-generated method stub
+//		List<DebitnotePO> list=new ArrayList<DebitnotePO>();
+//		DebitnotePO newpo=new DebitnotePO(122345, 20140312,"ï¿½Ï¾ï¿½ï¿½ï¿½Ñ§Ò½Ôº","ï¿½ï¿½ï¿½", "ï¿½Ï¾ï¿½ï¿½ï¿½Ñ§", 200000, "ï¿½Ï¾ï¿½ï¿½ï¿½ï¿½ï¿½Â·");
+//		list.add(newpo);
+//		return list;
+//	}
+//
+//	@Override
+//	public void updateDebitnoteForm(DebitnotePO po) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		System.out.println("Update Succeed!\n");
+//		
+//	}
+//
+//	@Override
+//	public void addDebitnoteForm(DebitnotePO po) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		System.out.println("Add Succeed!\n");
+//		
+//	}
+//
+//	
+//
+//}

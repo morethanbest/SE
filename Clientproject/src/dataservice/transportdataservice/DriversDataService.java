@@ -3,13 +3,14 @@ package dataservice.transportdataservice;
 import java.rmi.RemoteException;
 
 import po.DriversPO;
+import vo.ResultMessage;
 
 public interface DriversDataService {
-	public void insertDriver(DriversPO po)throws RemoteException;
+	public ResultMessage insertDriver(DriversPO po)throws RemoteException;
 	
-	public void deleteDriver(DriversPO po)throws RemoteException;
+	public ResultMessage deleteDriver(DriversPO po)throws RemoteException;
 	
-	public void updateDriver(DriversPO po)throws RemoteException;
+	public ResultMessage updateDriver(DriversPO po)throws RemoteException;
 	
 	public DriversPO findDriver(String identity)throws RemoteException;
 }
