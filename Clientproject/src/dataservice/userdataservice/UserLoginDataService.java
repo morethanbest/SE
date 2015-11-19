@@ -6,6 +6,6 @@ import vo.ResultMessage;
 
 public interface UserLoginDataService {
 
-	public ResultMessage login(String username,String password)throws RemoteException;
+	public ResultMessage login(long id,String password)throws RemoteException;
 
 }

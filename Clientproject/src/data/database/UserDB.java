@@ -11,7 +11,7 @@ public class UserDB {
 	static ResultSet ret = null;
 	static PreparedStatement pst=null;
 
-	public static ResultMessage write(byte[] b,String username,String password){
+	public static ResultMessage write(byte[] b,long id,String password){
 
 		dbh=new DBHelper();
 		sql="insert into UserPO values(?,?,?)";
@@ -19,7 +19,7 @@ public class UserDB {
 		try{
 
 			pst.setBytes(1, b);
-			pst.setString(2, username);
+			pst.setLong(2, id);
 			pst.setString(3, password);
 			int result=pst.executeUpdate();
 			if(result==-1){
@@ -35,12 +35,12 @@ public class UserDB {
 		
 	}
 	
-	public static ResultMessage check(String username,String password){
+	public static ResultMessage check(long id,String password){
 		dbh=new DBHelper();
-		sql="select username,password from UserPO where username=? and password=?";
+		sql="select id,password from UserPO where id=? and password=?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setString(1, username);
+			pst.setLong(1, id);
 			pst.setString(2, password);
 			ret=pst.executeQuery();
 			if(ret.next()){
@@ -68,11 +68,11 @@ public class UserDB {
 //		try{
 //			byte[] b=ser.Object2Bytes(po);
 //			ResultMessage result;
-//			result=write(b,po.getUsername(),po.getPassword());
+//			result=write(b,po.getId(),po.getPassword());
 //			if(result==ResultMessage.success){
 //				System.out.println("add Successfully");
 //			}
-//			result=check("sunchao","1234");
+//			result=check(1,"1234");
 //			if(result==ResultMessage.success){
 //				System.out.println("login Successfully");
 //			}

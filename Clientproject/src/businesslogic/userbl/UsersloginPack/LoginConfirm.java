@@ -11,15 +11,15 @@ public class LoginConfirm {
 	public ResultMessage log(long id, String password){
 		databaseFactory fac=new databaseFactory();
 		UserLoginData userdata=fac.getUserLogin();
-		String idstr=Long.toString(id);
+		ResultMessage result=ResultMessage.failure;
 		try {
-			ResultMessage result=userdata.login(idstr,password);
+			result=userdata.login(id,password);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.out.println("RemoteException!!");
 			e.printStackTrace();
 		}
-		return ResultMessage.success;
+		return result;
 	}
 
 }

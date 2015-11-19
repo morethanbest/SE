@@ -9,10 +9,10 @@ import vo.ResultMessage;
 public class UserLoginData implements UserLoginDataService {
 
 	@Override
-	public ResultMessage login(String username, String password) throws RemoteException {
+	public ResultMessage login(long id, String password) throws RemoteException {
 		// TODO Auto-generated method stub
 		UserDB db=new UserDB();
-		ResultMessage result=db.check(username, password);
+		ResultMessage result=db.check(id, password);
 		return result;
 	}
 
