@@ -14,12 +14,16 @@ public class UserPO implements Serializable {
 		this.password = password;
 		this.level = level;
 	}
-	public String getCode() {
+
+	public String getPassword() {
 		return password;
 	}
-	public void setCode(String code) {
-		this.password = code;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
+
 	public String getLevel() {
 		return level;
 	}

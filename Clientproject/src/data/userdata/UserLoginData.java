@@ -1,9 +1,19 @@
 package data.userdata;
 
-public class UserLoginData {
+import java.rmi.RemoteException;
 
-	public UserLoginData() {
-		// TODO Auto-generated constructor stub
+import data.database.UserDB;
+import dataservice.userdataservice.UserLoginDataService;
+import vo.ResultMessage;
+
+public class UserLoginData implements UserLoginDataService {
+
+	@Override
+	public ResultMessage login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		UserDB db=new UserDB();
+		ResultMessage result=db.check(username, password);
+		return result;
 	}
 
 }
