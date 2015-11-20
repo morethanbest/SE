@@ -1,6 +1,6 @@
 package businesslogic.userbl.UsersloginPack;
 
-import vo.ResultMessage;
+import po.Job;
 
 public class Userlogin {
 	LoginConfirm con;
@@ -9,9 +9,9 @@ public class Userlogin {
 		this.con=con;
 	}
 	
-	public ResultMessage login(long id, String password){
-		ResultMessage result=con.log(id,password);
-		return result;
+	public Job login(long id, String password){
+		Job job=con.log(id,password);
+		return job;
 	}
 
 }

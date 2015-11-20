@@ -1,5 +1,8 @@
 package po;
 
-public enum Job {
-	Courier,hallsalesman,transfercenter,drivers
+import java.io.Serializable;
+
+public enum Job implements Serializable{
+	Courier,hallsalesman,transfercenter,drivers,manager
+	,visitor
 }

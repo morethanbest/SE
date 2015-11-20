@@ -1,9 +1,9 @@
 package businesslogicservice.userblservice;
 import java.rmi.RemoteException;
 
-import vo.ResultMessage;
+import po.Job;
 public interface UserloginBlService {
 	
-	public ResultMessage login(long id,String password)throws RemoteException;
+	public Job login(long id,String password)throws RemoteException;
 
 }

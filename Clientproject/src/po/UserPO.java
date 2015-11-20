@@ -7,12 +7,12 @@ public class UserPO implements Serializable {
 	long id;
 	String username;
 	String password;
-	String level;
-	public UserPO(long id, String username, String password, String level) {
+	Job job;
+	public UserPO(long id, String username, String password, Job job) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.level = level;
+		this.job=job;
 	}
 
 	public String getPassword() {
@@ -23,13 +23,14 @@ public class UserPO implements Serializable {
 		this.password = password;
 	}
 
+	public Job getJob() {
+		return job;
+	}
 
-	public String getLevel() {
-		return level;
+	public void setJob(Job job) {
+		this.job = job;
 	}
-	public void setLevel(String level) {
-		this.level = level;
-	}
+
 	public long getId() {
 		return id;
 	}
