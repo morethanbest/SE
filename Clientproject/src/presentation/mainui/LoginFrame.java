@@ -86,7 +86,7 @@ public class LoginFrame extends JFrame {
 				UserloginBlService userloginBlService = new UserloginController();
 				try {
 					long id = Long.parseLong(textField.getText());
-					String password = passwordField.getPassword().toString();
+					String password = new String(passwordField.getPassword());
 					skipToNext(userloginBlService.login(id, password));
 				} catch (NumberFormatException e1) {
 					try {
