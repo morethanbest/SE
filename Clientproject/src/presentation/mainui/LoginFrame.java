@@ -80,14 +80,14 @@ public class LoginFrame extends JFrame {
 		label.setBounds(282, 94, 424, 64);
 		contentPane.add(label);
 		
-		JButton button = new JButton("登录");
+		JButton button = new JButton("\u767B\u5F55");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserloginBlService userloginBlService = new UserloginController();
 				try {
 					long id = Long.parseLong(textField.getText());
 					String password = passwordField.getPassword().toString();
-					skip(userloginBlService.login(id, password));
+					skipToNext(userloginBlService.login(id, password));
 				} catch (NumberFormatException e1) {
 					try {
 						WrongDialog dialog = new WrongDialog();
@@ -98,11 +98,11 @@ public class LoginFrame extends JFrame {
 					}
 				}
 			}
-			private void skip(Job job){
+			private void skipToNext(Job job){
 				if(job == Job.manager){
-					System.out.println("登录成功，身份为manager!!!");
+					System.out.println("Login success, manager!!!");
 				}else if(job == Job.visitor){
-					System.out.println("登录失败，没有此账号!!!");
+					System.out.println("Login failed!!!");
 				}
 			}
 		});
@@ -113,7 +113,7 @@ public class LoginFrame extends JFrame {
 		JButton button_1 = new JButton("\u67E5\u8BE2\u7269\u6D41\u4FE1\u606F");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("不能用啊！！！！！！！");
+				System.out.println("Cannot use!!!!");
 			}
 		});
 		button_1.setFont(new Font("黑体", Font.BOLD, 18));
