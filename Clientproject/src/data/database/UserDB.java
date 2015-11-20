@@ -89,11 +89,7 @@ public class UserDB {
 		
 	}
 	public static void main(String[] args) {
-		Job job = checkforjob(1, "123");
-		if (job != Job.visitor) {
-			System.out.println("login Successfully");
-
-		}
+		initialize();
 	}
 
 	
