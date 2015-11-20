@@ -31,38 +31,38 @@ import dataservice.datafactoryservice.datafactoryserv;
 
 public  class databaseFactory extends datafactoryserv{
 	//account
-			AccountData  account;
-			NewBookData newbook;
+			AccountData  account=new AccountData();
+			NewBookData newbook=new NewBookData();
 			//balance
-			DebitnoteFormData debitnote;
-			RecordcollectFormData recordcollect;
-			RecordpayFormData recordpay;
+			DebitnoteFormData debitnote=new DebitnoteFormData();
+			RecordcollectFormData recordcollect=new RecordcollectFormData();
+			RecordpayFormData recordpay=new RecordpayFormData();
 			//commodity
-			CommodityData commodity;
-			StockinFormData stockin;
-			StockoutFormData stockout;
+			CommodityData commodity=new CommodityData();
+			StockinFormData stockin=new StockinFormData();
+			StockoutFormData stockout=new StockoutFormData();
 			//logistics
-			ArrivalFormData arrivalform;
-			CenterLoadFormData centerload;
-			DeliveryFormData delivery;
-			GoodsReceivingFormData goodsreceving;
-			HallLoadFormData hallload;
-			LogisticsInfo logisticsinfo;
-			RecordtransFormData recordtrans;
+			ArrivalFormData arrivalform=new ArrivalFormData();
+			CenterLoadFormData centerload=new CenterLoadFormData();
+			DeliveryFormData delivery=new DeliveryFormData();
+			GoodsReceivingFormData goodsreceving=new GoodsReceivingFormData();
+			HallLoadFormData hallload=new HallLoadFormData();
+			LogisticsInfo logisticsinfo=new LogisticsInfo();
+			RecordtransFormData recordtrans=new RecordtransFormData();
 			//manager
-			ConstantsData constants;
-			OrganizationData organization;
-			SalaryData salary;
-			StaffData staff;
+			ConstantsData constants=new ConstantsData();
+			OrganizationData organization=new OrganizationData();
+			SalaryData salary=new SalaryData();
+			StaffData staff=new StaffData();
 			//order
-			LogisticsData logistics;
-			OrderFormData orderform;
+			LogisticsData logistics=new LogisticsData();
+			OrderFormData orderform=new OrderFormData();
 			//transport
-			DriversData drivers;
-			VehicleData vehicles;
+			DriversData drivers=new DriversData();
+			VehicleData vehicles=new VehicleData();
 			//user
-			private UsersData user;
-			private UserLoginData userlogin;
+			private UsersData user=new UsersData();
+			private UserLoginData userlogin=new UserLoginData();
 			
 			public UsersData getUsersData(){
 				return this.user;
