@@ -62,6 +62,46 @@ public class ConstantsDB {
 		
 	}
 	
+	public static ResultMessage delete(long id){
+		dbh=new DBHelper();
+		sql="delete from ConstantsPO where id=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setLong(1, id);
+			int result;
+			result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+			ret.close();
+			dbh.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;
+	}
+	
+	public static ResultMessage update(String originalname,String newname,double newvalue){
+		dbh=new DBHelper();
+		sql="update ConstantsPO set name=?,value=? where name=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setString(1,newname);
+			pst.setDouble(2, newvalue);
+			pst.setString(3, originalname);
+			int result;
+			result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+			ret.close();
+			dbh.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;
+	}
+	
 	public static List<ConstantsPO> fuzzySearch(String name){
 		List<ConstantsPO> list=new ArrayList<ConstantsPO>();
 		ConstantsPO po;
@@ -83,6 +123,8 @@ public class ConstantsDB {
 		}
 		return list;
 	}
+	
+	
 	public static ConstantsPO search(String name){
 		ConstantsPO po=null;
 		dbh=new DBHelper();
@@ -123,7 +165,9 @@ public class ConstantsDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		System.out.println(getLastId());
+		if(update("distance;Shanghai;Nanjin","a",4)==ResultMessage.success){
+			System.out.println("success");
+		}
 	}
 
 	

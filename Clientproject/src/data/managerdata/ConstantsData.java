@@ -21,13 +21,17 @@ public class ConstantsData implements ConstantsDataService {
 	@Override
 	public ResultMessage deleteConstants(ConstantsPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		ConstantsDB db=new ConstantsDB();
+		ResultMessage result=db.delete(po.getId());
+		return result;
 	}
 
 	@Override
-	public ResultMessage updateConstants(ConstantsPO po) throws RemoteException {
+	public ResultMessage updateConstants(String originalname,ConstantsPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		ConstantsDB db=new ConstantsDB();
+		ResultMessage result=db.update(originalname, po.getName(), po.getValue());
+		return result;
 	}
 
 	@Override
