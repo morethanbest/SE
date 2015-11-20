@@ -3,7 +3,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import po.Hall;
 import po.Job;
+import po.LoginPO;
 import po.UserPO;
 import vo.ResultMessage;  
 public class UserDB {
@@ -17,20 +19,20 @@ public class UserDB {
 		pst=dbh.prepare(sql);
 		try{
 			pst.executeUpdate();
-			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,job blob)";
+			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,job blob,hall blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			UserPO po = new UserPO(1, "sunchao", "123", Job.manager);			//此处的id没用，以后应该设个初始值如10000
+			UserPO po = new UserPO(1, "sunchao", "123", Job.manager,null);			//此处的id没用，以后应该设个初始值如10000
 			byte[] jobbytes = Serialize.Object2Bytes(po.getJob());
+			byte[] hallbytes=Serialize.Object2Bytes(po.getHall());
 			ResultMessage result;
-			result = write(po.getUsername(), po.getPassword(), jobbytes);
+			result = write(po.getUsername(), po.getPassword(), jobbytes,hallbytes);
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
-			Job job = checkforjob(1, "123");
+			Job job = check(1, "123").getJob();
 			if (job != Job.visitor) {
 				System.out.println("login Successfully");
-
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -38,15 +40,16 @@ public class UserDB {
 			e.printStackTrace();
 		}
 	}
-	public static ResultMessage write(String username,String password,byte[] job){
+	public static ResultMessage write(String username,String password,byte[] job,byte [] hall){
 
 		dbh=new DBHelper();
-		sql="insert into UserPO values(null,?,?,?)";
+		sql="insert into UserPO values(null,?,?,?,?)";
 		pst=dbh.prepare(sql);
 		try{
 			pst.setString(1,username);
 			pst.setString(2, password);
 			pst.setBytes(3, job);
+			pst.setBytes(4, hall);
 			int result=pst.executeUpdate();
 			if(result==-1){
 				dbh.close();// 关闭连接
@@ -61,9 +64,10 @@ public class UserDB {
 		
 	}
 	
-	public static Job checkforjob(long id,String password){
+	public static LoginPO check(long id,String password){
+		LoginPO po;
 		dbh=new DBHelper();
-		sql="select job from UserPO where id=? and password=?";
+		sql="select job,username,hall from UserPO where id=? and password=?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setLong(1, id);
@@ -71,10 +75,14 @@ public class UserDB {
 			ret=pst.executeQuery();
 			if(ret.next()){
 				byte[] jobbytes=ret.getBytes(1);
+				String username=ret.getString(2);
+				byte[] hallbytes=ret.getBytes(3);
 				Job job=(Job)Serialize.Bytes2Object(jobbytes);
+				Hall hall=(Hall)Serialize.Bytes2Object(hallbytes);
+				po=new LoginPO(username,hall,job);
 				ret.close();
 				dbh.close();// 关闭连接
-				return job;
+				return po;
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -84,7 +92,7 @@ public class UserDB {
 			e.printStackTrace();
 		}
 		
-		return Job.visitor;
+		return new LoginPO(null,null,Job.visitor);
 		
 	}
 	public static void main(String[] args) {
