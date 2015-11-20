@@ -19,6 +19,9 @@ public class FindConstants {
 	public ConstantsVO findConstants() throws RemoteException{
 		ConstantsDataService constants=new ConstantsData();
 		ConstantsPO po=constants.findConstants(name);
+		if(po==null){
+			return null;
+		}
 		double value=po.getValue();
 		String name=po.getName();
 		ConstantsVO vo=new ConstantsVO(name,value);
