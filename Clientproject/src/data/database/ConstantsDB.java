@@ -21,12 +21,12 @@ public class ConstantsDB {
 		pst=dbh.prepare(sql);
 		try{
 			pst.executeUpdate();
-			sql = "create table ConstantsPO(id bigint,name text,value double,incrementid bigint auto_increment primary key)";
+			sql = "create table ConstantsPO(id bigint auto_increment primary key,name text,value double)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
 			ConstantsPO po=new ConstantsPO(1,"distance;Shanghai;Nanjing",5);
 			ResultMessage result;
-			result = write(po.getId(), po.getName(), po.getValue());
+			result = write(po.getName(), po.getValue());
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
@@ -40,15 +40,14 @@ public class ConstantsDB {
 			e.printStackTrace();
 		}
 	}
-	public static ResultMessage write(long id,String name,double value){
+	public static ResultMessage write(String name,double value){
 
 		dbh=new DBHelper();
-		sql="insert into ConstantsPO values(?,?,?,null)";
+		sql="insert into ConstantsPO values(null,?,?)";
 		pst=dbh.prepare(sql);
 		try{
-			pst.setLong(1, id);
-			pst.setString(2,name);
-			pst.setDouble(3, value);
+			pst.setString(1,name);
+			pst.setDouble(2, value);
 			int result=pst.executeUpdate();
 			if(result==-1){
 				dbh.close();// 关闭连接
@@ -90,7 +89,7 @@ public class ConstantsDB {
 		sql="select id,name,value from ConstantsPO where name like ?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setString(1,name);	//模糊查找时两边加%
+			pst.setString(1,name);	
 			ret=pst.executeQuery();
 			if(ret.next()){
 				po=new ConstantsPO(ret.getLong(1),ret.getString(2),ret.getDouble(3));
@@ -107,7 +106,7 @@ public class ConstantsDB {
 	public static long getLastId(){
 		long lastId=0;
 		dbh=new DBHelper();
-		sql="select max(incrementid) from ConstantsPO";
+		sql="select max(id) from ConstantsPO";
 		pst = dbh.prepare(sql);
 		try {
 			ret=pst.executeQuery();

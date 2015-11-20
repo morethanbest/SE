@@ -17,17 +17,17 @@ public class UserDB {
 		pst=dbh.prepare(sql);
 		try{
 			pst.executeUpdate();
-			sql = "create table UserPO(id bigint,username text,password text,job blob)";
+			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,job blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			UserPO po = new UserPO(1, "sunchao", "123", Job.manager);
+			UserPO po = new UserPO(1, "sunchao", "123", Job.manager);			//此处的id没用，以后应该设个初始值如10000
 			byte[] jobbytes = Serialize.Object2Bytes(po.getJob());
 			ResultMessage result;
-			result = write(po.getId(), po.getUsername(), po.getPassword(), jobbytes);
+			result = write(po.getUsername(), po.getPassword(), jobbytes);
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
-			Job job = checkforjob(1, "1234");
+			Job job = checkforjob(1, "123");
 			if (job != Job.visitor) {
 				System.out.println("login Successfully");
 
@@ -38,16 +38,15 @@ public class UserDB {
 			e.printStackTrace();
 		}
 	}
-	public static ResultMessage write(long id,String username,String password,byte[] job){
+	public static ResultMessage write(String username,String password,byte[] job){
 
 		dbh=new DBHelper();
-		sql="insert into UserPO values(?,?,?,?)";
+		sql="insert into UserPO values(null,?,?,?)";
 		pst=dbh.prepare(sql);
 		try{
-			pst.setLong(1, id);
-			pst.setString(2,username);
-			pst.setString(3, password);
-			pst.setBytes(4, job);
+			pst.setString(1,username);
+			pst.setString(2, password);
+			pst.setBytes(3, job);
 			int result=pst.executeUpdate();
 			if(result==-1){
 				dbh.close();// 关闭连接

@@ -13,7 +13,7 @@ public class ConstantsData implements ConstantsDataService {
 	@Override
 	public ResultMessage addConstants(ConstantsPO po) throws RemoteException {
 		ConstantsDB db=new ConstantsDB();
-		ResultMessage result=db.write(po.getId(), po.getName(), po.getValue());
+		ResultMessage result=db.write(po.getName(), po.getValue());
 		// TODO Auto-generated method stub
 		return result;
 	}
