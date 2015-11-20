@@ -1,6 +1,7 @@
 package businesslogic.managerbl.ConstantsPack;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import businesslogicservice.managerblservice.ConstantsBlService;
 import vo.ConstantsVO;
@@ -11,25 +12,38 @@ public class ConstantsController implements ConstantsBlService {
 	@Override
 	public ResultMessage addConstants(ConstantsVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		AddConstants addc=new AddConstants();
+		IdInfo id=new IdInfo();
+		Constants c=new Constants(addc,id);
+		ResultMessage result=c.addConstants(vo);
+		return result;
 	}
 
 	@Override
 	public ResultMessage delConstants(ConstantsVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		DelConstants delc=new DelConstants();
+		Constants c=new Constants(delc); 
+		ResultMessage result=c.delConstants(vo);
+		return result;
 	}
 
 	@Override
-	public ResultMessage revConstants(ConstantsVO vo) throws RemoteException {
+	public ResultMessage revConstants(String originalname,ConstantsVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		RevConstants revc=new RevConstants();
+		Constants c= new Constants(revc);
+		ResultMessage result=c.revConstants(originalname,vo);
+		return result;
 	}
 
 	@Override
-	public ConstantsVO getConstants(String name) throws RemoteException {
+	public List<ConstantsVO> getConstants(String name) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		FindConstants findc=new FindConstants();
+		Constants c=new Constants(findc);
+		List<ConstantsVO> listvo=c.fuzzyfindConstants(name);
+		return listvo;
 	}
 
 }
