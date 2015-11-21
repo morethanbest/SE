@@ -1,5 +1,7 @@
 package data.datafactory;
 
+import java.io.Serializable;
+
 import data.accountdata.AccountData;
 import data.accountdata.NewBookData;
 import data.balancedata.DebitnoteFormData;
@@ -29,12 +31,16 @@ import dataservice.datafactoryservice.datafactoryserv;
 
 
 
-public  class databaseFactory extends datafactoryserv{
-	//account
-			AccountData  account=new AccountData();
-			NewBookData newbook=new NewBookData();
+public class databaseFactory extends datafactoryserv implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8991901458173145838L;
+			//account
+			static AccountData  account=new AccountData();
+			static NewBookData newbook=new NewBookData();
 			//balance
-			DebitnoteFormData debitnote=new DebitnoteFormData();
+			static DebitnoteFormData debitnote=new DebitnoteFormData();
 			RecordcollectFormData recordcollect=new RecordcollectFormData();
 			RecordpayFormData recordpay=new RecordpayFormData();
 			//commodity

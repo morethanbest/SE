@@ -1,21 +1,19 @@
-package clienttest;
+package RMI;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import RMI.IMessage;
 import data.datafactory.databaseFactory;
 
-public class rmitest {
+public class FactoryGet {
 
-	public static void main(String[] args) {
+	public static databaseFactory getfactory(){
 		try {
 			IMessage message = (IMessage) Naming.lookup("rmi://172.26.99.181:5001/message");
 			databaseFactory msg = message.getdatabase();
-			//System.out.println(msg);
-			System.out.println("yes");
+			return msg;
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
@@ -23,7 +21,8 @@ public class rmitest {
 		} catch (NotBoundException e) {
 			e.printStackTrace();
 		}
-
+		return null;
+		
 	}
 
 }

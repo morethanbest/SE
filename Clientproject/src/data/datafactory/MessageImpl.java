@@ -1,4 +1,4 @@
-package data.datafactory;
+/*package data.datafactory;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -12,19 +12,14 @@ public class MessageImpl extends UnicastRemoteObject implements IMessage {
 	}
 
 	@Override
-	public String getdatabase() throws RemoteException,
+	public databaseFactory  getdatabase() throws RemoteException,
 			IllegalArgumentException {
 		databaseFactory factory=new databaseFactory();
-		return "hello";
+		return factory;
 	}
 
-	@Override
-	public void echo() throws RemoteException, IllegalArgumentException {
-		// TODO Auto-generated method stub
-		System.out.println("success");
-		
-	}
+	
 
 
 
-}
+}*/
