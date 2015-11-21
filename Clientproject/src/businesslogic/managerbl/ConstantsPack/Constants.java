@@ -1,34 +1,37 @@
 package businesslogic.managerbl.ConstantsPack;
 
+import java.rmi.RemoteException;
+import java.util.List;
+
 import vo.ConstantsVO;
 import vo.ResultMessage;
 
 public class Constants {
-	MockAddConstants addc;
-	MockDelConstants delc;
-	MockFindConstants findc;
-	MockRevConstants revc;
-	MockIdInfo id;
+	AddConstants addc;
+    DelConstants delc;
+	FindConstants findc;
+	RevConstants revc;
+	IdInfo id;
 	
-	public Constants(MockAddConstants addc,MockIdInfo id){
+	public Constants(AddConstants addc,IdInfo id){
 		this.addc=addc;
 		this.id=id;
 	}
 	
-	public Constants(MockDelConstants delc){
+	public Constants(DelConstants delc){
 		this.delc=delc;
 	}
 	
-	public Constants(MockFindConstants findc){
+	public Constants(FindConstants findc){
 		this.findc=findc;
 	}
 	
-	public Constants(MockRevConstants revc){
+	public Constants(RevConstants revc){
 		this.revc=revc;
 		
 	}
 	
-	public ResultMessage addConstants(ConstantsVO vo){
+	public ResultMessage addConstants(ConstantsVO vo) throws RemoteException{
 		String name=vo.getName();
 		double value=vo.getValue();
 		long id=this.id.getid();
@@ -38,7 +41,7 @@ public class Constants {
 		
 	}
 	
-	public ResultMessage delConstants(ConstantsVO vo){
+	public ResultMessage delConstants(ConstantsVO vo) throws RemoteException{
 		String name=vo.getName();
 		double value=vo.getValue();
 		delc.setDelInfo(name, value);
@@ -46,16 +49,16 @@ public class Constants {
 		return result;
 	}
 	
-	public ConstantsVO findConstants(String name){
+	public List<ConstantsVO> fuzzyfindConstants(String name) throws RemoteException{
 		findc.setFindInfo(name);
-		ConstantsVO vo=findc.findConstants();
-		return vo;
+		List<ConstantsVO> listvo=findc.fuzzyfindConstants();
+		return listvo;
 	}
 	
-	public ResultMessage revConstants(ConstantsVO vo){
+	public ResultMessage revConstants(String originalname,ConstantsVO vo) throws RemoteException{
 		String name=vo.getName();
 		double value=vo.getValue();
-		revc.setRevInfo(name, value);
+		revc.setRevInfo(originalname,name, value);
 		ResultMessage result=revc.rev();
 		return result;
 	}

@@ -10,8 +10,9 @@ public interface StaffDataService {
 	
 	public ResultMessage deleteStaff (StaffPO po)throws RemoteException;
 	
-	public ResultMessage updateStaff (StaffPO po)throws RemoteException;
+	public ResultMessage updateStaff (String originalname,StaffPO po)throws RemoteException;
 	
 	public StaffPO  findStaff(String name)throws RemoteException;
-
+	
+	public long getLastId()throws RemoteException;
 }

@@ -58,7 +58,7 @@ public class LoginFrame extends JFrame {
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("∫⁄ÃÂ", Font.PLAIN, 20));
+		textField.setFont(new Font("ÔøΩÔøΩÔøΩÔøΩ", Font.PLAIN, 20));
 		textField.setOpaque(false);
 		textField.setBorder(new EmptyBorder(0,0,0,0));
 		textField.setBackground(new Color(255, 255, 255));
@@ -67,7 +67,7 @@ public class LoginFrame extends JFrame {
 		textField.setColumns(12);
 		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("ÀŒÃÂ", Font.PLAIN, 13));
+		passwordField.setFont(new Font("ÔøΩÔøΩÔøΩÔøΩ", Font.PLAIN, 13));
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordField.setBounds(404, 286, 234, 45);
 		passwordField.setOpaque(false);
@@ -76,18 +76,18 @@ public class LoginFrame extends JFrame {
 		
 		JLabel label = new JLabel("\u5FEB\u9012\u516C\u53F8\u7BA1\u7406\u7CFB\u7EDF");
 		label.setForeground(Color.BLACK);
-		label.setFont(new Font("ª™ŒƒÁ˙ÁÍ", Font.BOLD, 49));
+		label.setFont(new Font("ÂçéÊñáÁê•ÁèÄ", Font.BOLD, 49));
 		label.setBounds(282, 94, 424, 64);
 		contentPane.add(label);
 		
-		JButton button = new JButton("µ«¬º");
+		JButton button = new JButton("\u767B\u5F55");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserloginBlService userloginBlService = new UserloginController();
 				try {
 					long id = Long.parseLong(textField.getText());
-					String password = passwordField.getPassword().toString();
-					skip(userloginBlService.login(id, password));
+					String password = new String(passwordField.getPassword());
+					skipToNext(userloginBlService.login(id, password).getJob());
 				} catch (NumberFormatException e1) {
 					try {
 						WrongDialog dialog = new WrongDialog();
@@ -98,25 +98,25 @@ public class LoginFrame extends JFrame {
 					}
 				}
 			}
-			private void skip(Job job){
+			private void skipToNext(Job job){
 				if(job == Job.manager){
-					System.out.println("µ«¬º≥…π¶£¨…Ì∑›Œ™manager!!!");
+					System.out.println("Login success, manager!!!");
 				}else if(job == Job.visitor){
-					System.out.println("µ«¬º ß∞‹£¨√ª”–¥À’À∫≈!!!");
+					System.out.println("Login failed!!!");
 				}
 			}
 		});
-		button .setFont(new Font("∫⁄ÃÂ", Font.BOLD, 18));
+		button .setFont(new Font("ÔøΩÔøΩÔøΩÔøΩ", Font.BOLD, 18));
 		button.setBounds(433, 381, 141, 43);
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("\u67E5\u8BE2\u7269\u6D41\u4FE1\u606F");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("≤ªƒ‹”√∞°£°£°£°£°£°£°£°");
+				System.out.println("Cannot use!!!!");
 			}
 		});
-		button_1.setFont(new Font("∫⁄ÃÂ", Font.BOLD, 18));
+		button_1.setFont(new Font("ÔøΩÔøΩÔøΩÔøΩ", Font.BOLD, 18));
 		button_1.setBounds(759, 473, 158, 43);
 		contentPane.add(button_1);
 		

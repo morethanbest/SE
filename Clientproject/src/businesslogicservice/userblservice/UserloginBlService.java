@@ -1,8 +1,8 @@
 package businesslogicservice.userblservice;
 
-import po.Job;
+import vo.LoginVO;
 public interface UserloginBlService {
 	
-	public Job login(long id,String password);
+	public LoginVO login(long id,String password);
 
 }

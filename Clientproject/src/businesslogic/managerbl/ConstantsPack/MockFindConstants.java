@@ -17,4 +17,5 @@ public class MockFindConstants extends FindConstants{
 		ConstantsVO vo=new ConstantsVO(name,value);
 		return vo;
 	}
+	
 }
