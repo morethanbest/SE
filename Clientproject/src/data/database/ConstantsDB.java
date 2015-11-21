@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.ConstantsPO;
-import po.Job;
 import vo.ResultMessage;
 
 public class ConstantsDB {
@@ -128,7 +127,7 @@ public class ConstantsDB {
 	public static ConstantsPO search(String name){
 		ConstantsPO po=null;
 		dbh=new DBHelper();
-		sql="select id,name,value from ConstantsPO where name like ?";
+		sql="select id,name,value from ConstantsPO where name = ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1,name);	
@@ -165,7 +164,7 @@ public class ConstantsDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		if(update("distance;Shanghai;Nanjin","a",4)==ResultMessage.success){
+		if(search("distance;Shanghai;Nanjin")!=null){
 			System.out.println("success");
 		}
 	}

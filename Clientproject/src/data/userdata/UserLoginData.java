@@ -11,8 +11,7 @@ public class UserLoginData implements UserLoginDataService {
 	@Override
 	public LoginPO login(long id, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		UserDB db=new UserDB();
-		LoginPO po=db.check(id, password);
+		LoginPO po=UserDB.check(id, password);
 		return po;
 	}
 
