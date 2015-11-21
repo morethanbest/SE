@@ -1,9 +1,10 @@
 package businesslogicservice.managerblservice;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
+import po.Job;
 import vo.ResultMessage; 
-
 import vo.StaffVO;
 
 public interface StaffBlService {
@@ -13,6 +14,10 @@ public interface StaffBlService {
 	
 	public ResultMessage revStaff(StaffVO vo)throws RemoteException;
 	
-	public StaffVO getStaff(String name)throws RemoteException;
+	public List<StaffVO> getStaffbyName(String name)throws RemoteException;
+	
+	public List<StaffVO> getStaffbyJob(Job job) throws RemoteException;
+	
+	public List<StaffVO> getStaffbyBoth(String name, Job job) throws RemoteException;
 
 }

@@ -1,62 +1,75 @@
 package businesslogic.managerbl.StaffPack;
 
+import java.rmi.RemoteException;
+import java.util.List;
+
 import po.Job;
 import vo.ResultMessage;
 import vo.StaffVO;
 
 public class Staff {
-	MockAddStaff adds;
-	MockDelStaff dels;
-	MockFindStaff finds;
-	MockRevStaff revs;
-	MockIdInfo id;
+	AddStaff adds;
+	DelStaff dels;
+	FindStaff finds;
+	RevStaff revs;
 	
-	public Staff(MockAddStaff adds,MockIdInfo id){
+	public Staff(AddStaff adds){
 		this.adds=adds;
-		this.id=id;
 	}
 	
-	public Staff(MockDelStaff dels){
+	public Staff(DelStaff dels){
 		this.dels=dels;
 	}
 	
-	public Staff(MockFindStaff finds){
+	public Staff(FindStaff finds){
 		this.finds=finds;
 	}
 	
-	public Staff(MockRevStaff revs){
+	public Staff(RevStaff revs){
 		this.revs=revs;
 		
 	}
 	
-	public ResultMessage addStaff(StaffVO vo){
+	public ResultMessage addStaff(StaffVO vo) throws RemoteException{
+		long id=vo.getId();
 		String name=vo.getName();
 		Job job=vo.getJob();
-		long id=this.id.getid();
 		adds.setAddInfo(id, name, job);
 		ResultMessage result=adds.addStaff();
 		return result;
 		
 	}
 	
-	public ResultMessage delStaff(StaffVO vo){
-		String name=vo.getName();
-		Job job=vo.getJob();
-		dels.setDelInfo(name, job);
+	public ResultMessage delStaff(StaffVO vo) throws RemoteException{
+		long id=vo.getId();
+		dels.setDelInfo(id);
 		ResultMessage result=dels.delete();
 		return result;
 	}
 	
-	public StaffVO findStaff(String name){
+	public List<StaffVO> findStaff(String name) throws RemoteException{
 		finds.setFindInfo(name);
-		StaffVO vo=finds.findStaff();
-		return vo;
+		List<StaffVO> listvo=finds.fuzzyfindStaff();
+		return listvo;
 	}
 	
-	public ResultMessage revStaff(StaffVO vo){
+	public List<StaffVO> findStaffbyJob(Job job) throws RemoteException{
+		finds.setFindInfo(job);
+		List<StaffVO> listvo=finds.fuzzyfindStaffbyJob();
+		return listvo;
+	}
+	
+	public List<StaffVO> findStaffbyBoth(String name,Job job) throws RemoteException{
+		finds.setFindInfo(name,job);
+		List<StaffVO> listvo=finds.fuzzyfindStaffbyboth();
+		return listvo;
+	}
+	
+	public ResultMessage revStaff(StaffVO vo) throws RemoteException{
+		long id=vo.getId();
 		String name=vo.getName();
 		Job job=vo.getJob();
-		revs.setRevInfo(name, job);
+		revs.setRevInfo(id,name, job);
 		ResultMessage result=revs.rev();
 		return result;
 	}
