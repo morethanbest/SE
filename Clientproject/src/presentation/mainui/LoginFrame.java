@@ -76,7 +76,7 @@ public class LoginFrame extends JFrame {
 		
 		JLabel label = new JLabel("\u5FEB\u9012\u516C\u53F8\u7BA1\u7406\u7CFB\u7EDF");
 		label.setForeground(Color.BLACK);
-		label.setFont(new Font("��������", Font.BOLD, 49));
+		label.setFont(new Font("华文琥珀", Font.BOLD, 49));
 		label.setBounds(282, 94, 424, 64);
 		contentPane.add(label);
 		
