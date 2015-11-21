@@ -25,9 +25,9 @@ public class ConstantsData implements ConstantsDataService {
 	}
 
 	@Override
-	public ResultMessage updateConstants(String originalname,ConstantsPO po) throws RemoteException {
+	public ResultMessage updateConstants(ConstantsPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=ConstantsDB.update(originalname, po.getName(), po.getValue());
+		ResultMessage result=ConstantsDB.update(po.getName(), po.getValue());
 		return result;
 	}
 

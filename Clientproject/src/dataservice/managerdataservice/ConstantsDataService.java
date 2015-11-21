@@ -11,7 +11,7 @@ public interface ConstantsDataService {
 	
 	public ResultMessage deleteConstants (ConstantsPO po)throws RemoteException;
 
-	public ResultMessage updateConstants (String originalname,ConstantsPO po)throws RemoteException;
+	public ResultMessage updateConstants (ConstantsPO po)throws RemoteException;
 	
 	public List<ConstantsPO>  fuzzyfindConstants(String name)throws RemoteException;
 	

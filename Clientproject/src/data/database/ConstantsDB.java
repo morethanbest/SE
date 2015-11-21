@@ -23,13 +23,15 @@ public class ConstantsDB {
 			sql = "create table ConstantsPO(id bigint auto_increment primary key,name text,value double)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			ConstantsPO po=new ConstantsPO(1,"distance;Shanghai;Nanjing",5);
+			ConstantsPO po=new ConstantsPO(1,"距离-南京-上海",500);
 			ResultMessage result;
+			result = write(po.getName(), po.getValue());
+			po=new ConstantsPO(1,"距离-上海-南京",500);
 			result = write(po.getName(), po.getValue());
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
-			List<ConstantsPO> list = fuzzySearch("distance");
+			List<ConstantsPO> list = fuzzySearch("距离");
 			if (list.size()>0) {
 				System.out.println("get it");
 			}
@@ -40,7 +42,9 @@ public class ConstantsDB {
 		}
 	}
 	public static ResultMessage write(String name,double value){
-
+		if(search(name)!=null){
+			return ResultMessage.failure;
+		}
 		dbh=new DBHelper();
 		sql="insert into ConstantsPO values(null,?,?)";
 		pst=dbh.prepare(sql);
@@ -80,14 +84,13 @@ public class ConstantsDB {
 		return ResultMessage.failure;
 	}
 	
-	public static ResultMessage update(String originalname,String newname,double newvalue){
+	public static ResultMessage update(String name,double value){
 		dbh=new DBHelper();
-		sql="update ConstantsPO set name=?,value=? where name=?";
+		sql="update ConstantsPO set value=? where name=?";
 		pst=dbh.prepare(sql);
 		try{
-			pst.setString(1,newname);
-			pst.setDouble(2, newvalue);
-			pst.setString(3, originalname);
+			pst.setDouble(1,value);
+			pst.setString(2, name);
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
@@ -164,7 +167,7 @@ public class ConstantsDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		if(search("distance;Shanghai;Nanjin")!=null){
+		if(update("距离-南京-上",500)==ResultMessage.success){
 			System.out.println("success");
 		}
 	}
