@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import data.database.StaffDB;
 import dataservice.managerdataservice.StaffDataService;
+import po.ResultMessage;
 import po.StaffPO;
-import vo.ResultMessage;
 
 public class StaffData implements StaffDataService {
 

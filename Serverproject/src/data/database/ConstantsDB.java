@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.ConstantsPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class ConstantsDB {
 	static String sql = null;

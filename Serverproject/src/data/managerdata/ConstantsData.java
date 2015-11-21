@@ -6,7 +6,7 @@ import java.util.List;
 import data.database.ConstantsDB;
 import dataservice.managerdataservice.ConstantsDataService;
 import po.ConstantsPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class ConstantsData implements ConstantsDataService {
 

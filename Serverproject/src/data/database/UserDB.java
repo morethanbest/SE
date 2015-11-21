@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import po.Hall;
 import po.Job;
 import po.LoginPO;
+import po.ResultMessage;
 import po.UserPO;
-import vo.ResultMessage;
 
 public class UserDB {
 	static String sql = null;

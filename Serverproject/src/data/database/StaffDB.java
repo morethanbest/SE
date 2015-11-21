@@ -4,8 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import po.Job;
+import po.ResultMessage;
 import po.StaffPO;
-import vo.ResultMessage;
 
 public class StaffDB {
 	static String sql = null;
