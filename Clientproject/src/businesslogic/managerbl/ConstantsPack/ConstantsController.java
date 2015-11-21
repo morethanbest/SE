@@ -29,11 +29,11 @@ public class ConstantsController implements ConstantsBlService {
 	}
 
 	@Override
-	public ResultMessage revConstants(String originalname,ConstantsVO vo) throws RemoteException {
+	public ResultMessage revConstants(ConstantsVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		RevConstants revc=new RevConstants();
 		Constants c= new Constants(revc);
-		ResultMessage result=c.revConstants(originalname,vo);
+		ResultMessage result=c.revConstants(vo);
 		return result;
 	}
 

@@ -10,7 +10,7 @@ import vo.ResultMessage;
 public class RevConstants {
 	String name;
 	double value;
-	public void setRevInfo(String originalname,String name,double value){
+	public void setRevInfo(String name,double value){
 		this.value=value;
 		this.name=name;
 	}

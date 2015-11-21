@@ -14,7 +14,7 @@ public interface ConstantsBlService {
 	
 	public List<ConstantsVO> getConstants(String name)throws RemoteException;
 	//更新数据，通过原名查找，再将vo覆盖上
-	public ResultMessage revConstants (String originalname,ConstantsVO vo)throws RemoteException;
+	public ResultMessage revConstants (ConstantsVO vo)throws RemoteException;
 
 
 }

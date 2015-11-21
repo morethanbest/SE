@@ -37,6 +37,12 @@ public class Constants {
 		long id=this.id.getid();
 		addc.setAddInfo(id, name, value);
 		ResultMessage result=addc.addConstants();
+		String[] splits=name.split("-");
+		if(splits[0].equals("距离")){
+			name=splits[0]+"-"+splits[2]+"-"+splits[1];
+			addc.setAddInfo(id+1, name, value);
+			addc.addConstants();
+		}
 		return result;
 		
 	}
@@ -46,6 +52,12 @@ public class Constants {
 		double value=vo.getValue();
 		delc.setDelInfo(name, value);
 		ResultMessage result=delc.delete();
+		String[] splits=name.split("-");
+		if(splits[0].equals("距离")){
+			name=splits[0]+"-"+splits[2]+"-"+splits[1];
+			delc.setDelInfo(name, value);
+			delc.delete();
+		}
 		return result;
 	}
 	
@@ -55,11 +67,17 @@ public class Constants {
 		return listvo;
 	}
 	
-	public ResultMessage revConstants(String originalname,ConstantsVO vo) throws RemoteException{
+	public ResultMessage revConstants(ConstantsVO vo) throws RemoteException{
 		String name=vo.getName();
 		double value=vo.getValue();
-		revc.setRevInfo(originalname,name, value);
+		revc.setRevInfo(name, value);
 		ResultMessage result=revc.rev();
+		String[] splits=name.split("-");
+		if(splits[0].equals("距离")){
+			name=splits[0]+"-"+splits[2]+"-"+splits[1];
+			revc.setRevInfo(name, value);
+			revc.rev();
+		}
 		return result;
 	}
 }
