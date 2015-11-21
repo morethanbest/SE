@@ -1,8 +1,6 @@
 package businesslogic.userbl.UsersloginPack;
 
-import java.rmi.RemoteException;
-
-import po.Job;
+import vo.LoginVO;
 
 public class Userlogin {
 	LoginConfirm con;
@@ -11,9 +9,9 @@ public class Userlogin {
 		this.con=con;
 	}
 	
-	public Job login(long id, String password) {
-		Job job=con.log(id,password);
-		return job;
+	public LoginVO login(long id, String password) {
+		LoginVO login=con.log(id,password);
+		return login;
 	}
 
 }

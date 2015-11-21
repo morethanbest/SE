@@ -2,20 +2,18 @@ package businesslogic.userbl.UsersloginPack;
 
 
 
-import java.rmi.RemoteException;
-
-import po.Job;
 import businesslogicservice.userblservice.UserloginBlService;
+import vo.LoginVO;
 
 public class UserloginController implements UserloginBlService{
 
 
 
 	@Override
-	public Job login(long id, String password) {
+	public LoginVO login(long id, String password) {
 		LoginConfirm con=new LoginConfirm();
 		Userlogin login=new Userlogin(con);
-		Job job=login.login(id,password);
-		return job;
+		LoginVO vo=login.login(id,password);
+		return vo;
 	}
 }

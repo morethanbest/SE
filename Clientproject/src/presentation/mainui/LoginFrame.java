@@ -58,7 +58,7 @@ public class LoginFrame extends JFrame {
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("ºÚÌå", Font.PLAIN, 20));
+		textField.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 20));
 		textField.setOpaque(false);
 		textField.setBorder(new EmptyBorder(0,0,0,0));
 		textField.setBackground(new Color(255, 255, 255));
@@ -67,7 +67,7 @@ public class LoginFrame extends JFrame {
 		textField.setColumns(12);
 		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("ËÎÌå", Font.PLAIN, 13));
+		passwordField.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 13));
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordField.setBounds(404, 286, 234, 45);
 		passwordField.setOpaque(false);
@@ -76,7 +76,7 @@ public class LoginFrame extends JFrame {
 		
 		JLabel label = new JLabel("\u5FEB\u9012\u516C\u53F8\u7BA1\u7406\u7CFB\u7EDF");
 		label.setForeground(Color.BLACK);
-		label.setFont(new Font("»ªÎÄçúçê", Font.BOLD, 49));
+		label.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 49));
 		label.setBounds(282, 94, 424, 64);
 		contentPane.add(label);
 		
@@ -87,7 +87,7 @@ public class LoginFrame extends JFrame {
 				try {
 					long id = Long.parseLong(textField.getText());
 					String password = new String(passwordField.getPassword());
-					skipToNext(userloginBlService.login(id, password));
+					skipToNext(userloginBlService.login(id, password).getJob());
 				} catch (NumberFormatException e1) {
 					try {
 						WrongDialog dialog = new WrongDialog();
@@ -106,7 +106,7 @@ public class LoginFrame extends JFrame {
 				}
 			}
 		});
-		button .setFont(new Font("ºÚÌå", Font.BOLD, 18));
+		button .setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 18));
 		button.setBounds(433, 381, 141, 43);
 		contentPane.add(button);
 		
@@ -116,7 +116,7 @@ public class LoginFrame extends JFrame {
 				System.out.println("Cannot use!!!!");
 			}
 		});
-		button_1.setFont(new Font("ºÚÌå", Font.BOLD, 18));
+		button_1.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 18));
 		button_1.setBounds(759, 473, 158, 43);
 		contentPane.add(button_1);
 		
