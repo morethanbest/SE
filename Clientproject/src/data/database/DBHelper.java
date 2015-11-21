@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;  
   
 public class DBHelper {  
-    private static final String url = "jdbc:mysql://127.0.0.1/Delivery?"+ "useUnicode=true&characterEncoding=UTF8";  
+    private static final String url = "jdbc:mysql://192.168.1.105/Delivery?"+ "useUnicode=true&characterEncoding=UTF8";  
     private static final String name = "com.mysql.jdbc.Driver";  
-    private static final String user = "root";  
-    private static final String password = "";  
+    private static final String user = "sunchao";  
+    private static final String password = "123456";  
   
     private Connection conn = null;  
     private PreparedStatement pst = null;  
