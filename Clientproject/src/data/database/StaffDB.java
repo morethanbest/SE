@@ -162,7 +162,7 @@ public class StaffDB {
 
 			StaffPO po;
 			dbh = new DBHelper();
-			sql = "select id,name,job from StaffPO where job=?,name like ?";
+			sql = "select id,name,job from StaffPO where job=? and name like ?";
 			pst = dbh.prepare(sql);
 
 			pst.setBytes(1, jobbyte);
@@ -225,7 +225,7 @@ public class StaffDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		if((fuzzySearchbyjob(Job.Courier)!=null))
+		if((fuzzySearchbyboth("sunchao",Job.manager).size()>0))
 		System.out.println(getLastId());
 	}
 }
