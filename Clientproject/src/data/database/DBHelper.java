@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;  
   
 public class DBHelper {  
-    private static final String url = "jdbc:mysql://192.168.1.105/Delivery?"+ "useUnicode=true&characterEncoding=UTF8";  
+    private static final String url = "jdbc:mysql://192.168.1.105:3306/delivery?"+ "useUnicode=true&characterEncoding=UTF8";  
     private static final String name = "com.mysql.jdbc.Driver";  
     private static final String user = "sunchao";  
     private static final String password = "123456";  
@@ -16,9 +16,8 @@ public class DBHelper {
   
 	public DBHelper() {  
         try {  
-            Class.forName(name);//指定连接类型  
+            Class.forName(name);//指定连接类型 
             conn = DriverManager.getConnection(url, user, password);//获取连接  
-            
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
