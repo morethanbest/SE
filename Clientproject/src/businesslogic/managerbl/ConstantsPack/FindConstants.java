@@ -16,28 +16,46 @@ public class FindConstants {
 	public void setFindInfo(String name){
 		this.name=name;
 	}
-	public ConstantsVO findConstants() throws RemoteException{
+	public ConstantsVO findConstants(){
 		ConstantsDataService constants=new ConstantsData();
-		ConstantsPO po=constants.findConstants(name);
-		if(po==null){
-			return null;
-		}
-		double value=po.getValue();
-		String name=po.getName();
-		ConstantsVO vo=new ConstantsVO(name,value);
-		return vo;
-	}
-	public List<ConstantsVO> fuzzyfindConstants() throws RemoteException{
-		ConstantsDataService constants=new ConstantsData();
-		List<ConstantsPO> listpo=constants.fuzzyfindConstants(name);
-		List<ConstantsVO> listvo=new ArrayList<ConstantsVO>();
-		for(int i=0;i<listpo.size();i++){
-			ConstantsPO po=listpo.get(i);
+		ConstantsPO po;
+		ConstantsVO vo;
+		try {
+			po = constants.findConstants(name);
+			if(po==null){
+				return null;
+			}
 			double value=po.getValue();
 			String name=po.getName();
-			ConstantsVO vo=new ConstantsVO(name,value);
-			listvo.add(i,vo);
+			vo=new ConstantsVO(name,value);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			vo=null;
+			System.out.println("findconstants fail");
 		}
+	
+		return vo;
+	}
+	public List<ConstantsVO> fuzzyfindConstants(){
+		ConstantsDataService constants=new ConstantsData();
+		List<ConstantsPO> listpo;
+		List<ConstantsVO> listvo;
+		try {
+			listpo = constants.fuzzyfindConstants(name);
+			listvo=new ArrayList<ConstantsVO>();
+			for(int i=0;i<listpo.size();i++){
+				ConstantsPO po=listpo.get(i);
+				double value=po.getValue();
+				String name=po.getName();
+				ConstantsVO vo=new ConstantsVO(name,value);
+				listvo.add(i,vo);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			listvo=null;
+			System.out.println("fuzzyfindconstants fail");
+		}
+		
 		return listvo;
 		
 	}

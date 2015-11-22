@@ -15,10 +15,19 @@ public class DelConstants {
 		this.name=name;
 	}
 	
-	public ResultMessage delete() throws RemoteException{
+	public ResultMessage delete(){
 		ConstantsDataService constants=new ConstantsData();
-		ConstantsPO po=constants.findConstants(name);
-		ResultMessage result=constants.deleteConstants(po);
+		ConstantsPO po;
+		ResultMessage result;
+		try {
+			po = constants.findConstants(name);
+			result=constants.deleteConstants(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result=ResultMessage.failure;
+			System.out.println("delconstants fail");
+		}
+		
 		return result;
 		
 	}

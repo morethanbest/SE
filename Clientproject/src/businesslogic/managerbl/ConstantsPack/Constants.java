@@ -31,7 +31,7 @@ public class Constants {
 		
 	}
 	
-	public ResultMessage addConstants(ConstantsVO vo) throws RemoteException{
+	public ResultMessage addConstants(ConstantsVO vo){
 		String name=vo.getName();
 		double value=vo.getValue();
 		long id=this.id.getid();
@@ -47,7 +47,7 @@ public class Constants {
 		
 	}
 	
-	public ResultMessage delConstants(ConstantsVO vo) throws RemoteException{
+	public ResultMessage delConstants(ConstantsVO vo){
 		String name=vo.getName();
 		double value=vo.getValue();
 		delc.setDelInfo(name, value);
@@ -61,13 +61,13 @@ public class Constants {
 		return result;
 	}
 	
-	public List<ConstantsVO> fuzzyfindConstants(String name) throws RemoteException{
+	public List<ConstantsVO> fuzzyfindConstants(String name){
 		findc.setFindInfo(name);
 		List<ConstantsVO> listvo=findc.fuzzyfindConstants();
 		return listvo;
 	}
 	
-	public ResultMessage revConstants(ConstantsVO vo) throws RemoteException{
+	public ResultMessage revConstants(ConstantsVO vo){
 		String name=vo.getName();
 		double value=vo.getValue();
 		revc.setRevInfo(name, value);

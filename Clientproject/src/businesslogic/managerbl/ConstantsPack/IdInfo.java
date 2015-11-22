@@ -7,10 +7,16 @@ import dataservice.managerdataservice.ConstantsDataService;
 
 public class IdInfo {
 	long id;
-	public long getid() throws RemoteException{
+	public long getid(){
 		ConstantsDataService constants=new ConstantsData();
-		this.id=constants.getLastId();
-		this.id+=1;
-		return this.id;
+		try {
+			this.id=constants.getLastId();
+			this.id+=1;
+			return this.id;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("getis fail");
+			return 0;
+		}
 	}
 }

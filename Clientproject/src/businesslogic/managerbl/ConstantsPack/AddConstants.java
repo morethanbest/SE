@@ -1,7 +1,5 @@
 package businesslogic.managerbl.ConstantsPack;
 
-import java.rmi.RemoteException;
-
 import data.managerdata.ConstantsData;
 import dataservice.managerdataservice.ConstantsDataService;
 import po.ConstantsPO;
@@ -17,10 +15,17 @@ public class AddConstants {
 		this.name=name;
 		this.value=value;
 	}
-	public ResultMessage addConstants() throws RemoteException{
+	public ResultMessage addConstants(){
 		ConstantsPO po=new ConstantsPO(id,name,value);
 		ConstantsDataService constants=new ConstantsData();
-		ResultMessage result=constants.addConstants(po);
+		ResultMessage result;
+		try {
+			result = constants.addConstants(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result = ResultMessage.failure;
+			System.out.println("addconstants fail");
+		}
 		return result;
 	}
 }
