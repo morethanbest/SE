@@ -2,15 +2,15 @@ package presentation.mainui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import java.awt.Font;
 
 public class WrongDialog extends JDialog implements ActionListener{
 
@@ -29,7 +29,7 @@ public class WrongDialog extends JDialog implements ActionListener{
 		contentPanel.setLayout(null);
 		
 		JLabel label = new JLabel("\u7528\u6237\u540D\u9519\u8BEF");
-		label.setFont(new Font("ËÎÌå", Font.BOLD, 22));
+		label.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 22));
 		label.setBounds(76, 31, 128, 48);
 		contentPanel.add(label);
 		{
