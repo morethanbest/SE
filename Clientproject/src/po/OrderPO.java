@@ -76,7 +76,7 @@ public class OrderPO  implements Serializable{
 		this.weight = weight;
 		this.volume = volume;
 		this.productname = productname;
-		this.productsize = productsize;
+		this.productsize=productsize;
 		this.packagefee = packagefee;
 		this.totalfee = totalfee;
 		this.ordercode = ordercode;
@@ -154,11 +154,9 @@ public class OrderPO  implements Serializable{
 	public void setProductname(String productname) {
 		this.productname = productname;
 	}
-
 	public void setProductsize(double productsize) {
-		this.productsize = productsize;
+		this.productsize=productsize;
 	}
-
 	public void setPackagefee(double packagefee) {
 		this.packagefee = packagefee;
 	}
