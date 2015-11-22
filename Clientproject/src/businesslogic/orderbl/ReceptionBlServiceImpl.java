@@ -3,7 +3,7 @@ package businesslogic.orderbl;
 import java.rmi.RemoteException;
 
 import po.LogisticsPO;
-import po.OrdersPO;
+import po.OrderPO;
 import vo.ReceptionVO;
 import vo.ResultMessage;
 import businesslogicservice.orderblservice.ReceptionBlService;
@@ -16,12 +16,12 @@ public class ReceptionBlServiceImpl implements ReceptionBlService{
 	@Override
 	public ResultMessage addReception(ReceptionVO vo){
 		LogisticsPO logistics;
-		OrdersPO po;
+		OrderPO po;
 		try {
 			po = orderFormDataService.getOrderForm(vo.getReceivingtime());
 			po.setReceive(vo.getCodeofreceiving(), vo.getReceiver(), vo.getReceivingtime());
 			logistics = logisticsDataService.findLogistics(vo.getCodeofreceiving());
-			logistics.getHistory().add("ÒÑÊÕ¼þ£¬ÊÕ¼þÈËÊÇ" + vo.getReceiver());
+			logistics.getHistory().add("ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½" + vo.getReceiver());
 			logisticsDataService.update(logistics);
 			orderFormDataService.updateOrderForm(po);
 		} catch (RemoteException e) {

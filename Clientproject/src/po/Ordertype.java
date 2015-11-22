@@ -1,5 +1,7 @@
 package po;
 
-public enum Ordertype {
+import java.io.Serializable;
+
+public enum Ordertype implements Serializable{
 	economical,normal,fast
 }

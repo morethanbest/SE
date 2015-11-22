@@ -170,6 +170,8 @@ public class ConstantsDB {
 		if(update("距离-南京-上",500)==ResultMessage.success){
 			System.out.println("success");
 		}
+		String id=String.valueOf(1);
+		System.out.println(id);
 	}
 
 	

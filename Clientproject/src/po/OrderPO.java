@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-public class OrdersPO  implements Serializable{
+public class OrderPO  implements Serializable{
 	long id;
 	String sendername;
 	String senderaddress;
@@ -28,7 +28,7 @@ public class OrdersPO  implements Serializable{
 	long receivingtime;
 	Formstate documentstate;	
 	
-	public OrdersPO(long id,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
+	public OrderPO(long id,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
 			double volume,String productname,double productsize,double packagefee,double totalfee,String ordercode,Ordertype ordertype){
 		this.id=id;

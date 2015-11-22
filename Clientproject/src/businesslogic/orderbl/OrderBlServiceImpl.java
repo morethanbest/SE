@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.LogisticsPO;
-import po.OrdersPO;
+import po.OrderPO;
 import vo.OrderFareVO;
 import vo.OrderVO;
 import vo.ResultMessage;
@@ -23,8 +23,8 @@ public class OrderBlServiceImpl implements OrderBlService {
 		try {
 			newLogisticsID = logisticsDataService.findLastID() + 1;
 			newOrderID = orderFormDataService.findLastID() + 1;
-			LogisticsPO logistics = new LogisticsPO(newLogisticsID, "¿ìµÝÔ±ÒÑÍê³ÉÀ¿¼þ...", new ArrayList<String>(), vo.getOrdercode());
-			OrdersPO po = new OrdersPO(newOrderID, vo.getSendername(), vo.getSenderaddress(), vo.getSenderunit(), vo.getSenderphone(), vo.getSendercellphone(),vo.getReceivername(), 
+			LogisticsPO logistics = new LogisticsPO(newLogisticsID, "ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...", new ArrayList<String>(), vo.getOrdercode());
+			OrderPO po = new OrderPO(newOrderID, vo.getSendername(), vo.getSenderaddress(), vo.getSenderunit(), vo.getSenderphone(), vo.getSendercellphone(),vo.getReceivername(), 
 					vo.getReceiveraddress(), vo.getReceiverunit(), vo.getReceiverphone(), vo.getReceivercellphone(), vo.getNumbers(), vo.getWeight(), vo.getVolume(), vo.getProductname(),
 					vo.getProductsize(), vo.getPackagefee(), 0, vo.getOrdercode(), vo.getOrdertype());
 			logisticsDataService.addLogistics(logistics);
