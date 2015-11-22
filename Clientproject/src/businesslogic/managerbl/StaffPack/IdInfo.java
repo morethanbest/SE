@@ -7,10 +7,16 @@ import dataservice.managerdataservice.StaffDataService;
 
 public class IdInfo {
 	long id;
-	public long getid() throws RemoteException{
+	public long getid(){
 		StaffDataService staff=new StaffData();
-		this.id=staff.getLastId();
-		this.id+=1;
-		return this.id;
+		try {
+			this.id=staff.getLastId();
+			this.id+=1;
+			return this.id;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("getid fail");
+			return 0;
+		}
 	}
 }

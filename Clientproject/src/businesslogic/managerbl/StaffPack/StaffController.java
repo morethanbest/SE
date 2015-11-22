@@ -11,7 +11,7 @@ import vo.StaffVO;
 public class StaffController implements StaffBlService {
 
 	@Override
-	public ResultMessage addStaff(StaffVO vo) throws RemoteException {
+	public ResultMessage addStaff(StaffVO vo){
 		// TODO Auto-generated method stub
 		AddStaff adds=new AddStaff();
 		Staff s=new Staff(adds);
@@ -20,7 +20,7 @@ public class StaffController implements StaffBlService {
 	}
 
 	@Override
-	public ResultMessage delStaff(StaffVO vo) throws RemoteException {
+	public ResultMessage delStaff(StaffVO vo){
 		// TODO Auto-generated method stub
 		DelStaff dels=new DelStaff();
 		Staff s=new Staff(dels);
@@ -29,7 +29,7 @@ public class StaffController implements StaffBlService {
 	}
 
 	@Override
-	public ResultMessage revStaff(StaffVO vo) throws RemoteException {
+	public ResultMessage revStaff(StaffVO vo){
 		// TODO Auto-generated method stub
 		RevStaff revs=new RevStaff();
 		Staff s=new Staff(revs);
@@ -38,20 +38,20 @@ public class StaffController implements StaffBlService {
 	}
 
 	@Override
-	public List<StaffVO> getStaffbyName(String name) throws RemoteException {
+	public List<StaffVO> getStaffbyName(String name){
 		// TODO Auto-generated method stub
 		FindStaff find=new FindStaff();
 		Staff s=new Staff(find);
 		List<StaffVO> result=s.findStaff(name);
 		return result;
 	}
-	public List<StaffVO> getStaffbyJob(Job job) throws RemoteException{
+	public List<StaffVO> getStaffbyJob(Job job){
 		FindStaff find=new FindStaff();
 		Staff s=new Staff(find);
 		List<StaffVO> result=s.findStaffbyJob(job);
 		return result;
 	}
-	public List<StaffVO> getStaffbyBoth(String name, Job job) throws RemoteException{
+	public List<StaffVO> getStaffbyBoth(String name, Job job){
 		FindStaff find=new FindStaff();
 		Staff s=new Staff(find);
 		List<StaffVO> result=s.findStaffbyBoth(name, job);

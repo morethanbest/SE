@@ -19,10 +19,17 @@ public class RevStaff {
 		this.name=name;
 	}
 	
-	public ResultMessage rev() throws RemoteException{
+	public ResultMessage rev(){
 		StaffDataService staff=new StaffData();
 		StaffPO po=new StaffPO(id, name, job);
-		ResultMessage result=staff.updateStaff(po);
+		ResultMessage result;
+		try {
+			result = staff.updateStaff(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("revstaff fail");
+			result=ResultMessage.failure;
+		}
 		return result;
 		
 	}

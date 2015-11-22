@@ -17,10 +17,17 @@ public class AddStaff {
 		this.name=name;
 		this.job=job;
 	}
-	public ResultMessage addStaff() throws RemoteException{
+	public ResultMessage addStaff(){
 		StaffPO po=new StaffPO(id,name,job);
 		StaffDataService staff=new StaffData();
-		ResultMessage result=staff.addStaff(po);
+		ResultMessage result;
+		try {
+			result = staff.addStaff(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result=ResultMessage.failure;
+			System.out.println("addstaff fail");
+		}
 		return result;
 	}
 }

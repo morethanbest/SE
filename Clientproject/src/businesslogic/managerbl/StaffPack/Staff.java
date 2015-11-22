@@ -30,7 +30,7 @@ public class Staff {
 		
 	}
 	
-	public ResultMessage addStaff(StaffVO vo) throws RemoteException{
+	public ResultMessage addStaff(StaffVO vo){
 		long id=vo.getId();
 		String name=vo.getName();
 		Job job=vo.getJob();
@@ -40,32 +40,32 @@ public class Staff {
 		
 	}
 	
-	public ResultMessage delStaff(StaffVO vo) throws RemoteException{
+	public ResultMessage delStaff(StaffVO vo){
 		long id=vo.getId();
 		dels.setDelInfo(id);
 		ResultMessage result=dels.delete();
 		return result;
 	}
 	
-	public List<StaffVO> findStaff(String name) throws RemoteException{
+	public List<StaffVO> findStaff(String name){
 		finds.setFindInfo(name);
 		List<StaffVO> listvo=finds.fuzzyfindStaff();
 		return listvo;
 	}
 	
-	public List<StaffVO> findStaffbyJob(Job job) throws RemoteException{
+	public List<StaffVO> findStaffbyJob(Job job){
 		finds.setFindInfo(job);
 		List<StaffVO> listvo=finds.fuzzyfindStaffbyJob();
 		return listvo;
 	}
 	
-	public List<StaffVO> findStaffbyBoth(String name,Job job) throws RemoteException{
+	public List<StaffVO> findStaffbyBoth(String name,Job job){
 		finds.setFindInfo(name,job);
 		List<StaffVO> listvo=finds.fuzzyfindStaffbyboth();
 		return listvo;
 	}
 	
-	public ResultMessage revStaff(StaffVO vo) throws RemoteException{
+	public ResultMessage revStaff(StaffVO vo){
 		long id=vo.getId();
 		String name=vo.getName();
 		Job job=vo.getJob();
