@@ -1,5 +1,7 @@
 package po;
 
-public enum Organizationtype {
+import java.io.Serializable;
+
+public enum Organizationtype implements Serializable{
 	hall,transfercenter
 }
