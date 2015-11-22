@@ -230,7 +230,7 @@ public class OrganizationDB {
 			System.out.println("update success");
 		}
 		if(search(1)!=null){
-			System.out.println("seach success");
+			System.out.println("search success");
 		}
 		if(fuzzySearch("上海").size()>0){
 			System.out.println("fuzzysearch success");

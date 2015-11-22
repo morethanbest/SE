@@ -10,7 +10,7 @@ import vo.ResultMessage;
 public interface OrderFormDataService {
 	public ResultMessage addOrderForm (OrderPO po)throws RemoteException;
 	
-	public OrderPO getOrderForm (long ordernum)throws RemoteException;
+	public OrderPO getOrderForm (String ordernum)throws RemoteException;
 	
 	public List<OrderPO> getOrderForm (Formstate state)throws RemoteException;
 	

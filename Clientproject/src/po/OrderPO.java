@@ -56,6 +56,36 @@ public class OrderPO  implements Serializable{
 		this.receivingtime=0;
 		this.documentstate=Formstate.waiting;
 	}
+	public OrderPO(long id, String sendername, String senderaddress, String senderunit, String senderphone,
+			String sendercellphone, String receivername, String receiveraddress, String receiverunit,
+			String receiverphone, String receivercellphone, double numbers, double weight, double volume,
+			String productname, double productsize, double packagefee, double totalfee, String ordercode,
+			Ordertype ordertype, String codeofreceiving, String receiver, long receivingtime, Formstate documentstate) {
+		this.id = id;
+		this.sendername = sendername;
+		this.senderaddress = senderaddress;
+		this.senderunit = senderunit;
+		this.senderphone = senderphone;
+		this.sendercellphone = sendercellphone;
+		this.receivername = receivername;
+		this.receiveraddress = receiveraddress;
+		this.receiverunit = receiverunit;
+		this.receiverphone = receiverphone;
+		this.receivercellphone = receivercellphone;
+		this.numbers = numbers;
+		this.weight = weight;
+		this.volume = volume;
+		this.productname = productname;
+		this.productsize = productsize;
+		this.packagefee = packagefee;
+		this.totalfee = totalfee;
+		this.ordercode = ordercode;
+		this.ordertype = ordertype;
+		this.codeofreceiving = codeofreceiving;
+		this.receiver = receiver;
+		this.receivingtime = receivingtime;
+		this.documentstate = documentstate;
+	}
 	public long getId() {
 		return id;
 	}

@@ -23,10 +23,10 @@ public class OrderDB {
 		pst=dbh.prepare(sql);
 		try{
 			pst.executeUpdate();
-			sql = "create table OrderPO(id bigint auto_increment primary key,sendername text,sendaddress text,senderunit text,senderphone "
+			sql = "create table OrderPO(id bigint auto_increment primary key,sendername text,senderaddress text,senderunit text,senderphone "
 					+ "text,sendercellphone text,receivername text,receiveraddress text,receiverunit text,receiverphone text,receivercellphone "
 					+ "text,numbers double,weight double,volume double,productname text,productsize double,packagefee double,totalfee double,ordercode "
-					+ "text,ordertype blob,codeofreceving text,receiver text,receivingtime bigint,documentstate blob)";
+					+ "text,ordertype blob,codeofreceiving text,receiver text,receivingtime bigint,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
 
@@ -108,60 +108,53 @@ public class OrderDB {
 		
 	}
 	
-	public static ResultMessage delete(long id){
-		dbh=new DBHelper();
-		sql="delete from OrganizationPO where id=?";
-		pst=dbh.prepare(sql);
-		try{
-			pst.setLong(1, id);
-			int result;
-			result=pst.executeUpdate();
-			if(result!=0){
-				return ResultMessage.success;
-			}
-			ret.close();
-			dbh.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return ResultMessage.failure;
-	}
+
 	
-	public static ResultMessage update(long id,String name,Organizationtype type){
-		try{
-			byte[] typebytes = Serialize.Object2Bytes(type);
-			dbh = new DBHelper();
-			sql = "update OrganizationPO set name=?,type=? where id=?";
-			pst = dbh.prepare(sql);
-			pst.setString(1, name);
-			pst.setBytes(2, typebytes);
-			pst.setLong(3,id);
-			int result;
-			result = pst.executeUpdate();
-			if (result != 0) {
-				return ResultMessage.success;
-			}
-			ret.close();
-			dbh.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return ResultMessage.failure;
-	}
-	
-	public static List<OrganizationPO> fuzzySearch(String name){
-		List<OrganizationPO> list=new ArrayList<OrganizationPO>();
-		OrganizationPO po;
-		dbh=new DBHelper();
-		sql="select id,name,type from OrganizationPO where name like ?";
-		pst = dbh.prepare(sql);
+	public static ResultMessage update(OrderPO po){
 		try {
-			pst.setString(1,"%"+name+"%");	//模糊查找时两边加%
-			ret=pst.executeQuery();
-			while(ret.next()){
-				byte[] typebytes=ret.getBytes(3);
-				Organizationtype type=(Organizationtype) Serialize.Bytes2Object(typebytes);
-				po=new OrganizationPO(ret.getLong(1),ret.getString(2),type);
+			
+			String ordercode=po.getOrdercode();
+			Formstate documentstate=po.getDocumentstate();	
+			byte[] statebytes = Serialize.Object2Bytes(documentstate);
+			
+			dbh = new DBHelper();
+			sql = "update OrderPO set documentstate=? where ordercode =?";
+			pst = dbh.prepare(sql);
+			pst.setBytes(1, statebytes);
+			pst.setString(2, ordercode);
+			int result = pst.executeUpdate();
+			if (result == -1) {
+				dbh.close();// 关闭连接
+				return ResultMessage.failure;
+			}
+			dbh.close();// 关闭连接
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ResultMessage.success;
+	}
+	
+	public static List<OrderPO> fuzzySearch(Formstate state){
+		List<OrderPO> list=new ArrayList<OrderPO>();
+		OrderPO po;
+		dbh=new DBHelper();
+		try {
+			byte[] statebytes = Serialize.Object2Bytes(state);
+			sql = "select id,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,receiverunit,receiverphone,"
+					+ "receivercellphone,numbers,weight,volume,productname,productsize,packagefee,totalfee,ordercode,ordertype,codeofreceiving,"
+					+ "receiver,receivingtime,documentstate from OrderPO where documentstate = ?";
+			pst = dbh.prepare(sql);
+			pst.setBytes(1, statebytes);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				Ordertype type = (Ordertype) Serialize.Bytes2Object(ret.getBytes(20));
+				Formstate documentstate = (Formstate) Serialize.Bytes2Object(ret.getBytes(24));
+				po = new OrderPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4), ret.getString(5),
+						ret.getString(6), ret.getString(7), ret.getString(8), ret.getString(9), ret.getString(10),
+						ret.getString(11), ret.getDouble(12), ret.getDouble(13), ret.getDouble(14), ret.getString(15),
+						ret.getDouble(16), ret.getDouble(17), ret.getDouble(18), ret.getString(19), type,
+						ret.getString(21), ret.getString(22), ret.getLong(23), documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -173,73 +166,48 @@ public class OrderDB {
 		return list;
 	}
 	
-	public static List<OrganizationPO> fuzzySearchbytype(Organizationtype typeget) {
-		List<OrganizationPO> list = new ArrayList<OrganizationPO>();
-		try {
-			byte[] typebyte = Serialize.Object2Bytes(typeget);
 
-			OrganizationPO po;
-			dbh = new DBHelper();
-			sql = "select id,name,type from OrganizationPO where type=?";
-			pst = dbh.prepare(sql);
 
-			pst.setBytes(1, typebyte);
-			ret = pst.executeQuery();
-			while (ret.next()) {
-				byte[] typebytes = ret.getBytes(3);
-				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				po = new OrganizationPO(ret.getLong(1), ret.getString(2), type);
-				list.add(po);
-			}
-			ret.close();
-			dbh.close();// 关闭连接
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
 
-	public static List<OrganizationPO> fuzzySearchbyboth(String name, Organizationtype typeget) {
-		List<OrganizationPO> list = new ArrayList<OrganizationPO>();
-		try {
-			byte[] typebyte = Serialize.Object2Bytes(typeget);
-
-			OrganizationPO po;
-			dbh = new DBHelper();
-			sql = "select id,name,type from OrganizationPO where type=? and name like ?";
-			pst = dbh.prepare(sql);
-
-			pst.setBytes(1, typebyte);
-			pst.setString(2, "%" + name + "%"); // 模糊查找时两边加%
-			ret = pst.executeQuery();
-			while (ret.next()) {
-				byte[] typebytes = ret.getBytes(3);
-				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				po = new OrganizationPO(ret.getLong(1), ret.getString(2), type);
-				list.add(po);
-			}
-			ret.close();
-			dbh.close();// 关闭连接
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	public static OrganizationPO search(long id){
-		OrganizationPO po=null;
+	public static OrderPO search(String ordernum){
+		OrderPO po=null;
 		dbh=new DBHelper();
-		sql="select id,name,type from OrganizationPO where id = ?";
+		sql="select id,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,receiverunit,receiverphone,"
+				+ "receivercellphone,numbers,weight,volume,productname,productsize,packagefee,totalfee,ordercode,ordertype,codeofreceiving,"
+				+ "receiver,receivingtime,documentstate from OrderPO where ordercode = ?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setLong(1,id);	
+			pst.setString(1,ordernum);	
 			ret=pst.executeQuery();
 			if(ret.next()){
-				byte[] typebytes=ret.getBytes(3);
-				Organizationtype type=(Organizationtype) Serialize.Bytes2Object(typebytes);
-				po=new OrganizationPO(ret.getLong(1),ret.getString(2),type);
+				long id=ret.getLong(1);
+				String sendername=ret.getString(2);
+				String senderaddress=ret.getString(3);
+				String senderunit=ret.getString(4);
+				String senderphone=ret.getString(5);
+				String sendercellphone=ret.getString(6);
+				String receivername=ret.getString(7);
+				String receiveraddress=ret.getString(8);
+				String receiverunit=ret.getString(9);
+				String receiverphone=ret.getString(10);
+				String receivercellphone=ret.getString(11);
+				double numbers=ret.getDouble(12);
+				double weight=ret.getDouble(13);
+				double volume=ret.getDouble(14);
+				String productname=ret.getString(15);
+				double productsize=ret.getDouble(16);
+				double packagefee=ret.getDouble(17);
+				double totalfee=ret.getDouble(18);
+				String ordercode=ret.getString(19);
+				Ordertype ordertype=(Ordertype)Serialize.Bytes2Object(ret.getBytes(20));
+				String codeofreceiving=ret.getString(21);
+				String receiver=ret.getString(22);
+				long receivingtime=ret.getLong(23);
+				Formstate documentstate=(Formstate)Serialize.Bytes2Object(ret.getBytes(24));
+				po=new OrderPO(id,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,
+						receiverunit,receiverphone,receivercellphone,numbers,weight,volume,productname,productsize,packagefee,
+						totalfee,ordercode,ordertype,codeofreceiving,receiver,receivingtime,documentstate);
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -253,7 +221,7 @@ public class OrderDB {
 	public static long getLastId(){
 		long lastId=0;
 		dbh=new DBHelper();
-		sql="select max(id) from OrganizationPO";
+		sql="select max(id) from OrderPO";
 		pst = dbh.prepare(sql);
 		try {
 			ret=pst.executeQuery();
@@ -271,29 +239,21 @@ public class OrderDB {
 	public static void main(String[] args) {
 		initialize();
 		System.out.println("test");
-//		if(write("南京",Organizationtype.hall)==ResultMessage.success){
-//			System.out.println("write success");
-//		}
-//		if(getLastId()==2){
-//			System.out.println("getLastId success");
-//		}
-//		if(delete(2)==ResultMessage.success){
-//			System.out.println("delete success");
-//		}
-//		if(update(1,"上海",Organizationtype.transfercenter)==ResultMessage.success){
-//			System.out.println("update success");
-//		}
-//		if(search(1)!=null){
-//			System.out.println("seach success");
-//		}
-//		if(fuzzySearch("上海").size()>0){
-//			System.out.println("fuzzysearch success");
-//		}
-//		if(fuzzySearchbytype(Organizationtype.transfercenter).size()>0){
-//			System.out.println("fuzzySearchbyypte success");
-//		}
-//		if(fuzzySearchbyboth("上海",Organizationtype.transfercenter).size()>0){
-//			System.out.println("fuzzySearchbyboth success");
-//		}
+
+		if(getLastId()==1){
+			System.out.println("getLastId success");
+		}
+
+		if(update(new OrderPO(1,"孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
+				"56565656","13234567890",1,5,3,"iphone6",4,5,10,"0000000001",Ordertype.fast))==ResultMessage.success){
+			System.out.println("update success");
+		}
+		if(search("0000000001")!=null){
+			System.out.println("search success");
+		}
+		if(fuzzySearch(Formstate.waiting).size()>0){
+			System.out.println("fuzzysearch success");
+		}
+
 	}
 }
