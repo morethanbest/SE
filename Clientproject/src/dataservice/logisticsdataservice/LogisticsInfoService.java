@@ -9,4 +9,6 @@ public interface LogisticsInfoService {
 	public LogisticsPO findLogisticsInfo (String ordernum)throws RemoteException;
 	
 	public ResultMessage update(LogisticsPO po) throws RemoteException;
+	
+	public ResultMessage addnew(LogisticsPO po)throws RemoteException;
 }

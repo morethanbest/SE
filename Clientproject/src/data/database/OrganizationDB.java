@@ -46,11 +46,12 @@ public class OrganizationDB {
 				return ResultMessage.failure;
 			}
 			dbh.close();// 关闭连接
+			return ResultMessage.success;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ResultMessage.success;
+		return ResultMessage.failure;
 		
 	}
 	

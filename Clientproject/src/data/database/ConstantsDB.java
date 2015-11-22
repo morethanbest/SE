@@ -57,11 +57,12 @@ public class ConstantsDB {
 				return ResultMessage.failure;
 			}
 			dbh.close();// 关闭连接
+			return ResultMessage.success;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		
-		return ResultMessage.success;
+		return ResultMessage.failure;
 		
 	}
 	
