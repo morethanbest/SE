@@ -8,10 +8,15 @@ import dataservice.managerdataservice.OrganizationDataService;
 
 public class IdInfo {
 	long id;
-	public long getid() throws RemoteException{
+	public long getid(){
 		OrganizationDataService organization=new OrganizationData();
-		this.id=organization.getLastId();
-		this.id+=1;
-		return this.id;
+		try {
+			this.id=organization.getLastId();
+			this.id+=1;
+			return this.id;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return 0;
+		}
 	}
 }

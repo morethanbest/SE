@@ -20,10 +20,17 @@ public class AddOrganization {
 	}
 	
 	
-	public ResultMessage addOrganization() throws RemoteException{
+	public ResultMessage addOrganization(){
 		OrganizationDataService organization=new OrganizationData();
 		OrganizationPO po=new OrganizationPO(id,name,type);
-		ResultMessage result=organization.addOrganization(po);
+		ResultMessage result;
+		try {
+			result = organization.addOrganization(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result = ResultMessage.failure;
+			System.out.println("addorganization fail");
+		}
 		return result;
 	}
 }

@@ -18,10 +18,17 @@ public class RevOrganization {
 		this.name=name;
 	}
 	
-	public ResultMessage rev() throws RemoteException{
+	public ResultMessage rev(){
 		OrganizationDataService organization=new OrganizationData();
 		OrganizationPO newpo=new OrganizationPO(id,name,type);
-		ResultMessage result=organization.updateOrganization(newpo);
+		ResultMessage result;
+		try {
+			result = organization.updateOrganization(newpo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result=ResultMessage.failure;
+			System.out.println("revorganization fail");
+		}
 		return result;
 		
 	}

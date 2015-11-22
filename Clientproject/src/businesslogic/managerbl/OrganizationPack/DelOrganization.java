@@ -14,10 +14,18 @@ public class DelOrganization {
 		this.id=id;
 	}
 	
-	public ResultMessage delete() throws RemoteException{
+	public ResultMessage delete(){
 		OrganizationDataService organization=new OrganizationData();
-		OrganizationPO po=organization.findOrganization(id);
-		ResultMessage result=organization.deleteOrganization(po);
+		OrganizationPO po;
+		ResultMessage result;
+		try {
+			po = organization.findOrganization(id);
+			result=organization.deleteOrganization(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result=ResultMessage.failure;
+			System.out.println("delete fail");
+		}
 		return result;
 		
 	}

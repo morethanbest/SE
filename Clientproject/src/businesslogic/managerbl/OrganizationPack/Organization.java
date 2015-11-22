@@ -28,7 +28,7 @@ public class Organization {
 		this.revo=revo;
 	}
 	
-	public ResultMessage addOrganization(OrganizationVO vo) throws RemoteException{
+	public ResultMessage addOrganization(OrganizationVO vo){
 		long id=vo.getId();
 		String name=vo.getName();
 		Organizationtype type=vo.getType();
@@ -37,32 +37,32 @@ public class Organization {
 		return result;
 	}
 	
-	public List<OrganizationVO> findOrganizationbyName(String name) throws RemoteException{
+	public List<OrganizationVO> findOrganizationbyName(String name){
 		findo.setFindInfo(name);
 		List<OrganizationVO> listvo=findo.findOrganizationbyName();
 		return listvo;
 	}
 	
-	public List<OrganizationVO> findOrganizationbyType(Organizationtype type) throws RemoteException{
+	public List<OrganizationVO> findOrganizationbyType(Organizationtype type){
 		findo.setFindInfo(type);
 		List<OrganizationVO> listvo=findo.findOrganizationbyType();
 		return listvo;
 	}
 	
-	public List<OrganizationVO> findOrganizationbyBoth(String name, Organizationtype type) throws RemoteException{
+	public List<OrganizationVO> findOrganizationbyBoth(String name, Organizationtype type){
 		findo.setFindInfo(name, type);
 		List<OrganizationVO> listvo=findo.findOrganizationbyBoth();
 		return listvo;
 	}
 	
-	public ResultMessage deleteOrganization(OrganizationVO vo) throws RemoteException{
+	public ResultMessage deleteOrganization(OrganizationVO vo){
 		long id=vo.getId();
 		delo.setDelInfo(id);
 		ResultMessage result=delo.delete();
 		return result;
 	}
 	
-	public ResultMessage revOrganization(OrganizationVO vo) throws RemoteException{
+	public ResultMessage revOrganization(OrganizationVO vo){
 		long id=vo.getId();
 		String name=vo.getName();
 		Organizationtype type=vo.getType();

@@ -30,58 +30,90 @@ public class FindOrganization {
 		this.type=type;
 	}
 	
-	public OrganizationVO findOrganization() throws RemoteException{
+	public OrganizationVO findOrganization(){
 		OrganizationDataService organization=new OrganizationData();
-		OrganizationPO po=organization.findOrganization(id);
-		if(po==null){
-			return null;
+		OrganizationPO po;
+		OrganizationVO vo;
+		try {
+			po = organization.findOrganization(id);
+			long id=po.getId();
+			Organizationtype type=po.getType();
+			String name=po.getName();
+			vo=new OrganizationVO(id,name,type);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			vo=null;
+			System.out.println("findOrganization fail");
 		}
-		long id=po.getId();
-		Organizationtype type=po.getType();
-		String name=po.getName();
-		OrganizationVO vo=new OrganizationVO(id,name,type);
 		return vo;
 	}
-	public List<OrganizationVO> findOrganizationbyName() throws RemoteException{
+	public List<OrganizationVO> findOrganizationbyName(){
 		OrganizationDataService organization=new OrganizationData();
-		List<OrganizationPO> listpo=organization.fuzzyfind(name);
-		List<OrganizationVO> listvo=new ArrayList<OrganizationVO>();
-		for(int i=0;i<listpo.size();i++){
-			OrganizationPO po=listpo.get(i);
-			long id=po.getId();
-			String name=po.getName();
-			Organizationtype type=po.getType();
-			OrganizationVO vo=new OrganizationVO(id, name, type);
-			listvo.add(vo);
+		List<OrganizationPO> listpo;
+		List<OrganizationVO> listvo;
+		try {
+			listpo = organization.fuzzyfind(name);
+			listvo=new ArrayList<OrganizationVO>();
+			for(int i=0;i<listpo.size();i++){
+				OrganizationPO po=listpo.get(i);
+				long id=po.getId();
+				String name=po.getName();
+				Organizationtype type=po.getType();
+				OrganizationVO vo=new OrganizationVO(id, name, type);
+				listvo.add(vo);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			listvo=null;
+			System.out.println("findOrganizationbyName fail");
 		}
+		
 		return listvo;
 	}
-	public List<OrganizationVO> findOrganizationbyType() throws RemoteException{
+	public List<OrganizationVO> findOrganizationbyType(){
 		OrganizationDataService organization=new OrganizationData();
-		List<OrganizationPO> listpo=organization.fuzzyfindbytype(type);
-		List<OrganizationVO> listvo=new ArrayList<OrganizationVO>();
-		for(int i=0;i<listpo.size();i++){
-			OrganizationPO po=listpo.get(i);
-			long id=po.getId();
-			String name=po.getName();
-			Organizationtype type=po.getType();
-			OrganizationVO vo=new OrganizationVO(id, name, type);
-			listvo.add(vo);
+		List<OrganizationPO> listpo;
+		List<OrganizationVO> listvo;
+		try {
+			listpo = organization.fuzzyfindbytype(type);
+			listvo=new ArrayList<OrganizationVO>();
+			for(int i=0;i<listpo.size();i++){
+				OrganizationPO po=listpo.get(i);
+				long id=po.getId();
+				String name=po.getName();
+				Organizationtype type=po.getType();
+				OrganizationVO vo=new OrganizationVO(id, name, type);
+				listvo.add(vo);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("fuzzyfindbytype fail");
+			listvo=null;
 		}
+		
 		return listvo;
 	}
-	public List<OrganizationVO> findOrganizationbyBoth() throws RemoteException{
+	public List<OrganizationVO> findOrganizationbyBoth(){
 		OrganizationDataService organization=new OrganizationData();
-		List<OrganizationPO> listpo=organization.fuzzyfindbyboth(name, type);
-		List<OrganizationVO> listvo=new ArrayList<OrganizationVO>();
-		for(int i=0;i<listpo.size();i++){
-			OrganizationPO po=listpo.get(i);
-			long id=po.getId();
-			String name=po.getName();
-			Organizationtype type=po.getType();
-			OrganizationVO vo=new OrganizationVO(id, name, type);
-			listvo.add(vo);
+		List<OrganizationPO> listpo;
+		List<OrganizationVO> listvo;
+		try {
+			listpo = organization.fuzzyfindbyboth(name, type);
+			listvo=new ArrayList<OrganizationVO>();
+			for(int i=0;i<listpo.size();i++){
+				OrganizationPO po=listpo.get(i);
+				long id=po.getId();
+				String name=po.getName();
+				Organizationtype type=po.getType();
+				OrganizationVO vo=new OrganizationVO(id, name, type);
+				listvo.add(vo);
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			listvo=null;
+			System.out.println("fuzzyfindbyboth fail");
 		}
+		
 		return listvo;
 	}
 }

@@ -11,7 +11,7 @@ import vo.ResultMessage;
 public class OrganizationController implements OrganizationBlService {
 
 	@Override
-	public ResultMessage addOrganization(OrganizationVO vo) throws RemoteException {
+	public ResultMessage addOrganization(OrganizationVO vo){
 		AddOrganization addo=new AddOrganization();
 		IdInfo id=new IdInfo();
 		Organization o=new Organization(addo);
@@ -22,7 +22,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public ResultMessage delOrganization(OrganizationVO vo) throws RemoteException {
+	public ResultMessage delOrganization(OrganizationVO vo){
 		// TODO Auto-generated method stub
 		DelOrganization delo=new DelOrganization();
 		Organization o=new Organization(delo); 
@@ -31,7 +31,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public ResultMessage revOrganization(OrganizationVO vo) throws RemoteException {
+	public ResultMessage revOrganization(OrganizationVO vo){
 		// TODO Auto-generated method stub
 		RevOrganization revo=new RevOrganization();
 		Organization o= new Organization(revo);
@@ -40,7 +40,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public List<OrganizationVO> getOrganizationbyName(String name) throws RemoteException {
+	public List<OrganizationVO> getOrganizationbyName(String name){
 		// TODO Auto-generated method stub
 		FindOrganization findo=new FindOrganization();
 		Organization o=new Organization(findo);
@@ -49,7 +49,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public List<OrganizationVO> getOrganizationbyType(Organizationtype type) throws RemoteException {
+	public List<OrganizationVO> getOrganizationbyType(Organizationtype type){
 		// TODO Auto-generated method stub
 		FindOrganization findo=new FindOrganization();
 		Organization o=new Organization(findo);
@@ -58,7 +58,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public List<OrganizationVO> getOrganizationbyBoth(String name, Organizationtype type) throws RemoteException {
+	public List<OrganizationVO> getOrganizationbyBoth(String name, Organizationtype type){
 		// TODO Auto-generated method stub
 		FindOrganization findo=new FindOrganization();
 		Organization o=new Organization(findo);
