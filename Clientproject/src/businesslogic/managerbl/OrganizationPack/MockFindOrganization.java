@@ -16,7 +16,7 @@ public class MockFindOrganization extends FindOrganization{
 		OrganizationPO po=new OrganizationPO(5,name,Organizationtype.hall);		//以后为从数据层拿
 		Organizationtype type=po.getType();
 		String name=po.getName();
-		OrganizationVO vo=new OrganizationVO(name,type);
+		OrganizationVO vo=new OrganizationVO((long) 5,name,type);
 		return vo;
 	}
 }

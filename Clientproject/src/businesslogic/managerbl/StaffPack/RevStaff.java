@@ -21,7 +21,7 @@ public class RevStaff {
 	
 	public ResultMessage rev() throws RemoteException{
 		StaffDataService staff=new StaffData();
-		StaffPO po=staff.findStaff(id);
+		StaffPO po=new StaffPO(id, name, job);
 		ResultMessage result=staff.updateStaff(po);
 		return result;
 		

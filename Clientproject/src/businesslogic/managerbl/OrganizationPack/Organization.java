@@ -1,60 +1,72 @@
 package businesslogic.managerbl.OrganizationPack;
 
+import java.rmi.RemoteException;
+import java.util.List;
+
 import po.Organizationtype;
 import vo.OrganizationVO;
 import vo.ResultMessage;
 
 public class Organization {
-	MockAddOrganization addo;
-	MockFindOrganization findo;
-	MockDelOrganization delo;
-	MockRevOrganization revo;
-	MockIdInfo id;
-	public Organization(MockAddOrganization addo,MockIdInfo id){
+	AddOrganization addo;
+	FindOrganization findo;
+	DelOrganization delo;
+	RevOrganization revo;
+	public Organization(AddOrganization addo){
 		this.addo=addo;
-		this.id=id;
 	}
 	
-	public Organization(MockFindOrganization findo){
+	public Organization(FindOrganization findo){
 		this.findo=findo;
 	}
 	
-	public Organization(MockDelOrganization delo){
+	public Organization(DelOrganization delo){
 		this.delo=delo;
 	}
 	
-	public Organization(MockRevOrganization revo){
+	public Organization(RevOrganization revo){
 		this.revo=revo;
 	}
 	
-	public ResultMessage addOrganization(OrganizationVO vo){
+	public ResultMessage addOrganization(OrganizationVO vo) throws RemoteException{
+		long id=vo.getId();
 		String name=vo.getName();
 		Organizationtype type=vo.getType();
-		long id=this.id.getid();
-		addo.setAddInfo(id,name, type);;
+		addo.setAddInfo(id, name, type);;
 		ResultMessage result=addo.addOrganization();
 		return result;
 	}
 	
-	public OrganizationVO findOrganization(String name){
-		OrganizationVO vo;
+	public List<OrganizationVO> findOrganizationbyName(String name) throws RemoteException{
 		findo.setFindInfo(name);
-		vo=findo.findOrganization();
-		return vo;
+		List<OrganizationVO> listvo=findo.findOrganizationbyName();
+		return listvo;
 	}
 	
-	public ResultMessage deleteOrganization(OrganizationVO vo){
-		String name=vo.getName();
-		Organizationtype type=vo.getType();
-		delo.setDelInfo(name, type);
+	public List<OrganizationVO> findOrganizationbyType(Organizationtype type) throws RemoteException{
+		findo.setFindInfo(type);
+		List<OrganizationVO> listvo=findo.findOrganizationbyType();
+		return listvo;
+	}
+	
+	public List<OrganizationVO> findOrganizationbyBoth(String name, Organizationtype type) throws RemoteException{
+		findo.setFindInfo(name, type);
+		List<OrganizationVO> listvo=findo.findOrganizationbyBoth();
+		return listvo;
+	}
+	
+	public ResultMessage deleteOrganization(OrganizationVO vo) throws RemoteException{
+		long id=vo.getId();
+		delo.setDelInfo(id);
 		ResultMessage result=delo.delete();
 		return result;
 	}
 	
-	public ResultMessage revOrganization(OrganizationVO vo){
+	public ResultMessage revOrganization(OrganizationVO vo) throws RemoteException{
+		long id=vo.getId();
 		String name=vo.getName();
 		Organizationtype type=vo.getType();
-		revo.setRevInfo(name, type);
+		revo.setRevInfo(id,name, type);
 		ResultMessage result=revo.rev();
 		return result;
 	}

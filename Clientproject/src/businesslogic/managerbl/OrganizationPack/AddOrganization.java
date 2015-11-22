@@ -1,5 +1,9 @@
 package businesslogic.managerbl.OrganizationPack;
 
+import java.rmi.RemoteException;
+
+import data.managerdata.OrganizationData;
+import dataservice.managerdataservice.OrganizationDataService;
 import po.OrganizationPO;
 import po.Organizationtype;
 import vo.ResultMessage;
@@ -16,9 +20,10 @@ public class AddOrganization {
 	}
 	
 	
-	public ResultMessage addOrganization(){
+	public ResultMessage addOrganization() throws RemoteException{
+		OrganizationDataService organization=new OrganizationData();
 		OrganizationPO po=new OrganizationPO(id,name,type);
-		ResultMessage result=ResultMessage.success;
+		ResultMessage result=organization.addOrganization(po);
 		return result;
 	}
 }
