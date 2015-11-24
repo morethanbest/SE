@@ -1,6 +1,7 @@
 package data.managerdata;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import data.database.SalaryDB;
 import dataservice.managerdataservice.SalaryDataService;
@@ -8,8 +9,11 @@ import po.Job;
 import po.ResultMessage;
 import po.SalaryPO;
 
-public class SalaryData implements SalaryDataService {
-
+public class SalaryData extends UnicastRemoteObject implements SalaryDataService {
+	public SalaryData() throws RemoteException
+	{
+		super();
+	}
 	@Override
 	public ResultMessage addSalary(SalaryPO po) throws RemoteException {
 		// TODO Auto-generated method stub
