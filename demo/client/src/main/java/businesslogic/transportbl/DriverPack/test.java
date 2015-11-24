@@ -14,7 +14,7 @@ public class test {
 	@Test
 	public void testAdd() throws RemoteException {
 		DriverVO vo=new DriverVO("012002", "ÀîÍú", 19720123, "465646" ,"13115646","ÄÐ", 3);
-		AddDriverMock add=new AddDriverMock();
+		AddDriver add=new AddDriver();
 		Driver driver=new Driver(add);
 		ResultMessage result=driver.addDriver(vo);
 		assertEquals(result,ResultMessage.success);
@@ -22,7 +22,7 @@ public class test {
 	@Test
 	public void testDel() throws RemoteException {
 		DriverVO vo=new DriverVO("012002", "ÀîÍú", 19720123, "465646" ,"13115646","ÄÐ", 3);
-		DelDriverMock del=new DelDriverMock();
+		DelDriver del=new DelDriver();
 		Driver driver=new Driver(del);
 		ResultMessage result=driver.delDriver(vo);
 		assertEquals(result,ResultMessage.success);
@@ -30,7 +30,7 @@ public class test {
 	@Test
 	public void testRev() throws RemoteException {
 		DriverVO vo=new DriverVO("012002", "ÀîÍú", 19720123, "465646" ,"13115646","ÄÐ", 3);
-		RevDriverMock rev=new RevDriverMock();
+		RevDriver rev=new RevDriver();
 		Driver driver=new Driver(rev);
 		ResultMessage result=driver.revDriver(vo);
 		assertEquals(result,ResultMessage.success);
@@ -39,7 +39,7 @@ public class test {
 	public void testGetByDN() throws RemoteException {
 		String driverNumber="201463";
 		DriverVO vo=new DriverVO(driverNumber,"abc",1,"321459193621","13214","32153",20150322);
-		FindDriverMock fd=new FindDriverMock(vo);
+		FindDriver fd=new FindDriver(vo);
 		Driver driver=new Driver(fd);
 		DriverVO vogot=driver.getDriverbyDN(driverNumber);
 		assertEquals(vogot.getDrivercode(),driverNumber);
@@ -49,7 +49,7 @@ public class test {
 	public void testGetByName() throws RemoteException {
 		String name="ÀîÍú";
 		DriverVO vo=new DriverVO("1",name,1,"321459193621","13214","32153",20150322);
-		FindDriverMock fd=new FindDriverMock(vo);
+		FindDriver fd=new FindDriver(vo);
 		Driver driver=new Driver(fd);
 		DriverVO vogot=driver.getDriverbyName(name);
 		assertEquals(vogot.getDrivername(),name);

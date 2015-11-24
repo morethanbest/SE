@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import org.junit.Test;
 
 import vo.ResultMessage;
-import businesslogic.logisticsbl.HallLoadBlServiceImpl;
+import businesslogic.logisticsbl.stub.HallLoadBlServiceImpl;
 import businesslogicservice.logisticsblservice.HallLoadBlService;
 
 public class HallLoadBlServiceImplTest {

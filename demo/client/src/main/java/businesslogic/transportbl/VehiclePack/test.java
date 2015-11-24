@@ -6,13 +6,8 @@ import java.rmi.RemoteException;
 
 import org.junit.Test;
 
-import vo.DriverVO;
 import vo.ResultMessage;
 import vo.VehicleVO;
-import businesslogic.transportbl.DriverPack.DelDriverMock;
-import businesslogic.transportbl.DriverPack.Driver;
-import businesslogic.transportbl.DriverPack.FindDriverMock;
-import businesslogic.transportbl.DriverPack.RevDriverMock;
 
 public class test {
 

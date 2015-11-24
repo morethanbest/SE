@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import org.junit.Test;
 
 import vo.ResultMessage;
-import businesslogic.logisticsbl.CenterloadBlServiceImpl;
+import businesslogic.logisticsbl.stub.CenterloadBlServiceImpl;
 import businesslogicservice.logisticsblservice.CenterloadBlService;
 
 public class CenterloadBlServiceImplTest {

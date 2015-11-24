@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import org.junit.Test;
 
 import vo.ResultMessage;
-import businesslogic.logisticsbl.RecordtransBlServiceImpl;
+import businesslogic.logisticsbl.stub.RecordtransBlServiceImpl;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
 
 public class RecordtranBlServiceImplTest {

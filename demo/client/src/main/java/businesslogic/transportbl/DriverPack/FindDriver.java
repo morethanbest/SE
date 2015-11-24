@@ -3,9 +3,9 @@ package businesslogic.transportbl.DriverPack;
 import po.DriversPO;
 import vo.DriverVO;
 
-public class FindDriverMock {
+public class FindDriver {
 	DriverVO vo;
-	public FindDriverMock(DriverVO vo) {
+	public FindDriver(DriverVO vo) {
 		// TODO Auto-generated constructor stub
 		this.vo=vo;
 	}

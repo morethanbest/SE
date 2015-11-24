@@ -1,9 +1,13 @@
 package businesslogic.transportbl.DriverPack;
 
+import dataservice.transportdataservice.DriversDataService;
+import init.RMIHelper;
 import po.DriversPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
-public class RevDriverMock {
+import java.rmi.RemoteException;
+
+public class RevDriver {
 	String drivercode;
 	String drivername;
 	long birthtime;
@@ -24,7 +28,15 @@ public class RevDriverMock {
 	
 	public ResultMessage passrev(){
 		DriversPO po=new DriversPO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
-		ResultMessage result=ResultMessage.success;
+		DriversDataService dataserv= RMIHelper.getDriverdata();
+		ResultMessage result= null;
+		try {
+			result = dataserv.updateDriver(po);
+		} catch (Exception e) {
+			System.out.println("Revise driver failed!!!");
+			result=ResultMessage.failure;
+			e.printStackTrace();
+		}
 		return result;
 	}
 

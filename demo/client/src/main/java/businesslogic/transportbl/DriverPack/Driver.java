@@ -3,24 +3,24 @@ package businesslogic.transportbl.DriverPack;
 import java.rmi.RemoteException;
 
 import vo.DriverVO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class Driver {
-	AddDriverMock addd;
-	DelDriverMock deld;
-	RevDriverMock revd;
-	FindDriverMock findd;
-	public Driver(AddDriverMock addd) {
+	AddDriver addd;
+	DelDriver deld;
+	RevDriver revd;
+	FindDriver findd;
+	public Driver(AddDriver addd) {
 		// TODO Auto-generated constructor stub
 		this.addd=addd;
 	}
-	public Driver(DelDriverMock deld){
+	public Driver(DelDriver deld){
 		this.deld=deld;
 	}
-	public Driver(RevDriverMock revd){
+	public Driver(RevDriver revd){
 		this.revd=revd;
 	}
-	public Driver(FindDriverMock findd){
+	public Driver(FindDriver findd){
 		this.findd=findd;
 	}
 	

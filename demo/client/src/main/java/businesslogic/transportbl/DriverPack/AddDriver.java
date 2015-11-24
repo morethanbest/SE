@@ -1,9 +1,13 @@
 package businesslogic.transportbl.DriverPack;
 
+import dataservice.transportdataservice.DriversDataService;
+import init.RMIHelper;
 import po.DriversPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
-public class AddDriverMock {
+import java.rmi.RemoteException;
+
+public class AddDriver {
 	String drivercode;
 	String drivername;
 	long birthtime;
@@ -25,7 +29,16 @@ public class AddDriverMock {
 	
 	public ResultMessage passadd(){
 		DriversPO po=new DriversPO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
-		ResultMessage result=ResultMessage.success;
+		DriversDataService dataserv= RMIHelper.getDriverdata();
+
+		ResultMessage result= null;
+		try {
+			result = dataserv.insertDriver(po);
+		} catch (Exception e) {
+			System.out.println("Add driver failed!!!");
+			result=ResultMessage.failure;
+			e.printStackTrace();
+		}
 		return result;
 	}
 	

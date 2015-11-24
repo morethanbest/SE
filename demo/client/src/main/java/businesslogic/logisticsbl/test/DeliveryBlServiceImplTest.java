@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import org.junit.Test;
 
 import vo.ResultMessage;
-import businesslogic.logisticsbl.DeliveryBlServiceImpl;
+import businesslogic.logisticsbl.stub.DeliveryBlServiceImpl;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
 
 public class DeliveryBlServiceImplTest {

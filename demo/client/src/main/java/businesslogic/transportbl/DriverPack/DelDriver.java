@@ -1,9 +1,11 @@
 package businesslogic.transportbl.DriverPack;
 
+import dataservice.transportdataservice.DriversDataService;
+import init.RMIHelper;
 import po.DriversPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
-public class DelDriverMock {
+public class DelDriver {
 	String drivercode;
 	String drivername;
 	long birthtime;
@@ -25,6 +27,8 @@ public class DelDriverMock {
 	public ResultMessage passdel(){
 		DriversPO po=new DriversPO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
 		ResultMessage result=ResultMessage.success;
+		DriversDataService dataserv= RMIHelper.getDriverdata();
+		result=dataserv.deleteDriver();
 		return result;
 	}
 

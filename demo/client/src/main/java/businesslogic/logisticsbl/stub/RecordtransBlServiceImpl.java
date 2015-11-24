@@ -1,4 +1,4 @@
-package businesslogic.logisticsbl;
+package businesslogic.logisticsbl.stub;
 
 import java.rmi.RemoteException;
 import java.util.List;
