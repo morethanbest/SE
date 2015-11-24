@@ -1,11 +1,11 @@
 package presentation.enums;
 
-public enum City {
+public enum CityType {
 	Beijing("北京"), Shanghai("上海"), Guangzhou("广州"), Nanjing("南京");
 
 	private String name;
 
-	private City(String name) {
+	private CityType(String name) {
 		this.name = name;
 	}
 

@@ -15,14 +15,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import presentation.enums.City;
+import po.ResultMessage;
+import presentation.enums.CityType;
 import presentation.enums.ContstantType;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.TransportTypes;
 import vo.ConstantsVO;
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+
 
 public class AddConstantDailog extends JDialog {
 
@@ -31,13 +33,11 @@ public class AddConstantDailog extends JDialog {
 	private JComboBox<String> type;
 	private JComboBox<String> select_1;
 	private JComboBox<String> select_2;
-	private ConstantPanel parent;
 
 	/**
 	 * Create the dialog.
 	 */
-	public AddConstantDailog(ConstantPanel parent) {
-		this.parent = parent;
+	public AddConstantDailog(final ConstantPanel parent) {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
@@ -61,13 +61,13 @@ public class AddConstantDailog extends JDialog {
 					select_2.setVisible(true);
 					addDistanceItems();
 				} else if (type.getSelectedItem().equals(
-						ContstantType.OrderType.getName())) {
+						ContstantType.PackageType.getName())) {
 					select_1.removeAllItems();
 					select_2.removeAllItems();
 					select_2.setVisible(false);
 					addPackTypeItems();
 				} else if (type.getSelectedItem().equals(
-						ContstantType.PackageType.getName())) {
+						ContstantType.OrderType.getName())) {
 					select_1.removeAllItems();
 					select_2.removeAllItems();
 					select_2.setVisible(false);
@@ -119,9 +119,10 @@ public class AddConstantDailog extends JDialog {
 						try {
 							ConstantsVO vo = new ConstantsVO(name, Double
 									.parseDouble(textField.getText()));
-							constantsBlService.addConstants(vo);
-							dispose();
+							if(constantsBlService.addConstants(vo) == ResultMessage.failure)
+								parent.setHint("系统提示：添加失败，该常量已存在！");;
 							parent.refreshList();
+							dispose();
 						} catch (NumberFormatException e1) {
 							textField.setText("Wrong Input!");
 						}
@@ -151,7 +152,7 @@ public class AddConstantDailog extends JDialog {
 	}
 
 	private void addDistanceItems() {
-		for (City city : City.values()) {
+		for (CityType city : CityType.values()) {
 			select_1.addItem(city.getName());
 			select_2.addItem(city.getName());
 		}
@@ -174,4 +175,5 @@ public class AddConstantDailog extends JDialog {
 			select_1.addItem(city.getName());
 		}
 	}
+	
 }
