@@ -2,32 +2,32 @@ package businesslogic.managerbl.SalaryPack;
 
 import po.Job;
 import po.SalaryMode;
-import vo.ResultMessage;
+import po.ResultMessage;
 import vo.SalaryVO;
 
 public class Salary {
-	MockAddSalary adds;
-	MockDelSalary dels;
-	MockFindSalary finds;
-	MockRevSalary revs;
-	MockIdInfo id;
+	AddSalary adds;
+	DelSalary dels;
+    FindSalary finds;
+	RevSalary revs;
 	
-	public Salary(MockAddSalary adds,MockIdInfo id){
+	public Salary(AddSalary adds){
 		this.adds=adds;
-		this.id=id;
 	}
 	
-	public Salary(MockDelSalary dels){
+	public Salary(DelSalary dels){
+
 		this.dels=dels;
 	}
 	
-	public Salary(MockFindSalary finds){
+	public Salary(FindSalary finds){
+
 		this.finds=finds;
 	}
 	
-	public Salary(MockRevSalary revs){
+	public Salary(RevSalary revs){
+
 		this.revs=revs;
-		
 	}
 	
 	public ResultMessage addSalary(SalaryVO vo){
@@ -35,8 +35,7 @@ public class Salary {
 		SalaryMode salarymode=vo.getSalarymode();
 		double base=vo.getBase();
 		double bonus=vo.getBonus();
-		long id=this.id.getid();
-		adds.setAddInfo(id,salarymode,job,base,bonus);
+		adds.setAddInfo(salarymode,job,base,bonus);
 		ResultMessage result=adds.addSalary();
 		return result;
 		
