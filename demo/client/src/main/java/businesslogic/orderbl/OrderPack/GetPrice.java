@@ -37,10 +37,21 @@ public class GetPrice {
 		if(volume/5000>w){
 			w=volume/5000;
 		}
-		String ordert=ordertype.toString();
-		List<ConstantsVO> listvo1=constants.getConstants(ordert);
+		String name="快递类型-";
+		switch(ordertype){
+			case economical:
+				name+="经济快递";
+				break;
+			case normal:
+				name+="标准快递";
+				break;
+			case fast:
+				name+="次晨特快";
+				break;
+		}
+		List<ConstantsVO> listvo1=constants.getConstants(name);
 		ConstantsVO vo1=listvo1.get(0);
-		double ot=vo1.getValue();
+		double ot=vo.getValue();
 		double price=distance/1000*ot*w;
 		return price;
 	}
