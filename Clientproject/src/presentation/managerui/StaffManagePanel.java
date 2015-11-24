@@ -37,12 +37,12 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		add(button);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(350, 164, 244, 35);
+		textField_1.setBounds(350, 141, 244, 35);
 		add(textField_1);
 		textField_1.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(350, 259, 244, 35);
+		comboBox.setBounds(350, 234, 244, 35);
 		add(comboBox);
 		
 		JButton btnNewButton = new JButton("New button");
@@ -50,11 +50,15 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(305, 365, 113, 27);
+		btnNewButton.setBounds(307, 323, 113, 27);
 		add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(521, 365, 113, 27);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(512, 323, 113, 27);
 		add(btnNewButton_1);
 
 	}

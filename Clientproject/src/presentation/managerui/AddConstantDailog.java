@@ -23,6 +23,7 @@ import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.TransportTypes;
 import vo.ConstantsVO;
+import vo.ResultMessage;
 
 public class AddConstantDailog extends JDialog {
 
@@ -61,13 +62,13 @@ public class AddConstantDailog extends JDialog {
 					select_2.setVisible(true);
 					addDistanceItems();
 				} else if (type.getSelectedItem().equals(
-						ContstantType.OrderType.getName())) {
+						ContstantType.PackageType.getName())) {
 					select_1.removeAllItems();
 					select_2.removeAllItems();
 					select_2.setVisible(false);
 					addPackTypeItems();
 				} else if (type.getSelectedItem().equals(
-						ContstantType.PackageType.getName())) {
+						ContstantType.OrderType.getName())) {
 					select_1.removeAllItems();
 					select_2.removeAllItems();
 					select_2.setVisible(false);
@@ -119,9 +120,10 @@ public class AddConstantDailog extends JDialog {
 						try {
 							ConstantsVO vo = new ConstantsVO(name, Double
 									.parseDouble(textField.getText()));
-							constantsBlService.addConstants(vo);
-							dispose();
+							if(constantsBlService.addConstants(vo) == ResultMessage.failure)
+								parent.setHint("系统提示：添加失败，该常量已存在！");;
 							parent.refreshList();
+							dispose();
 						} catch (NumberFormatException e1) {
 							textField.setText("Wrong Input!");
 						}
@@ -174,4 +176,5 @@ public class AddConstantDailog extends JDialog {
 			select_1.addItem(city.getName());
 		}
 	}
+	
 }

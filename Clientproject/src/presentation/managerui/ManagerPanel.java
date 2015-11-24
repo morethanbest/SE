@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JLabel;
 
 public class ManagerPanel extends JPanel implements ActionListener {
 	private JPanel panel;
@@ -18,9 +19,10 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JButton btnNewButton_4;
 	private JButton btnNewButton_5;
 	private JButton btnNewButton_6;
+	private JLabel hint;
 	private CardLayout card;
-	StaffManagePanel staff;
-	ConstantPanel constant;
+	private StaffManagePanel staff;
+	private ConstantPanel constant;
 	/**
 	 * Create the panel.
 	 */
@@ -64,25 +66,34 @@ public class ManagerPanel extends JPanel implements ActionListener {
 
 		panel = new JPanel();
 		panel.setBackground(SystemColor.controlHighlight);
-		panel.setBounds(14, 75, 954, 465);
+		panel.setBounds(14, 75, 954, 420);
 		add(panel);
 		card = new CardLayout();
 		panel.setLayout(card);
 		
 		//card中添加各种功能面板
 		staff = new StaffManagePanel();
-		constant = new ConstantPanel();
+		constant = new ConstantPanel(this);
 		panel.add(staff, "staff");
 		panel.add(constant, "constant");
+		
+		hint = new JLabel("");
+		hint.setBounds(24, 508, 383, 32);
+		add(hint);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnNewButton_1)) {
 			card.show(panel, "staff");
+			constant.refreshList();
 		}else if (e.getSource().equals(btnNewButton_4)) {
 			card.show(panel, "constant");
 		}
 
+	}
+	
+	void setHint(String str){
+		hint.setText(str);
 	}
 }
