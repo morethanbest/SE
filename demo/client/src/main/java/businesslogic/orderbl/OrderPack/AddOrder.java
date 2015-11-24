@@ -1,14 +1,10 @@
 package businesslogic.orderbl.OrderPack;
 
-import java.rmi.RemoteException;
-
-import data.orderdata.OrderFormData;
 import dataservice.orderdataservice.OrderFormDataService;
-import po.Formstate;
-import po.LogisticsPO;
+import init.RMIHelper;
 import po.OrderPO;
 import po.Ordertype;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class AddOrder {
 	long id;
@@ -62,7 +58,7 @@ public class AddOrder {
 		OrderPO po=new OrderPO(id, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, productname, 
 				productsize, packagefee, totalfee, ordercode, ordertype);
-		OrderFormDataService order=new OrderFormData();
+		OrderFormDataService order=RMIHelper.getOrderformdata();
 		ResultMessage result;
 		try {
 			result=order.addOrderForm(po);

@@ -2,11 +2,10 @@ package businesslogic.managerbl.StaffPack;
 
 import java.rmi.RemoteException;
 
-import data.managerdata.StaffData;
 import dataservice.managerdataservice.StaffDataService;
-import po.Job;
+import init.RMIHelper;
+import po.ResultMessage;
 import po.StaffPO;
-import vo.ResultMessage;
 
 public class DelStaff {
 	long id;
@@ -14,7 +13,7 @@ public class DelStaff {
 		this.id=id;
 	}
 	public ResultMessage delete(){
-		StaffDataService staff=new StaffData();
+		StaffDataService staff=RMIHelper.getStaffdata();
 		StaffPO po;
 		ResultMessage result;
 		try {

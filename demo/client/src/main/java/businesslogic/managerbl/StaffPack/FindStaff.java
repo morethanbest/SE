@@ -1,12 +1,11 @@
 package businesslogic.managerbl.StaffPack;
 
-import java.nio.file.attribute.PosixFilePermission;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.managerdata.StaffData;
 import dataservice.managerdataservice.StaffDataService;
+import init.RMIHelper;
 import po.Job;
 import po.StaffPO;
 import vo.StaffVO;
@@ -31,7 +30,7 @@ public class FindStaff {
 	}
 	
 	public List<StaffVO> fuzzyfindStaff(){
-		StaffDataService staff=new StaffData();
+		StaffDataService staff=RMIHelper.getStaffdata();
 		List<StaffPO> listpo;
 		List<StaffVO> listvo;
 		try {
@@ -54,7 +53,7 @@ public class FindStaff {
 		return listvo;
 	}
 	public StaffVO findStaff(){
-		StaffDataService staff=new StaffData();
+		StaffDataService staff=RMIHelper.getStaffdata();
 		StaffPO po;
 		StaffVO vo;
 		try {
@@ -74,7 +73,7 @@ public class FindStaff {
 		return vo;
 	}
 	public List<StaffVO> fuzzyfindStaffbyJob(){
-		StaffDataService staff=new StaffData();
+		StaffDataService staff=RMIHelper.getStaffdata();
 		List<StaffPO> listpo;
 		List<StaffVO> listvo;
 		try {
@@ -97,7 +96,7 @@ public class FindStaff {
 		return listvo;
 	}
 	public List<StaffVO> fuzzyfindStaffbyboth(){
-		StaffDataService staff=new StaffData();
+		StaffDataService staff=RMIHelper.getStaffdata();
 		List<StaffPO> listpo;
 		List<StaffVO> listvo;
 		try {

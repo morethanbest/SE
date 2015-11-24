@@ -1,10 +1,6 @@
 package businesslogic.orderbl.OrderPack;
 
-import java.rmi.RemoteException;
-
 import po.Ordertype;
-import data.orderdata.OrderFormData;
-import dataservice.orderdataservice.OrderFormDataService;
 
 public class GetPrice {
 	String senderaddress;
@@ -27,7 +23,7 @@ public class GetPrice {
 		this.ordertype=ordertype;
 	}
 	public double getPrice(){
-		//待常量完成后填写！！！
+		//寰呭父閲忓畬鎴愬悗濉啓锛侊紒锛�
 		return 10;
 	}
 

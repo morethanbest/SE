@@ -1,11 +1,11 @@
 package businesslogic.orderbl.OrderPack;
 
-import data.orderdata.OrderFormData;
 import dataservice.orderdataservice.OrderFormDataService;
+import init.RMIHelper;
 
 public class GetOrderCode {
 	public String getCode(){
-		OrderFormDataService order=new OrderFormData();
+		OrderFormDataService order=RMIHelper.getOrderformdata();
 		String s;
 		try {
 			long id=order.findLastID()+1;

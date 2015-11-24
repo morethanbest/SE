@@ -1,11 +1,10 @@
 package businesslogic.managerbl.StaffPack;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
-import po.Job;
 import businesslogicservice.managerblservice.StaffBlService;
-import vo.ResultMessage;
+import po.Job;
+import po.ResultMessage;
 import vo.StaffVO;
 
 public class StaffController implements StaffBlService {

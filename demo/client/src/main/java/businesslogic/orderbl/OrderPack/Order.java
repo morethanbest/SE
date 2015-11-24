@@ -1,9 +1,9 @@
 package businesslogic.orderbl.OrderPack;
 
 import po.Ordertype;
+import po.ResultMessage;
 import vo.OrderFareVO;
 import vo.OrderVO;
-import vo.ResultMessage;
 
 public class Order {
 	AddOrder add;

@@ -1,10 +1,9 @@
 package businesslogic.managerbl.StaffPack;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
 import po.Job;
-import vo.ResultMessage;
+import po.ResultMessage;
 import vo.StaffVO;
 
 public class Staff {

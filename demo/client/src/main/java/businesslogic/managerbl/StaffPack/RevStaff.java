@@ -1,13 +1,10 @@
 package businesslogic.managerbl.StaffPack;
 
-import java.rmi.RemoteException;
-
-import data.managerdata.StaffData;
 import dataservice.managerdataservice.StaffDataService;
+import init.RMIHelper;
 import po.Job;
+import po.ResultMessage;
 import po.StaffPO;
-import vo.ResultMessage;
-import vo.StaffVO;
 
 public class RevStaff {
 	long id;
@@ -20,7 +17,7 @@ public class RevStaff {
 	}
 	
 	public ResultMessage rev(){
-		StaffDataService staff=new StaffData();
+		StaffDataService staff=RMIHelper.getStaffdata();
 		StaffPO po=new StaffPO(id, name, job);
 		ResultMessage result;
 		try {

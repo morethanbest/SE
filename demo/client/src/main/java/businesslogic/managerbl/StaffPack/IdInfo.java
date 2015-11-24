@@ -1,14 +1,12 @@
 package businesslogic.managerbl.StaffPack;
 
-import java.rmi.RemoteException;
-
-import data.managerdata.StaffData;
 import dataservice.managerdataservice.StaffDataService;
+import init.RMIHelper;
 
 public class IdInfo {
 	long id;
 	public long getid(){
-		StaffDataService staff=new StaffData();
+		StaffDataService staff=RMIHelper.getStaffdata();
 		try {
 			this.id=staff.getLastId();
 			this.id+=1;
