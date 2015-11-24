@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.City;
 import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -20,26 +21,28 @@ public class OrganizationDB {
 		pst=dbh.prepare(sql);
 		try{
 			pst.executeUpdate();
-			sql = "create table OrganizationPO(id bigint auto_increment primary key,name text,type blob)";
+			sql = "create table OrganizationPO(id bigint auto_increment primary key,name text,organizationcode text,type blob,city blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			OrganizationPO po=new OrganizationPO(1,"上海",Organizationtype.hall);
-			write(po.getName(), po.getType());
+			OrganizationPO po=new OrganizationPO("南京鼓楼营业厅","025000",Organizationtype.hall,City.Nanjing);
+			write(po.getName(),po.getOrganizationcode(), po.getType(),po.getCity());
 			dbh.close();// 关闭连接
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 
-	public static ResultMessage write(String name, Organizationtype type) {
+	public static ResultMessage write(String name,String organizationcode,Organizationtype type,City city) {
 		try {
 			byte[] typebytes = Serialize.Object2Bytes(type);
+			byte[] citybytes = Serialize.Object2Bytes(city);
 			dbh = new DBHelper();
-			sql = "insert into OrganizationPO values(null,?,?)";
+			sql = "insert into OrganizationPO values(null,?,?,?,?)";
 			pst = dbh.prepare(sql);
-
 			pst.setString(1, name);
-			pst.setBytes(2, typebytes);
+			pst.setString(2, organizationcode);
+			pst.setBytes(3, typebytes);
+			pst.setBytes(4, citybytes);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -55,12 +58,12 @@ public class OrganizationDB {
 		
 	}
 	
-	public static ResultMessage delete(long id){
+	public static ResultMessage delete(String organizationcode){
 		dbh=new DBHelper();
-		sql="delete from OrganizationPO where id=?";
+		sql="delete from OrganizationPO where organizationcode=?";
 		pst=dbh.prepare(sql);
 		try{
-			pst.setLong(1, id);
+			pst.setString(1,organizationcode);
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
@@ -74,21 +77,22 @@ public class OrganizationDB {
 		return ResultMessage.failure;
 	}
 	
-	public static ResultMessage update(long id,String name,Organizationtype type){
+	public static ResultMessage update(String name,String organizationcode,Organizationtype type,City city){
 		try{
 			byte[] typebytes = Serialize.Object2Bytes(type);
+			byte[] citybytes=Serialize.Object2Bytes(city);
 			dbh = new DBHelper();
-			sql = "update OrganizationPO set name=?,type=? where id=?";
+			sql = "update OrganizationPO set name=?,type=?,city=? where organizationcode=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, name);
 			pst.setBytes(2, typebytes);
-			pst.setLong(3,id);
+			pst.setBytes(3, citybytes);
+			pst.setString(4, organizationcode);
 			int result;
 			result = pst.executeUpdate();
 			if (result != 0) {
 				return ResultMessage.success;
 			}
-			ret.close();
 			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -96,19 +100,20 @@ public class OrganizationDB {
 		return ResultMessage.failure;
 	}
 	
-	public static List<OrganizationPO> fuzzySearch(String name){
+	public static List<OrganizationPO> fuzzySearchbycity(City city){
 		List<OrganizationPO> list=new ArrayList<OrganizationPO>();
 		OrganizationPO po;
 		dbh=new DBHelper();
-		sql="select id,name,type from OrganizationPO where name like ?";
+		sql="select name,organizationcode,type from OrganizationPO where city = ?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setString(1,"%"+name+"%");	//模糊查找时两边加%
+			byte[] citybytes=Serialize.Object2Bytes(city);
+			pst.setBytes(1, citybytes);
 			ret=pst.executeQuery();
 			while(ret.next()){
 				byte[] typebytes=ret.getBytes(3);
 				Organizationtype type=(Organizationtype) Serialize.Bytes2Object(typebytes);
-				po=new OrganizationPO(ret.getLong(1),ret.getString(2),type);
+				po=new OrganizationPO(ret.getString(1),ret.getString(2),type,city);
 				list.add(po);
 			}
 			ret.close();
@@ -120,22 +125,21 @@ public class OrganizationDB {
 		return list;
 	}
 	
-	public static List<OrganizationPO> fuzzySearchbytype(Organizationtype typeget) {
+	public static List<OrganizationPO> fuzzySearchbytype(Organizationtype type) {
 		List<OrganizationPO> list = new ArrayList<OrganizationPO>();
 		try {
-			byte[] typebyte = Serialize.Object2Bytes(typeget);
+			byte[] typebyte = Serialize.Object2Bytes(type);
 
 			OrganizationPO po;
 			dbh = new DBHelper();
-			sql = "select id,name,type from OrganizationPO where type=?";
+			sql="select name,organizationcode,city from OrganizationPO where type=?";
 			pst = dbh.prepare(sql);
-
 			pst.setBytes(1, typebyte);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				byte[] typebytes = ret.getBytes(3);
-				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				po = new OrganizationPO(ret.getLong(1), ret.getString(2), type);
+				byte[] citybytes=ret.getBytes(3);
+				City city=(City) Serialize.Bytes2Object(citybytes);
+				po=new OrganizationPO(ret.getString(1),ret.getString(2),type,city);
 				list.add(po);
 			}
 			ret.close();
@@ -147,23 +151,20 @@ public class OrganizationDB {
 		return list;
 	}
 
-	public static List<OrganizationPO> fuzzySearchbyboth(String name, Organizationtype typeget) {
+	public static List<OrganizationPO> fuzzySearchbyboth(City city, Organizationtype type) {
 		List<OrganizationPO> list = new ArrayList<OrganizationPO>();
 		try {
-			byte[] typebyte = Serialize.Object2Bytes(typeget);
-
+			byte[] typebyte = Serialize.Object2Bytes(type);
+			byte[] citybytes=Serialize.Object2Bytes(city);
 			OrganizationPO po;
 			dbh = new DBHelper();
-			sql = "select id,name,type from OrganizationPO where type=? and name like ?";
+			sql="select name,organizationcode from OrganizationPO where type=? and city= ?";
 			pst = dbh.prepare(sql);
-
 			pst.setBytes(1, typebyte);
-			pst.setString(2, "%" + name + "%"); // 模糊查找时两边加%
+			pst.setBytes(2, citybytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				byte[] typebytes = ret.getBytes(3);
-				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				po = new OrganizationPO(ret.getLong(1), ret.getString(2), type);
+				po=new OrganizationPO(ret.getString(1),ret.getString(2),type,city);
 				list.add(po);
 			}
 			ret.close();
@@ -178,15 +179,17 @@ public class OrganizationDB {
 	public static OrganizationPO search(long id){
 		OrganizationPO po=null;
 		dbh=new DBHelper();
-		sql="select id,name,type from OrganizationPO where id = ?";
+		sql="select id,name,organizationcode,type,city from OrganizationPO where id = ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setLong(1,id);	
 			ret=pst.executeQuery();
 			if(ret.next()){
-				byte[] typebytes=ret.getBytes(3);
+				byte[] typebytes=ret.getBytes(4);
 				Organizationtype type=(Organizationtype) Serialize.Bytes2Object(typebytes);
-				po=new OrganizationPO(ret.getLong(1),ret.getString(2),type);
+				byte[] citybytes=ret.getBytes(5);
+				City city=(City) Serialize.Bytes2Object(citybytes);
+				po=new OrganizationPO(ret.getString(2),ret.getString(3),type,city);
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -197,15 +200,17 @@ public class OrganizationDB {
 		return po;		//查不到时返回null
 	}
 	
-	public static long getLastId(){
-		long lastId=0;
+	public static String gethallcode(City city){
+		String lastcode=null;
 		dbh=new DBHelper();
-		sql="select max(id) from OrganizationPO";
+		sql="select organizationcode from OrganizationPO where city=?";
 		pst = dbh.prepare(sql);
 		try {
+			byte[] citybytes=Serialize.Object2Bytes(city);
+			pst.setBytes(1, citybytes);
 			ret=pst.executeQuery();
-			if(ret.next()){
-				lastId=ret.getLong(1);
+			while(ret.next()){
+				lastcode=ret.getString(1);
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -213,34 +218,31 @@ public class OrganizationDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return lastId;
+		return lastcode;
 	}
 	public static void main(String[] args) {
 		initialize();
 		System.out.println("test");
-		if(write("南京",Organizationtype.hall)==ResultMessage.success){
-			System.out.println("write success");
-		}
-		if(getLastId()==2){
-			System.out.println("getLastId success");
-		}
-		if(delete(2)==ResultMessage.success){
-			System.out.println("delete success");
-		}
-		if(update(1,"上海",Organizationtype.transfercenter)==ResultMessage.success){
+		if(update("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai)==ResultMessage.success){
 			System.out.println("update success");
 		}
 		if(search(1)!=null){
 			System.out.println("search success");
 		}
-		if(fuzzySearch("上海").size()>0){
+		if(fuzzySearchbycity(City.Shanghai).size()>0){
 			System.out.println("fuzzysearch success");
 		}
 		if(fuzzySearchbytype(Organizationtype.transfercenter).size()>0){
 			System.out.println("fuzzySearchbyypte success");
 		}
-		if(fuzzySearchbyboth("上海",Organizationtype.transfercenter).size()>0){
+		if(fuzzySearchbyboth(City.Shanghai,Organizationtype.transfercenter).size()>0){
 			System.out.println("fuzzySearchbyboth success");
+		}
+		if(gethallcode(City.Nanjing).equals("025000")){
+			System.out.println("gethallcode success");
+		}
+		if(delete("025000")==ResultMessage.success){
+			System.out.println("delete success");
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import po.City;
 import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -15,14 +16,12 @@ public interface OrganizationDataService extends Remote {
 	
 	public ResultMessage updateOrganization (OrganizationPO po)throws RemoteException;
 	
-	public OrganizationPO  findOrganization(long id)throws RemoteException;
-	
-	public List<OrganizationPO> fuzzyfind(String name)throws RemoteException;
+	public List<OrganizationPO> fuzzyfind(City city)throws RemoteException;
 	
 	public List<OrganizationPO> fuzzyfindbytype(Organizationtype type)throws RemoteException;
 	
-	public List<OrganizationPO> fuzzyfindbyboth(String name,Organizationtype type)throws RemoteException;
+	public List<OrganizationPO> fuzzyfindbyboth(City city,Organizationtype type)throws RemoteException;
 	
-	public long getLastId()throws RemoteException;
+	public String getlasthallcode(City city)throws RemoteException;
 
 }

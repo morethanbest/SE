@@ -6,6 +6,7 @@ import java.util.List;
 
 import data.database.OrganizationDB;
 import dataservice.managerdataservice.OrganizationDataService;
+import po.City;
 import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -17,35 +18,29 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 	@Override
 	public ResultMessage addOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=OrganizationDB.update(po.getId(), po.getName(), po.getType());
+		ResultMessage result=OrganizationDB.update( po.getName(),po.getOrganizationcode(), po.getType(),po.getCity());
 		return result;
 	}
 
 	@Override
 	public ResultMessage deleteOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=OrganizationDB.delete(po.getId());
+		ResultMessage result=OrganizationDB.delete(po.getOrganizationcode());
 		return result;
 	}
 
 	@Override
 	public ResultMessage updateOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=OrganizationDB.update(po.getId(), po.getName(), po.getType());
+		ResultMessage result=OrganizationDB.update(po.getName(),po.getOrganizationcode(), po.getType(),po.getCity());
 		return result;
 	}
 
-	@Override
-	public OrganizationPO findOrganization(long id) throws RemoteException {
-		// TODO Auto-generated method stub
-		OrganizationPO po=OrganizationDB.search(id);
-		return po;
-	}
 
 	@Override
-	public List<OrganizationPO> fuzzyfind(String name) throws RemoteException {
+	public List<OrganizationPO> fuzzyfind(City city) throws RemoteException {
 		// TODO Auto-generated method stub	
-		List<OrganizationPO> list =OrganizationDB.fuzzySearch(name);
+		List<OrganizationPO> list =OrganizationDB.fuzzySearchbycity(city);
 		return list;
 	}
 
@@ -57,17 +52,17 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 	}
 
 	@Override
-	public List<OrganizationPO> fuzzyfindbyboth(String name, Organizationtype type) throws RemoteException {
+	public List<OrganizationPO> fuzzyfindbyboth(City city, Organizationtype type) throws RemoteException {
 		// TODO Auto-generated method stub
-		List<OrganizationPO> list =OrganizationDB.fuzzySearchbyboth(name,type);
+		List<OrganizationPO> list =OrganizationDB.fuzzySearchbyboth(city,type);
 		return list;
 	}
 
 	@Override
-	public long getLastId() throws RemoteException {
+	public 	String getlasthallcode(City city) throws RemoteException {
 		// TODO Auto-generated method stub
-		long id = OrganizationDB.getLastId();
-		return id;
+		String hallcode = OrganizationDB.gethallcode(city);
+		return hallcode;
 	}
 
 }

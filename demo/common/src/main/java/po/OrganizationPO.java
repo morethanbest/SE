@@ -3,16 +3,15 @@ package po;
 import java.io.Serializable;
 
 public class OrganizationPO  implements Serializable{
-	long id;
 	String name;
+	String organizationcode;
 	Organizationtype type;
-	public OrganizationPO(long id,String name, Organizationtype type) {
-		this.id=id;
+	City city;
+	public OrganizationPO( String name, String organizationcode, Organizationtype type, City city) {
 		this.name = name;
+		this.organizationcode = organizationcode;
 		this.type = type;
-	}
-	public long getId() {
-		return id;
+		this.city = city;
 	}
 	public String getName() {
 		return name;
@@ -20,11 +19,24 @@ public class OrganizationPO  implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getOrganizationcode() {
+		return organizationcode;
+	}
+	public void setOrganizationcode(String organizationcode) {
+		this.organizationcode = organizationcode;
+	}
 	public Organizationtype getType() {
 		return type;
 	}
 	public void setType(Organizationtype type) {
 		this.type = type;
 	}
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
+	}
+
 	
 }

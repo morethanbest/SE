@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.City;
 import po.LogisticsPO;
 import po.ResultMessage;
 
