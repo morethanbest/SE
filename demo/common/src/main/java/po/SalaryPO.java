@@ -2,13 +2,11 @@ package po;
 import java.io.Serializable;
 
 public class SalaryPO implements Serializable{
-	long id;
 	Job job;
 	SalaryMode salarymode;
 	double base;
 	double bonus;
-	public SalaryPO(long id, Job job, SalaryMode salarymode, double base, double bonus) {
-		this.id = id;
+	public SalaryPO( Job job, SalaryMode salarymode, double base, double bonus) {
 		this.job = job;
 		this.salarymode = salarymode;
 		this.base = base;
@@ -38,12 +36,6 @@ public class SalaryPO implements Serializable{
 	public void setBonus(double bonus) {
 		this.bonus = bonus;
 	}
-	public long getId() {
-		return id;
-	}
-	
-	
-
-	
+		
 	
 }

@@ -24,7 +24,7 @@ public class UserDB {
 			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,job blob,hall blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			UserPO po = new UserPO(1, "sunchao", "123", Job.manager, null); // 姝ゅ鐨刬d娌＄敤锛屼互鍚庡簲璇ヨ涓垵濮嬪�煎10000
+			UserPO po = new UserPO(1, "sunchao", "123", Job.manager, null); // 此处的id没用，以后应该设个初始值如10000
 
 			ResultMessage result;
 			result = write(po.getUsername(), po.getPassword(), po.getJob(), po.getHall());
@@ -36,7 +36,7 @@ public class UserDB {
 				System.out.println("login Successfully");
 			}
 			ret.close();
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,10 +56,10 @@ public class UserDB {
 			pst.setBytes(4, hallbytes);
 			int result = pst.executeUpdate();
 			if (result == -1) {
-				dbh.close();// 鍏抽棴杩炴帴
+				dbh.close();// 关闭连接
 				return ResultMessage.failure;
 			}
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 			return ResultMessage.success;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,11 +86,11 @@ public class UserDB {
 				Hall hall = (Hall) Serialize.Bytes2Object(hallbytes);
 				po = new LoginPO(username, hall, job);
 				ret.close();
-				dbh.close();// 鍏抽棴杩炴帴
+				dbh.close();// 关闭连接
 				return po;
 			}
 			ret.close();
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 
 		} catch (Exception e) {
 			e.printStackTrace();

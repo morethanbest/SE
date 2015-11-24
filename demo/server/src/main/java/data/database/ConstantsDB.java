@@ -23,20 +23,20 @@ public class ConstantsDB {
 			sql = "create table ConstantsPO(id bigint auto_increment primary key,name text,value double)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			ConstantsPO po=new ConstantsPO(1,"璺濈-鍗椾含-涓婃捣",500);
+			ConstantsPO po=new ConstantsPO(1,"距离-南京-上海",500);
 			ResultMessage result;
 			result = write(po.getName(), po.getValue());
-			po=new ConstantsPO(1,"璺濈-涓婃捣-鍗椾含",500);
+			po=new ConstantsPO(1,"距离-上海-南京",500);
 			result = write(po.getName(), po.getValue());
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
-			List<ConstantsPO> list = fuzzySearch("璺濈");
+			List<ConstantsPO> list = fuzzySearch("距离");
 			if (list.size()>0) {
 				System.out.println("get it");
 			}
 			ret.close();
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -53,10 +53,10 @@ public class ConstantsDB {
 			pst.setDouble(2, value);
 			int result=pst.executeUpdate();
 			if(result==-1){
-				dbh.close();// 鍏抽棴杩炴帴
+				dbh.close();// 关闭连接
 				return ResultMessage.failure;
 			}
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 			return ResultMessage.success;
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -112,14 +112,14 @@ public class ConstantsDB {
 		sql="select id,name,value from ConstantsPO where name like ?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setString(1,"%"+name+"%");	//妯＄硦鏌ユ壘鏃朵袱杈瑰姞%
+			pst.setString(1,"%"+name+"%");	//模糊查找时两边加%
 			ret=pst.executeQuery();
 			while(ret.next()){
 				po=new ConstantsPO(ret.getLong(1),ret.getString(2),ret.getDouble(3));
 				list.add(po);
 			}
 			ret.close();
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,12 +140,12 @@ public class ConstantsDB {
 				po=new ConstantsPO(ret.getLong(1),ret.getString(2),ret.getDouble(3));
 			}
 			ret.close();
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return po;		//鏌ヤ笉鍒版椂杩斿洖null
+		return po;		//查不到时返回null
 	}
 	
 	public static long getLastId(){
@@ -159,7 +159,7 @@ public class ConstantsDB {
 				lastId=ret.getLong(1);
 			}
 			ret.close();
-			dbh.close();// 鍏抽棴杩炴帴
+			dbh.close();// 关闭连接
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -168,7 +168,7 @@ public class ConstantsDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		if(update("璺濈-鍗椾含-涓�",500)==ResultMessage.success){
+		if(update("距离-南京-上",500)==ResultMessage.success){
 			System.out.println("success");
 		}
 		String id=String.valueOf(1);

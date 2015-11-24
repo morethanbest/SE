@@ -1,37 +1,37 @@
 package data.managerdata;
 
+import java.rmi.RemoteException;
+
+import data.database.SalaryDB;
 import dataservice.managerdataservice.SalaryDataService;
 import po.Job;
 import po.ResultMessage;
 import po.SalaryPO;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-
-public class SalaryData extends UnicastRemoteObject implements SalaryDataService{
-
-	public SalaryData() throws RemoteException{
-		// TODO Auto-generated constructor stub
-		super();
-	}
+public class SalaryData implements SalaryDataService {
 
 	@Override
 	public ResultMessage addSalary(SalaryPO po) throws RemoteException {
-		return null;
+		// TODO Auto-generated method stub
+		return SalaryDB.write(po.getJob(), po.getSalarymode(), po.getBase(), po.getBonus());
 	}
 
 	@Override
 	public ResultMessage updateSalary(SalaryPO po) throws RemoteException {
-		return null;
+		// TODO Auto-generated method stub
+		return SalaryDB.update(po.getJob(), po.getSalarymode(), po.getBase(), po.getBonus());
 	}
 
 	@Override
 	public ResultMessage delSalary(SalaryPO po) throws RemoteException {
-		return null;
+		// TODO Auto-generated method stub
+		return SalaryDB.delete(po.getJob());
 	}
 
 	@Override
 	public SalaryPO findSalary(Job job) throws RemoteException {
-		return null;
+		// TODO Auto-generated method stub
+		return SalaryDB.search(job);
 	}
+
 }
