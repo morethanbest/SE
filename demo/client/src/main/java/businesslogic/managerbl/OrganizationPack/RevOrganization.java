@@ -1,12 +1,10 @@
 package businesslogic.managerbl.OrganizationPack;
 
-import java.rmi.RemoteException;
-
-import data.managerdata.OrganizationData;
 import dataservice.managerdataservice.OrganizationDataService;
+import init.RMIHelper;
 import po.OrganizationPO;
 import po.Organizationtype;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class RevOrganization {
 	long id;
@@ -19,7 +17,7 @@ public class RevOrganization {
 	}
 	
 	public ResultMessage rev(){
-		OrganizationDataService organization=new OrganizationData();
+		OrganizationDataService organization=RMIHelper.getOrgdata();
 		OrganizationPO newpo=new OrganizationPO(id,name,type);
 		ResultMessage result;
 		try {

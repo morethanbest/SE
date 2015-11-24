@@ -1,15 +1,13 @@
 package businesslogic.managerbl.OrganizationPack;
 
-import java.rmi.RemoteException;
-
-import data.managerdata.OrganizationData;
 import dataservice.managerdataservice.OrganizationDataService;
+import init.RMIHelper;
 
 
 public class IdInfo {
 	long id;
 	public long getid(){
-		OrganizationDataService organization=new OrganizationData();
+		OrganizationDataService organization=RMIHelper.getOrgdata();
 		try {
 			this.id=organization.getLastId();
 			this.id+=1;

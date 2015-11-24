@@ -1,11 +1,10 @@
 package businesslogic.managerbl.OrganizationPack;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
 import po.Organizationtype;
+import po.ResultMessage;
 import vo.OrganizationVO;
-import vo.ResultMessage;
 
 public class Organization {
 	AddOrganization addo;

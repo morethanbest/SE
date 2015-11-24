@@ -1,12 +1,11 @@
 package businesslogic.managerbl.OrganizationPack;
 
-import java.nio.file.attribute.PosixFilePermission;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.managerdata.OrganizationData;
 import dataservice.managerdataservice.OrganizationDataService;
+import init.RMIHelper;
 import po.OrganizationPO;
 import po.Organizationtype;
 import vo.OrganizationVO;
@@ -31,7 +30,7 @@ public class FindOrganization {
 	}
 	
 	public OrganizationVO findOrganization(){
-		OrganizationDataService organization=new OrganizationData();
+		OrganizationDataService organization=RMIHelper.getOrgdata();
 		OrganizationPO po;
 		OrganizationVO vo;
 		try {
@@ -48,7 +47,7 @@ public class FindOrganization {
 		return vo;
 	}
 	public List<OrganizationVO> findOrganizationbyName(){
-		OrganizationDataService organization=new OrganizationData();
+		OrganizationDataService organization=RMIHelper.getOrgdata();
 		List<OrganizationPO> listpo;
 		List<OrganizationVO> listvo;
 		try {
@@ -71,7 +70,7 @@ public class FindOrganization {
 		return listvo;
 	}
 	public List<OrganizationVO> findOrganizationbyType(){
-		OrganizationDataService organization=new OrganizationData();
+		OrganizationDataService organization=RMIHelper.getOrgdata();
 		List<OrganizationPO> listpo;
 		List<OrganizationVO> listvo;
 		try {
@@ -94,7 +93,7 @@ public class FindOrganization {
 		return listvo;
 	}
 	public List<OrganizationVO> findOrganizationbyBoth(){
-		OrganizationDataService organization=new OrganizationData();
+		OrganizationDataService organization=RMIHelper.getOrgdata();
 		List<OrganizationPO> listpo;
 		List<OrganizationVO> listvo;
 		try {

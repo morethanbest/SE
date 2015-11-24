@@ -1,6 +1,5 @@
 package businesslogic.managerbl.ConstantsPack;
 
-import data.managerdata.ConstantsData;
 import dataservice.managerdataservice.ConstantsDataService;
 import init.RMIHelper;
 import po.ConstantsPO;

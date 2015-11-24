@@ -1,7 +1,7 @@
 package businesslogic.accountbl.AccountPack;
 
+import po.ResultMessage;
 import vo.AccountVO;
-import vo.ResultMessage;
 
 public class Account {
 	MockIdInfo idInfo;

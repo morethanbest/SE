@@ -1,12 +1,9 @@
 package businesslogic.managerbl.OrganizationPack;
 
-import java.rmi.RemoteException;
-
-import data.managerdata.OrganizationData;
 import dataservice.managerdataservice.OrganizationDataService;
+import init.RMIHelper;
 import po.OrganizationPO;
-import po.Organizationtype;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class DelOrganization {
 	long id;
@@ -15,7 +12,7 @@ public class DelOrganization {
 	}
 	
 	public ResultMessage delete(){
-		OrganizationDataService organization=new OrganizationData();
+		OrganizationDataService organization=RMIHelper.getOrgdata();
 		OrganizationPO po;
 		ResultMessage result;
 		try {
