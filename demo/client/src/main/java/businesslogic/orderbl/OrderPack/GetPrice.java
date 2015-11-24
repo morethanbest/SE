@@ -1,6 +1,10 @@
 package businesslogic.orderbl.OrderPack;
 
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import po.Ordertype;
+import vo.ConstantsVO;
+
+import java.util.List;
 
 public class GetPrice {
 	String senderaddress;
@@ -23,8 +27,23 @@ public class GetPrice {
 		this.ordertype=ordertype;
 	}
 	public double getPrice(){
-		//寰呭父閲忓畬鎴愬悗濉啓锛侊紒锛�
-		return 10;
+		String[] splits1=senderaddress.split("-");
+		String[] splits2=receiveraddress.split("-");
+		ConstantsController constants=new ConstantsController();
+		List<ConstantsVO> listvo=constants.getConstants("距离-"+splits1[0]+"-"+splits2[0]);
+		ConstantsVO vo=listvo.get(0);
+		double distance=vo.getValue();
+		double w=weight;
+		if(volume/5000>w){
+			w=volume/5000;
+		}
+		String ordert=ordertype.toString();
+		List<ConstantsVO> listvo1=constants.getConstants(ordert);
+		ConstantsVO vo1=listvo1.get(0);
+		double ot=vo1.getValue();
+		double price=distance/1000*ot*w;
+		return price;
 	}
+
 
 }
