@@ -16,6 +16,8 @@ public interface OrganizationDataService extends Remote {
 	
 	public ResultMessage updateOrganization (OrganizationPO po)throws RemoteException;
 	
+	public List<OrganizationPO> getAll()throws RemoteException;
+	
 	public List<OrganizationPO> fuzzyfind(City city)throws RemoteException;
 	
 	public List<OrganizationPO> fuzzyfindbytype(Organizationtype type)throws RemoteException;

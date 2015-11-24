@@ -100,6 +100,31 @@ public class OrganizationDB {
 		return ResultMessage.failure;
 	}
 	
+	public static List<OrganizationPO> getAll(){
+		List<OrganizationPO> list=new ArrayList<OrganizationPO>();
+		OrganizationPO po;
+		dbh=new DBHelper();
+		sql="select name,organizationcode,type,city from OrganizationPO";
+		pst = dbh.prepare(sql);
+		try {
+			ret=pst.executeQuery();
+			while(ret.next()){
+				byte[] typebytes=ret.getBytes(3);
+				Organizationtype type=(Organizationtype) Serialize.Bytes2Object(typebytes);
+				byte[] citybytes=ret.getBytes(4);
+				City city=(City)Serialize.Bytes2Object(citybytes);
+				po=new OrganizationPO(ret.getString(1),ret.getString(2),type,city);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static List<OrganizationPO> fuzzySearchbycity(City city){
 		List<OrganizationPO> list=new ArrayList<OrganizationPO>();
 		OrganizationPO po;
@@ -203,11 +228,13 @@ public class OrganizationDB {
 	public static String gethallcode(City city){
 		String lastcode=null;
 		dbh=new DBHelper();
-		sql="select organizationcode from OrganizationPO where city=?";
+		sql="select organizationcode from OrganizationPO where city=? and type=?";
 		pst = dbh.prepare(sql);
 		try {
 			byte[] citybytes=Serialize.Object2Bytes(city);
+			byte[] typebytes=Serialize.Object2Bytes(Organizationtype.hall);
 			pst.setBytes(1, citybytes);
+			pst.setBytes(2, typebytes);
 			ret=pst.executeQuery();
 			while(ret.next()){
 				lastcode=ret.getString(1);
@@ -223,6 +250,9 @@ public class OrganizationDB {
 	public static void main(String[] args) {
 		initialize();
 		System.out.println("test");
+		if(getAll().size()>0){
+			System.out.println("getall success");
+		}
 		if(update("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai)==ResultMessage.success){
 			System.out.println("update success");
 		}
@@ -238,7 +268,7 @@ public class OrganizationDB {
 		if(fuzzySearchbyboth(City.Shanghai,Organizationtype.transfercenter).size()>0){
 			System.out.println("fuzzySearchbyboth success");
 		}
-		if(gethallcode(City.Nanjing).equals("025000")){
+		if("025000".equals(gethallcode(City.Nanjing))){
 			System.out.println("gethallcode success");
 		}
 		if(delete("025000")==ResultMessage.success){

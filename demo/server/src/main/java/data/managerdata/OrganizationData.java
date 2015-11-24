@@ -23,6 +23,11 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 	}
 
 	@Override
+	public List<OrganizationPO> getAll() throws RemoteException {
+		// TODO Auto-generated method stub
+		return OrganizationDB.getAll();
+	}
+	@Override
 	public ResultMessage deleteOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		ResultMessage result=OrganizationDB.delete(po.getOrganizationcode());

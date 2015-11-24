@@ -23,13 +23,13 @@ public class OrderDB {
 			pst.executeUpdate();
 			sql = "create table OrderPO(id bigint auto_increment primary key,sendername text,senderaddress text,senderunit text,senderphone "
 					+ "text,sendercellphone text,receivername text,receiveraddress text,receiverunit text,receiverphone text,receivercellphone "
-					+ "text,numbers double,weight double,volume double,productname text,productsize double,packagefee double,totalfee double,ordercode "
+					+ "text,numbers double,weight double,volume double,productname text,packagefee double,totalfee double,ordercode "
 					+ "text,ordertype blob,codeofreceiving text,receiver text,receivingtime bigint,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
 
 			OrderPO po=new OrderPO(1,"孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
-					"56565656","13234567890",1,5,3,"iphone6",4,5,10,"0000000001",Ordertype.fast);
+					"56565656","13234567890",1,5,3,"iphone6",4,5,"0000000001",Ordertype.fast);
 			write(po);
 			dbh.close();// 关闭连接
 		}catch(Exception e){
@@ -53,7 +53,6 @@ public class OrderDB {
 			double weight=po.getWeight();
 			double volume=po.getVolume();
 			String productname=po.getProductname();
-			double productsize=po.getProductsize();
 			double packagefee=po.getPackagefee();
 			double totalfee=po.getTotalfee();
 			String ordercode=po.getOrdercode();
@@ -66,7 +65,7 @@ public class OrderDB {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
 			
 			dbh = new DBHelper();
-			sql = "insert into OrderPO values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into OrderPO values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 
 			pst.setString(1, sendername);
@@ -83,15 +82,14 @@ public class OrderDB {
 			pst.setDouble(12,weight);
 			pst.setDouble(13,volume);
 			pst.setString(14, productname);
-			pst.setDouble(15,productsize);
-			pst.setDouble(16,packagefee);
-			pst.setDouble(17,totalfee);
-			pst.setString(18, ordercode);
-			pst.setBytes(19, typebyte);
-			pst.setString(20, codeofreceiving);
-			pst.setString(21, receiver);
-			pst.setLong(22, receivingtime);
-			pst.setBytes(23, statebytes);
+			pst.setDouble(15,packagefee);
+			pst.setDouble(16,totalfee);
+			pst.setString(17, ordercode);
+			pst.setBytes(18, typebyte);
+			pst.setString(19, codeofreceiving);
+			pst.setString(20, receiver);
+			pst.setLong(21, receivingtime);
+			pst.setBytes(22, statebytes);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -142,19 +140,19 @@ public class OrderDB {
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(state);
 			sql = "select id,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,receiverunit,receiverphone,"
-					+ "receivercellphone,numbers,weight,volume,productname,productsize,packagefee,totalfee,ordercode,ordertype,codeofreceiving,"
+					+ "receivercellphone,numbers,weight,volume,productname,packagefee,totalfee,ordercode,ordertype,codeofreceiving,"
 					+ "receiver,receivingtime,documentstate from OrderPO where documentstate = ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				Ordertype type = (Ordertype) Serialize.Bytes2Object(ret.getBytes(20));
-				Formstate documentstate = (Formstate) Serialize.Bytes2Object(ret.getBytes(24));
+				Ordertype type = (Ordertype) Serialize.Bytes2Object(ret.getBytes(19));
+				Formstate documentstate = (Formstate) Serialize.Bytes2Object(ret.getBytes(23));
 				po = new OrderPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4), ret.getString(5),
 						ret.getString(6), ret.getString(7), ret.getString(8), ret.getString(9), ret.getString(10),
 						ret.getString(11), ret.getDouble(12), ret.getDouble(13), ret.getDouble(14), ret.getString(15),
-						ret.getDouble(16), ret.getDouble(17), ret.getDouble(18), ret.getString(19), type,
-						ret.getString(21), ret.getString(22), ret.getLong(23), documentstate);
+						ret.getDouble(16), ret.getDouble(17), ret.getString(18), type,
+						ret.getString(20), ret.getString(21), ret.getLong(22), documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -174,7 +172,7 @@ public class OrderDB {
 		OrderPO po=null;
 		dbh=new DBHelper();
 		sql="select id,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,receiverunit,receiverphone,"
-				+ "receivercellphone,numbers,weight,volume,productname,productsize,packagefee,totalfee,ordercode,ordertype,codeofreceiving,"
+				+ "receivercellphone,numbers,weight,volume,productname,packagefee,totalfee,ordercode,ordertype,codeofreceiving,"
 				+ "receiver,receivingtime,documentstate from OrderPO where ordercode = ?";
 		pst = dbh.prepare(sql);
 		try {
@@ -196,17 +194,16 @@ public class OrderDB {
 				double weight=ret.getDouble(13);
 				double volume=ret.getDouble(14);
 				String productname=ret.getString(15);
-				double productsize=ret.getDouble(16);
-				double packagefee=ret.getDouble(17);
-				double totalfee=ret.getDouble(18);
-				String ordercode=ret.getString(19);
-				Ordertype ordertype=(Ordertype)Serialize.Bytes2Object(ret.getBytes(20));
-				String codeofreceiving=ret.getString(21);
-				String receiver=ret.getString(22);
-				long receivingtime=ret.getLong(23);
-				Formstate documentstate=(Formstate)Serialize.Bytes2Object(ret.getBytes(24));
+				double packagefee=ret.getDouble(16);
+				double totalfee=ret.getDouble(17);
+				String ordercode=ret.getString(18);
+				Ordertype ordertype=(Ordertype)Serialize.Bytes2Object(ret.getBytes(19));
+				String codeofreceiving=ret.getString(20);
+				String receiver=ret.getString(21);
+				long receivingtime=ret.getLong(22);
+				Formstate documentstate=(Formstate)Serialize.Bytes2Object(ret.getBytes(23));
 				po=new OrderPO(id,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,
-						receiverunit,receiverphone,receivercellphone,numbers,weight,volume,productname,productsize,packagefee,
+						receiverunit,receiverphone,receivercellphone,numbers,weight,volume,productname,packagefee,
 						totalfee,ordercode,ordertype,codeofreceiving,receiver,receivingtime,documentstate);
 			}
 			ret.close();
@@ -245,7 +242,7 @@ public class OrderDB {
 		}
 
 		if(update(new OrderPO(1,"孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
-				"56565656","13234567890",1,5,3,"iphone6",4,5,10,"0000000001",Ordertype.fast))==ResultMessage.success){
+				"56565656","13234567890",1,5,3,"iphone6",4,5,"0000000001",Ordertype.fast))==ResultMessage.success){
 			System.out.println("update success");
 		}
 		if(search("0000000001")!=null){
