@@ -64,4 +64,22 @@ public class OrganizationController implements OrganizationBlService {
 		return listvo;
 	}
 
+	@Override
+	public List<OrganizationVO> getOrganizationAll(){
+		// TODO Auto-generated method stub
+		FindOrganization findo=new FindOrganization();
+		Organization o=new Organization(findo);
+		List<OrganizationVO> listvo=o.findOrganizationall();
+		return listvo;
+	}
+
+	@Override
+	public String getOrganizationCode(City city, Organizationtype type){
+		// TODO Auto-generated method stub
+		GetOrganizationcode getcode=new GetOrganizationcode();
+		Organization o=new Organization(getcode);
+		String code=o.getorganizationcode(type,city);
+		return code;
+	}
+
 }

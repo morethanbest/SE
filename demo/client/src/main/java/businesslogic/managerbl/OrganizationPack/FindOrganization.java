@@ -97,4 +97,28 @@ public class FindOrganization {
 		
 		return listvo;
 	}
+	public List<OrganizationVO> findOrganizationall(){
+		OrganizationDataService organization=RMIHelper.getOrgdata();
+		List<OrganizationPO> listpo;
+		List<OrganizationVO> listvo;
+		try {
+			listpo = organization.getAll();
+			listvo=new ArrayList<OrganizationVO>();
+			for(int i=0;i<listpo.size();i++){
+				OrganizationPO po=listpo.get(i);
+				String poname=po.getName();
+				String poorganizationcode=po.getOrganizationcode();
+				Organizationtype potype=po.getType();
+				City pocity=po.getCity();
+				OrganizationVO vo=new OrganizationVO(poname, poorganizationcode, potype, pocity);
+				listvo.add(vo);
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			listvo=null;
+			System.out.println("getall fail");
+		}
+
+		return listvo;
+	}
 }

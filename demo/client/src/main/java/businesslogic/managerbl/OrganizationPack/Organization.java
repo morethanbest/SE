@@ -12,6 +12,7 @@ public class Organization {
 	FindOrganization findo;
 	DelOrganization delo;
 	RevOrganization revo;
+	GetOrganizationcode getcode;
 	public Organization(AddOrganization addo){
 		this.addo=addo;
 	}
@@ -27,7 +28,11 @@ public class Organization {
 	public Organization(RevOrganization revo){
 		this.revo=revo;
 	}
-	
+
+	public Organization(GetOrganizationcode getcode){
+		this.getcode=getcode;
+	}
+
 	public ResultMessage addOrganization(OrganizationVO vo){
 		String name=vo.getName();
 		String organizationcode=vo.getOrganizationcode();
@@ -55,7 +60,12 @@ public class Organization {
 		List<OrganizationVO> listvo=findo.findOrganizationbyBoth();
 		return listvo;
 	}
-	
+
+	public List<OrganizationVO> findOrganizationall(){
+		List<OrganizationVO> listvo=findo.findOrganizationall();
+		return listvo;
+	}
+
 	public ResultMessage deleteOrganization(OrganizationVO vo){
 		String name=vo.getName();
 		String organizationcode=vo.getOrganizationcode();
@@ -73,6 +83,12 @@ public class Organization {
 		City city=vo.getCity();
 		revo.setRevInfo(name, organizationcode, type, city);
 		ResultMessage result=revo.rev();
+		return result;
+	}
+
+	public String getorganizationcode(Organizationtype type, City city){
+        getcode.setGetcodeInfo(city,type);
+		String result=getcode.getOrganizationcode();
 		return result;
 	}
 }
