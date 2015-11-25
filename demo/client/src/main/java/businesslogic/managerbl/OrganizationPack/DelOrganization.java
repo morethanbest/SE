@@ -2,26 +2,33 @@ package businesslogic.managerbl.OrganizationPack;
 
 import dataservice.managerdataservice.OrganizationDataService;
 import init.RMIHelper;
+import po.City;
 import po.OrganizationPO;
+import po.Organizationtype;
 import po.ResultMessage;
 
 public class DelOrganization {
-	long id;
-	public void setDelInfo(long id){
-		this.id=id;
+	String name;
+	String organizationcode;
+	Organizationtype type;
+	City city;
+	public void setDelInfo(String name, String organizationcode, Organizationtype type, City city){
+		this.name=name;
+		this.organizationcode=organizationcode;
+		this.type=type;
+		this.city=city;
 	}
 	
 	public ResultMessage delete(){
 		OrganizationDataService organization=RMIHelper.getOrgdata();
-		OrganizationPO po;
+		OrganizationPO po=new OrganizationPO(name, organizationcode, type, city);
 		ResultMessage result;
 		try {
-			po = organization.findOrganization(id);
 			result=organization.deleteOrganization(po);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			result=ResultMessage.failure;
-			System.out.println("delete fail");
+			System.out.println("deleteorganization fail");
 		}
 		return result;
 		

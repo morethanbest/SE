@@ -3,6 +3,7 @@ package businesslogic.managerbl.OrganizationPack;
 import java.util.List;
 
 import businesslogicservice.managerblservice.OrganizationBlService;
+import po.City;
 import po.Organizationtype;
 import po.ResultMessage;
 import vo.OrganizationVO;
@@ -12,9 +13,7 @@ public class OrganizationController implements OrganizationBlService {
 	@Override
 	public ResultMessage addOrganization(OrganizationVO vo){
 		AddOrganization addo=new AddOrganization();
-		IdInfo id=new IdInfo();
 		Organization o=new Organization(addo);
-		OrganizationVO newvo=new OrganizationVO(id.getid(), vo.getName(), vo.getType());
 		ResultMessage result=o.addOrganization(vo);
 		// TODO Auto-generated method stub
 		return result;
@@ -39,11 +38,11 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public List<OrganizationVO> getOrganizationbyName(String name){
+	public List<OrganizationVO> getOrganizationbyCity(City city){
 		// TODO Auto-generated method stub
 		FindOrganization findo=new FindOrganization();
 		Organization o=new Organization(findo);
-		List<OrganizationVO> listvo=o.findOrganizationbyName(name);
+		List<OrganizationVO> listvo=o.findOrganizationbyCity(city);
 		return listvo;
 	}
 
@@ -57,11 +56,11 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public List<OrganizationVO> getOrganizationbyBoth(String name, Organizationtype type){
+	public List<OrganizationVO> getOrganizationbyBoth(City city, Organizationtype type){
 		// TODO Auto-generated method stub
 		FindOrganization findo=new FindOrganization();
 		Organization o=new Organization(findo);
-		List<OrganizationVO> listvo=o.findOrganizationbyBoth(name, type);
+		List<OrganizationVO> listvo=o.findOrganizationbyBoth(city, type);
 		return listvo;
 	}
 

@@ -2,6 +2,7 @@ package businesslogic.managerbl.OrganizationPack;
 
 import java.util.List;
 
+import po.City;
 import po.Organizationtype;
 import po.ResultMessage;
 import vo.OrganizationVO;
@@ -28,17 +29,18 @@ public class Organization {
 	}
 	
 	public ResultMessage addOrganization(OrganizationVO vo){
-		long id=vo.getId();
 		String name=vo.getName();
+		String organizationcode=vo.getOrganizationcode();
 		Organizationtype type=vo.getType();
-		addo.setAddInfo(id, name, type);;
+		City city=vo.getCity();
+		addo.setAddInfo(name, organizationcode, type, city);
 		ResultMessage result=addo.addOrganization();
 		return result;
 	}
 	
-	public List<OrganizationVO> findOrganizationbyName(String name){
-		findo.setFindInfo(name);
-		List<OrganizationVO> listvo=findo.findOrganizationbyName();
+	public List<OrganizationVO> findOrganizationbyCity(City city){
+		findo.setFindInfo(city);
+		List<OrganizationVO> listvo=findo.findOrganizationbyCity();
 		return listvo;
 	}
 	
@@ -48,24 +50,28 @@ public class Organization {
 		return listvo;
 	}
 	
-	public List<OrganizationVO> findOrganizationbyBoth(String name, Organizationtype type){
-		findo.setFindInfo(name, type);
+	public List<OrganizationVO> findOrganizationbyBoth(City city, Organizationtype type){
+		findo.setFindInfo(city, type);
 		List<OrganizationVO> listvo=findo.findOrganizationbyBoth();
 		return listvo;
 	}
 	
 	public ResultMessage deleteOrganization(OrganizationVO vo){
-		long id=vo.getId();
-		delo.setDelInfo(id);
+		String name=vo.getName();
+		String organizationcode=vo.getOrganizationcode();
+		Organizationtype type=vo.getType();
+		City city=vo.getCity();
+		delo.setDelInfo(name, organizationcode, type, city);
 		ResultMessage result=delo.delete();
 		return result;
 	}
 	
 	public ResultMessage revOrganization(OrganizationVO vo){
-		long id=vo.getId();
 		String name=vo.getName();
+		String organizationcode=vo.getOrganizationcode();
 		Organizationtype type=vo.getType();
-		revo.setRevInfo(id,name, type);
+		City city=vo.getCity();
+		revo.setRevInfo(name, organizationcode, type, city);
 		ResultMessage result=revo.rev();
 		return result;
 	}
