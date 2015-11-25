@@ -10,16 +10,32 @@ import java.rmi.RemoteException;
  */
 public class DriverId {
 
-    public long getid(){
+
+    public String getid(String orgcode){
         DriversDataService dataserv= RMIHelper.getDriverdata();
         long id= 0;
+
+        String result=null;
         try {
-            id = dataserv.getCurrentID();
+            id = dataserv.getCurrentID(orgcode)+1;
+
+            result=Long.toString(id);
+            int len=result.length();
+            if(len>3){
+                result="-1";
+                return result;
+            }
+            for(int j=0;j<=3-len-1;j++){
+                result="0"+result;
+            }
+
         } catch (RemoteException e) {
             e.printStackTrace();
             System.out.println("Get Latest DriverID Failed!!!");
-            id=-1;
+            result="-2";
         }
-        return id;
+
+
+        return result;
     }
 }

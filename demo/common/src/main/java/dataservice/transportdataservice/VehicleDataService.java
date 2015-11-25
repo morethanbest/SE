@@ -17,5 +17,5 @@ public interface VehicleDataService extends Remote {
 
 	public VehiclesPO findVehicleByPlateNumber(String plateNumber) throws RemoteException;
 
-	public long getCurrentID() throws RemoteException;
+	public long getCurrentID(String orgcode) throws RemoteException;
 }
