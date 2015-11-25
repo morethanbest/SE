@@ -37,6 +37,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 
 		btnNewButton = new JButton("审批单据");
 		btnNewButton.setBounds(14, 13, 113, 27);
+		btnNewButton.addActionListener(this);
 		add(btnNewButton);
 
 		btnNewButton_1 = new JButton("人员管理");
@@ -46,10 +47,12 @@ public class ManagerPanel extends JPanel implements ActionListener {
 
 		btnNewButton_2 = new JButton("机构管理");
 		btnNewButton_2.setBounds(268, 13, 113, 27);
+		btnNewButton_2.addActionListener(this);
 		add(btnNewButton_2);
 
 		btnNewButton_3 = new JButton("统计分析");
 		btnNewButton_3.setBounds(395, 13, 113, 27);
+		btnNewButton_3.addActionListener(this);
 		add(btnNewButton_3);
 
 		btnNewButton_4 = new JButton("常量信息");
@@ -59,10 +62,12 @@ public class ManagerPanel extends JPanel implements ActionListener {
 
 		btnNewButton_5 = new JButton("薪水策略");
 		btnNewButton_5.setBounds(649, 13, 113, 27);
+		btnNewButton_5.addActionListener(this);
 		add(btnNewButton_5);
 
 		btnNewButton_6 = new JButton("注销");
 		btnNewButton_6.setBounds(855, 13, 113, 27);
+		btnNewButton_6.addActionListener(this);
 		add(btnNewButton_6);
 
 		JSeparator separator = new JSeparator();
