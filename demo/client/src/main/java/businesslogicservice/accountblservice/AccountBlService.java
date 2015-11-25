@@ -6,13 +6,13 @@ import po.ResultMessage;
 import vo.AccountVO;
 
 public interface AccountBlService {
-	public ResultMessage addAccount(AccountVO vo)throws RemoteException;
+	public ResultMessage addAccount(AccountVO vo);
 	
-	public ResultMessage delAccount()throws RemoteException;
+	public ResultMessage delAccount(AccountVO vo);
 	
-	public ResultMessage revAccount(AccountVO vo)throws RemoteException;
-	
-	public AccountVO getAccountbyID(long id)throws RemoteException;
+	public ResultMessage revAccount(AccountVO vo);
+
+	public AccountVO getAccountbyName(String accountname);
 	
 
 }

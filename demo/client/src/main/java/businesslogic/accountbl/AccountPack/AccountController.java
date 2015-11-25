@@ -2,33 +2,46 @@ package businesslogic.accountbl.AccountPack;
 
 import java.rmi.RemoteException;
 
+import com.sun.xml.internal.fastinfoset.tools.FI_StAX_SAX_Or_XML_SAX_SAXEvent;
 import vo.AccountVO;
-import vo.ResultMessage;
+import po.ResultMessage;
 import businesslogicservice.accountblservice.AccountBlService;
 
 public class AccountController implements AccountBlService {
 	@Override
-	public ResultMessage addAccount(AccountVO vo) throws RemoteException {
+	public ResultMessage addAccount(AccountVO vo) {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		AddAccount addAccount=new AddAccount();
+		Account account=new Account(addAccount);
+		ResultMessage result=account.addAccount(vo);
+		return result;
 	}
 
 	@Override
-	public ResultMessage delAccount() throws RemoteException {
+	public ResultMessage delAccount(AccountVO vo) {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		DelAccount delAccount=new DelAccount();
+		Account account = new Account(delAccount);
+		ResultMessage result=account.delAccount(vo);
+		return result;
 	}
 
 	@Override
-	public ResultMessage revAccount(AccountVO vo) throws RemoteException {
+	public ResultMessage revAccount(AccountVO vo) {
 		// TODO Auto-generated method stub
-		return ResultMessage.success;
+		RevAccount revAccount=new RevAccount();
+		Account account=new Account(revAccount);
+		ResultMessage result=account.revAccount(vo);
+		return result;
 	}
 
 	@Override
-	public AccountVO getAccountbyID(long id) throws RemoteException {
+	public AccountVO getAccountbyName(String accountname) {
 		// TODO Auto-generated method stub
-		return new AccountVO(1,"abc",100);
+		GetAccountbyName getAccountbyName=new GetAccountbyName();
+		Account account=new Account(getAccountbyName);
+		AccountVO vo=account.getAccountbyName(accountname);
+		return vo;
 	}
 
 }

@@ -4,41 +4,38 @@ import po.ResultMessage;
 import vo.AccountVO;
 
 public class Account {
-	MockIdInfo idInfo;
-	MockAddAccount addAccount;
-	MockDelAccount delAccount;
-	MockRevAccount revAccount;
-	MockGetAccountbyID getAccountbyID;
-	public Account(MockAddAccount addAccount,MockIdInfo idInfo){
+	AddAccount addAccount;
+	DelAccount delAccount;
+	RevAccount revAccount;
+	GetAccountbyName getAccountbyName;
+	public Account(AddAccount addAccount){
 		this.addAccount=addAccount;
-		this.idInfo=idInfo;
 	}
 	
-	public Account(MockDelAccount delAccount){
+	public Account(DelAccount delAccount){
 		this.delAccount=delAccount;
 	}
 	
-	public Account(MockRevAccount revAccount){
+	public Account(RevAccount revAccount){
 		this.revAccount=revAccount;
 	}
 	
-	public Account(MockGetAccountbyID getAccountbyID){
-		this.getAccountbyID=getAccountbyID;
+	public Account(GetAccountbyName getAccountbyName){
+		this.getAccountbyName=getAccountbyName;
 	}
 	
 	public ResultMessage addAccount(AccountVO vo){
 		String accountname=vo.getAccountname();
 		double accountsum=vo.getAccountsum();
-		long id=this.idInfo.getid();
-		addAccount.setAddInfo(id,accountname, accountsum);
+		addAccount.setAddInfo(accountname, accountsum);
 		ResultMessage result=addAccount.addAccount();
 		return result;
 	}
 	
-	public AccountVO getAccountbyID(long id){
+	public AccountVO getAccountbyName(String accountname){
 		AccountVO vo;
-		getAccountbyID.setGetInfo(id);
-		vo=getAccountbyID.getAccountbyID();
+		getAccountbyName.setGetInfo(accountname);
+		vo=getAccountbyName.getAccountbyName();
 		return vo;
 	}
 	

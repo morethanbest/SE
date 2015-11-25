@@ -5,14 +5,9 @@ import java.io.Serializable;
 public class AccountPO  implements Serializable{
 	String accountname;
 	double accountsum;
-	long id;
-	public AccountPO(long id,String accountname, double accountsum) {
-		this.id=id;
+	public AccountPO(String accountname, double accountsum) {
 		this.accountname = accountname;
 		this.accountsum = accountsum;
-	}
-	public long getId() {
-		return id;
 	}
 	public String getAccountname() {
 		return accountname;

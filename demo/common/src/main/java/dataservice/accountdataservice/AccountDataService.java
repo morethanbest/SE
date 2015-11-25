@@ -8,7 +8,7 @@ import po.ResultMessage;
 
 
 public interface AccountDataService extends Remote {
-	public ResultMessage addAccount(AccountPO po)throws RemoteException;
+	public ResultMessage addAccount(AccountPO po)throws RemoteException;//po里name不可重名
 	
 	public ResultMessage deleteAccount(AccountPO po)throws RemoteException;
 	
