@@ -17,7 +17,7 @@ public class StaffData extends UnicastRemoteObject implements StaffDataService {
 	@Override
 	public ResultMessage addStaff(StaffPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=StaffDB.write(po.getName(), po.getJob(),po.getOrganization());
+		ResultMessage result=StaffDB.write(po);
 		return result;
 	}
 
@@ -31,7 +31,7 @@ public class StaffData extends UnicastRemoteObject implements StaffDataService {
 	@Override
 	public ResultMessage updateStaff(StaffPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=StaffDB.update(po.getId(),po.getName(), po.getJob(),po.getOrganization());
+		ResultMessage result=StaffDB.update(po);
 		return result;
 	}
 	
@@ -43,12 +43,6 @@ public class StaffData extends UnicastRemoteObject implements StaffDataService {
 		return po;
 	}
 
-	@Override
-	public List<StaffPO> fuzzyfindStaff(String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		List<StaffPO> list=StaffDB.fuzzySearch(name);
-		return list;
-	}
 
 	@Override
 	public long getLastId() throws RemoteException {
@@ -63,13 +57,18 @@ public class StaffData extends UnicastRemoteObject implements StaffDataService {
 		List<StaffPO> list=StaffDB.fuzzySearchbyjob(job);
 		return list;
 	}
-
 	@Override
-	public List<StaffPO> fuzzyfindbyboth(String name, Job job) throws RemoteException {
+	public List<StaffPO> fuzzyfindbyorganization(String organizationcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		List<StaffPO> list=StaffDB.fuzzySearchbyboth(name, job);
-		return list;
+		return StaffDB.fuzzySearchbyorganizationcode(organizationcode);
 	}
+	@Override
+	public List<StaffPO> fuzzyfindbyboth(String organizationcode, Job job) throws RemoteException {
+		// TODO Auto-generated method stub
+		return StaffDB.fuzzySearchbyboth(organizationcode, job);
+	}
+
+
 
 
 }

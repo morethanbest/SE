@@ -5,17 +5,16 @@ import java.rmi.server.UnicastRemoteObject;
 
 import data.database.UserDB;
 import dataservice.userdataservice.UserLoginDataService;
-import po.LoginPO;
+import po.UserPO;
 
 public class UserLoginData extends UnicastRemoteObject implements UserLoginDataService {
 	public UserLoginData() throws  RemoteException{
 		super();
 	}
 	@Override
-	public LoginPO login(long id, String password) throws RemoteException {
+	public UserPO login(long id, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		LoginPO po=UserDB.check(id, password);
-		return po;
+		return UserDB.check(id, password);
 	}
 
 }

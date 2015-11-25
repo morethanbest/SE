@@ -3,10 +3,10 @@ package dataservice.userdataservice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import po.LoginPO;
+import po.UserPO;
 
 public interface UserLoginDataService extends Remote {
 
-	public LoginPO login(long id,String password)throws RemoteException;
+	public UserPO login(long id,String password)throws RemoteException;
 
 }

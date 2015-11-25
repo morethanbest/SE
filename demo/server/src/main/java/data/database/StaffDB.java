@@ -23,12 +23,12 @@ public class StaffDB {
 		pst=dbh.prepare(sql);
 		try{
 			pst.executeUpdate();
-			sql = "create table StaffPO(id bigint auto_increment primary key,name text,job blob,organization blob)";
+			sql = "create table StaffPO(id bigint auto_increment primary key,name text,job blob,organizationname text,organizationcode text,organizationtype blob,city blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			StaffPO po=new StaffPO(1,"sunchao",Job.transfercentersalesman,new OrganizationPO("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai));
+			StaffPO po=new StaffPO(1,"sunchao",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai);
 			ResultMessage result;
-			result = write(po.getName(), po.getJob(),po.getOrganization());
+			result = write(po);
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
@@ -43,17 +43,22 @@ public class StaffDB {
 		}
 	}
 
-	public static ResultMessage write(String name, Job job,OrganizationPO organization) {
+	public static ResultMessage write(StaffPO staff) {
 		try {
-			byte[] jobbytes = Serialize.Object2Bytes(job);
-			byte[] organizationbytes=Serialize.Object2Bytes(organization);
+			
+			byte[] jobbytes = Serialize.Object2Bytes(staff.getJob());
+			byte[] typebytes=Serialize.Object2Bytes(staff.getType());
+			byte[] citybytes=Serialize.Object2Bytes(staff.getCity());
 			dbh = new DBHelper();
-			sql = "insert into StaffPO values(null,?,?,?)";
+			sql = "insert into StaffPO values(null,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 
-			pst.setString(1, name);
+			pst.setString(1, staff.getName());
 			pst.setBytes(2, jobbytes);
-			pst.setBytes(3, organizationbytes);
+			pst.setString(3, staff.getOrganizationname());
+			pst.setString(4, staff.getOrganizationcode());
+			pst.setBytes(5, typebytes);
+			pst.setBytes(6, citybytes);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -70,9 +75,8 @@ public class StaffDB {
 	}
 	
 	public static ResultMessage delete(long id){
-		List<StaffPO> stafflist=new ArrayList<StaffPO>();
-		stafflist.add(search(id));
-		UserDB.deletebyStaff(stafflist);
+		StaffPO po=search(id);
+		UserDB.deletebyStaff(po.getOrganizationcode());
 		dbh=new DBHelper();
 		sql="delete from StaffPO where id=?";
 		pst=dbh.prepare(sql);
@@ -91,15 +95,13 @@ public class StaffDB {
 		return ResultMessage.failure;
 	}
 	
-	public static ResultMessage deletebyorganization(OrganizationPO organization){
-		List<StaffPO> stafflist=fuzzySearchbyorganization(organization);
-		UserDB.deletebyStaff(stafflist);
+	public static ResultMessage deletebyorganization(String organizationcode){
+		UserDB.deletebyStaff(organizationcode);
 		dbh=new DBHelper();
-		sql="delete from StaffPO where organization=?";
+		sql="delete from StaffPO where organizationcode=?";
 		pst=dbh.prepare(sql);
 		try{
-			byte[] organizationbytes=Serialize.Object2Bytes(organization);
-			pst.setBytes(1,organizationbytes);
+			pst.setString(1,organizationcode);
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
@@ -112,17 +114,21 @@ public class StaffDB {
 		return ResultMessage.failure;
 	}
 	
-	public static ResultMessage update(long id,String name,Job job,OrganizationPO organization){
+	public static ResultMessage update(StaffPO staff){
 		try{
-			byte[] jobbytes = Serialize.Object2Bytes(job);
-			byte[] organizationbytes=Serialize.Object2Bytes(organization);
+			byte[] jobbytes = Serialize.Object2Bytes(staff.getJob());
+			byte[] typebytes=Serialize.Object2Bytes(staff.getType());
+			byte[] citybytes=Serialize.Object2Bytes(staff.getCity());
 			dbh = new DBHelper();
-			sql = "update StaffPO set name=?,job=?,organization=? where id=?";
+			sql = "update StaffPO set name=?,job=?,organizationname=?,organizationcode=?,organizationtype=?,city=? where id=?";
 			pst = dbh.prepare(sql);
-			pst.setString(1, name);
+			pst.setString(1, staff.getName());
 			pst.setBytes(2, jobbytes);
-			pst.setBytes(3, organizationbytes);
-			pst.setLong(4,id);
+			pst.setString(3, staff.getOrganizationname());
+			pst.setString(4, staff.getOrganizationcode());
+			pst.setBytes(5, typebytes);
+			pst.setBytes(6, citybytes);
+			pst.setLong(7,staff.getId());
 			int result;
 			result = pst.executeUpdate();
 			if (result != 0) {
@@ -136,107 +142,110 @@ public class StaffDB {
 		return ResultMessage.failure;
 	}
 	
-	public static List<StaffPO> fuzzySearch(String name){
-		List<StaffPO> list=new ArrayList<StaffPO>();
-		StaffPO po;
-		dbh=new DBHelper();
-		sql="select id,name,job,organization from StaffPO where name like ?";
-		pst = dbh.prepare(sql);
+//	public static List<StaffPO> fuzzySearch(String name){
+//		List<StaffPO> list=new ArrayList<StaffPO>();
+//		StaffPO po;
+//		dbh=new DBHelper();
+//		sql="select id,name,job,organization from StaffPO where name like ?";
+//		pst = dbh.prepare(sql);
+//		try {
+//			pst.setString(1,"%"+name+"%");	//模糊查找时两边加%
+//			ret=pst.executeQuery();
+//			while(ret.next()){
+//				byte[] jobbytes=ret.getBytes(3);
+//				Job job=(Job) Serialize.Bytes2Object(jobbytes);
+//				byte[] organizationbytes=ret.getBytes(4);
+//				OrganizationPO organization=(OrganizationPO)Serialize.Bytes2Object(organizationbytes);
+//				po=new StaffPO(ret.getLong(1),ret.getString(2),job,organization);
+//				list.add(po);
+//			}
+//			ret.close();
+//			dbh.close();// 关闭连接
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+	
+	public static List<StaffPO> fuzzySearchbyjob(Job job) {
+		List<StaffPO> list = new ArrayList<StaffPO>();
 		try {
-			pst.setString(1,"%"+name+"%");	//模糊查找时两边加%
-			ret=pst.executeQuery();
-			while(ret.next()){
-				byte[] jobbytes=ret.getBytes(3);
-				Job job=(Job) Serialize.Bytes2Object(jobbytes);
-				byte[] organizationbytes=ret.getBytes(4);
-				OrganizationPO organization=(OrganizationPO)Serialize.Bytes2Object(organizationbytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,organization);
+			byte[] jobbyte = Serialize.Object2Bytes(job);
+
+			StaffPO po;
+			dbh = new DBHelper();
+			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where job=?";
+			pst = dbh.prepare(sql);
+
+			pst.setBytes(1, jobbyte);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				byte[] typebytes=ret.getBytes(6);
+				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
+				byte[] citybytes=ret.getBytes(7);
+				City city=(City)Serialize.Bytes2Object(citybytes);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
 				list.add(po);
 			}
 			ret.close();
 			dbh.close();// 关闭连接
-			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public static List<StaffPO> fuzzySearchbyboth(String organizationcode, Job job) {
+		List<StaffPO> list = new ArrayList<StaffPO>();
+		try {
+			byte[] jobbyte = Serialize.Object2Bytes(job);
+
+			StaffPO po;
+			dbh = new DBHelper();
+			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where organizationcode=? and job=?";
+			pst = dbh.prepare(sql);
+
+			pst.setString(1, organizationcode);
+			pst.setBytes(2, jobbyte);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				byte[] typebytes=ret.getBytes(6);
+				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
+				byte[] citybytes=ret.getBytes(7);
+				City city=(City)Serialize.Bytes2Object(citybytes);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
 	
-	public static List<StaffPO> fuzzySearchbyjob(Job jobget) {
+	public static List<StaffPO> fuzzySearchbyorganizationcode(String organizationcode) {
 		List<StaffPO> list = new ArrayList<StaffPO>();
 		try {
-			byte[] jobbyte = Serialize.Object2Bytes(jobget);
 
 			StaffPO po;
 			dbh = new DBHelper();
-			sql = "select id,name,job,organization from StaffPO where job=?";
+			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where organizationcode=?";
 			pst = dbh.prepare(sql);
 
-			pst.setBytes(1, jobbyte);
+			pst.setString(1, organizationcode);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				byte[] jobbytes = ret.getBytes(3);
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
-				byte[] organizationbytes=ret.getBytes(4);
-				OrganizationPO organization=(OrganizationPO)Serialize.Bytes2Object(organizationbytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,organization);
-				list.add(po);
-			}
-			ret.close();
-			dbh.close();// 关闭连接
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	public static List<StaffPO> fuzzySearchbyboth(String name, Job jobget) {
-		List<StaffPO> list = new ArrayList<StaffPO>();
-		try {
-			byte[] jobbyte = Serialize.Object2Bytes(jobget);
-
-			StaffPO po;
-			dbh = new DBHelper();
-			sql = "select id,name,job,organization from StaffPO where job=? and name like ?";
-			pst = dbh.prepare(sql);
-
-			pst.setBytes(1, jobbyte);
-			pst.setString(2, "%" + name + "%"); // 模糊查找时两边加%
-			ret = pst.executeQuery();
-			while (ret.next()) {
-				byte[] jobbytes = ret.getBytes(3);
-				Job job = (Job) Serialize.Bytes2Object(jobbytes);
-				byte[] organizationbytes=ret.getBytes(4);
-				OrganizationPO organization=(OrganizationPO)Serialize.Bytes2Object(organizationbytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,organization);
-				list.add(po);
-			}
-			ret.close();
-			dbh.close();// 关闭连接
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static List<StaffPO> fuzzySearchbyorganization(OrganizationPO organization ) {
-		List<StaffPO> list = new ArrayList<StaffPO>();
-		try {
-			byte[] organizationbyte = Serialize.Object2Bytes(organization);
-
-			StaffPO po;
-			dbh = new DBHelper();
-			sql = "select id,name,job from StaffPO where organization=?";
-			pst = dbh.prepare(sql);
-
-			pst.setBytes(1, organizationbyte);
-			ret = pst.executeQuery();
-			while (ret.next()) {
-				byte[] jobbytes = ret.getBytes(3);
-				Job job = (Job) Serialize.Bytes2Object(jobbytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,organization);
+				byte[] typebytes=ret.getBytes(6);
+				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
+				byte[] citybytes=ret.getBytes(7);
+				City city=(City)Serialize.Bytes2Object(citybytes);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
 				list.add(po);
 			}
 			ret.close();
@@ -251,17 +260,19 @@ public class StaffDB {
 	public static StaffPO search(long id){
 		StaffPO po=null;
 		dbh=new DBHelper();
-		sql="select id,name,job,organization from StaffPO where id = ?";
+		sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where id=?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setLong(1,id);	
 			ret=pst.executeQuery();
 			if(ret.next()){
-				byte[] jobbytes=ret.getBytes(3);
-				Job job=(Job) Serialize.Bytes2Object(jobbytes);
-				byte[] organizationbytes=ret.getBytes(4);
-				OrganizationPO organization=(OrganizationPO)Serialize.Bytes2Object(organizationbytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,organization);
+				byte[] jobbytes = ret.getBytes(3);
+				Job job = (Job) Serialize.Bytes2Object(jobbytes);
+				byte[] typebytes=ret.getBytes(6);
+				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
+				byte[] citybytes=ret.getBytes(7);
+				City city=(City)Serialize.Bytes2Object(citybytes);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
 			}
 			ret.close();
 			dbh.close();// 关闭连接

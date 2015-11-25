@@ -2,12 +2,9 @@ package data.database;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
 import po.City;
 import po.Job;
-import po.LoginPO;
-import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
 import po.StaffPO;
@@ -25,13 +22,13 @@ public class UserDB {
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,staff blob)";
+			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,job blob,organizationname text,organizationcode text,organizationtype blob,city blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			UserPO po = new UserPO(1, "sunchao", "123", new StaffPO(2,"sunchao",Job.manager,null) ); // 此处的id没用，以后应该设个初始值如10000
+			UserPO po = new UserPO(1, "sunchao","123",Job.manager,null,null,null,null); // 此处的id没用，以后应该设个初始值如10000
 
 			ResultMessage result;
-			result = write(po.getUsername(), po.getPassword(),po.getStaff());
+			result = write(po);
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
@@ -42,16 +39,22 @@ public class UserDB {
 		}
 	}
 
-	public static ResultMessage write(String username, String password, StaffPO staff) {
+	public static ResultMessage write(UserPO user) {
 		try {
-			byte[] staffbytes = Serialize.Object2Bytes(staff);
+			byte[] jobbytes = Serialize.Object2Bytes(user.getJob());
+			byte[] typebytes= Serialize.Object2Bytes(user.getOrganizationtype());
+			byte[] citybytes=Serialize.Object2Bytes(user.getCity());
 			dbh = new DBHelper();
-			sql = "insert into UserPO values(null,?,?,?)";
+			sql = "insert into UserPO values(null,?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 
-			pst.setString(1, username);
-			pst.setString(2, password);
-			pst.setBytes(3, staffbytes);
+			pst.setString(1, user.getUsername());
+			pst.setString(2, user.getPassword());
+			pst.setBytes(3, jobbytes);
+			pst.setString(4, user.getOrganizationname());
+			pst.setString(5, user.getOrganizationcode());
+			pst.setBytes(6, typebytes);
+			pst.setBytes(7, citybytes);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -67,18 +70,13 @@ public class UserDB {
 
 	}
 	
-	public static ResultMessage deletebyStaff(List<StaffPO> stafflist){
+	public static ResultMessage deletebyStaff(String organizationcode){
 		dbh=new DBHelper();
-		sql="delete from UserPO where staff=?";
+		sql="delete from UserPO where organizationcode=?";
 		pst=dbh.prepare(sql);
 		try{
-			int result=0;
-			for(int i=0;i<stafflist.size();i++){
-				byte[] staffbytes=Serialize.Object2Bytes(stafflist.get(i));
-				pst.setBytes(1,staffbytes);
-				if(pst.executeUpdate()>0)
-				result=1;
-			}
+			pst.setString(1, organizationcode);
+			int result=pst.executeUpdate();
 			if(result!=0){
 				return ResultMessage.success;
 			}
@@ -87,10 +85,10 @@ public class UserDB {
 		}
 		return ResultMessage.failure;
 	}
-	public static LoginPO check(long id, String password) {
-		LoginPO po=null;
+	public static UserPO check(long id, String password) {
+		UserPO po=null;
 		dbh = new DBHelper();
-		sql = "select username,staff from UserPO where id=? and password=?";
+		sql = "select username,job,organizationname,organizationcode,organizationtype,city from UserPO where id=? and password=?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setLong(1, id);
@@ -98,9 +96,13 @@ public class UserDB {
 			ret = pst.executeQuery();
 			if (ret.next()) {
 				String username = ret.getString(1);
-				byte[] staffbytes = ret.getBytes(2);
-				StaffPO staff = (StaffPO) Serialize.Bytes2Object(staffbytes);
-				po = new LoginPO(username, staff);
+				byte[] jobbytes = ret.getBytes(2);
+				Job job = (Job) Serialize.Bytes2Object(jobbytes);
+				byte[] typebytes=ret.getBytes(5);
+				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
+				byte[] citybytes=ret.getBytes(6);
+				City city=(City)Serialize.Bytes2Object(citybytes);
+				po = new UserPO(id,username,password,job,ret.getString(3),ret.getString(4),type,city);
 				ret.close();
 				dbh.close();// 关闭连接
 				return po;
@@ -118,7 +120,8 @@ public class UserDB {
 
 	public static void main(String[] args) {
 		initialize();
-		write("a","1234",new StaffPO(1,"sunchao",Job.transfercentersalesman,new OrganizationPO("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai)));
+		write(new UserPO(2,"sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai));
+		check(1,"123");
 	}
 
 }

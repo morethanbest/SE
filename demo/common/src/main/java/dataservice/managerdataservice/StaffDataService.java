@@ -17,11 +17,11 @@ public interface StaffDataService extends Remote {
 	
 	public StaffPO  findStaff(long id)throws RemoteException;
 	
-	public List<StaffPO> fuzzyfindStaff(String name)throws RemoteException;
+	public List<StaffPO> fuzzyfindbyorganization(String organizationcode)throws RemoteException;
 	
 	public List<StaffPO> fuzzyfindbyjob(Job job)throws RemoteException;
 	
-	public List<StaffPO> fuzzyfindbyboth(String name,Job job)throws RemoteException;
+	public List<StaffPO> fuzzyfindbyboth(String organizationcode,Job job)throws RemoteException;
 	
 	public long getLastId()throws RemoteException;
 }

@@ -61,7 +61,7 @@ public class OrganizationDB {
 	public static ResultMessage delete(String organizationcode){
 		OrganizationPO organization=search(organizationcode);
 		if(organization!=null)
-			StaffDB.deletebyorganization(organization);
+			StaffDB.deletebyorganization(organizationcode);
 		dbh=new DBHelper();
 		sql="delete from OrganizationPO where organizationcode=?";
 		pst=dbh.prepare(sql);
