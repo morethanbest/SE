@@ -2,23 +2,26 @@ package businesslogic.managerbl.OrganizationPack;
 
 import dataservice.managerdataservice.OrganizationDataService;
 import init.RMIHelper;
+import po.City;
 import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
 
 public class RevOrganization {
-	long id;
 	String name;
+	String organizationcode;
 	Organizationtype type;
-	public void setRevInfo(Long id, String name,Organizationtype type){
-		this.id=id;
-		this.type=type;
+	City city;
+	public void setRevInfo(String name, String organizationcode, Organizationtype type, City city){
 		this.name=name;
+		this.organizationcode=organizationcode;
+		this.type=type;
+		this.city=city;
 	}
 	
 	public ResultMessage rev(){
 		OrganizationDataService organization=RMIHelper.getOrgdata();
-		OrganizationPO newpo=new OrganizationPO(id,name,type);
+		OrganizationPO newpo=new OrganizationPO(name, organizationcode, type, city);
 		ResultMessage result;
 		try {
 			result = organization.updateOrganization(newpo);
