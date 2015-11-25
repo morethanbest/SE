@@ -27,12 +27,12 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 	}
 
 	@Override
-	public ResultMessage addArrivalForm(ArrivalPO po) throws RemoteException {
+	 public ResultMessage addArrivalForm(ArrivalPO po) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public long findLastID() throws RemoteException {
+		 public long findLastID() throws RemoteException {
 		return 0;
 	}
 }

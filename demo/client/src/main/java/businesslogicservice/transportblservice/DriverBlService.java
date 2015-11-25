@@ -14,11 +14,13 @@ public interface DriverBlService {
 	
 	public ResultMessage revDriver (DriverVO vo)throws RemoteException;
 	
-	public DriverVO getDriverbyDN (String driverNumber)throws RemoteException;
+	public DriverVO getDriverbyDN (String driverNumber,String orgcode)throws RemoteException;
 	
-	public List<DriverVO> getDriverbyName (String name)throws RemoteException;
+	public List<DriverVO> getDriverbyName (String name,String orgcode)throws RemoteException;
 
 	public long getid() throws RemoteException;
+
+
 
 	
 	

@@ -38,23 +38,24 @@ public class VehicleController implements VehicleBlService{
 	}
 
 	@Override
-	public VehicleVO getVehiclebyVN(String vehicleCode)
+	public VehicleVO getVehiclebyVN(String vehicleCode,String orgcode)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 
 		FindVehicle find=new FindVehicle();
 		Vehicle ve=new Vehicle(find);
-		VehicleVO vogot=ve.getVehiclebyVN(vehicleCode);
+		VehicleVO vogot=ve.getVehiclebyVN(vehicleCode,orgcode);
 		return vogot;
 	}
 
 	@Override
-	public VehicleVO getVehiclebyPN(String plateNumber) throws RemoteException {
+	public VehicleVO getVehiclebyPN(String plateNumber,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
 
 		FindVehicle find=new FindVehicle();
 		Vehicle ve=new Vehicle(find);
-		VehicleVO  vogot=ve.getVehiclebyPN(plateNumber);
+
+		VehicleVO  vogot=ve.getVehiclebyPN(plateNumber,orgcode);
 		return vogot;
 	}
 

@@ -57,16 +57,16 @@ public class Vehicle {
 	}
 
 	
-	public VehicleVO getVehiclebyVN(String vehicleNumber) throws RemoteException {
+	public VehicleVO getVehiclebyVN(String vehicleNumber,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		VehicleVO vo=find.getvehiclebyvn(vehicleNumber);
+		VehicleVO vo=find.getvehiclebyvn(vehicleNumber,orgcode);
 		return vo;
 	}
 
 	
-	public VehicleVO getVehiclebyPN(String plateNumber) throws RemoteException {
+	public VehicleVO getVehiclebyPN(String plateNumber,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		VehicleVO vo=find.getvehiclebypn(plateNumber);
+		VehicleVO vo=find.getvehiclebypn(plateNumber,orgcode);
 		return vo;
 	}
 

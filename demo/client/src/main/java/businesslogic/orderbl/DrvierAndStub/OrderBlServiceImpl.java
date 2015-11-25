@@ -7,7 +7,7 @@ import po.LogisticsPO;
 import po.OrderPO;
 import vo.OrderFareVO;
 import vo.OrderVO;
-import vo.ResultMessage;
+import po.ResultMessage;
 import businesslogicservice.orderblservice.OrderBlService;
 import dataservice.orderdataservice.LogisticsDataService;
 import dataservice.orderdataservice.OrderFormDataService;
@@ -39,6 +39,11 @@ public class OrderBlServiceImpl implements OrderBlService {
 	public double orderFare(OrderFareVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String getOrdercode() {
+		return null;
 	}
 
 }

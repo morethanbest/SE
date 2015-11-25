@@ -11,9 +11,32 @@ import java.util.List;
 
 public class FindDriver {
 
+
+	/*
+	用于判断司机是否为所查营业厅的司机
+	 */
+	public boolean wheAt(String driverNumber, String orgcode){
+		long orgcodelen=orgcode.length();
+		boolean whe=true;
+		for(int i=0;i<=orgcodelen-1;i++){
+			if(!driverNumber.substring(i,i+1).equals(orgcode.substring(i,i+1))){
+				whe=false;
+				break;
+			}
+		}
+		return whe;
+	}
+
 	
-	
-	public DriverVO getdriverbynum(String driverNumber){
+
+	public DriverVO getdriverbynum(String driverNumber,String orgcode){
+
+		if(wheAt(driverNumber, orgcode)==false){
+			return null;
+		}
+
+
+
 		DriversDataService dataserv= RMIHelper.getDriverdata();
 		DriverVO vo=null;
 		DriversPO po=null;
@@ -35,7 +58,7 @@ public class FindDriver {
 		return vo;
 	}
 	
-	public List<DriverVO> getdriverbyname(String name){
+	public List<DriverVO> getdriverbyname(String name,String orgcode){
 		List<DriverVO> list=new ArrayList<DriverVO>();
 		DriversDataService dataserv=RMIHelper.getDriverdata();
 		List<DriversPO> polist=new ArrayList<DriversPO>();
@@ -50,8 +73,11 @@ public class FindDriver {
 				String drivergender=polist.get(i).getDrivergender();
 				long timelimit=polist.get(i).getTimelimit();
 
-				DriverVO newvo=new DriverVO(drivercode,drivername,birthtime,identifiercode,cellphone,drivergender,timelimit);
-				list.add(newvo);
+				if(wheAt(drivercode,orgcode)==true) {
+					DriverVO newvo = new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
+
+					list.add(newvo);
+				}
 			}
 		} catch (RemoteException e) {
 			System.out.println("Find Driver By Name Failed!!!");

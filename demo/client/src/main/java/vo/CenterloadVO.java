@@ -2,9 +2,11 @@ package vo;
 
 import java.util.List;
 
+import po.Formstate;
 import po.Hall;
 
 public class CenterloadVO {
+	long id;
 	long loadtime;
 	String motorcode;
 	Hall destination;
@@ -12,8 +14,9 @@ public class CenterloadVO {
 	String supervisor;
 	String supercargo;
 	List<String> allbarcode;
+	Formstate documentstate;
 	public CenterloadVO(long loadtime, String motorcode, Hall destination, String vehiclecode, String supervisor,
-			String supercargo, List<String> allbarcode) {
+			String supercargo, List<String> allbarcode,Formstate documentstate) {
 		this.loadtime = loadtime;
 		this.motorcode = motorcode;
 		this.destination = destination;
@@ -21,6 +24,7 @@ public class CenterloadVO {
 		this.supervisor = supervisor;
 		this.supercargo = supercargo;
 		this.allbarcode = allbarcode;
+		this.documentstate=documentstate;
 	}
 
 
@@ -45,5 +49,7 @@ public class CenterloadVO {
 	public List<String> getAllbarcode() {
 		return allbarcode;
 	}
-	
+	public Formstate GETFormstate(){
+		return documentstate;
+	}
 }

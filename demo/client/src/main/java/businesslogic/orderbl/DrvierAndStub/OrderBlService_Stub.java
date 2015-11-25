@@ -6,7 +6,7 @@ import businesslogicservice.orderblservice.OrderBlService;
 import vo.OrderFareVO;
 import vo.OrderVO;
 import vo.ReceptionVO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class OrderBlService_Stub implements OrderBlService {
 
@@ -20,6 +20,11 @@ public class OrderBlService_Stub implements OrderBlService {
 	public double orderFare(OrderFareVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String getOrdercode() {
+		return null;
 	}
 
 

@@ -52,12 +52,12 @@ public class DriverController implements DriverBlService{
 	
 	
 	@Override
-	public DriverVO getDriverbyDN(String driverNumber) throws RemoteException {
+	public DriverVO getDriverbyDN(String driverNumber,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
 
 		FindDriver fd=new FindDriver();
 		Driver driver=new Driver(fd);
-		DriverVO vogot=driver.getDriverbyDN(driverNumber);
+		DriverVO vogot=driver.getDriverbyDN(driverNumber,orgcode);
 		return vogot;
 	}
 
@@ -66,13 +66,13 @@ public class DriverController implements DriverBlService{
 	
 	
 	@Override
-	public List<DriverVO> getDriverbyName(String name) throws RemoteException {
+	public List<DriverVO> getDriverbyName(String name,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 
 		FindDriver fd=new FindDriver();
 		Driver driver=new Driver(fd);
-		List<DriverVO> list=driver.getDriverbyName(name);
+		List<DriverVO> list=driver.getDriverbyName(name,orgcode);
 		return list;
 	}
 
@@ -82,5 +82,7 @@ public class DriverController implements DriverBlService{
 		long id=idgetter.getid();
 		return id;
 	}
+
+
 
 }

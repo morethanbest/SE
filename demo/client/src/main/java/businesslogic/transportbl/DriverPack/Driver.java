@@ -87,18 +87,17 @@ public class Driver {
 	}
 
 	
-	public DriverVO getDriverbyDN(String driverNumber) throws RemoteException {
+	public DriverVO getDriverbyDN(String driverNumber,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		DriverVO vo=findd.getdriverbynum(driverNumber);
+		DriverVO vo=findd.getdriverbynum(driverNumber,orgcode);
 		return vo;
 	}
 
 	
-	public List<DriverVO> getDriverbyName(String name) throws RemoteException {
+	public List<DriverVO> getDriverbyName(String name,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		List<DriverVO> list=findd.getdriverbyname(name);
-		return list
-				;
+		List<DriverVO> list=findd.getdriverbyname(name,orgcode);
+		return list;
 	}
 
 }

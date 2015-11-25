@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import po.LogisticsPO;
 import po.OrderPO;
 import vo.ReceptionVO;
-import vo.ResultMessage;
+import po.ResultMessage;
 import businesslogicservice.orderblservice.ReceptionBlService;
 import dataservice.orderdataservice.LogisticsDataService;
 import dataservice.orderdataservice.OrderFormDataService;

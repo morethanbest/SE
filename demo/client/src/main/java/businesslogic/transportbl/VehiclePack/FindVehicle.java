@@ -8,12 +8,25 @@ import vo.VehicleVO;
 import java.rmi.RemoteException;
 
 public class FindVehicle {
-
+	public boolean wheAt (String vehicleNumber,String orgcode){
+		long orgcodelen=orgcode.length();
+		boolean whe=true;
+		for(int i=0;i<=orgcodelen-1;i++){
+			if(!vehicleNumber.substring(i,i+1).equals(orgcode.substring(i,i+1))){
+				whe=false;
+				break;
+			}
+		}
+		return whe;
+	}
 
 
 	
 	
-	public VehicleVO getvehiclebyvn(String vehicleNumber){
+	public VehicleVO getvehiclebyvn(String vehicleNumber,String orgcode){
+		if(wheAt(vehicleNumber,orgcode)==false){
+			return null;
+		}
 		VehicleDataService dataserv= RMIHelper.getVehicledata();
 		VehicleVO vo=null;
 		try {
@@ -30,7 +43,7 @@ public class FindVehicle {
 		return vo;
 	}
 	
-	public VehicleVO getvehiclebypn(String plateNumber){
+	public VehicleVO getvehiclebypn(String plateNumber,String orgcode){
 		VehicleDataService dataserv=RMIHelper.getVehicledata();
 		VehicleVO vo=null;
 		try {
@@ -38,7 +51,10 @@ public class FindVehicle {
 			String vehiclecode=po.getVehiclecode();
 			String vehiclenum=po.getVehiclenum();
 			long extendtime=po.getExtendtime();
-			vo=new VehicleVO(vehiclecode,vehiclenum,extendtime);
+
+			if(wheAt(vehiclecode,orgcode)==true) {
+				vo = new VehicleVO(vehiclecode, vehiclenum, extendtime);
+			}
 		} catch (RemoteException e) {
 			System.out.println("Find Vehicle By PlateNumber Failed!!!");
 			e.printStackTrace();
