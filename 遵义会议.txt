@@ -1,0 +1,34 @@
+机构界面：OrgType机构类型 （选择 查询）         City  城市（选择 查询）     OrgName 机构名字（只能显示和修改）        OrgCode编号（自动生成）
+
+
+
+人员界面：Staffname（人员名字）   id（用于（查询删除））    [ OrgType   City  OrgCode   OrgName]      Job职业
+
+
+
+
+登录：  id      username      password       job   City     OrgType     OrgCode
+OrgName
+
+
+id5：能够根据中转单编号得到list订单号
+
+
+司机不属于staff  但是算工资          监装员 押运员不属于staff 也不发工资
+
+货柜号是string
+
+
+编号+日期+XXXXX之类的  XXXXX每天归零   传给逻辑层编号和日期  再逻辑层向上传入presentation层
+
+每入库一个  检查是否库存报警
+
+结算管理
+账户其实关系结算管理
+
+
+
+
+
+
+
