@@ -5,6 +5,8 @@ import init.RMIHelper;
 import po.DriversPO;
 import po.ResultMessage;
 
+import java.rmi.RemoteException;
+
 public class DelDriver {
 	String drivercode;
 	String drivername;
@@ -28,7 +30,14 @@ public class DelDriver {
 		DriversPO po=new DriversPO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
 		ResultMessage result=ResultMessage.success;
 		DriversDataService dataserv= RMIHelper.getDriverdata();
-		result=dataserv.deleteDriver();
+
+		try {
+			result=dataserv.deleteDriver(po);
+		} catch (Exception e) {
+			System.out.println("Delete Driver Failed!!!");
+			result=ResultMessage.failure;
+			e.printStackTrace();
+		}
 		return result;
 	}
 

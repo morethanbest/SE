@@ -30,7 +30,19 @@ public class VehicleData extends UnicastRemoteObject implements VehicleDataServi
 	}
 
 	@Override
-	public VehiclesPO findVehicle(String identity) throws RemoteException {
+	public VehiclesPO findVehicleBycode(String identity) throws RemoteException {
 		return null;
 	}
+
+	@Override
+	public VehiclesPO findVehicleByPlateNumber(String plateNumber) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public long getCurrentID() throws RemoteException {
+		return 0;
+	}
+
+
 }

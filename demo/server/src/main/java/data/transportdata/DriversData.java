@@ -7,6 +7,7 @@ import po.ResultMessage;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Driver;
+import java.util.List;
 
 public class DriversData extends UnicastRemoteObject implements DriversDataService{
 
@@ -31,7 +32,19 @@ public class DriversData extends UnicastRemoteObject implements DriversDataServi
 	}
 
 	@Override
-	public DriversPO findDriver(String identity) throws RemoteException {
+	public DriversPO findDriverBynum(String identity) throws RemoteException {
 		return null;
 	}
+
+	@Override
+	public List<DriversPO> findDriverByname(String identity) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public long getCurrentID() throws RemoteException {
+		return 0;
+	}
+
+
 }

@@ -13,5 +13,9 @@ public interface VehicleDataService extends Remote {
 	
 	public ResultMessage updateVehicle(VehiclesPO po)throws RemoteException;
 	
-	public VehiclesPO findVehicle(String identity)throws RemoteException;
+	public VehiclesPO findVehicleBycode(String identity)throws RemoteException;
+
+	public VehiclesPO findVehicleByPlateNumber(String plateNumber) throws RemoteException;
+
+	public long getCurrentID() throws RemoteException;
 }

@@ -2,24 +2,24 @@ package businesslogic.transportbl.VehiclePack;
 
 import java.rmi.RemoteException;
 
-import vo.ResultMessage;
+import po.ResultMessage;
 import vo.VehicleVO;
 
 public class Vehicle {
-	AddVehicleMock add;
-	DelVehicleMock del;
-	RevVehicleMock rev;
-	FindVehicleMock find;
-	public Vehicle(AddVehicleMock add){
+	AddVehicle add;
+	DelVehicle del;
+	RevVehicle rev;
+	FindVehicle find;
+	public Vehicle(AddVehicle add){
 		this.add=add;
 	}
-	public Vehicle(DelVehicleMock del){
+	public Vehicle(DelVehicle del){
 		this.del=del;
 	}
-	public Vehicle(RevVehicleMock rev){
+	public Vehicle(RevVehicle rev){
 		this.rev=rev;
 	}
-	public Vehicle(FindVehicleMock find){
+	public Vehicle(FindVehicle find){
 		this.find=find;
 	}
 

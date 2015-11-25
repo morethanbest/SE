@@ -1,6 +1,7 @@
 package businesslogicservice.transportblservice;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.ResultMessage;
 import vo.DriverVO;
@@ -15,7 +16,10 @@ public interface DriverBlService {
 	
 	public DriverVO getDriverbyDN (String driverNumber)throws RemoteException;
 	
-	public DriverVO getDriverbyName (String name)throws RemoteException;
+	public List<DriverVO> getDriverbyName (String name)throws RemoteException;
+
+	public long getid() throws RemoteException;
+
 	
 	
 }

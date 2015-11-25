@@ -1,6 +1,7 @@
 package businesslogic.transportbl.DriverPack;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import vo.DriverVO;
 import po.ResultMessage;
@@ -10,9 +11,12 @@ public class Driver {
 	DelDriver deld;
 	RevDriver revd;
 	FindDriver findd;
+
+
 	public Driver(AddDriver addd) {
 		// TODO Auto-generated constructor stub
 		this.addd=addd;
+
 	}
 	public Driver(DelDriver deld){
 		this.deld=deld;
@@ -23,7 +27,7 @@ public class Driver {
 	public Driver(FindDriver findd){
 		this.findd=findd;
 	}
-	
+
 
 	
 	
@@ -40,6 +44,8 @@ public class Driver {
 		String cellphone=vo.getCellphone();
 		String drivergender=vo.getDrivergender();
 		long timelimit=vo.getTimelimit();
+
+
 		
 		addd.setAddDriver(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
 		ResultMessage result=addd.passadd();
@@ -88,10 +94,11 @@ public class Driver {
 	}
 
 	
-	public DriverVO getDriverbyName(String name) throws RemoteException {
+	public List<DriverVO> getDriverbyName(String name) throws RemoteException {
 		// TODO Auto-generated method stub
-		DriverVO vo=findd.getdriverbyname(name);
-		return vo;
+		List<DriverVO> list=findd.getdriverbyname(name);
+		return list
+				;
 	}
 
 }

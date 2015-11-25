@@ -2,7 +2,7 @@ package businesslogic.transportbl.VehiclePack;
 
 import java.rmi.RemoteException;
 
-import vo.ResultMessage;
+import po.ResultMessage;
 import vo.VehicleVO;
 import businesslogicservice.transportblservice.VehicleBlService;
 
@@ -13,7 +13,7 @@ public class VehicleController implements VehicleBlService{
 	@Override
 	public ResultMessage addVehicle(VehicleVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		AddVehicleMock add=new AddVehicleMock();
+		AddVehicle add=new AddVehicle();
 		Vehicle ve=new Vehicle(add);
 		ResultMessage result=ve.addVehicle(vo);
 		return result;
@@ -22,7 +22,7 @@ public class VehicleController implements VehicleBlService{
 	@Override
 	public ResultMessage delVehicle(VehicleVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		DelVehicleMock del=new DelVehicleMock();
+		DelVehicle del=new DelVehicle();
 		Vehicle ve=new Vehicle(del);
 		ResultMessage result=ve.delVehicle(vo);
 		return result;
@@ -31,7 +31,7 @@ public class VehicleController implements VehicleBlService{
 	@Override
 	public ResultMessage revVehicle(VehicleVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		RevVehicleMock rev=new RevVehicleMock();
+		RevVehicle rev=new RevVehicle();
 		Vehicle ve=new Vehicle(rev);
 		ResultMessage result=ve.revVehicle(vo);
 		return result;
@@ -41,8 +41,8 @@ public class VehicleController implements VehicleBlService{
 	public VehicleVO getVehiclebyVN(String vehicleCode)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		VehicleVO vo=new VehicleVO(vehicleCode,"1",1);
-		FindVehicleMock find=new FindVehicleMock(vo);
+
+		FindVehicle find=new FindVehicle();
 		Vehicle ve=new Vehicle(find);
 		VehicleVO vogot=ve.getVehiclebyVN(vehicleCode);
 		return vogot;
@@ -51,11 +51,18 @@ public class VehicleController implements VehicleBlService{
 	@Override
 	public VehicleVO getVehiclebyPN(String plateNumber) throws RemoteException {
 		// TODO Auto-generated method stub
-		VehicleVO vo=new VehicleVO("1",plateNumber,1);
-		FindVehicleMock find=new FindVehicleMock(vo);
+
+		FindVehicle find=new FindVehicle();
 		Vehicle ve=new Vehicle(find);
 		VehicleVO  vogot=ve.getVehiclebyPN(plateNumber);
 		return vogot;
+	}
+
+	@Override
+	public long getid() throws RemoteException {
+		IdGet idgetter=new IdGet();
+		long id=idgetter.getid();
+		return id;
 	}
 
 }

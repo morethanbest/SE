@@ -33,7 +33,7 @@ public class RevDriver {
 		try {
 			result = dataserv.updateDriver(po);
 		} catch (Exception e) {
-			System.out.println("Revise driver failed!!!");
+			System.out.println("Revise Driver failed!!!");
 			result=ResultMessage.failure;
 			e.printStackTrace();
 		}

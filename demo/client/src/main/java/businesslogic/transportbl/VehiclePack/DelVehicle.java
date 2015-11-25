@@ -1,9 +1,13 @@
 package businesslogic.transportbl.VehiclePack;
 
+import dataservice.transportdataservice.VehicleDataService;
+import init.RMIHelper;
 import po.VehiclesPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
-public class DelVehicleMock {
+import java.rmi.RemoteException;
+
+public class DelVehicle {
 
 	String vehiclecode;
 	String vehiclenum;
@@ -20,7 +24,15 @@ public class DelVehicleMock {
 	
 	public ResultMessage passdel(){
 		VehiclesPO po=new VehiclesPO(vehiclecode,vehiclenum,extendtime);
-		ResultMessage result=ResultMessage.success;
+		VehicleDataService dataserv= RMIHelper.getVehicledata();
+		ResultMessage result= null;
+		try {
+			result = dataserv.deleteVehicle(po);
+		} catch (RemoteException e) {
+			System.out.println("Delete Vehicle Failed!!!");
+			result=ResultMessage.failure;
+			e.printStackTrace();
+		}
 		return result;
 	}
 

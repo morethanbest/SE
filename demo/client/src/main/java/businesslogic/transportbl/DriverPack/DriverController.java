@@ -1,6 +1,7 @@
 package businesslogic.transportbl.DriverPack;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import vo.DriverVO;
 import po.ResultMessage;
@@ -13,6 +14,7 @@ public class DriverController implements DriverBlService{
 	@Override
 	public ResultMessage addDriver(DriverVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
+
 		AddDriver add=new AddDriver();
 		Driver driver=new Driver(add);
 		ResultMessage result=driver.addDriver(vo);
@@ -52,8 +54,8 @@ public class DriverController implements DriverBlService{
 	@Override
 	public DriverVO getDriverbyDN(String driverNumber) throws RemoteException {
 		// TODO Auto-generated method stub
-		DriverVO vo=new DriverVO(driverNumber,"abc",1,"321459193621","13214","32153",20150322);
-		FindDriver fd=new FindDriver(vo);
+
+		FindDriver fd=new FindDriver();
 		Driver driver=new Driver(fd);
 		DriverVO vogot=driver.getDriverbyDN(driverNumber);
 		return vogot;
@@ -64,14 +66,21 @@ public class DriverController implements DriverBlService{
 	
 	
 	@Override
-	public DriverVO getDriverbyName(String name) throws RemoteException {
+	public List<DriverVO> getDriverbyName(String name) throws RemoteException {
 		// TODO Auto-generated method stub
 		
-		DriverVO vo=new DriverVO("1",name,1,"321459193621","13214","32153",20150322);
-		FindDriver fd=new FindDriver(vo);
+
+		FindDriver fd=new FindDriver();
 		Driver driver=new Driver(fd);
-		DriverVO vogot=driver.getDriverbyName(name);
-		return vogot;
+		List<DriverVO> list=driver.getDriverbyName(name);
+		return list;
+	}
+
+	@Override
+	public long getid() throws RemoteException {
+		DriverId idgetter=new DriverId();
+		long id=idgetter.getid();
+		return id;
 	}
 
 }

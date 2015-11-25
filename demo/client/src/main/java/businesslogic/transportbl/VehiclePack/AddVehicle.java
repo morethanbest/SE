@@ -1,9 +1,13 @@
 package businesslogic.transportbl.VehiclePack;
 
+import dataservice.transportdataservice.VehicleDataService;
+import init.RMIHelper;
 import po.VehiclesPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
-public class AddVehicleMock {
+import java.rmi.RemoteException;
+
+public class AddVehicle {
 	String vehiclecode;
 	String vehiclenum;
 	long extendtime;
@@ -19,7 +23,16 @@ public class AddVehicleMock {
 	
 	public ResultMessage passadd(){
 		VehiclesPO po=new VehiclesPO(vehiclecode,vehiclenum,extendtime);
-		ResultMessage result=ResultMessage.success;
+		VehicleDataService dataserv= RMIHelper.getVehicledata();
+
+		ResultMessage result= null;
+		try {
+			result = dataserv.insertVehicle(po);
+		} catch (RemoteException e) {
+			System.out.println("Add Vehicle Failed!!!");
+			result=ResultMessage.failure;
+			e.printStackTrace();
+		}
 		return result;
 	}
 

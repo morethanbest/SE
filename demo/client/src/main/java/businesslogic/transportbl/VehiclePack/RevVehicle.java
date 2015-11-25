@@ -1,9 +1,13 @@
 package businesslogic.transportbl.VehiclePack;
 
+import dataservice.transportdataservice.VehicleDataService;
+import init.RMIHelper;
 import po.VehiclesPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
-public class RevVehicleMock {
+import java.rmi.RemoteException;
+
+public class RevVehicle {
 
 	String vehiclecode;
 	String vehiclenum;
@@ -20,7 +24,15 @@ public class RevVehicleMock {
 	
 	public ResultMessage passrev(){
 		VehiclesPO po=new VehiclesPO(vehiclecode,vehiclenum,extendtime);
-		ResultMessage result=ResultMessage.success;
+		VehicleDataService dataserv= RMIHelper.getVehicledata();
+		ResultMessage result= null;
+		try {
+			result = dataserv.updateVehicle(po);
+		} catch (RemoteException e) {
+			System.out.println("Revise Driver Failed!!!");
+			result=ResultMessage.failure;
+			e.printStackTrace();
+		}
 		return result;
 	}
 
