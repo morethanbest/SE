@@ -37,23 +37,27 @@ public class StaffController implements StaffBlService {
 	}
 
 	@Override
-	public List<StaffVO> getStaffbyName(String name){
+	public List<StaffVO> getStaffbyOrganization(String organizationcode){
 		// TODO Auto-generated method stub
 		FindStaff find=new FindStaff();
 		Staff s=new Staff(find);
-		List<StaffVO> result=s.findStaff(name);
+		List<StaffVO> result=s.findStaffbyOrganization(organizationcode);
 		return result;
 	}
+
+	@Override
 	public List<StaffVO> getStaffbyJob(Job job){
 		FindStaff find=new FindStaff();
 		Staff s=new Staff(find);
 		List<StaffVO> result=s.findStaffbyJob(job);
 		return result;
 	}
-	public List<StaffVO> getStaffbyBoth(String name, Job job){
+
+	@Override
+	public List<StaffVO> getStaffbyBoth(String organizationcode, Job job){
 		FindStaff find=new FindStaff();
 		Staff s=new Staff(find);
-		List<StaffVO> result=s.findStaffbyBoth(name, job);
+		List<StaffVO> result=s.findStaffbyBoth(organizationcode, job);
 		return result;
 	}
 

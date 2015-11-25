@@ -2,7 +2,9 @@ package businesslogic.managerbl.StaffPack;
 
 import java.util.List;
 
+import po.City;
 import po.Job;
+import po.Organizationtype;
 import po.ResultMessage;
 import vo.StaffVO;
 
@@ -26,14 +28,17 @@ public class Staff {
 	
 	public Staff(RevStaff revs){
 		this.revs=revs;
-		
 	}
 	
 	public ResultMessage addStaff(StaffVO vo){
 		long id=vo.getId();
 		String name=vo.getName();
 		Job job=vo.getJob();
-		adds.setAddInfo(id, name, job);
+		String organizationname=vo.getOrganizationname();
+		String organizationcode=vo.getOrganizationcode();
+		Organizationtype organizationtype=vo.getOrganizationtype();
+		City city=vo.getCity();
+		adds.setAddInfo(id, name, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=adds.addStaff();
 		return result;
 		
@@ -46,9 +51,9 @@ public class Staff {
 		return result;
 	}
 	
-	public List<StaffVO> findStaff(String name){
-		finds.setFindInfo(name);
-		List<StaffVO> listvo=finds.fuzzyfindStaff();
+	public List<StaffVO> findStaffbyOrganization(String organizationcode){
+		finds.setFindInfo(organizationcode);
+		List<StaffVO> listvo=finds.fuzzyfindbyorganization();
 		return listvo;
 	}
 	
@@ -58,8 +63,8 @@ public class Staff {
 		return listvo;
 	}
 	
-	public List<StaffVO> findStaffbyBoth(String name,Job job){
-		finds.setFindInfo(name,job);
+	public List<StaffVO> findStaffbyBoth(String organizationcode,Job job){
+		finds.setFindInfo(organizationcode,job);
 		List<StaffVO> listvo=finds.fuzzyfindStaffbyboth();
 		return listvo;
 	}
@@ -68,7 +73,11 @@ public class Staff {
 		long id=vo.getId();
 		String name=vo.getName();
 		Job job=vo.getJob();
-		revs.setRevInfo(id,name, job);
+		String organizationname=vo.getOrganizationname();
+		String organizationcode=vo.getOrganizationcode();
+		Organizationtype organizationtype=vo.getOrganizationtype();
+		City city=vo.getCity();
+		revs.setRevInfo(id, name, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=revs.rev();
 		return result;
 	}

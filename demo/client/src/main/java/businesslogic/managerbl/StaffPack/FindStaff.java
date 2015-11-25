@@ -6,17 +6,19 @@ import java.util.List;
 
 import dataservice.managerdataservice.StaffDataService;
 import init.RMIHelper;
+import po.City;
 import po.Job;
+import po.Organizationtype;
 import po.StaffPO;
 import vo.StaffVO;
 
 public class FindStaff {
 	long id;
-    String name;
+	String organizationcode;
     Job job;
     
-	public void setFindInfo(String name){
-		this.name=name;
+	public void setFindInfo(String organizationcode){
+		this.organizationcode=organizationcode;
 	}
 	public void setFindInfo(long id){
 		this.id=id;
@@ -24,24 +26,28 @@ public class FindStaff {
 	public void setFindInfo(Job job){
 		this.job=job;
 	}
-	public void setFindInfo(String name,Job job){
-		this.name=name;
+	public void setFindInfo(String organizationcode, Job job){
+		this.organizationcode=organizationcode;
 		this.job=job;
 	}
 	
-	public List<StaffVO> fuzzyfindStaff(){
+	public List<StaffVO> fuzzyfindbyorganization(){
 		StaffDataService staff=RMIHelper.getStaffdata();
 		List<StaffPO> listpo;
 		List<StaffVO> listvo;
 		try {
-			listpo = staff.fuzzyfindStaff(name);
+			listpo = staff.fuzzyfindbyorganization(organizationcode);
 			listvo=new ArrayList<StaffVO>();
 			for(int i=0;i<listpo.size();i++){
 				StaffPO po=listpo.get(i);
 				long id=po.getId();
 				String name=po.getName();
 				Job job=po.getJob();
-				StaffVO vo=new StaffVO(id, name, job);
+				String organizationname=po.getOrganizationname();
+				String organizationcode=po.getOrganizationcode();
+				Organizationtype organizationtype=po.getType();
+				City city=po.getCity();
+				StaffVO vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 				listvo.add(vo);
 			}
 		} catch (Exception e) {
@@ -63,7 +69,11 @@ public class FindStaff {
 			}
 			String name=po.getName();
 			Job job=po.getJob();
-			vo=new StaffVO(id, name, job);
+			String organizationname=po.getOrganizationname();
+			String organizationcode=po.getOrganizationcode();
+			Organizationtype organizationtype=po.getType();
+			City city=po.getCity();
+			vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			vo=null;
@@ -84,7 +94,11 @@ public class FindStaff {
 				long id=po.getId();
 				String name=po.getName();
 				Job job=po.getJob();
-				StaffVO vo=new StaffVO(id, name, job);
+				String organizationname=po.getOrganizationname();
+				String organizationcode=po.getOrganizationcode();
+				Organizationtype organizationtype=po.getType();
+				City city=po.getCity();
+				StaffVO vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 				listvo.add(vo);
 			}
 		} catch (RemoteException e) {
@@ -100,14 +114,18 @@ public class FindStaff {
 		List<StaffPO> listpo;
 		List<StaffVO> listvo;
 		try {
-			listpo = staff.fuzzyfindbyboth(name, job);
+			listpo = staff.fuzzyfindbyboth(organizationcode, job);
 			listvo=new ArrayList<StaffVO>();
 			for(int i=0;i<listpo.size();i++){
 				StaffPO po=listpo.get(i);
 				long id=po.getId();
 				String name=po.getName();
 				Job job=po.getJob();
-				StaffVO vo=new StaffVO(id, name, job);
+				String organizationname=po.getOrganizationname();
+				String organizationcode=po.getOrganizationcode();
+				Organizationtype organizationtype=po.getType();
+				City city=po.getCity();
+				StaffVO vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 				listvo.add(vo);
 			}
 		} catch (Exception e) {
