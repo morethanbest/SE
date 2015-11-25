@@ -1,4 +1,4 @@
-package presentation.managerui;
+package presentation.managerui.constant;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +20,7 @@ import presentation.enums.ContstantType;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.TransportTypes;
+import presentation.managerui.ManagerPanel;
 import vo.ConstantsVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
@@ -128,7 +129,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 					constantsBlService.delConstants(new ConstantsVO(cellValue1,
 							cellValue2));
 					refreshList();
-				} catch (ArrayIndexOutOfBoundsException e1) {
+				} catch (ArrayIndexOutOfBoundsException | NullPointerException e1) {
 					managerPanel.setHint("系统提示：未选择删除项！");
 				}
 			}
@@ -151,7 +152,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnCount(2);
-		tableModel.setRowCount(11);
+		tableModel.setRowCount(10);
 
 		refreshList();
 
@@ -225,7 +226,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 
 	}
 
-	void refreshList() {
+	public void refreshList() {
 		if (select_1.getSelectedItem() == null
 				|| (select_2.getSelectedItem() == null && type
 						.getSelectedItem().equals(

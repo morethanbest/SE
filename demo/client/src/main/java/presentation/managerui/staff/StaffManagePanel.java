@@ -1,7 +1,8 @@
-package presentation.managerui;
+package presentation.managerui.staff;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,8 +11,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import presentation.enums.StaffType;
+import vo.StaffVO;
+import businesslogic.managerbl.StaffPack.StaffController;
+import businesslogicservice.managerblservice.StaffBlService;
 
 public class StaffManagePanel extends JPanel implements ActionListener{
 	private JTextField nameField;
@@ -19,9 +24,10 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 	JButton btnSearch;
 	JButton btnAdd;
 	JComboBox<String> staffSelect;
-	JButton btnNewButton;
-	JButton btnNewButton_1;
-	
+	JButton btnRevise;
+	JButton btnDelete;
+	private List<StaffVO> list;
+	private StaffBlService staffBlService;
 	
 	
 	/**
@@ -29,6 +35,8 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 	 */
 	public StaffManagePanel() {
 		setLayout(null);
+		
+		staffBlService = new StaffController();
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 49, 954, 8);
@@ -56,21 +64,21 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		add(staffSelect);
 		addPackTypeItems();
 		
-		btnNewButton = new JButton("Revise");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnRevise = new JButton("Revise");
+		btnRevise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(847, 0, 107, 36);
-		add(btnNewButton);
+		btnRevise.setBounds(847, 0, 107, 36);
+		add(btnRevise);
 		
-		btnNewButton_1 = new JButton("Delete");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setBounds(726, 0, 107, 36);
-		add(btnNewButton_1);
+		btnDelete.setBounds(726, 0, 107, 36);
+		add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(14, 70, 926, 337);
@@ -78,6 +86,9 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setColumnCount(2);
+		tableModel.setRowCount(10);
 
 	}
 
@@ -90,7 +101,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(null)){
+		if(e.getSource().equals(btnAdd)){
 			
 		}
 		

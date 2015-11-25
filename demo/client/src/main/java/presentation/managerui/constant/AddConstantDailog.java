@@ -1,4 +1,4 @@
-package presentation.managerui;
+package presentation.managerui.constant;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

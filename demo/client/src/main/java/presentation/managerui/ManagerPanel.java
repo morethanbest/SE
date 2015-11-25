@@ -10,6 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 
+import presentation.managerui.constant.ConstantPanel;
+import presentation.managerui.organization.OrganizationPanel;
+import presentation.managerui.staff.StaffManagePanel;
+
 public class ManagerPanel extends JPanel implements ActionListener {
 	private JPanel panel;
 	private JButton btnNewButton;
@@ -23,6 +27,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private CardLayout card;
 	private StaffManagePanel staff;
 	private ConstantPanel constant;
+	private OrganizationPanel organization;
 	/**
 	 * Create the panel.
 	 */
@@ -72,13 +77,16 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		panel.setLayout(card);
 		
 		//card中添加各种功能面板
+		organization = new OrganizationPanel();
 		staff = new StaffManagePanel();
 		constant = new ConstantPanel(this);
+		panel.add(organization, "organization");
 		panel.add(staff, "staff");
 		panel.add(constant, "constant");
 		
 		hint = new JLabel("");
-		hint.setBounds(24, 508, 383, 32);
+		hint.setBounds(585, 508, 383, 32);
+		hint.setVisible(false);
 		add(hint);
 	}
 
@@ -87,13 +95,27 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		if (e.getSource().equals(btnNewButton_1)) {
 			card.show(panel, "staff");
 			constant.refreshList();
+		}else if (e.getSource().equals(btnNewButton_2)) {
+			card.show(panel, "organization");
 		}else if (e.getSource().equals(btnNewButton_4)) {
 			card.show(panel, "constant");
 		}
 
 	}
 	
-	void setHint(String str){
+	public void setHint(String str){
 		hint.setText(str);
+//		Thread thr = new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				for (int i = 0; i < 11; i++) {
+//					hint.setLocation(985 - i * 40, 508);
+//					Thread.sleep(200);
+//				}
+//				
+//			}
+//		});
+		
 	}
 }
