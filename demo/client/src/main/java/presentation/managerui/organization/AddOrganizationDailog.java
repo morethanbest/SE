@@ -26,13 +26,13 @@ public class AddOrganizationDailog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(29, 31, 172, 31);
-		contentPanel.add(comboBox);
+		JComboBox citySelect = new JComboBox();
+		citySelect.setBounds(29, 31, 172, 31);
+		contentPanel.add(citySelect);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(234, 32, 172, 31);
-		contentPanel.add(comboBox_1);
+		JComboBox orgSelect = new JComboBox();
+		orgSelect.setBounds(234, 32, 172, 31);
+		contentPanel.add(orgSelect);
 		
 		textField = new JTextField();
 		textField.setBounds(234, 132, 172, 31);
@@ -55,4 +55,6 @@ public class AddOrganizationDailog extends JDialog {
 			}
 		}
 	}
+	
+	
 }

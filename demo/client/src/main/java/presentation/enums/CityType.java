@@ -9,6 +9,7 @@ public enum CityType {
 	private City city;
 	private CityType(String name, City city) {
 		this.name = name;
+		this.city = city;
 	}
 
 	public String getName() {

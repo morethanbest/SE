@@ -80,8 +80,8 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		organization = new OrganizationPanel();
 		staff = new StaffManagePanel();
 		constant = new ConstantPanel(this);
-		panel.add(organization, "organization");
 		panel.add(staff, "staff");
+		panel.add(organization, "organization");
 		panel.add(constant, "constant");
 		
 		hint = new JLabel("");
@@ -94,7 +94,6 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnNewButton_1)) {
 			card.show(panel, "staff");
-			constant.refreshList();
 		}else if (e.getSource().equals(btnNewButton_2)) {
 			card.show(panel, "organization");
 		}else if (e.getSource().equals(btnNewButton_4)) {

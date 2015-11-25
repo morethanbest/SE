@@ -25,13 +25,13 @@ import businesslogicservice.managerblservice.OrganizationBlService;
 
 public class OrganizationPanel extends JPanel {
 	private JTable table;
-	JComboBox<String> orgSelect;
-	JComboBox<String> citySelect;
-	JButton btnAdd;
-	JButton btnNewButton;
-	JButton btnNewButton_1;
-	List<OrganizationVO> list;
-	OrganizationBlService organizationBlService;
+	private JComboBox<String> orgSelect;
+	private JComboBox<String> citySelect;
+	private JButton btnAdd;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private List<OrganizationVO> list;
+	private OrganizationBlService organizationBlService;
 	/**
 	 * Create the panel.
 	 */
