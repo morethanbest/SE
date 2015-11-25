@@ -59,6 +59,9 @@ public class OrganizationDB {
 	}
 	
 	public static ResultMessage delete(String organizationcode){
+		OrganizationPO organization=search(organizationcode);
+		if(organization!=null)
+			StaffDB.deletebyorganization(organization);
 		dbh=new DBHelper();
 		sql="delete from OrganizationPO where organizationcode=?";
 		pst=dbh.prepare(sql);
@@ -201,13 +204,13 @@ public class OrganizationDB {
 		return list;
 	}
 
-	public static OrganizationPO search(long id){
+	public static OrganizationPO search(String organizationcode){
 		OrganizationPO po=null;
 		dbh=new DBHelper();
-		sql="select id,name,organizationcode,type,city from OrganizationPO where id = ?";
+		sql="select id,name,organizationcode,type,city from OrganizationPO where organizationcode = ?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setLong(1,id);	
+			pst.setString(1,organizationcode);
 			ret=pst.executeQuery();
 			if(ret.next()){
 				byte[] typebytes=ret.getBytes(4);
@@ -256,7 +259,7 @@ public class OrganizationDB {
 		if(update("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai)==ResultMessage.success){
 			System.out.println("update success");
 		}
-		if(search(1)!=null){
+		if(search("025000")!=null){
 			System.out.println("search success");
 		}
 		if(fuzzySearchbycity(City.Shanghai).size()>0){

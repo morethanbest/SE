@@ -7,46 +7,35 @@ public class UserPO implements Serializable {
 	long id;
 	String username;
 	String password;
-	Job job;
-	Hall hall;
-	public UserPO(long id, String username, String password, Job job,Hall hall) {
+	StaffPO staff;
+	public UserPO(long id, String username, String password, StaffPO staff) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.job=job;
-		this.hall=hall;
-	}
-
-	public Hall getHall() {
-		return hall;
-	}
-
-	public void setHall(Hall hall) {
-		this.hall = hall;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Job getJob() {
-		return job;
-	}
-
-	public void setJob(Job job) {
-		this.job = job;
-	}
-
-	public long getId() {
-		return id;
+		this.staff = staff;
 	}
 	public String getUsername() {
 		return username;
 	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public StaffPO getStaff() {
+		return staff;
+	}
+	public void setStaff(StaffPO staff) {
+		this.staff = staff;
+	}
+	public long getId() {
+		return id;
+	}
+	
 	
 	
 }

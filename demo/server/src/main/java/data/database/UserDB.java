@@ -2,11 +2,15 @@ package data.database;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
-import po.Hall;
+import po.City;
 import po.Job;
 import po.LoginPO;
+import po.OrganizationPO;
+import po.Organizationtype;
 import po.ResultMessage;
+import po.StaffPO;
 import po.UserPO;
 
 public class UserDB {
@@ -21,39 +25,33 @@ public class UserDB {
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,job blob,hall blob)";
+			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,staff blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			UserPO po = new UserPO(1, "sunchao", "123", Job.manager, null); // 此处的id没用，以后应该设个初始值如10000
+			UserPO po = new UserPO(1, "sunchao", "123", new StaffPO(2,"sunchao",Job.manager,null) ); // 此处的id没用，以后应该设个初始值如10000
 
 			ResultMessage result;
-			result = write(po.getUsername(), po.getPassword(), po.getJob(), po.getHall());
+			result = write(po.getUsername(), po.getPassword(),po.getStaff());
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
-			Job job = check(1, "1234").getJob();
-			if (job != Job.visitor) {
-				System.out.println("login Successfully");
-			}
-			ret.close();
+
 			dbh.close();// 关闭连接
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static ResultMessage write(String username, String password, Job job, Hall hall) {
+	public static ResultMessage write(String username, String password, StaffPO staff) {
 		try {
-			byte[] jobbytes = Serialize.Object2Bytes(job);
-			byte[] hallbytes = Serialize.Object2Bytes(hall);
+			byte[] staffbytes = Serialize.Object2Bytes(staff);
 			dbh = new DBHelper();
-			sql = "insert into UserPO values(null,?,?,?,?)";
+			sql = "insert into UserPO values(null,?,?,?)";
 			pst = dbh.prepare(sql);
 
 			pst.setString(1, username);
 			pst.setString(2, password);
-			pst.setBytes(3, jobbytes);
-			pst.setBytes(4, hallbytes);
+			pst.setBytes(3, staffbytes);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -68,23 +66,41 @@ public class UserDB {
 		return ResultMessage.failure;
 
 	}
-
+	
+	public static ResultMessage deletebyStaff(List<StaffPO> stafflist){
+		dbh=new DBHelper();
+		sql="delete from UserPO where staff=?";
+		pst=dbh.prepare(sql);
+		try{
+			int result=0;
+			for(int i=0;i<stafflist.size();i++){
+				byte[] staffbytes=Serialize.Object2Bytes(stafflist.get(i));
+				pst.setBytes(1,staffbytes);
+				if(pst.executeUpdate()>0)
+				result=1;
+			}
+			if(result!=0){
+				return ResultMessage.success;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;
+	}
 	public static LoginPO check(long id, String password) {
-		LoginPO po;
+		LoginPO po=null;
 		dbh = new DBHelper();
-		sql = "select job,username,hall from UserPO where id=? and password=?";
+		sql = "select username,staff from UserPO where id=? and password=?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setLong(1, id);
 			pst.setString(2, password);
 			ret = pst.executeQuery();
 			if (ret.next()) {
-				byte[] jobbytes = ret.getBytes(1);
-				String username = ret.getString(2);
-				byte[] hallbytes = ret.getBytes(3);
-				Job job = (Job) Serialize.Bytes2Object(jobbytes);
-				Hall hall = (Hall) Serialize.Bytes2Object(hallbytes);
-				po = new LoginPO(username, hall, job);
+				String username = ret.getString(1);
+				byte[] staffbytes = ret.getBytes(2);
+				StaffPO staff = (StaffPO) Serialize.Bytes2Object(staffbytes);
+				po = new LoginPO(username, staff);
 				ret.close();
 				dbh.close();// 关闭连接
 				return po;
@@ -96,12 +112,13 @@ public class UserDB {
 			e.printStackTrace();
 		}
 
-		return new LoginPO(null, null, Job.visitor);
+		return null;
 
 	}
 
 	public static void main(String[] args) {
 		initialize();
+		write("a","1234",new StaffPO(1,"sunchao",Job.transfercentersalesman,new OrganizationPO("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai)));
 	}
 
 }

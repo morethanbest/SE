@@ -6,13 +6,12 @@ public class StaffPO implements Serializable {
 	long id;
 	String name;
 	Job job;
-	public StaffPO(long id,String name, Job job) {
-		this.id=id;
+	OrganizationPO organization;
+	public StaffPO(long id, String name, Job job, OrganizationPO organization) {
+		this.id = id;
 		this.name = name;
 		this.job = job;
-	}
-	public long getId() {
-		return id;
+		this.organization = organization;
 	}
 	public String getName() {
 		return name;
@@ -26,5 +25,15 @@ public class StaffPO implements Serializable {
 	public void setJob(Job job) {
 		this.job = job;
 	}
+	public OrganizationPO getOrganization() {
+		return organization;
+	}
+	public void setOrganization(OrganizationPO organization) {
+		this.organization = organization;
+	}
+	public long getId() {
+		return id;
+	}
+
 	
 }

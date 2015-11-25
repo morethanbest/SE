@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 public class LoginPO implements Serializable {
 	String username;
-	Hall hall;
-	Job job;
-	public LoginPO(String username, Hall hall, Job job) {
+	StaffPO staff;
+	public LoginPO(String username, StaffPO po) {
 		this.username = username;
-		this.hall = hall;
-		this.job = job;
+		this.staff = po;
 	}
 	public String getUsername() {
 		return username;
@@ -17,17 +15,12 @@ public class LoginPO implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public Hall getHall() {
-		return hall;
+	public StaffPO getStaff() {
+		return staff;
 	}
-	public void setHall(Hall hall) {
-		this.hall = hall;
+	public void setStaff(StaffPO po) {
+		this.staff = po;
 	}
-	public Job getJob() {
-		return job;
-	}
-	public void setJob(Job job) {
-		this.job = job;
-	}
+	
 	
 }
