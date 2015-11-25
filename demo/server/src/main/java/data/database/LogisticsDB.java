@@ -86,15 +86,15 @@ public class LogisticsDB {
 	public static LogisticsPO find(String ordernum) {
 		LogisticsPO po = null;
 		dbh = new DBHelper();
-		sql = "select id,state,history,ordernum from LogisticsPO where ordernum = ?";
+		sql = "select state,history,ordernum from LogisticsPO where ordernum = ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, ordernum);
 			ret = pst.executeQuery();
 			if (ret.next()) {
-				byte[] historybytes = ret.getBytes(3);
+				byte[] historybytes = ret.getBytes(2);
 				List<String> history = (List<String>) Serialize.Bytes2Object(historybytes);
-				po = new LogisticsPO(ret.getLong(1), ret.getString(2), history, ret.getString(4));
+				po = new LogisticsPO(ret.getString(1), history, ret.getString(3));
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -107,13 +107,13 @@ public class LogisticsDB {
 
 	public static void main(String[] args) {
 		initialize();
-		if (write(new LogisticsPO(1, "a", new ArrayList<String>(), "123")) == ResultMessage.success) {
+		if (write(new LogisticsPO("a", new ArrayList<String>(), "123")) == ResultMessage.success) {
 			System.out.println("write success");
 		}
 		if (find("123") != null) {
 			System.out.println("find success");
 		}
-		if (update(new LogisticsPO(1, "b", new ArrayList<String>(), "123")) == ResultMessage.success) {
+		if (update(new LogisticsPO( "b", new ArrayList<String>(), "123")) == ResultMessage.success) {
 			System.out.println("update success");
 		}
 	}

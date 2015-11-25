@@ -4,18 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 public class LogisticsPO  implements Serializable{
-	long id;
 	String state;
 	List<String> history;
 	String ordernum;
-	public LogisticsPO(long id,String state, List<String> history, String ordernum) {
-		this.id=id;
+	public LogisticsPO(String state, List<String> history, String ordernum) {
 		this.state = state;
 		this.history = history;
 		this.ordernum = ordernum;
-	}
-	public long getId() {
-		return id;
 	}
 	public String getState() {
 		return state;
@@ -35,5 +30,6 @@ public class LogisticsPO  implements Serializable{
 	public void setOrdernum(String ordernum) {
 		this.ordernum = ordernum;
 	}
+
 	
 }
