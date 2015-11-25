@@ -1,14 +1,20 @@
 package presentation.enums;
 
-public enum StaffType {
-	Courior("快递员"), HallStaff("营业厅业务员"), CenterStaff("中转中心业务员"), CenterDepot("中转中心库存管理人员"), Financial("财务人员"), Manager("总经理");
-	private String name;
+import po.Job;
 
-	private StaffType(String name) {
+public enum StaffType {
+	Courior("快递员", Job.Courier), HallStaff("营业厅业务员",Job.hallsalesman), CenterStaff("中转中心业务员", Job.transfercentersalesman), CenterDepot("中转中心库存管理人员",Job.CenterDepot), Financial("财务人员", Job.Financial), Manager("总经理", Job.manager);
+	private String name;
+	private Job job;
+	private StaffType(String name, Job job) {
 		this.name = name;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public Job getJob() {
+		return job;
 	}
 }

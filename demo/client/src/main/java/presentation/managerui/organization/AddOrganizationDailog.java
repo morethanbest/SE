@@ -15,18 +15,6 @@ public class AddOrganizationDailog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			AddOrganizationDailog dialog = new AddOrganizationDailog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
