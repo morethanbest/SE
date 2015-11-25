@@ -8,10 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 public class AddOrganizationDailog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -43,6 +45,11 @@ public class AddOrganizationDailog extends JDialog {
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(234, 32, 172, 31);
 		contentPanel.add(comboBox_1);
+		
+		textField = new JTextField();
+		textField.setBounds(234, 132, 172, 31);
+		contentPanel.add(textField);
+		textField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);

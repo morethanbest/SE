@@ -1,22 +1,22 @@
 package presentation.managerui.organization;
 
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.enums.CityType;
 import presentation.enums.OrganizationType;
-import presentation.enums.TransportTypes;
-import vo.ConstantsVO;
 import vo.OrganizationVO;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.List;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.managerblservice.OrganizationBlService;
 
 public class OrganizationPanel extends JPanel {
 	private JTable table;
@@ -25,12 +25,15 @@ public class OrganizationPanel extends JPanel {
 	JButton btnAdd;
 	JButton btnNewButton;
 	JButton btnNewButton_1;
-	
+	List<OrganizationVO> list;
+	OrganizationBlService organizationBlService;
 	/**
 	 * Create the panel.
 	 */
 	public OrganizationPanel() {
 		setLayout(null);
+		
+		organizationBlService = new OrganizationController();
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 58, 954, 10);
@@ -85,7 +88,7 @@ public class OrganizationPanel extends JPanel {
 		}
 	}
 	
-	private void displayByVO(List<OrganizationVO> list) {
+	private void displayByVO() {
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);// 清除原有行
 
@@ -104,5 +107,9 @@ public class OrganizationPanel extends JPanel {
 			}
 		}
 
+	}
+	
+	void refreshList(){
+		list = organizationBlService.getOrganizationbyBoth(city, type);
 	}
 }

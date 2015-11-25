@@ -13,21 +13,22 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import presentation.enums.CityType;
 import presentation.enums.StaffType;
 import vo.StaffVO;
 import businesslogic.managerbl.StaffPack.StaffController;
 import businesslogicservice.managerblservice.StaffBlService;
 
 public class StaffManagePanel extends JPanel implements ActionListener{
-	private JTextField nameField;
 	private JTable table;
-	JButton btnSearch;
 	JButton btnAdd;
 	JComboBox<String> staffSelect;
 	JButton btnRevise;
 	JButton btnDelete;
 	private List<StaffVO> list;
 	private StaffBlService staffBlService;
+	private JComboBox<String> citySelect;
+	private JComboBox<String> orgSelect;
 	
 	
 	/**
@@ -42,15 +43,6 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 49, 954, 8);
 		add(separator);
 		
-		nameField = new JTextField();
-		nameField.setBounds(145, 0, 131, 36);
-		add(nameField);
-		nameField.setColumns(10);
-		
-		btnSearch = new JButton("Search");
-		btnSearch.setBounds(290, 0, 113, 36);
-		add(btnSearch);
-		
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -60,9 +52,9 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		add(btnAdd);
 		
 		staffSelect = new JComboBox<String>();
-		staffSelect.setBounds(0, 1, 131, 35);
+		staffSelect.setBounds(0, 0, 131, 35);
 		add(staffSelect);
-		addPackTypeItems();
+		addStaffTypeItems();
 		
 		btnRevise = new JButton("Revise");
 		btnRevise.addActionListener(new ActionListener() {
@@ -86,16 +78,33 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		citySelect = new JComboBox<String>();
+		citySelect.setBounds(137, 0, 131, 35);
+		add(citySelect);
+		addCityItems();
+		
+		orgSelect = new JComboBox<String>();
+		orgSelect.setBounds(274, 0, 131, 35);
+		add(orgSelect);
+		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnCount(2);
 		tableModel.setRowCount(10);
 
 	}
 
-	private void addPackTypeItems() {
+	private void addStaffTypeItems() {
 		staffSelect.addItem("全部");
 		for (StaffType staff : StaffType.values()) {
 			staffSelect.addItem(staff.getName());
+		}
+	}
+	
+	private void addCityItems() {
+		citySelect.addItem("全部");
+		for (CityType city : CityType.values()) {
+			citySelect.addItem(city.getName());
 		}
 	}
 	
