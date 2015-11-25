@@ -2,6 +2,8 @@ package data.database.transportDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.database.DBHelper;
 import po.DriversPO;
@@ -130,11 +132,36 @@ public class DriverDB {
 		}
 		return po;
 	}
+	
+	public static List<DriversPO> fuzzysearch(String name){
+		List<DriversPO> list=new ArrayList<DriversPO>();
+		dbh = new DBHelper();
+		try {
+			sql = "select drivercode,birthtime,identifiercode,cellphone,drivergender,timelimit from DriversPO where drivername like ?";
+			pst = dbh.prepare(sql);
+			pst.setString(1, "%"+name+"%");
+			ret = pst.executeQuery();
+			if (ret.next()) {
+				DriversPO po = new DriversPO( ret.getString(1),name, ret.getLong(2), ret.getString(3), ret.getString(4),
+						ret.getString(5), ret.getLong(6));
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public static void main(String[] args) {
 		initialize();
 		if(search("025000000")!=null){
 			System.out.println("search success");
+		}
+		if(fuzzysearch("大").size()>0){
+			System.out.println("fuzzysearch success");
 		}
 
 	}
