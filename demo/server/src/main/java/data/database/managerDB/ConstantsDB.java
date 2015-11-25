@@ -1,4 +1,4 @@
-package data.database;
+package data.database.managerDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.database.DBHelper;
 import po.ConstantsPO;
 import po.ResultMessage;
 

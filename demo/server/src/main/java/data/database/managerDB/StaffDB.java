@@ -1,10 +1,13 @@
-package data.database;
+package data.database.managerDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.database.DBHelper;
+import data.database.Serialize;
+import data.database.userDB.UserDB;
 import po.City;
 import po.Job;
 import po.OrganizationPO;

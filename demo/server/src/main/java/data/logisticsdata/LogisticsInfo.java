@@ -3,7 +3,7 @@ package data.logisticsdata;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import data.database.LogisticsDB;
+import data.database.logisticsDB.LogisticsDB;
 import dataservice.logisticsdataservice.LogisticsInfoService;
 import po.LogisticsPO;
 import po.ResultMessage;
@@ -25,10 +25,5 @@ public class LogisticsInfo extends UnicastRemoteObject implements LogisticsInfoS
 		return LogisticsDB.update(po);
 	}
 
-	@Override
-	public ResultMessage addnew(LogisticsPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return LogisticsDB.write(po);
-	}
 
 }

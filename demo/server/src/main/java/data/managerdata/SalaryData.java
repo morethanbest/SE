@@ -3,7 +3,7 @@ package data.managerdata;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import data.database.SalaryDB;
+import data.database.managerDB.SalaryDB;
 import dataservice.managerdataservice.SalaryDataService;
 import po.Job;
 import po.ResultMessage;

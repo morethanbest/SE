@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import data.database.StaffDB;
+import data.database.managerDB.StaffDB;
 import dataservice.managerdataservice.StaffDataService;
 import po.Job;
 import po.ResultMessage;

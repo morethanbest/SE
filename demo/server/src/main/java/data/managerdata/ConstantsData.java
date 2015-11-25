@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import data.database.ConstantsDB;
+import data.database.managerDB.ConstantsDB;
 import dataservice.managerdataservice.ConstantsDataService;
 import po.ConstantsPO;
 import po.ResultMessage;

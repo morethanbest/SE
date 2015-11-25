@@ -11,5 +11,4 @@ public interface LogisticsInfoService extends Remote {
 	
 	public ResultMessage update(LogisticsPO po) throws RemoteException;
 	
-	public ResultMessage addnew(LogisticsPO po)throws RemoteException;
 }

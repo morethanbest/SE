@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import data.database.OrganizationDB;
+import data.database.managerDB.OrganizationDB;
 import dataservice.managerdataservice.OrganizationDataService;
 import po.City;
 import po.OrganizationPO;

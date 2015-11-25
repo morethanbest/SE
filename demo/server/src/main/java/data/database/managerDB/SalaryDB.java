@@ -1,8 +1,10 @@
-package data.database;
+package data.database.managerDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import data.database.DBHelper;
+import data.database.Serialize;
 import po.Job;
 import po.ResultMessage;
 import po.SalaryMode;

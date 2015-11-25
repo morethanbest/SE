@@ -1,10 +1,12 @@
-package data.database;
+package data.database.logisticsDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.database.DBHelper;
+import data.database.Serialize;
 import po.LogisticsPO;
 import po.ResultMessage;
 

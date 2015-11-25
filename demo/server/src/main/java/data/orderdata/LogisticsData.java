@@ -7,6 +7,8 @@ import po.ResultMessage;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import data.database.logisticsDB.LogisticsDB;
+
 public class LogisticsData extends UnicastRemoteObject implements LogisticsDataService{
 	public LogisticsData() throws  RemoteException{
 		super();
@@ -14,21 +16,7 @@ public class LogisticsData extends UnicastRemoteObject implements LogisticsDataS
 
 	@Override
 	public ResultMessage addLogistics(LogisticsPO po) throws RemoteException {
-		return null;
+		return LogisticsDB.write(po);
 	}
 
-	@Override
-	public LogisticsPO findLogistics(String orderNumber) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(LogisticsPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public long findLastID() throws RemoteException {
-		return 0;
-	}
 }
