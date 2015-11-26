@@ -60,9 +60,9 @@ public class VehicleController implements VehicleBlService{
 	}
 
 	@Override
-	public long getid() throws RemoteException {
+	public String getid(String orgcode) throws RemoteException {
 		IdGet idgetter=new IdGet();
-		long id=idgetter.getid();
+		String  id=idgetter.getid(orgcode);
 		return id;
 	}
 

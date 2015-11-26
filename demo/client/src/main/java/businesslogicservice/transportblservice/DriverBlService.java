@@ -18,7 +18,7 @@ public interface DriverBlService {
 	
 	public List<DriverVO> getDriverbyName (String name,String orgcode)throws RemoteException;
 
-	public long getid() throws RemoteException;
+	public String getid(String orgcode) throws RemoteException;
 
 
 

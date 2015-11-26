@@ -77,9 +77,9 @@ public class DriverController implements DriverBlService{
 	}
 
 	@Override
-	public long getid() throws RemoteException {
+	public String getid(String orgcode) throws RemoteException {
 		DriverId idgetter=new DriverId();
-		long id=idgetter.getid();
+		String id=idgetter.getid(orgcode);
 		return id;
 	}
 
