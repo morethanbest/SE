@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 
 public class ArrivalPO  implements Serializable{
-
+	long id;
 	String centercode;
 	long arrivaltime;
 	String transcode;
@@ -11,8 +11,8 @@ public class ArrivalPO  implements Serializable{
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 
-	public ArrivalPO(String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate,Formstate documentstate) {
-
+	public ArrivalPO(long id,String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate,Formstate documentstate) {
+		this.id=id;
 		this.centercode = centercode;
 		this.arrivaltime = arrivaltime;
 		this.transcode = transcode;
@@ -20,7 +20,7 @@ public class ArrivalPO  implements Serializable{
 		this.arrivalstate = arrivalstate;
 		this.documentstate=documentstate;
 	}
-
+	public void setId(long id){this.id=id;}
 	public void setCentercode(String centercode) {
 		this.centercode = centercode;
 	}
@@ -57,5 +57,5 @@ public class ArrivalPO  implements Serializable{
 	public Arrivalstate getArrivalstate() {
 		return arrivalstate;
 	}
-	
+	public long getId(){return this.id;}
 }

@@ -49,19 +49,7 @@ public class ArrivalController implements ArrivalBlService {
         return result;
     }
 
-    @Override
-    public String getDepartureByTrans(String transcode) throws RemoteException {
-        DepartGet departgetter=new DepartGet();
-        String departure=departgetter.getDepartureByTrans(transcode);
-        return departure;
-    }
 
-    @Override
-    public String getDepartureByLoad(String loadcode) throws RemoteException {
-        DepartGet departgetter=new DepartGet();
-        String departure=departgetter.getDepartureByLoad(loadcode);
-        return departure;
-    }
 
     @Override
     public long getid(String centercode) throws RemoteException {

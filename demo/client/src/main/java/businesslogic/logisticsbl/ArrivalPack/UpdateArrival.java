@@ -10,6 +10,8 @@ import java.rmi.RemoteException;
  * Created by Administrator on 2015/11/25.
  */
 public class UpdateArrival {
+
+    long id;
     String centercode;
     long arrivaltime;
     String transcode;
@@ -17,7 +19,8 @@ public class UpdateArrival {
     Arrivalstate arrivalstate;
     Formstate documentstate;
 
-    public void setUpdataArrival(String centercode,long arrivaltime, String transcode,String departure,Arrivalstate arrivalstate,Formstate documentstate){
+    public void setUpdataArrival(long id,String centercode,long arrivaltime, String transcode,String departure,Arrivalstate arrivalstate,Formstate documentstate){
+        this.id=id;
         this.centercode=centercode;
         this.arrivaltime=arrivaltime;
         this.transcode=transcode;
@@ -28,7 +31,7 @@ public class UpdateArrival {
 
 
     public ResultMessage passupdate(){
-        ArrivalPO po=new ArrivalPO(centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
+        ArrivalPO po=new ArrivalPO(id,centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
         ArrivalFormDataService  dataserv= RMIHelper.getArrivalform();
         ResultMessage result=ResultMessage.failure;
         try {

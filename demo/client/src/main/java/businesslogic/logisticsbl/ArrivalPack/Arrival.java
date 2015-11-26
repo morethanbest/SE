@@ -21,6 +21,7 @@ public class Arrival {
     }
 
     public ResultMessage addArrivalForm(ArrivalVO  vo){
+        long id=vo.getId();
         String centercode=vo.getCentercode();
         long arrivaltime=vo.getArrivaltime();
         String transcode=vo.getTranscode();
@@ -28,7 +29,7 @@ public class Arrival {
 
         Arrivalstate arrivalstate=vo.getArrivalstate();
         Formstate documentstate=vo.getFormstate();
-        add.setAddArrival(centercode, arrivaltime, transcode, departure, arrivalstate,documentstate);
+        add.setAddArrival(id,centercode, arrivaltime, transcode, departure, arrivalstate,documentstate);
         ResultMessage result=add.addpass();
         return result;
 
@@ -37,6 +38,7 @@ public class Arrival {
     }
 
     public ResultMessage updataArrivalForm(ArrivalVO vo){
+        long id=vo.getId();
         String centercode=vo.getCentercode();
         long arrivaltime=vo.getArrivaltime();
         String transcode=vo.getTranscode();
@@ -44,7 +46,7 @@ public class Arrival {
 
         Arrivalstate arrivalstate=vo.getArrivalstate();
         Formstate documentstate=vo.getFormstate();
-        update.setUpdataArrival(centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
+        update.setUpdataArrival(id,centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
         ResultMessage result=update.passupdate();
         return result;
 
