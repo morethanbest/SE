@@ -1,20 +1,19 @@
 package businesslogic.userbl.UsersPack;
 
-import java.rmi.RemoteException;
-
-import vo.ResultMessage;
+import po.City;
+import po.Job;
+import po.Organizationtype;
+import po.ResultMessage;
 import vo.UserVO;
 
 public class User {
-	private IdInfo idgetter;
 	private AddUser add;
 	private DelUser del;
 	private RevUser rev;
 	private FindUser find;
 	
-	public User(AddUser add,IdInfo idgetter) {
+	public User(AddUser add) {
 		// TODO Auto-generated constructor stub
-		this.idgetter=idgetter;
 		this.add=add;
 	}
 	
@@ -32,49 +31,56 @@ public class User {
 	
 	
 	
-	public ResultMessage addUser(UserVO vo) throws RemoteException {                              //revise
+	public ResultMessage addUser(UserVO vo){ 
 		// TODO Auto-generated method stub
 		String username=vo.getUsername();
-		String password=vo.getCode();
-		String level=vo.getLevel();
-		long id=idgetter.getid();
-		
-		//add.setUser(id, username, password, level);
-		ResultMessage result=add.adduser(username,password,level,id);
+		String password=vo.getPassword();
+		Job job=vo.getJob();
+		String organizationname=vo.getOrganizationname();
+		String organizationcode=vo.getOrganizationcode();
+		Organizationtype organizationtype=vo.getOrganizationtype();
+		City city=vo.getCity();
+		add.setAddInfo(username, password, job, organizationname, organizationcode, organizationtype, city);
+		ResultMessage result=add.adduser();
 		return result;
 		
 		
 	}
 
 	
-	public ResultMessage delUser(UserVO vo,long id) throws RemoteException {
+	public ResultMessage delUser(UserVO vo) {
 		// TODO Auto-generated method stub
 		String username=vo.getUsername();
-		String password=vo.getCode();
-		String level=vo.getLevel();
-		long toid=id;
-		
-		del.setUser(toid, username, password, level);
+		String password=vo.getPassword();
+		Job job=vo.getJob();
+		String organizationname=vo.getOrganizationname();
+		String organizationcode=vo.getOrganizationcode();
+		Organizationtype organizationtype=vo.getOrganizationtype();
+		City city=vo.getCity();
+		del.setDelInfo(username, password, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=del.deluser();
 		return result;
 	}
 
 	
-	public ResultMessage revUser(UserVO vo,long id) throws RemoteException {
+	public ResultMessage revUser(UserVO vo){
 		// TODO Auto-generated method stub
 		String username=vo.getUsername();
-		String password=vo.getCode();
-		String level=vo.getLevel();
-		long toid=id;
-		
-		rev.setUser(toid, username, password, level);
+		String password=vo.getPassword();
+		Job job=vo.getJob();
+		String organizationname=vo.getOrganizationname();
+		String organizationcode=vo.getOrganizationcode();
+		Organizationtype organizationtype=vo.getOrganizationtype();
+		City city=vo.getCity();
+		rev.setRevInfo(username, password, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=rev.revuser();
 		return result;
 	}
 
 	
-	public UserVO getUserbyID(long id) throws RemoteException {
+	public UserVO getUserbyName(String username) {
 		// TODO Auto-generated method stub
+		find.setFindInfo(username);
 		UserVO vo=find.getvo();
 		return vo;
 	}

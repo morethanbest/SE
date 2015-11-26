@@ -1,19 +1,17 @@
 package businesslogicservice.userblservice;
 
-import java.rmi.RemoteException;
-
 import po.ResultMessage;
 import vo.UserVO;
 
 public interface UserBlService {
 	
 	
-	public ResultMessage addUser(UserVO vo)throws RemoteException;
+	public ResultMessage addUser(UserVO vo);
 	
-	public ResultMessage delUser(UserVO vo,long id)throws RemoteException;
+	public ResultMessage delUser(UserVO vo);
 	
-	public ResultMessage revUser(UserVO vo,long id)throws RemoteException;
+	public ResultMessage revUser(UserVO vo);
 	
-	public UserVO getUserbyID(long id)throws RemoteException;
+	public UserVO getUserbyName(String username);
 
 }

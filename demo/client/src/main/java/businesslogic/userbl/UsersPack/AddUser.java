@@ -1,22 +1,42 @@
 package businesslogic.userbl.UsersPack;
 
-import po.UserPO;
+import dataservice.userdataservice.UserDataService;
+import init.RMIHelper;
+import po.City;
+import po.Job;
+import po.Organizationtype;
 import po.ResultMessage;
-import data.datafactory.databaseFactory;
-import data.userdata.UsersData;
-import dataservice.datafactoryservice.datafactoryserv;
+import po.UserPO;
 
 public class AddUser {
-
-	public ResultMessage adduser(String username,String password,String level,long id){
-		UserPO po=new UserPO(id,username,password,level);
-//		databaseFactory fac=new databaseFactory();
-//		UsersData userdata=fac.getUsersData();
-//		ResultMessage result=fac.UsersData.;
-		
-		
-		
-		
+	String username;
+	String password;
+	Job job;
+	String organizationname;
+	String organizationcode;
+	Organizationtype organizationtype;
+	City city;
+    public void setAddInfo(String username, String password, Job job, String organizationname, String organizationcode,
+			Organizationtype organizationtype, City city){
+		this.username = username;
+		this.password = password;
+		this.job = job;
+		this.organizationname = organizationname;
+		this.organizationcode = organizationcode;
+		this.organizationtype = organizationtype;
+		this.city = city;
+    }
+	public ResultMessage adduser(){
+		UserPO po=new UserPO(username, password, job, organizationname, organizationcode, organizationtype, city);
+		UserDataService user=RMIHelper.getUserdata();
+		ResultMessage result;
+		try {
+			result = user.add(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result=ResultMessage.failure;
+			System.out.println("adduser fail");
+		}
 		return result;
 	}
 

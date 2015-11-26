@@ -1,29 +1,48 @@
 package vo;
 
+import po.City;
+import po.Job;
+import po.Organizationtype;
+
 public class UserVO{
-	long id;
 	String username;
 	String password;
-	String level;
-	public UserVO( long id,String username, String password, String level) {
-		this.id=id;
+	Job job;
+	String organizationname;
+	String organizationcode;
+	Organizationtype organizationtype;
+	City city;
+	public UserVO(String username, String password, Job job, String organizationname, String organizationcode,
+			Organizationtype organizationtype, City city) {
 		this.username = username;
 		this.password = password;
-		this.level = level;
-	}
-
-	public String getCode() {
-		return password;
-	}
-	public String getLevel() {
-		return level;
+		this.job = job;
+		this.organizationname = organizationname;
+		this.organizationcode = organizationcode;
+		this.organizationtype = organizationtype;
+		this.city = city;
 	}
 	public String getUsername() {
 		return username;
 	}
-	public long getID(){
-		return id;
+	public String getPassword() {
+		return password;
 	}
-	
+	public Job getJob() {
+		return job;
+	}
+	public String getOrganizationname() {
+		return organizationname;
+	}
+	public String getOrganizationcode() {
+		return organizationcode;
+	}
+	public Organizationtype getOrganizationtype() {
+		return organizationtype;
+	}
+	public City getCity() {
+		return city;
+	}
+
 	
 }
