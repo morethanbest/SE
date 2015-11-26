@@ -3,9 +3,11 @@ package po;
 import java.io.Serializable;
 
 public class AccountPO  implements Serializable{
+	long id;
 	String accountname;
 	double accountsum;
-	public AccountPO(String accountname, double accountsum) {
+	public AccountPO(long id,String accountname, double accountsum) {
+		this.id=id;
 		this.accountname = accountname;
 		this.accountsum = accountsum;
 	}
@@ -20,6 +22,9 @@ public class AccountPO  implements Serializable{
 	}
 	public void setAccountsum(double accountsum) {
 		this.accountsum = accountsum;
+	}
+	public long getId() {
+		return id;
 	}
 	
 }

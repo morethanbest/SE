@@ -7,6 +7,8 @@ import po.VehiclesPO;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import data.database.transportDB.VehicleDB;
+
 public class VehicleData extends UnicastRemoteObject implements VehicleDataService{
 
 	public VehicleData() throws  RemoteException{
@@ -16,33 +18,35 @@ public class VehicleData extends UnicastRemoteObject implements VehicleDataServi
 
 	@Override
 	public ResultMessage insertVehicle(VehiclesPO po) throws RemoteException {
-		return null;
+		return VehicleDB.write(po);
 	}
 
 	@Override
 	public ResultMessage deleteVehicle(VehiclesPO po) throws RemoteException {
-		return null;
+		return VehicleDB.delete(po);
 	}
 
 	@Override
 	public ResultMessage updateVehicle(VehiclesPO po) throws RemoteException {
-		return null;
+		return VehicleDB.update(po);
 	}
 
 	@Override
 	public VehiclesPO findVehicleBycode(String identity) throws RemoteException {
-		return null;
+		return VehicleDB.searchbycode(identity);
 	}
 
 	@Override
 	public VehiclesPO findVehicleByPlateNumber(String plateNumber) throws RemoteException {
-		return null;
+		return VehicleDB.searchbynum(plateNumber);
 	}
 
 	@Override
-	public long getCurrentID() throws RemoteException {
-		return 0;
+	public long getCurrentID(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return Long.parseLong(VehicleDB.getlastcode(orgcode));
 	}
+
 
 
 }
