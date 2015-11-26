@@ -7,6 +7,8 @@ import po.UserPO;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import data.database.userDB.UserDB;
+
 public class UsersData extends UnicastRemoteObject implements UserDataService{
 
 	public UsersData() throws  RemoteException{
@@ -16,21 +18,21 @@ public class UsersData extends UnicastRemoteObject implements UserDataService{
 
 	@Override
 	public ResultMessage add(UserPO po) throws RemoteException {
-		return null;
+		return UserDB.write(po);
 	}
 
 	@Override
 	public ResultMessage delete(UserPO po) throws RemoteException {
-		return null;
+		return UserDB.deletebyid(po);
 	}
 
 	@Override
 	public UserPO find(long id) throws RemoteException {
-		return null;
+		return UserDB.find(id);
 	}
 
 	@Override
 	public ResultMessage update(UserPO po) throws RemoteException {
-		return null;
+		return UserDB.update(po);
 	}
 }

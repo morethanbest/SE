@@ -2,11 +2,8 @@ package data.database.transportDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import data.database.DBHelper;
-import po.DriversPO;
 import po.ResultMessage;
 import po.VehiclesPO;
 

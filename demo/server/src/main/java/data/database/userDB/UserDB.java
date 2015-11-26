@@ -9,7 +9,6 @@ import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
-import po.StaffPO;
 import po.UserPO;
 
 public class UserDB {
@@ -87,6 +86,85 @@ public class UserDB {
 		}
 		return ResultMessage.failure;
 	}
+	
+	public static ResultMessage deletebyid(UserPO po){
+		dbh=new DBHelper();
+		sql="delete from UserPO where ide=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setLong(1, po.getId());
+			int result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;
+	}
+	
+	public static UserPO find(long id) {
+		UserPO po=null;
+		dbh = new DBHelper();
+		sql = "select username,password,job,organizationname,organizationcode,organizationtype,city from UserPO where id=?";
+		pst = dbh.prepare(sql);
+		try {
+			pst.setLong(1, id);
+			ret = pst.executeQuery();
+			if (ret.next()) {
+				String username = ret.getString(1);
+				byte[] jobbytes = ret.getBytes(3);
+				Job job = (Job) Serialize.Bytes2Object(jobbytes);
+				byte[] typebytes=ret.getBytes(6);
+				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
+				byte[] citybytes=ret.getBytes(7);
+				City city=(City)Serialize.Bytes2Object(citybytes);
+				po = new UserPO(id,username,ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
+				ret.close();
+				dbh.close();// 关闭连接
+				return po;
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+	
+	public static ResultMessage update(UserPO po){
+		dbh=new DBHelper();
+		sql="update UserPO set username=?,password=?,job=?,organizationname=?,organizationcode=?"
+				+ ",organizationtype=?,city=? where id=?";
+		pst=dbh.prepare(sql);
+		try{
+			byte[] jobbytes=Serialize.Object2Bytes(po.getJob());
+			byte[] typebytes=Serialize.Object2Bytes(po.getOrganizationtype());
+			byte[] citybytes=Serialize.Object2Bytes(po.getCity());
+			pst.setString(1, po.getUsername());
+			pst.setString(2, po.getPassword());
+			pst.setBytes(3, jobbytes);
+			pst.setString(4, po.getOrganizationname());
+			pst.setString(5, po.getOrganizationcode());
+			pst.setBytes(6, typebytes);
+			pst.setBytes(7, citybytes);
+			pst.setLong(8, po.getId());
+			int result;
+			result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+			ret.close();
+			dbh.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;		
+	}
+	
 	public static UserPO check(long id, String password) {
 		UserPO po=null;
 		dbh = new DBHelper();
@@ -122,7 +200,7 @@ public class UserDB {
 
 	public static void main(String[] args) {
 		initialize();
-		write(new UserPO(2,"sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai));
+		update(new UserPO(1,"sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai));
 		check(1,"123");
 	}
 

@@ -10,7 +10,6 @@ import data.database.Serialize;
 import data.database.userDB.UserDB;
 import po.City;
 import po.Job;
-import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
 import po.StaffPO;
