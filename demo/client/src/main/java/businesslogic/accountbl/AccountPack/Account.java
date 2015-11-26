@@ -8,8 +8,10 @@ public class Account {
 	DelAccount delAccount;
 	RevAccount revAccount;
 	GetAccountbyName getAccountbyName;
-	public Account(AddAccount addAccount){
+	IdInfo Id;
+	public Account(AddAccount addAccount, IdInfo Id){
 		this.addAccount=addAccount;
+		this.Id=Id;
 	}
 	
 	public Account(DelAccount delAccount){
@@ -25,9 +27,10 @@ public class Account {
 	}
 	
 	public ResultMessage addAccount(AccountVO vo){
+		long id=Id.getId();
 		String accountname=vo.getAccountname();
 		double accountsum=vo.getAccountsum();
-		addAccount.setAddInfo(accountname, accountsum);
+		addAccount.setAddInfo(id, accountname, accountsum);
 		ResultMessage result=addAccount.addAccount();
 		return result;
 	}
@@ -40,16 +43,19 @@ public class Account {
 	}
 	
 	public ResultMessage delAccount(AccountVO vo){
+		long id=vo.getId();
 		String accountname=vo.getAccountname();
-		delAccount.setdelInfo(accountname);
+		double accountsum=vo.getAccountsum();
+		delAccount.setdelInfo(id, accountname, accountsum);
 		ResultMessage result=delAccount.delAccount();
 		return result;
 	}
 	
 	public ResultMessage revAccount(AccountVO vo){
+		long id=vo.getId();
 		String accountname=vo.getAccountname();
 		double accountsum=vo.getAccountsum();
-		revAccount.setRevInfo(accountname, accountsum);
+		revAccount.setRevInfo(id, accountname, accountsum);
 		ResultMessage result=revAccount.revAccount();
 		return result;
 	}

@@ -22,9 +22,10 @@ public class GetAccountbyName {
         AccountVO vo;
         try {
             po = account.findAccount(accountname);
+            long id=po.getId();
             String name=po.getAccountname();
             double sum=po.getAccountsum();
-            vo=new AccountVO(name, sum);
+            vo=new AccountVO(id, name, sum);
         } catch (Exception e) {
             vo=null;
             System.out.println("getaccount fail");

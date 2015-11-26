@@ -8,16 +8,20 @@ import po.ResultMessage;
 import java.rmi.RemoteException;
 
 public class DelAccount {
+    long id;
     String accountname;
-    public void setdelInfo(String accountname){
+    double accountsum;
+    public void setdelInfo(long id, String accountname,double accountsum){
+        this.id=id;
         this.accountname=accountname;
+        this.accountsum=accountsum;
     }
     public ResultMessage delAccount() {
         // TODO Auto-generated method stub
         AccountDataService account= RMIHelper.getAccountdata();
         ResultMessage result;
         try {
-            AccountPO po=account.findAccount(accountname);
+            AccountPO po=new AccountPO(id, accountname, accountsum);
             result=account.deleteAccount(po);
         } catch (Exception e) {
             result=ResultMessage.failure;

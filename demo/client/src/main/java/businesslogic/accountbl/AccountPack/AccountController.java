@@ -12,7 +12,8 @@ public class AccountController implements AccountBlService {
 	public ResultMessage addAccount(AccountVO vo) {
 		// TODO Auto-generated method stub
 		AddAccount addAccount=new AddAccount();
-		Account account=new Account(addAccount);
+		IdInfo Id=new IdInfo();
+		Account account=new Account(addAccount, Id);
 		ResultMessage result=account.addAccount(vo);
 		return result;
 	}
