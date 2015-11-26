@@ -10,8 +10,6 @@ import org.junit.Test;
 
 import po.City;
 import po.CommodityLocation;
-import po.Hall;
-import po.Loadform;
 import vo.CommodityOutVO;
 import vo.StocktakingVO;
 

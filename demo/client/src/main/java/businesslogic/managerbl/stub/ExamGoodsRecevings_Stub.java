@@ -6,7 +6,6 @@ import java.util.List;
 
 import businesslogicservice.managerblservice.ExamGoodsRecevings;
 import po.Arrivalstate;
-import po.Hall;
 import vo.GoodsReceivingExamVO;
 import vo.ResultMessage;
 

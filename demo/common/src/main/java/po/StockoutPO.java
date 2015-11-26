@@ -5,12 +5,12 @@ public class StockoutPO  implements Serializable{
 	long id;
 	String ordercode;
 	long outtime;
-	Hall destination;
+	String destination;
 	Loadform loadform;
 	String transcode;
 	String motorcode;
 	Formstate documentstate;
-	public StockoutPO(long id,String ordercode, long outtime, Hall destination, Loadform loadform, String transcode, String motorcode) {
+	public StockoutPO(long id,String ordercode, long outtime, String destination, Loadform loadform, String transcode, String motorcode) {
 		this.id=id;
 		this.ordercode = ordercode;
 		this.outtime = outtime;
@@ -32,7 +32,7 @@ public class StockoutPO  implements Serializable{
 	public void setOuttime(long outtime) {
 		this.outtime = outtime;
 	}
-	public void setDestination(Hall destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 	public void setLoadform(Loadform loadform) {
@@ -53,7 +53,7 @@ public class StockoutPO  implements Serializable{
 	public long getOuttime() {
 		return outtime;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public Loadform getLoadform() {

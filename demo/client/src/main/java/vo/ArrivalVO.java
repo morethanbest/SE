@@ -2,18 +2,16 @@ package vo;
 
 import po.Arrivalstate;
 import po.Formstate;
-import po.Hall;
-
-import java.text.Normalizer;
 
 public class ArrivalVO {
 	String centercode;
 	long arrivaltime;
 	String transcode;
-	Hall departure;
+
+	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
-	public ArrivalVO(String centercode, long arrivaltime, String transcode, Hall departure, Arrivalstate arrivalstate, Formstate documentstate) {
+	public ArrivalVO(String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate, Formstate documentstate) {
 		this.centercode = centercode;
 		this.arrivaltime = arrivaltime;
 		this.transcode = transcode;
@@ -21,6 +19,8 @@ public class ArrivalVO {
 		this.arrivalstate = arrivalstate;
 		this.documentstate=documentstate;
 	}
+
+
 	
 
 	public String getCentercode() {
@@ -32,7 +32,7 @@ public class ArrivalVO {
 	public String getTranscode() {
 		return transcode;
 	}
-	public Hall getDeparture() {
+	public String getDeparture() {
 		return departure;
 	}
 	public Arrivalstate getArrivalstate() {

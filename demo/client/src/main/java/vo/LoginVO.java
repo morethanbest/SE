@@ -1,15 +1,14 @@
 package vo;
 
-import po.Hall;
 import po.Job;
 
 public class LoginVO {
 	String username;
-	Hall hall;
+	String String;
 	Job job;
-	public LoginVO(String username, Hall hall, Job job) {
+	public LoginVO(String username, String String, Job job) {
 		this.username = username;
-		this.hall = hall;
+		this.String = String;
 		this.job = job;
 	}
 	public String getUsername() {
@@ -18,11 +17,11 @@ public class LoginVO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public Hall getHall() {
-		return hall;
+	public String getString() {
+		return String;
 	}
-	public void setHall(Hall hall) {
-		this.hall = hall;
+	public void setString(String String) {
+		this.String = String;
 	}
 	public Job getJob() {
 		return job;

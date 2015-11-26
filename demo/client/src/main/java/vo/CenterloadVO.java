@@ -3,19 +3,18 @@ package vo;
 import java.util.List;
 
 import po.Formstate;
-import po.Hall;
 
 public class CenterloadVO {
 	long id;
 	long loadtime;
 	String motorcode;
-	Hall destination;
+	String destination;
 	String vehiclecode;
 	String supervisor;
 	String supercargo;
 	List<String> allbarcode;
 	Formstate documentstate;
-	public CenterloadVO(long loadtime, String motorcode, Hall destination, String vehiclecode, String supervisor,
+	public CenterloadVO(long loadtime, String motorcode, String destination, String vehiclecode, String supervisor,
 			String supercargo, List<String> allbarcode,Formstate documentstate) {
 		this.loadtime = loadtime;
 		this.motorcode = motorcode;
@@ -34,7 +33,7 @@ public class CenterloadVO {
 	public String getMotorcode() {
 		return motorcode;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public String getVehiclecode() {

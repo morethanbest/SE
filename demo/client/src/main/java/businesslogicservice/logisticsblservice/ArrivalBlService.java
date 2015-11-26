@@ -9,4 +9,6 @@ public interface ArrivalBlService {
 	public ResultMessage addArrival(ArrivalVO vo)throws RemoteException;
 	public ResultMessage update(ArrivalVO vo)throws RemoteException;
 
+	public String
+
 }

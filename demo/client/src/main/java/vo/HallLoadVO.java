@@ -2,22 +2,20 @@ package vo;
 
 import java.util.List;
 
-import po.Hall;
-
 public class HallLoadVO {
 	long loadtime;
-	String hallcode;
+	String Stringcode;
 	String motorcode;
-	Hall destination;
+	String destination;
 	String vehiclecode;
 	String supervisor;
 	String supercargo;
 	List<String> allbarcode;
 	
-	public HallLoadVO(long loadtime,String hallcode,String motorcode,Hall destination,String vehiclecode,String supervisor,
+	public HallLoadVO(long loadtime,String Stringcode,String motorcode,String destination,String vehiclecode,String supervisor,
 			String supercargo,List<String> allbarcode){
 		this.loadtime=loadtime;
-		this.hallcode=hallcode;
+		this.Stringcode=Stringcode;
 		this.motorcode=motorcode;
 		this.destination=destination;
 		this.vehiclecode=vehiclecode;
@@ -29,13 +27,13 @@ public class HallLoadVO {
 	public long getLoadtime(){
 		return this.loadtime;
 	}
-	public String getHallcode(){
-		return this.hallcode;
+	public String getStringcode(){
+		return this.Stringcode;
 	}
 	public String getMotorcode(){
 		return this.motorcode;
 	}
-	public Hall getDestination(){
+	public String getDestination(){
 		return this.destination;
 	}
 	public String getVehicldecode(){

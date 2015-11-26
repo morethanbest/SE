@@ -1,15 +1,14 @@
 package vo;
 
 import po.Arrivalstate;
-import po.Hall;
 
 public class GoodsReceivingVO {
 	long arrivaltime;
 	String transcode;
-	Hall departure;
+	String departure;
 	Arrivalstate arrivalstate;
 	
-	public GoodsReceivingVO(long arrivaltime,String transcode,Hall departure,Arrivalstate arrivalstate){
+	public GoodsReceivingVO(long arrivaltime,String transcode,String departure,Arrivalstate arrivalstate){
 		this.arrivaltime=arrivaltime;
 		this.transcode=transcode;
 		this.departure=departure;
@@ -23,7 +22,7 @@ public class GoodsReceivingVO {
 	public String getTranscode(){
 		return this.transcode;
 	}
-	public Hall getDeparture(){
+	public String getDeparture(){
 		return this.departure;
 	}
 	public Arrivalstate getArrivalstate(){

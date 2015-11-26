@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.Hall;
 import vo.CLFormsExamVO;
 import vo.ResultMessage;
 

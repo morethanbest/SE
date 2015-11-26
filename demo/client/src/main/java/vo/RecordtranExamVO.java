@@ -3,22 +3,21 @@ package vo;
 import java.util.List;
 
 import po.Formstate;
-import po.Hall;
 
 public class RecordtranExamVO {
 	long loadtime;
 	long arrivaltime;
 	String transcode;
 	String flightcode;
-	Hall departrue;
-	Hall destination;
+	String departrue;
+	String destination;
 	String countercode;
 	String supervisor;
 	List<String> allcode;
 	double fee;
 	Formstate documentstate;
-	public RecordtranExamVO(long loadtime, long arrivaltime, String transcode, String flightcode, Hall departrue,
-			Hall destination, String countercode, String supervisor, List<String> allcode, double fee) {
+	public RecordtranExamVO(long loadtime, long arrivaltime, String transcode, String flightcode, String departrue,
+			String destination, String countercode, String supervisor, List<String> allcode, double fee) {
 		this.loadtime = loadtime;
 		this.arrivaltime = arrivaltime;
 		this.transcode = transcode;
@@ -53,10 +52,10 @@ public class RecordtranExamVO {
 	public void setFlightcode(String flightcode) {
 		this.flightcode = flightcode;
 	}
-	public void setDepartrue(Hall departrue) {
+	public void setDepartrue(String departrue) {
 		this.departrue = departrue;
 	}
-	public void setDestination(Hall destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 	public void setCountercode(String countercode) {
@@ -80,10 +79,10 @@ public class RecordtranExamVO {
 	public String getFlightcode() {
 		return flightcode;
 	}
-	public Hall getDepartrue() {
+	public String getDepartrue() {
 		return departrue;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public String getCountercode() {

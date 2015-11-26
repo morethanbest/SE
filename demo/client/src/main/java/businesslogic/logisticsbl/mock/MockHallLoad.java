@@ -1,9 +1,9 @@
 package businesslogic.logisticsbl.mock;
 
-public class MockHallLoad {
+public class MockStringLoad {
 	long id;
 
-	public MockHallLoad(long id) {
+	public MockStringLoad(long id) {
 		super();
 		this.id = id;
 	}

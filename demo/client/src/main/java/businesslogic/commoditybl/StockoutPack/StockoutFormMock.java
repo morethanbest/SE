@@ -1,7 +1,6 @@
 package businesslogic.commoditybl.StockoutPack;
 
 import po.CommodityPO;
-import po.Hall;
 import po.Loadform;
 import po.StockoutPO;
 import vo.ResultMessage;
@@ -9,7 +8,7 @@ import vo.ResultMessage;
 public class StockoutFormMock {
 	String ordercode;
 	long outtime;
-	Hall destination;
+	String destination;
 	Loadform loadform;
 	String transcode;
 	String motorcode;
@@ -18,7 +17,7 @@ public class StockoutFormMock {
 	
 	
 	
-	public void setStockoutForm(String ordercode,long outtime,Hall destination,Loadform loadform,String transcode,String motorcode,long id) {
+	public void setStockoutForm(String ordercode,long outtime,String destination,Loadform loadform,String transcode,String motorcode,long id) {
 		// TODO Auto-generated constructor stub
 		this.ordercode=ordercode;
 		this.outtime=outtime;
@@ -35,9 +34,9 @@ public class StockoutFormMock {
 	
 	public ResultMessage passform(){
 		StockoutPO newpo=new StockoutPO(id,ordercode, outtime,destination, loadform, transcode, motorcode);
-		CommodityPO compo;//ÓÉÊý¾Ý²ã²éµÃµÄcommodityPO
+		CommodityPO compo;//ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½Ãµï¿½commodityPO
 		
-		//compo.outtime=//µÃµ½µ±Ç°Ê±¼ä£»
+		//compo.outtime=//ï¿½Ãµï¿½ï¿½ï¿½Ç°Ê±ï¿½ä£»
 		
 		
 		

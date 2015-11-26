@@ -2,20 +2,18 @@ package vo;
 
 import java.util.List;
 
-import po.Hall;
-
 public class RecordtransVO {
 	long loadtime;
 	long arrivaltime;
 	String transcode;
 	String flightcode;
-	Hall departrue;
-	Hall destination;
+	String departrue;
+	String destination;
 	String countercode;
 	String supervisor;
 	List<String> allcode;
-	public RecordtransVO(long loadtime, long arrivaltime, String transcode, String flightcode, Hall departrue,
-			Hall destination, String countercode, String supervisor, List<String> allcode) {
+	public RecordtransVO(long loadtime, long arrivaltime, String transcode, String flightcode, String departrue,
+			String destination, String countercode, String supervisor, List<String> allcode) {
 		this.loadtime = loadtime;
 		this.arrivaltime = arrivaltime;
 		this.transcode = transcode;
@@ -39,10 +37,10 @@ public class RecordtransVO {
 	public String getFlightcode() {
 		return flightcode;
 	}
-	public Hall getDepartrue() {
+	public String getDepartrue() {
 		return departrue;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public String getCountercode() {

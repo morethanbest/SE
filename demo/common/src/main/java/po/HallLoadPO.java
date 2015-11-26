@@ -8,7 +8,7 @@ public class HallLoadPO  implements Serializable{
 	long loadtime;
 	String hallcode;
 	String motorcode;
-	Hall destination;		
+	String destination;
 	String vehiclecode;
 	String supervisor;
 	String supercargo;
@@ -16,7 +16,7 @@ public class HallLoadPO  implements Serializable{
 	double fee;
 	Formstate documentstate;	
 	
-	public HallLoadPO(long id,long loadtime,String hallcode,String motorcode,Hall destination,String vehiclecode,String supervisor,
+	public HallLoadPO(long id,long loadtime,String hallcode,String motorcode,String destination,String vehiclecode,String supervisor,
 			String supercargo,List<String> allbarcode,double fee){
 		this.id = id;
 		this.loadtime=loadtime;
@@ -53,7 +53,7 @@ public class HallLoadPO  implements Serializable{
 		this.motorcode = motorcode;
 	}
 
-	public void setDestination(Hall destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 
@@ -89,7 +89,7 @@ public class HallLoadPO  implements Serializable{
 	public String getMotorcode(){
 		return this.motorcode;
 	}
-	public Hall getDestination(){
+	public String getDestination(){
 		return this.destination;
 	}
 	public String getVehicldecode(){

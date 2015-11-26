@@ -3,13 +3,12 @@ package vo;
 import java.util.List;
 
 import po.Formstate;
-import po.Hall;
 
 public class HLFormsExamVO {
 	long loadtime;
-	String hallcode;
+	String Stringcode;
 	String motorcode;
-	Hall destination;		
+	String destination;		
 	String vehiclecode;
 	String supervisor;
 	String supercargo;
@@ -17,10 +16,10 @@ public class HLFormsExamVO {
 	double fee;
 	Formstate documentstate;	
 	
-	public HLFormsExamVO(long loadtime,String hallcode,String motorcode,Hall destination,String vehiclecode,String supervisor,
+	public HLFormsExamVO(long loadtime,String Stringcode,String motorcode,String destination,String vehiclecode,String supervisor,
 			String supercargo,List<String> allbarcode,double fee){
 		this.loadtime=loadtime;
-		this.hallcode=hallcode;
+		this.Stringcode=Stringcode;
 		this.motorcode=motorcode;
 		this.destination=destination;
 		this.vehiclecode=vehiclecode;
@@ -43,15 +42,15 @@ public class HLFormsExamVO {
 		this.loadtime = loadtime;
 	}
 
-	public void setHallcode(String hallcode) {
-		this.hallcode = hallcode;
+	public void setStringcode(String Stringcode) {
+		this.Stringcode = Stringcode;
 	}
 
 	public void setMotorcode(String motorcode) {
 		this.motorcode = motorcode;
 	}
 
-	public void setDestination(Hall destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 
@@ -81,13 +80,13 @@ public class HLFormsExamVO {
 	public long getLoadtime(){
 		return this.loadtime;
 	}
-	public String getHallcode(){
-		return this.hallcode;
+	public String getStringcode(){
+		return this.Stringcode;
 	}
 	public String getMotorcode(){
 		return this.motorcode;
 	}
-	public Hall getDestination(){
+	public String getDestination(){
 		return this.destination;
 	}
 	public String getVehicldecode(){

@@ -2,7 +2,6 @@ package businesslogic.commoditybl.StockoutPack;
 
 import java.rmi.RemoteException;
 
-import po.Hall;
 import po.Loadform;
 import vo.ResultMessage;
 import vo.StockoutVO;
@@ -24,7 +23,7 @@ public class Stockout {
 		// TODO Auto-generated method stub
 		String ordercode=vo.getOrdercode();
 		long outtime=vo.getOuttime();
-		Hall destination=vo.getDestination();
+		String destination=vo.getDestination();
 		Loadform loadform=vo.getLoadform();
 		String transcode=vo.getTranscode();
 		String motorcode=vo.getMotorcode();

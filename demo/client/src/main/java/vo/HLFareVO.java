@@ -1,19 +1,17 @@
 package vo;
 
-import po.Hall;
-
 public class HLFareVO {
-	Hall destination;
-	Hall departure;
-	public HLFareVO(Hall destination, Hall departure) {
+	String destination;
+	String departure;
+	public HLFareVO(String destination, String departure) {
 		super();
 		this.destination = destination;
 		this.departure = departure;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
-	public Hall getDeparture() {
+	public String getDeparture() {
 		return departure;
 	}
 }

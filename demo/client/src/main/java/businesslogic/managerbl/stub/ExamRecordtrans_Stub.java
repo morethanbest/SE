@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import businesslogicservice.managerblservice.ExamRecordtrans;
-import po.Hall;
 import vo.RecordtranExamVO;
 import vo.ResultMessage;
 

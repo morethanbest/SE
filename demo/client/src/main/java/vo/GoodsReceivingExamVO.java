@@ -2,17 +2,16 @@ package vo;
 
 import po.Arrivalstate;
 import po.Formstate;
-import po.Hall;
 
 
 public class GoodsReceivingExamVO {
 	long arrivaltime;
 	String transcode;
-	Hall departure;
+	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 	
-	public GoodsReceivingExamVO(long arrivaltime,String transcode,Hall departure,Arrivalstate arrivalstate){
+	public GoodsReceivingExamVO(long arrivaltime,String transcode,String departure,Arrivalstate arrivalstate){
 		this.arrivaltime=arrivaltime;
 		this.transcode=transcode;
 		this.departure=departure;
@@ -31,7 +30,7 @@ public class GoodsReceivingExamVO {
 		this.transcode = transcode;
 	}
 
-	public void setDeparture(Hall departure) {
+	public void setDeparture(String departure) {
 		this.departure = departure;
 	}
 
@@ -48,7 +47,7 @@ public class GoodsReceivingExamVO {
 	public String getTranscode(){
 		return this.transcode;
 	}
-	public Hall getDeparture(){
+	public String getDeparture(){
 		return this.departure;
 	}
 	public Arrivalstate getArrivalstate(){

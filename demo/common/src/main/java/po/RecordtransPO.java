@@ -8,15 +8,15 @@ public class RecordtransPO  implements Serializable{
 	long arrivaltime;
 	String transcode;
 	String flightcode;
-	Hall departrue;
-	Hall destination;
+	String departrue;
+	String destination;
 	String countercode;
 	String supervisor;
 	List<String> allcode;
 	double fee;
 	Formstate documentstate;
-	public RecordtransPO(long id,long loadtime, long arrivaltime, String transcode, String flightcode, Hall departrue,
-			Hall destination, String countercode, String supervisor, List<String> allcode, double fee) {
+	public RecordtransPO(long id,long loadtime, long arrivaltime, String transcode, String flightcode, String departrue,
+			String destination, String countercode, String supervisor, List<String> allcode, double fee) {
 		this.id=id;
 		this.loadtime = loadtime;
 		this.arrivaltime = arrivaltime;
@@ -54,10 +54,10 @@ public class RecordtransPO  implements Serializable{
 	public void setFlightcode(String flightcode) {
 		this.flightcode = flightcode;
 	}
-	public void setDepartrue(Hall departrue) {
+	public void setDepartrue(String departrue) {
 		this.departrue = departrue;
 	}
-	public void setDestination(Hall destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 	public void setCountercode(String countercode) {
@@ -81,10 +81,10 @@ public class RecordtransPO  implements Serializable{
 	public String getFlightcode() {
 		return flightcode;
 	}
-	public Hall getDepartrue() {
+	public String getDepartrue() {
 		return departrue;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public String getCountercode() {

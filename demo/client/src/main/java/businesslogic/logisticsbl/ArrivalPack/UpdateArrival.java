@@ -13,11 +13,11 @@ public class UpdateArrival {
     String centercode;
     long arrivaltime;
     String transcode;
-    Hall departure;
+    String departure;
     Arrivalstate arrivalstate;
     Formstate documentstate;
 
-    public void setUpdataArrival(String centercode,long arrivaltime, String transcode,Hall departure,Arrivalstate arrivalstate,Formstate documentstate){
+    public void setUpdataArrival(String centercode,long arrivaltime, String transcode,String departure,Arrivalstate arrivalstate,Formstate documentstate){
         this.centercode=centercode;
         this.arrivaltime=arrivaltime;
         this.transcode=transcode;

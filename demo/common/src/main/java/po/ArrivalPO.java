@@ -7,11 +7,11 @@ public class ArrivalPO  implements Serializable{
 	String centercode;
 	long arrivaltime;
 	String transcode;
-	Hall departure;
+	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 
-	public ArrivalPO(String centercode, long arrivaltime, String transcode, Hall departure, Arrivalstate arrivalstate,Formstate documentstate) {
+	public ArrivalPO(String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate,Formstate documentstate) {
 
 		this.centercode = centercode;
 		this.arrivaltime = arrivaltime;
@@ -30,7 +30,7 @@ public class ArrivalPO  implements Serializable{
 	public void setTranscode(String transcode) {
 		this.transcode = transcode;
 	}
-	public void setDeparture(Hall departure) {
+	public void setDeparture(String departure) {
 		this.departure = departure;
 	}
 	public void setArrivalstate(Arrivalstate arrivalstate) {
@@ -51,7 +51,7 @@ public class ArrivalPO  implements Serializable{
 	public String getTranscode() {
 		return transcode;
 	}
-	public Hall getDeparture() {
+	public String getDeparture() {
 		return departure;
 	}
 	public Arrivalstate getArrivalstate() {

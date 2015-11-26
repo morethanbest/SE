@@ -3,26 +3,26 @@ package businesslogic.logisticsbl.stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.HallLoadPO;
+import po.StringLoadPO;
 import po.LogisticsPO;
 import vo.HLFareVO;
-import vo.HallLoadVO;
+import vo.StringLoadVO;
 import vo.ResultMessage;
-import businesslogicservice.logisticsblservice.HallLoadBlService;
-import dataservice.logisticsdataservice.HallLoadFormDataService;
+import businesslogicservice.logisticsblservice.StringLoadBlService;
+import dataservice.logisticsdataservice.StringLoadFormDataService;
 import dataservice.logisticsdataservice.LogisticsInfoService;
 
-public class HallLoadBlServiceImpl implements HallLoadBlService {
+public class StringLoadBlServiceImpl implements StringLoadBlService {
 
-	HallLoadFormDataService hallLoadFormDataService;
+	StringLoadFormDataService hallLoadFormDataService;
 	LogisticsInfoService logisticsInfoService;
 	
 	@Override
-	public ResultMessage addHallLoadForm(HallLoadVO vo) throws RemoteException {
+	public ResultMessage addStringLoadForm(StringLoadVO vo) throws RemoteException {
 		long newID;
 		try {
 			newID = hallLoadFormDataService.findLastID() + 1;
-			HallLoadPO po = new HallLoadPO(newID, vo.getLoadtime(), vo.getHallcode(), vo.getMotorcode(), vo.getDestination(),vo.getVehicldecode(), vo.getSupervisor(), vo.getSupercargo(), vo.getAllbarcode(), 0);
+			StringLoadPO po = new StringLoadPO(newID, vo.getLoadtime(), vo.getStringcode(), vo.getMotorcode(), vo.getDestination(),vo.getVehicldecode(), vo.getSupervisor(), vo.getSupercargo(), vo.getAllbarcode(), 0);
 			hallLoadFormDataService.addLoadForm(po);
 		} catch (RemoteException e) {
 			return ResultMessage.failure;
@@ -31,13 +31,13 @@ public class HallLoadBlServiceImpl implements HallLoadBlService {
 	}
 
 	@Override
-	public double computeHallLoadFare(HLFareVO vo) throws RemoteException {
+	public double computeStringLoadFare(HLFareVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public ResultMessage update(HallLoadVO vo) throws RemoteException {
+	public ResultMessage update(StringLoadVO vo) throws RemoteException {
 		try {
 			List<String> orderList= vo.getAllbarcode();
 			for (int i = 0; i < orderList.size(); i++) {

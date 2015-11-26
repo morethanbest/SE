@@ -1,16 +1,15 @@
 package vo;
 
-import po.Hall;
 import po.Loadform;
 
 public class StockoutVO {
 	String ordercode;
 	long outtime;
-	Hall destination;
+	String destination;
 	Loadform loadform;
 	String transcode;
 	String motorcode;
-	public StockoutVO(String ordercode, long outtime, Hall destination, Loadform loadform, String transcode,
+	public StockoutVO(String ordercode, long outtime, String destination, Loadform loadform, String transcode,
 			String motorcode) {
 		this.ordercode = ordercode;
 		this.outtime = outtime;
@@ -25,7 +24,7 @@ public class StockoutVO {
 	public long getOuttime() {
 		return outtime;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public Loadform getLoadform() {

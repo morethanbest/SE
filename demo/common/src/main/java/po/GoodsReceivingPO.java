@@ -6,11 +6,11 @@ public class GoodsReceivingPO  implements Serializable{
 	long id;
 	long arrivaltime;
 	String transcode;
-	Hall departure;
+	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 	
-	public GoodsReceivingPO(long id,long arrivaltime,String transcode,Hall departure,Arrivalstate arrivalstate){
+	public GoodsReceivingPO(long id,long arrivaltime,String transcode,String departure,Arrivalstate arrivalstate){
 		this.id=id;
 		this.arrivaltime=arrivaltime;
 		this.transcode=transcode;
@@ -33,7 +33,7 @@ public class GoodsReceivingPO  implements Serializable{
 		this.transcode = transcode;
 	}
 
-	public void setDeparture(Hall departure) {
+	public void setDeparture(String departure) {
 		this.departure = departure;
 	}
 
@@ -50,7 +50,7 @@ public class GoodsReceivingPO  implements Serializable{
 	public String getTranscode(){
 		return this.transcode;
 	}
-	public Hall getDeparture(){
+	public String getDeparture(){
 		return this.departure;
 	}
 	public Arrivalstate getArrivalstate(){

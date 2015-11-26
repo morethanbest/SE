@@ -1,18 +1,17 @@
 package vo;
 
 import po.Formstate;
-import po.Hall;
 import po.Loadform;
 
 public class StockoutExamVO {
 	String ordercode;
 	long outtime;
-	Hall destination;
+	String destination;
 	Loadform loadform;
 	String transcode;
 	String motorcode;
 	Formstate documentstate;
-	public StockoutExamVO(long id,String ordercode, long outtime, Hall destination, Loadform loadform, String transcode, String motorcode) {
+	public StockoutExamVO(long id,String ordercode, long outtime, String destination, Loadform loadform, String transcode, String motorcode) {
 		this.ordercode = ordercode;
 		this.outtime = outtime;
 		this.destination = destination;
@@ -31,7 +30,7 @@ public class StockoutExamVO {
 	public void setOuttime(long outtime) {
 		this.outtime = outtime;
 	}
-	public void setDestination(Hall destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 	public void setLoadform(Loadform loadform) {
@@ -52,7 +51,7 @@ public class StockoutExamVO {
 	public long getOuttime() {
 		return outtime;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public Loadform getLoadform() {

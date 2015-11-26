@@ -7,14 +7,14 @@ public class CenterloadPO  implements Serializable{
 	long id;
 	long loadtime;
 	String motorcode;
-	Hall destination;
+	String destination;
 	String vehiclecode;
 	String supervisor;
 	String supercargo;
 	List<String> allbarcode;
 	double fee;
 	Formstate documentstate;
-	public CenterloadPO(long id,long loadtime, String motorcode, Hall destination, String vehiclecode, String supervisor,
+	public CenterloadPO(long id,long loadtime, String motorcode, String destination, String vehiclecode, String supervisor,
 			String supercargo, List<String> allbarcode, double fee) {
 		this.id = id;
 		this.loadtime = loadtime;
@@ -36,7 +36,7 @@ public class CenterloadPO  implements Serializable{
 	public void setMotorcode(String motorcode) {
 		this.motorcode = motorcode;
 	}
-	public void setDestination(Hall destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 	public void setVehiclecode(String vehiclecode) {
@@ -66,7 +66,7 @@ public class CenterloadPO  implements Serializable{
 	public String getMotorcode() {
 		return motorcode;
 	}
-	public Hall getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	public String getVehiclecode() {

@@ -5,8 +5,6 @@ import java.util.List;
 
 import po.ArrivalPO;
 import po.Arrivalstate;
-import po.Formstate;
-import po.Hall;
 import vo.ArrivalExamVO;
 
 public class MockGetArrivals extends GetArrivals {

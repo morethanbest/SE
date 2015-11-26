@@ -7,26 +7,26 @@ import java.rmi.RemoteException;
 import org.junit.Test;
 
 import vo.ResultMessage;
-import businesslogic.logisticsbl.stub.HallLoadBlServiceImpl;
-import businesslogicservice.logisticsblservice.HallLoadBlService;
+import businesslogic.logisticsbl.stub.StringLoadBlServiceImpl;
+import businesslogicservice.logisticsblservice.StringLoadBlService;
 
-public class HallLoadBlServiceImplTest {
+public class StringLoadBlServiceImplTest {
 
 	@Test
-	public void testAddHallLoadForm() throws RemoteException {
-		HallLoadBlService hallLoadBlService = new HallLoadBlServiceImpl();
-		assertEquals(ResultMessage.success,hallLoadBlService.addHallLoadForm(null));
+	public void testAddStringLoadForm() throws RemoteException {
+		StringLoadBlService hallLoadBlService = new StringLoadBlServiceImpl();
+		assertEquals(ResultMessage.success,hallLoadBlService.addStringLoadForm(null));
 	}
 
 	@Test
-	public void testComputeHallLoadFare() throws RemoteException {
-		HallLoadBlService hallLoadBlService = new HallLoadBlServiceImpl();
-		assertEquals(0,hallLoadBlService.computeHallLoadFare(null),0.0001);
+	public void testComputeStringLoadFare() throws RemoteException {
+		StringLoadBlService hallLoadBlService = new StringLoadBlServiceImpl();
+		assertEquals(0,hallLoadBlService.computeStringLoadFare(null),0.0001);
 	}
 
 	@Test
 	public void testUpdate() throws RemoteException {
-		HallLoadBlService hallLoadBlService = new HallLoadBlServiceImpl();
+		StringLoadBlService hallLoadBlService = new StringLoadBlServiceImpl();
 		assertEquals(ResultMessage.success,hallLoadBlService.update(null));
 	}
 

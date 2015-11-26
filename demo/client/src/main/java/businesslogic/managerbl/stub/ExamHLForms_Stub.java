@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import businesslogicservice.managerblservice.ExamHLForms;
-import po.Hall;
 import vo.HLFormsExamVO;
 import vo.ResultMessage;
 

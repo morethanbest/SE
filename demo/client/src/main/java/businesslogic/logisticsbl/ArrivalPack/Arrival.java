@@ -2,7 +2,6 @@ package businesslogic.logisticsbl.ArrivalPack;
 
 import po.Arrivalstate;
 import po.Formstate;
-import po.Hall;
 import po.ResultMessage;
 import vo.ArrivalVO;
 
@@ -25,7 +24,7 @@ public class Arrival {
         String centercode=vo.getCentercode();
         long arrivaltime=vo.getArrivaltime();
         String transcode=vo.getTranscode();
-        Hall departure=vo.getDeparture();
+        String departure=vo.getDeparture();
 
         Arrivalstate arrivalstate=vo.getArrivalstate();
         Formstate documentstate=vo.getFormstate();
@@ -41,7 +40,7 @@ public class Arrival {
         String centercode=vo.getCentercode();
         long arrivaltime=vo.getArrivaltime();
         String transcode=vo.getTranscode();
-        Hall departure=vo.getDeparture();
+        String departure=vo.getDeparture();
 
         Arrivalstate arrivalstate=vo.getArrivalstate();
         Formstate documentstate=vo.getFormstate();
