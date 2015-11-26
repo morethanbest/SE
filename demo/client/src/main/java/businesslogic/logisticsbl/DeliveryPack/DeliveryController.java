@@ -27,10 +27,5 @@ public class DeliveryController implements DeliveryBlService{
         return result;
     }
 
-    @Override
-    public long getid() throws RemoteException {
-        IdGet idgetter=new IdGet();
-        long id=idgetter.getid();
-        return id;
-    }
+
 }
