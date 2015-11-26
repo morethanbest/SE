@@ -1,28 +1,25 @@
 package businesslogic.userbl.UsersloginPack;
 
+import dataservice.userdataservice.UserLoginDataService;
 import init.RMIHelper;
-
-import java.rmi.RemoteException;
-
 import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.UserPO;
 import vo.LoginVO;
-import dataservice.userdataservice.UserLoginDataService;
 
 public class LoginConfirm {
-	long id;
+	String username;
 	String password;
-	public void setLogin(long id, String password){
-		this.id=id;
+	public void setLogin(String username, String password){
+		this.username=username;
 		this.password=password;
 	}
 	public LoginVO log(){
 		UserLoginDataService userdata=RMIHelper.getUserlogindata();
 		LoginVO vo;
 		try {
-			UserPO po=userdata.login(id,password);
+			UserPO po=userdata.login(username,password);
 			if(po==null){
 				vo=null;
 			}
