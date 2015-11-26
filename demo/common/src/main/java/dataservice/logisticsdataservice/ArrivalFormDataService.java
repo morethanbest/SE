@@ -6,6 +6,8 @@ import java.util.List;
 
 import po.ArrivalPO;
 import po.Formstate;
+import po.HallLoadPO;
+import po.RecordtransPO;
 import po.ResultMessage;
 
 public interface ArrivalFormDataService extends Remote {
@@ -15,10 +17,11 @@ public interface ArrivalFormDataService extends Remote {
 	
 	public ResultMessage addArrivalForm (ArrivalPO po) throws RemoteException;
 	
-	public long findLastID(String centercode) throws RemoteException;
+	public long findLastID() throws RemoteException;
 
-	public String getDepartureByTrans(String transcode) throws  RemoteException;
-	public String getDepartureByLoad(String loadcode) throws  RemoteException;
+	public HallLoadPO getHallLoadBycode(String hallloadcode) throws  RemoteException;
+	
+	public RecordtransPO getRecordtransBycode(String recordtranscode) throws  RemoteException;
 
 
 }

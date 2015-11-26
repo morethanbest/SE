@@ -15,5 +15,5 @@ public interface CenterLoadFormDataService extends Remote {
 	
 	public ResultMessage addCenterLoadForm (CenterloadPO po)throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public String findLastmotorcode(String orgcode) throws RemoteException;
 }

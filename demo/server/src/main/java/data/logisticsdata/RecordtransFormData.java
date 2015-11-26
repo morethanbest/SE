@@ -32,12 +32,10 @@ public class RecordtransFormData extends UnicastRemoteObject implements Recordtr
 	}
 
 	@Override
-	public long findLastID() throws RemoteException {
-		return 0;
-	}
-
-	@Override
-	public RecordtransPO getRecordtransForm(String transNumber) throws RemoteException {
+	public String findLasttranscode(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }

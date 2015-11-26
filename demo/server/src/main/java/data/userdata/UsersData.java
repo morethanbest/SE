@@ -23,12 +23,12 @@ public class UsersData extends UnicastRemoteObject implements UserDataService{
 
 	@Override
 	public ResultMessage delete(UserPO po) throws RemoteException {
-		return UserDB.deletebyid(po);
+		return UserDB.deletebyusername(po);
 	}
 
 	@Override
-	public UserPO find(long id) throws RemoteException {
-		return UserDB.find(id);
+	public UserPO find(String username) throws RemoteException {
+		return UserDB.find(username);
 	}
 
 	@Override

@@ -4,8 +4,10 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import po.CenterloadPO;
 import po.Formstate;
 import po.GoodsReceivingPO;
+import po.HallLoadPO;
 import po.ResultMessage;
 
 public interface GoodsReceivingFormDataService extends Remote {
@@ -17,5 +19,8 @@ public interface GoodsReceivingFormDataService extends Remote {
 	
 	public long findLastID() throws RemoteException;
 	
+	public HallLoadPO getHallLoadBycode(String hallloadcode) throws  RemoteException;
+	
+	public CenterloadPO getCenterLoadBycode(String centerloadcode) throws  RemoteException;
 	
 }

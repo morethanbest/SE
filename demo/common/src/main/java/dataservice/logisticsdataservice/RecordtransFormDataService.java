@@ -15,7 +15,6 @@ public interface RecordtransFormDataService extends Remote {
 	
 	public ResultMessage addRecordtransForm (RecordtransPO po)throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public String findLasttranscode(String orgcode) throws RemoteException;
 	
-	public RecordtransPO getRecordtransForm (String transNumber)throws RemoteException;
 }

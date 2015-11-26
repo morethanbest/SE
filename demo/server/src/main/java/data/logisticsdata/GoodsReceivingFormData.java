@@ -1,8 +1,10 @@
 package data.logisticsdata;
 
 import dataservice.logisticsdataservice.GoodsReceivingFormDataService;
+import po.CenterloadPO;
 import po.Formstate;
 import po.GoodsReceivingPO;
+import po.HallLoadPO;
 import po.ResultMessage;
 
 import java.rmi.RemoteException;
@@ -31,6 +33,18 @@ public class GoodsReceivingFormData extends UnicastRemoteObject implements Goods
 
 	@Override
 	public ResultMessage updateGoodsReceivingForm(GoodsReceivingPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public HallLoadPO getHallLoadBycode(String hallloadcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CenterloadPO getCenterLoadBycode(String centerloadcode) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

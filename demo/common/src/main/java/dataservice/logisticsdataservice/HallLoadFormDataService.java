@@ -15,5 +15,5 @@ public interface HallLoadFormDataService extends Remote {
 	
 	public ResultMessage updateLoadForm(HallLoadPO po)throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public String findLastmotorcode(String orgcode) throws RemoteException;
 }

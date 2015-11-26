@@ -23,10 +23,10 @@ public class UserDB {
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table UserPO(id bigint auto_increment primary key,username text,password text,job blob,organizationname text,organizationcode text,organizationtype blob,city blob)";
+			sql = "create table UserPO(username text,password text,job blob,organizationname text,organizationcode text,organizationtype blob,city blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			UserPO po = new UserPO(1, "sunchao","123",Job.manager,null,null,null,null); // 此处的id没用，以后应该设个初始值如10000
+			UserPO po = new UserPO("sunchao","123",Job.manager,null,null,null,null); 
 
 			ResultMessage result;
 			result = write(po);
@@ -42,11 +42,14 @@ public class UserDB {
 
 	public static ResultMessage write(UserPO user) {
 		try {
+			if(find(user.getUsername())!=null){
+				return ResultMessage.failure;
+			}
 			byte[] jobbytes = Serialize.Object2Bytes(user.getJob());
 			byte[] typebytes= Serialize.Object2Bytes(user.getOrganizationtype());
 			byte[] citybytes=Serialize.Object2Bytes(user.getCity());
 			dbh = new DBHelper();
-			sql = "insert into UserPO values(null,?,?,?,?,?,?,?)";
+			sql = "insert into UserPO values(?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 
 			pst.setString(1, user.getUsername());
@@ -87,12 +90,12 @@ public class UserDB {
 		return ResultMessage.failure;
 	}
 	
-	public static ResultMessage deletebyid(UserPO po){
+	public static ResultMessage deletebyusername(UserPO po){
 		dbh=new DBHelper();
-		sql="delete from UserPO where ide=?";
+		sql="delete from UserPO where username=?";
 		pst=dbh.prepare(sql);
 		try{
-			pst.setLong(1, po.getId());
+			pst.setString(1, po.getUsername());
 			int result=pst.executeUpdate();
 			if(result!=0){
 				return ResultMessage.success;
@@ -103,23 +106,22 @@ public class UserDB {
 		return ResultMessage.failure;
 	}
 	
-	public static UserPO find(long id) {
+	public static UserPO find(String username) {
 		UserPO po=null;
 		dbh = new DBHelper();
-		sql = "select username,password,job,organizationname,organizationcode,organizationtype,city from UserPO where id=?";
+		sql = "select password,job,organizationname,organizationcode,organizationtype,city from UserPO where username=?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setLong(1, id);
+			pst.setString(1, username);
 			ret = pst.executeQuery();
 			if (ret.next()) {
-				String username = ret.getString(1);
-				byte[] jobbytes = ret.getBytes(3);
+				byte[] jobbytes = ret.getBytes(2);
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
-				byte[] typebytes=ret.getBytes(6);
+				byte[] typebytes=ret.getBytes(5);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(7);
+				byte[] citybytes=ret.getBytes(6);
 				City city=(City)Serialize.Bytes2Object(citybytes);
-				po = new UserPO(id,username,ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
+				po = new UserPO(username,ret.getString(1),job,ret.getString(3),ret.getString(4),type,city);
 				ret.close();
 				dbh.close();// 关闭连接
 				return po;
@@ -137,21 +139,20 @@ public class UserDB {
 	
 	public static ResultMessage update(UserPO po){
 		dbh=new DBHelper();
-		sql="update UserPO set username=?,password=?,job=?,organizationname=?,organizationcode=?"
-				+ ",organizationtype=?,city=? where id=?";
+		sql="update UserPO set password=?,job=?,organizationname=?,organizationcode=?"
+				+ ",organizationtype=?,city=? where username=?";
 		pst=dbh.prepare(sql);
 		try{
 			byte[] jobbytes=Serialize.Object2Bytes(po.getJob());
 			byte[] typebytes=Serialize.Object2Bytes(po.getOrganizationtype());
 			byte[] citybytes=Serialize.Object2Bytes(po.getCity());
-			pst.setString(1, po.getUsername());
-			pst.setString(2, po.getPassword());
-			pst.setBytes(3, jobbytes);
-			pst.setString(4, po.getOrganizationname());
-			pst.setString(5, po.getOrganizationcode());
-			pst.setBytes(6, typebytes);
-			pst.setBytes(7, citybytes);
-			pst.setLong(8, po.getId());
+			pst.setString(1, po.getPassword());
+			pst.setBytes(2, jobbytes);
+			pst.setString(3, po.getOrganizationname());
+			pst.setString(4, po.getOrganizationcode());
+			pst.setBytes(5, typebytes);
+			pst.setBytes(6, citybytes);
+			pst.setString(7, po.getUsername());
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
@@ -168,20 +169,20 @@ public class UserDB {
 	public static UserPO check(String username, String password) {
 		UserPO po=null;
 		dbh = new DBHelper();
-		sql = "select id,job,organizationname,organizationcode,organizationtype,city from UserPO where username=? and password=?";
+		sql = "select job,organizationname,organizationcode,organizationtype,city from UserPO where username=? and password=?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, username);
 			pst.setString(2, password);
 			ret = pst.executeQuery();
 			if (ret.next()) {
-				byte[] jobbytes = ret.getBytes(2);
+				byte[] jobbytes = ret.getBytes(1);
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
-				byte[] typebytes=ret.getBytes(5);
+				byte[] typebytes=ret.getBytes(4);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(6);
+				byte[] citybytes=ret.getBytes(5);
 				City city=(City)Serialize.Bytes2Object(citybytes);
-				po = new UserPO(ret.getLong(1),username,password,job,ret.getString(3),ret.getString(4),type,city);
+				po = new UserPO(username,password,job,ret.getString(2),ret.getString(3),type,city);
 				ret.close();
 				dbh.close();// 关闭连接
 				return po;

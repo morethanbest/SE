@@ -11,7 +11,7 @@ public interface UserDataService extends Remote {
 	
 	public ResultMessage delete (UserPO po)throws RemoteException;
 	
-	public UserPO find(long id)throws RemoteException;
+	public UserPO find(String username)throws RemoteException;
 	
 	public ResultMessage update (UserPO po)throws RemoteException;
 }

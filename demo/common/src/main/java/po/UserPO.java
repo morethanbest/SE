@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 
 public class UserPO implements Serializable {
-	long id;
 	String username;
 	String password;
 	Job job;
@@ -12,9 +11,8 @@ public class UserPO implements Serializable {
 	String organizationcode;
 	Organizationtype organizationtype;
 	City city;
-	public UserPO(long id, String username, String password, Job job, String organizationname, String organizationcode,
+	public UserPO(String username, String password, Job job, String organizationname, String organizationcode,
 			Organizationtype organizationtype, City city) {
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.job = job;
@@ -25,9 +23,6 @@ public class UserPO implements Serializable {
 	}
 	public String getUsername() {
 		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public String getPassword() {
 		return password;
@@ -64,9 +59,6 @@ public class UserPO implements Serializable {
 	}
 	public void setCity(City city) {
 		this.city = city;
-	}
-	public long getId() {
-		return id;
 	}
 	
 	

@@ -1,13 +1,15 @@
 package data.logisticsdata;
 
-import dataservice.logisticsdataservice.ArrivalFormDataService;
-import po.ArrivalPO;
-import po.Formstate;
-import po.ResultMessage;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+
+import dataservice.logisticsdataservice.ArrivalFormDataService;
+import po.ArrivalPO;
+import po.Formstate;
+import po.HallLoadPO;
+import po.RecordtransPO;
+import po.ResultMessage;
 
 public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormDataService{
 
@@ -28,6 +30,18 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 
 	@Override
 	 public ResultMessage addArrivalForm(ArrivalPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public HallLoadPO getHallLoadBycode(String hallloadcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RecordtransPO getRecordtransBycode(String recordtranscode) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
