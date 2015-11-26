@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class RecordtransPO  implements Serializable{
-	long id;
+
 	long loadtime;
 	long arrivaltime;
 	String transcode;
@@ -15,9 +15,9 @@ public class RecordtransPO  implements Serializable{
 	List<String> allcode;
 	double fee;
 	Formstate documentstate;
-	public RecordtransPO(long id,long loadtime, long arrivaltime, String transcode, String flightcode, String departrue,
+	public RecordtransPO(long loadtime, long arrivaltime, String transcode, String flightcode, String departrue,
 			String destination, String countercode, String supervisor, List<String> allcode, double fee) {
-		this.id=id;
+
 		this.loadtime = loadtime;
 		this.arrivaltime = arrivaltime;
 		this.transcode = transcode;
@@ -30,9 +30,7 @@ public class RecordtransPO  implements Serializable{
 		this.fee = fee;
 		this.documentstate=Formstate.waiting;
 	}
-	public long getId() {
-		return id;
-	}
+
 	public Formstate getDocumentstate() {
 		return documentstate;
 	}

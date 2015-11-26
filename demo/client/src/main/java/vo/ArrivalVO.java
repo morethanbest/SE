@@ -4,6 +4,8 @@ import po.Arrivalstate;
 import po.Formstate;
 
 public class ArrivalVO {
+
+
 	String centercode;
 	long arrivaltime;
 	String transcode;

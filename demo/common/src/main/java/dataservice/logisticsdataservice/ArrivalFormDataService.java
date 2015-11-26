@@ -15,5 +15,10 @@ public interface ArrivalFormDataService extends Remote {
 	
 	public ResultMessage addArrivalForm (ArrivalPO po) throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public long findLastID(String centercode) throws RemoteException;
+
+	public String getDepartureByTrans(String transcode) throws  RemoteException;
+	public String getDepartureByLoad(String loadcode) throws  RemoteException;
+
+
 }

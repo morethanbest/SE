@@ -13,6 +13,7 @@ public class CenterloadVO {
 	String supervisor;
 	String supercargo;
 	List<String> allbarcode;
+	double fee;
 	Formstate documentstate;
 	public CenterloadVO(long loadtime, String motorcode, String destination, String vehiclecode, String supervisor,
 			String supercargo, List<String> allbarcode,Formstate documentstate) {

@@ -25,4 +25,25 @@ public class ArrivalController implements ArrivalBlService {
         ResultMessage result=newarriv.updataArrivalForm(vo);
         return result;
     }
+
+    @Override
+    public String getDepartureByTrans(String transcode) throws RemoteException {
+        DepartGet departgetter=new DepartGet();
+        String departure=departgetter.getDepartureByTrans(transcode);
+        return departure;
+    }
+
+    @Override
+    public String getDepartureByLoad(String loadcode) throws RemoteException {
+        DepartGet departgetter=new DepartGet();
+        String departure=departgetter.getDepartureByLoad(loadcode);
+        return departure;
+    }
+
+    @Override
+    public String getid(String centercode) throws RemoteException {
+        IdGet idgetter=new IdGet();
+        String result=idgetter.getid(centercode);
+        return result;
+    }
 }

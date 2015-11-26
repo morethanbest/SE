@@ -9,7 +9,7 @@ public class DeliveryPO  implements Serializable{
 	String delivorinfo;
 	Formstate documentstate;
 	
-	public DeliveryPO(long id,long arrivaltime,String barcode,String delivorinfo) {
+	public DeliveryPO(long id,long arrivaltime,String barcode,String delivorinfo,Formstate documentstate) {
 		this.id = id;
 		this.arrivaltime=arrivaltime;
 		this.barcode=barcode;
