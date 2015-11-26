@@ -100,9 +100,9 @@ public class LoginPanel extends JPanel implements ActionListener {
 			try {
 				long id = Long.parseLong(textField.getText());
 				String password = new String(passwordField.getPassword());
-				frame.skipToNext(userloginBlService.login(id, password)
-						.getJob());
-				// frame.skipToNext(Job.manager);//作者测试用，真实使用时注释掉
+//				frame.skipToNext(userloginBlService.login(id, password)
+//						.getJob());
+				frame.skipToNext(Job.manager);//作者测试用，真实使用时注释掉
 			} catch (NumberFormatException e1) {
 				try {
 					WrongDialog dialog = new WrongDialog();

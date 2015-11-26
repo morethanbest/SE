@@ -255,29 +255,29 @@ public class OrganizationDB {
 	public static void main(String[] args) {
 		initialize();
 		System.out.println("test");
-		if(getAll().size()>0){
-			System.out.println("getall success");
-		}
-		if(update("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai)==ResultMessage.success){
-			System.out.println("update success");
-		}
-		if(search("025000")!=null){
-			System.out.println("search success");
-		}
-		if(fuzzySearchbycity(City.Shanghai).size()>0){
-			System.out.println("fuzzysearch success");
-		}
-		if(fuzzySearchbytype(Organizationtype.transfercenter).size()>0){
-			System.out.println("fuzzySearchbyypte success");
-		}
-		if(fuzzySearchbyboth(City.Shanghai,Organizationtype.transfercenter).size()>0){
-			System.out.println("fuzzySearchbyboth success");
-		}
-		if("025000".equals(gethallcode(City.Nanjing))){
-			System.out.println("gethallcode success");
-		}
-		if(delete("025000")==ResultMessage.success){
-			System.out.println("delete success");
-		}
+//		if(getAll().size()>0){
+//			System.out.println("getall success");
+//		}
+//		if(update("上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai)==ResultMessage.success){
+//			System.out.println("update success");
+//		}
+//		if(search("025000")!=null){
+//			System.out.println("search success");
+//		}
+//		if(fuzzySearchbycity(City.Shanghai).size()>0){
+//			System.out.println("fuzzysearch success");
+//		}
+//		if(fuzzySearchbytype(Organizationtype.transfercenter).size()>0){
+//			System.out.println("fuzzySearchbyypte success");
+//		}
+//		if(fuzzySearchbyboth(City.Shanghai,Organizationtype.transfercenter).size()>0){
+//			System.out.println("fuzzySearchbyboth success");
+//		}
+//		if("025000".equals(gethallcode(City.Nanjing))){
+//			System.out.println("gethallcode success");
+//		}
+//		if(delete("025000")==ResultMessage.success){
+//			System.out.println("delete success");
+//		}
 	}
 }

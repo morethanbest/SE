@@ -9,6 +9,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.Driver;
 import java.util.List;
 
+import data.database.transportDB.DriverDB;
+
 public class DriversData extends UnicastRemoteObject implements DriversDataService{
 
 	public DriversData() throws  RemoteException{
@@ -18,27 +20,27 @@ public class DriversData extends UnicastRemoteObject implements DriversDataServi
 
 	@Override
 	public ResultMessage insertDriver(DriversPO po) throws RemoteException {
-		return null;
+		return DriverDB.write(po);
 	}
 
 	@Override
 	public ResultMessage deleteDriver(DriversPO po) throws RemoteException {
-		return null;
+		return  DriverDB.delete(po);
 	}
 
 	@Override
 	public ResultMessage updateDriver(DriversPO po) throws RemoteException {
-		return null;
+		return DriverDB.update(po);
 	}
 
 	@Override
 	public DriversPO findDriverBynum(String identity) throws RemoteException {
-		return null;
+		return DriverDB.search(identity);
 	}
 
 	@Override
 	public List<DriversPO> findDriverByname(String identity) throws RemoteException {
-		return null;
+		return DriverDB.fuzzysearch(identity);
 	}
 
 	@Override
