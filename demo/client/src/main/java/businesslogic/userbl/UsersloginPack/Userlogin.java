@@ -10,8 +10,9 @@ public class Userlogin {
 	}
 	
 	public LoginVO login(long id, String password) {
-		LoginVO login=con.log(id,password);
-		return login;
+		con.setLogin(id, password);
+		LoginVO vo=con.log();
+		return vo;
 	}
 
 }

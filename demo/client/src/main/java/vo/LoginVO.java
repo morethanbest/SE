@@ -1,32 +1,40 @@
 package vo;
 
+import po.City;
 import po.Job;
+import po.Organizationtype;
 
 public class LoginVO {
 	String username;
-	String String;
 	Job job;
-	public LoginVO(String username, String String, Job job) {
+	String organizationname;
+	String organizationcode;
+	Organizationtype organizationtype;
+	City city;
+	public LoginVO(String username, Job job, String organizationname, String organizationcode, Organizationtype organizationtype, City city) {
 		this.username = username;
-		this.String = String;
 		this.job = job;
+		this.organizationname=organizationname;
+		this.organizationcode=organizationcode;
+		this.organizationtype=organizationtype;
+		this.city=city;
 	}
 	public String getUsername() {
 		return username;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getString() {
-		return String;
-	}
-	public void setString(String String) {
-		this.String = String;
-	}
 	public Job getJob() {
 		return job;
 	}
-	public void setJob(Job job) {
-		this.job = job;
+	public String getOrganizationname(){
+		return organizationname;
+	}
+	public String getOrganizationcode(){
+		return organizationcode;
+	}
+	public Organizationtype getOrganizationtype(){
+		return organizationtype;
+	}
+	public City getCity(){
+		return city;
 	}
 }

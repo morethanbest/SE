@@ -4,25 +4,43 @@ import init.RMIHelper;
 
 import java.rmi.RemoteException;
 
+import po.City;
 import po.Job;
-import po.LoginPO;
+import po.Organizationtype;
+import po.UserPO;
 import vo.LoginVO;
 import dataservice.userdataservice.UserLoginDataService;
 
 public class LoginConfirm {
-
-	public LoginVO log(long id, String password){
-//		databaseFactory fac=FactoryGet.getfactory();
-//		UserLoginData userdata=fac.getUserLogin();
+	long id;
+	String password;
+	public void setLogin(long id, String password){
+		this.id=id;
+		this.password=password;
+	}
+	public LoginVO log(){
 		UserLoginDataService userdata=RMIHelper.getUserlogindata();
+		LoginVO vo;
 		try {
-			LoginPO po=userdata.login(id,password);
-			
-			return new LoginVO(po.getUsername(),po.getHall(),po.getJob());
-		} catch (RemoteException e) {
-			return new LoginVO(null,null,Job.visitor);
+			UserPO po=userdata.login(id,password);
+			if(po==null){
+				vo=null;
+			}
+			else{
+				String username=po.getUsername();
+				Job job=po.getJob();
+				String organizationname=po.getOrganizationname();
+				String organizationcode=po.getOrganizationcode();
+				Organizationtype organizationtype=po.getOrganizationtype();
+				City city=po.getCity();
+				vo=new LoginVO(username, job, organizationname, organizationcode, organizationtype, city);
+			}
+
+		} catch (Exception e) {
+			System.out.println("Login fail");
+			vo=null;
 		}
-		
+		return vo;
 	}
 
 }
