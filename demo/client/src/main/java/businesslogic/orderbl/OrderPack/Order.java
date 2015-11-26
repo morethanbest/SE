@@ -37,15 +37,14 @@ public class Order {
 		double weight=vo.getWeight();
 		double volume=vo.getVolume();
 		String productname=vo.getProductname();
-		double productsize=vo.getProductsize();
 		double packagefee=vo.getPackagefee();
 		String ordercode=vo.getOrdercode();
 		Ordertype ordertype=vo.getOrdertype();
-		OrderFareVO farevo=new OrderFareVO(senderaddress, receiveraddress, numbers, weight, volume, productsize, packagefee, ordertype);
+		OrderFareVO farevo=new OrderFareVO(senderaddress, receiveraddress, numbers, weight, volume, packagefee, ordertype);
 		double totalfee=this.getPrice(farevo);
 		add.setOrder(id, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, 
-				productname, productsize, packagefee, totalfee, ordercode, ordertype);
+				productname, packagefee, totalfee, ordercode, ordertype);
 		ResultMessage result=add.addOrder();
 		return result;
 	}
@@ -56,10 +55,9 @@ public class Order {
 		double numbers=vo.getNumbers();
 		double weight=vo.getWeight();
 		double volume=vo.getVolume();
-		double productsize=vo.getProductsize();
 		double packagefee=vo.getPackagefee();
 		Ordertype ordertype=vo.getOrdertype();
-		getPrice.setPriceInfo(senderaddress, receiveraddress, numbers, weight, volume, productsize, packagefee, ordertype);
+		getPrice.setPriceInfo(senderaddress, receiveraddress, numbers, weight, volume, packagefee, ordertype);
 		double price=getPrice.getPrice();
 		return price;
 	}

@@ -8,11 +8,10 @@ public class OrderFareVO {
 	double numbers;
 	double weight;
 	double volume;
-	double productsize;
 	double packagefee;
 	Ordertype ordertype;
 	public OrderFareVO(String senderaddress, String receiveraddress,
-			double numbers, double weight, double volume, double productsize,
+			double numbers, double weight, double volume, 
 			double packagefee, Ordertype ordertype) {
 		super();
 		this.senderaddress = senderaddress;
@@ -20,7 +19,6 @@ public class OrderFareVO {
 		this.numbers = numbers;
 		this.weight = weight;
 		this.volume = volume;
-		this.productsize = productsize;
 		this.packagefee = packagefee;
 		this.ordertype = ordertype;
 	}
@@ -38,9 +36,6 @@ public class OrderFareVO {
 	}
 	public double getVolume() {
 		return volume;
-	}
-	public double getProductsize() {
-		return productsize;
 	}
 	public double getPackagefee() {
 		return packagefee;

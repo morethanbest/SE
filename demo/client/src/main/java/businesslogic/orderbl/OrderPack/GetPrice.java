@@ -12,17 +12,15 @@ public class GetPrice {
 	double numbers;
 	double weight;
 	double volume;
-	double productsize;
 	double packagefee;
 	Ordertype ordertype;
 	public void setPriceInfo(String senderaddress,String receiveraddress,double numbers,double weight,
-			double volume,double productsize,double packagefee,Ordertype ordertype){
+			double volume,double packagefee,Ordertype ordertype){
 		this.senderaddress=senderaddress;
 		this.receiveraddress=receiveraddress;
 		this.numbers=numbers;
 		this.weight=weight;
 		this.volume=volume;
-		this.productsize=productsize;
 		this.packagefee=packagefee;
 		this.ordertype=ordertype;
 	}
@@ -51,7 +49,7 @@ public class GetPrice {
 		}
 		List<ConstantsVO> listvo1=constants.getConstants(name);
 		ConstantsVO vo1=listvo1.get(0);
-		double ot=vo.getValue();
+		double ot=vo1.getValue();
 		double price=distance/1000*ot*w;
 		return price;
 	}

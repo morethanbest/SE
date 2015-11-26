@@ -167,8 +167,15 @@ public class OrderPO  implements Serializable{
 	public void setOrdertype(Ordertype ordertype) {
 		this.ordertype = ordertype;
 	}
-
-	
+	public void setReceiver(String receiver){
+		this.receiver=receiver;
+	}
+	public void setReceivingtime(long receivingtime){
+		this.receivingtime=receivingtime;
+	}
+	public void setFormstate(Formstate documentstate){
+	    this.documentstate=documentstate;
+	}
 	public Formstate getDocumentstate(){
 		return this.documentstate;
 	}

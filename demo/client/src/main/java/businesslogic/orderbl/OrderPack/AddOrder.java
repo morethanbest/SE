@@ -33,7 +33,7 @@ public class AddOrder {
 	
 	public void setOrder(long id,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
-			double volume,String productname,Double productsize,double packagefee,double totalfee,String ordercode,Ordertype ordertype){
+			double volume,String productname,double packagefee,double totalfee,String ordercode,Ordertype ordertype){
 		this.id=id;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
@@ -60,7 +60,7 @@ public class AddOrder {
 	public ResultMessage addOrder(){
 		OrderPO po=new OrderPO(id, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, productname, 
-				productsize, packagefee, totalfee, ordercode, ordertype);
+				packagefee, totalfee, ordercode, ordertype);
 		OrderFormDataService order=RMIHelper.getOrderformdata();
 		ResultMessage result;
 		try {
@@ -74,7 +74,7 @@ public class AddOrder {
 	}
 	public ResultMessage addLogisticsPO(){
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		LogisticsPO po=new LogisticsPO(id, "ordertype", null, ordercode);//
+		LogisticsPO po=new LogisticsPO("ordertype", null, ordercode);//
 		//////////////////////////
 		OrderPOAddService addservice=new OrderPOAdd();
 		ResultMessage result=addservice.addOrder(po);
