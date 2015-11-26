@@ -7,6 +7,6 @@ import po.UserPO;
 
 public interface UserLoginDataService extends Remote {
 
-	public UserPO login(long id,String password)throws RemoteException;
+	public UserPO login(String username,String password)throws RemoteException;
 
 }

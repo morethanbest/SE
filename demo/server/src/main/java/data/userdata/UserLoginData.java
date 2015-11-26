@@ -12,9 +12,9 @@ public class UserLoginData extends UnicastRemoteObject implements UserLoginDataS
 		super();
 	}
 	@Override
-	public UserPO login(long id, String password) throws RemoteException {
+	public UserPO login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		return UserDB.check(id, password);
+		return UserDB.check(username, password);
 	}
 
 }

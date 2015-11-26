@@ -131,7 +131,7 @@ public class UserDB {
 			e.printStackTrace();
 		}
 
-		return null;
+		return po;
 
 	}
 	
@@ -165,24 +165,23 @@ public class UserDB {
 		return ResultMessage.failure;		
 	}
 	
-	public static UserPO check(long id, String password) {
+	public static UserPO check(String username, String password) {
 		UserPO po=null;
 		dbh = new DBHelper();
-		sql = "select username,job,organizationname,organizationcode,organizationtype,city from UserPO where id=? and password=?";
+		sql = "select id,job,organizationname,organizationcode,organizationtype,city from UserPO where username=? and password=?";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setLong(1, id);
+			pst.setString(1, username);
 			pst.setString(2, password);
 			ret = pst.executeQuery();
 			if (ret.next()) {
-				String username = ret.getString(1);
 				byte[] jobbytes = ret.getBytes(2);
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
 				byte[] typebytes=ret.getBytes(5);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
 				byte[] citybytes=ret.getBytes(6);
 				City city=(City)Serialize.Bytes2Object(citybytes);
-				po = new UserPO(id,username,password,job,ret.getString(3),ret.getString(4),type,city);
+				po = new UserPO(ret.getLong(1),username,password,job,ret.getString(3),ret.getString(4),type,city);
 				ret.close();
 				dbh.close();// 关闭连接
 				return po;
@@ -194,14 +193,16 @@ public class UserDB {
 			e.printStackTrace();
 		}
 
-		return null;
+		return po;
 
 	}
 
 	public static void main(String[] args) {
 		initialize();
-		update(new UserPO(1,"sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai));
-		check(1,"123");
+//		update(new UserPO(1,"sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai));
+		if(check("sunchao","123")!=null){
+			System.out.println("login");
+		}
 	}
 
 }
