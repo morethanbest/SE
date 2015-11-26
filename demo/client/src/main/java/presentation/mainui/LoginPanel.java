@@ -98,11 +98,11 @@ public class LoginPanel extends JPanel implements ActionListener {
 		if (e.getSource().equals(button)) {
 			UserloginBlService userloginBlService = new UserloginController();
 			try {
-				long id = Long.parseLong(textField.getText());
+				String username = textField.getText();
 				String password = new String(passwordField.getPassword());
-//				frame.skipToNext(userloginBlService.login(id, password)
-//						.getJob());
-				frame.skipToNext(Job.manager);//作者测试用，真实使用时注释掉
+				frame.skipToNext(userloginBlService.login(username, password)
+						.getJob());
+//				frame.skipToNext(Job.manager);//作者测试用，真实使用时注释掉
 			} catch (NumberFormatException e1) {
 				try {
 					WrongDialog dialog = new WrongDialog();
