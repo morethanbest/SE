@@ -1,16 +1,15 @@
 package businesslogic.logisticsbl.ArrivalPack;
 
-import dataservice.logisticsdataservice.ArrivalFormDataService;
-import dataservice.orderdataservice.LogisticsDataService;
-import init.RMIHelper;
-
 import java.rmi.RemoteException;
+
+import dataservice.logisticsdataservice.ArrivalFormDataService;
+import init.RMIHelper;
 
 /**
  * Created by Administrator on 2015/11/26.
  */
 public class IdGet {
-    public long getid(String centercode){
+    public long getid(){
         ArrivalFormDataService dataserv= RMIHelper.getArrivalform();
        long id=-1;
         try {

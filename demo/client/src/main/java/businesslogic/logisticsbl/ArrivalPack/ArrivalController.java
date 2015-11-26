@@ -19,10 +19,10 @@ public class ArrivalController implements ArrivalBlService {
     }
 
     @Override
-    public ResultMessage addArrivalFromHall(ArrivalVO vo,String orgcode) throws RemoteException {
+    public ResultMessage addArrivalFromHall(ArrivalVO vo,String orgname) throws RemoteException {
         ResultMessage result=addArrival(vo);
         UpdateLogistics update=new UpdateLogistics();
-        ResultMessage res=update.updatebyhall(vo,orgcode);
+        ResultMessage res=update.updatebyhall(vo,orgname);
         if(res==ResultMessage.failure){
             System.out.println("can not update all state");
         }
@@ -31,10 +31,10 @@ public class ArrivalController implements ArrivalBlService {
     }
 
     @Override
-    public ResultMessage addArrivalFromCenter(ArrivalVO vo,String orgcode) throws RemoteException {
+    public ResultMessage addArrivalFromCenter(ArrivalVO vo,String orgname) throws RemoteException {
         ResultMessage result=addArrival(vo);
         UpdateLogistics update=new UpdateLogistics();
-        ResultMessage res=update.updatebycenter(vo,orgcode);
+        ResultMessage res=update.updatebycenter(vo,orgname);
         if(res==ResultMessage.failure){
             System.out.println("can not update all state");
         }
@@ -52,9 +52,9 @@ public class ArrivalController implements ArrivalBlService {
 
 
     @Override
-    public long getid(String centercode) throws RemoteException {
+    public long getid() throws RemoteException {
         IdGet idgetter=new IdGet();
-        long result=idgetter.getid(centercode);
+        long result=idgetter.getid();
         return result;
     }
 }
