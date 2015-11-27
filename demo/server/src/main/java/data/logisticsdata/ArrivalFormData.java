@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.database.logisticsDB.ArrivalDB;
 import dataservice.logisticsdataservice.ArrivalFormDataService;
 import po.ArrivalPO;
 import po.Formstate;
@@ -20,17 +21,17 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 
 	@Override
 	public List<ArrivalPO> getArrivalForm(Formstate state) throws RemoteException {
-		return null;
+		return ArrivalDB.fuzzySearch(state);
 	}
 
 	@Override
 	public ResultMessage updateArrivalForm(ArrivalPO po) throws RemoteException {
-		return null;
+		return ArrivalDB.update(po);
 	}
 
 	@Override
 	 public ResultMessage addArrivalForm(ArrivalPO po) throws RemoteException {
-		return null;
+		return ArrivalDB.write(po);
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 	}
 
 	@Override
-		 public long findLastID() throws RemoteException {
-		return 0;
+	public long findLastID() throws RemoteException {
+		return ArrivalDB.getLastId();
 	}
 }
