@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 
 import data.database.DBHelper;
 import data.database.Serialize;
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -23,7 +22,7 @@ public class UserDB {
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table UserPO(username text,password text,job blob,organizationname text,organizationcode text,organizationtype blob,city blob)";
+			sql = "create table UserPO(username text,password text,job blob,organizationname text,organizationcode text,organizationtype blob,city text)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
 			UserPO po = new UserPO("sunchao","123",Job.manager,null,null,null,null); 
@@ -47,7 +46,6 @@ public class UserDB {
 			}
 			byte[] jobbytes = Serialize.Object2Bytes(user.getJob());
 			byte[] typebytes= Serialize.Object2Bytes(user.getOrganizationtype());
-			byte[] citybytes=Serialize.Object2Bytes(user.getCity());
 			dbh = new DBHelper();
 			sql = "insert into UserPO values(?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
@@ -58,7 +56,7 @@ public class UserDB {
 			pst.setString(4, user.getOrganizationname());
 			pst.setString(5, user.getOrganizationcode());
 			pst.setBytes(6, typebytes);
-			pst.setBytes(7, citybytes);
+			pst.setString(7, user.getCity());
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -119,9 +117,7 @@ public class UserDB {
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
 				byte[] typebytes=ret.getBytes(5);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(6);
-				City city=(City)Serialize.Bytes2Object(citybytes);
-				po = new UserPO(username,ret.getString(1),job,ret.getString(3),ret.getString(4),type,city);
+				po = new UserPO(username,ret.getString(1),job,ret.getString(3),ret.getString(4),type,ret.getString(6));
 				ret.close();
 				dbh.close();// 关闭连接
 				return po;
@@ -145,13 +141,12 @@ public class UserDB {
 		try{
 			byte[] jobbytes=Serialize.Object2Bytes(po.getJob());
 			byte[] typebytes=Serialize.Object2Bytes(po.getOrganizationtype());
-			byte[] citybytes=Serialize.Object2Bytes(po.getCity());
 			pst.setString(1, po.getPassword());
 			pst.setBytes(2, jobbytes);
 			pst.setString(3, po.getOrganizationname());
 			pst.setString(4, po.getOrganizationcode());
 			pst.setBytes(5, typebytes);
-			pst.setBytes(6, citybytes);
+			pst.setString(6, po.getCity());
 			pst.setString(7, po.getUsername());
 			int result;
 			result=pst.executeUpdate();
@@ -180,9 +175,7 @@ public class UserDB {
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
 				byte[] typebytes=ret.getBytes(4);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(5);
-				City city=(City)Serialize.Bytes2Object(citybytes);
-				po = new UserPO(username,password,job,ret.getString(2),ret.getString(3),type,city);
+				po = new UserPO(username,password,job,ret.getString(2),ret.getString(3),type,ret.getString(5));
 				ret.close();
 				dbh.close();// 关闭连接
 				return po;
@@ -200,7 +193,7 @@ public class UserDB {
 
 	public static void main(String[] args) {
 		initialize();
-//		update(new UserPO(1,"sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai));
+//		update(new UserPO("sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,"上海"));
 		if(check("sunchao","123")!=null){
 			System.out.println("login");
 		}

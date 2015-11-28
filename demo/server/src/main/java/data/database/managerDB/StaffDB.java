@@ -8,7 +8,6 @@ import java.util.List;
 import data.database.DBHelper;
 import data.database.Serialize;
 import data.database.userDB.UserDB;
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -25,10 +24,10 @@ public class StaffDB {
 		pst=dbh.prepare(sql);
 		try{
 			pst.executeUpdate();
-			sql = "create table StaffPO(id bigint auto_increment primary key,name text,job blob,organizationname text,organizationcode text,organizationtype blob,city blob)";
+			sql = "create table StaffPO(id bigint auto_increment primary key,name text,job blob,organizationname text,organizationcode text,organizationtype blob,city text)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			StaffPO po=new StaffPO(1,"sunchao",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,City.Shanghai);
+			StaffPO po=new StaffPO(1,"sunchao",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,"上海");
 			ResultMessage result;
 			result = write(po);
 			if (result == ResultMessage.success) {
@@ -49,8 +48,7 @@ public class StaffDB {
 		try {
 			
 			byte[] jobbytes = Serialize.Object2Bytes(staff.getJob());
-			byte[] typebytes=Serialize.Object2Bytes(staff.getType());
-			byte[] citybytes=Serialize.Object2Bytes(staff.getCity());
+			byte[] typebytes=Serialize.Object2Bytes(staff.getOrganizationtype());
 			dbh = new DBHelper();
 			sql = "insert into StaffPO values(null,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
@@ -60,7 +58,7 @@ public class StaffDB {
 			pst.setString(3, staff.getOrganizationname());
 			pst.setString(4, staff.getOrganizationcode());
 			pst.setBytes(5, typebytes);
-			pst.setBytes(6, citybytes);
+			pst.setString(6, staff.getCity());
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -119,8 +117,7 @@ public class StaffDB {
 	public static ResultMessage update(StaffPO staff){
 		try{
 			byte[] jobbytes = Serialize.Object2Bytes(staff.getJob());
-			byte[] typebytes=Serialize.Object2Bytes(staff.getType());
-			byte[] citybytes=Serialize.Object2Bytes(staff.getCity());
+			byte[] typebytes=Serialize.Object2Bytes(staff.getOrganizationtype());
 			dbh = new DBHelper();
 			sql = "update StaffPO set name=?,job=?,organizationname=?,organizationcode=?,organizationtype=?,city=? where id=?";
 			pst = dbh.prepare(sql);
@@ -129,7 +126,7 @@ public class StaffDB {
 			pst.setString(3, staff.getOrganizationname());
 			pst.setString(4, staff.getOrganizationcode());
 			pst.setBytes(5, typebytes);
-			pst.setBytes(6, citybytes);
+			pst.setString(6, staff.getCity());
 			pst.setLong(7,staff.getId());
 			int result;
 			result = pst.executeUpdate();
@@ -185,9 +182,7 @@ public class StaffDB {
 			while (ret.next()) {
 				byte[] typebytes=ret.getBytes(6);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(7);
-				City city=(City)Serialize.Bytes2Object(citybytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,ret.getString(7));
 				list.add(po);
 			}
 			ret.close();
@@ -215,9 +210,7 @@ public class StaffDB {
 			while (ret.next()) {
 				byte[] typebytes=ret.getBytes(6);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(7);
-				City city=(City)Serialize.Bytes2Object(citybytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,ret.getString(7));
 				list.add(po);
 			}
 			ret.close();
@@ -245,9 +238,7 @@ public class StaffDB {
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
 				byte[] typebytes=ret.getBytes(6);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(7);
-				City city=(City)Serialize.Bytes2Object(citybytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,ret.getString(7));
 				list.add(po);
 			}
 			ret.close();
@@ -272,9 +263,7 @@ public class StaffDB {
 				Job job = (Job) Serialize.Bytes2Object(jobbytes);
 				byte[] typebytes=ret.getBytes(6);
 				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
-				byte[] citybytes=ret.getBytes(7);
-				City city=(City)Serialize.Bytes2Object(citybytes);
-				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,city);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,ret.getString(7));
 			}
 			ret.close();
 			dbh.close();// 关闭连接
