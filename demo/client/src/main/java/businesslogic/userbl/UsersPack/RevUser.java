@@ -1,12 +1,11 @@
 package businesslogic.userbl.UsersPack;
 
-import po.UserPO;
 import dataservice.userdataservice.UserDataService;
 import init.RMIHelper;
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
+import po.UserPO;
 
 public class RevUser {
 	String username;
@@ -15,9 +14,9 @@ public class RevUser {
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
     public void setRevInfo(String username, String password, Job job, String organizationname, String organizationcode,
-			Organizationtype organizationtype, City city){
+			Organizationtype organizationtype, String city){
 		this.username = username;
 		this.password = password;
 		this.job = job;

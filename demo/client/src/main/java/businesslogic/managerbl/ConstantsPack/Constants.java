@@ -2,7 +2,9 @@ package businesslogic.managerbl.ConstantsPack;
 
 import java.util.List;
 
+import po.CityPO;
 import po.ResultMessage;
+import vo.CityVO;
 import vo.ConstantsVO;
 
 public class Constants {
@@ -11,6 +13,10 @@ public class Constants {
 	FindConstants findc;
 	RevConstants revc;
 	IdInfo id;
+	AddCity addCity;
+	DelCity delCity;
+	RevCity revCity;
+	FindCity findCity;
 	
 	public Constants(AddConstants addc,IdInfo id){
 		this.addc=addc;
@@ -27,6 +33,22 @@ public class Constants {
 	
 	public Constants(RevConstants revc){
 		this.revc=revc;
+		
+	}
+	public Constants(AddCity addCity){
+		this.addCity=addCity;
+		
+	}
+	public Constants(DelCity delCity){
+		this.delCity=delCity;
+		
+	}
+	public Constants(FindCity findCity){
+		this.findCity=findCity;
+		
+	}
+	public Constants(RevCity revCity){
+		this.revCity=revCity;
 		
 	}
 	
@@ -78,5 +100,35 @@ public class Constants {
 			revc.rev();
 		}
 		return result;
+	}
+	public ResultMessage addCity(CityVO vo){
+		String name=vo.getName();
+		String zone=vo.getZone();
+		addCity.setCityInfo(name, zone);
+		ResultMessage result=addCity.addCity();
+		return result;
+	}
+	public ResultMessage delCity(CityVO vo){
+		String name=vo.getName();
+		String zone=vo.getZone();
+		delCity.setCityInfo(name, zone);
+		ResultMessage result=delCity.delCity();
+		return result;
+	}
+	public ResultMessage revCity(CityVO vo){
+		String name=vo.getName();
+		String zone=vo.getZone();
+		revCity.setCityInfo(name, zone);
+		ResultMessage result=revCity.updateCity();
+		return result;
+	}
+	public List<CityVO> getAll(){
+		List<CityVO> list=findCity.getAll();
+		return list;
+	}
+	public CityVO findCity(String name){
+		findCity.setCityInfo(name);
+		CityVO vo=findCity.findCity();
+		return vo;
 	}
 }

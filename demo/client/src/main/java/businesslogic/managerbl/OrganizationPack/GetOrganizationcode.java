@@ -2,24 +2,22 @@ package businesslogic.managerbl.OrganizationPack;
 
 import dataservice.managerdataservice.OrganizationDataService;
 import init.RMIHelper;
-import po.City;
 import po.Organizationtype;
 
-import java.rmi.RemoteException;
-
 /**
- * Created by ³¬ on 2015/11/25.
+ * Created by ï¿½ï¿½ on 2015/11/25.
  */
 public class GetOrganizationcode {
-    City city;
+	String city;
     Organizationtype type;
-    public void setGetcodeInfo(City city, Organizationtype type){
+    public void setGetcodeInfo(String city, Organizationtype type){
         this.city=city;
         this.type=type;
     }
 
     public String getOrganizationcode(){
-        String code=city.getNumber();
+    	//CityDataService city=RMIHelper.get
+        String code=null;
         if(type==Organizationtype.hall){
             OrganizationDataService organization= RMIHelper.getOrgdata();
             try {

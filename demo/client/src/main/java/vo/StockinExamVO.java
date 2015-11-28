@@ -1,6 +1,5 @@
 package vo;
 
-import po.City;
 import po.CommodityLocation;
 import po.Formstate;
 
@@ -9,9 +8,9 @@ public class StockinExamVO {
 	String ordercode;
 	long intime;
 	CommodityLocation Location;
-	City destination;
+	String destination;
 	Formstate documentstate;
-	public StockinExamVO(String ordercode, long intime, CommodityLocation location,City destination) {
+	public StockinExamVO(String ordercode, long intime, CommodityLocation location,String destination) {
 		this.ordercode = ordercode;
 		this.intime = intime;
 		Location = location;
@@ -24,10 +23,10 @@ public class StockinExamVO {
 	public void setOrdercode(String ordercode) {
 		this.ordercode = ordercode;
 	}
-	public City getDestination() {
+	public String getDestination() {
 		return destination;
 	}
-	public void setDestination(City destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 	public long getIntime() {

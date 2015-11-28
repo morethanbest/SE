@@ -2,7 +2,6 @@ package businesslogic.userbl.UsersloginPack;
 
 import dataservice.userdataservice.UserLoginDataService;
 import init.RMIHelper;
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.UserPO;
@@ -29,7 +28,7 @@ public class LoginConfirm {
 				String organizationname=po.getOrganizationname();
 				String organizationcode=po.getOrganizationcode();
 				Organizationtype organizationtype=po.getOrganizationtype();
-				City city=po.getCity();
+				String city=po.getCity();
 				vo=new LoginVO(username, job, organizationname, organizationcode, organizationtype, city);
 			}
 

@@ -1,11 +1,9 @@
 package vo;
 
-import po.City;
-
 public class CLFareVO {
 	String destination;
-	City departure;
-	public CLFareVO(String destination, City departure) {
+	String departure;
+	public CLFareVO(String destination, String departure) {
 		super();
 		this.destination = destination;
 		this.departure = departure;
@@ -13,7 +11,7 @@ public class CLFareVO {
 	public String getDestination() {
 		return destination;
 	}
-	public City getDeparture() {
+	public String getDeparture() {
 		return departure;
 	}
 }

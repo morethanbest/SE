@@ -1,14 +1,13 @@
 package vo;
 
-import po.City;
 import po.Organizationtype;
 
 public class OrganizationVO {
 	String name;
 	String organizationcode;
 	Organizationtype type;
-	City city;
-	public OrganizationVO(String name, String organizationcode, Organizationtype type, City city) {
+	String city;
+	public OrganizationVO(String name, String organizationcode, Organizationtype type, String city) {
 		this.name = name;
 		this.organizationcode = organizationcode;
 		this.type = type;
@@ -24,7 +23,7 @@ public class OrganizationVO {
 	public Organizationtype getType() {
 		return type;
 	}
-	public City getCity(){
+	public String getCity(){
 		return city;
 	}
 	

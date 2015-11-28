@@ -2,7 +2,6 @@ package businesslogic.managerbl.StaffPack;
 
 import java.util.List;
 
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -37,7 +36,7 @@ public class Staff {
 		String organizationname=vo.getOrganizationname();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype organizationtype=vo.getOrganizationtype();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		adds.setAddInfo(id, name, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=adds.addStaff();
 		return result;
@@ -76,7 +75,7 @@ public class Staff {
 		String organizationname=vo.getOrganizationname();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype organizationtype=vo.getOrganizationtype();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		revs.setRevInfo(id, name, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=revs.rev();
 		return result;

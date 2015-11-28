@@ -2,7 +2,6 @@ package businesslogic.userbl.UsersPack;
 
 import dataservice.userdataservice.UserDataService;
 import init.RMIHelper;
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -15,9 +14,9 @@ public class AddUser {
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
     public void setAddInfo(String username, String password, Job job, String organizationname, String organizationcode,
-			Organizationtype organizationtype, City city){
+			Organizationtype organizationtype, String city){
 		this.username = username;
 		this.password = password;
 		this.job = job;

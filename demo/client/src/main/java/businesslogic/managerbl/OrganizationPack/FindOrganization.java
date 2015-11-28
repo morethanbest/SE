@@ -6,22 +6,21 @@ import java.util.List;
 
 import dataservice.managerdataservice.OrganizationDataService;
 import init.RMIHelper;
-import po.City;
 import po.OrganizationPO;
 import po.Organizationtype;
 import vo.OrganizationVO;
 
 public class FindOrganization {
-	City city;
+	String city;
     Organizationtype type;
 	
-	public void setFindInfo(City city){
+	public void setFindInfo(String city){
 		this.city=city;
 	}
 	public void setFindInfo(Organizationtype type){
 		this.type=type;
 	}
-	public void setFindInfo(City city, Organizationtype type){
+	public void setFindInfo(String city, Organizationtype type){
 		this.city=city;
 		this.type=type;
 	}
@@ -38,7 +37,7 @@ public class FindOrganization {
 				String poname=po.getName();
 				String poorganizationcode=po.getOrganizationcode();
 				Organizationtype potype=po.getType();
-				City pocity=po.getCity();
+				String pocity=po.getCity();
 				OrganizationVO vo=new OrganizationVO(poname, poorganizationcode, potype, pocity);
 				listvo.add(vo);
 			}
@@ -61,7 +60,7 @@ public class FindOrganization {
 				String poname=po.getName();
 				String poorganizationcode=po.getOrganizationcode();
 				Organizationtype potype=po.getType();
-				City pocity=po.getCity();
+				String pocity=po.getCity();
 				OrganizationVO vo=new OrganizationVO(poname, poorganizationcode, potype, pocity);
 				listvo.add(vo);
 			}
@@ -85,7 +84,7 @@ public class FindOrganization {
 				String poname=po.getName();
 				String poorganizationcode=po.getOrganizationcode();
 				Organizationtype potype=po.getType();
-				City pocity=po.getCity();
+				String pocity=po.getCity();
 				OrganizationVO vo=new OrganizationVO(poname, poorganizationcode, potype, pocity);
 				listvo.add(vo);
 			}
@@ -109,7 +108,7 @@ public class FindOrganization {
 				String poname=po.getName();
 				String poorganizationcode=po.getOrganizationcode();
 				Organizationtype potype=po.getType();
-				City pocity=po.getCity();
+				String pocity=po.getCity();
 				OrganizationVO vo=new OrganizationVO(poname, poorganizationcode, potype, pocity);
 				listvo.add(vo);
 			}

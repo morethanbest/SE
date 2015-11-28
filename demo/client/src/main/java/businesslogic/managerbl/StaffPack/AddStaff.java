@@ -2,7 +2,10 @@ package businesslogic.managerbl.StaffPack;
 
 import dataservice.managerdataservice.StaffDataService;
 import init.RMIHelper;
-import po.*;
+import po.Job;
+import po.Organizationtype;
+import po.ResultMessage;
+import po.StaffPO;
 
 public class AddStaff {
 	long id;
@@ -11,9 +14,9 @@ public class AddStaff {
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
 	public void setAddInfo(long id, String name, Job job, String organizationname, String organizationcode,
-						   Organizationtype type, City city){
+						   Organizationtype organizationtype, String city){
 		this.id=id;
 		this.name=name;
 		this.job=job;

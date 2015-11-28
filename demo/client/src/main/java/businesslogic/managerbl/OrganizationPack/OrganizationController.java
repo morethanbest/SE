@@ -3,7 +3,6 @@ package businesslogic.managerbl.OrganizationPack;
 import java.util.List;
 
 import businesslogicservice.managerblservice.OrganizationBlService;
-import po.City;
 import po.Organizationtype;
 import po.ResultMessage;
 import vo.OrganizationVO;
@@ -38,7 +37,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public List<OrganizationVO> getOrganizationbyCity(City city){
+	public List<OrganizationVO> getOrganizationbyCity(String city){
 		// TODO Auto-generated method stub
 		FindOrganization findo=new FindOrganization();
 		Organization o=new Organization(findo);
@@ -56,7 +55,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public List<OrganizationVO> getOrganizationbyBoth(City city, Organizationtype type){
+	public List<OrganizationVO> getOrganizationbyBoth(String city, Organizationtype type){
 		// TODO Auto-generated method stub
 		FindOrganization findo=new FindOrganization();
 		Organization o=new Organization(findo);
@@ -74,7 +73,7 @@ public class OrganizationController implements OrganizationBlService {
 	}
 
 	@Override
-	public String getOrganizationCode(City city, Organizationtype type){
+	public String getOrganizationCode(String city, Organizationtype type){
 		// TODO Auto-generated method stub
 		GetOrganizationcode getcode=new GetOrganizationcode();
 		Organization o=new Organization(getcode);

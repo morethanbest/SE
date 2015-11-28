@@ -1,15 +1,14 @@
 package vo;
 
-import po.City;
 import po.CommodityLocation;
 
 public class StockinVO {
 	String ordercode;
 	long intime;
 	CommodityLocation location;
-	City destination;
+	String destination;
 	public StockinVO(String ordercode, long intime, CommodityLocation location,
-			City destination) {
+			String destination) {
 		super();
 		this.ordercode = ordercode;
 		this.intime = intime;
@@ -25,7 +24,7 @@ public class StockinVO {
 	public CommodityLocation getLocation() {
 		return location;
 	}
-	public City getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 }

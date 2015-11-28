@@ -1,6 +1,5 @@
 package vo;
 
-import po.City;
 import po.Job;
 import po.Organizationtype;
 
@@ -11,9 +10,9 @@ public class StaffVO {
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
 	public StaffVO(long id, String name, Job job, String organizationname, String organizationcode,
-				   Organizationtype organizationtype, City city) {
+				   Organizationtype organizationtype, String city) {
 		this.id=id;
 		this.name=name;
 		this.job=job;
@@ -40,7 +39,7 @@ public class StaffVO {
 	public String getOrganizationcode(){
 		return organizationcode;
 	}
-	public City getCity(){
+	public String getCity(){
 		return city;
 	}
 }

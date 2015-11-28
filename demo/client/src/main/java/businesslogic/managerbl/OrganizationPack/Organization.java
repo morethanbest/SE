@@ -2,7 +2,6 @@ package businesslogic.managerbl.OrganizationPack;
 
 import java.util.List;
 
-import po.City;
 import po.Organizationtype;
 import po.ResultMessage;
 import vo.OrganizationVO;
@@ -37,13 +36,13 @@ public class Organization {
 		String name=vo.getName();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype type=vo.getType();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		addo.setAddInfo(name, organizationcode, type, city);
 		ResultMessage result=addo.addOrganization();
 		return result;
 	}
 	
-	public List<OrganizationVO> findOrganizationbyCity(City city){
+	public List<OrganizationVO> findOrganizationbyCity(String city){
 		findo.setFindInfo(city);
 		List<OrganizationVO> listvo=findo.findOrganizationbyCity();
 		return listvo;
@@ -55,7 +54,7 @@ public class Organization {
 		return listvo;
 	}
 	
-	public List<OrganizationVO> findOrganizationbyBoth(City city, Organizationtype type){
+	public List<OrganizationVO> findOrganizationbyBoth(String city, Organizationtype type){
 		findo.setFindInfo(city, type);
 		List<OrganizationVO> listvo=findo.findOrganizationbyBoth();
 		return listvo;
@@ -70,7 +69,7 @@ public class Organization {
 		String name=vo.getName();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype type=vo.getType();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		delo.setDelInfo(name, organizationcode, type, city);
 		ResultMessage result=delo.delete();
 		return result;
@@ -80,13 +79,13 @@ public class Organization {
 		String name=vo.getName();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype type=vo.getType();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		revo.setRevInfo(name, organizationcode, type, city);
 		ResultMessage result=revo.rev();
 		return result;
 	}
 
-	public String getorganizationcode(Organizationtype type, City city){
+	public String getorganizationcode(Organizationtype type, String city){
         getcode.setGetcodeInfo(city,type);
 		String result=getcode.getOrganizationcode();
 		return result;

@@ -1,6 +1,5 @@
 package vo;
 
-import po.City;
 import po.Job;
 import po.Organizationtype;
 
@@ -11,9 +10,9 @@ public class UserVO{
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
 	public UserVO(String username, String password, Job job, String organizationname, String organizationcode,
-			Organizationtype organizationtype, City city) {
+			Organizationtype organizationtype, String city) {
 		this.username = username;
 		this.password = password;
 		this.job = job;
@@ -40,7 +39,7 @@ public class UserVO{
 	public Organizationtype getOrganizationtype() {
 		return organizationtype;
 	}
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
 

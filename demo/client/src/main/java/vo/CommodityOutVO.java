@@ -4,7 +4,6 @@ package vo;
 
 
 
-import po.City;
 import po.CommodityLocation;
 
 public class CommodityOutVO {
@@ -12,9 +11,9 @@ public class CommodityOutVO {
 	long intime;
 	long outTime;
 	CommodityLocation location;
-	City destination;
+	String destination;
 	public CommodityOutVO(String ordercode, long intime, long outTime,
-			CommodityLocation location,City destination) {
+			CommodityLocation location,String destination) {
 		super();
 		this.ordercode = ordercode;
 		this.intime = intime;
@@ -34,7 +33,7 @@ public class CommodityOutVO {
 	public CommodityLocation getLocation() {
 		return location;
 	}
-	public City getDestination(){
+	public String getDestination(){
 		return destination;
 	}
 

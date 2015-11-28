@@ -2,7 +2,6 @@ package businesslogic.userbl.UsersPack;
 
 import dataservice.userdataservice.UserDataService;
 import init.RMIHelper;
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.UserPO;
@@ -25,7 +24,7 @@ public class FindUser {
 			String organizationname=po.getOrganizationname();
 			String organizationcode=po.getOrganizationcode();
 			Organizationtype organizationtype=po.getOrganizationtype();
-			City city=po.getCity();
+			String city=po.getCity();
 			vo=new UserVO(username, password, job, organizationname, organizationcode, organizationtype, city);
 	
 		} catch (Exception e) {

@@ -11,9 +11,9 @@ public class RevStaff {
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
 	public void setRevInfo(long id, String name, Job job, String organizationname, String organizationcode,
-						   Organizationtype type, City city){
+						   Organizationtype organizationtype, String city){
 		this.id=id;
 		this.name=name;
 		this.job=job;

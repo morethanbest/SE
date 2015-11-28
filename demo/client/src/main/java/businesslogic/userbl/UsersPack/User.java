@@ -1,6 +1,5 @@
 package businesslogic.userbl.UsersPack;
 
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -39,7 +38,7 @@ public class User {
 		String organizationname=vo.getOrganizationname();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype organizationtype=vo.getOrganizationtype();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		add.setAddInfo(username, password, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=add.adduser();
 		return result;
@@ -56,7 +55,7 @@ public class User {
 		String organizationname=vo.getOrganizationname();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype organizationtype=vo.getOrganizationtype();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		del.setDelInfo(username, password, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=del.deluser();
 		return result;
@@ -71,7 +70,7 @@ public class User {
 		String organizationname=vo.getOrganizationname();
 		String organizationcode=vo.getOrganizationcode();
 		Organizationtype organizationtype=vo.getOrganizationtype();
-		City city=vo.getCity();
+		String city=vo.getCity();
 		rev.setRevInfo(username, password, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=rev.revuser();
 		return result;

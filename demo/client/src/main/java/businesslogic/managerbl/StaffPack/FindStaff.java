@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataservice.managerdataservice.StaffDataService;
 import init.RMIHelper;
-import po.City;
 import po.Job;
 import po.Organizationtype;
 import po.StaffPO;
@@ -45,8 +44,8 @@ public class FindStaff {
 				Job job=po.getJob();
 				String organizationname=po.getOrganizationname();
 				String organizationcode=po.getOrganizationcode();
-				Organizationtype organizationtype=po.getType();
-				City city=po.getCity();
+				Organizationtype organizationtype=po.getOrganizationtype();
+				String city=po.getCity();
 				StaffVO vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 				listvo.add(vo);
 			}
@@ -71,8 +70,8 @@ public class FindStaff {
 			Job job=po.getJob();
 			String organizationname=po.getOrganizationname();
 			String organizationcode=po.getOrganizationcode();
-			Organizationtype organizationtype=po.getType();
-			City city=po.getCity();
+			Organizationtype organizationtype=po.getOrganizationtype();
+			String city=po.getCity();
 			vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -96,8 +95,8 @@ public class FindStaff {
 				Job job=po.getJob();
 				String organizationname=po.getOrganizationname();
 				String organizationcode=po.getOrganizationcode();
-				Organizationtype organizationtype=po.getType();
-				City city=po.getCity();
+				Organizationtype organizationtype=po.getOrganizationtype();
+				String city=po.getCity();
 				StaffVO vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 				listvo.add(vo);
 			}
@@ -123,8 +122,8 @@ public class FindStaff {
 				Job job=po.getJob();
 				String organizationname=po.getOrganizationname();
 				String organizationcode=po.getOrganizationcode();
-				Organizationtype organizationtype=po.getType();
-				City city=po.getCity();
+				Organizationtype organizationtype=po.getOrganizationtype();
+				String city=po.getCity();
 				StaffVO vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
 				listvo.add(vo);
 			}
