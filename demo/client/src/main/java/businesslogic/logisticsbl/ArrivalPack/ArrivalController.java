@@ -1,10 +1,12 @@
 package businesslogic.logisticsbl.ArrivalPack;
 
 import businesslogicservice.logisticsblservice.ArrivalBlService;
+import po.Formstate;
 import po.ResultMessage;
 import vo.ArrivalVO;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/25.
@@ -49,12 +51,20 @@ public class ArrivalController implements ArrivalBlService {
         return result;
     }
 
+    @Override
+    public List<ArrivalVO> search(Formstate state) throws RemoteException {
+        FindArrival find=new FindArrival();
+        Arrival newarriv=new Arrival(find);
+        List<ArrivalVO> list=newarriv.findArrivalForm(state);
+        return list;
+    }
 
 
     @Override
-    public long getid() throws RemoteException {
+    public String getid(String orgcode) throws RemoteException {
         IdGet idgetter=new IdGet();
-        long result=idgetter.getid();
+        String  result=idgetter.getid(orgcode);
+
         return result;
     }
 }

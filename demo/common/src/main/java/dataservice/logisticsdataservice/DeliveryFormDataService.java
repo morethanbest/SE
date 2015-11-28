@@ -15,5 +15,5 @@ public interface DeliveryFormDataService extends Remote {
 	
 	public ResultMessage addDeliveryForm (DeliveryPO po)throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public long findLastID(String orgcode) throws RemoteException;
 }

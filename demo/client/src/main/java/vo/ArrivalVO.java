@@ -5,7 +5,7 @@ import po.Formstate;
 
 public class ArrivalVO {
 
-	long id;
+	String  id;//为中转中心的编号加上id
 	String centercode;
 	long arrivaltime;
 	String transcode;
@@ -13,7 +13,7 @@ public class ArrivalVO {
 	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
-	public ArrivalVO(long id,String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate, Formstate documentstate) {
+	public ArrivalVO(String id,String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate, Formstate documentstate) {
 		this.id=id;
 		this.centercode = centercode;
 		this.arrivaltime = arrivaltime;
@@ -25,7 +25,7 @@ public class ArrivalVO {
 
 
 	
-	public long getId(){return this.id;}
+	public String getId(){return this.id;}
 	public String getCentercode() {
 		return centercode;
 	}

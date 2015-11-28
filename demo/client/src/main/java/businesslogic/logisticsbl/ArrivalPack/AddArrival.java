@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
  * Created by Administrator on 2015/11/25.
  */
 public class AddArrival {
-    long id;
+    String id;
     String centercode;
     long arrivaltime;
     String transcode;
@@ -19,7 +19,7 @@ public class AddArrival {
     Formstate documentstate;
 
 
-    public void setAddArrival(long id,String centercode,long arrivaltime, String transcode,String departure,Arrivalstate arrivalstate,Formstate documentstate){
+    public void setAddArrival(String id,String centercode,long arrivaltime, String transcode,String departure,Arrivalstate arrivalstate,Formstate documentstate){
         this.id=id;
         this.centercode=centercode;
         this.arrivaltime=arrivaltime;

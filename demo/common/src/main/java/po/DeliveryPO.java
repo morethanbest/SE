@@ -3,22 +3,20 @@ package po;
 import java.io.Serializable;
 
 public class DeliveryPO  implements Serializable{
-	long id;
+	String id;
 	long arrivaltime;
 	String barcode;
 	String delivorinfo;
 	Formstate documentstate;
 	
-	public DeliveryPO(long id,long arrivaltime,String barcode,String delivorinfo,Formstate documentstate) {
+	public DeliveryPO(String id,long arrivaltime,String barcode,String delivorinfo,Formstate documentstate) {
 		this.id = id;
 		this.arrivaltime=arrivaltime;
 		this.barcode=barcode;
 		this.delivorinfo=delivorinfo;
 		this.documentstate=Formstate.waiting;
 	}
-	public long getId() {
-		return id;
-	}
+	public void seID(String id){this.id=id;}
 	public void setDocumentstate(Formstate documentstate) {
 		this.documentstate=documentstate;
 	}
@@ -33,6 +31,12 @@ public class DeliveryPO  implements Serializable{
 
 	public void setDelivorinfo(String delivorinfo) {
 		this.delivorinfo = delivorinfo;
+	}
+
+
+
+	public String getId() {
+		return id;
 	}
 
 	public Formstate getDocumentstate(){

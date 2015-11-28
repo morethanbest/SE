@@ -17,10 +17,10 @@ public interface GoodsReceivingFormDataService extends Remote {
 	
 	public ResultMessage updateGoodsReceivingForm (GoodsReceivingPO po)throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public long findLastID(String orgcode) throws RemoteException;
 	
-	public HallLoadPO getHallLoadBycode(String hallloadcode) throws  RemoteException;
+	public HallLoadPO getHallLoadBycode(String hallloadcode) throws  RemoteException;//这的hallloadcode即为 接收货物上的中转单编号  为营业厅的装车单编号
 	
-	public CenterloadPO getCenterLoadBycode(String centerloadcode) throws  RemoteException;
+	public CenterloadPO getCenterLoadBycode(String centerloadcode) throws  RemoteException;//这里的centerloadcode即为 接收货物单据上的中转单编号   为中转中心的装车单编号
 	
 }

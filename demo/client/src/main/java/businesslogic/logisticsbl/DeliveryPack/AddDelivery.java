@@ -14,13 +14,13 @@ import java.rmi.RemoteException;
  * Created by Administrator on 2015/11/26.
  */
 public class AddDelivery {
-    long id;
+    String id;
     long arrivaltime;
     String barcode;
     String delivorinfo;
 
     Formstate documentstate;
-    public void setDelivery(long id,long arrivaltime,String barcode,String delivorinfo,Formstate documentstate){
+    public void setDelivery(String id,long arrivaltime,String barcode,String delivorinfo,Formstate documentstate){
         this.id=id;
         this.arrivaltime=arrivaltime;
         this.barcode=barcode;

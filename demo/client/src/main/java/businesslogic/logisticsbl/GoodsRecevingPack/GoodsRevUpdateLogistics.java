@@ -1,37 +1,38 @@
-package businesslogic.logisticsbl.ArrivalPack;
+package businesslogic.logisticsbl.GoodsRecevingPack;
 
-import dataservice.logisticsdataservice.ArrivalFormDataService;
+import dataservice.logisticsdataservice.GoodsReceivingFormDataService;
 import dataservice.logisticsdataservice.LogisticsInfoService;
 import init.RMIHelper;
+import po.CenterloadPO;
 import po.HallLoadPO;
 import po.LogisticsPO;
-import po.RecordtransPO;
 import po.ResultMessage;
-import vo.ArrivalVO;
+import vo.GoodsReceivingVO;
 
 import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/11/26.
+ * Created by Administrator on 2015/11/28.
  */
-public class UpdateLogistics {
+public class GoodsRevUpdateLogistics {
 
-    public ResultMessage updatebyhall(ArrivalVO vo,String orgcode){///////////////////根据营业厅装车单编号  得到营业厅装车单  从而得到这批货的所有条形码号  然后修改历史轨迹
-        ArrivalFormDataService dataserv= RMIHelper.getArrivalform();
-        HallLoadPO po=null;
-        ResultMessage result=ResultMessage.success;
+    public ResultMessage updatabyhall(GoodsReceivingVO vo,String orgname){//如果这次的货物是由营业厅来的
+        GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
+        HallLoadPO hallload=null;
+        ResultMessage result=ResultMessage.failure;
         try {
-            po=dataserv.getHallLoadBycode(vo.getTranscode());
+            hallload=dataserv.getHallLoadBycode(vo.getTranscode());
         } catch (RemoteException e) {
-            System.out.println("Get HallLoadPO failed!!!");
+            System.out.println("update goodsreceving logistics information failed!!!");
             e.printStackTrace();
         }
 
+        List<String> allbarcode=hallload.getAllbarcode();
 
-
-        List<String> allbarcode=po.getAllbarcode();//得到所有的订单号
         LogisticsInfoService infoserv=RMIHelper.getLogisticsinfo();
+
+
         int len=allbarcode.size();
         for(int i=0;i<=len-1;i++)//依次根据订单号得到logisticspo  更新
         {
@@ -40,7 +41,7 @@ public class UpdateLogistics {
 
 
                 newpo=infoserv.findLogisticsInfo(allbarcode.get(i));
-                String newstate="到达"+orgcode;
+                String newstate="到达"+orgname;
                 newpo.setState(newstate);
                 List<String> history=newpo.getHistory();
                 history.add(newstate);
@@ -70,30 +71,40 @@ public class UpdateLogistics {
 
     }
 
-    public ResultMessage updatebycenter(ArrivalVO vo,String orgcode){
 
-        ArrivalFormDataService dataserv= RMIHelper.getArrivalform();
-        RecordtransPO po=null;
-        ResultMessage result=ResultMessage.success;
+
+    public ResultMessage updatebycenter(GoodsReceivingVO vo,String orgname){
+        GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
+
+        CenterloadPO centerload=null;
+        ResultMessage result=ResultMessage.failure;
         try {
-            po=dataserv.getRecordtransBycode(vo.getTranscode());
+            centerload=dataserv.getCenterLoadBycode(vo.getTranscode());
         } catch (RemoteException e) {
-            System.out.println("Get TransPO failed!!!");
+            System.out.println("update goodsreceving logistics information failed!!!");
             e.printStackTrace();
         }
-        List<String> allbarcode=po.getAllcode();//得到所有的订单号
+
+        List<String> allbarcode=centerload.getAllbarcode();
+
         LogisticsInfoService infoserv=RMIHelper.getLogisticsinfo();
+
+
         int len=allbarcode.size();
         for(int i=0;i<=len-1;i++)//依次根据订单号得到logisticspo  更新
         {
             LogisticsPO newpo=null;
             try {
+
+
                 newpo=infoserv.findLogisticsInfo(allbarcode.get(i));
-                String newstate="到达"+orgcode;
+                String newstate="到达"+orgname;
                 newpo.setState(newstate);
                 List<String> history=newpo.getHistory();
                 history.add(newstate);
                 newpo.setHistory(history);
+
+
             } catch (RemoteException e) {
                 System.out.println("Get LogisticsPO failed!!!");
                 e.printStackTrace();
@@ -113,6 +124,7 @@ public class UpdateLogistics {
 
         }
         return result;
-
     }
+
+
 }

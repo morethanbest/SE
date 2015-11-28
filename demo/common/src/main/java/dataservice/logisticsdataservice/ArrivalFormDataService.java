@@ -17,11 +17,13 @@ public interface ArrivalFormDataService extends Remote {
 	
 	public ResultMessage addArrivalForm (ArrivalPO po) throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public long findLastID(String orgcode) throws RemoteException;
 
-	public HallLoadPO getHallLoadBycode(String hallloadcode) throws  RemoteException;
+	public HallLoadPO getHallLoadBycode(String hallloadcode) throws  RemoteException;//根据中转单编号  得到中转中心的PO
 	
-	public RecordtransPO getRecordtransBycode(String recordtranscode) throws  RemoteException;
+	public RecordtransPO getRecordtransBycode(String recordtranscode) throws  RemoteException;//
+
+
 
 
 }

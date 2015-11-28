@@ -3,23 +3,26 @@ package po;
 import java.io.Serializable;
 
 public class GoodsReceivingPO  implements Serializable{
-	long id;
+	String id;
 	long arrivaltime;
 	String transcode;
 	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 	
-	public GoodsReceivingPO(long id,long arrivaltime,String transcode,String departure,Arrivalstate arrivalstate){
+	public GoodsReceivingPO(String id,long arrivaltime,String transcode,String departure,Arrivalstate arrivalstate,Formstate state){
 		this.id=id;
 		this.arrivaltime=arrivaltime;
 		this.transcode=transcode;
 		this.departure=departure;
 		this.arrivalstate=arrivalstate;
-		this.documentstate=Formstate.waiting;
+		this.documentstate=state;
 	}
-	public long getId() {
-		return id;
+
+
+
+	public void setid(String id){
+		this.id=id;
 	}
 	public void setDocumentstate(Formstate documentstate){
 		this.documentstate=documentstate;
@@ -41,6 +44,9 @@ public class GoodsReceivingPO  implements Serializable{
 		this.arrivalstate = arrivalstate;
 	}
 
+	public String getId() {
+		return id;
+	}
 	public Formstate getDocumentstate(){
 		return this.documentstate;
 	}

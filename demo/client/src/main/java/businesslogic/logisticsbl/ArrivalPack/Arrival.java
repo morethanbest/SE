@@ -1,9 +1,13 @@
 package businesslogic.logisticsbl.ArrivalPack;
 
+import po.ArrivalPO;
 import po.Arrivalstate;
 import po.Formstate;
 import po.ResultMessage;
 import vo.ArrivalVO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/25.
@@ -11,6 +15,7 @@ import vo.ArrivalVO;
 public class Arrival {
     AddArrival add;
     UpdateArrival update;
+    FindArrival find;
 
     public Arrival(AddArrival add){
         this.add=add;
@@ -20,8 +25,9 @@ public class Arrival {
         this.update=update;
     }
 
+    public Arrival(FindArrival find){ this.find=find;}
     public ResultMessage addArrivalForm(ArrivalVO  vo){
-        long id=vo.getId();
+        String id=vo.getId();
         String centercode=vo.getCentercode();
         long arrivaltime=vo.getArrivaltime();
         String transcode=vo.getTranscode();
@@ -38,7 +44,7 @@ public class Arrival {
     }
 
     public ResultMessage updataArrivalForm(ArrivalVO vo){
-        long id=vo.getId();
+        String id=vo.getId();
         String centercode=vo.getCentercode();
         long arrivaltime=vo.getArrivaltime();
         String transcode=vo.getTranscode();
@@ -50,5 +56,28 @@ public class Arrival {
         ResultMessage result=update.passupdate();
         return result;
 
+    }
+
+    public List<ArrivalVO> findArrivalForm(Formstate state)
+    {
+
+        List<ArrivalPO> po=find.find(state);
+        List<ArrivalVO> list=new ArrayList<ArrivalVO>();
+        int len=po.size();
+        for(int i=0;i<=len-1;i++)
+        {
+            ArrivalPO a=po.get(i);
+            String id=a.getId();
+            String centercode=a.getCentercode();
+            long arrivaltime=a.getArrivaltime();
+            String transcode=a.getTranscode();
+            String departure=a.getDeparture();
+            Arrivalstate arrivalstate=a.getArrivalstate();
+            Formstate documentstate=a.getDocumentstate();
+            ArrivalVO newvo=new ArrivalVO(id,centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
+            list.add(newvo);
+
+        }
+        return list;
     }
 }
