@@ -87,6 +87,21 @@ public class UserDB {
 		}
 		return ResultMessage.failure;
 	}
+	public static ResultMessage deletebyCity(String city){
+		dbh=new DBHelper();
+		sql="delete from UserPO where city=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setString(1, city);
+			int result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;
+	}
 	
 	public static ResultMessage deletebyusername(UserPO po){
 		dbh=new DBHelper();

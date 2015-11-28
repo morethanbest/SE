@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.database.DBHelper;
+import data.database.userDB.UserDB;
 import po.CityPO;
-import po.ConstantsPO;
 import po.ResultMessage;
 
 public class CityDB {
@@ -61,6 +61,11 @@ public class CityDB {
 	}
 	
 	public static ResultMessage delete(CityPO po){
+		if(search(po.getName())!=null){
+			OrganizationDB.deletebycity(po.getName());
+			StaffDB.deletebycity(po.getName());
+			UserDB.deletebyCity(po.getName());
+		}
 		dbh=new DBHelper();
 		sql="delete from CityPO where name=?";
 		pst=dbh.prepare(sql);
@@ -143,6 +148,7 @@ public class CityDB {
 	
 	public static void main(String args[]){
 		initialize();
+
 //		if(search("上海")!=null)
 //		System.out.println("search success");
 //		if(write(new CityPO("上海","021"))==ResultMessage.failure)

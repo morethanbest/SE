@@ -57,6 +57,24 @@ public class OrganizationDB {
 		return ResultMessage.failure;
 		
 	}
+	public static ResultMessage deletebycity(String city){
+		dbh=new DBHelper();
+		sql="delete from OrganizationPO where city=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setString(1,city);
+			int result;
+			result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+			ret.close();
+			dbh.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;
+	}
 	
 	public static ResultMessage delete(OrganizationPO po){
 		String organizationcode=po.getOrganizationcode();
