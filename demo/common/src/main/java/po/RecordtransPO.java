@@ -7,7 +7,8 @@ public class RecordtransPO  implements Serializable{
 	long loadtime;
 	long arrivaltime;
 	String transcode;
-	String flightcode;
+	String transport;//交通方式
+	String transportcode;//班次号
 	String departrue;
 	String destination;
 	String countercode;
@@ -15,20 +16,21 @@ public class RecordtransPO  implements Serializable{
 	List<String> allcode;
 	double fee;
 	Formstate documentstate;
-	public RecordtransPO(long loadtime, long arrivaltime, String transcode, String flightcode, String departrue,
-			String destination, String countercode, String supervisor, List<String> allcode, double fee) {
+	public RecordtransPO(long loadtime, long arrivaltime, String transcode,  String transport,String transportcode, String departrue,
+			String destination, String countercode, String supervisor, List<String> allcode, double fee,Formstate state) {
 
 		this.loadtime = loadtime;
 		this.arrivaltime = arrivaltime;
 		this.transcode = transcode;
-		this.flightcode = flightcode;
+		this.transport=transport;
+		this.transportcode=transportcode;
 		this.departrue = departrue;
 		this.destination = destination;
 		this.countercode = countercode;
 		this.supervisor = supervisor;
 		this.allcode = allcode;
 		this.fee = fee;
-		this.documentstate=Formstate.waiting;
+		this.documentstate=state;
 	}
 
 	public Formstate getDocumentstate() {
@@ -49,9 +51,8 @@ public class RecordtransPO  implements Serializable{
 	public void setTranscode(String transcode) {
 		this.transcode = transcode;
 	}
-	public void setFlightcode(String flightcode) {
-		this.flightcode = flightcode;
-	}
+	public void setTransport(String transport){this.transport=transport;}
+	public void setTransportCode(String transportcode){this.transportcode=transportcode;}
 	public void setDepartrue(String departrue) {
 		this.departrue = departrue;
 	}
@@ -70,14 +71,17 @@ public class RecordtransPO  implements Serializable{
 	public void setFee(double fee) {
 		this.fee = fee;
 	}
+	public void setformstate(Formstate state){this.documentstate=state;}
 	public long getArrivaltime() {
 		return arrivaltime;
 	}
 	public String getTranscode() {
 		return transcode;
 	}
-	public String getFlightcode() {
-		return flightcode;
+	public String getTransportType(){return transport;}
+
+	public String getTransportCode() {
+		return transportcode;
 	}
 	public String getDepartrue() {
 		return departrue;

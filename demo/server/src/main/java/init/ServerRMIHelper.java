@@ -9,10 +9,7 @@ import data.commoditydata.CommodityData;
 import data.commoditydata.StockinFormData;
 import data.commoditydata.StockoutFormData;
 import data.logisticsdata.*;
-import data.managerdata.ConstantsData;
-import data.managerdata.OrganizationData;
-import data.managerdata.SalaryData;
-import data.managerdata.StaffData;
+import data.managerdata.*;
 import data.orderdata.LogisticsData;
 import data.orderdata.OrderFormData;
 import data.transportdata.DriversData;
@@ -82,7 +79,7 @@ public class ServerRMIHelper {
         NAMING_MAP.put("vehicledata",  VehicleData.class);
         NAMING_MAP.put("userdata",  UsersData.class);
         NAMING_MAP.put("userlogindata",  UserLoginData.class);
-
+        NAMING_MAP.put("citydata",  CityData.class);
 
 
     }

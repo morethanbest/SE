@@ -19,9 +19,14 @@ public class Idget {
             int len=result.length();
             if(len>7){
                 System.out.println("goodsreceving id out of bound!!!");
-                return null;
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
             }
-            for(int i=0;i<=len-1;i++)
+            for(int i=0;i<=7-len-1;i++)
                 result="0"+result;
         } catch (RemoteException e) {
             e.printStackTrace();

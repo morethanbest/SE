@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CenterloadPO  implements Serializable{
-	long id;
+	String  id;
 	long loadtime;
 	String motorcode;
 	String destination;
@@ -14,8 +14,8 @@ public class CenterloadPO  implements Serializable{
 	List<String> allbarcode;
 	double fee;
 	Formstate documentstate;
-	public CenterloadPO(long id,long loadtime, String motorcode, String destination, String vehiclecode, String supervisor,
-			String supercargo, List<String> allbarcode, double fee) {
+	public CenterloadPO(String id,long loadtime, String motorcode, String destination, String vehiclecode, String supervisor,
+			String supercargo, List<String> allbarcode, double fee,Formstate state) {
 		this.id = id;
 		this.loadtime = loadtime;
 		this.motorcode = motorcode;
@@ -25,11 +25,9 @@ public class CenterloadPO  implements Serializable{
 		this.supercargo = supercargo;
 		this.allbarcode = allbarcode;
 		this.fee = fee;
-		this.documentstate=Formstate.waiting;
+		this.documentstate=state;
 	}
-	public long getId() {
-		return id;
-	}
+	public void setid(String id){ this.id=id;}
 	public void setLoadtime(long loadtime) {
 		this.loadtime = loadtime;
 	}
@@ -83,6 +81,9 @@ public class CenterloadPO  implements Serializable{
 	}
 	public double getFee() {
 		return fee;
+	}
+	public String getId() {
+		return id;
 	}
 	
 }

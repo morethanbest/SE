@@ -19,7 +19,12 @@ public class IdGet {
              int len=result.length();
             if(len>7){
                 System.out.println("arrival id out of bound!!!");
-                return "-1";
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
             }
             for(int i=0;i<=7-len-1;i++)
                 result="0"+result;

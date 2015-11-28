@@ -18,6 +18,15 @@ public class IdGet {
             id=dataserv.findLastID(orgcode)+1;
             result=Long.toString(id);
             int len=result.length();
+            if(len>7){
+                System.out.println("id overflow");
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+            }
             for(int i=0;i<=7-len-1;i++){
                 System.out.println("delivery id out  of bound!!!");
                 result="0"+result;

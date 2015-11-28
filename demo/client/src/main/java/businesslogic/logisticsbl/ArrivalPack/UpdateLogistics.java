@@ -61,7 +61,7 @@ public class UpdateLogistics {
             }
             if(res==ResultMessage.failure){
                 result=ResultMessage.failure;
-                break;
+
             }
 
         }

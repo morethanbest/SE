@@ -13,10 +13,7 @@ import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.commoditydataservice.StockinFormDataService;
 import dataservice.commoditydataservice.StockoutFormDataService;
 import dataservice.logisticsdataservice.*;
-import dataservice.managerdataservice.ConstantsDataService;
-import dataservice.managerdataservice.OrganizationDataService;
-import dataservice.managerdataservice.SalaryDataService;
-import dataservice.managerdataservice.StaffDataService;
+import dataservice.managerdataservice.*;
 import dataservice.orderdataservice.LogisticsDataService;
 import dataservice.orderdataservice.OrderFormDataService;
 import dataservice.transportdataservice.DriversDataService;
@@ -66,6 +63,7 @@ public class RMIHelper {
     private static VehicleDataService vehicledata;
     private static UserDataService userdata;
     private static UserLoginDataService userlogindata;
+    private static CityDataService citydata;
 
     public synchronized static void init() throws ClientInitException {
         if (inited) {
@@ -107,7 +105,7 @@ public class RMIHelper {
         vehicledata = (VehicleDataService) Naming.lookup(urlPrefix + "vehicledata");
         userdata = (UserDataService) Naming.lookup(urlPrefix + "userdata");
         userlogindata = (UserLoginDataService) Naming.lookup(urlPrefix + "userlogindata");
-
+        citydata=(CityDataService)Naming.lookup(urlPrefix + "citydata");
 
 
 
@@ -217,4 +215,6 @@ public class RMIHelper {
     public static UserLoginDataService getUserlogindata() {
         return userlogindata;
     }
+
+    public static CityDataService getCitydata(){ return citydata;}
 }

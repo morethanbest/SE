@@ -119,7 +119,7 @@ public class GoodsRevUpdateLogistics {
             }
             if(res==ResultMessage.failure){
                 result=ResultMessage.failure;
-                break;
+
             }
 
         }

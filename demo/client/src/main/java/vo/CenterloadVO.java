@@ -5,7 +5,7 @@ import java.util.List;
 import po.Formstate;
 
 public class CenterloadVO {
-	long id;
+	String id;
 	long loadtime;
 	String motorcode;
 	String destination;
@@ -15,8 +15,9 @@ public class CenterloadVO {
 	List<String> allbarcode;
 	double fee;
 	Formstate documentstate;
-	public CenterloadVO(long loadtime, String motorcode, String destination, String vehiclecode, String supervisor,
-			String supercargo, List<String> allbarcode,Formstate documentstate) {
+	public CenterloadVO(String id,long loadtime, String motorcode, String destination, String vehiclecode, String supervisor,
+			String supercargo, List<String> allbarcode,double fee,Formstate documentstate) {
+		this.id=id;
 		this.loadtime = loadtime;
 		this.motorcode = motorcode;
 		this.destination = destination;
@@ -24,10 +25,11 @@ public class CenterloadVO {
 		this.supervisor = supervisor;
 		this.supercargo = supercargo;
 		this.allbarcode = allbarcode;
+		this.fee=fee;
 		this.documentstate=documentstate;
 	}
 
-
+	public String getId(){return this.id;}
 	public long getLoadtime() {
 		return loadtime;
 	}
@@ -49,7 +51,9 @@ public class CenterloadVO {
 	public List<String> getAllbarcode() {
 		return allbarcode;
 	}
-	public Formstate GETFormstate(){
+	public Formstate getFormstate(){
 		return documentstate;
 	}
+	public double getfee(){return this.fee;}
+
 }

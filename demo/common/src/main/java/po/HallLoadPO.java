@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class HallLoadPO  implements Serializable{
-	long id;
+
 	long loadtime;
 	String hallcode;
 	String motorcode;
@@ -14,11 +14,11 @@ public class HallLoadPO  implements Serializable{
 	String supercargo;
 	List<String> allbarcode;
 	double fee;
-	Formstate documentstate;	
-	
-	public HallLoadPO(long id,long loadtime,String hallcode,String motorcode,String destination,String vehiclecode,String supervisor,
-			String supercargo,List<String> allbarcode,double fee){
-		this.id = id;
+	Formstate documentstate;
+
+	public HallLoadPO(long loadtime,String hallcode,String motorcode,String destination,String vehiclecode,String supervisor,
+			String supercargo,List<String> allbarcode,double fee,Formstate state){
+
 		this.loadtime=loadtime;
 		this.hallcode=hallcode;
 		this.motorcode=motorcode;
@@ -28,11 +28,9 @@ public class HallLoadPO  implements Serializable{
 		this.supercargo=supercargo;
 		this.allbarcode=allbarcode;
 		this.fee=fee;
-		this.documentstate=Formstate.waiting;
+		this.documentstate=state;
 	}
-	public long getId() {
-		return id;
-	}
+
 	public String getVehiclecode() {
 		return vehiclecode;
 	}
@@ -107,4 +105,6 @@ public class HallLoadPO  implements Serializable{
 	public double getFee(){
 		return this.fee;
 	}
+
+	public Formstate getstate(){return this.documentstate;}
 }

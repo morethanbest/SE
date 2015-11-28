@@ -11,18 +11,18 @@ import po.ResultMessage;
 
 public interface RecordtransFormDataService extends Remote {
 	public List<RecordtransPO> getRecordtransForm (Formstate state)throws RemoteException;
-	
+
 	public ResultMessage updateRecordtransForm (RecordtransPO po)throws RemoteException;
-	
+
 	public ResultMessage addRecordtransForm (RecordtransPO po)throws RemoteException;
-	
-	public String findLasttranscode(String orgcode) throws RemoteException;
-	
+
+	public long  findLasttranscode(String orgcode,String date) throws RemoteException;
+
 	public double getunitprice(String transporttype)throws RemoteException;
-	
+
 	public double getdistance(String city1,String city2)throws RemoteException;
-	
+
 	public double getweight(String ordernum)throws RemoteException;
 	
-	public List<CityPO>  getAllCities()throws RemoteException;
+
 }
