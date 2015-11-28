@@ -10,9 +10,9 @@ public class UserPO implements Serializable {
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
 	public UserPO(String username, String password, Job job, String organizationname, String organizationcode,
-			Organizationtype organizationtype, City city) {
+			Organizationtype organizationtype, String city) {
 		this.username = username;
 		this.password = password;
 		this.job = job;
@@ -23,6 +23,9 @@ public class UserPO implements Serializable {
 	}
 	public String getUsername() {
 		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
@@ -54,14 +57,11 @@ public class UserPO implements Serializable {
 	public void setOrganizationtype(Organizationtype organizationtype) {
 		this.organizationtype = organizationtype;
 	}
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
-	
-	
-	
 	
 }

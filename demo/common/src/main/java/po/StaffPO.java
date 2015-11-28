@@ -9,16 +9,22 @@ public class StaffPO implements Serializable {
 	String organizationname;
 	String organizationcode;
 	Organizationtype organizationtype;
-	City city;
+	String city;
 	public StaffPO(long id, String name, Job job, String organizationname, String organizationcode,
-			Organizationtype type, City city) {
+			Organizationtype organizationtype, String city) {
 		this.id = id;
 		this.name = name;
 		this.job = job;
 		this.organizationname = organizationname;
 		this.organizationcode = organizationcode;
-		this.organizationtype = type;
+		this.organizationtype = organizationtype;
 		this.city = city;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -44,23 +50,17 @@ public class StaffPO implements Serializable {
 	public void setOrganizationcode(String organizationcode) {
 		this.organizationcode = organizationcode;
 	}
-	public Organizationtype getType() {
+	public Organizationtype getOrganizationtype() {
 		return organizationtype;
 	}
-	public void setType(Organizationtype type) {
-		this.organizationtype = type;
+	public void setOrganizationtype(Organizationtype organizationtype) {
+		this.organizationtype = organizationtype;
 	}
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
-	public long getId() {
-		return id;
-	}
-	
-	
-
 	
 }

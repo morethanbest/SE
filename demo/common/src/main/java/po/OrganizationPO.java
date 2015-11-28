@@ -6,8 +6,8 @@ public class OrganizationPO  implements Serializable{
 	String name;
 	String organizationcode;
 	Organizationtype type;
-	City city;
-	public OrganizationPO( String name, String organizationcode, Organizationtype type, City city) {
+	String city;
+	public OrganizationPO(String name, String organizationcode, Organizationtype type, String city) {
 		this.name = name;
 		this.organizationcode = organizationcode;
 		this.type = type;
@@ -31,12 +31,11 @@ public class OrganizationPO  implements Serializable{
 	public void setType(Organizationtype type) {
 		this.type = type;
 	}
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
-
 	
 }

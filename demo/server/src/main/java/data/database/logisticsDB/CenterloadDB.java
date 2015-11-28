@@ -33,35 +33,35 @@ public class CenterloadDB {
 			e.printStackTrace();
 		}
 	}
-
-	public static ResultMessage write(CenterloadPO po) {
-		try {
-			byte[] statebytes = Serialize.Object2Bytes(po.getArrivalstate());
-			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
-			dbh = new DBHelper();
-			sql = "insert into ArrivalPO values(null,?,?,?,?,?,?)";
-			pst = dbh.prepare(sql);
-
-			pst.setString(1, po.getCentercode());
-			pst.setLong(2, po.getArrivaltime());
-			pst.setString(3, po.getTranscode());
-			pst.setString(4, po.getDeparture());
-			pst.setBytes(5, statebytes);
-			pst.setBytes(6, formstate);
-			int result = pst.executeUpdate();
-			if (result == -1) {
-				dbh.close();// 关闭连接
-				return ResultMessage.failure;
-			}
-			dbh.close();// 关闭连接
-			return ResultMessage.success;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return ResultMessage.failure;
-
-	}
+//
+//	public static ResultMessage write(CenterloadPO po) {
+//		try {
+//			byte[] statebytes = Serialize.Object2Bytes(po.getArrivalstate());
+//			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
+//			dbh = new DBHelper();
+//			sql = "insert into ArrivalPO values(null,?,?,?,?,?,?)";
+//			pst = dbh.prepare(sql);
+//
+//			pst.setString(1, po.getCentercode());
+//			pst.setLong(2, po.getArrivaltime());
+//			pst.setString(3, po.getTranscode());
+//			pst.setString(4, po.getDeparture());
+//			pst.setBytes(5, statebytes);
+//			pst.setBytes(6, formstate);
+//			int result = pst.executeUpdate();
+//			if (result == -1) {
+//				dbh.close();// 关闭连接
+//				return ResultMessage.failure;
+//			}
+//			dbh.close();// 关闭连接
+//			return ResultMessage.success;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return ResultMessage.failure;
+//
+//	}
 
 	public static ResultMessage update(ArrivalPO po) {
 
@@ -133,8 +133,8 @@ public class CenterloadDB {
 	public static void main(String[] args) {
 		initialize();
 		ArrivalPO po=new ArrivalPO(1,"a",1,"b","c",Arrivalstate.lost,Formstate.waiting);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
 		if(update(po)==ResultMessage.success)
 			System.out.println("update success");
 		if(fuzzySearch(Formstate.waiting).size()>0)
