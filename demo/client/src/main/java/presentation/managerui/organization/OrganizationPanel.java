@@ -15,12 +15,13 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import po.City;
 import po.Organizationtype;
-import presentation.enums.CityType;
 import presentation.enums.OrganizationType;
+import vo.CityVO;
 import vo.OrganizationVO;
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 
 public class OrganizationPanel extends JPanel {
@@ -59,7 +60,7 @@ public class OrganizationPanel extends JPanel {
 		citySelect = new JComboBox<String>();
 		citySelect.setBounds(188, 0, 174, 31);
 		add(citySelect);
-		addCityTypeItems();
+		addCityItems();
 		
 		ItemListener listener = new ItemListener() {
 			
@@ -105,9 +106,12 @@ public class OrganizationPanel extends JPanel {
 		tableModel.setRowCount(10);
 	}
 	
-	private void addCityTypeItems() {
+	public void addCityItems() {
+		citySelect.removeAll();
+		ConstantsBlService constantsBlService = new ConstantsController();
+		List<CityVO> cityList = constantsBlService.getAllCity();
 		citySelect.addItem("全部");
-		for (CityType city : CityType.values()) {
+		for (CityVO city : cityList) {
 			citySelect.addItem(city.getName());
 		}
 	}
@@ -127,7 +131,7 @@ public class OrganizationPanel extends JPanel {
 			String[] row = new String[4];
 			row[0] = vo.getOrganizationcode();
 			row[1] = vo.getName();
-			row[2] = getCityStr(vo.getCity());
+			row[2] = vo.getCity();
 			row[3] = getOrganizationStr(vo.getType());
 
 			tableModel.addRow(row);
@@ -148,9 +152,9 @@ public class OrganizationPanel extends JPanel {
 		else if(citySelect.getSelectedItem().equals("全部"))
 			list = organizationBlService.getOrganizationbyType(getOrganizationType((String) orgSelect.getSelectedItem()));
 		else if(orgSelect.getSelectedItem().equals("全部"))
-			list = organizationBlService.getOrganizationbyCity(getCityType((String) citySelect.getSelectedItem()));
+			list = organizationBlService.getOrganizationbyCity((String) citySelect.getSelectedItem());
 		else
-			list = organizationBlService.getOrganizationbyBoth(getCityType((String) citySelect.getSelectedItem()), getOrganizationType((String) orgSelect.getSelectedItem()));
+			list = organizationBlService.getOrganizationbyBoth((String) citySelect.getSelectedItem(), getOrganizationType((String) orgSelect.getSelectedItem()));
 		
 		displayByVO();
 	}
@@ -164,16 +168,7 @@ public class OrganizationPanel extends JPanel {
 		return null;
 	}
 	
-	private City getCityType(String str){
-		for (CityType city: CityType.values()) {
-			if(city.getName().equals(str)){
-				return city.getCity();
-			}
-		}
-		
-		return null;
-	}
-	
+
 	private String getOrganizationStr(Organizationtype org){
 		for (OrganizationType orgs : OrganizationType.values()) {
 			if(orgs.getOrg() == org){
@@ -184,13 +179,4 @@ public class OrganizationPanel extends JPanel {
 		return null;
 	}
 	
-	private String getCityStr(City city){
-		for (CityType citys : CityType.values()) {
-			if(citys.getCity() == city){
-				return citys.getName();
-			}
-		}
-		
-		return null;
-	}
 }

@@ -10,13 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import presentation.enums.CityType;
 import presentation.enums.StaffType;
+import vo.CityVO;
 import vo.StaffVO;
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.StaffPack.StaffController;
+import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.StaffBlService;
 
 public class StaffManagePanel extends JPanel implements ActionListener{
@@ -101,9 +102,12 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		}
 	}
 	
-	private void addCityItems() {
+	public void addCityItems() {
+		citySelect.removeAll();
+		ConstantsBlService constantsBlService = new ConstantsController();
+		List<CityVO> cityList = constantsBlService.getAllCity();
 		citySelect.addItem("全部");
-		for (CityType city : CityType.values()) {
+		for (CityVO city : cityList) {
 			citySelect.addItem(city.getName());
 		}
 	}

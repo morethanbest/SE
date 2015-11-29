@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,11 +17,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import po.ResultMessage;
-import presentation.enums.CityType;
 import presentation.enums.ContstantType;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.TransportTypes;
+import vo.CityVO;
 import vo.ConstantsVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
@@ -37,7 +38,7 @@ public class AddConstantDailog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AddConstantDailog(final ConstantPanel parent) {
+	public AddConstantDailog(final ConstantPanel parent, final List<CityVO> list) {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
@@ -59,7 +60,7 @@ public class AddConstantDailog extends JDialog {
 					select_1.removeAllItems();
 					select_2.removeAllItems();
 					select_2.setVisible(true);
-					addDistanceItems();
+					addDistanceItems(list);
 				} else if (type.getSelectedItem().equals(
 						ContstantType.PackageType.getName())) {
 					select_1.removeAllItems();
@@ -90,7 +91,7 @@ public class AddConstantDailog extends JDialog {
 		select_2.setBounds(14, 142, 187, 32);
 		contentPanel.add(select_2);
 
-		addDistanceItems();
+		addDistanceItems(list);
 
 		JLabel label = new JLabel("常量值");
 		label.setBounds(292, 97, 73, 32);
@@ -151,10 +152,10 @@ public class AddConstantDailog extends JDialog {
 		}
 	}
 
-	private void addDistanceItems() {
-		for (CityType city : CityType.values()) {
-			select_1.addItem(city.getName());
-			select_2.addItem(city.getName());
+	private void addDistanceItems(List<CityVO> list2) {
+		for(CityVO vo:list2){
+			select_1.addItem(vo.getName());
+			select_2.addItem(vo.getName());
 		}
 	}
 

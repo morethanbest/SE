@@ -101,6 +101,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			card.show(panel, "staff");
 		}else if (e.getSource().equals(btnNewButton_2)) {
 			card.show(panel, "organization");
+			organization.addCityItems();
 		}else if (e.getSource().equals(btnNewButton_4)) {
 			card.show(panel, "constant");
 		}
