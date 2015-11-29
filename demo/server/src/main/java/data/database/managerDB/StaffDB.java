@@ -105,7 +105,6 @@ public class StaffDB {
 			if(result!=0){
 				return ResultMessage.success;
 			}
-			ret.close();
 			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
