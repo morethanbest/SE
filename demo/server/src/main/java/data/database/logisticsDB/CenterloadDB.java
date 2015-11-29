@@ -7,8 +7,7 @@ import java.util.List;
 
 import data.database.DBHelper;
 import data.database.Serialize;
-import po.ArrivalPO;
-import po.Arrivalstate;
+import po.CenterloadPO;
 import po.Formstate;
 import po.ResultMessage;
 
@@ -20,11 +19,11 @@ public class CenterloadDB {
 
 	public static void initialize() {
 		dbh = new DBHelper();
-//		sql = "drop table CenterloadPO";
-//		pst = dbh.prepare(sql);
+		sql = "drop table CenterloadPO";
+		pst = dbh.prepare(sql);
 		try {
-//			pst.executeUpdate();
-			sql = "create table CenterloadPO(id bigint auto_increment primary key,loadtime bigint,motorcode text,destination text,"
+			pst.executeUpdate();
+			sql = "create table CenterloadPO(id text,loadtime bigint,motorcode text,destination text,"
 					+ "vehiclecode text,supervisor text,supercargo text,allbarcode blob,fee double,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
@@ -33,45 +32,59 @@ public class CenterloadDB {
 			e.printStackTrace();
 		}
 	}
-//
-//	public static ResultMessage write(CenterloadPO po) {
-//		try {
-//			byte[] statebytes = Serialize.Object2Bytes(po.getArrivalstate());
-//			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
-//			dbh = new DBHelper();
-//			sql = "insert into ArrivalPO values(null,?,?,?,?,?,?)";
-//			pst = dbh.prepare(sql);
-//
-//			pst.setString(1, po.getCentercode());
-//			pst.setLong(2, po.getArrivaltime());
-//			pst.setString(3, po.getTranscode());
-//			pst.setString(4, po.getDeparture());
-//			pst.setBytes(5, statebytes);
-//			pst.setBytes(6, formstate);
-//			int result = pst.executeUpdate();
-//			if (result == -1) {
-//				dbh.close();// 关闭连接
-//				return ResultMessage.failure;
-//			}
-//			dbh.close();// 关闭连接
-//			return ResultMessage.success;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return ResultMessage.failure;
-//
-//	}
 
-	public static ResultMessage update(ArrivalPO po) {
-
+	public static ResultMessage write(CenterloadPO po) {
 		try {
+			byte[] listbytes = Serialize.Object2Bytes(po.getAllbarcode());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "update ArrivalPO set documentstate=? where id=?";
+			sql = "insert into CenterloadPO values(?,?,?,?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
-			pst.setBytes(1, formstate);
-			pst.setLong(2,po.getId());
+
+			pst.setString(1, po.getId());
+			pst.setLong(2, po.getLoadtime());
+			pst.setString(3, po.getMotorcode());
+			pst.setString(4, po.getDestination());
+			pst.setString(5, po.getVehiclecode());
+			pst.setString(6, po.getSupervisor());
+			pst.setString(7, po.getSupercargo());
+			pst.setBytes(8, listbytes);
+			pst.setDouble(9, po.getFee());
+			pst.setBytes(10, formstate);
+			int result = pst.executeUpdate();
+			if (result == -1) {
+				dbh.close();// 关闭连接
+				return ResultMessage.failure;
+			}
+			dbh.close();// 关闭连接
+			return ResultMessage.success;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ResultMessage.failure;
+
+	}
+
+	public static ResultMessage update(CenterloadPO po) {
+
+		try {
+			byte[] listbytes=Serialize.Object2Bytes(po.getAllbarcode());
+			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
+			dbh = new DBHelper();
+			sql = "update CenterloadPO set loadtime=?,motorcode=?,destination=?,vehiclecode=?,supervisor=?,"
+					+ "supercargo=?,allbarcode=?,fee=?,documentstate=? where id=?";
+			pst = dbh.prepare(sql);
+			pst.setLong(1, po.getLoadtime());
+			pst.setString(2, po.getMotorcode());
+			pst.setString(3, po.getDestination());
+			pst.setString(4, po.getVehiclecode());
+			pst.setString(5, po.getSupervisor());
+			pst.setString(6, po.getSupercargo());
+			pst.setBytes(7, listbytes);
+			pst.setDouble(8, po.getFee());
+			pst.setBytes(9, formstate);
+			pst.setString(10, po.getId());
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -86,20 +99,21 @@ public class CenterloadDB {
 		return ResultMessage.failure;
 	}
 	
-	public static List<ArrivalPO> fuzzySearch(Formstate documentstate){
-		List<ArrivalPO> list=new ArrayList<ArrivalPO>();
-		ArrivalPO po;
+	public static List<CenterloadPO> fuzzySearch(Formstate documentstate){
+		List<CenterloadPO> list=new ArrayList<CenterloadPO>();
+		CenterloadPO po;
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select id,centercode,arrivaltime,transcode,departure,arrivalstate from ArrivalPO where documentstate = ?";
+			sql = "select id,loadtime,motorcode,destination,vehiclecode,supervisor,"
+					+ "supercargo,allbarcode,fee from CenterloadPO where documentstate = ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				Arrivalstate arrivalstate=(Arrivalstate)Serialize.Bytes2Object(ret.getBytes(6)) ;
-				po = new ArrivalPO(ret.getLong(1), ret.getString(2), ret.getLong(3), ret.getString(4), ret.getString(5),
-						arrivalstate,documentstate);
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;
+				po = new CenterloadPO(ret.getString(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
+						ret.getString(6),ret.getString(7),allbarcode,ret.getDouble(9),documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -111,15 +125,17 @@ public class CenterloadDB {
 		return list;
 	}
 
-	public static long getLastId(){
+	public static long getLastId(String orgcode){
 		long lastId=0;
 		dbh=new DBHelper();
-		sql="select max(id) from ArrivalPO";
+		sql="select id from CenterloadPO where id like ?";
 		pst = dbh.prepare(sql);
 		try {
+			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
 			if(ret.next()){
-				lastId=ret.getLong(1);
+				if(ret.getString(1).startsWith(orgcode))
+					lastId++;
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -129,17 +145,43 @@ public class CenterloadDB {
 		}
 		return lastId;
 	}
+	
+	public static CenterloadPO getpoBymotorcode(String motorcode){
+		CenterloadPO po=null;
+		dbh=new DBHelper();
+		try {
+			sql = "select id,loadtime,destination,vehiclecode,supervisor,"
+					+ "supercargo,allbarcode,fee,documentstate from CenterloadPO where motorcode = ?";
+			pst = dbh.prepare(sql);
+			pst.setString(1, motorcode);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(7)) ;
+				Formstate state=(Formstate)Serialize.Bytes2Object(ret.getBytes(9)) ;
+				po = new CenterloadPO(ret.getString(1), ret.getLong(2),motorcode, ret.getString(3), ret.getString(4),
+						ret.getString(5),ret.getString(6),allbarcode,ret.getDouble(8),state);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return po;
+	}
 
 	public static void main(String[] args) {
 		initialize();
-		ArrivalPO po=new ArrivalPO(1,"a",1,"b","c",Arrivalstate.lost,Formstate.waiting);
-//		if(write(po)==ResultMessage.success)
-//			System.out.println("write success");
+		List<String> list=new ArrayList<String>();
+		list.add("001");
+		CenterloadPO po=new CenterloadPO("0250001",1,"a","1","b","c","d",list,10,Formstate.waiting);
+		if(write(po)==ResultMessage.success)
+			System.out.println("write success");
 		if(update(po)==ResultMessage.success)
 			System.out.println("update success");
 		if(fuzzySearch(Formstate.waiting).size()>0)
 			System.out.println("fuzzysearch success");
-		System.out.println(getLastId());
+		System.out.println(getLastId("0250"));
 					
 	}
 }

@@ -7,12 +7,11 @@ import java.util.List;
 
 import data.database.DBHelper;
 import data.database.Serialize;
-import po.ArrivalPO;
-import po.Arrivalstate;
+import po.DeliveryPO;
 import po.Formstate;
 import po.ResultMessage;
 
-public class ArrivalDB {
+public class DeliveryDB {
 	static String sql = null;
 	static DBHelper dbh = null;
 	static ResultSet ret = null;
@@ -20,12 +19,12 @@ public class ArrivalDB {
 
 	public static void initialize() {
 		dbh = new DBHelper();
-		sql = "drop table ArrivalPO";
+		sql = "drop table DeliveryPO";
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table ArrivalPO(id text,centercode text,arrivaltime bigint,"
-					+ "transcode text,departure text,arrivalstate blob,documentstate blob)";
+			sql = "create table DeliveryPO(id text,arrivaltime bigint,"
+					+ "barcode text,delivorinfo text,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
 			dbh.close();// 关闭连接
@@ -34,20 +33,17 @@ public class ArrivalDB {
 		}
 	}
 
-	public static ResultMessage write(ArrivalPO po) {
+	public static ResultMessage write(DeliveryPO po) {
 		try {
-			byte[] statebytes = Serialize.Object2Bytes(po.getArrivalstate());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "insert into ArrivalPO values(?,?,?,?,?,?,?)";
+			sql = "insert into DeliveryPO values(?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 			pst.setString(1, po.getId());
-			pst.setString(2, po.getCentercode());
-			pst.setLong(3, po.getArrivaltime());
-			pst.setString(4, po.getTranscode());
-			pst.setString(5, po.getDeparture());
-			pst.setBytes(6, statebytes);
-			pst.setBytes(7, formstate);
+			pst.setLong(2, po.getArrivaltime());
+			pst.setString(3, po.getBarcode());
+			pst.setString(4, po.getDelivorinfo());
+			pst.setBytes(5, formstate);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -63,21 +59,18 @@ public class ArrivalDB {
 
 	}
 
-	public static ResultMessage update(ArrivalPO po) {
+	public static ResultMessage update(DeliveryPO po) {
 
 		try {
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
-			byte[] arrivalstate =Serialize.Object2Bytes(po.getArrivalstate());
 			dbh = new DBHelper();
-			sql = "update ArrivalPO set centercode=?,arrivaltime=?,transcode=?,departure=?,arrivalstate=?,documentstate=? where id=?";
+			sql = "update DeliveryPO set arrivaltime=?,barcode=?,delivorinfo=?,documentstate=? where id=?";
 			pst = dbh.prepare(sql);
-			pst.setString(1, po.getCentercode());
-			pst.setLong(2, po.getArrivaltime());
-			pst.setString(3, po.getTranscode());
-			pst.setString(4, po.getDeparture());
-			pst.setBytes(5, formstate);
-			pst.setBytes(6, arrivalstate);
-			pst.setString(7,po.getId());
+			pst.setLong(1, po.getArrivaltime());
+			pst.setString(2, po.getBarcode());
+			pst.setString(3, po.getDelivorinfo());
+			pst.setBytes(4, formstate);
+			pst.setString(5,po.getId());
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -92,20 +85,18 @@ public class ArrivalDB {
 		return ResultMessage.failure;
 	}
 	
-	public static List<ArrivalPO> fuzzySearch(Formstate documentstate){
-		List<ArrivalPO> list=new ArrayList<ArrivalPO>();
-		ArrivalPO po;
+	public static List<DeliveryPO> fuzzySearch(Formstate documentstate){
+		List<DeliveryPO> list=new ArrayList<DeliveryPO>();
+		DeliveryPO po;
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select id,centercode,arrivaltime,transcode,departure,arrivalstate from ArrivalPO where documentstate = ?";
+			sql = "select id,arrivaltime,barcode,delivorinfo from DeliveryPO where documentstate = ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				Arrivalstate arrivalstate=(Arrivalstate)Serialize.Bytes2Object(ret.getBytes(6)) ;
-				po = new ArrivalPO(ret.getString(1), ret.getString(2), ret.getLong(3), ret.getString(4), ret.getString(5),
-						arrivalstate,documentstate);
+				po = new DeliveryPO(ret.getString(1), ret.getLong(2), ret.getString(3), ret.getString(4),documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -120,7 +111,7 @@ public class ArrivalDB {
 	public static long getLastId(String orgcode){
 		long lastId=0;
 		dbh=new DBHelper();
-		sql="select id from ArrivalPO where id like ?";
+		sql="select id from DeliveryPO where id like ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, "%"+orgcode+"%");
@@ -140,7 +131,7 @@ public class ArrivalDB {
 
 	public static void main(String[] args) {
 		initialize();
-		ArrivalPO po=new ArrivalPO("0250001","a",1,"b","c",Arrivalstate.lost,Formstate.waiting);
+		DeliveryPO po=new DeliveryPO("0250001",1,"b","c",Formstate.waiting);
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)

@@ -47,7 +47,10 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 	}
 
 	@Override
-	public long findLastID() throws RemoteException {
-		return ArrivalDB.getLastId();
+	public long findLastID(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return ArrivalDB.getLastId(orgcode);
 	}
+
+
 }

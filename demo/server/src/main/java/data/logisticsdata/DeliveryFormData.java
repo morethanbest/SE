@@ -9,6 +9,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.database.logisticsDB.DeliveryDB;
+
 public class DeliveryFormData extends UnicastRemoteObject implements DeliveryFormDataService{
 
 	public DeliveryFormData() throws RemoteException{
@@ -18,21 +20,24 @@ public class DeliveryFormData extends UnicastRemoteObject implements DeliveryFor
 
 	@Override
 	public List<DeliveryPO> getDeliveryForm(Formstate state) throws RemoteException {
-		return null;
+		return DeliveryDB.fuzzySearch(state);
 	}
 
 	@Override
 	public ResultMessage updateDeliveryForm(DeliveryPO po) throws RemoteException {
-		return null;
+		return DeliveryDB.update(po);
 	}
 
 	@Override
 	public ResultMessage addDeliveryForm(DeliveryPO po) throws RemoteException {
-		return null;
+		return DeliveryDB.write(po);
 	}
 
 	@Override
-	public long findLastID() throws RemoteException {
-		return 0;
+	public long findLastID(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return DeliveryDB.getLastId(orgcode);
 	}
+
+
 }

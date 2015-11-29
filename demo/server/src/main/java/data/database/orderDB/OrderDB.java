@@ -117,10 +117,34 @@ public class OrderDB {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
 			
 			dbh = new DBHelper();
-			sql = "update OrderPO set documentstate=? where ordercode =?";
+			sql = "update OrderPO set sendername=?,senderaddress=?,senderunit=?,senderphone=?,sendercellphone=?,receivername=?,"
+					+ "receiveraddress=?,receiverunit=?,receiverphone=?,receivercellphone=?,numbers=?,weight=?,volume=?,productname=?"
+					+ ",packagefee=?,totalfee=?,ordertype=?,codeofreceiving=?,receiver=?,receivingtime=?,documentstate=? "
+					+ "where ordercode =?";
 			pst = dbh.prepare(sql);
-			pst.setBytes(1, statebytes);
-			pst.setString(2, ordercode);
+			pst.setString(1, po.getSendername());
+			pst.setString(2, po.getSenderaddress());
+			pst.setString(3, po.getSenderunit());
+			pst.setString(4, po.getSenderphone());
+			pst.setString(5, po.getSendercellphone());
+			pst.setString(6, po.getReceivername());
+			pst.setString(7, po.getReceiveraddress());
+			pst.setString(8, po.getReceiverunit());
+			pst.setString(9, po.getReceiverphone());
+			pst.setString(10, po.getReceivercellphone());
+			pst.setDouble(11, po.getNumbers());
+			pst.setDouble(12, po.getWeight());
+			pst.setDouble(13, po.getVolume());
+			pst.setString(14, po.getProductname());
+			pst.setDouble(15, po.getPackagefee());
+			pst.setDouble(16, po.getTotalfee());
+			byte[] typebytes = Serialize.Object2Bytes(po.getOrdertype());
+			pst.setBytes(17, typebytes);
+			pst.setString(18, po.getCodeofreceiving());
+			pst.setString(19, po.getReceiver());
+			pst.setLong(20, po.getReceivingtime());
+			pst.setBytes(21, statebytes);
+			pst.setString(22, ordercode);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -215,6 +239,26 @@ public class OrderDB {
 			e.printStackTrace();
 		}
 		return po;		//查不到时返回null
+	}
+	
+	public static double getWeight(String ordernum){
+		double weight=0;
+		dbh=new DBHelper();
+		sql="select weight from OrderPO where ordercode = ?";
+		pst = dbh.prepare(sql);
+		try {
+			pst.setString(1,ordernum);	
+			ret=pst.executeQuery();
+			if(ret.next()){
+				weight=ret.getDouble(1);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return weight;
 	}
 	
 	public static long getLastId(){

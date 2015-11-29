@@ -151,7 +151,8 @@ public class VehicleDB {
 			pst.setString(1, "%"+codeget+"%");
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				code=ret.getString(1);
+				if(ret.getString(1).startsWith(codeget));
+					code=ret.getString(1);
 			}
 			ret.close();
 			dbh.close();
