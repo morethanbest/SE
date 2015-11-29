@@ -1,7 +1,9 @@
 package businesslogic.managerbl.OrganizationPack;
 
+import dataservice.managerdataservice.CityDataService;
 import dataservice.managerdataservice.OrganizationDataService;
 import init.RMIHelper;
+import po.CityPO;
 import po.Organizationtype;
 
 /**
@@ -16,24 +18,28 @@ public class GetOrganizationcode {
     }
 
     public String getOrganizationcode(){
-    	//CityDataService city=RMIHelper.get
-        String code=null;
-        if(type==Organizationtype.hall){
-            OrganizationDataService organization= RMIHelper.getOrgdata();
-            try {
-                int number=Integer.parseInt(organization.getlasthallcode(city))+1;
-                String s=Integer.toString(number);
-                for(int i=0;i<3-s.length();i++){
-                    code+="0";
-                }
-                code+=s;
-            } catch (Exception e) {
-                System.out.println("getcode fail");
-            }
-        }
-        else{
-            code+="0";
-        }
+    	CityDataService cityDataService=RMIHelper.getCitydata();
+    	String code = "";
+    	try {
+			CityPO po=cityDataService.findCity(city);
+			code+=po.getZone();
+			if(type==Organizationtype.hall){
+	            OrganizationDataService organization= RMIHelper.getOrgdata();
+	            int number=Integer.parseInt(organization.getlasthallcode(city))+1;
+	            String s=Integer.toString(number);
+	            for(int i=0;i<3-s.length();i++){
+	                code+="0";
+	            }
+	            code+=s;
+	        }
+	        else{
+	            code+="0";
+	        }
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println("getorganizationcode fail");
+		}
+        
         return code;
     }
 

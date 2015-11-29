@@ -14,7 +14,16 @@ public class AddCity {
 	}
 	public ResultMessage addCity(){
 		CityPO po=new CityPO(name, zone);
-//		CityDataService city=RMIHelper.get
-		return ResultMessage.failure;
+		CityDataService city=RMIHelper.getCitydata();
+		ResultMessage result;
+		try {
+			result=city.addCity(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			result=ResultMessage.failure;
+			System.out.println("addcity fail");
+		}
+		
+		return result;
 	}
 }

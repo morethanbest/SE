@@ -1,5 +1,8 @@
 package businesslogic.managerbl.ConstantsPack;
 
+import dataservice.managerdataservice.CityDataService;
+import init.RMIHelper;
+import po.CityPO;
 import po.ResultMessage;
 
 public class RevCity {
@@ -10,6 +13,16 @@ public class RevCity {
 		this.zone=zone;
 	}
 	public ResultMessage updateCity(){
-		return null;
+		CityDataService cityDataService=RMIHelper.getCitydata();
+		CityPO po=new CityPO(name, zone);
+		ResultMessage resultMessage;
+		try {
+			resultMessage=cityDataService.updateCity(po);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			resultMessage=ResultMessage.failure;
+			System.out.println("RevCity fail");
+		}
+		return resultMessage;
 	}
 }
