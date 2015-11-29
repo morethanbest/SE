@@ -46,15 +46,7 @@ public class ConstantsController implements ConstantsBlService {
 		return listvo;
 	}
 	
-	@Override
-	public ResultMessage delConstants(ConstantsVO vo){
-		// TODO Auto-generated method stub
-		DelConstants delc=new DelConstants();
-		Constants c=new Constants(delc); 
-		ResultMessage result=c.delConstants(vo);
-		return result;
-	}
-	
+
 	@Override
 	public ResultMessage addCity(CityVO vo){
 		AddCity addCity=new AddCity();
