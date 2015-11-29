@@ -85,4 +85,5 @@ public class ConstantsController implements ConstantsBlService {
 		CityVO vo=constants.findCity(name);
 		return vo;
 	}
+	
 }

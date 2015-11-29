@@ -23,10 +23,11 @@ public class FindCity {
 				String poname=po.getName();
 				String zone=po.getZone();
 				CityVO vo=new CityVO(poname, zone);
-				listvo.add(vo);
+				listvo.add(vo);			
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+
 			listvo=null;
 			System.out.println("getallcity fail");
 		}

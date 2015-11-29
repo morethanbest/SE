@@ -7,6 +7,7 @@ import java.util.List;
 import data.database.logisticsDB.CenterloadDB;
 import data.database.managerDB.ConstantsDB;
 import data.database.orderDB.OrderDB;
+import data.managerdata.CityData;
 import dataservice.logisticsdataservice.CenterLoadFormDataService;
 import po.CenterloadPO;
 import po.ConstantsPO;
@@ -67,7 +68,7 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 		return OrderDB.getWeight(ordernum);
 	}
 
-	
+//	
 //	public static void main(String[] args){
 //		try{
 //			CenterLoadFormData data=new CenterLoadFormData();
@@ -76,8 +77,9 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 //			System.out.println(data.getunitprice("汽车"));
 //		}catch(Exception e){
 //			e.printStackTrace();
+//			
 //		}
 //	}
-
-	
+//
+//	
 }

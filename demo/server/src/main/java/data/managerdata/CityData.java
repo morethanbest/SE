@@ -43,5 +43,5 @@ public class CityData extends UnicastRemoteObject implements CityDataService{
 		// TODO Auto-generated method stub
 		return CityDB.search(name);
 	}
-
+	
 }

@@ -1,6 +1,8 @@
 package po;
 
-public class CityPO {
+import java.io.Serializable;
+
+public class CityPO implements Serializable{
 	String name;
 	String zone;
 	public CityPO(String name, String zone) {
