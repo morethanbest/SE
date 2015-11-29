@@ -49,7 +49,9 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	public ConstantPanel(final ManagerPanel managerPanel) {
 		this.managerPanel = managerPanel;
 		constantsBlService = new ConstantsController();
+		cityList = constantsBlService.getAllCity();
 
+		
 		setLayout(null);
 
 		btnAdd = new JButton("Add");
@@ -79,8 +81,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 			public void itemStateChanged(ItemEvent e) {
 				if (type.getSelectedItem().equals(ContstantType.City.getName())) {
 					swapBtn(true);
-					select_1.removeAllItems();
-					select_2.removeAllItems();
 					select_2.setVisible(false);
 					addCityItems();
 					displayByCity(cityList);
@@ -88,8 +88,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 					swapBtn(false);
 					if (type.getSelectedItem().equals(
 							ContstantType.Distance.getName())) {
-						select_1.removeAllItems();
-						select_2.removeAllItems();
 						select_2.setVisible(true);
 						addDistanceItems();
 						list1 = constantsBlService
@@ -97,8 +95,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 						displayByVO(list1);
 					} else if (type.getSelectedItem().equals(
 							ContstantType.PackageType.getName())) {
-						select_1.removeAllItems();
-						select_2.removeAllItems();
 						select_2.setVisible(false);
 						addPackTypeItems();
 						list1 = constantsBlService
@@ -107,8 +103,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 						displayByVO(list1);
 					} else if (type.getSelectedItem().equals(
 							ContstantType.OrderType.getName())) {
-						select_1.removeAllItems();
-						select_2.removeAllItems();
 						select_2.setVisible(false);
 						addOrderTypeItems();
 						list1 = constantsBlService
@@ -116,8 +110,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 						displayByVO(list1);
 					} else if (type.getSelectedItem().equals(
 							ContstantType.TransportType.getName())) {
-						select_1.removeAllItems();
-						select_2.removeAllItems();
 						select_2.setVisible(false);
 						addTransportTypeItems();
 						list1 = constantsBlService
@@ -164,16 +156,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		add(btnRevise);
 		
 		btnAddCity = new JButton("AddCity");
-		btnAddCity.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					AddCityDialog dialog = new AddCityDialog();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception e1) {
-				}
-			}
-		});
+		btnAddCity.addActionListener(this);
 		btnAddCity.setBounds(594, 0, 120, 32);
 		add(btnAddCity);
 		
@@ -188,6 +171,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 				String cellValue2 = (String) tableModel.getValueAt(
 						table.getSelectedRow(), 1);
 				constantsBlService.delCity(new CityVO(cellValue1, cellValue2));
+				updateCity();
 			} catch (ArrayIndexOutOfBoundsException | NullPointerException e1) {
 				managerPanel.setHint("系统提示：未选择删除项！");
 			}
@@ -209,24 +193,24 @@ public class ConstantPanel extends JPanel implements ActionListener {
 
 		select_2.addItemListener(distanceListener);
 
-		cityList = constantsBlService.getAllCity();
-
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnCount(2);
 		tableModel.setRowCount(10);
-
+		swapBtn(false);
 		refreshList();
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		try {
+		if(e.getSource().equals(btnAdd)){
 			AddConstantDailog dialog = new AddConstantDailog(this, cityList);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		} catch (Exception e2) {
-
+		}else if(e.getSource().equals(btnAddCity)){
+			AddCityDialog dialog = new AddCityDialog(this);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		}
 	}
 
@@ -237,6 +221,8 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	}
 
 	private void addDistanceItems() {
+		select_1.removeAllItems();
+		select_2.removeAllItems();
 		select_1.addItem("全部");
 		select_2.addItem("全部");
 		for(CityVO vo:cityList){
@@ -246,6 +232,8 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	}
 
 	private void addPackTypeItems() {
+		select_1.removeAllItems();
+		select_2.removeAllItems();
 		select_1.addItem("全部");
 		for (PackageTypes packages : PackageTypes.values()) {
 			select_1.addItem(packages.getName());
@@ -253,6 +241,8 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	}
 
 	private void addCityItems() {
+		select_1.removeAllItems();
+		select_2.removeAllItems();
 		select_1.addItem("全部");
 		for(CityVO vo:cityList){
 			select_1.addItem(vo.getName());
@@ -260,6 +250,8 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	}
 
 	private void addOrderTypeItems() {
+		select_1.removeAllItems();
+		select_2.removeAllItems();
 		select_1.addItem("全部");
 		for (OrderTypes order : OrderTypes.values()) {
 			select_1.addItem(order.getName());
@@ -267,6 +259,8 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	}
 
 	private void addTransportTypeItems() {
+		select_1.removeAll();
+		select_2.removeAll();
 		select_1.addItem("全部");
 		for (TransportTypes transport : TransportTypes.values()) {
 			select_1.addItem(transport.getName());
@@ -312,6 +306,12 @@ public class ConstantPanel extends JPanel implements ActionListener {
 				tableModel.addRow(new String[2]);
 			}
 		}
+	}
+	
+	void updateCity(){
+		cityList = constantsBlService.getAllCity();
+		addCityItems();
+		displayByCity(cityList);
 	}
 
 	public void refreshList() {

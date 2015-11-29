@@ -28,7 +28,7 @@ public class AddCityDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AddCityDialog() {
+	public AddCityDialog(final ConstantPanel parent) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,6 +65,7 @@ public class AddCityDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						ConstantsBlService constantsBlService = new ConstantsController();
 						constantsBlService.addCity(new CityVO(cityField.getText(), codeField.getText()));
+						parent.updateCity();
 						dispose();
 					}
 				});

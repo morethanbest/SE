@@ -58,7 +58,7 @@ public class OrganizationPanel extends JPanel {
 		addOrgTypeItems();
 		
 		citySelect = new JComboBox<String>();
-		citySelect.setBounds(188, 0, 174, 31);
+		citySelect.setBounds(199, 0, 174, 31);
 		add(citySelect);
 		addCityItems();
 		
@@ -77,13 +77,9 @@ public class OrganizationPanel extends JPanel {
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
 					AddOrganizationDailog dialog = new AddOrganizationDailog();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
-				} catch (Exception e1) {
-				}
-				
 			}
 		});
 		btnAdd.setBounds(587, 0, 113, 31);
@@ -107,7 +103,7 @@ public class OrganizationPanel extends JPanel {
 	}
 	
 	public void addCityItems() {
-		citySelect.removeAll();
+		citySelect.removeAllItems();
 		ConstantsBlService constantsBlService = new ConstantsController();
 		List<CityVO> cityList = constantsBlService.getAllCity();
 		citySelect.addItem("全部");
@@ -147,7 +143,10 @@ public class OrganizationPanel extends JPanel {
 	}
 	
 	void refreshList(){
-		if(citySelect.getSelectedItem().equals("全部") && orgSelect.getSelectedItem().equals("全部"))
+		if(citySelect.getSelectedItem() == null || orgSelect.getSelectedItem() == null)
+			return;
+		if(citySelect.getSelectedItem().equals("全部") 
+				&& orgSelect.getSelectedItem().equals("全部"))
 			list = organizationBlService.getOrganizationAll();
 		else if(citySelect.getSelectedItem().equals("全部"))
 			list = organizationBlService.getOrganizationbyType(getOrganizationType((String) orgSelect.getSelectedItem()));

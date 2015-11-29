@@ -103,7 +103,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 	}
 	
 	public void addCityItems() {
-		citySelect.removeAll();
+		citySelect.removeAllItems();
 		ConstantsBlService constantsBlService = new ConstantsController();
 		List<CityVO> cityList = constantsBlService.getAllCity();
 		citySelect.addItem("全部");
