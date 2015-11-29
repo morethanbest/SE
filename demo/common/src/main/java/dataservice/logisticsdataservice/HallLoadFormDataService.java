@@ -4,7 +4,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.CityPO;
 import po.Formstate;
 import po.HallLoadPO;
 import po.ResultMessage;

@@ -1,15 +1,18 @@
 package data.logisticsdata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+
+import data.database.logisticsDB.CenterloadDB;
+import data.database.logisticsDB.GoodsReceivingDB;
+import data.database.logisticsDB.HallLoadDB;
 import dataservice.logisticsdataservice.GoodsReceivingFormDataService;
 import po.CenterloadPO;
 import po.Formstate;
 import po.GoodsReceivingPO;
 import po.HallLoadPO;
 import po.ResultMessage;
-
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
 
 /**
  *
@@ -23,33 +26,36 @@ public class GoodsReceivingFormData extends UnicastRemoteObject implements Goods
 
 	@Override
 	public ResultMessage addGoodsReceivingForm(GoodsReceivingPO po) throws RemoteException {
-		return null;
+		return GoodsReceivingDB.write(po);
 	}
 
 	@Override
 	public List<GoodsReceivingPO> getGoodsReceivingForm(Formstate state) throws RemoteException {
-		return null;
+		return GoodsReceivingDB.fuzzySearch(state);
 	}
 
 	@Override
 	public ResultMessage updateGoodsReceivingForm(GoodsReceivingPO po) throws RemoteException {
-		return null;
+		return GoodsReceivingDB.update(po);
 	}
 
 	@Override
 	public HallLoadPO getHallLoadBycode(String hallloadcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return HallLoadDB.getpoBymotorcode(hallloadcode);
 	}
 
 	@Override
 	public CenterloadPO getCenterLoadBycode(String centerloadcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return CenterloadDB.getpoBymotorcode(centerloadcode);
 	}
 
 	@Override
-	public long findLastID() throws RemoteException {
-		return 0;
+	public long findLastID(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return GoodsReceivingDB.getLastId(orgcode);
 	}
+
+
 }

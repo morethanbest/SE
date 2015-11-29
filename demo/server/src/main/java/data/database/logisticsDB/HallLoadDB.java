@@ -9,9 +9,10 @@ import data.database.DBHelper;
 import data.database.Serialize;
 import po.CenterloadPO;
 import po.Formstate;
+import po.HallLoadPO;
 import po.ResultMessage;
 
-public class CenterloadDB {
+public class HallLoadDB {
 	static String sql = null;
 	static DBHelper dbh = null;
 	static ResultSet ret = null;
@@ -19,11 +20,11 @@ public class CenterloadDB {
 
 	public static void initialize() {
 		dbh = new DBHelper();
-		sql = "drop table CenterloadPO";
+		sql = "drop table HallLoadPO";
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table CenterloadPO(id text,loadtime bigint,motorcode text,destination text,"
+			sql = "create table HallLoadPO(loadtime bigint,hallcode text,motorcode text,destination text,"
 					+ "vehiclecode text,supervisor text,supercargo text,allbarcode blob,fee double,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
@@ -33,16 +34,16 @@ public class CenterloadDB {
 		}
 	}
 
-	public static ResultMessage write(CenterloadPO po) {
+	public static ResultMessage write(HallLoadPO po) {
 		try {
 			byte[] listbytes = Serialize.Object2Bytes(po.getAllbarcode());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "insert into CenterloadPO values(?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into HallLoadPO values(?,?,?,?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 
-			pst.setString(1, po.getId());
-			pst.setLong(2, po.getLoadtime());
+			pst.setLong(1, po.getLoadtime());
+			pst.setString(2, po.getHallcode());
 			pst.setString(3, po.getMotorcode());
 			pst.setString(4, po.getDestination());
 			pst.setString(5, po.getVehiclecode());
@@ -66,17 +67,17 @@ public class CenterloadDB {
 
 	}
 
-	public static ResultMessage update(CenterloadPO po) {
+	public static ResultMessage update(HallLoadPO po) {
 
 		try {
 			byte[] listbytes=Serialize.Object2Bytes(po.getAllbarcode());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "update CenterloadPO set id=?,loadtime=?,destination=?,vehiclecode=?,supervisor=?,"
+			sql = "update HallLoadPO set loadtime=?,hallcode=?,destination=?,vehiclecode=?,supervisor=?,"
 					+ "supercargo=?,allbarcode=?,fee=?,documentstate=? where motorcode=?";
 			pst = dbh.prepare(sql);
-			pst.setString(1, po.getId());
-			pst.setLong(2, po.getLoadtime());
+			pst.setLong(1, po.getLoadtime());
+			pst.setString(2, po.getHallcode());
 			pst.setString(3, po.getDestination());
 			pst.setString(4, po.getVehiclecode());
 			pst.setString(5, po.getSupervisor());
@@ -85,7 +86,6 @@ public class CenterloadDB {
 			pst.setDouble(8, po.getFee());
 			pst.setBytes(9, formstate);
 			pst.setString(10, po.getMotorcode());
-
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -100,20 +100,20 @@ public class CenterloadDB {
 		return ResultMessage.failure;
 	}
 	
-	public static List<CenterloadPO> fuzzySearch(Formstate documentstate){
-		List<CenterloadPO> list=new ArrayList<CenterloadPO>();
-		CenterloadPO po;
+	public static List<HallLoadPO> fuzzySearch(Formstate documentstate){
+		List<HallLoadPO> list=new ArrayList<HallLoadPO>();
+		HallLoadPO po;
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select id,loadtime,motorcode,destination,vehiclecode,supervisor,"
-					+ "supercargo,allbarcode,fee from CenterloadPO where documentstate = ?";
+			sql = "select loadtime,hallcode,motorcode,destination,vehiclecode,supervisor,"
+					+ "supercargo,allbarcode,fee from HallLoadPO where documentstate = ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;
-				po = new CenterloadPO(ret.getString(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
+				po = new HallLoadPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4), ret.getString(5),
 						ret.getString(6),ret.getString(7),allbarcode,ret.getDouble(9),documentstate);
 				list.add(po);
 			}
@@ -127,9 +127,9 @@ public class CenterloadDB {
 	}
 
 	public static long getLastId(String orgcode){
-		long lastId=0;
+		long lastId=-1;
 		dbh=new DBHelper();
-		sql="select motorcode from CenterloadPO where motorcode like ?";
+		sql="select motorcode from HallLoadPO where motorcode like ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, "%"+orgcode+"%");
@@ -147,19 +147,19 @@ public class CenterloadDB {
 		return lastId;
 	}
 	
-	public static CenterloadPO getpoBymotorcode(String motorcode){
-		CenterloadPO po=null;
+	public static HallLoadPO getpoBymotorcode(String motorcode){
+		HallLoadPO po=null;
 		dbh=new DBHelper();
 		try {
-			sql = "select id,loadtime,destination,vehiclecode,supervisor,"
-					+ "supercargo,allbarcode,fee,documentstate from CenterloadPO where motorcode = ?";
+			sql = "select loadtime,hallcode,destination,vehiclecode,supervisor,"
+					+ "supercargo,allbarcode,fee,documentstate from HallLoadPO where motorcode = ?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, motorcode);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(7)) ;
 				Formstate state=(Formstate)Serialize.Bytes2Object(ret.getBytes(9)) ;
-				po = new CenterloadPO(ret.getString(1), ret.getLong(2),motorcode, ret.getString(3), ret.getString(4),
+				po = new HallLoadPO(ret.getLong(1), ret.getString(2),motorcode, ret.getString(3), ret.getString(4),
 						ret.getString(5),ret.getString(6),allbarcode,ret.getDouble(8),state);
 			}
 			ret.close();
@@ -175,7 +175,7 @@ public class CenterloadDB {
 		initialize();
 		List<String> list=new ArrayList<String>();
 		list.add("001");
-		CenterloadPO po=new CenterloadPO("0250001",1,"0250002","1","b","c","d",list,10,Formstate.waiting);
+		HallLoadPO po=new HallLoadPO(1,"025000","02500000","1","b","c","d",list,10,Formstate.waiting);
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)

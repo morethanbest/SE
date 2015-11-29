@@ -5,6 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import data.database.logisticsDB.ArrivalDB;
+import data.database.logisticsDB.HallLoadDB;
+import data.database.logisticsDB.RecordtransDB;
 import dataservice.logisticsdataservice.ArrivalFormDataService;
 import po.ArrivalPO;
 import po.Formstate;
@@ -37,13 +39,13 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 	@Override
 	public HallLoadPO getHallLoadBycode(String hallloadcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return HallLoadDB.getpoBymotorcode(hallloadcode);
 	}
 
 	@Override
 	public RecordtransPO getRecordtransBycode(String recordtranscode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return RecordtransDB.getpoBytranscode(recordtranscode);
 	}
 
 	@Override

@@ -75,8 +75,8 @@ public class ArrivalDB {
 			pst.setLong(2, po.getArrivaltime());
 			pst.setString(3, po.getTranscode());
 			pst.setString(4, po.getDeparture());
-			pst.setBytes(5, formstate);
-			pst.setBytes(6, arrivalstate);
+			pst.setBytes(5, arrivalstate);
+			pst.setBytes(6, formstate);
 			pst.setString(7,po.getId());
 			int result = pst.executeUpdate();
 			if (result == -1) {
