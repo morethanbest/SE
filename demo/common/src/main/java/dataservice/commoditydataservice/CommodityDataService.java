@@ -19,5 +19,7 @@ public interface CommodityDataService extends Remote {
 	
 	public ResultMessage changeLocation(CommodityPO po, CommodityLocation location)throws RemoteException;
 
+	public long getnewid(String orgcode) throws  RemoteException;
+
 
 }
