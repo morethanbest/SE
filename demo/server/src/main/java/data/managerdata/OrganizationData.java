@@ -17,7 +17,7 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 	@Override
 	public ResultMessage addOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=OrganizationDB.update( po);
+		ResultMessage result=OrganizationDB.write(po);
 		return result;
 	}
 
@@ -68,5 +68,14 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 		String hallcode = OrganizationDB.gethallcode(city);
 		return hallcode;
 	}
-
+//	public static void main(String[] args){
+//		try{
+//		OrganizationData data=new OrganizationData();
+//		if(data.addOrganization(new OrganizationPO("0250","南京中转中心",Organizationtype.transfercenter,"南京"))==ResultMessage.success)
+//			System.out.println("add success");
+//		
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//	}
 }

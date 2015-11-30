@@ -19,7 +19,7 @@ public class test {
 		StockinVO vo=new StockinVO("002400400", 20130412, loca, City.Beijing);
 		
 		
-		InboundFormMock newform=new InboundFormMock();
+		AddInbound newform=new AddInbound();
 		
 		IdInfoMock idgetter=new IdInfoMock(5);
 		Inbound newinbound=new Inbound(newform,idgetter);

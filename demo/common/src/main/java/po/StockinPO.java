@@ -1,18 +1,21 @@
 package po;
 import java.io.Serializable;
+import java.text.Normalizer;
 
 public class StockinPO  implements Serializable{
-	long id;
+	String id;
 	String ordercode;
 	long intime;
 	CommodityLocation Location;
 	String destination;
-	public StockinPO(long id, String ordercode, long intime, CommodityLocation location, String destination) {
+	Formstate formstate;
+	public StockinPO(String id, String ordercode, long intime, CommodityLocation location, String destination,Formstate formstate) {
 		this.id = id;
 		this.ordercode = ordercode;
 		this.intime = intime;
 		Location = location;
 		this.destination = destination;
+		this.formstate=formstate;
 	}
 	public String getOrdercode() {
 		return ordercode;
@@ -38,8 +41,14 @@ public class StockinPO  implements Serializable{
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
+	}
+	public void setId(String id){this.id=id;}
+
+	public void setFormstate(Formstate state){this.formstate=state;}
+	public Formstate getFormstate(){
+		return  formstate;
 	}
 	
 }

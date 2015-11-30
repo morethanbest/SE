@@ -2,69 +2,78 @@ package po;
 import java.io.Serializable;
 
 public class StockoutPO  implements Serializable{
-	long id;
+	String id;
 	String ordercode;
 	long outtime;
 	String destination;
-	Loadform loadform;
+	String transporttype;
 	String transcode;
-	String motorcode;
-	Formstate documentstate;
-	public StockoutPO(long id,String ordercode, long outtime, String destination, Loadform loadform, String transcode, String motorcode) {
+
+	Formstate formstate;
+	public StockoutPO(String id,String ordercode, long outtime, String destination, String transporttype, String transcode,
+					  Formstate formstate) {
 		this.id=id;
 		this.ordercode = ordercode;
 		this.outtime = outtime;
 		this.destination = destination;
-		this.loadform = loadform;
+		this.transporttype=transporttype;
 		this.transcode = transcode;
-		this.motorcode = motorcode;
-		this.documentstate=Formstate.waiting;
+		this.formstate=formstate;
 	}
-	public long getId() {
+
+	public String getId() {
 		return id;
 	}
-	public Formstate getDocumentstate() {
-		return documentstate;
+
+	public void setId(String id) {
+		this.id = id;
 	}
-	public void setOrdercode(String ordercode) {
-		this.ordercode = ordercode;
-	}
-	public void setOuttime(long outtime) {
-		this.outtime = outtime;
-	}
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-	public void setLoadform(Loadform loadform) {
-		this.loadform = loadform;
-	}
-	public void setTranscode(String transcode) {
-		this.transcode = transcode;
-	}
-	public void setMotorcode(String motorcode) {
-		this.motorcode = motorcode;
-	}
-	public void setDocumentstate(Formstate documentstate) {
-		this.documentstate = documentstate;
-	}
+
 	public String getOrdercode() {
 		return ordercode;
 	}
+
+	public void setOrdercode(String ordercode) {
+		this.ordercode = ordercode;
+	}
+
 	public long getOuttime() {
 		return outtime;
 	}
+
+	public void setOuttime(long outtime) {
+		this.outtime = outtime;
+	}
+
 	public String getDestination() {
 		return destination;
 	}
-	public Loadform getLoadform() {
-		return loadform;
+
+	public String getTransporttype() {
+		return transporttype;
 	}
+
+	public void setTransporttype(String transporttype) {
+		this.transporttype = transporttype;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
 	public String getTranscode() {
 		return transcode;
 	}
-	public String getMotorcode() {
-		return motorcode;
+
+	public void setTranscode(String transcode) {
+		this.transcode = transcode;
 	}
-	
-	
+
+	public Formstate getFormstate() {
+		return formstate;
+	}
+
+	public void setFormstate(Formstate formstate) {
+		this.formstate = formstate;
+	}
 }
