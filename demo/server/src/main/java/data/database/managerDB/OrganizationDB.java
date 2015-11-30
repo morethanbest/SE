@@ -48,12 +48,12 @@ public class OrganizationDB {
 				dbh.close();// 关闭连接
 				return ResultMessage.failure;
 			}
-			dbh.close();// 关闭连接
+			dbh.close();
 			return ResultMessage.success;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		dbh.close();
 		return ResultMessage.failure;
 		
 	}
@@ -66,12 +66,13 @@ public class OrganizationDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -88,13 +89,13 @@ public class OrganizationDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -111,12 +112,13 @@ public class OrganizationDB {
 			int result;
 			result = pst.executeUpdate();
 			if (result != 0) {
+				dbh.close();
 				return ResultMessage.success;
 			}
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	

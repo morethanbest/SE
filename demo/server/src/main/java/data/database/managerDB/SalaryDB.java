@@ -60,7 +60,7 @@ public class SalaryDB {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+		dbh.close();
 		return ResultMessage.failure;
 		
 	}
@@ -75,13 +75,13 @@ public class SalaryDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -99,13 +99,13 @@ public class SalaryDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	

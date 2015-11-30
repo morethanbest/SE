@@ -48,12 +48,12 @@ public class AccountDB {
 				dbh.close();// 关闭连接
 				return ResultMessage.failure;
 			}
-			dbh.close();// 关闭连接
+			dbh.close();
 			return ResultMessage.success;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		
+		dbh.close();
 		return ResultMessage.failure;
 		
 	}
@@ -67,13 +67,13 @@ public class AccountDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -88,13 +88,13 @@ public class AccountDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	

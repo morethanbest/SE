@@ -24,19 +24,6 @@ public class ConstantsDB {
 			sql = "create table ConstantsPO(id bigint auto_increment primary key,name text,value double)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			ConstantsPO po=new ConstantsPO(1,"距离-南京-上海",500);
-			ResultMessage result;
-			result = write(po.getName(), po.getValue());
-			po=new ConstantsPO(1,"距离-上海-南京",500);
-			result = write(po.getName(), po.getValue());
-			if (result == ResultMessage.success) {
-				System.out.println("add Successfully");
-			}
-			List<ConstantsPO> list = fuzzySearch("距离");
-			if (list.size()>0) {
-				System.out.println("get it");
-			}
-			ret.close();
 			dbh.close();// 关闭连接
 		}catch(Exception e){
 			e.printStackTrace();
@@ -57,14 +44,33 @@ public class ConstantsDB {
 				dbh.close();// 关闭连接
 				return ResultMessage.failure;
 			}
-			dbh.close();// 关闭连接
+			dbh.close();
 			return ResultMessage.success;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		
+		dbh.close();
 		return ResultMessage.failure;
 		
+	}
+	
+	public static ResultMessage deletebycity(String city){
+		dbh=new DBHelper();
+		sql="delete from ConstantsPO where name like ?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setString(1, "%"+city+"%");
+			int result;
+			result=pst.executeUpdate();
+			if(result!=0){
+				dbh.close();
+				return ResultMessage.success;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		dbh.close();
+		return ResultMessage.failure;
 	}
 	
 	public static ResultMessage delete(long id){
@@ -76,13 +82,13 @@ public class ConstantsDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -96,13 +102,13 @@ public class ConstantsDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	

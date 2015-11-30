@@ -50,13 +50,13 @@ public class CityDB {
 				dbh.close();// 关闭连接
 				return ResultMessage.failure;
 			}
-			dbh.close();// 关闭连接
+			dbh.close();
 			return ResultMessage.success;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		
-		return ResultMessage.failure;
+		dbh.close();// 关闭连接
+		return ResultMessage.success;
 		
 	}
 	
@@ -65,6 +65,7 @@ public class CityDB {
 			OrganizationDB.deletebycity(po.getName());
 			StaffDB.deletebycity(po.getName());
 			UserDB.deletebyCity(po.getName());
+			ConstantsDB.deletebycity(po.getName());
 		}
 		dbh=new DBHelper();
 		sql="delete from CityPO where name=?";
@@ -74,13 +75,14 @@ public class CityDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -94,13 +96,13 @@ public class CityDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	

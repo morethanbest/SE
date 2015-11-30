@@ -71,7 +71,7 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 //	public static void main(String[] args){
 //		try{
 //		OrganizationData data=new OrganizationData();
-//		if(data.addOrganization(new OrganizationPO("0250","南京中转中心",Organizationtype.transfercenter,"南京"))==ResultMessage.success)
+//		if(data.addOrganization(new OrganizationPO("南京中转中心","0250",Organizationtype.transfercenter,"南京"))==ResultMessage.success)
 //			System.out.println("add success");
 //		
 //		}catch(Exception e){

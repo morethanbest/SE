@@ -69,7 +69,7 @@ public class StaffDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		dbh.close();
 		return ResultMessage.failure;
 		
 	}
@@ -85,13 +85,13 @@ public class StaffDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	public static ResultMessage deletebycity(String city){
@@ -103,12 +103,13 @@ public class StaffDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -122,12 +123,13 @@ public class StaffDB {
 			int result;
 			result=pst.executeUpdate();
 			if(result!=0){
+				dbh.close();
 				return ResultMessage.success;
 			}
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
@@ -148,13 +150,13 @@ public class StaffDB {
 			int result;
 			result = pst.executeUpdate();
 			if (result != 0) {
+				dbh.close();
 				return ResultMessage.success;
 			}
-			ret.close();
-			dbh.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	
