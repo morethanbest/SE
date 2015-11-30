@@ -25,7 +25,7 @@ public class UserDB {
 			sql = "create table UserPO(username text,password text,job blob,organizationname text,organizationcode text,organizationtype blob,city text)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			UserPO po = new UserPO("sunchao","123",Job.manager,"总部","025",Organizationtype.headquarters,"南京"); 
+			UserPO po = new UserPO("1","123",Job.manager,"总部","025",Organizationtype.headquarters,"南京"); 
 
 			ResultMessage result;
 			result = write(po);

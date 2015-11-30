@@ -107,6 +107,32 @@ public class DeliveryDB {
 		}
 		return list;
 	}
+	
+	public static List<DeliveryPO> fuzzySearch(Formstate documentstate,String orgcode){
+		List<DeliveryPO> list=new ArrayList<DeliveryPO>();
+		DeliveryPO po;
+		dbh=new DBHelper();
+		try {
+			byte[] statebytes = Serialize.Object2Bytes(documentstate);
+			sql = "select id,arrivaltime,barcode,delivorinfo from DeliveryPO where documentstate = ? and id like ?";
+			pst = dbh.prepare(sql);
+			pst.setBytes(1, statebytes);
+			pst.setString(2, "%"+orgcode+"%");
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(!ret.getString(1).startsWith(orgcode))
+					continue;
+				po = new DeliveryPO(ret.getString(1), ret.getLong(2), ret.getString(3), ret.getString(4),documentstate);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public static long getLastId(String orgcode){
 		long lastId=0;

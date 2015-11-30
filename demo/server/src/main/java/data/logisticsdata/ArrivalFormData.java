@@ -22,8 +22,8 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 	}
 
 	@Override
-	public List<ArrivalPO> getArrivalForm(Formstate state) throws RemoteException {
-		return ArrivalDB.fuzzySearch(state);
+	public List<ArrivalPO> getArrivalForm(Formstate state,String orgcode) throws RemoteException {
+		return ArrivalDB.fuzzySearch(state,orgcode);
 	}
 
 	@Override

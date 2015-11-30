@@ -125,6 +125,35 @@ public class HallLoadDB {
 		}
 		return list;
 	}
+	
+	public static List<HallLoadPO> fuzzySearch(Formstate documentstate,String orgcode){
+		List<HallLoadPO> list=new ArrayList<HallLoadPO>();
+		HallLoadPO po;
+		dbh=new DBHelper();
+		try {
+			byte[] statebytes = Serialize.Object2Bytes(documentstate);
+			sql = "select loadtime,hallcode,motorcode,destination,vehiclecode,supervisor,"
+					+ "supercargo,allbarcode,fee from HallLoadPO where documentstate = ? and motorcode like ?";
+			pst = dbh.prepare(sql);
+			pst.setBytes(1, statebytes);
+			pst.setString(2, "%"+orgcode+"%");
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(!ret.getString(3).startsWith(orgcode))
+					continue;
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;
+				po = new HallLoadPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4), ret.getString(5),
+						ret.getString(6),ret.getString(7),allbarcode,ret.getDouble(9),documentstate);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public static long getLastId(String orgcode){
 		long lastId=-1;

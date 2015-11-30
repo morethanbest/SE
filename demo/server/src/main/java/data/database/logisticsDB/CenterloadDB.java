@@ -125,6 +125,35 @@ public class CenterloadDB {
 		}
 		return list;
 	}
+	
+	public static List<CenterloadPO> fuzzySearch(Formstate documentstate,String orgcode){
+		List<CenterloadPO> list=new ArrayList<CenterloadPO>();
+		CenterloadPO po;
+		dbh=new DBHelper();
+		try {
+			byte[] statebytes = Serialize.Object2Bytes(documentstate);
+			sql = "select id,loadtime,motorcode,destination,vehiclecode,supervisor,"
+					+ "supercargo,allbarcode,fee from CenterloadPO where documentstate = ? and orgcode like ?";
+			pst = dbh.prepare(sql);
+			pst.setBytes(1, statebytes);
+			pst.setString(2, "%"+orgcode+"%");
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(!ret.getString(3).startsWith(orgcode))
+					continue;
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;
+				po = new CenterloadPO(ret.getString(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
+						ret.getString(6),ret.getString(7),allbarcode,ret.getDouble(9),documentstate);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public static long getLastId(String orgcode){
 		long lastId=0;

@@ -18,8 +18,8 @@ public class DeliveryFormData extends UnicastRemoteObject implements DeliveryFor
 	}
 
 	@Override
-	public List<DeliveryPO> getDeliveryForm(Formstate state) throws RemoteException {
-		return DeliveryDB.fuzzySearch(state);
+	public List<DeliveryPO> getDeliveryForm(Formstate state,String orgcode) throws RemoteException {
+		return DeliveryDB.fuzzySearch(state,orgcode);
 	}
 
 	@Override

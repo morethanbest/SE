@@ -21,8 +21,8 @@ public class RecordtransFormData extends UnicastRemoteObject implements Recordtr
 	}
 
 	@Override
-	public List<RecordtransPO> getRecordtransForm(Formstate state) throws RemoteException {
-		return RecordtransDB.fuzzySearch(state);
+	public List<RecordtransPO> getRecordtransForm(Formstate state,String orgcode) throws RemoteException {
+		return RecordtransDB.fuzzySearch(state,orgcode);
 	}
 
 	@Override

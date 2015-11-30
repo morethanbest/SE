@@ -129,6 +129,35 @@ public class RecordtransDB {
 		}
 		return list;
 	}
+	
+	public static List<RecordtransPO> fuzzySearch(Formstate documentstate,String orgcode){
+		List<RecordtransPO> list=new ArrayList<RecordtransPO>();
+		RecordtransPO po;
+		dbh=new DBHelper();
+		try {
+			byte[] statebytes = Serialize.Object2Bytes(documentstate);
+			sql = "select loadtime,arrivaltime,transcode,transport,transportcode,departrue,destination,"
+					+ "countercode,supervisor,allcode,fee from RecordtransPO where documentstate = ? and transcode like ?";
+			pst = dbh.prepare(sql);
+			pst.setBytes(1, statebytes);
+			pst.setString(2, "%"+orgcode+"%");
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(!ret.getString(3).startsWith(orgcode))
+					continue;
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(10));
+				po = new RecordtransPO(ret.getLong(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
+						ret.getString(6),ret.getString(7),ret.getString(8),ret.getString(9),allbarcode,ret.getDouble(11),documentstate);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public static long getLastId(String orgcode){
 		long lastId=-1;

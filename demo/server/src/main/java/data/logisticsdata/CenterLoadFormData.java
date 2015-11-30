@@ -22,8 +22,8 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 	}
 
 	@Override
-	public List<CenterloadPO> getCenterLoadForm(Formstate state) throws RemoteException {
-		return CenterloadDB.fuzzySearch(state);
+	public List<CenterloadPO> getCenterLoadForm(Formstate state,String orgcode) throws RemoteException {
+		return CenterloadDB.fuzzySearch(state,orgcode);
 	}
 
 	@Override

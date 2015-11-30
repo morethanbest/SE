@@ -26,8 +26,8 @@ public class HallLoadFormData extends UnicastRemoteObject implements HallLoadFor
 	}
 
 	@Override
-	public List<HallLoadPO> getLoadForm(Formstate state) throws RemoteException {
-		return HallLoadDB.fuzzySearch(state);
+	public List<HallLoadPO> getLoadForm(Formstate state,String orgcode) throws RemoteException {
+		return HallLoadDB.fuzzySearch(state,orgcode);
 	}
 
 	@Override

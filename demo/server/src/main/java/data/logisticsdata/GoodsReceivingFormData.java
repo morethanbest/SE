@@ -30,8 +30,8 @@ public class GoodsReceivingFormData extends UnicastRemoteObject implements Goods
 	}
 
 	@Override
-	public List<GoodsReceivingPO> getGoodsReceivingForm(Formstate state) throws RemoteException {
-		return GoodsReceivingDB.fuzzySearch(state);
+	public List<GoodsReceivingPO> getGoodsReceivingForm(Formstate state,String orgcode) throws RemoteException {
+		return GoodsReceivingDB.fuzzySearch(state,orgcode);
 	}
 
 	@Override
