@@ -11,11 +11,11 @@ public class GetRegioInfoController implements GetRegionInfoBlService{
 	
 
 	@Override
-	public RegionInfoVO getRegionInfo(long blocknum) throws RemoteException {
+	public RegionInfoVO getRegionInfo(String orgcode,long blocknum) throws RemoteException {
 		// TODO Auto-generated method stub
-		RegionGetMock regiongetter=new RegionGetMock(null);//change
-		GetRegionInfo regioninfo=new GetRegionInfo(regiongetter);
-		RegionInfoVO vo=regioninfo.getinfo(blocknum);
+		RegionGet geter=new RegionGet();
+		GetRegionInfo regioninfo=new GetRegionInfo(geter);
+		RegionInfoVO vo=regioninfo.getinfo(orgcode,blocknum);
 		return vo;
 		
 		}

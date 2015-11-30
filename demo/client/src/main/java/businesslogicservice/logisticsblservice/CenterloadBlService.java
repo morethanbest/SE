@@ -16,7 +16,7 @@ public interface CenterloadBlService {
 
 
 
-	public List<CenterloadVO>  findCenterloadForm(Formstate state) throws  RemoteException;
+	public List<CenterloadVO>  findCenterloadForm(Formstate state,String orgcode) throws  RemoteException;
 
 	public ResultMessage update(CenterloadVO vo)throws RemoteException;
 

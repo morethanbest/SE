@@ -6,8 +6,7 @@ import java.util.List;
 import po.CommodityLocation;
 
 import businesslogicservice.commodityblservice.GetRegionInfoBlService;
-import vo.CommodityInVO;
-import vo.Region;
+import vo.CommodityGetRegionVO;
 import vo.RegionInfoVO;
 
 public class GetRegionInfoBlService_Stub implements GetRegionInfoBlService {
@@ -15,8 +14,8 @@ public class GetRegionInfoBlService_Stub implements GetRegionInfoBlService {
 	@Override
 	public RegionInfoVO getRegionInfo(long blocknum) throws RemoteException {
 		// TODO Auto-generated method stub
-		List<CommodityInVO> l=new ArrayList<CommodityInVO>();
-		l.add(new CommodityInVO("a",1,new CommodityLocation(1,1,1,1)));
+		List<CommodityGetRegionVO> l=new ArrayList<CommodityGetRegionVO>();
+		l.add(new CommodityGetRegionVO("a",1,new CommodityLocation(1,1,1,1)));
 		return new RegionInfoVO(l);
 	}
 

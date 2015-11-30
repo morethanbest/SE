@@ -18,8 +18,7 @@ public class HallLoadController implements HallLoadBlService{
         AddLoad add=new AddLoad();
         HallLoad load=new HallLoad(add);
         ResultMessage result=load.addform(vo);
-        HallloadUpdateLogistics updatehistory=new HallloadUpdateLogistics();
-        updatehistory.updatehistory(vo);
+
         return result;
     }
 
@@ -32,6 +31,9 @@ public class HallLoadController implements HallLoadBlService{
 
     @Override
     public ResultMessage update(HallLoadVO vo) throws RemoteException {
+        HallloadUpdateLogistics updatehistory=new HallloadUpdateLogistics();
+        updatehistory.updatehistory(vo);
+
         UpdateLoad update=new UpdateLoad();
         HallLoad load=new HallLoad(update);
         ResultMessage result=load.updateform(vo);
@@ -39,10 +41,10 @@ public class HallLoadController implements HallLoadBlService{
     }
 
     @Override
-    public List<HallLoadVO> findforms(Formstate state) throws RemoteException {
+    public List<HallLoadVO> findforms(Formstate state,String orgcode) throws RemoteException {
         FindLoad find=new FindLoad();
         HallLoad load=new HallLoad(find);
-        List<HallLoadVO> list=load.findforms(state);
+        List<HallLoadVO> list=load.findforms(state,orgcode);
         return list;
     }
 

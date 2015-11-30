@@ -11,7 +11,7 @@ import po.ResultMessage;
 public interface HallLoadFormDataService extends Remote {
 	public ResultMessage addLoadForm (HallLoadPO po)throws RemoteException;
 	
-	public List<HallLoadPO> getLoadForm (Formstate state)throws RemoteException;
+	public List<HallLoadPO> getLoadForm (Formstate state,String orgcode)throws RemoteException;
 	
 	public ResultMessage updateLoadForm(HallLoadPO po)throws RemoteException;
 	

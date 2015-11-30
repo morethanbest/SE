@@ -55,8 +55,8 @@ public class GoodsReceving {
         return result;
     }
 
-    public List<GoodsReceivingVO> findgoodsform(Formstate state){
-        List<GoodsReceivingPO> pos=find.getforms(state);
+    public List<GoodsReceivingVO> findgoodsform(Formstate state,String orgcode){
+        List<GoodsReceivingPO> pos=find.getforms(state,orgcode);
         List<GoodsReceivingVO> list=null;
         int len=pos.size();
         for(int i=0;i<=len-1;i++){

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Administrator on 2015/11/27.
  */
 public class GoodsRecevingController implements GoodsRecevingBlService{
-
+    @Override
     public ResultMessage GoodsReceving(GoodsReceivingVO vo) throws RemoteException {
 
         AddGoods add=new AddGoods();
@@ -26,35 +26,40 @@ public class GoodsRecevingController implements GoodsRecevingBlService{
 
 
 
-    @Override
-    public ResultMessage GoodsRecevingFromhall(GoodsReceivingVO vo, String orgname) throws RemoteException {
-        ResultMessage result=GoodsReceving(vo);
-        GoodsRevUpdateLogistics updatelog=new GoodsRevUpdateLogistics();
-        updatelog.updatabyhall(vo,orgname);////////////////////////////////////////////
-
-        return result;
 
 
-    }
+
 
     @Override
-    public ResultMessage GoodsRecevingFromcenter(GoodsReceivingVO vo, String orgname) throws RemoteException {
-        ResultMessage result=GoodsReceving(vo);
-        GoodsRevUpdateLogistics updatelog=new GoodsRevUpdateLogistics();
-        updatelog.updatebycenter(vo,orgname);
-        return result;
-    }
-
-    @Override
-    public List<GoodsReceivingVO> findform(Formstate state) throws RemoteException {
+    public List<GoodsReceivingVO> findform(Formstate state,String orgcode) throws RemoteException {
         FindGoods find=new FindGoods();
         GoodsReceving rev=new GoodsReceving(find);
-        List<GoodsReceivingVO> list=rev.findgoodsform(state);
+        List<GoodsReceivingVO> list=rev.findgoodsform(state,orgcode);
         return list;
     }
 
     @Override
+    public ResultMessage updateFromHall(GoodsReceivingVO vo, String orgname) throws RemoteException {
+        GoodsRevUpdateLogistics updatelog=new GoodsRevUpdateLogistics();
+        updatelog.updatabyhall(vo,orgname);////////////////////////////////////////////
+
+        ResultMessage result=update(vo);
+        return result;
+    }
+
+    @Override
+    public ResultMessage updateFromCenter(GoodsReceivingVO vo, String orgname) throws RemoteException {
+        GoodsRevUpdateLogistics updatelog=new GoodsRevUpdateLogistics();
+        updatelog.updatabyhall(vo,orgname);////////////////////////////////////////////
+
+        ResultMessage result=update(vo);
+        return result;
+    }
+
+
     public ResultMessage update(GoodsReceivingVO vo) throws RemoteException {
+
+
         UpdateGoods update=new UpdateGoods();
         GoodsReceving rev=new GoodsReceving(update);
         ResultMessage result=rev.updategoodsform(vo);

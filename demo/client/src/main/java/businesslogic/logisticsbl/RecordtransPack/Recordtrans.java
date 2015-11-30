@@ -63,9 +63,9 @@ public class Recordtrans {
         return result;
     }
 
-    public List<RecordtransVO> findforms(Formstate state){
+    public List<RecordtransVO> findforms(Formstate state,String orgcode){
         List<RecordtransVO> list=new ArrayList<RecordtransVO>();
-        List<RecordtransPO> pos=find.findforms(state);
+        List<RecordtransPO> pos=find.findforms(state,orgcode);
         int len=pos.size();
         for(int i=0;i<=len-1;i++){
             RecordtransPO newpo=pos.get(i);

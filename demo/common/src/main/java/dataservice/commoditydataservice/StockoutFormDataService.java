@@ -13,7 +13,7 @@ public interface StockoutFormDataService extends Remote {
 	
 	public ResultMessage addStockoutForm (StockoutPO po)throws RemoteException;
 	
-	public List<StockoutPO> getStockoutForm (Formstate state)throws RemoteException;
+	public List<StockoutPO> getStockoutForm (Formstate state,String orgcode)throws RemoteException;
 
 	public long getid(String orgcode) throws  RemoteException;
 }

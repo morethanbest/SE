@@ -30,7 +30,11 @@ public class UpdateGoods {
     }
 
     public ResultMessage passupdate(){
+        if(documentstate==Formstate.pass){
+            documentstate=Formstate.checked;
+        }
         GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
+
         GoodsReceivingPO po=new GoodsReceivingPO(id,arrivaltime,transcode,departure,arrivalstate,documentstate);
         ResultMessage result=ResultMessage.failure;
         try {

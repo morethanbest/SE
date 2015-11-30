@@ -22,13 +22,15 @@ public class CentertransController implements RecordtransBlService{
         Recordtrans trans=new Recordtrans(add);
         ResultMessage result=trans.addform(vo);
 
-        RecordtransUpdateLogistics updatehistory=new RecordtransUpdateLogistics();
-        updatehistory.updatehistory(vo);
+
         return result;
     }
 
     @Override
     public ResultMessage update(RecordtransVO vo) throws RemoteException {
+        RecordtransUpdateLogistics updatehistory=new RecordtransUpdateLogistics();
+        updatehistory.updatehistory(vo);
+
         UpdateTrans update=new UpdateTrans();
         Recordtrans trans=new Recordtrans(update);
         ResultMessage result=trans.updateform(vo);
@@ -36,10 +38,10 @@ public class CentertransController implements RecordtransBlService{
     }
 
     @Override
-    public List<RecordtransVO> find(Formstate state) throws RemoteException {
+    public List<RecordtransVO> find(Formstate state,String orgcode) throws RemoteException {
         FindTrans find=new FindTrans();
         Recordtrans trans=new Recordtrans(find);
-        List<RecordtransVO> list=trans.findforms(state);
+        List<RecordtransVO> list=trans.findforms(state,orgcode);
         return list;
     }
 

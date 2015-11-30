@@ -3,14 +3,14 @@ package vo;
 import java.util.List;
 
 public class RegionInfoVO {
-	List<CommodityInVO> list;
+	List<CommodityGetRegionVO> list;
 
-	public RegionInfoVO(List<CommodityInVO> list) {
+	public RegionInfoVO(List<CommodityGetRegionVO> list) {
 		super();
 		this.list = list;
 	}
 
-	public List<CommodityInVO> getList() {
+	public List<CommodityGetRegionVO> getList() {
 		return list;
 	}
 	

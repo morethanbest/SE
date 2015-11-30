@@ -51,9 +51,9 @@ public class Delivery {
         return result;
 
     }
-    public List<DeliveryVO> find(Formstate state)
+    public List<DeliveryVO> find(Formstate state,String orgcode)
     {
-        List<DeliveryPO > pos=finder.find(state);
+        List<DeliveryPO > pos=finder.find(state,orgcode);
         List<DeliveryVO> list=new ArrayList<DeliveryVO>();
         int len=pos.size();
         for(int i=0;i<=len-1;i++)

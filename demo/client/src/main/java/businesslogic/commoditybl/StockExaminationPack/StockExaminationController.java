@@ -10,12 +10,13 @@ public class StockExaminationController implements StockExaminationBlService{
 	
 
 	@Override
-	public StockExaminationVO StockExamination(long startTime, long endTime)
+	public StockExaminationVO StockExamination(String orgcode,long startTime, long endTime)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		FormGetterMock formget=new FormGetterMock(null,0,0,0,0,0);///修改传入参数
-		StockExamination exam=new StockExamination(formget);
-		StockExaminationVO vos=exam.examhandle(startTime, endTime);
+		Exam examer=new Exam();
+		getPara para=new getPara();
+		StockExamination exam=new StockExamination(examer,para);
+		StockExaminationVO vos=exam.examhandle(orgcode,startTime, endTime);
 		return vos;
 	}
 

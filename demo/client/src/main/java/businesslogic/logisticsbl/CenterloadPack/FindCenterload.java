@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class FindCenterload {
 
-    public List<CenterloadPO> findlist(Formstate state){
+    public List<CenterloadPO> findlist(Formstate state,String orgcode){
         CenterLoadFormDataService dataserv= RMIHelper.getCenterloaddata();
         List<CenterloadPO> pos=null;
         try {
-            pos=dataserv.getCenterLoadForm(state);
+            pos=dataserv.getCenterLoadForm(state,orgcode);
         } catch (RemoteException e) {
             System.out.println("get centerload form list by formstate failed!!!");
             e.printStackTrace();

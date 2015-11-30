@@ -3,14 +3,13 @@ package businesslogic.accountbl.NewBookPack;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.CommodityLocation;
 import po.OrignalAccountPO;
 import po.OrignalCommodityPO;
 import po.OrignalOrganizationPO;
 import po.OrignalStaffPO;
 import po.OrignalVehiclesPO;
 import vo.AccountVO;
-import vo.CommodityInVO;
+import vo.CommodityGetRegionVO;
 import vo.NewbookVO;
 import vo.OrganizationVO;
 import vo.ResultMessage;
@@ -31,7 +30,7 @@ public class NewBook {
 		this.osid=osid;
 	}
 	public ResultMessage CreateNewBook(NewbookVO vo){
-		//Ê±¼ä
+		//Ê±ï¿½ï¿½
 		long time=0;
 		List<OrignalAccountPO> account = new ArrayList<OrignalAccountPO>();
 		List<OrignalCommodityPO> commodity = new ArrayList<OrignalCommodityPO>();
@@ -39,7 +38,7 @@ public class NewBook {
 		List<OrignalStaffPO> staff = new ArrayList<OrignalStaffPO>();
 		List<OrignalVehiclesPO> vehicles = new ArrayList<OrignalVehiclesPO>();
 		List<AccountVO> accountvo=vo.getAccount();
-		List<CommodityInVO> commodityvo=vo.getCommodity();
+		List<CommodityGetRegionVO> commodityvo=vo.getCommodity();
 		List<OrganizationVO> organizationvo=vo.getOrganization();
 		List<StaffVO> staffvo=vo.getStaff();
 		List<VehicleVO> vehiclesvo=vo.getVehicles();
@@ -49,7 +48,7 @@ public class NewBook {
 			account.add(i, po);
 		}
 		for(int i=0;i<commodityvo.size();i++){
-			CommodityInVO v=commodityvo.get(i);
+			CommodityGetRegionVO v=commodityvo.get(i);
 			OrignalCommodityPO po=new OrignalCommodityPO(ocid.getid(), v.getOrdercode(), v.getIntime(), v.getLocation());
 			commodity.add(i, po);
 		}

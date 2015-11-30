@@ -13,7 +13,7 @@ public class StockinId {
         StockinFormDataService data= RMIHelper.getStockinform();
         long id=0;
         try {
-            id=data.getid(orgcode);
+            id=data.getid(orgcode)+1;
         } catch (RemoteException e) {
             System.out.println("get stockin id failed!!!");
             e.printStackTrace();
@@ -29,7 +29,7 @@ public class StockinId {
             }
         }
 
-        for(int i=0;i<=len-1;i++)
+        for(int i=0;i<=7-len-1;i++)
             result="0"+result;
         result=orgcode=result;
         return result;

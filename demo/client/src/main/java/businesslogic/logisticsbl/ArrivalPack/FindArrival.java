@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class FindArrival {
 
-    public List<ArrivalPO> find(Formstate state){
+    public List<ArrivalPO> find(Formstate state,String orgcode){
         ArrivalFormDataService dataserv= RMIHelper.getArrivalform();
         List<ArrivalPO> pos=null;
         try {
-            pos=dataserv.getArrivalForm(state);
+            pos=dataserv.getArrivalForm(state,orgcode);
         } catch (RemoteException e) {
             System.out.println("GET ARRIVALPO by state failed!!!");
 

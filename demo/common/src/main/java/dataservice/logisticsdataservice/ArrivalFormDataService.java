@@ -11,7 +11,7 @@ import po.RecordtransPO;
 import po.ResultMessage;
 
 public interface ArrivalFormDataService extends Remote {
-	public List<ArrivalPO> getArrivalForm (Formstate state)throws RemoteException;
+	public List<ArrivalPO> getArrivalForm (Formstate state,String orgcode)throws RemoteException;
 	
 	public ResultMessage updateArrivalForm (ArrivalPO po)throws RemoteException;
 	

@@ -3,13 +3,11 @@ package businesslogic.logisticsbl.GoodsRecevingPack;
 import dataservice.logisticsdataservice.GoodsReceivingFormDataService;
 import dataservice.logisticsdataservice.LogisticsInfoService;
 import init.RMIHelper;
-import po.CenterloadPO;
-import po.HallLoadPO;
-import po.LogisticsPO;
-import po.ResultMessage;
+import po.*;
 import vo.GoodsReceivingVO;
 
 import java.rmi.RemoteException;
+import java.text.Normalizer;
 import java.util.List;
 
 /**
@@ -18,6 +16,9 @@ import java.util.List;
 public class GoodsRevUpdateLogistics {
 
     public ResultMessage updatabyhall(GoodsReceivingVO vo,String orgname){//如果这次的货物是由营业厅来的
+        if(vo.getFormstate()!= Formstate.pass){
+            return ResultMessage.failure;
+        }
         GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
         HallLoadPO hallload=null;
         ResultMessage result=ResultMessage.failure;
@@ -74,6 +75,9 @@ public class GoodsRevUpdateLogistics {
 
 
     public ResultMessage updatebycenter(GoodsReceivingVO vo,String orgname){
+        if(vo.getFormstate()!= Formstate.pass){
+            return ResultMessage.failure;
+        }
         GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
 
         CenterloadPO centerload=null;

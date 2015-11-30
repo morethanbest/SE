@@ -22,10 +22,10 @@ public class DeliveryController implements DeliveryBlService{
     }
 
     @Override
-    public List<DeliveryVO> find(Formstate state) throws RemoteException {
+    public List<DeliveryVO> find(Formstate state,String orgcode) throws RemoteException {
         FindDelivery finder=new FindDelivery();
         Delivery dev=new Delivery(finder);
-        List<DeliveryVO> list=dev.find(state);
+        List<DeliveryVO> list=dev.find(state,orgcode);
         return list;
 
     }

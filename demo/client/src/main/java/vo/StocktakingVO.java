@@ -3,14 +3,14 @@ package vo;
 import java.util.List;
 
 public class StocktakingVO {
-	List<CommodityOutVO> list;
+	List<CommodityTakingVO> list;
 
-	public StocktakingVO(List<CommodityOutVO> list) {
+	public StocktakingVO(List<CommodityTakingVO> list) {
 		super();
 		this.list = list;
 	}
 
-	public List<CommodityOutVO> getList() {
+	public List<CommodityTakingVO> getList() {
 		return list;
 	}
 	

@@ -31,8 +31,13 @@ public class UpdateDelivery {
     }
 
     public ResultMessage passupdate(){
+
+        if(this.documentstate==Formstate.pass){
+            this.documentstate=Formstate.checked;
+        }
         DeliveryFormDataService dataserv= RMIHelper.getDeliveryformdata();
         ResultMessage result=ResultMessage.failure;
+
         DeliveryPO po=new DeliveryPO(id,arrivaltime,barcode,delivorinfo,documentstate);
         try {
             result=dataserv.updateDeliveryForm(po);

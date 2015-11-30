@@ -11,7 +11,7 @@ import vo.RecordtransVO;
 public interface RecordtransBlService {
 	public ResultMessage Recordtrans (RecordtransVO vo)throws RemoteException;
 	public ResultMessage update(RecordtransVO vo)throws RemoteException;
-	public List<RecordtransVO> find(Formstate state)  throws RemoteException;
+	public List<RecordtransVO> find(Formstate state,String orgcode)  throws RemoteException;
 
 
 

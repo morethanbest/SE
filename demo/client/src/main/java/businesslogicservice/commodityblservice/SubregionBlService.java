@@ -6,7 +6,7 @@ import po.CommodityLocation;
 import po.ResultMessage;
 
 public interface SubregionBlService {
-	public ResultMessage Subregion(CommodityLocation beforeLocation,CommodityLocation afterLocation)throws RemoteException;
+	public ResultMessage Subregion(String orgcode,CommodityLocation beforeLocation,CommodityLocation afterLocation)throws RemoteException;
 }
 
 

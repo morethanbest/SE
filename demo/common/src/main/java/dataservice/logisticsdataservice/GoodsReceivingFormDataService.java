@@ -13,7 +13,7 @@ import po.ResultMessage;
 public interface GoodsReceivingFormDataService extends Remote {
 	public ResultMessage addGoodsReceivingForm (GoodsReceivingPO po)throws RemoteException;
 	
-	public List<GoodsReceivingPO> getGoodsReceivingForm (Formstate state)throws RemoteException;
+	public List<GoodsReceivingPO> getGoodsReceivingForm (Formstate state,String orgcode)throws RemoteException;
 	
 	public ResultMessage updateGoodsReceivingForm (GoodsReceivingPO po)throws RemoteException;
 	

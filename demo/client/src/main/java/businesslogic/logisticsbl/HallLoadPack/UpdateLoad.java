@@ -39,8 +39,12 @@ public class UpdateLoad {
     }
 
     public ResultMessage passupdate(){
+        if(documentstate==Formstate.pass){
+            documentstate=Formstate.checked;
+        }
         HallLoadPO po=new HallLoadPO(loadtime,hallcode,motorcode,destination,vehiclecode,supervisor,supercargo,allbarcode,fee,documentstate);
         HallLoadFormDataService data= RMIHelper.getHallloadform();
+
         ResultMessage result=null;
         try {
             result=data.updateLoadForm(po);

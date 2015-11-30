@@ -13,7 +13,7 @@ public class Idget {
         HallLoadFormDataService data= RMIHelper.getHallloadform();
         long id=0;
         try {
-            id=data.findLastmotorcode(orgcode,date);
+            id=data.findLastmotorcode(orgcode,date)+1;
         } catch (RemoteException e) {
             System.out.println("get hall load id failed!!!");
             e.printStackTrace();

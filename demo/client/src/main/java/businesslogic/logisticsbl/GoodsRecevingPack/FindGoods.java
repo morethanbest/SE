@@ -15,12 +15,12 @@ import java.util.List;
  * Created by Administrator on 2015/11/27.
  */
 public class FindGoods {
-    public List<GoodsReceivingPO> getforms(Formstate state) {
+    public List<GoodsReceivingPO> getforms(Formstate state,String orgcode) {
         GoodsReceivingFormDataService dataserv = RMIHelper.getGoodsreceiving();
 
         List<GoodsReceivingPO> pos = null;
         try {
-            pos = dataserv.getGoodsReceivingForm(state);
+            pos = dataserv.getGoodsReceivingForm(state,orgcode);
         } catch (RemoteException e) {
             System.out.println("find goodsrecevingforms by formstate failed!!!");
             e.printStackTrace();

@@ -3,6 +3,7 @@ package businesslogic.logisticsbl.HallLoadPack;
 import dataservice.logisticsdataservice.HallLoadFormDataService;
 import dataservice.logisticsdataservice.LogisticsInfoService;
 import init.RMIHelper;
+import po.Formstate;
 import po.LogisticsPO;
 import po.ResultMessage;
 import vo.HallLoadVO;
@@ -15,6 +16,9 @@ import java.util.List;
  */
 public class HallloadUpdateLogistics {
     public ResultMessage updatehistory(HallLoadVO vo){
+        if(vo.getstate()!= Formstate.pass){
+            return ResultMessage.failure;
+        }
         ResultMessage result=ResultMessage.success;
         LogisticsInfoService data=RMIHelper.getLogisticsinfo();
         List<String> allbar=vo.getAllbarcode();

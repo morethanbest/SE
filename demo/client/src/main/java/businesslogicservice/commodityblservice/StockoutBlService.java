@@ -12,7 +12,7 @@ public interface StockoutBlService {
 
 	public ResultMessage update(StockoutVO vo) throws  RemoteException;
 
-	public List<StockoutVO> findforms(Formstate state) throws  RemoteException;
+	public List<StockoutVO> findforms(Formstate state,String orgcode) throws  RemoteException;
 
 	public String getid(String orgcode) throws  RemoteException;
 }

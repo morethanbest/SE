@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Administrator on 2015/11/25.
  */
 public class ArrivalController implements ArrivalBlService {
-
+    @Override
     public ResultMessage addArrival(ArrivalVO vo) throws RemoteException {
         AddArrival addarriv=new AddArrival();
         Arrival newarriv=new Arrival(addarriv);
@@ -20,44 +20,45 @@ public class ArrivalController implements ArrivalBlService {
         return result;
     }
 
-    @Override
-    public ResultMessage addArrivalFromHall(ArrivalVO vo,String orgname) throws RemoteException {
-        ResultMessage result=addArrival(vo);
-        UpdateLogistics update=new UpdateLogistics();
-        ResultMessage res=update.updatebyhall(vo,orgname);
-        if(res==ResultMessage.failure){
-            System.out.println("can not update all state");
-        }
-        return result;
 
-    }
 
-    @Override
-    public ResultMessage addArrivalFromCenter(ArrivalVO vo,String orgname) throws RemoteException {
-        ResultMessage result=addArrival(vo);
-        UpdateLogistics update=new UpdateLogistics();
-        ResultMessage res=update.updatebycenter(vo,orgname);
-        if(res==ResultMessage.failure){
-            System.out.println("can not update all state");
-        }
-        return result;
-    }
 
-    @Override
-         public ResultMessage update(ArrivalVO vo) throws RemoteException {
+
+    public ResultMessage update(ArrivalVO vo) throws RemoteException {
         UpdateArrival updatearriv=new UpdateArrival();
         Arrival newarriv=new Arrival(updatearriv);
         ResultMessage result=newarriv.updataArrivalForm(vo);
         return result;
     }
 
+
+
     @Override
-    public List<ArrivalVO> search(Formstate state) throws RemoteException {
+    public ResultMessage updateFromHall(ArrivalVO vo, String orgname) throws RemoteException {
+        UpdateLogistics updatelog=new UpdateLogistics();
+        updatelog.updatebyhall(vo,orgname);
+
+        ResultMessage result=update(vo);
+        return result;
+    }
+
+    @Override
+    public ResultMessage updateFromCenter(ArrivalVO vo, String orgname) throws RemoteException {
+        UpdateLogistics updatelog=new UpdateLogistics();
+        updatelog.updatebycenter(vo, orgname);
+
+        ResultMessage result=update(vo);
+        return result;
+    }
+
+    @Override
+    public List<ArrivalVO> search(String orgcode, Formstate state) throws RemoteException {
         FindArrival find=new FindArrival();
         Arrival newarriv=new Arrival(find);
-        List<ArrivalVO> list=newarriv.findArrivalForm(state);
+        List<ArrivalVO> list=newarriv.findArrivalForm(state,orgcode);
         return list;
     }
+
 
 
     @Override

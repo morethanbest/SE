@@ -43,6 +43,9 @@ public class UpdateTrans {
     }
 
     public ResultMessage passupdate(){
+        if(this.formstate==Formstate.pass){
+            this.formstate=Formstate.checked;
+        }
         RecordtransFormDataService dataserv= RMIHelper.getRecordtrans();
         RecordtransPO po=new RecordtransPO(loadtime,arrivaltime,transcode,transport,transportcode,departrue,destination,countercode,supervisor,allcode,fee,formstate);
         ResultMessage result=null;

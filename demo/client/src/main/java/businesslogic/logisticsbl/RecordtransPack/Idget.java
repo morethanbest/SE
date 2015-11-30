@@ -14,7 +14,7 @@ public class Idget {
         long id=0;
         String result=null;
         try {
-            id=data.findLasttranscode(orgcode,date);
+            id=data.findLasttranscode(orgcode,date)+1;
         } catch (RemoteException e) {
             System.out.println("recordtrans get id failed!!!");
             e.printStackTrace();

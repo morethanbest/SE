@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import po.CommodityLocation;
 import po.CommodityPO;
-import vo.ResultMessage;
+import po.ResultMessage;
 import businesslogicservice.commodityblservice.SubregionBlService;
 
 public class SubregionController implements SubregionBlService{
@@ -12,13 +12,12 @@ public class SubregionController implements SubregionBlService{
 
 
 	@Override
-	public ResultMessage Subregion(CommodityLocation beforeLocation,
+	public ResultMessage Subregion(String orgcode,CommodityLocation beforeLocation,
 			CommodityLocation afterLocation) throws RemoteException {
 		// TODO Auto-generated method stub
-		CommodityPO po=new CommodityPO(11,"001220",20130412,beforeLocation,20140121);
-		SubRegionMock newmock=new SubRegionMock(po);
-		Subregion subre=new Subregion(newmock);
-		ResultMessage result=subre.sub(beforeLocation, afterLocation);
+		ChangeLocation change=new ChangeLocation();
+		Subregion sub=new Subregion(change);
+		ResultMessage result=sub.sub(orgcode,beforeLocation,afterLocation);
 		return result;
 	}
 

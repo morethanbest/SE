@@ -3,10 +3,7 @@ package businesslogic.logisticsbl.ArrivalPack;
 import dataservice.logisticsdataservice.ArrivalFormDataService;
 import dataservice.logisticsdataservice.LogisticsInfoService;
 import init.RMIHelper;
-import po.HallLoadPO;
-import po.LogisticsPO;
-import po.RecordtransPO;
-import po.ResultMessage;
+import po.*;
 import vo.ArrivalVO;
 
 import java.rmi.RemoteException;
@@ -18,6 +15,9 @@ import java.util.List;
 public class UpdateLogistics {
 
     public ResultMessage updatebyhall(ArrivalVO vo,String orgcode){///////////////////根据营业厅装车单编号  得到营业厅装车单  从而得到这批货的所有条形码号  然后修改历史轨迹
+        if(vo.getFormstate()!= Formstate.pass){
+            return ResultMessage.failure;
+        }
         ArrivalFormDataService dataserv= RMIHelper.getArrivalform();
         HallLoadPO po=null;
         ResultMessage result=ResultMessage.success;
@@ -71,7 +71,9 @@ public class UpdateLogistics {
     }
 
     public ResultMessage updatebycenter(ArrivalVO vo,String orgcode){
-
+        if(vo.getFormstate()!= Formstate.pass){
+            return ResultMessage.failure;
+        }
         ArrivalFormDataService dataserv= RMIHelper.getArrivalform();
         RecordtransPO po=null;
         ResultMessage result=ResultMessage.success;

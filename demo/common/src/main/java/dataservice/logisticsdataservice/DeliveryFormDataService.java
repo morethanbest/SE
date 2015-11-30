@@ -9,7 +9,7 @@ import po.Formstate;
 import po.ResultMessage;
 
 public interface DeliveryFormDataService extends Remote {
-	public List<DeliveryPO> getDeliveryForm (Formstate state)throws RemoteException;
+	public List<DeliveryPO> getDeliveryForm (Formstate state,String orgcode)throws RemoteException;
 	
 	public ResultMessage updateDeliveryForm (DeliveryPO po)throws RemoteException;
 	

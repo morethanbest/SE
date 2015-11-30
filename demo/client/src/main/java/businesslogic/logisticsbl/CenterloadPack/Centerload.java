@@ -62,9 +62,9 @@ public class Centerload {
     }
 
 
-    public List<CenterloadVO> findforms(Formstate state){
+    public List<CenterloadVO> findforms(Formstate state,String orgcode){
         List<CenterloadVO> list=new ArrayList<CenterloadVO>();
-        List<CenterloadPO> pos=find.findlist(state);
+        List<CenterloadPO> pos=find.findlist(state,orgcode);
         int len=pos.size();
         for(int i=0;i<=len-1;i++){
 

@@ -21,8 +21,7 @@ public class CenterloadController implements CenterloadBlService{
         ResultMessage result=contro.addform(vo);
 
 
-        CenterloadUpdateLogistics updatehistory=new CenterloadUpdateLogistics();
-        updatehistory.updatehistory(vo);
+
         return result;
 
     }
@@ -30,10 +29,10 @@ public class CenterloadController implements CenterloadBlService{
 
 
     @Override
-    public List<CenterloadVO> findCenterloadForm(Formstate state) throws RemoteException {
+    public List<CenterloadVO> findCenterloadForm(Formstate state,String orgcode) throws RemoteException {
         FindCenterload find=new FindCenterload();
         Centerload center=new Centerload(find);
-        List<CenterloadVO>  list=center.findforms(state);
+        List<CenterloadVO>  list=center.findforms(state,orgcode);
         return list;
     }
 
@@ -42,6 +41,11 @@ public class CenterloadController implements CenterloadBlService{
         UpdateCenterload update=new UpdateCenterload();
         Centerload center=new Centerload(update);
         ResultMessage result=center.updateform(vo);
+
+        CenterloadUpdateLogistics updatehistory=new CenterloadUpdateLogistics();
+        updatehistory.updatehistory(vo);
+
+
         return result;
     }
 

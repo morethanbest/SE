@@ -58,10 +58,10 @@ public class Arrival {
 
     }
 
-    public List<ArrivalVO> findArrivalForm(Formstate state)
+    public List<ArrivalVO> findArrivalForm(Formstate state,String orgcode)
     {
 
-        List<ArrivalPO> po=find.find(state);
+        List<ArrivalPO> po=find.find(state,orgcode);
         List<ArrivalVO> list=new ArrayList<ArrivalVO>();
         int len=po.size();
         for(int i=0;i<=len-1;i++)

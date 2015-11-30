@@ -4,7 +4,7 @@ import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.commoditydataservice.StockinFormDataService;
 import init.RMIHelper;
 import po.*;
-import po.City;
+
 
 import java.rmi.RemoteException;
 
@@ -43,15 +43,7 @@ public class AddInbound {
 			System.out.println("Add stockin form failed!!!");
 			e.printStackTrace();
 		}
-		CommodityPO newcommodity=new CommodityPO(id,ordercode,intime,-1,destination,location);
-		CommodityDataService data2=RMIHelper.getCommoditydata();
-		try {
-			data2.addnew(newcommodity);
-			System.out.println("Add new commodity success!!!");
-		} catch (RemoteException e) {
-			System.out.println("Add new commodity failed!!!");
-			e.printStackTrace();
-		}
+
 
 		return result;
 				

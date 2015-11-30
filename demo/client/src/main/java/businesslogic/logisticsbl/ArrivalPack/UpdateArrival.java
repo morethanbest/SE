@@ -31,6 +31,9 @@ public class UpdateArrival {
 
 
     public ResultMessage passupdate(){
+        if(this.documentstate==Formstate.pass){
+            this.documentstate=Formstate.checked;
+        }
         ArrivalPO po=new ArrivalPO(id,centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
         ArrivalFormDataService  dataserv= RMIHelper.getArrivalform();
         ResultMessage result=ResultMessage.failure;

@@ -2,6 +2,7 @@ package businesslogic.logisticsbl.CenterloadPack;
 
 import dataservice.logisticsdataservice.LogisticsInfoService;
 import init.RMIHelper;
+import po.Formstate;
 import po.LogisticsPO;
 import po.ResultMessage;
 import vo.CenterloadVO;
@@ -16,6 +17,11 @@ public class CenterloadUpdateLogistics {
 
     public ResultMessage updatehistory(CenterloadVO vo)
     {
+        if(vo.getFormstate()!= Formstate.pass){
+            return ResultMessage.failure;
+        }
+
+
         ResultMessage result=ResultMessage.success;
         List<String> allbarcode=vo.getAllbarcode();
         String destination=vo.getDestination();

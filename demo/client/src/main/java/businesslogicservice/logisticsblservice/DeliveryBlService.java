@@ -10,7 +10,7 @@ import vo.DeliveryVO;
 public interface DeliveryBlService {
 	public ResultMessage Delivery(DeliveryVO vo)throws RemoteException;
 
-	public List<DeliveryVO> find(Formstate state) throws  RemoteException;
+	public List<DeliveryVO> find(Formstate state,String orgcode) throws  RemoteException;
 
 	public String findID(String orgcode) throws  RemoteException;
 

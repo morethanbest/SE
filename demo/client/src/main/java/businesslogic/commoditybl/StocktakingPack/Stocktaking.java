@@ -5,23 +5,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.CommodityLocation;
-import vo.CommodityOutVO;
+import po.CommodityPO;
+import vo.CommodityTakingVO;
 import vo.StocktakingVO;
 
 public class Stocktaking {
-	FormGetMock formgetter;
-	public Stocktaking(FormGetMock formgetter) {
+	Formget getter;
+	public Stocktaking(Formget getter) {
 		// TODO Auto-generated constructor stub
-		this.formgetter=formgetter;
+		this.getter=getter;
 	
 	}
 	
 	
-	public StocktakingVO StockFormget() throws RemoteException {
+	public StocktakingVO StockFormget(String orgcode,String date,long blocknum) {
 		// TODO Auto-generated method stub
-		List<CommodityOutVO> list=formgetter.getForm();
-		StocktakingVO vo=new StocktakingVO(list);
-		return vo;
+		List<CommodityPO> pos=getter.getcom(orgcode,date,blocknum);
+		List<CommodityTakingVO> list=new ArrayList<CommodityTakingVO>();
+		for(int i=0;i<=pos.size()-1;i++){
+			CommodityPO po=pos.get(i);
+			String ordercode=po.getOrdercode();
+			long intime=po.getIntime();
+			CommodityLocation location=po.getLocation();
+			String destination=po.getDestination();
+
+			CommodityTakingVO newvo=new CommodityTakingVO(ordercode,intime,destination,location);
+			list.add(newvo);
+		}
+
+		StocktakingVO result=new StocktakingVO(list);
+		return result;
 		
 		
 	}

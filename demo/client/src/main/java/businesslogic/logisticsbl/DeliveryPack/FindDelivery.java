@@ -13,11 +13,11 @@ import java.util.List;
  * Created by Administrator on 2015/11/27.
  */
 public class FindDelivery {
-    public List<DeliveryPO> find(Formstate state){
+    public List<DeliveryPO> find(Formstate state,String orgcode){
         DeliveryFormDataService dataserv=RMIHelper.getDeliveryformdata();
         List<DeliveryPO> pos=null;
         try {
-            pos=dataserv.getDeliveryForm(state);
+            pos=dataserv.getDeliveryForm(state,orgcode);
         } catch (RemoteException e) {
             System.out.println("find delivery failed!!!");
 

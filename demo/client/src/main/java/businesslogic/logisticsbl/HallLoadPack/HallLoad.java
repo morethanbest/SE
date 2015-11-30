@@ -59,9 +59,9 @@ public class HallLoad {
         return result;
     }
 
-    public List<HallLoadVO> findforms(Formstate state){
+    public List<HallLoadVO> findforms(Formstate state,String orgcode){
         List<HallLoadVO> list=new ArrayList<HallLoadVO>();
-        List<HallLoadPO> pos=find.findform(state);
+        List<HallLoadPO> pos=find.findform(state,orgcode);
         for(int i=0;i<=pos.size()-1;i++){
             HallLoadPO po=pos.get(i);
             long loadtime=po.getLoadtime();

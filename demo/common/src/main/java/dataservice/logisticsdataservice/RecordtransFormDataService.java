@@ -9,7 +9,7 @@ import po.RecordtransPO;
 import po.ResultMessage;
 
 public interface RecordtransFormDataService extends Remote {
-	public List<RecordtransPO> getRecordtransForm (Formstate state)throws RemoteException;
+	public List<RecordtransPO> getRecordtransForm (Formstate state,String orgcode)throws RemoteException;
 
 	public ResultMessage updateRecordtransForm (RecordtransPO po)throws RemoteException;
 

@@ -38,8 +38,13 @@ public class UpdateCenterload {
     }
 
     public ResultMessage passupdate(){
+        if(this.documentstate==Formstate.pass){
+            this.documentstate=Formstate.checked;
+        }
+
         CenterLoadFormDataService dataserv= RMIHelper.getCenterloaddata();
         ResultMessage result=null;
+
         CenterloadPO po=new CenterloadPO(id,loadtime,motorcode,destination,vehiclecode,supervisor,supercargo,allbarcode,fee,documentstate);
         try {
             result=dataserv.updateCenterLoadForm(po);
