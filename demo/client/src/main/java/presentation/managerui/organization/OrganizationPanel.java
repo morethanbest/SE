@@ -128,7 +128,7 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		if (table.getRowCount() < 11) {
 			int n = table.getRowCount();
 			for (int i = 0; i < 11 - n; i++) {
-				tableModel.addRow(new String[2]);
+				tableModel.addRow(new String[4]);
 			}
 		}
 
@@ -177,7 +177,8 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		return null;
 	}
 
-	void addOrganization(String name, String code, String org, String city){
+	void addOrganization(String name, String org, String city){
+		String code = organizationBlService.getOrganizationCode(city, getOrganizationType(org));
 		organizationBlService.addOrganization(new OrganizationVO(name, code, getOrganizationType(org), city));
 	}
 	

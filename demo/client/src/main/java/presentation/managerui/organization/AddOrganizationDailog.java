@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 public class AddOrganizationDailog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField codeField;
 	private JComboBox<String> citySelect;
 	private JComboBox<String> orgSelect;
 	private JTextField nameField;
@@ -48,11 +47,6 @@ public class AddOrganizationDailog extends JDialog {
 		contentPanel.add(orgSelect);
 		addOrgTypeItems();
 		
-		codeField = new JTextField();
-		codeField.setBounds(234, 132, 172, 31);
-		contentPanel.add(codeField);
-		codeField.setColumns(10);
-		
 		nameField = new JTextField();
 		nameField.setBounds(29, 132, 172, 31);
 		contentPanel.add(nameField);
@@ -65,7 +59,7 @@ public class AddOrganizationDailog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						parent.addOrganization(nameField.getText(), codeField.getText(), (String) orgSelect.getSelectedItem(), (String)citySelect.getSelectedItem());
+						parent.addOrganization(nameField.getText(), (String) orgSelect.getSelectedItem(), (String)citySelect.getSelectedItem());
 						dispose();
 					}
 				});

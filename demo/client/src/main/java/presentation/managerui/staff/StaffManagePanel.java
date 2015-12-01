@@ -2,6 +2,8 @@ package presentation.managerui.staff;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -12,12 +14,18 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import po.Job;
+import po.Organizationtype;
+import presentation.enums.OrganizationType;
 import presentation.enums.StaffType;
 import vo.CityVO;
+import vo.OrganizationVO;
 import vo.StaffVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.managerbl.StaffPack.StaffController;
 import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.managerblservice.StaffBlService;
 
 public class StaffManagePanel extends JPanel implements ActionListener{
@@ -58,18 +66,12 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		addStaffTypeItems();
 		
 		btnRevise = new JButton("Revise");
-		btnRevise.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnRevise.addActionListener(this);
 		btnRevise.setBounds(847, 0, 107, 36);
 		add(btnRevise);
 		
 		btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnDelete.addActionListener(this);
 		btnDelete.setBounds(726, 0, 107, 36);
 		add(btnDelete);
 		
@@ -88,11 +90,41 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		orgSelect = new JComboBox<String>();
 		orgSelect.setBounds(274, 0, 131, 35);
 		add(orgSelect);
+		orgSelect.setVisible(false);
+		addOrganizationItems();
+		
+		ItemListener listener = new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(citySelect.getSelectedItem().equals("全部"))
+					orgSelect.setVisible(false);
+				else{
+					orgSelect.setVisible(true);
+					addOrganizationItems();
+				}
+				refreshList();
+			}
+		};
+		
+		ItemListener listener2 = new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				refreshList();	
+			}
+			
+		};
+		citySelect.addItemListener(listener);
+		staffSelect.addItemListener(listener2);
+		orgSelect.addItemListener(listener2);
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		tableModel.setColumnCount(2);
+		tableModel.setColumnCount(5);
 		tableModel.setRowCount(10);
 
+		
+		list = staffBlService.getStaffAll();
 	}
 
 	private void addStaffTypeItems() {
@@ -112,11 +144,83 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		}
 	}
 	
+	public void addOrganizationItems(){
+		orgSelect.removeAllItems();
+		OrganizationBlService organizationBlService = new OrganizationController();
+		List<OrganizationVO> orgList;
+		orgList = organizationBlService.getOrganizationbyCity((String) citySelect.getSelectedItem());
+		for(OrganizationVO org : orgList){
+			orgSelect.addItem(org.getName());
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(btnAdd)){
 			
+		}else if(e.getSource().equals(btnDelete)){
+//			staffBlService.delStaff(null);
 		}
 		
+	}
+	private Job getJob(String str) {
+		for (StaffType job : StaffType.values()) {
+			if (job.getName().equals(str)) {
+				return job.getJob();
+			}
+		}
+
+		return null;
+	}
+
+	private String getJobStr(Job job) {
+		for (StaffType staff : StaffType.values()) {
+			if (staff.getJob() == job) {
+				return staff.getName();
+			}
+		}
+
+		return null;
+	}
+	
+	void refreshList(){
+		if(staffSelect.getSelectedItem() == null || citySelect.getSelectedItem() == null)
+			return;
+		if(staffSelect.getSelectedItem().equals("全部") && citySelect.getSelectedItem().equals("全部"))
+			list = staffBlService.getStaffAll();
+		else if(staffSelect.getSelectedItem().equals("全部"))
+			list = staffBlService.getStaffbyOrganization((String) orgSelect.getSelectedItem());
+		else if(citySelect.getSelectedItem().equals("全部")){
+			System.out.println((String) staffSelect.getSelectedItem());
+			list = staffBlService.getStaffbyJob(getJob((String) staffSelect.getSelectedItem()));
+		}
+		else
+			list = staffBlService.getStaffbyBoth((String) orgSelect.getSelectedItem(), getJob((String) staffSelect.getSelectedItem()));
+		
+		displayByVO();
+	}
+	
+	private void displayByVO() {
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setRowCount(0);// 清除原有行
+
+		for (StaffVO vo : list) {
+			String[] row = new String[5];
+			row[0] = vo.getCity();
+			row[1] = vo.getOrganizationname();
+			row[2] = vo.getName();
+			row[3] = getJobStr(vo.getJob());
+			row[4] = vo.getOrganizationcode();
+
+			tableModel.addRow(row);
+		}
+
+		if (table.getRowCount() < 11) {
+			int n = table.getRowCount();
+			for (int i = 0; i < 11 - n; i++) {
+				tableModel.addRow(new String[5]);
+			}
+		}
+
 	}
 }
