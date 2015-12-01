@@ -35,7 +35,16 @@ public class StaffController implements StaffBlService {
 		ResultMessage result=s.revStaff(vo);
 		return result;
 	}
-
+	
+	@Override
+	public List<StaffVO> getStaffAll(){
+		// TODO Auto-generated method stub
+		FindStaff find=new FindStaff();
+		Staff s=new Staff(find);
+		List<StaffVO> result=s.findStaffbyOrganization("");
+		return result;
+	}
+	
 	@Override
 	public List<StaffVO> getStaffbyOrganization(String organizationcode){
 		// TODO Auto-generated method stub
@@ -59,6 +68,14 @@ public class StaffController implements StaffBlService {
 		Staff s=new Staff(find);
 		List<StaffVO> result=s.findStaffbyBoth(organizationcode, job);
 		return result;
+	}
+	
+	@Override
+	public long getid(){
+		IdInfo idInfo=new IdInfo();
+		Staff s=new Staff(idInfo);
+		long id=s.getid();
+		return id;
 	}
 
 }

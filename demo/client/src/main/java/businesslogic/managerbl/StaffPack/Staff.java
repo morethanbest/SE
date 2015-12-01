@@ -12,7 +12,7 @@ public class Staff {
 	DelStaff dels;
 	FindStaff finds;
 	RevStaff revs;
-	
+	IdInfo idInfo;
 	public Staff(AddStaff adds){
 		this.adds=adds;
 	}
@@ -28,7 +28,9 @@ public class Staff {
 	public Staff(RevStaff revs){
 		this.revs=revs;
 	}
-	
+	public Staff(IdInfo idInfo){
+		this.idInfo=idInfo;
+	}
 	public ResultMessage addStaff(StaffVO vo){
 		long id=vo.getId();
 		String name=vo.getName();
@@ -79,5 +81,9 @@ public class Staff {
 		revs.setRevInfo(id, name, job, organizationname, organizationcode, organizationtype, city);
 		ResultMessage result=revs.rev();
 		return result;
+	}
+	public long getid(){
+		long id=idInfo.getid();
+		return id;
 	}
 }
