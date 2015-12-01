@@ -27,7 +27,7 @@ public class StaffDB {
 			sql = "create table StaffPO(id bigint auto_increment primary key,name text,job blob,organizationname text,organizationcode text,organizationtype blob,city text)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			StaffPO po=new StaffPO(1,"sunchao",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,"上海");
+			StaffPO po=new StaffPO(1,"孙超",Job.transfercentersalesman,"上海中转中心","0250",Organizationtype.transfercenter,"上海");
 			ResultMessage result;
 			result = write(po);
 			if (result == ResultMessage.success) {
@@ -313,7 +313,7 @@ public class StaffDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		if((fuzzySearchbyboth("sunchao",Job.transfercentersalesman).size()>0))
+		if((fuzzySearchbyjob(Job.transfercentersalesman).size()>0))
 		System.out.println(getLastId());
 		if(search(1)!=null){
 			System.out.println("search success");
