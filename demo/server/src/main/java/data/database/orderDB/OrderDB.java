@@ -190,7 +190,40 @@ public class OrderDB {
 		return list;
 	}
 	
-
+	public static List<OrderPO> fuzzySearch(Formstate state,String orgcode){
+		List<OrderPO> list=new ArrayList<OrderPO>();
+		OrderPO po;
+		dbh=new DBHelper();
+		try {
+			byte[] statebytes = Serialize.Object2Bytes(state);
+			sql = "select id,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,receiverunit,receiverphone,"
+					+ "receivercellphone,numbers,weight,volume,productname,packagetype,totalfee,ordercode,ordertype,codeofreceiving,"
+					+ "receiver,receivingtime,documentstate from OrderPO where documentstate = ? and ordercode like ?";
+			pst = dbh.prepare(sql);
+			pst.setBytes(1, statebytes);
+			pst.setString(2, "%"+orgcode+"%");
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(!ret.getString(18).startsWith(orgcode)){
+					continue;
+				}
+				Ordertype type = (Ordertype) Serialize.Bytes2Object(ret.getBytes(19));
+				Formstate documentstate = (Formstate) Serialize.Bytes2Object(ret.getBytes(23));
+				po = new OrderPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4), ret.getString(5),
+						ret.getString(6), ret.getString(7), ret.getString(8), ret.getString(9), ret.getString(10),
+						ret.getString(11), ret.getDouble(12), ret.getDouble(13), ret.getDouble(14), ret.getString(15),
+						ret.getString(16), ret.getDouble(17), ret.getString(18), type,
+						ret.getString(20), ret.getString(21), ret.getLong(22), documentstate);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 
 

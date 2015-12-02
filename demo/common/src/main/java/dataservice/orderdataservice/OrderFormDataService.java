@@ -13,7 +13,7 @@ public interface OrderFormDataService extends Remote {
 	
 	public OrderPO getOrderForm (String ordernum)throws RemoteException;
 	
-	public List<OrderPO> getOrderForm (Formstate state)throws RemoteException;
+	public List<OrderPO> getOrderForm (Formstate state,String orgcode)throws RemoteException;
 	
 	public ResultMessage updateOrderForm (OrderPO po)throws RemoteException;
 	
