@@ -18,7 +18,7 @@ public class Stocktaking {
 	}
 	
 	
-	public StocktakingVO StockFormget(String orgcode,String date,long blocknum) {
+	public StocktakingVO StockFormget(String orgcode,long date,long blocknum) {
 		// TODO Auto-generated method stub
 		List<CommodityPO> pos=getter.getcom(orgcode,date,blocknum);
 		List<CommodityTakingVO> list=new ArrayList<CommodityTakingVO>();

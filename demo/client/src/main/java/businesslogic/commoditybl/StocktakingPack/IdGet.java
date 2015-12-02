@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
  * Created by Administrator on 2015/11/30.
  */
 public class IdGet {
-    public long getid(String orgcode,String date){
+    public long getid(String orgcode,long date){
         CommodityDataService data= RMIHelper.getCommoditydata();
         long id=0;
         try {

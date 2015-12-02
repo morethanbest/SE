@@ -46,7 +46,7 @@ public class CentertransController implements RecordtransBlService{
     }
 
     @Override
-    public String getid(String orgcode, String date) throws RemoteException {
+    public String getid(String orgcode, long date) throws RemoteException {
         Idget idgetter=new Idget();
         String id=idgetter.getid(orgcode,date);
 

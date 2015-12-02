@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
  * Created by Administrator on 2015/11/28.
  */
 public class Idget {
-    public String idget(String orgcode,String date){
+    public String idget(String orgcode,long date){
         HallLoadFormDataService data= RMIHelper.getHallloadform();
         long id=0;
         try {
@@ -32,7 +32,7 @@ public class Idget {
         for(int i=0;i<=5-len-1;i++)
             result="0"+result;
 
-        result=orgcode+date+result;
+        result=orgcode+Long.toString(date)+result;
         return result;
     }
 

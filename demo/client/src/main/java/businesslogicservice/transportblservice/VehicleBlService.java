@@ -16,6 +16,7 @@ public interface VehicleBlService {
 	
 	public VehicleVO getVehiclebyPN (String plateNumber,String orgcode)throws RemoteException;
 
+	//得到 车辆的编号  形式为  6位的营业厅编号 加上了三位的数字
 	public String getid(String orgcode) throws  RemoteException;
 
 

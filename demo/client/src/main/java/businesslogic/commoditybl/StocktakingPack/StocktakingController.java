@@ -12,12 +12,15 @@ public class StocktakingController implements StocktakingBlService{
 
 
 	@Override
-	public StocktakingVO Stocktaking(String orgcode,String date, long blocknum) throws RemoteException {
-		return null;
+	public StocktakingVO Stocktaking(String orgcode,long date, long blocknum) throws RemoteException {
+		Formget getter=new Formget();
+		Stocktaking take=new Stocktaking(getter);
+		StocktakingVO vo=take.StockFormget(orgcode,date ,blocknum);
+		return vo;
 	}
 
 	@Override
-	public long getId(String orgcode, String date) throws RemoteException {
+	public long getId(String orgcode, long date) throws RemoteException {
 		IdGet idgetter=new IdGet();
 		long id=idgetter.getid(orgcode,date);
 		return id;

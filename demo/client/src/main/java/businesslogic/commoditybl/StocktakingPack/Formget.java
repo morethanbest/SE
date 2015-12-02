@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Administrator on 2015/11/30.
  */
 public class Formget {
-    public List<CommodityPO> getcom(String orgcode,String date,long blocknum){
+    public List<CommodityPO> getcom(String orgcode,long date,long blocknum){
         List<CommodityPO> pos=null;
         CommodityDataService data= RMIHelper.getCommoditydata();
         try {

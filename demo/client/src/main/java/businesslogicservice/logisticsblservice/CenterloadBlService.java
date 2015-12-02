@@ -21,7 +21,7 @@ public interface CenterloadBlService {
 	public ResultMessage update(CenterloadVO vo)throws RemoteException;
 
 	//传入两个参数 一个是组织编号 一个是当前日期  由此得到string类型的汽运编号
-	public String getid(String orgcode,String date) throws  RemoteException;
+	public String getid(String orgcode,long date) throws  RemoteException;
 
 
 	//得到运费的方法

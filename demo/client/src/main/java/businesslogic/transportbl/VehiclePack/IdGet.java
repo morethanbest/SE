@@ -31,6 +31,7 @@ public class IdGet {
             result="-2";
             e.printStackTrace();
         }
+        result=orgcode+result;
         return  result;
     }
 

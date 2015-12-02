@@ -52,10 +52,10 @@ public interface CommodityDataService extends Remote {
 
 	////库存盘点
 	//库存盘点得到截止点
-	public long getStopPoint(String orgcode,String date) throws  RemoteException;
+	public long getStopPoint(String orgcode,long  date) throws  RemoteException;
 	//得到此区所有的commoditypo  (存在着的，已经出库的不算）
 
-	public List<CommodityPO> stockTaking(String orgcode,String date,long blocknum) throws RemoteException;
+	public List<CommodityPO> stockTaking(String orgcode,long date,long blocknum) throws RemoteException;
 
 	public List<CommodityPO> getCommodtiyByBlock(String orgcode,long blocknum) throws  RemoteException;
 
