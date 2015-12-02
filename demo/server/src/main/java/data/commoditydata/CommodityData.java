@@ -55,10 +55,10 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	}
 
 	@Override
-	public ResultMessage setOuttime(CommodityPO po, long endtime) throws RemoteException {
+	public ResultMessage setOuttime(CommodityPO po, long outtime) throws RemoteException {
 		// TODO Auto-generated method stub
-		
-		return null;
+		po.setOuttime(outtime);
+		return CommodityDB.update(po);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public List<CommodityPO> getCommodtiyByBlock(String orgcode, long blocknum) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return CommodityDB.getbyblock(orgcode, blocknum);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public List<CommodityPO> getCommodityBetween(String orgcode, long starttime, long endtime) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return CommodityDB.getbetween(orgcode, starttime, endtime);
 	}
 
 	

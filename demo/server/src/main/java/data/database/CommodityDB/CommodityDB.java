@@ -113,6 +113,61 @@ public class CommodityDB {
 		return list;
 	}
 	
+	public static List<CommodityPO> getbyblock(String orgcode,long blocknum){
+		List<CommodityPO> list=new ArrayList<CommodityPO>();
+		CommodityPO po;
+		dbh=new DBHelper();
+		try {
+			sql = "select id,ordercode,intime,outtime,destination,Location from CommodityPO "
+					+ "where id like ? and outtime < 0 and blocknum=?";
+			pst = dbh.prepare(sql);
+			pst.setString(1, "%"+orgcode+"%");
+			pst.setLong(2, blocknum);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(!ret.getString(1).startsWith(orgcode))
+					continue;
+				CommodityLocation location=(CommodityLocation)Serialize.Bytes2Object(ret.getBytes(6)) ;
+				po = new CommodityPO(ret.getString(1), ret.getString(2), ret.getLong(3),ret.getLong(4),  ret.getString(5),location);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static List<CommodityPO> getbetween(String orgcode,long starttime,long endtime){
+		List<CommodityPO> list=new ArrayList<CommodityPO>();
+		CommodityPO po;
+		dbh=new DBHelper();
+		try {
+			sql = "select id,ordercode,intime,outtime,destination,Location from CommodityPO where id like ? and outtime < 0 and "
+					+ "?<= intime <=?";
+			pst = dbh.prepare(sql);
+			pst.setString(1, "%"+orgcode+"%");
+			pst.setLong(2, starttime);
+			pst.setLong(3,endtime);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(!ret.getString(1).startsWith(orgcode))
+					continue;
+				CommodityLocation location=(CommodityLocation)Serialize.Bytes2Object(ret.getBytes(6)) ;
+				po = new CommodityPO(ret.getString(1), ret.getString(2), ret.getLong(3),ret.getLong(4),  ret.getString(5),location);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static CommodityPO getbyLocation(String orgcode,CommodityLocation location){
 		CommodityPO po=null;
 		dbh=new DBHelper();
@@ -187,13 +242,19 @@ public class CommodityDB {
 
 	public static void main(String[] args) {
 		initialize();
-		CommodityPO po=new CommodityPO("0250001","a",1,-1,"b",new CommodityLocation(1,1,1,1));
+		CommodityPO po=new CommodityPO("0250001","a",20150422,-1,"b",new CommodityLocation(1,1,1,1));
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)
 			System.out.println("update success");
 		if(getAll("025").size()>0)
-			System.out.println("fuzzysearch success");
+			System.out.println("getall success");
+		if(getbetween("025",20150422,20150422).size()>0){
+			System.out.println("getbetween success");
+		}
+		if(getbyblock("025",1).size()>0){
+			System.out.println("getbyblock success");
+		}
 					
 	}
 }

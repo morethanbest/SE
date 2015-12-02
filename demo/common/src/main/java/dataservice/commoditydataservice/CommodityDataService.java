@@ -42,7 +42,7 @@ public interface CommodityDataService extends Remote {
 	//通过快件编号得到 commoditypo
 	public CommodityPO getCommodityByCode(String orgcode,String ordercode) throws  RemoteException;
 
-	public ResultMessage setOuttime(CommodityPO po,long endtime) throws RemoteException;
+	public ResultMessage setOuttime(CommodityPO po,long outtime) throws RemoteException;
 
 
 
