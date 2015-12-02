@@ -1,6 +1,9 @@
 package businesslogic.orderbl.OrderPack;
 
+import java.util.List;
+
 import businesslogicservice.orderblservice.OrderBlService;
+import po.Formstate;
 import po.ResultMessage;
 import vo.OrderFareVO;
 import vo.OrderVO;
@@ -31,5 +34,18 @@ public class OrderController implements OrderBlService{
 		Order order=new Order(getcode);
 		String code=order.getOrdercode();
 		return code;
+	}
+	@Override
+	public List<OrderVO> findOrderByState(Formstate documentstate){
+		FindOrder findOrder=new FindOrder();
+		Order order=new Order(findOrder);
+		List<OrderVO> listvo=order.findOrderByState(documentstate);
+		return listvo;
+	}
+	@Override
+	public ResultMessage updateLogistics(OrderVO vo){
+		UpdateLogistics updateLogistics=new UpdateLogistics();
+		ResultMessage resultMessage=updateLogistics.updatebyorder(vo);
+		return resultMessage;
 	}
 }

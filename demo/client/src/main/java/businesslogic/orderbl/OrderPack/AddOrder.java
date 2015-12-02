@@ -1,10 +1,7 @@
 package businesslogic.orderbl.OrderPack;
 
-import businesslogic.logisticsbl.InterfaceProvidedToOtherPackage.OrderPOAdd;
-import businesslogic.logisticsbl.InterfaceProvidedToOtherPackage.OrderPOAddService;
 import dataservice.orderdataservice.OrderFormDataService;
 import init.RMIHelper;
-import po.LogisticsPO;
 import po.OrderPO;
 import po.Ordertype;
 import po.ResultMessage;
@@ -70,12 +67,5 @@ public class AddOrder {
 		}
 		return result;
 	}
-	public ResultMessage addLogisticsPO(){
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		LogisticsPO po=new LogisticsPO("ordertype", null, ordercode);//
-		//////////////////////////
-		OrderPOAddService addservice=new OrderPOAdd();
-		ResultMessage result=addservice.addOrder(po);
-		return result;
-	}
+	
 }

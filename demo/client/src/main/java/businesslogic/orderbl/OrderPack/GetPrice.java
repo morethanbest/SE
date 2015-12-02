@@ -1,10 +1,10 @@
 package businesslogic.orderbl.OrderPack;
 
+import java.util.List;
+
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import po.Ordertype;
 import vo.ConstantsVO;
-
-import java.util.List;
 
 public class GetPrice {
 	String senderaddress;
@@ -12,16 +12,16 @@ public class GetPrice {
 	double numbers;
 	double weight;
 	double volume;
-	double packagefee;
+	String packagetype;
 	Ordertype ordertype;
 	public void setPriceInfo(String senderaddress,String receiveraddress,double numbers,double weight,
-			double volume,double packagefee,Ordertype ordertype){
+			double volume,String packagetype,Ordertype ordertype){
 		this.senderaddress=senderaddress;
 		this.receiveraddress=receiveraddress;
 		this.numbers=numbers;
 		this.weight=weight;
 		this.volume=volume;
-		this.packagefee=packagefee;
+		this.packagetype=packagetype;
 		this.ordertype=ordertype;
 	}
 	public double getPrice(){
@@ -31,6 +31,9 @@ public class GetPrice {
 		List<ConstantsVO> listvo=constants.getConstants("距离-"+splits1[0]+"-"+splits2[0]);
 		ConstantsVO vo=listvo.get(0);
 		double distance=vo.getValue();
+		List<ConstantsVO> listvo1=constants.getConstants("包装类型-"+packagetype);
+		ConstantsVO vo1=listvo1.get(0);
+		double packagefee=vo1.getValue();
 		double w=weight;
 		if(volume/5000>w){
 			w=volume/5000;
@@ -47,10 +50,10 @@ public class GetPrice {
 				name+="次晨特快";
 				break;
 		}
-		List<ConstantsVO> listvo1=constants.getConstants(name);
-		ConstantsVO vo1=listvo1.get(0);
-		double ot=vo1.getValue();
-		double price=distance/1000*ot*w;
+		List<ConstantsVO> listvo2=constants.getConstants(name);
+		ConstantsVO vo2=listvo2.get(0);
+		double ot=vo2.getValue();
+		double price=distance/1000*ot*w+packagefee;
 		return price;
 	}
 
