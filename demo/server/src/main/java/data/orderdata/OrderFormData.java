@@ -42,9 +42,9 @@ public class OrderFormData extends UnicastRemoteObject implements OrderFormDataS
 	}
 
 	@Override
-	public long findLastID() throws RemoteException {
+	public long findLastID(String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return OrderDB.getLastId();
+		return OrderDB.getLastId(orgcode);
 	}
 
 }

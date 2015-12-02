@@ -17,5 +17,5 @@ public interface OrderFormDataService extends Remote {
 	
 	public ResultMessage updateOrderForm (OrderPO po)throws RemoteException;
 	
-	public long findLastID() throws RemoteException;
+	public long findLastID(String orgcode) throws RemoteException;
 }
