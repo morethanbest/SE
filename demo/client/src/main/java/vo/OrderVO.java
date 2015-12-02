@@ -17,13 +17,14 @@ public class OrderVO {
 	double weight;
 	double volume;
 	String productname;
-	double packagefee;
+	String packagetype;
 	String ordercode;
 	Ordertype ordertype;
+	double totalfee;
 	
 	public OrderVO(String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,
-			double numbers,double weight,double volume,String productname,double packagefee,String ordercode,Ordertype ordertype){
+			double numbers,double weight,double volume,String productname,String packagetype,String ordercode,Ordertype ordertype,double totalfee){
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
 		this.senderunit=senderunit;
@@ -38,9 +39,10 @@ public class OrderVO {
 		this.weight=weight;
 		this.volume=volume;
 		this.productname=productname;
-		this.packagefee=packagefee;
+		this.packagetype=packagetype;
 		this.ordercode=ordercode;
 		this.ordertype=ordertype;
+		this.totalfee=totalfee;
 	}
 
 	public String getReceivername() {
@@ -88,13 +90,16 @@ public class OrderVO {
 	public String getProductname(){
 		return this.productname;
 	}
-	public double getPackagefee(){
-		return this.packagefee;
+	public String getPackagetype(){
+		return this.packagetype;
 	}
 	public String getOrdercode(){
 		return this.ordercode;
 	}
 	public Ordertype getOrdertype(){
 		return this.ordertype;
+	}
+	public double getTotalfee(){
+		return this.totalfee;
 	}
 }
