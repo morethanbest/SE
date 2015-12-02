@@ -191,7 +191,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		else if(staffSelect.getSelectedItem().equals("全部"))
 			list = staffBlService.getStaffbyOrganization((String) orgSelect.getSelectedItem());
 		else if(citySelect.getSelectedItem().equals("全部")){
-			System.out.println((String) staffSelect.getSelectedItem());
+			System.out.println(getJob((String) staffSelect.getSelectedItem()));
 			list = staffBlService.getStaffbyJob(getJob((String) staffSelect.getSelectedItem()));
 		}
 		else

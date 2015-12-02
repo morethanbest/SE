@@ -8,6 +8,7 @@ public enum StaffType {
 	private Job job;
 	private StaffType(String name, Job job) {
 		this.name = name;
+		this.job = job;
 	}
 
 	public String getName() {

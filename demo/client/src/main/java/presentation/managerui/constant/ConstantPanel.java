@@ -413,6 +413,9 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		row[0] = "1";
 		row[1] = "1";
 
+		
+		
+		
 		tableModel.addRow(row);
 		if (table.getRowCount() < 11) {
 			int n = table.getRowCount();
