@@ -37,9 +37,9 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 	}
 
 	@Override
-	public long findLastmotorcode(String orgcode, String date) throws RemoteException {
+	public long findLastmotorcode(String orgcode, long date) throws RemoteException {
 		// TODO Auto-generated method stub
-		return CenterloadDB.getLastId(orgcode+date);
+		return CenterloadDB.getLastId(orgcode+Long.toString(date));
 	}
 
 	@Override

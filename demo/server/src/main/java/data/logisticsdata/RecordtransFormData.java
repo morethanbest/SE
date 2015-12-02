@@ -36,9 +36,9 @@ public class RecordtransFormData extends UnicastRemoteObject implements Recordtr
 	}
 
 	@Override
-	public long findLasttranscode(String orgcode, String date) throws RemoteException {
+	public long findLasttranscode(String orgcode, long date) throws RemoteException {
 		// TODO Auto-generated method stub
-		return RecordtransDB.getLastId(orgcode+date);
+		return RecordtransDB.getLastId(orgcode+Long.toString(date));
 	}
 
 	@Override
