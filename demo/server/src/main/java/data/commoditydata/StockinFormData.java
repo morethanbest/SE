@@ -1,13 +1,14 @@
 package data.commoditydata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+
+import data.database.CommodityDB.StockinDB;
 import dataservice.commoditydataservice.StockinFormDataService;
 import po.Formstate;
 import po.ResultMessage;
 import po.StockinPO;
-
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
 
 public class StockinFormData extends UnicastRemoteObject implements StockinFormDataService{
 
@@ -18,16 +19,24 @@ public class StockinFormData extends UnicastRemoteObject implements StockinFormD
 
 	@Override
 	public ResultMessage addStockinForm(StockinPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public List<StockinPO> getStockinForm(Formstate state) throws RemoteException {
-		return null;
+		return StockinDB.write(po);
 	}
 
 	@Override
 	public ResultMessage updateStockinForm(StockinPO po) throws RemoteException {
-		return null;
+		return StockinDB.update(po);
 	}
+
+	@Override
+	public List<StockinPO> getStockinForm(Formstate state, String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return StockinDB.fuzzySearch(state, orgcode);
+	}
+
+	@Override
+	public long getid(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return StockinDB.getLastId(orgcode);
+	}
+	
 }

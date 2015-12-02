@@ -58,14 +58,19 @@ public class StaffData extends UnicastRemoteObject implements StaffDataService {
 		return list;
 	}
 	@Override
-	public List<StaffPO> fuzzyfindbyorganization(String organizationcode) throws RemoteException {
+	public List<StaffPO> fuzzyfindbyorganization(String organizationame) throws RemoteException {
 		// TODO Auto-generated method stub
-		return StaffDB.fuzzySearchbyorganizationcode(organizationcode);
+		return StaffDB.fuzzySearchbyorganizationname(organizationame);
 	}
 	@Override
-	public List<StaffPO> fuzzyfindbyboth(String organizationcode, Job job) throws RemoteException {
+	public List<StaffPO> fuzzyfindbyboth(String organizationame, Job job) throws RemoteException {
 		// TODO Auto-generated method stub
-		return StaffDB.fuzzySearchbyboth(organizationcode, job);
+		return StaffDB.fuzzySearchbyboth(organizationame, job);
+	}
+	@Override
+	public List<StaffPO> getAll() throws RemoteException {
+		// TODO Auto-generated method stub
+		return StaffDB.getAll();
 	}
 
 

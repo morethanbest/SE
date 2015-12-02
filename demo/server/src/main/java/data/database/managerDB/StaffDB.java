@@ -186,6 +186,32 @@ public class StaffDB {
 //		return list;
 //	}
 	
+	public static List<StaffPO> getAll() {
+		List<StaffPO> list=new ArrayList<StaffPO>();
+		try {
+			StaffPO po;
+			dbh = new DBHelper();
+			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO";
+			pst = dbh.prepare(sql);
+
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				byte[] jobbytes=ret.getBytes(3);
+				Job job = (Job) Serialize.Bytes2Object(jobbytes);
+				byte[] typebytes=ret.getBytes(6);
+				Organizationtype type = (Organizationtype) Serialize.Bytes2Object(typebytes);
+				po=new StaffPO(ret.getLong(1),ret.getString(2),job,ret.getString(4),ret.getString(5),type,ret.getString(7));
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static List<StaffPO> fuzzySearchbyjob(Job job) {
 		List<StaffPO> list = new ArrayList<StaffPO>();
 		try {
@@ -213,17 +239,17 @@ public class StaffDB {
 		return list;
 	}
 
-	public static List<StaffPO> fuzzySearchbyboth(String organizationcode, Job job) {
+	public static List<StaffPO> fuzzySearchbyboth(String organizationname, Job job) {
 		List<StaffPO> list = new ArrayList<StaffPO>();
 		try {
 			byte[] jobbyte = Serialize.Object2Bytes(job);
 
 			StaffPO po;
 			dbh = new DBHelper();
-			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where organizationcode=? and job=?";
+			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where organizationname=? and job=?";
 			pst = dbh.prepare(sql);
 
-			pst.setString(1, organizationcode);
+			pst.setString(1, organizationname);
 			pst.setBytes(2, jobbyte);
 			ret = pst.executeQuery();
 			while (ret.next()) {
@@ -241,16 +267,16 @@ public class StaffDB {
 		return list;
 	}
 	
-	public static List<StaffPO> fuzzySearchbyorganizationcode(String organizationcode) {
+	public static List<StaffPO> fuzzySearchbyorganizationname(String organizationname) {
 		List<StaffPO> list = new ArrayList<StaffPO>();
 		try {
 
 			StaffPO po;
 			dbh = new DBHelper();
-			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where organizationcode=?";
+			sql = "select id,name,job,organizationname,organizationcode,organizationtype,city from StaffPO where organizationname=?";
 			pst = dbh.prepare(sql);
 
-			pst.setString(1, organizationcode);
+			pst.setString(1, organizationname);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				byte[] jobbytes = ret.getBytes(3);
@@ -313,11 +339,10 @@ public class StaffDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		if((fuzzySearchbyjob(Job.transfercentersalesman).size()>0))
+		if((fuzzySearchbyorganizationname("上海中转中心").size()>0))
 		System.out.println(getLastId());
 		if(search(1)!=null){
 			System.out.println("search success");
 		}
-	//	if()
 	}
 }

@@ -61,6 +61,10 @@ public class CityDB {
 	}
 	
 	public static ResultMessage delete(CityPO po){
+		//如果删掉的是四个基本城市，则失败
+		if("上海".equals(po.getName())||"南京".equals(po.getName())||"北京".equals(po.getName())||"广州".equals(po.getName())){
+			return ResultMessage.failure;
+		}
 		if(search(po.getName())!=null){
 			OrganizationDB.deletebycity(po.getName());
 			StaffDB.deletebycity(po.getName());
