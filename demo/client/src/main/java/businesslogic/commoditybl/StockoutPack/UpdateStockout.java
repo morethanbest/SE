@@ -36,12 +36,14 @@ public class UpdateStockout {
     }
 
     public ResultMessage passupdate(){
+        String orgcode=id.substring(0,id.length()-7);//////////////////////////get orgcode   may run wrong
+
         if(formstate==Formstate.pass){
             this.formstate=Formstate.checked;
             CommodityDataService data2=RMIHelper.getCommoditydata();
             CommodityPO po=null;
             try {
-                po=data2.getCommodityByCode(ordercode);
+                po=data2.getCommodityByCode(orgcode,ordercode);
             } catch (RemoteException e) {
                 System.out.println("stockout update commodity po get commoditypo failed!!!");
                 e.printStackTrace();
