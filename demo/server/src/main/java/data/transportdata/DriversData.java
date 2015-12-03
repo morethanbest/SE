@@ -46,7 +46,7 @@ public class DriversData extends UnicastRemoteObject implements DriversDataServi
 	@Override
 	public long getCurrentID(String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return Long.parseLong(DriverDB.getlastcode(orgcode));
+		return DriverDB.getlastcode(orgcode);
 	}
 
 

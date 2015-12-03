@@ -18,21 +18,32 @@ public class RecordcollectFormData extends UnicastRemoteObject implements Record
 
 	@Override
 	public ResultMessage addRecordcollectForm(RecordcollectPO po) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<RecordcollectPO> getRecordcollectForm(Formstate state) throws RemoteException {
+	public List<RecordcollectPO> getRecordcollectForm(Formstate state, String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ResultMessage updateRecordcollectForm(RecordcollectPO po) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<RecordcollectPO> getallRecordcollectForm() throws RemoteException {
+	public long getlastid(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ResultMessage addmoney(String accountname, double fee) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

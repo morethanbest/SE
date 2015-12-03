@@ -1,8 +1,11 @@
 package data.balancedata;
 
 import dataservice.balancedataservice.DebitnoteFormDataService;
+import po.CityPO;
 import po.DebitnotePO;
 import po.Formstate;
+import po.OrganizationPO;
+import po.RecordcollectPO;
 import po.ResultMessage;
 
 import java.rmi.RemoteException;
@@ -17,17 +20,27 @@ public class DebitnoteFormData extends UnicastRemoteObject implements DebitnoteF
 	}
 
 	@Override
-	public List<DebitnotePO> getDebitnoteForm(Formstate state) throws RemoteException {
+	public List<RecordcollectPO> getRecordcollectbyhall(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage updateDebitnoteForm(DebitnotePO po) throws RemoteException {
+	public List<RecordcollectPO> getRecordcollectbydate(long date) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage addDebitnoteForm(DebitnotePO po) throws RemoteException {
+	public List<CityPO> getALLCity() throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<OrganizationPO> getAllOrganization(String city) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -155,8 +155,8 @@ public class DriverDB {
 		return list;
 	}
 	
-	public static String getlastcode(String codeget){
-		String code=null;
+	public static long getlastcode(String codeget){
+		long lastid=-1;
 		dbh = new DBHelper();
 		try {
 			sql = "select drivercode from DriversPO where drivercode like ?";
@@ -165,7 +165,7 @@ public class DriverDB {
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				if(ret.getString(1).startsWith(codeget))
-					code=ret.getString(1);
+					lastid++;
 			}
 			ret.close();
 			dbh.close();
@@ -173,7 +173,7 @@ public class DriverDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return code;
+		return lastid;
 	}
 
 	public static void main(String[] args) {

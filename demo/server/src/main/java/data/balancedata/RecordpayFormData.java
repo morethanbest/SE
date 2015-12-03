@@ -32,7 +32,10 @@ public class RecordpayFormData extends UnicastRemoteObject implements RecordpayF
 	}
 
 	@Override
-	public List<RecordpayPO> getallRecordpayForm() throws RemoteException {
+	public ResultMessage removeTheCost(String accountname, double fee) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }
