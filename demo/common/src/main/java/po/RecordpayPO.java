@@ -1,95 +1,92 @@
 package po;
 import java.io.Serializable;
 
+
 public class RecordpayPO  implements Serializable{
-	long id;
+	String id;
 	long paytime;
 	double paysum;
 	String payman;
 	String payaccount;
-	double rent;
-	double fee;
-	double salary;
-	double reward;
+	RecordpayList entry;
 	String remark;
-	Formstate documentstate;
-	public RecordpayPO(long id,long paytime, double paysum, String payman, String payaccount, double rent, double fee,
-			double salary, double reward, String remark) {
+	Formstate formstate;
+	public RecordpayPO(String id,long paytime, double paysum, String payman, String payaccount,RecordpayList entry,
+					   String remark,Formstate formstate) {
 		this.id=id;
 		this.paytime = paytime;
 		this.paysum = paysum;
 		this.payman = payman;
 		this.payaccount = payaccount;
-		this.rent = rent;
-		this.fee = fee;
-		this.salary = salary;
-		this.reward = reward;
+		this.entry=entry;
 		this.remark = remark;
-		this.documentstate=Formstate.waiting;
+		this.formstate=formstate;
 	}
-	public long getId() {
+
+	public String getId() {
 		return id;
 	}
+
 	public long getPaytime() {
 		return paytime;
 	}
-	public void setPaytime(long paytime) {
-		this.paytime = paytime;
-	}
+
 	public double getPaysum() {
 		return paysum;
 	}
-	public void setPaysum(long paysum) {
-		this.paysum = paysum;
-	}
+
 	public String getPayman() {
 		return payman;
 	}
-	public void setPayman(String payman) {
-		this.payman = payman;
-	}
+
 	public String getPayaccount() {
 		return payaccount;
+
 	}
-	public void setPayaccount(String payaccount) {
-		this.payaccount = payaccount;
+
+	public RecordpayList getEntry() {
+		return entry;
 	}
-	public double getRent() {
-		return rent;
-	}
-	public void setRent(double rent) {
-		this.rent = rent;
-	}
-	public double getFee() {
-		return fee;
-	}
-	public void setFee(double fee) {
-		this.fee = fee;
-	}
-	public double getSalary() {
-		return salary;
-	}
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
-	public double getReward() {
-		return reward;
-	}
-	public void setReward(double reward) {
-		this.reward = reward;
-	}
+
 	public String getRemark() {
 		return remark;
 	}
+
+	public Formstate getFormstate() {
+		return formstate;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setPaytime(long paytime) {
+		this.paytime = paytime;
+	}
+
+	public void setPaysum(double paysum) {
+		this.paysum = paysum;
+
+	}
+
+	public void setPayman(String payman) {
+		this.payman = payman;
+	}
+
+	public void setPayaccount(String payaccount) {
+		this.payaccount = payaccount;
+	}
+
+	public void setEntry(RecordpayList entry) {
+		this.entry = entry;
+	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public Formstate getDocumentstate() {
-		return documentstate;
+
+	public void setFormstate(Formstate formstate) {
+		this.formstate = formstate;
 	}
-	public void setDocumentstate(Formstate documentstate) {
-		this.documentstate = documentstate;
-	}
-	
-	
 }

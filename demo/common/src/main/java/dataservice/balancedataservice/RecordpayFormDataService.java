@@ -16,5 +16,7 @@ public interface RecordpayFormDataService extends Remote {
 	public ResultMessage addRecordpayForm (RecordpayPO po)throws RemoteException;
 	
 	public  ResultMessage removeTheCost(String accountname,double fee)throws RemoteException;
+
+	public long getlastid() throws  RemoteException;
 	
 }
