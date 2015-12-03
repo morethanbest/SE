@@ -49,6 +49,15 @@ public class DriversData extends UnicastRemoteObject implements DriversDataServi
 		return DriverDB.getlastcode(orgcode);
 	}
 
-
+	
+//	public static void main(String[] args){
+//		try{
+//			DriversData data=new DriversData();
+//			System.out.println(data.getCurrentID("025"));
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			
+//		}
+//	}
 
 }

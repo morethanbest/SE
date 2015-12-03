@@ -12,6 +12,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.database.balanceDB.RecordcollectDB;
+import data.database.managerDB.CityDB;
+import data.database.managerDB.OrganizationDB;
+
 public class DebitnoteFormData extends UnicastRemoteObject implements DebitnoteFormDataService{
 
 	public DebitnoteFormData() throws  RemoteException{
@@ -22,25 +26,25 @@ public class DebitnoteFormData extends UnicastRemoteObject implements DebitnoteF
 	@Override
 	public List<RecordcollectPO> getRecordcollectbyhall(String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return RecordcollectDB.getbyhall(orgcode);
 	}
 
 	@Override
 	public List<RecordcollectPO> getRecordcollectbydate(long date) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return RecordcollectDB.getbydate(date);
 	}
 
 	@Override
 	public List<CityPO> getALLCity() throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return CityDB.getAll();
 	}
 
 	@Override
 	public List<OrganizationPO> getAllOrganization(String city) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return OrganizationDB.fuzzySearchbycity(city);
 	}
 
 }

@@ -4,13 +4,15 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.database.balanceDB.RecordcollectDB;
 import dataservice.balancedataservice.StatisticsDataService;
+import po.Formstate;
 import po.RecordcollectPO;
 import po.RecordpayPO;
 
-public class StaisticsData extends UnicastRemoteObject implements StatisticsDataService {
+public class StatisticsData extends UnicastRemoteObject implements StatisticsDataService {
 
-	public StaisticsData() throws RemoteException {
+	public StatisticsData() throws RemoteException {
 		// TODO Auto-generated constructor stub
 		super();
 	}
@@ -24,7 +26,7 @@ public class StaisticsData extends UnicastRemoteObject implements StatisticsData
 	@Override
 	public List<RecordcollectPO> getallRecordcollect(long starttime, long endtime) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return RecordcollectDB.getbetween(Formstate.checked, starttime, endtime);		//获得已被确认过的这段时间中的收款单
 	}
 
 }
