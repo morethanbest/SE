@@ -17,7 +17,7 @@ public class Recordpay {
 	FindRecord find;
 	public ResultMessage add(RecordpayVO vo){
 		String id=vo.getId();
-		long paytime=vo.getPaytime()
+		long paytime=vo.getPaytime();
 		double paysum=vo.getPaysum();
 		String payman=vo.getPayman();
 		String payaccount=vo.getPayaccount();

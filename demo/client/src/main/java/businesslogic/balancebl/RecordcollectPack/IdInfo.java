@@ -11,7 +11,7 @@ public class IdInfo {
         RecordcollectFormDataService data= RMIHelper.getRecordcollect();
         long id=0;
         try {
-            id=data.getlastid(orgcode);
+            id=data.getlastid(orgcode)+1;
         } catch (RemoteException e) {
             System.out.println("record collect get last id failed!@!!");
             e.printStackTrace();

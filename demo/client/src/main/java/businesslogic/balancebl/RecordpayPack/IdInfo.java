@@ -10,7 +10,7 @@ public class IdInfo {
         RecordpayFormDataService data= RMIHelper.getRecordpay();
         long id=0;
         try {
-            id=data.getlastid();
+            id=data.getlastid()+1;
         } catch (RemoteException e) {
             System.out.println("Record pay getlast id failed!!!");
             e.printStackTrace();

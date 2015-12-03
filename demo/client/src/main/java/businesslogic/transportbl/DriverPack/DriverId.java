@@ -24,7 +24,12 @@ public class DriverId {
             int len=result.length();
             if(len>3){
                 result="-1";
-                return result;
+                System.out.println(" driver id overflow~!!!");
+                try {
+                    throw  new Exception();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             for(int j=0;j<=3-len-1;j++){
                 result="0"+result;
