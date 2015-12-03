@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import po.Job;
 import presentation.courierui.CourierPanel;
+import presentation.hallsalesmanui.HallsalesmanPanel;
 import presentation.managerui.ManagerPanel;
 import vo.LoginVO;
 
@@ -60,6 +61,10 @@ public class MainFrame extends JFrame {
 			card.show(contentPane, "courier");
 		} else if (vo.getJob() == Job.visitor) {
 			System.out.println("Login failed!!!");
+		} else if(vo.getJob() == Job.hallsalesman){
+			JPanel temp=new HallsalesmanPanel();
+			contentPane.add(temp, "hallsalesman");
+			card.show(contentPane, "hallsalesman");
 		}
 	}
 

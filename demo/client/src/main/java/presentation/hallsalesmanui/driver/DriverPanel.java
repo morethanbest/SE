@@ -2,18 +2,22 @@ package presentation.hallsalesmanui.driver;
 
 import java.awt.Button;
 import java.awt.Choice;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import businesslogic.transportbl.DriverPack.DriverController;
 import businesslogicservice.transportblservice.DriverBlService;
@@ -40,6 +44,7 @@ public class DriverPanel extends JPanel {
 	private JTextField textDyear;
 	private JTextField textDmouth;
 	private JTextField textDday;
+	List<DriverVO> list;
 	
 	public DriverPanel() {
 		setLayout(null);
@@ -204,30 +209,43 @@ public class DriverPanel extends JPanel {
 		return null;
 	}
 	
-	public List<DriverVO> getDriverbyName(){
+	public List<DriverVO> getDriverbyName(String name){
 		return null;
 		
 	}
 	public String getid(){
 		return null;
 	}
+	public void displayInTable(List<DriverVO> list){
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setRowCount(0);
+		for(DriverVO vo:list){
+			String[] row =new String[2];
+			row[0]=vo.getDrivername();
+			row[1]=vo.getDrivercode();
+			tableModel.addRow(row);
+		}
+	}
 	public void actionPerformed(ActionEvent e){
 		DriverBlService driverBlService=new DriverController();
 		if(e.getSource().equals(BTNadd)){
-			
+			AddDriverDialog dialog=new AddDriverDialog(this);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		}
 		else if(e.getSource().equals(BTNdelete)){
 			
 		}
-		else if(e.getSource().equals(BTNsearch)){
+		else if(e.getSource().equals(BTNsearchByName)){
 			String nameToSearch=textNameToSearch.getText();
-			String codeToSearch=textCodeToSearch.getText();
-			if(nameToSearch.equals("")){
-				
-			}
+			list=this.getDriverbyName(nameToSearch);
+			displayInTable(list);
 		}
-		else if(e.getSource().equals(BTNupdate)){
-			
+		else if(e.getSource().equals(BTNsearchByCode)){
+			String code=textCodeToSearch.getText();
+			list=new ArrayList<>();
+			list.add(this.getDriverbyDN());		
+			displayInTable(list);
 		}
 	}
 }
