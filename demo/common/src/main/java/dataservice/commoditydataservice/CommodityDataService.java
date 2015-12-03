@@ -28,6 +28,8 @@ public interface CommodityDataService extends Remote {
 	//是否超出警戒值(在入库时确定）  就就是说  此时 货物数量未被加入分区  所以这个计算时 要将货物的数量加1之后再判断是否 会报警
 	public boolean wheOverLoad(String orgcode,long blocknum) throws  RemoteException;
 
+
+	public CommodityLocation getLoc(String orgcode, long blocknum) throws  RemoteException;
 	////库存分区调整
 
 	//通过地址得到commoditypo
@@ -69,6 +71,10 @@ public interface CommodityDataService extends Remote {
 	public List<Long> getCommodityNumber(String orgcode,long begin,long end) throws  RemoteException;
 
 	public List<CommodityPO>  getCommodityBetween(String orgcode,long starttime,long endtime)throws RemoteException;
+
+
+
+
 
 
 }

@@ -3,6 +3,7 @@ package businesslogicservice.commodityblservice;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import po.CommodityLocation;
 import po.Formstate;
 import po.ResultMessage;
 import vo.StockinVO;
@@ -17,4 +18,9 @@ public interface InboundBlService {
 	public List<StockinVO> findInboundForm(Formstate state,String orgcode)throws  RemoteException;
 
 	public String getid(String orgcode)throws  RemoteException;
+
+
+	//位置自动生成     填写入库单的时候  只要选择自己的区号 并且传入组织编号 就可以 得到这个区有空的位置
+	public CommodityLocation getAvailLoc(String orgcode,long blocknum) throws  RemoteException;
+
 }

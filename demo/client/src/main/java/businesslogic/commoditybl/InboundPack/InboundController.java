@@ -3,6 +3,7 @@ package businesslogic.commoditybl.InboundPack;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import po.CommodityLocation;
 import po.Formstate;
 import po.ResultMessage;
 import vo.StockinVO;
@@ -51,6 +52,13 @@ public class InboundController implements businesslogicservice.commodityblservic
 		StockinId idgetter=new StockinId();
 		String id=idgetter.getid(orgcode);
 		return id;
+	}
+
+	@Override
+	public CommodityLocation getAvailLoc(String orgcode,long blocknum) throws RemoteException {
+		LocationGet get=new LocationGet();
+		CommodityLocation location=get.getLoc(orgcode,blocknum);
+		return location;
 	}
 
 }

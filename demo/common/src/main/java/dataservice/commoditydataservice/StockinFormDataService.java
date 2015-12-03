@@ -4,10 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.CommodityPO;
-import po.Formstate;
-import po.ResultMessage;
-import po.StockinPO;
+import po.*;
 
 public interface StockinFormDataService extends Remote {
 	public ResultMessage addStockinForm (StockinPO po)throws RemoteException;
@@ -19,4 +16,6 @@ public interface StockinFormDataService extends Remote {
 
 
 	public long getid(String orgcode)throws  RemoteException;
+
+	public CommodityLocation getAvailLoc(String orgcode)throws  RemoteException;
 }
