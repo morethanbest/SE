@@ -10,7 +10,8 @@ public class GetOrderCode {
 		try {
 			long id=order.findLastID(orgcode)+1;
 			s=Long.toString(id);
-			for(int i=0;i<10-s.length();i++){
+			int k = s.length();
+			for(int i=0;i<10-k;i++){
 				s="0"+s;
 			}
 		} catch (Exception e) {
