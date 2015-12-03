@@ -142,8 +142,8 @@ public class VehicleDB {
 		return po;
 	}
 	
-	public static String getlastcode(String codeget){
-		String code=null;
+	public static long getlastcode(String codeget){
+		long lastid=-1;
 		dbh = new DBHelper();
 		try {
 			sql = "select vehiclecode from VehiclesPO where vehiclecode like ?";
@@ -152,7 +152,7 @@ public class VehicleDB {
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				if(ret.getString(1).startsWith(codeget));
-					code=ret.getString(1);
+					lastid++;
 			}
 			ret.close();
 			dbh.close();
@@ -160,7 +160,7 @@ public class VehicleDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return code;
+		return lastid;
 	}
 	public static void main(String[] args) {
 		initialize();

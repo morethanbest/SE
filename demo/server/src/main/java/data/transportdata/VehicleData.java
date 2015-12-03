@@ -44,7 +44,7 @@ public class VehicleData extends UnicastRemoteObject implements VehicleDataServi
 	@Override
 	public long getCurrentID(String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return Long.parseLong(VehicleDB.getlastcode(orgcode));
+		return VehicleDB.getlastcode(orgcode);
 	}
 
 
