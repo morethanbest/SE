@@ -15,21 +15,32 @@ public class RecordpayController implements RecordpayBlService{
 
 	@Override
 	public ResultMessage AddRecordpay(RecordpayVO vo) throws RemoteException {
-		return null;
+		AddRecord add=new AddRecord();
+		Recordpay record=new Recordpay(add);
+		ResultMessage result=record.add(vo);
+		return  result;
 	}
 
 	@Override
 	public ResultMessage updateRecordpay(RecordpayVO vo) throws RemoteException {
-		return null;
+		UpdateRecord update=new UpdateRecord();
+		Recordpay record=new Recordpay(update);
+		ResultMessage result=record.update(vo);
+		return result;
 	}
 
 	@Override
 	public List<RecordpayVO> findforms(Formstate formstate) throws RemoteException {
-		return null;
+		FindRecord find=new FindRecord();
+		Recordpay record=new Recordpay(find);
+		List<RecordpayVO> list=record.find(formstate);
+		return list;
 	}
 
 	@Override
 	public String getid() throws RemoteException {
-		return null;
+		IdInfo idgetter=new IdInfo();
+		String id=idgetter.getid();
+		return id;
 	}
 }
