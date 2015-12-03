@@ -29,7 +29,6 @@ public interface CommodityDataService extends Remote {
 	public boolean wheOverLoad(String orgcode,long blocknum) throws  RemoteException;
 
 
-	public CommodityLocation getLoc(String orgcode, long blocknum) throws  RemoteException;
 	////库存分区调整
 
 	//通过地址得到commoditypo

@@ -47,7 +47,7 @@ public class StockDB {
 			pst.setLong(4, po.getLinenum());
 			pst.setLong(5, po.getShelfnum());
 			pst.setLong(6, po.getLocationnum());
-			pst.setLong(7, po.getLocationnum());
+			pst.setLong(7, po.getTotalnum());
 			pst.setDouble(8, po.getWarningvalue());
 			int result = pst.executeUpdate();
 			if (result == -1) {
@@ -75,7 +75,7 @@ public class StockDB {
 			pst.setLong(3, po.getLinenum());
 			pst.setLong(4, po.getShelfnum());
 			pst.setLong(5, po.getLocationnum());
-			pst.setLong(6, po.getLocationnum());
+			pst.setLong(6, po.getTotalnum());
 			pst.setDouble(7, po.getWarningvalue());
 			pst.setString(8, po.getOrgcode());
 			int result = pst.executeUpdate();
