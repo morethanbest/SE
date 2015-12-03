@@ -1,15 +1,17 @@
 package data.commoditydata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import data.database.commodityDB.CommodityDB;
+import data.database.commodityDB.StockDB;
+import data.database.commodityDB.StopPointDB;
 import dataservice.commoditydataservice.CommodityDataService;
 import po.CommodityLocation;
 import po.CommodityPO;
 import po.ResultMessage;
-
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
-
-import data.database.commodityDB.CommodityDB;
 
 public class CommodityData extends UnicastRemoteObject implements CommodityDataService{
 
@@ -33,7 +35,8 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public boolean wheOverLoad(String orgcode, long blocknum) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		//如果该区库存加1后的数值比这个区的警戒值大
+		return CommodityDB.getNum(orgcode, blocknum)+1>StockDB.getwarningNumInblock(orgcode, blocknum);	
 	}
 
 	@Override
@@ -64,7 +67,7 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public long getStopPoint(String orgcode, long date) throws RemoteException {
 		// TODO Auto-generated method stub
-		return 0;
+		return StopPointDB.getlastStoppoint(orgcode+date);
 	}
 
 	@Override
@@ -82,13 +85,17 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public List<Long> getAllBlock(String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return StockDB.getAllblock(orgcode);
 	}
 
 	@Override
 	public List<Long> getCommodityNumber(String orgcode, long begin, long end) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Long> list=new ArrayList<Long>();
+		list.add(CommodityDB.getinnumber(orgcode, begin, end));
+		list.add(CommodityDB.getoutnumber(orgcode, begin, end));
+		list.add(CommodityDB.getAllNum(orgcode));
+		return list;
 	}
 
 	@Override

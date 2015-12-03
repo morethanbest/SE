@@ -92,7 +92,8 @@ public class StockDB {
 		return ResultMessage.failure;
 	}
 	
-	public static double getAllNumInblock(String orgcode,long blocknum){
+	//获取某个区达到警戒值的库存数量
+	public static double getwarningNumInblock(String orgcode,long blocknum){
 		double num=0;
 		try {
 			dbh = new DBHelper();
@@ -114,6 +115,7 @@ public class StockDB {
 		return num;
 	}
 	
+	//获取所有的区号
 	public static List<Long> getAllblock(String orgcode) {
 		List<Long> list=new ArrayList<Long>();
 		try {
@@ -138,7 +140,6 @@ public class StockDB {
 
 	public static void main(String[] args) {
 		initialize();
-		System.out.println(getAllNumInblock("0250",1));
 		
 
 	}

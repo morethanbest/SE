@@ -88,6 +88,7 @@ public class CommodityDB {
 		return ResultMessage.failure;
 	}
 	
+	//获取某个仓库所有的库存
 	public static List<CommodityPO> getAll(String orgcode){
 		List<CommodityPO> list=new ArrayList<CommodityPO>();
 		CommodityPO po;
@@ -112,7 +113,7 @@ public class CommodityDB {
 		}
 		return list;
 	}
-	
+	//获取某个区所有没出库的库存
 	public static List<CommodityPO> getbyblock(String orgcode,long blocknum){
 		List<CommodityPO> list=new ArrayList<CommodityPO>();
 		CommodityPO po;
@@ -140,6 +141,55 @@ public class CommodityDB {
 		return list;
 	}
 	
+	//获取在一段时间内入库的数量
+	public static long getinnumber(String orgcode,long starttime,long endtime){
+		long number=0;
+		dbh=new DBHelper();
+		try {
+			sql = "select id from CommodityPO where id like ? and ?<intime<?";
+			pst = dbh.prepare(sql);
+			pst.setString(1, "%"+orgcode+"%");
+			pst.setLong(2, starttime);
+			pst.setLong(3, endtime);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				if(ret.getString(1).startsWith(orgcode))
+					number++;
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return number;
+	}
+	
+	//获取在一段时间内出库的数量
+		public static long getoutnumber(String orgcode,long starttime,long endtime){
+			long number=0;
+			dbh=new DBHelper();
+			try {
+				sql = "select id from CommodityPO where id like ? and ?<outtime<?";
+				pst = dbh.prepare(sql);
+				pst.setString(1, "%"+orgcode+"%");
+				pst.setLong(2, starttime);
+				pst.setLong(3, endtime);
+				ret = pst.executeQuery();
+				while (ret.next()) {
+					if(ret.getString(1).startsWith(orgcode))
+						number++;
+				}
+				ret.close();
+				dbh.close();// 关闭连接
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return number;
+		}
+	
+	//获取在一个时间段内出入库的所有库存信息	
 	public static List<CommodityPO> getbetween(String orgcode,long starttime,long endtime){
 		List<CommodityPO> list=new ArrayList<CommodityPO>();
 		CommodityPO po;
@@ -167,7 +217,7 @@ public class CommodityDB {
 		}
 		return list;
 	}
-	
+	//获取在某个位置上的库存信息
 	public static CommodityPO getbyLocation(String orgcode,CommodityLocation location){
 		CommodityPO po=null;
 		dbh=new DBHelper();
@@ -193,6 +243,8 @@ public class CommodityDB {
 		return po;
 	}
 	
+	
+	//获取某个订单的库存信息
 	public static CommodityPO getbyCode(String orgcode,String ordercode){
 		CommodityPO po=null;
 		dbh=new DBHelper();
@@ -217,7 +269,7 @@ public class CommodityDB {
 		}
 		return po;
 	}
-
+	//获取某个区的库存数量
 	public static long getNum(String orgcode,long blocknum){
 		long number=0;
 		dbh=new DBHelper();
@@ -226,6 +278,27 @@ public class CommodityDB {
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			pst.setLong(2, blocknum);
+			ret=pst.executeQuery();
+			if(ret.next()){
+				if(ret.getString(1).startsWith(orgcode))
+					number++;
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return number;
+	}
+	//获取该仓库的总数量
+	public static long getAllNum(String orgcode){
+		long number=0;
+		dbh=new DBHelper();
+		sql="select id from CommodityPO where id like ? and outtime<0";
+		pst = dbh.prepare(sql);
+		try {
+			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
 			if(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))

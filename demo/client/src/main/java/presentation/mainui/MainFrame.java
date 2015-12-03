@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
 			contentPane.add(temp, "manager");
 			card.show(contentPane, "manager");
 		} else if (vo.getJob() == Job.Courier) {
-			JPanel temp = new CourierPanel();
+			JPanel temp = new CourierPanel(vo.getOrganizationcode(), vo.getOrganizationname());
 			contentPane.add(temp, "courier");
 			card.show(contentPane, "courier");
 		} else if (vo.getJob() == Job.visitor) {

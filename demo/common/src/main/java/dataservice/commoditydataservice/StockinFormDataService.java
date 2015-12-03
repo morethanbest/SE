@@ -17,5 +17,4 @@ public interface StockinFormDataService extends Remote {
 
 	public long getid(String orgcode)throws  RemoteException;
 
-	public CommodityLocation getAvailLoc(String orgcode)throws  RemoteException;
 }
