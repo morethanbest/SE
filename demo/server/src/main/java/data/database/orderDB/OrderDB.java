@@ -300,7 +300,6 @@ public class OrderDB {
 		sql="select ordercode from OrderPO";
 		pst = dbh.prepare(sql);
 		try {
-			pst.setString(1, orgcode);
 			ret=pst.executeQuery();
 			while(ret.next()){
 				lastId++;
@@ -314,11 +313,11 @@ public class OrderDB {
 		return lastId;
 	}
 	public static void main(String[] args) {
-		initialize();
-		System.out.println("test");
+//		initialize();
+//		System.out.println("test");
 
 		if(getLastId("025")==1){
-			System.out.println("getLastId success");
+			System.out.println(getLastId("025"));
 		}
 
 		if(update(new OrderPO("025000","孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
