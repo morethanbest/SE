@@ -7,7 +7,7 @@ import java.sql.SQLException;
   
 public class DBHelper {  
 	//寝室的ip为172.26.15.52
-    private static final String url = "jdbc:mysql://114.212.43.239/delivery?"+ "useUnicode=true&characterEncoding=UTF8";  
+    private static final String url = "jdbc:mysql://172.26.15.52/delivery?"+ "useUnicode=true&characterEncoding=UTF8";  
     private static final String name = "com.mysql.jdbc.Driver";  
     private static final String user = "sunchao";  
     private static final String password = "123456";  
