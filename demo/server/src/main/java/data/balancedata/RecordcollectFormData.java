@@ -48,8 +48,8 @@ public class RecordcollectFormData extends UnicastRemoteObject implements Record
 		// TODO Auto-generated method stub
 		AccountPO account=AccountDB.search(accountname);
 		account.setAccountsum(fee+account.getAccountsum());			//账户的钱为原来的钱加上这次增加的钱
-		AccountDB.update(account);									//更新数据库中的账户信息
-		return null;
+		return AccountDB.update(account);							//更新数据库中的账户信息
+
 	}
 
 }

@@ -123,7 +123,7 @@ public class RecordcollectDB {
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
 			sql = "select id,collectiontime,accountcode,collectionsum,collectionman,allordercode from RecordcollectPO where documentstate = ?"
-					+ "and ?<=collect<=?";
+					+ "and ?<=collectiontime<=?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			pst.setLong(2, starttime);

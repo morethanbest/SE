@@ -5,9 +5,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import data.database.balanceDB.RecordcollectDB;
+import data.database.balanceDB.RecordpayDB;
 import dataservice.balancedataservice.BalanceDataService;
 import po.Formstate;
 import po.RecordcollectPO;
+import po.RecordpayPO;
 
 public class BalanceData extends UnicastRemoteObject implements BalanceDataService {
 	
@@ -30,7 +32,12 @@ public class BalanceData extends UnicastRemoteObject implements BalanceDataServi
 	@Override
 	public double allout() throws RemoteException {
 		// TODO Auto-generated method stub
-		return 0;
+		double result=0;
+		List<RecordpayPO> list=RecordpayDB.fuzzySearch(Formstate.checked);
+		for(RecordpayPO recordpay :list){
+			result+=recordpay.getPaysum();
+		}
+		return result;
 	}
 
 }

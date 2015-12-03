@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import data.database.balanceDB.RecordcollectDB;
+import data.database.balanceDB.RecordpayDB;
 import dataservice.balancedataservice.StatisticsDataService;
 import po.Formstate;
 import po.RecordcollectPO;
@@ -20,7 +21,7 @@ public class StatisticsData extends UnicastRemoteObject implements StatisticsDat
 	@Override
 	public List<RecordpayPO> getallRecordpay(long starttime, long endtime) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return RecordpayDB.getbetween(Formstate.checked, starttime, endtime);
 	}
 
 	@Override
