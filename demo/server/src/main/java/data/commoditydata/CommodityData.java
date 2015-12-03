@@ -97,5 +97,11 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 		return CommodityDB.getbetween(orgcode, starttime, endtime);
 	}
 
+	@Override
+	public CommodityLocation getLoc(String orgcode, long blocknum) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

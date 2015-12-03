@@ -1,6 +1,7 @@
 package po;
 //用于记录仓库的容量和警戒值
 public class StockPO {
+	String orgcode;
 	String name;
 	long blocknum;
 	long linenum;
@@ -8,6 +9,27 @@ public class StockPO {
 	long locationnum;
 	long totalnum;
 	double warningvalue;
+	
+	public StockPO(String orgcode, String name, long blocknum, long linenum, long shelfnum, long locationnum,
+			long totalnum, double warningvalue) {
+		this.orgcode = orgcode;
+		this.name = name;
+		this.blocknum = blocknum;
+		this.linenum = linenum;
+		this.shelfnum = shelfnum;
+		this.locationnum = locationnum;
+		this.totalnum = totalnum;
+		this.warningvalue = warningvalue;
+	}
+	
+	public String getOrgcode() {
+		return orgcode;
+	}
+
+	public void setOrgcode(String orgcode) {
+		this.orgcode = orgcode;
+	}
+
 	public String getName() {
 		return name;
 	}

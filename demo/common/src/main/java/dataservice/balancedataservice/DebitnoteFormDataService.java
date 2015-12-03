@@ -9,10 +9,12 @@ import po.Formstate;
 import po.ResultMessage;
 
 public interface DebitnoteFormDataService extends Remote {
-	public List<DebitnotePO> getDebitnoteForm (Formstate state)throws RemoteException;
+	public List<DebitnotePO> getDebitnoteForm (Formstate state,String orgcode)throws RemoteException;
 	
 	public ResultMessage updateDebitnoteForm (DebitnotePO po)throws RemoteException;
 	
 	public ResultMessage addDebitnoteForm (DebitnotePO po)throws RemoteException;
+	
+	public long getlastID(String orgcode)throws RemoteException;
 	
 }
