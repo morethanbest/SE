@@ -295,7 +295,7 @@ public class OrderDB {
 	}
 	
 	public static long getLastId(String orgcode){
-		long lastId=0;
+		long lastId=-1;
 		dbh=new DBHelper();
 		sql="select ordercode from OrderPO where ordercode like ?";
 		pst = dbh.prepare(sql);
@@ -303,8 +303,7 @@ public class OrderDB {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
 			while(ret.next()){
-				if(ret.getString(1).startsWith(orgcode))
-					lastId++;
+				lastId++;
 			}
 			ret.close();
 			dbh.close();// 关闭连接
