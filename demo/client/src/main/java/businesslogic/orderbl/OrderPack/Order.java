@@ -47,8 +47,7 @@ public class Order {
 		String  packagetype=vo.getPackagetype();
 		String ordercode=vo.getOrdercode();
 		Ordertype ordertype=vo.getOrdertype();
-		OrderFareVO farevo=new OrderFareVO(senderaddress, receiveraddress, numbers, weight, volume, packagetype, ordertype);
-		double totalfee=this.getPrice(farevo);
+		double totalfee=vo.getTotalfee();
 		add.setOrder(orgcode, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, 
 				productname, packagetype, totalfee, ordercode, ordertype);

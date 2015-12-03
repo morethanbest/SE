@@ -252,6 +252,10 @@ public class VehiclePanel extends JPanel implements ActionListener {
 				if(isrev==false){
 					isrev=true;
 					btnupdate.setText("确定");
+					CardField.setEditable(true);
+					yearSelect.setEditable(true);
+					mouthSelect.setEditable(true);
+					daySelect.setEditable(true);
 				}
 				else{
 					isrev=false;
@@ -262,6 +266,10 @@ public class VehiclePanel extends JPanel implements ActionListener {
 				    display();
 				    revVehicle(vo);
 				    btnupdate.setText("修改");
+				    CardField.setEditable(false);
+					yearSelect.setEditable(false);
+					mouthSelect.setEditable(false);
+					daySelect.setEditable(false);
 				}
 		}
 	}
