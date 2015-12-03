@@ -68,6 +68,21 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		add(scrollPane);
 
 		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+			},
+			new String[] {
+				"\u540D\u79F0", "\u6570\u503C"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setRowHeight(30);
 
@@ -194,7 +209,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		select_2.addItemListener(distanceListener);
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		tableModel.setColumnCount(2);
 		tableModel.setRowCount(10);
 		swapBtn(false);
 		refreshList();

@@ -20,6 +20,7 @@ import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.StaffType;
 import vo.CityVO;
+import vo.OrderFareVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
@@ -66,7 +67,6 @@ public class OrderPanel extends JPanel {
 	 */
 	public OrderPanel(CourierPanel courierPanel) {
 		orderBlService = new OrderController();
-
 		setLayout(null);
 
 		JSeparator separator = new JSeparator();
@@ -92,6 +92,7 @@ public class OrderPanel extends JPanel {
 		sareaBox = new JComboBox<String>();
 		sareaBox.setBounds(470, 85, 86, 24);
 		add(sareaBox);
+		addOrganizationItems(scityBox, sareaBox);
 
 		sdetailField = new JTextField();
 		sdetailField.setText("白宫");
@@ -220,6 +221,17 @@ public class OrderPanel extends JPanel {
 		button = new JButton("获取运费");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String saddress = (String) scityBox.getSelectedItem();
+				String raddress = (String) rcityBox.getSelectedItem();
+				double number = Double.parseDouble(numberField.getText());
+				double weight = Double.parseDouble(weightField.getText());
+				double volume = Double.parseDouble(volumeField.getText());
+				double fare = orderBlService.orderFare(new OrderFareVO(saddress, raddress,
+						number, weight, volume, (String) packBox
+								.getSelectedItem(),
+						getOrderType((String) orderBox.getSelectedItem())));
+				fareField.setText(fare + "");
+
 			}
 		});
 		button.setBounds(254, 499, 86, 27);
@@ -228,7 +240,7 @@ public class OrderPanel extends JPanel {
 		button_2 = new JButton("提交订单");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//添加订单
+				// 添加订单
 				try {
 					String saddress = (String) scityBox.getSelectedItem();
 					saddress = saddress.concat("-").concat(
@@ -244,20 +256,25 @@ public class OrderPanel extends JPanel {
 					double weight = Double.parseDouble(weightField.getText());
 					double volume = Double.parseDouble(volumeField.getText());
 					double fare = Double.parseDouble(fareField.getText());
-					orderBlService.addOrder(new OrderVO(snameField.getText(),
-							saddress, sjobField.getText(), stelField.getText(),
-							sphoneField.getText(), rnameField.getText(),
-							raddress, rjobField.getText(), rtelField.getText(),
-							rphoneField.getText(), number, weight, volume,
-							nameField.getText(), (String) packBox
-									.getSelectedItem(), orderBlService
-									.getOrdercode(courierPanel.getOrgCode()),
-							getOrderType((String) orderBox.getSelectedItem()),
-							fare), courierPanel.getOrgCode());
+					orderBlService.addOrder(
+							new OrderVO(snameField.getText(), saddress,
+									sjobField.getText(), stelField.getText(),
+									sphoneField.getText(),
+									rnameField.getText(), raddress, rjobField
+											.getText(), rtelField.getText(),
+									rphoneField.getText(), number, weight,
+									volume, nameField.getText(),
+									(String) packBox.getSelectedItem(),
+									orderBlService.getOrdercode(courierPanel
+											.getOrgCode()),
+									getOrderType((String) orderBox
+											.getSelectedItem()), fare),
+							courierPanel.getOrgCode());
+					// System.out.println(orderBlService.getOrdercode(courierPanel.getOrgCode()));
 				} catch (NumberFormatException e1) {
 					System.out.println("wronginput");
 				}
-				
+
 			}
 		});
 		button_2.setBounds(434, 489, 133, 47);
@@ -279,8 +296,7 @@ public class OrderPanel extends JPanel {
 		JLabel orderCode = new JLabel("");
 		orderCode.setBounds(654, 500, 314, 18);
 		add(orderCode);
-		
-		
+
 		rcityBox.addItemListener(new ItemListener() {
 
 			@Override
@@ -297,8 +313,6 @@ public class OrderPanel extends JPanel {
 			}
 
 		});
-		
-		
 
 	}
 
@@ -344,7 +358,7 @@ public class OrderPanel extends JPanel {
 			packBox.addItem(packages.getName());
 		}
 	}
-	
+
 	private String getOrderTypeStr(Ordertype o) {
 		for (OrderTypes order : OrderTypes.values()) {
 			if (order.getOrdertype() == o) {

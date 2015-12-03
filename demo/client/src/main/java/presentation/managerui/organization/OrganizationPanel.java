@@ -52,6 +52,22 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		add(scrollPane);
 
 		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+			},
+			new String[] {
+				"\u673A\u6784\u7F16\u53F7", "\u673A\u6784\u540D\u79F0", "\u6240\u5728\u57CE\u5E02", "\u673A\u6784\u7C7B\u578B"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.setRowHeight(30);
 		scrollPane.setViewportView(table);
 
 		orgSelect = new JComboBox<String>();
@@ -90,7 +106,6 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		add(btnRevise);
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		tableModel.setColumnCount(4);
 		tableModel.setRowCount(10);
 	}
 

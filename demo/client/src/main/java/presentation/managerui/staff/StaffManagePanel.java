@@ -49,7 +49,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		staffBlService = new StaffController();
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 49, 954, 8);
+		separator.setBounds(0, 60, 954, 8);
 		add(separator);
 		
 		btnAdd = new JButton("Add");
@@ -76,10 +76,25 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		add(btnDelete);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(14, 70, 926, 337);
+		scrollPane.setBounds(14, 84, 926, 323);
 		add(scrollPane);
 		
 		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"\u6240\u5728\u57CE\u5E02", "\u6240\u5728\u673A\u6784", "\u59D3\u540D", "\u804C\u4E1A", "\u6240\u5728\u673A\u6784\u7F16\u53F7"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.setRowHeight(30);
 		scrollPane.setViewportView(table);
 		
 		citySelect = new JComboBox<String>();
