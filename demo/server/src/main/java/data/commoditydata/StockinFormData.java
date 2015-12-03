@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import data.database.CommodityDB.StockinDB;
+import data.database.commodityDB.StockinDB;
 import dataservice.commoditydataservice.StockinFormDataService;
 import po.CommodityLocation;
 import po.Formstate;

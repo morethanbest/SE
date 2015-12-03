@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import data.database.CommodityDB.CommodityDB;
+import data.database.commodityDB.CommodityDB;
 
 public class CommodityData extends UnicastRemoteObject implements CommodityDataService{
 
@@ -70,7 +70,7 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public List<CommodityPO> stockTaking(String orgcode, long date, long blocknum) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return CommodityDB.getbyblock(orgcode, blocknum);
 	}
 
 	@Override

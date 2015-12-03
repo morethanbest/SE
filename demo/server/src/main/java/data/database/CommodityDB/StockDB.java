@@ -1,15 +1,12 @@
-package data.database.CommodityDB;
+package data.database.commodityDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import data.database.DBHelper;
 import data.database.Serialize;
-import po.CommodityLocation;
-import po.CommodityPO;
 import po.ResultMessage;
+import po.StockPO;
 
 public class StockDB {
 	static String sql = null;
@@ -19,11 +16,11 @@ public class StockDB {
 
 	public static void initialize() {
 		dbh = new DBHelper();
-//		sql = "drop table Stock";
+//		sql = "drop table StockPO";
 //		pst = dbh.prepare(sql);
 		try {
 //			pst.executeUpdate();
-			sql = "create table Stock(name text,blocknum bigint,linenum bigint,shelfnum bigint,locationnum bigint)";
+			sql = "create table StockPO(name text,blocknum bigint,linenum bigint,shelfnum bigint,locationnum bigint,totalnum bigint,warningvalue double)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
 			dbh.close();// 关闭连接
@@ -32,29 +29,29 @@ public class StockDB {
 		}
 	}
 
-//	public static ResultMessage write(CommodityPO po) {
-//		try {
-//			byte[] location = Serialize.Object2Bytes(po.getLocation());
-//			dbh = new DBHelper();
-//			sql = "insert into CommodityPO values(?,?,?,?,?,?,?)";
-//			pst = dbh.prepare(sql);
-//			pst.setString(1, po.getId());
-//			pst.setString(2, po.getOrdercode());
-//			pst.setLong(3, po.getIntime());
-//			pst.setLong(4, po.getOuttime());
-//			pst.setString(5, po.getDestination());
-//			pst.setBytes(6, location);
-//			pst.setLong(7, po.getLocation().getBlocknum());
-//			int result = pst.executeUpdate();
-//			if (result == -1) {
-//				dbh.close();// 关闭连接
-//				return ResultMessage.failure;
-//			}
-//			dbh.close();// 关闭连接
-//			return ResultMessage.success;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	public static ResultMessage write(StockPO po) {
+		try {
+			byte[] location = Serialize.Object2Bytes(po.getLocation());
+			dbh = new DBHelper();
+			sql = "insert into StockPO values(?,?,?,?,?,?,?)";
+			pst = dbh.prepare(sql);
+			pst.setString(1, po.getId());
+			pst.setString(2, po.getOrdercode());
+			pst.setLong(3, po.getIntime());
+			pst.setLong(4, po.getOuttime());
+			pst.setString(5, po.getDestination());
+			pst.setBytes(6, location);
+			pst.setLong(7, po.getLocation().getBlocknum());
+			int result = pst.executeUpdate();
+			if (result == -1) {
+				dbh.close();// 关闭连接
+				return ResultMessage.failure;
+			}
+			dbh.close();// 关闭连接
+			return ResultMessage.success;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 //
 //		return ResultMessage.failure;
 //
