@@ -297,7 +297,7 @@ public class OrderDB {
 	public static long getLastId(String orgcode){
 		long lastId=-1;
 		dbh=new DBHelper();
-		sql="select ordercode from OrderPO where orgcode = ?";
+		sql="select ordercode from OrderPO";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, orgcode);
