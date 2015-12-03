@@ -2,24 +2,31 @@ package businesslogic.balancebl.RecordcollectPack;
 
 import java.util.List;
 
+import po.Formstate;
 import vo.RecordcollectVO;
-import vo.ResultMessage;
+import po.ResultMessage;
 
 public class Recordcollect {
-	MockIdInfo idInfo;
-	MockRecord record;
-	public Recordcollect(MockIdInfo idInfo,MockRecord record){
-		this.idInfo=idInfo;
-		this.record=record;
+	Addcollect add;
+	Updatecollect update;
+	Findcollect find;
+	public Recordcollect(Addcollect add){
+
+		this.add=add;
 	}
-	public ResultMessage Recordcollect(RecordcollectVO vo){
-		long id=idInfo.getid();
+	public Recordcollect(Updatecollect update){this.update=update;}
+	public Recordcollect(Findcollect find){this.find=find;}
+
+
+	public ResultMessage AddRecordcollect(RecordcollectVO vo){
+		String  id=vo.getid();
 		long collectiontime=vo.getCollectiontime();
 		double collectionsum=vo.getCollectionsum();
 		String collectionman=vo.getCollectionman();
 		List<String> allordercode=vo.getAllordercode();
-		record.setRecordInfo(id, collectiontime, collectionsum, collectionman, allordercode);
-		ResultMessage result=record.Recordcollect();
+		Formstate state=vo.getFormstate();
+
+
 		return result;
 	}
 }

@@ -3,24 +3,26 @@ import java.io.Serializable;
 import java.util.List;
 
 public class RecordcollectPO  implements Serializable{
-	long id;
+	String id;
 	long collectiontime;
 	double collectionsum;
 	String collectionman;
 	List<String> allordercode;
 	Formstate documentstate;
 	
-	public RecordcollectPO(long id,long collectiontime,double collectionsum,String collectionman,List<String> allordercode){
+	public RecordcollectPO(String id,long collectiontime,double collectionsum,String collectionman,List<String> allordercode,Formstate formstate){
 		this.id=id;
 		this.collectionman=collectionman;
 		this.collectionsum=collectionsum;
 		this.collectiontime=collectiontime;
 		this.allordercode=allordercode;
-		this.documentstate=Formstate.waiting;
+		this.documentstate=formstate;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
+
+	public void setId(String id){this.id=id;}
 	public void setDocumentstate(Formstate documentstate){
 		this.documentstate=documentstate;
 	}
@@ -40,6 +42,8 @@ public class RecordcollectPO  implements Serializable{
 	public void setAllordercode(List<String> allordercode) {
 		this.allordercode = allordercode;
 	}
+
+	public void setFormstate(Formstate state){this.documentstate=state;}
 
 	public Formstate getDocumentstate(){
 		return this.documentstate;
