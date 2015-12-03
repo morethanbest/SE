@@ -41,10 +41,12 @@ public class AddVehicleDialog extends JDialog {
 		
 		codeField = new JTextField();
 		codeField.setBounds(120, 36, 155, 20);
+		codeField.setEditable(false);
+		codeField.setText(parent.getid());
 		contentPanel.add(codeField);
 		codeField.setColumns(10);
 		
-		JLabel JLcard = new JLabel("编号：");
+		JLabel JLcard = new JLabel("车牌号：");
 		JLcard.setBounds(25, 96, 40, 20);
 		contentPanel.add(JLcard);
 		

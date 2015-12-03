@@ -48,23 +48,23 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		separator.setBounds(0, 49, 954, 8);
 		add(separator);
 		
-		codeToSearch = new JTextField();
-		codeToSearch.setBounds(104, 14, 103, 21);
-		add(codeToSearch);
-		codeToSearch.setColumns(10);
-		
-		btnSearchByCode = new JButton("搜索");
-		btnSearchByCode.setBounds(217, 13, 66, 23);
-		add(btnSearchByCode);
-		
 		cardToSearch = new JTextField();
-		cardToSearch.setColumns(10);
-		cardToSearch.setBounds(402, 14, 103, 21);
+		cardToSearch.setBounds(104, 14, 103, 21);
 		add(cardToSearch);
+		cardToSearch.setColumns(10);
 		
 		btnSearchByCard = new JButton("搜索");
-		btnSearchByCard.setBounds(515, 13, 66, 23);
+		btnSearchByCard.setBounds(217, 13, 66, 23);
 		add(btnSearchByCard);
+		
+		codeToSearch = new JTextField();
+		codeToSearch.setColumns(10);
+		codeToSearch.setBounds(402, 14, 103, 21);
+		add(codeToSearch);
+		
+		btnSearchByCode = new JButton("搜索");
+		btnSearchByCode.setBounds(515, 13, 66, 23);
+		add(btnSearchByCode);
 		
 		btnAddVehicle = new JButton("增加车辆信息");
 		btnAddVehicle.setBounds(681, 13, 121, 23);
@@ -210,7 +210,7 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		}
 		return VO;
 	}
-	private String getid(){
+	public String getid(){
 		VehicleBlService vehicleBlService=new VehicleController();
 		String id="";
 		try {
@@ -222,14 +222,24 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		return id;
 	}
 	private void display(){
-		CodeField.setText(vo.getVehiclecode());
-		CardField.setText(vo.getVehiclenum());
-		long year=vo.getExtendtime()/10000;
-		long mouth=vo.getExtendtime()/100-year*100;
-		long day=vo.getExtendtime()%100;
-		yearSelect.setSelectedItem(Long.toString(year));
-		mouthSelect.setSelectedItem(Long.toString(mouth));
-		daySelect.setSelectedItem(Long.toString(day));
+		if(vo==null){
+			CodeField.setText("");
+			CardField.setText("");
+			yearSelect.setSelectedIndex(0);
+			mouthSelect.setSelectedIndex(0);
+			daySelect.setSelectedIndex(0);
+		}
+		else{
+			CodeField.setText(vo.getVehiclecode());
+			CardField.setText(vo.getVehiclenum());
+			long year=vo.getExtendtime()/10000;
+			long mouth=vo.getExtendtime()/100-year*100;
+			long day=vo.getExtendtime()%100;
+			yearSelect.setSelectedItem(Long.toString(year));
+			mouthSelect.setSelectedItem(Long.toString(mouth));
+			daySelect.setSelectedItem(Long.toString(day));
+		}
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -239,11 +249,12 @@ public class VehiclePanel extends JPanel implements ActionListener {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}else if(e.getSource().equals(btnSearchByCard)){
-			String card=CardField.getText();
+			String card=cardToSearch.getText();
+			System.out.println(card);
 			vo=getVehiclebyPN(card);
 			display();
 		}else if(e.getSource().equals(btnSearchByCode)){
-			String code=CodeField.getText();
+			String code=codeToSearch.getText();
 			vo=getVehiclebyVN(code);
 			display();
 		}else if(e.getSource().equals(btndelete)){
