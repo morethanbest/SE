@@ -1,8 +1,5 @@
 package presentation.hallsalesmanui.driver;
 
-import java.awt.Button;
-import java.awt.Choice;
-import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -10,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,13 +15,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import businesslogic.transportbl.DriverPack.DriverController;
 import businesslogicservice.transportblservice.DriverBlService;
 import vo.DriverVO;
 
-public class DriverPanel extends JPanel {
+public class DriverPanel extends JPanel implements ActionListener {
 
 	private JTextField textNameToSearch;
 	private JTextField textCodeToSearch;
@@ -35,18 +35,23 @@ public class DriverPanel extends JPanel {
 	private JButton BTNsearchByCode;
 	private JButton BTNsearchByName;
 	private JButton BTNadd;
-	private Button BTNdelete;
-	private Button BTNupdate;
-	private JTextField textSex;
-	private JTextField textByear;
-	private JTextField textBmouth;
-	private JTextField textBday;
-	private JTextField textDyear;
-	private JTextField textDmouth;
-	private JTextField textDday;
-	List<DriverVO> list;
+	private JButton BTNdelete;
+	private JButton BTNupdate;
+	private JComboBox<String> SexSelect;
+	private JComboBox<String> ByearSelect;
+	private JComboBox<String> BmouthSelect;
+	private JComboBox<String> BdaySelect;
+	private JComboBox<String> DyearSelect;
+	private JComboBox<String> DmouthSelect;
+	private JComboBox<String> DdaySelect;
+	private List<DriverVO> list;
+	private DriverVO vo=null;
+	private int row;
+	private boolean isrev=false;
+	private String orgcode;
 	
-	public DriverPanel() {
+	public DriverPanel(String orgcode) {
+		this.orgcode=orgcode;
 		setLayout(null);
 		
 		JSeparator separator = new JSeparator();
@@ -94,7 +99,7 @@ public class DriverPanel extends JPanel {
 		textName.setBounds(330, 117, 143, 21);
 		add(textName);
 		textName.setColumns(10);
-		textName.setEditable(false);
+		textName.setEditable(isrev);
 		
 		JLabel label_3 = new JLabel("性别：");
 		label_3.setBounds(524, 120, 54, 15);
@@ -118,7 +123,7 @@ public class DriverPanel extends JPanel {
 		textPhone.setBounds(584, 180, 143, 21);
 		add(textPhone);
 		textPhone.setColumns(10);
-		textPhone.setEditable(false);
+		textPhone.setEditable(isrev);
 		
 		JLabel label_6 = new JLabel("出生日期：");
 		label_6.setBounds(266, 244, 66, 15);
@@ -136,105 +141,280 @@ public class DriverPanel extends JPanel {
 		textidentity.setBounds(330, 307, 143, 21);
 		add(textidentity);
 		textidentity.setColumns(10);
-		textidentity.setEditable(false);
+		textidentity.setEditable(isrev);
 		
-		BTNdelete = new Button("删除");
+		BTNdelete = new JButton("删除");
 		BTNdelete.setBounds(383, 388, 76, 23);
 		add(BTNdelete);
 		
-		BTNupdate = new Button("修改");
+		BTNupdate = new JButton("修改");
 		BTNupdate.setBounds(606, 388, 76, 23);
 		add(BTNupdate);
 		
-		textSex = new JTextField();
-		textSex.setEditable(false);
-		textSex.setColumns(10);
-		textSex.setBounds(588, 117, 143, 21);
-		add(textSex);
+		SexSelect = new JComboBox<String>();
+		SexSelect.setEditable(isrev);
+		SexSelect.setBounds(588, 117, 143, 21);
+		SexSelect.addItem("男");
+		SexSelect.addItem("女");
+		add(SexSelect);
 		
-		textByear = new JTextField();
-		textByear.setEditable(false);
-		textByear.setColumns(10);
-		textByear.setBounds(330, 241, 47, 21);
-		add(textByear);
+		ByearSelect = new JComboBox<String>();
+		ByearSelect.setEditable(isrev);
+		ByearSelect.setBounds(330, 241, 47, 21);
+		addByearItem();
+		add(ByearSelect);
 		
-		textBmouth = new JTextField();
-		textBmouth.setEditable(false);
-		textBmouth.setColumns(10);
-		textBmouth.setBounds(387, 241, 37, 21);
-		add(textBmouth);
+		BmouthSelect = new JComboBox<String>();
+		BmouthSelect.setEditable(isrev);
+		BmouthSelect.setBounds(387, 241, 37, 21);
+		addBmouthItem();
+		add(BmouthSelect);
 		
-		textBday = new JTextField();
-		textBday.setEditable(false);
-		textBday.setColumns(10);
-		textBday.setBounds(436, 241, 37, 21);
-		add(textBday);
+		BdaySelect = new JComboBox<String>();
+		BdaySelect.setEditable(isrev);
+		BdaySelect.setBounds(436, 241, 37, 21);
+		addBdayItem();
+		add(BdaySelect);
 		
-		textDyear = new JTextField();
-		textDyear.setEditable(false);
-		textDyear.setColumns(10);
-		textDyear.setBounds(584, 241, 47, 21);
-		add(textDyear);
+		DyearSelect = new JComboBox<String>();
+		DyearSelect.setEditable(isrev);
+		DyearSelect.setBounds(584, 241, 47, 21);
+		addDyearItem();
+		add(DyearSelect);
 		
-		textDmouth = new JTextField();
-		textDmouth.setEditable(false);
-		textDmouth.setColumns(10);
-		textDmouth.setBounds(641, 241, 37, 21);
-		add(textDmouth);
+		DmouthSelect = new JComboBox<String>();
+		DmouthSelect.setEditable(isrev);
+		DmouthSelect.setBounds(641, 241, 37, 21);
+		addDmouthItem();
+		add(DmouthSelect);
 		
-		textDday = new JTextField();
-		textDday.setEditable(false);
-		textDday.setColumns(10);
-		textDday.setBounds(688, 241, 37, 21);
-		add(textDday);
+		DdaySelect = new JComboBox<String>();
+		DdaySelect.setEditable(isrev);
+		DdaySelect.setBounds(688, 241, 37, 21);
+		addDdayItem();
+		add(DdaySelect);
 		
 		BTNsearchByName = new JButton("搜索");
 		BTNsearchByName.setBounds(188, 13, 66, 23);
 		add(BTNsearchByName);
 		
+		BTNadd.addActionListener(this);
+		BTNsearchByCode.addActionListener(this);
+		BTNsearchByName.addActionListener(this);
+		BTNdelete.addActionListener(this);
+		BTNupdate.addActionListener(this);
+		
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setColumnCount(2);
+		tableModel.setRowCount(10);
+		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				int row=table.getSelectedRow();
+				if(row<0){
+					textName.setText("");
+					SexSelect.setSelectedItem("");
+					textCode.setText("");
+					textPhone.setText("");
+					textidentity.setText("");
+					ByearSelect.setSelectedIndex(0);
+					BmouthSelect.setSelectedIndex(0);
+					BdaySelect.setSelectedIndex(0);
+					DyearSelect.setSelectedIndex(0);
+					DmouthSelect.setSelectedIndex(0);
+					DdaySelect.setSelectedIndex(0);
+				}
+				else{
+					vo=list.get(row);
+					textName.setText(vo.getDrivername());
+					SexSelect.setSelectedItem(vo.getDrivergender());
+					textCode.setText(vo.getDrivercode());
+					textPhone.setText(vo.getCellphone());
+					textidentity.setText(vo.getIdentifiercode());
+					long byear=vo.getBirthtime()/10000;
+					long bmouth=vo.getBirthtime()/100-byear*100;
+					long bday=vo.getBirthtime()%100;
+					ByearSelect.setSelectedItem(Long.toString(byear));
+					BmouthSelect.setSelectedItem(Long.toString(bmouth));
+					BdaySelect.setSelectedItem(Long.toString(bday));
+					long dyear=vo.getTimelimit()/10000;
+					long dmouth=vo.getTimelimit()/100-dyear*100;
+					long dday=vo.getTimelimit()%100;
+					DyearSelect.setSelectedItem(Long.toString(dyear));
+					DmouthSelect.setSelectedItem(Long.toString(dmouth));
+					DdaySelect.setSelectedItem(Long.toString(dday));
+				}
+				
+			}
+		});
 
 	}
-	void addDriver(){
-		
+	private void addByearItem(){
+		for(int i=1950;i<2050;i++){
+			ByearSelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addBmouthItem(){
+		for(int i=1;i<10;i++){
+			BmouthSelect.addItem("0"+Integer.toString(i));
+		}
+		BmouthSelect.addItem("10");
+		BmouthSelect.addItem("11");
+		BmouthSelect.addItem("12");
+	}
+	private void addBdayItem(){
+		for(int i=1;i<10;i++){
+			BdaySelect.addItem("0"+Integer.toString(i));
+		}
+		for(int i=10;i<32;i++){
+			BdaySelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addDyearItem(){
+		for(int i=2015;i<2050;i++){
+			DyearSelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addDmouthItem(){
+		for(int i=1;i<10;i++){
+			DmouthSelect.addItem("0"+Integer.toString(i));
+		}
+		DmouthSelect.addItem("10");
+		DmouthSelect.addItem("11");
+		DmouthSelect.addItem("12");
+	}
+	private void addDdayItem(){
+		for(int i=1;i<10;i++){
+			DdaySelect.addItem("0"+Integer.toString(i));
+		}
+		for(int i=10;i<32;i++){
+			DdaySelect.addItem(Integer.toString(i));
+		}
+	}
+	void addDriver(String drivername,String drivercode,long birthtime,String identifiercode,String cellphone,String drivergender,long timelimit){
+		DriverBlService driverBlService=new DriverController();
+		DriverVO vo=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
+		try {
+			driverBlService.addDriver(vo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(vo.getDrivercode());
+		System.out.println(vo.getDrivername());
+		System.out.println(vo.getCellphone());
+		System.out.println(vo.getBirthtime());
+		System.out.println(vo.getIdentifiercode());
+		System.out.println(vo.getCellphone());
+		System.out.println(vo.getDrivergender());
 	}
 	
-	void delDriver(){
+	void delDriver(DriverVO VO){
+		DriverBlService driverBlService=new DriverController();
+		try {
+			driverBlService.delDriver(VO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		list.remove(row);
+		displayInTable(list);
+		vo=null;
+		textName.setText("");
+		SexSelect.setSelectedItem("");
+		textCode.setText("");
+		textPhone.setText("");
+		textidentity.setText("");
+		ByearSelect.setSelectedItem("");
+		BmouthSelect.setSelectedItem("");
+		BdaySelect.setSelectedItem("");
+		DyearSelect.setSelectedItem("");
+		DmouthSelect.setSelectedItem("");
+		DdaySelect.setSelectedItem("");
+	}
+	void revDriver(DriverVO VO){
+		DriverBlService driverBlService=new DriverController();
+		try {
+			driverBlService.revDriver(VO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
-	void revDriver(){
-		
+	public String getcode(){
+		DriverBlService driverBlService=new DriverController();
+		String code=null;
+		try {
+			code = driverBlService.getid(orgcode);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return code;
 	}
 	
-	public DriverVO getDriverbyDN(){
-		return null;
+	public DriverVO getDriverbyDN(String driverNumber){
+		DriverBlService driverBlService=new DriverController();
+		DriverVO VO=null;
+		try {
+			VO = driverBlService.getDriverbyDN(driverNumber, orgcode);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(VO.getDrivername());
+		return VO;
 	}
 	
 	public List<DriverVO> getDriverbyName(String name){
-		return null;
+		DriverBlService driverBlService=new DriverController();
+		List<DriverVO> list=new ArrayList<>();
+		try {
+			list = driverBlService.getDriverbyName(name, orgcode);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 		
 	}
 	public String getid(){
-		return null;
+		DriverBlService driverBlService=new DriverController();
+		String code=null;
+		try {
+			code=driverBlService.getid(orgcode);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return code;
 	}
 	public void displayInTable(List<DriverVO> list){
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);
 		for(DriverVO vo:list){
-			String[] row =new String[2];
-			row[0]=vo.getDrivername();
-			row[1]=vo.getDrivercode();
-			tableModel.addRow(row);
+			String[] rowString =new String[2];
+			rowString[0]=vo.getDrivername();
+			rowString[1]=vo.getDrivercode();
+			tableModel.addRow(rowString);
 		}
 	}
+	@Override
 	public void actionPerformed(ActionEvent e){
-		DriverBlService driverBlService=new DriverController();
 		if(e.getSource().equals(BTNadd)){
 			AddDriverDialog dialog=new AddDriverDialog(this);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
 		else if(e.getSource().equals(BTNdelete)){
-			
+			delDriver(vo);
+			isrev=false;
 		}
 		else if(e.getSource().equals(BTNsearchByName)){
 			String nameToSearch=textNameToSearch.getText();
@@ -244,8 +424,30 @@ public class DriverPanel extends JPanel {
 		else if(e.getSource().equals(BTNsearchByCode)){
 			String code=textCodeToSearch.getText();
 			list=new ArrayList<>();
-			list.add(this.getDriverbyDN());		
+			list.add(this.getDriverbyDN(code));		
 			displayInTable(list);
+		}
+		else if(e.getSource().equals(BTNupdate)){
+			if(isrev==false){
+				isrev=true;
+				BTNupdate.setText("确定");
+			}
+			else{
+				isrev=false;
+				String drivername=textName.getText();
+				String drivercode=textCode.getText();
+				long birthtime=Long.parseLong((String)ByearSelect.getSelectedItem()+BmouthSelect.getSelectedItem()+BdaySelect.getSelectedItem());
+				String identifiercode=textidentity.getText();
+				String cellphone=textPhone.getText();
+				String drivergender=(String)SexSelect.getSelectedItem();
+				long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
+				DriverVO VO=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
+				vo=VO;
+				BTNupdate.setText("修改");
+				list.remove(row);
+				list.add(row, vo);
+				revDriver(VO);
+			}
 		}
 	}
 }

@@ -5,6 +5,8 @@ import init.RMIHelper;
 
 import java.rmi.RemoteException;
 
+import com.sun.glass.ui.TouchInputSupport;
+
 /**
  * Created by Administrator on 2015/11/25.
  */
@@ -18,9 +20,10 @@ public class DriverId {
         String result=null;
         try {
             id = dataserv.getCurrentID(orgcode)+1;
-
+            System.out.println(id);
             result=Long.toString(id);
             int len=result.length();
+            System.out.println(len);
             if(len>3){
                 result="-1";
                 return result;
@@ -38,4 +41,5 @@ public class DriverId {
         result=orgcode+result;
         return result;
     }
+
 }

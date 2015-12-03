@@ -62,7 +62,7 @@ public class MainFrame extends JFrame {
 		} else if (vo.getJob() == Job.visitor) {
 			System.out.println("Login failed!!!");
 		} else if(vo.getJob() == Job.hallsalesman){
-			JPanel temp=new HallsalesmanPanel();
+			JPanel temp=new HallsalesmanPanel(vo.getOrganizationcode());
 			contentPane.add(temp, "hallsalesman");
 			card.show(contentPane, "hallsalesman");
 		}

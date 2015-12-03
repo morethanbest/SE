@@ -19,8 +19,9 @@ public class VehiclePanel extends JPanel {
 	private JTable table;
 	private JTextField textField_2;
 	private JTextField textField_3;
-
-	public VehiclePanel() {
+    private String orgcode;
+	public VehiclePanel(String orgcode) {
+		this.orgcode=orgcode;
 		setLayout(null);
 		
 		JSeparator separator = new JSeparator();

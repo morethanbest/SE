@@ -23,15 +23,17 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	private JButton btnNewButton_3;
 	private JButton btnNewButton_4;
 	private JButton btnNewButton_5;
+	private JButton btnNewButton_6;
 	private JLabel hint;
 	private CardLayout card;
 	private DriverPanel driverPanel;
 	private VehiclePanel vehiclePanel;
-
+    private String orgcode;
 	/**
 	 * Create the panel.
 	 */
-	public HallsalesmanPanel() {
+	public HallsalesmanPanel(String orgcode) {
+		this.orgcode=orgcode;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
@@ -64,7 +66,12 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		btnNewButton_5.setBounds(649, 13, 113, 27);
 		btnNewButton_5.addActionListener(this);
 		add(btnNewButton_5);
-
+     
+		btnNewButton_6 = new JButton("注销");
+		btnNewButton_6.setBounds(855, 13, 113, 27);
+		btnNewButton_6.addActionListener(this);
+		add(btnNewButton_6);
+		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 58, 982, 2);
 		add(separator);
@@ -77,8 +84,8 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		panel.setLayout(card);
 		
 		//card中添加各种功能面板
-		driverPanel=new DriverPanel();
-		vehiclePanel=new VehiclePanel();
+		driverPanel=new DriverPanel(orgcode);
+		vehiclePanel=new VehiclePanel(orgcode);
 		panel.add(driverPanel, "driver");
 		panel.add(vehiclePanel, "vehicle");
 		

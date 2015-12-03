@@ -20,6 +20,7 @@ public class AddDriverDialog extends JDialog {
     private JTextField nameField;
     private JTextField codeField;
     private JTextField phoneField;
+    private JTextField identityField;
     private JComboBox<String> SexSelect;
     private JComboBox<String> ByearSelect;
     private JComboBox<String> BmouthSelect;
@@ -63,6 +64,8 @@ public class AddDriverDialog extends JDialog {
 		
 		codeField = new JTextField();
 		codeField.setBounds(80, 96, 155, 20);
+		codeField.setEditable(false);
+		codeField.setText(parent.getid());
 		contentPanel.add(codeField);
 		codeField.setColumns(10);
 		
@@ -117,10 +120,10 @@ public class AddDriverDialog extends JDialog {
 		JLidentity.setBounds(25, 216, 70, 20);
 		contentPanel.add(JLidentity);
 		
-		codeField = new JTextField();
-		codeField.setBounds(80, 216, 155, 20);
-		contentPanel.add(codeField);
-		codeField.setColumns(10);
+		identityField = new JTextField();
+		identityField.setBounds(80, 216, 155, 20);
+		contentPanel.add(identityField);
+		identityField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -131,7 +134,14 @@ public class AddDriverDialog extends JDialog {
 					
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						//parent.addDriver();
+						String drivername=nameField.getText();
+						String drivercode=codeField.getText();
+						long birthtime=Long.parseLong((String)ByearSelect.getSelectedItem()+BmouthSelect.getSelectedItem()+BdaySelect.getSelectedItem());
+						String identifiercode=identityField.getText();
+						String cellphone=phoneField.getText();
+						String drivergender=(String)SexSelect.getSelectedItem();
+						long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
+						parent.addDriver(drivername, drivercode, birthtime, identifiercode, cellphone, drivergender, timelimit);
 						dispose();
 					}
 				});
@@ -152,12 +162,18 @@ public class AddDriverDialog extends JDialog {
 		}
 	}
 	private void addBmouthItem(){
-		for(int i=1;i<13;i++){
-			BmouthSelect.addItem(Integer.toString(i));
+		for(int i=1;i<10;i++){
+			BmouthSelect.addItem("0"+Integer.toString(i));
 		}
+		BmouthSelect.addItem("10");
+		BmouthSelect.addItem("11");
+		BmouthSelect.addItem("12");
 	}
 	private void addBdayItem(){
-		for(int i=1;i<32;i++){
+		for(int i=1;i<10;i++){
+			BdaySelect.addItem("0"+Integer.toString(i));
+		}
+		for(int i=10;i<32;i++){
 			BdaySelect.addItem(Integer.toString(i));
 		}
 	}
@@ -167,12 +183,18 @@ public class AddDriverDialog extends JDialog {
 		}
 	}
 	private void addDmouthItem(){
-		for(int i=1;i<13;i++){
-			DmouthSelect.addItem(Integer.toString(i));
+		for(int i=1;i<10;i++){
+			DmouthSelect.addItem("0"+Integer.toString(i));
 		}
+		DmouthSelect.addItem("10");
+		DmouthSelect.addItem("11");
+		DmouthSelect.addItem("12");
 	}
 	private void addDdayItem(){
-		for(int i=1;i<32;i++){
+		for(int i=1;i<10;i++){
+			DdaySelect.addItem("0"+Integer.toString(i));
+		}
+		for(int i=10;i<32;i++){
 			DdaySelect.addItem(Integer.toString(i));
 		}
 	}
