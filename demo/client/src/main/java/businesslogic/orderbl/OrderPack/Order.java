@@ -11,24 +11,25 @@ import vo.OrderVO;
 public class Order {
 	AddOrder add;
 	GetPrice getPrice;
-	IdInfo Id;
 	GetOrderCode getcode;
 	FindOrder findOrder;
-	public Order(AddOrder add,IdInfo Id){
+	String orgcode;
+	public Order(AddOrder add,String orgcode){
 		this.add=add;
-		this.Id=Id;
+		this.orgcode=orgcode;
+
 	}
 	public Order(GetPrice getPrice){
 		this.getPrice=getPrice;
 	}
-	public Order(GetOrderCode getcode){
+	public Order(GetOrderCode getcode,String orgcode){
 		this.getcode=getcode;
+		this.orgcode=orgcode;
 	}
 	public Order(FindOrder findOrder){
 		this.findOrder=findOrder;
 	}
 	public ResultMessage addOrder(OrderVO vo){
-		long id=Id.getId();
 		String sendername=vo.getSendername();
 		String senderaddress=vo.getSenderaddress();
 		String senderunit=vo.getSenderunit();
@@ -48,7 +49,7 @@ public class Order {
 		Ordertype ordertype=vo.getOrdertype();
 		OrderFareVO farevo=new OrderFareVO(senderaddress, receiveraddress, numbers, weight, volume, packagetype, ordertype);
 		double totalfee=this.getPrice(farevo);
-		add.setOrder(id, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
+		add.setOrder(orgcode, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, 
 				productname, packagetype, totalfee, ordercode, ordertype);
 		ResultMessage result=add.addOrder();
@@ -68,11 +69,11 @@ public class Order {
 		return price;
 	}
 	public String getOrdercode(){
-		String code=getcode.getCode();
+		String code=getcode.getCode(orgcode);
 		return code;
 	}
-    public List<OrderVO> findOrderByState(Formstate documentstate){
-    	findOrder.setstate(documentstate);
+    public List<OrderVO> findOrderByState(Formstate documentstate,String orgcode){
+    	findOrder.setstate(documentstate,orgcode);
     	List<OrderVO> listvo=findOrder.findOrderbyState();
     	return listvo;
     }

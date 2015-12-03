@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 
 public class OrderPO  implements Serializable{
-	long id;
+	String orgcode;
 	String sendername;
 	String senderaddress;
 	String senderunit;
@@ -27,10 +27,10 @@ public class OrderPO  implements Serializable{
 	long receivingtime;
 	Formstate documentstate;	
 	
-	public OrderPO(long id,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
+	public OrderPO(String orgcode,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
 			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype){
-		this.id=id;
+		this.orgcode=orgcode;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
 		this.senderunit=senderunit;
@@ -54,12 +54,12 @@ public class OrderPO  implements Serializable{
 		this.receivingtime=0;
 		this.documentstate=Formstate.waiting;
 	}
-	public OrderPO(long id, String sendername, String senderaddress, String senderunit, String senderphone,
+	public OrderPO(String orgcode, String sendername, String senderaddress, String senderunit, String senderphone,
 			String sendercellphone, String receivername, String receiveraddress, String receiverunit,
 			String receiverphone, String receivercellphone, double numbers, double weight, double volume,
 			String productname, String packagetype, double totalfee, String ordercode,
 			Ordertype ordertype, String codeofreceiving, String receiver, long receivingtime, Formstate documentstate) {
-		this.id = id;
+		this.orgcode = orgcode;
 		this.sendername = sendername;
 		this.senderaddress = senderaddress;
 		this.senderunit = senderunit;
@@ -83,8 +83,8 @@ public class OrderPO  implements Serializable{
 		this.receivingtime = receivingtime;
 		this.documentstate = documentstate;
 	}
-	public long getId() {
-		return id;
+	public String getOrgcode() {
+		return orgcode;
 	}
 	public void setReceive(String codeofreceiving,String receiver,long receivingtime){
 		this.codeofreceiving=codeofreceiving;

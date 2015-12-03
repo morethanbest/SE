@@ -2,6 +2,8 @@ package presentation.hallsalesmanui.driver;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -37,7 +39,7 @@ public class AddDriverDialog extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel JLName = new JLabel("姓名：");
-		JLName.setBounds(29, 36, 40, 20);
+		JLName.setBounds(25, 36, 40, 20);
 		contentPanel.add(JLName);
 		
 		nameField = new JTextField();
@@ -51,10 +53,12 @@ public class AddDriverDialog extends JDialog {
 		
 		SexSelect = new JComboBox<String>();
 		SexSelect.setBounds(320, 36, 155, 20);
+		SexSelect.addItem("男");
+		SexSelect.addItem("女");
 		contentPanel.add(SexSelect);
 		
 		JLabel JLCode = new JLabel("编号：");
-		JLCode.setBounds(29, 96, 40, 20);
+		JLCode.setBounds(25, 96, 40, 20);
 		contentPanel.add(JLCode);
 		
 		codeField = new JTextField();
@@ -72,42 +76,65 @@ public class AddDriverDialog extends JDialog {
 		phoneField.setColumns(10);
 		
 		JLabel JLBirth = new JLabel("出生日期：");
-		JLBirth.setBounds(29, 156, 70, 20);
+		JLBirth.setBounds(25, 156, 70, 20);
 		contentPanel.add(JLBirth);
 		
 		ByearSelect = new JComboBox<String>();
-		ByearSelect.setBounds(83, 156, 65, 20);
+		ByearSelect.setBounds(80, 156, 60, 20);
 		contentPanel.add(ByearSelect);
+		addByearItem();
 		
 		BmouthSelect = new JComboBox<String>();
-		BmouthSelect.setBounds(150, 156, 40, 20);
+		BmouthSelect.setBounds(147, 156, 40, 20);
 		contentPanel.add(BmouthSelect);
+		addBmouthItem();
 		
 		BdaySelect = new JComboBox<String>();
 		BdaySelect.setBounds(195, 156, 40, 20);
 		contentPanel.add(BdaySelect);
+		addBdayItem();
 		
 		JLabel JLDriver = new JLabel("行驶期限：");
 		JLDriver.setBounds(250, 156, 70, 20);
 		contentPanel.add(JLDriver);
 		
-		ByearSelect = new JComboBox<String>();
-		ByearSelect.setBounds(304, 156, 65, 20);
-		contentPanel.add(ByearSelect);
+		DyearSelect = new JComboBox<String>();
+		DyearSelect.setBounds(320, 156, 65, 20);
+		contentPanel.add(DyearSelect);
+		addDyearItem();
 		
-		BmouthSelect = new JComboBox<String>();
-		BmouthSelect.setBounds(371, 156, 40, 20);
-		contentPanel.add(BmouthSelect);
+		DmouthSelect = new JComboBox<String>();
+		DmouthSelect.setBounds(391, 156, 40, 20);
+		contentPanel.add(DmouthSelect);
+		addDmouthItem();
 		
-		BdaySelect = new JComboBox<String>();
-		BdaySelect.setBounds(416, 156, 40, 20);
-		contentPanel.add(BdaySelect);
+		DdaySelect = new JComboBox<String>();
+		DdaySelect.setBounds(435, 156, 40, 20);
+		contentPanel.add(DdaySelect);
+		addDdayItem();
+		
+		JLabel JLidentity = new JLabel("身份证号：");
+		JLidentity.setBounds(25, 216, 70, 20);
+		contentPanel.add(JLidentity);
+		
+		codeField = new JTextField();
+		codeField.setBounds(80, 216, 155, 20);
+		contentPanel.add(codeField);
+		codeField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						//parent.addDriver();
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -119,5 +146,36 @@ public class AddDriverDialog extends JDialog {
 			}
 		}
 	}
+	private void addByearItem(){
+		for(int i=1950;i<2050;i++){
+			ByearSelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addBmouthItem(){
+		for(int i=1;i<13;i++){
+			BmouthSelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addBdayItem(){
+		for(int i=1;i<32;i++){
+			BdaySelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addDyearItem(){
+		for(int i=2015;i<2050;i++){
+			DyearSelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addDmouthItem(){
+		for(int i=1;i<13;i++){
+			DmouthSelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addDdayItem(){
+		for(int i=1;i<32;i++){
+			DdaySelect.addItem(Integer.toString(i));
+		}
+	}
+	
 
 }

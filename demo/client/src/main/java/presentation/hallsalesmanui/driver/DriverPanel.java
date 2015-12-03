@@ -28,7 +28,8 @@ public class DriverPanel extends JPanel {
 	private JTextField textCode;
 	private JTextField textPhone;
 	private JTextField textidentity;
-	private JButton BTNsearch;
+	private JButton BTNsearchByCode;
+	private JButton BTNsearchByName;
 	private JButton BTNadd;
 	private Button BTNdelete;
 	private Button BTNupdate;
@@ -54,12 +55,12 @@ public class DriverPanel extends JPanel {
 		
 		textCodeToSearch = new JTextField();
 		textCodeToSearch.setColumns(10);
-		textCodeToSearch.setBounds(288, 14, 103, 21);
+		textCodeToSearch.setBounds(401, 14, 103, 21);
 		add(textCodeToSearch);
 		
-		BTNsearch = new JButton("搜索");
-		BTNsearch.setBounds(473, 13, 66, 23);
-		add(BTNsearch);
+		BTNsearchByCode = new JButton("搜索");
+		BTNsearchByCode.setBounds(538, 13, 66, 23);
+		add(BTNsearchByCode);
 		
 		BTNadd = new JButton("增加司机信息");
 		BTNadd.setBounds(681, 13, 121, 23);
@@ -81,7 +82,7 @@ public class DriverPanel extends JPanel {
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("司机代号搜索：");
-		label_2.setBounds(193, 17, 85, 15);
+		label_2.setBounds(292, 17, 85, 15);
 		add(label_2);
 		
 		textName = new JTextField();
@@ -181,6 +182,10 @@ public class DriverPanel extends JPanel {
 		textDday.setColumns(10);
 		textDday.setBounds(688, 241, 37, 21);
 		add(textDday);
+		
+		BTNsearchByName = new JButton("搜索");
+		BTNsearchByName.setBounds(188, 13, 66, 23);
+		add(BTNsearchByName);
 		
 
 	}

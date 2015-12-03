@@ -7,7 +7,7 @@ import po.Ordertype;
 import po.ResultMessage;
 
 public class AddOrder {
-	long id;
+	String orgcode;
 	String sendername;
 	String senderaddress;
 	String senderunit;
@@ -27,10 +27,10 @@ public class AddOrder {
 	String ordercode;
 	Ordertype ordertype;
 	
-	public void setOrder(long id,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
+	public void setOrder(String orgcode,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
 			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype){
-		this.id=id;
+		this.ordercode=orgcode;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
 		this.senderunit=senderunit;
@@ -53,7 +53,7 @@ public class AddOrder {
 	}
 	
 	public ResultMessage addOrder(){
-		OrderPO po=new OrderPO(id, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
+		OrderPO po=new OrderPO(orgcode, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, productname, 
 				packagetype, totalfee, ordercode, ordertype);
 		OrderFormDataService order=RMIHelper.getOrderformdata();

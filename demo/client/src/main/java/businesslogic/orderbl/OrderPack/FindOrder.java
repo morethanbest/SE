@@ -11,15 +11,17 @@ import po.Ordertype;
 import vo.OrderVO;
 
 public class FindOrder {
-	Formstate documentstate;	
-	public void setstate(Formstate documentstate){
+	Formstate documentstate;
+	String orgcode;
+	public void setstate(Formstate documentstate,String orgcode){
 		this.documentstate=documentstate;
+		this.orgcode=orgcode;
 	}
 	public List<OrderVO> findOrderbyState(){
 		OrderFormDataService orderFormDataService=RMIHelper.getOrderformdata();
 		List<OrderVO> listvo=new ArrayList<OrderVO>();
 		try {
-			List<OrderPO> listpo=orderFormDataService.getOrderForm(documentstate);
+			List<OrderPO> listpo=orderFormDataService.getOrderForm(documentstate,orgcode);
 			for(int i=0;i<listpo.size();i++){
 				OrderPO po=listpo.get(i);
 				String sendername=po.getSendername();
