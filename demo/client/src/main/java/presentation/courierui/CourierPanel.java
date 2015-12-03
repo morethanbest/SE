@@ -6,14 +6,20 @@ import javax.swing.JPanel;
 
 public class CourierPanel extends JPanel {
 	
-	CardLayout card;
-	OrderPanel order;
-	RecievePanel recieve;
+	private CardLayout card;
+	private OrderPanel order;
+	private RecievePanel recieve;
+	private String orgCode;
+	private String orgName;
 	
 	/**
 	 * Create the panel.
+	 * @param orgName 机构名
+	 * @param orgCode 机构编号
 	 */
-	public CourierPanel() {
+	public CourierPanel(String orgCode, String orgName) {
+		this.orgCode = orgCode;
+		this.orgName = orgName;
 		card = new CardLayout();
 		order = new OrderPanel(this);
 		recieve = new RecievePanel(this);
@@ -25,6 +31,14 @@ public class CourierPanel extends JPanel {
 	
 	void switchPanel(){
 		card.next(this);
+	}
+
+	public String getOrgCode() {
+		return orgCode;
+	}
+
+	public String getOrgName() {
+		return orgName;
 	}
 
 }

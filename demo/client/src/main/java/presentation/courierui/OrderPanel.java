@@ -1,14 +1,24 @@
 package presentation.courierui;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import po.Job;
+import po.Ordertype;
+import presentation.enums.OrderTypes;
+import presentation.enums.PackageTypes;
+import presentation.enums.StaffType;
 import vo.CityVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
@@ -18,10 +28,6 @@ import businesslogic.orderbl.OrderPack.OrderController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.OrderBlService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.List;
 
 public class OrderPanel extends JPanel {
 	private JTextField snameField;
@@ -73,6 +79,7 @@ public class OrderPanel extends JPanel {
 		add(label);
 
 		snameField = new JTextField();
+		snameField.setText("奥巴马");
 		snameField.setBounds(172, 85, 96, 24);
 		add(snameField);
 		snameField.setColumns(10);
@@ -87,21 +94,25 @@ public class OrderPanel extends JPanel {
 		add(sareaBox);
 
 		sdetailField = new JTextField();
+		sdetailField.setText("白宫");
 		sdetailField.setBounds(620, 85, 270, 24);
 		add(sdetailField);
 		sdetailField.setColumns(10);
 
 		sjobField = new JTextField();
+		sjobField.setText("美国总统");
 		sjobField.setBounds(172, 148, 226, 24);
 		add(sjobField);
 		sjobField.setColumns(10);
 
 		stelField = new JTextField();
+		stelField.setText("911");
 		stelField.setBounds(480, 148, 159, 24);
 		add(stelField);
 		stelField.setColumns(10);
 
 		sphoneField = new JTextField();
+		sphoneField.setText("911");
 		sphoneField.setBounds(732, 148, 196, 24);
 		add(sphoneField);
 		sphoneField.setColumns(10);
@@ -115,6 +126,7 @@ public class OrderPanel extends JPanel {
 		add(label_1);
 
 		rnameField = new JTextField();
+		rnameField.setText("习近平");
 		rnameField.setColumns(10);
 		rnameField.setBounds(172, 225, 96, 24);
 		add(rnameField);
@@ -128,23 +140,27 @@ public class OrderPanel extends JPanel {
 		rareaBox.setBounds(470, 225, 86, 24);
 		add(rareaBox);
 		addOrganizationItems(rcityBox, rareaBox);
-		
+
 		rdetailField = new JTextField();
+		rdetailField.setText("中南海");
 		rdetailField.setColumns(10);
 		rdetailField.setBounds(620, 225, 270, 24);
 		add(rdetailField);
 
 		rjobField = new JTextField();
+		rjobField.setText("中国主席");
 		rjobField.setColumns(10);
 		rjobField.setBounds(172, 286, 226, 24);
 		add(rjobField);
 
 		rtelField = new JTextField();
+		rtelField.setText("110");
 		rtelField.setColumns(10);
 		rtelField.setBounds(480, 287, 159, 24);
 		add(rtelField);
 
 		rphoneField = new JTextField();
+		rphoneField.setText("110");
 		rphoneField.setColumns(10);
 		rphoneField.setBounds(732, 286, 196, 24);
 		add(rphoneField);
@@ -154,32 +170,38 @@ public class OrderPanel extends JPanel {
 		add(separator_2);
 
 		numberField = new JTextField();
+		numberField.setText("1");
 		numberField.setBounds(172, 361, 86, 24);
 		add(numberField);
 		numberField.setColumns(10);
 
 		weightField = new JTextField();
+		weightField.setText("1");
 		weightField.setBounds(354, 361, 86, 24);
 		add(weightField);
 		weightField.setColumns(10);
 
 		volumeField = new JTextField();
+		volumeField.setText("1");
 		volumeField.setBounds(553, 361, 86, 24);
 		add(volumeField);
 		volumeField.setColumns(10);
 
 		nameField = new JTextField();
+		nameField.setText("核弹");
 		nameField.setBounds(732, 361, 196, 24);
 		add(nameField);
 		nameField.setColumns(10);
 
 		packBox = new JComboBox<String>();
-		packBox.setBounds(174, 417, 159, 24);
+		packBox.setBounds(172, 417, 159, 24);
 		add(packBox);
+		addPackTypeItems();
 
 		orderBox = new JComboBox<String>();
 		orderBox.setBounds(480, 417, 159, 24);
 		add(orderBox);
+		addOrderTypeItems();
 
 		label_2 = new JLabel("托运货物信息");
 		label_2.setBounds(4, 364, 96, 18);
@@ -191,38 +213,54 @@ public class OrderPanel extends JPanel {
 
 		fareField = new JTextField();
 		fareField.setText("0");
-		fareField.setBounds(199, 494, 86, 24);
+		fareField.setBounds(172, 500, 68, 24);
 		add(fareField);
 		fareField.setColumns(10);
 
 		button = new JButton("获取运费");
-		button.setBounds(299, 493, 113, 27);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(254, 499, 86, 27);
 		add(button);
 
 		button_2 = new JButton("提交订单");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//添加订单
 				try {
-					String saddress;
+					String saddress = (String) scityBox.getSelectedItem();
+					saddress = saddress.concat("-").concat(
+							(String) sareaBox.getSelectedItem());
+					saddress = saddress.concat("-").concat(
+							sdetailField.getText());
 					String raddress = (String) rcityBox.getSelectedItem();
-					raddress = raddress.concat("-").concat((String) rareaBox.getSelectedItem());
-					raddress = raddress.concat("-").concat(rdetailField.getText());
+					raddress = raddress.concat("-").concat(
+							(String) rareaBox.getSelectedItem());
+					raddress = raddress.concat("-").concat(
+							rdetailField.getText());
 					double number = Double.parseDouble(numberField.getText());
 					double weight = Double.parseDouble(weightField.getText());
 					double volume = Double.parseDouble(volumeField.getText());
+					double fare = Double.parseDouble(fareField.getText());
 					orderBlService.addOrder(new OrderVO(snameField.getText(),
 							saddress, sjobField.getText(), stelField.getText(),
 							sphoneField.getText(), rnameField.getText(),
-							raddress, rjobField.getText(), rtelField
-									.getText(), rphoneField.getText(), number,
-							weight, volume, nameField.getText(), packagefee,
-							orderBlService.getOrdercode(), ordertype));
+							raddress, rjobField.getText(), rtelField.getText(),
+							rphoneField.getText(), number, weight, volume,
+							nameField.getText(), (String) packBox
+									.getSelectedItem(), orderBlService
+									.getOrdercode(courierPanel.getOrgCode()),
+							getOrderType((String) orderBox.getSelectedItem()),
+							fare), courierPanel.getOrgCode());
 				} catch (NumberFormatException e1) {
-
+					System.out.println("wronginput");
 				}
+				
 			}
 		});
-		button_2.setBounds(770, 483, 168, 47);
+		button_2.setBounds(434, 489, 133, 47);
 		add(button_2);
 
 		btnNewButton = new JButton("收件");
@@ -238,8 +276,32 @@ public class OrderPanel extends JPanel {
 		separator_4.setBounds(14, 68, 954, 1);
 		add(separator_4);
 
+		JLabel orderCode = new JLabel("");
+		orderCode.setBounds(654, 500, 314, 18);
+		add(orderCode);
+		
+		
+		rcityBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addOrganizationItems(rcityBox, rareaBox);
+			}
+
+		});
+		scityBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addOrganizationItems(scityBox, sareaBox);
+			}
+
+		});
+		
+		
+
 	}
-	
+
 	public void addCityItems(JComboBox<String> citySelect) {
 		citySelect.removeAllItems();
 		ConstantsBlService constantsBlService = new ConstantsController();
@@ -248,14 +310,48 @@ public class OrderPanel extends JPanel {
 			citySelect.addItem(city.getName());
 		}
 	}
-	
-	public void addOrganizationItems(JComboBox<String> citySelect, JComboBox<String> orgSelect){
+
+	public void addOrganizationItems(JComboBox<String> citySelect,
+			JComboBox<String> orgSelect) {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
 		List<OrganizationVO> orgList;
-		orgList = organizationBlService.getOrganizationbyCity((String) citySelect.getSelectedItem());
-		for(OrganizationVO org : orgList){
+		orgList = organizationBlService
+				.getOrganizationbyCity((String) citySelect.getSelectedItem());
+		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}
+	}
+
+	private void addOrderTypeItems() {
+		for (OrderTypes o : OrderTypes.values()) {
+			orderBox.addItem(o.getName());
+		}
+	}
+
+	private Ordertype getOrderType(String str) {
+		for (OrderTypes o : OrderTypes.values()) {
+			if (o.getName().equals(str)) {
+				return o.getOrdertype();
+			}
+		}
+
+		return null;
+	}
+
+	private void addPackTypeItems() {
+		for (PackageTypes packages : PackageTypes.values()) {
+			packBox.addItem(packages.getName());
+		}
+	}
+	
+	private String getOrderTypeStr(Ordertype o) {
+		for (OrderTypes order : OrderTypes.values()) {
+			if (order.getOrdertype() == o) {
+				return order.getName();
+			}
+		}
+
+		return null;
 	}
 }
