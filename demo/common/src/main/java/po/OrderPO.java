@@ -18,7 +18,7 @@ public class OrderPO  implements Serializable{
 	double weight;
 	double volume;
 	String productname;
-	double packagefee;
+	String packagetype;
 	double totalfee;
 	String ordercode;
 	Ordertype ordertype;
@@ -29,7 +29,7 @@ public class OrderPO  implements Serializable{
 	
 	public OrderPO(long id,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
-			double volume,String productname,double packagefee,double totalfee,String ordercode,Ordertype ordertype){
+			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype){
 		this.id=id;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
@@ -45,7 +45,7 @@ public class OrderPO  implements Serializable{
 		this.weight=weight;
 		this.volume=volume;
 		this.productname=productname;
-		this.packagefee=packagefee;
+		this.packagetype=packagetype;
 		this.totalfee=totalfee;
 		this.ordercode=ordercode;
 		this.ordertype=ordertype;
@@ -57,7 +57,7 @@ public class OrderPO  implements Serializable{
 	public OrderPO(long id, String sendername, String senderaddress, String senderunit, String senderphone,
 			String sendercellphone, String receivername, String receiveraddress, String receiverunit,
 			String receiverphone, String receivercellphone, double numbers, double weight, double volume,
-			String productname, double packagefee, double totalfee, String ordercode,
+			String productname, String packagetype, double totalfee, String ordercode,
 			Ordertype ordertype, String codeofreceiving, String receiver, long receivingtime, Formstate documentstate) {
 		this.id = id;
 		this.sendername = sendername;
@@ -74,7 +74,7 @@ public class OrderPO  implements Serializable{
 		this.weight = weight;
 		this.volume = volume;
 		this.productname = productname;
-		this.packagefee = packagefee;
+		this.packagetype = packagetype;
 		this.totalfee = totalfee;
 		this.ordercode = ordercode;
 		this.ordertype = ordertype;
@@ -152,8 +152,8 @@ public class OrderPO  implements Serializable{
 		this.productname = productname;
 	}
 
-	public void setPackagefee(double packagefee) {
-		this.packagefee = packagefee;
+	public void setPackagetype(String  packagetype) {
+		this.packagetype = packagetype;
 	}
 
 	public void setTotalfee(double totalfee) {
@@ -222,8 +222,8 @@ public class OrderPO  implements Serializable{
 		return this.productname;
 	}
 
-	public double getPackagefee(){
-		return this.packagefee;
+	public String  getPackagetype(){
+		return this.packagetype;
 	}
 	public double getTotalfee(){
 		return this.totalfee;

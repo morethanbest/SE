@@ -1,5 +1,8 @@
 package businesslogic.orderbl.OrderPack;
 
+import java.util.List;
+
+import po.Formstate;
 import po.Ordertype;
 import po.ResultMessage;
 import vo.OrderFareVO;
@@ -10,6 +13,7 @@ public class Order {
 	GetPrice getPrice;
 	IdInfo Id;
 	GetOrderCode getcode;
+	FindOrder findOrder;
 	public Order(AddOrder add,IdInfo Id){
 		this.add=add;
 		this.Id=Id;
@@ -20,9 +24,11 @@ public class Order {
 	public Order(GetOrderCode getcode){
 		this.getcode=getcode;
 	}
+	public Order(FindOrder findOrder){
+		this.findOrder=findOrder;
+	}
 	public ResultMessage addOrder(OrderVO vo){
 		long id=Id.getId();
-		String code=getcode.getCode();
 		String sendername=vo.getSendername();
 		String senderaddress=vo.getSenderaddress();
 		String senderunit=vo.getSenderunit();
@@ -37,14 +43,14 @@ public class Order {
 		double weight=vo.getWeight();
 		double volume=vo.getVolume();
 		String productname=vo.getProductname();
-		double packagefee=vo.getPackagefee();
+		String  packagetype=vo.getPackagetype();
 		String ordercode=vo.getOrdercode();
 		Ordertype ordertype=vo.getOrdertype();
-		OrderFareVO farevo=new OrderFareVO(senderaddress, receiveraddress, numbers, weight, volume, packagefee, ordertype);
+		OrderFareVO farevo=new OrderFareVO(senderaddress, receiveraddress, numbers, weight, volume, packagetype, ordertype);
 		double totalfee=this.getPrice(farevo);
 		add.setOrder(id, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, 
-				productname, packagefee, totalfee, ordercode, ordertype);
+				productname, packagetype, totalfee, ordercode, ordertype);
 		ResultMessage result=add.addOrder();
 		return result;
 	}
@@ -55,9 +61,9 @@ public class Order {
 		double numbers=vo.getNumbers();
 		double weight=vo.getWeight();
 		double volume=vo.getVolume();
-		double packagefee=vo.getPackagefee();
+		String  packagetype=vo.getPackagetype();
 		Ordertype ordertype=vo.getOrdertype();
-		getPrice.setPriceInfo(senderaddress, receiveraddress, numbers, weight, volume, packagefee, ordertype);
+		getPrice.setPriceInfo(senderaddress, receiveraddress, numbers, weight, volume, packagetype, ordertype);
 		double price=getPrice.getPrice();
 		return price;
 	}
@@ -65,5 +71,9 @@ public class Order {
 		String code=getcode.getCode();
 		return code;
 	}
-
+    public List<OrderVO> findOrderByState(Formstate documentstate){
+    	findOrder.setstate(documentstate);
+    	List<OrderVO> listvo=findOrder.findOrderbyState();
+    	return listvo;
+    }
 }

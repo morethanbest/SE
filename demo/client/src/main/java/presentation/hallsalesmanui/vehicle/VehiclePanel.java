@@ -1,4 +1,4 @@
-package presentation.hallsalesmanui;
+package presentation.hallsalesmanui.vehicle;
 
 import java.awt.Button;
 import java.awt.Choice;

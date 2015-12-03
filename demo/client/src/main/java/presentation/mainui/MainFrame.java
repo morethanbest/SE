@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
+import presentation.courierui.CourierPanel;
 import presentation.managerui.ManagerPanel;
+import vo.LoginVO;
 
 public class MainFrame extends JFrame {
 
@@ -47,12 +49,16 @@ public class MainFrame extends JFrame {
 	
 	}
 
-	public void skipToNext(Job job) {
-		if (job == Job.manager) {
+	public void skipToNext(LoginVO vo) {
+		if (vo.getJob() == Job.manager) {
 			JPanel temp = new ManagerPanel();
 			contentPane.add(temp, "manager");
 			card.show(contentPane, "manager");
-		} else if (job == Job.visitor) {
+		} else if (vo.getJob() == Job.Courier) {
+			JPanel temp = new CourierPanel();
+			contentPane.add(temp, "courier");
+			card.show(contentPane, "courier");
+		} else if (vo.getJob() == Job.visitor) {
 			System.out.println("Login failed!!!");
 		}
 	}

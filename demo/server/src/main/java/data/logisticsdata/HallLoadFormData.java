@@ -36,9 +36,9 @@ public class HallLoadFormData extends UnicastRemoteObject implements HallLoadFor
 	}
 
 	@Override
-	public long findLastmotorcode(String orgcode, String date) throws RemoteException {
+	public long findLastmotorcode(String orgcode, long date) throws RemoteException {
 		// TODO Auto-generated method stub
-		return HallLoadDB.getLastId(orgcode+date);
+		return HallLoadDB.getLastId(orgcode+Long.toString(date));
 	}
 
 	@Override

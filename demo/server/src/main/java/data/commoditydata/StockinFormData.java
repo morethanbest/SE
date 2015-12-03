@@ -4,8 +4,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import data.database.CommodityDB.StockinDB;
+import data.database.commodityDB.StockinDB;
 import dataservice.commoditydataservice.StockinFormDataService;
+import po.CommodityLocation;
 import po.Formstate;
 import po.ResultMessage;
 import po.StockinPO;
@@ -37,6 +38,12 @@ public class StockinFormData extends UnicastRemoteObject implements StockinFormD
 	public long getid(String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
 		return StockinDB.getLastId(orgcode);
+	}
+
+	@Override
+	public CommodityLocation getLocation(String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -26,12 +26,12 @@ public class UserDB {
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
 			UserPO po = new UserPO("1","123",Job.manager,"总部","025",Organizationtype.headquarters,"南京"); 
-
 			ResultMessage result;
 			result = write(po);
 			if (result == ResultMessage.success) {
 				System.out.println("add Successfully");
 			}
+			write(new UserPO("2","123",Job.Courier,"南京鼓楼营业厅","02500",Organizationtype.hall,"南京"));
 
 			dbh.close();// 关闭连接
 		} catch (Exception e) {
@@ -209,7 +209,7 @@ public class UserDB {
 	public static void main(String[] args) {
 		initialize();
 //		update(new UserPO("sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,"上海"));
-		if(check("sunchao","123")!=null){
+		if(check("1","123")!=null){
 			System.out.println("login");
 		}
 	}

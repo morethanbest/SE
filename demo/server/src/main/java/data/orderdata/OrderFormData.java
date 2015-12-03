@@ -30,9 +30,9 @@ public class OrderFormData extends UnicastRemoteObject implements OrderFormDataS
 	}
 
 	@Override
-	public List<OrderPO> getOrderForm(Formstate state) throws RemoteException {
+	public List<OrderPO> getOrderForm(Formstate state,String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return OrderDB.fuzzySearch(state);
+		return OrderDB.fuzzySearch(state,orgcode);
 	}
 
 	@Override
@@ -42,9 +42,9 @@ public class OrderFormData extends UnicastRemoteObject implements OrderFormDataS
 	}
 
 	@Override
-	public long findLastID() throws RemoteException {
+	public long findLastID(String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return OrderDB.getLastId();
+		return OrderDB.getLastId(orgcode);
 	}
 
 }
