@@ -1,54 +1,59 @@
 package vo;
 
+import po.Formstate;
+import po.RecordpayList;
+
 public class RecordpayVO {
+	String id;
 	long paytime;
-	long paysum;
+	double paysum;
 	String payman;
 	String payaccount;
-	double rent;
-	double fee;
-	double salary;
-	double reward;
+	RecordpayList entry;
 	String remark;
-	public RecordpayVO(long paytime, long paysum, String payman,
-			String payaccount, double rent, double fee, double salary,
-			double reward, String remark) {
-		super();
+	Formstate formstate;
+	public RecordpayVO(String id,long paytime, double paysum, String payman, String payaccount,RecordpayList entry,
+					   String remark,Formstate formstate) {
+		this.id=id;
 		this.paytime = paytime;
 		this.paysum = paysum;
 		this.payman = payman;
 		this.payaccount = payaccount;
-		this.rent = rent;
-		this.fee = fee;
-		this.salary = salary;
-		this.reward = reward;
+		this.entry=entry;
 		this.remark = remark;
+		this.formstate=formstate;
 	}
+
+	public String getId() {
+		return id;
+	}
+
 	public long getPaytime() {
 		return paytime;
 	}
-	public long getPaysum() {
+
+	public double getPaysum() {
 		return paysum;
 	}
+
 	public String getPayman() {
 		return payman;
 	}
+
 	public String getPayaccount() {
 		return payaccount;
+
 	}
-	public double getRent() {
-		return rent;
+
+	public RecordpayList getEntry() {
+		return entry;
 	}
-	public double getFee() {
-		return fee;
-	}
-	public double getSalary() {
-		return salary;
-	}
-	public double getReward() {
-		return reward;
-	}
+
 	public String getRemark() {
 		return remark;
+	}
+
+	public Formstate getFormstate() {
+		return formstate;
 	}
 }
