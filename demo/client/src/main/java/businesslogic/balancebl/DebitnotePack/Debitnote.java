@@ -1,25 +1,38 @@
 package businesslogic.balancebl.DebitnotePack;
 
+import vo.DebitnoteExamVO;
 import vo.DebitnoteVO;
-import vo.ResultMessage;
+import vo.RecordcollectVO;
 
+import java.util.List;
+
+/**
+ * Created by Administrator on 2015/12/3.
+ */
 public class Debitnote {
-	MockIdInfo idInfo;
-	MockRecord record;
-	public Debitnote(MockIdInfo idInfo,MockRecord record){
-		this.idInfo=idInfo;
-		this.record=record;
-	}
-	public ResultMessage RecordDebitnote(DebitnoteVO vo){
-		long id=idInfo.getid();
-		long debittime=vo.getDebittime();
-		String debitunit=vo.getDebitunit();
-		String debitor=vo.getDebitor();
-		String debitside=vo.getDebitside();
-		double sum=vo.getSum();
-		String location=vo.getLocation();
-		record.setRecordInfo(id, debittime, debitunit, debitor, debitside, sum, location);
-		ResultMessage result=record.RecordDebitnote();
-		return result;
-	}
+    private HallCollect hall;
+    private DateCollect day;
+    private DebitExam exam;
+    public Debitnote(HallCollect hall){this.hall=hall;}
+    public Debitnote(DateCollect day){this.day=day;}
+    public Debitnote(DebitExam exam){this.exam=exam;}
+
+    public DebitnoteVO gethall(String orgcode){
+        List<RecordcollectVO> list=hall.getbyhall(orgcode);
+        DebitnoteVO vo=new DebitnoteVO(list);
+        return vo;
+    }
+
+    public DebitnoteVO getdate(long date){
+        List<RecordcollectVO> list=day.getbydate(date);
+        DebitnoteVO vo=new DebitnoteVO(list);
+        return vo;
+    }
+
+    public DebitnoteExamVO debitexam(DebitnoteVO det){
+        double sum=exam.exam(det);
+        DebitnoteExamVO vo=new DebitnoteExamVO(sum);
+        return vo;
+    }
+
 }

@@ -5,14 +5,17 @@ import java.util.List;
 public class RecordcollectPO  implements Serializable{
 	String id;
 	long collectiontime;
+
+	String accountcode;
 	double collectionsum;
 	String collectionman;
 	List<String> allordercode;
 	Formstate documentstate;
 	
-	public RecordcollectPO(String id,long collectiontime,double collectionsum,String collectionman,List<String> allordercode,Formstate formstate){
+	public RecordcollectPO(String id,long collectiontime,String accountcode,double collectionsum,String collectionman,List<String> allordercode,Formstate formstate){
 		this.id=id;
 		this.collectionman=collectionman;
+		this.accountcode=accountcode;
 		this.collectionsum=collectionsum;
 		this.collectiontime=collectiontime;
 		this.allordercode=allordercode;
@@ -23,6 +26,10 @@ public class RecordcollectPO  implements Serializable{
 	}
 
 	public void setId(String id){this.id=id;}
+
+	public String getAccountcode(){return accountcode;}
+
+	public void setAccountcode(String code){this.accountcode=code;}
 	public void setDocumentstate(Formstate documentstate){
 		this.documentstate=documentstate;
 	}

@@ -12,7 +12,7 @@ public interface RecordCollectBlService {//营业厅的收款单
 
 	public ResultMessage updateCollect(RecordcollectVO vo) throws  RemoteException;
 
-	public List<RecordcollectVO> findforms(String orgcode,Formstate state)throws RemoteException;
+	public List<RecordcollectVO> findform(Formstate state,String orgcode)throws RemoteException;
 
 	public String getid(String orgcode)throws  RemoteException;
 

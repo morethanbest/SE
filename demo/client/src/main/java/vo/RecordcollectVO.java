@@ -7,14 +7,16 @@ import java.util.List;
 public class RecordcollectVO {
 	String id;
 	long collectiontime;
+	String accountcode;
 	double collectionsum;
 	String collectionman;
 	List<String> allordercode;
 	Formstate formstate;
-	public RecordcollectVO(String id,long collectiontime, double collectionsum,
+	public RecordcollectVO(String id,long collectiontime, String accountcode,double collectionsum,
 			String collectionman, List<String> allordercode, Formstate formstate) {
 		this.id=id;
 		this.collectiontime = collectiontime;
+		this.accountcode=accountcode;
 		this.collectionsum = collectionsum;
 		this.collectionman = collectionman;
 		this.allordercode = allordercode;
@@ -24,6 +26,7 @@ public class RecordcollectVO {
 	public long getCollectiontime() {
 		return collectiontime;
 	}
+	public String getAccountcode(){return accountcode;}
 	public double getCollectionsum() {
 		return collectionsum;
 	}

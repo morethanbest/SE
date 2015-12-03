@@ -6,9 +6,7 @@ package init;
 
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.accountdataservice.NewBookDataService;
-import dataservice.balancedataservice.DebitnoteFormDataService;
-import dataservice.balancedataservice.RecordcollectFormDataService;
-import dataservice.balancedataservice.RecordpayFormDataService;
+import dataservice.balancedataservice.*;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.commoditydataservice.StockinFormDataService;
 import dataservice.commoditydataservice.StockoutFormDataService;
@@ -40,9 +38,13 @@ public class RMIHelper {
 
     private static AccountDataService accountdata;
     private static NewBookDataService newbook;
+
     private static DebitnoteFormDataService debitnote;
     private static RecordcollectFormDataService recordcollect;
     private static RecordpayFormDataService recordpay;
+    private static BalanceDataService balancedata;
+    private static StatisticsDataService statistics;
+
     private static CommodityDataService commoditydata;
     private static StockinFormDataService stockinform;
     private static StockoutFormDataService stockouform;
@@ -65,6 +67,7 @@ public class RMIHelper {
     private static UserLoginDataService userlogindata;
     private static CityDataService citydata;
 
+
     public synchronized static void init() throws ClientInitException {
         if (inited) {
             return;
@@ -82,9 +85,13 @@ public class RMIHelper {
         String urlPrefix = "rmi://" + IP + "/";
         accountdata = (AccountDataService) Naming.lookup(urlPrefix + "accountdata");
         newbook= (NewBookDataService) Naming.lookup(urlPrefix + "newbookdata");
+
         debitnote = (DebitnoteFormDataService) Naming.lookup(urlPrefix + "debitnotedata");
         recordcollect = (RecordcollectFormDataService) Naming.lookup(urlPrefix + "recordcollectdata");
         recordpay = (RecordpayFormDataService) Naming.lookup(urlPrefix + "recordpaydata");
+        balancedata =(BalanceDataService)Naming.lookup(urlPrefix + "balancedata");
+        statistics=(StatisticsDataService)Naming.lookup(urlPrefix + "statistics");
+
         commoditydata = (CommodityDataService) Naming.lookup(urlPrefix + "commoditydata");
         stockinform = (StockinFormDataService) Naming.lookup(urlPrefix + "stockindata");
         stockouform = (StockoutFormDataService) Naming.lookup(urlPrefix + "stockoutdata");
@@ -133,6 +140,10 @@ public class RMIHelper {
         return recordpay;
     }
 
+    public static BalanceDataService getBalancedata(){
+        return balancedata;
+    }
+    public static StatisticsDataService getStatistics(){return statistics;}
     public static CommodityDataService getCommoditydata() {
         return commoditydata;
     }

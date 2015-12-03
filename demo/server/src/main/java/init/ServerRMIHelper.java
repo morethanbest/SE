@@ -59,6 +59,10 @@ public class ServerRMIHelper {
         NAMING_MAP.put("debitnotedata",  DebitnoteFormData.class);
         NAMING_MAP.put("recordcollectdata",  RecordcollectFormData.class);
         NAMING_MAP.put("recordpaydata",  RecordpayFormData.class);
+        NAMING_MAP.put("balancedata",  BalanceData.class);
+        NAMING_MAP.put("statistics",  StatisticsData.class);
+
+
         NAMING_MAP.put("commoditydata",  CommodityData.class);
         NAMING_MAP.put("stockindata",  StockinFormData.class);
         NAMING_MAP.put("stockoutdata",  StockoutFormData.class);

@@ -1,12 +1,8 @@
 package businesslogic.logisticsbl.RecordtransPack;
 
-import businesslogic.balancebl.DebitnotePack.Record;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
-import dataservice.logisticsdataservice.RecordtransFormDataService;
 import po.Formstate;
-import po.RecordtransPO;
 import po.ResultMessage;
-import vo.CenterloadVO;
 import vo.RecordtransVO;
 
 import java.rmi.RemoteException;
