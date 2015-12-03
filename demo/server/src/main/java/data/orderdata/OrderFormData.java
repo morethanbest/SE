@@ -46,5 +46,14 @@ public class OrderFormData extends UnicastRemoteObject implements OrderFormDataS
 		// TODO Auto-generated method stub
 		return OrderDB.getLastId(orgcode);
 	}
+//	
+//	public static void main(String[] args){
+//		try{
+//			OrderFormData data=new OrderFormData();
+//			System.out.println(data.findLastID("025"));
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//	}
 
 }

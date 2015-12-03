@@ -30,7 +30,7 @@ public class AddOrder {
 	public void setOrder(String orgcode,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
 			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype){
-		this.ordercode=orgcode;
+		this.orgcode=orgcode;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
 		this.senderunit=senderunit;
