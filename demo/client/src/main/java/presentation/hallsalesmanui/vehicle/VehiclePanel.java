@@ -4,8 +4,12 @@ import java.awt.Button;
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,13 +17,29 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class VehiclePanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTable table;
-	private JTextField textField_2;
-	private JTextField textField_3;
-    private String orgcode;
+import businesslogic.transportbl.VehiclePack.VehicleController;
+import businesslogicservice.transportblservice.VehicleBlService;
+import po.ResultMessage;
+import sun.awt.DisplayChangedListener;
+import vo.VehicleVO;
+
+public class VehiclePanel extends JPanel implements ActionListener {
+	private JTextField codeToSearch;
+	private JTextField cardToSearch;
+	private JTextField CodeField;
+	private JTextField CardField;
+    private JComboBox<String> daySelect;
+	private JComboBox<String> yearSelect;
+	private JComboBox<String> mouthSelect;
+	private JButton btnSearchByCode;
+	private JButton btnSearchByCard;
+	private JButton btnAddVehicle;
+	private JButton btnupdate;
+	private JButton btndelete;
+	private String orgcode;
+	private VehicleVO vo;
+	boolean isrev=false;
+	 
 	public VehiclePanel(String orgcode) {
 		this.orgcode=orgcode;
 		setLayout(null);
@@ -28,41 +48,30 @@ public class VehiclePanel extends JPanel {
 		separator.setBounds(0, 49, 954, 8);
 		add(separator);
 		
-		textField = new JTextField();
-		textField.setBounds(104, 14, 103, 21);
-		add(textField);
-		textField.setColumns(10);
+		codeToSearch = new JTextField();
+		codeToSearch.setBounds(104, 14, 103, 21);
+		add(codeToSearch);
+		codeToSearch.setColumns(10);
 		
-		JButton btnNewButton = new JButton("搜索");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(217, 13, 66, 23);
-		add(btnNewButton);
+		btnSearchByCode = new JButton("搜索");
+		btnSearchByCode.setBounds(217, 13, 66, 23);
+		add(btnSearchByCode);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(402, 14, 103, 21);
-		add(textField_1);
+		cardToSearch = new JTextField();
+		cardToSearch.setColumns(10);
+		cardToSearch.setBounds(402, 14, 103, 21);
+		add(cardToSearch);
 		
-		JButton button = new JButton("搜索");
-		button.setBounds(515, 13, 66, 23);
-		add(button);
+		btnSearchByCard = new JButton("搜索");
+		btnSearchByCard.setBounds(515, 13, 66, 23);
+		add(btnSearchByCard);
 		
-		JButton button_1 = new JButton("增加车辆信息");
-		button_1.setBounds(681, 13, 121, 23);
-		add(button_1);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(24, 77, 172, 334);
-		add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		btnAddVehicle = new JButton("增加车辆信息");
+		btnAddVehicle.setBounds(681, 13, 121, 23);
+		add(btnAddVehicle);
 		
 		JLabel label = new JLabel("车辆代号：");
-		label.setBounds(375, 120, 99, 15);
+		label.setBounds(287, 120, 99, 15);
 		add(label);
 		
 		JLabel label_1 = new JLabel("车牌号搜索：");
@@ -73,44 +82,187 @@ public class VehiclePanel extends JPanel {
 		label_2.setBounds(307, 17, 85, 15);
 		add(label_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(539, 117, 143, 21);
-		add(textField_2);
-		textField_2.setColumns(10);
+		CodeField = new JTextField();
+		CodeField.setBounds(539, 117, 143, 21);
+		CodeField.setEditable(false);
+		add(CodeField);
+		CodeField.setColumns(10);
 		
 		JLabel label_4 = new JLabel("车牌号：");
-		label_4.setBounds(375, 203, 54, 15);
+		label_4.setBounds(286, 203, 54, 15);
 		add(label_4);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(539, 200, 143, 21);
-		add(textField_3);
-		textField_3.setColumns(10);
+		CardField = new JTextField();
+		CardField.setBounds(539, 200, 143, 21);
+		CardField.setEditable(false);
+		add(CardField);
+		CardField.setColumns(10);
 		
 		JLabel label_6 = new JLabel("服役期限：");
-		label_6.setBounds(375, 291, 66, 15);
+		label_6.setBounds(287, 291, 66, 15);
 		add(label_6);
 		
-		Choice choice_1 = new Choice();
-		choice_1.setBounds(539, 291, 54, 21);
-		add(choice_1);
+		yearSelect = new JComboBox<String>();
+		yearSelect.setBounds(539, 291, 54, 21);
+		yearSelect.setEditable(false);
+		add(yearSelect);
+		addyearItem();
 		
-		Choice choice_2 = new Choice();
-		choice_2.setBounds(599, 291, 38, 21);
-		add(choice_2);
+		mouthSelect = new JComboBox<String>();
+		mouthSelect.setBounds(599, 291, 38, 21);
+		mouthSelect.setEditable(false);
+		add(mouthSelect);
+		addmouthItem();
 		
-		Choice choice_3 = new Choice();
-		choice_3.setBounds(643, 291, 39, 21);
-		add(choice_3);
+		daySelect = new JComboBox<String>();
+		daySelect.setBounds(643, 291, 39, 21);
+		daySelect.setEditable(false);
+		add(daySelect);
+		adddayItem();
 		
-		Button button_2 = new Button("删除");
-		button_2.setBounds(383, 388, 76, 23);
-		add(button_2);
+		btnupdate = new JButton("修改");
+		btnupdate.setBounds(276, 371, 93, 23);
+		add(btnupdate);
 		
-		Button button_3 = new Button("修改");
-		button_3.setBounds(606, 388, 76, 23);
-		add(button_3);
+		btndelete = new JButton("删除");
+		btndelete.setBounds(561, 371, 93, 23);
+		add(btndelete);
 		
+		btnSearchByCard.addActionListener(this);
+		btnSearchByCode.addActionListener(this);
+		btnAddVehicle.addActionListener(this);
+		btnupdate.addActionListener(this);
+		btndelete.addActionListener(this);
 	}
-
+	private void addyearItem(){
+		for(int i=1950;i<2050;i++){
+			yearSelect.addItem(Integer.toString(i));
+		}
+	}
+	private void addmouthItem(){
+		for(int i=1;i<10;i++){
+			mouthSelect.addItem("0"+Integer.toString(i));
+		}
+		mouthSelect.addItem("10");
+		mouthSelect.addItem("11");
+		mouthSelect.addItem("12");
+	}
+	private void adddayItem(){
+		for(int i=1;i<10;i++){
+			daySelect.addItem("0"+Integer.toString(i));
+		}
+		for(int i=10;i<32;i++){
+			daySelect.addItem(Integer.toString(i));
+		}
+	}
+	void addVehicle(VehicleVO vo){
+		VehicleBlService vehicleBlService=new VehicleController();
+		try {
+			vehicleBlService.addVehicle(vo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private void delVehicle(VehicleVO vo){
+		VehicleBlService vehicleBlService=new VehicleController();
+		try {
+			vehicleBlService.delVehicle(vo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CodeField.setText("");
+		CardField.setText("");
+		yearSelect.setSelectedIndex(0);
+		mouthSelect.setSelectedIndex(0);
+		daySelect.setSelectedIndex(0);
+		vo=null;
+	}
+	private void revVehicle(VehicleVO vo){
+		VehicleBlService vehicleBlService=new VehicleController();
+		try {
+			vehicleBlService.revVehicle(vo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private VehicleVO getVehiclebyVN(String vehicleCode){
+		VehicleBlService vehicleBlService=new VehicleController();
+		VehicleVO VO=null;
+		try {
+			VO = vehicleBlService.getVehiclebyVN(vehicleCode, orgcode);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return VO;
+	}
+	private VehicleVO getVehiclebyPN(String plateNumber){
+		VehicleBlService vehicleBlService=new VehicleController();
+		VehicleVO VO=null;
+		try {
+			VO = vehicleBlService.getVehiclebyPN(plateNumber, orgcode);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return VO;
+	}
+	private String getid(){
+		VehicleBlService vehicleBlService=new VehicleController();
+		String id="";
+		try {
+			id = vehicleBlService.getid(orgcode);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
+	}
+	private void display(){
+		CodeField.setText(vo.getVehiclecode());
+		CardField.setText(vo.getVehiclenum());
+		long year=vo.getExtendtime()/10000;
+		long mouth=vo.getExtendtime()/100-year*100;
+		long day=vo.getExtendtime()%100;
+		yearSelect.setSelectedItem(Long.toString(year));
+		mouthSelect.setSelectedItem(Long.toString(mouth));
+		daySelect.setSelectedItem(Long.toString(day));
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(btnAddVehicle)){
+			AddVehicleDialog dialog=new AddVehicleDialog(this);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}else if(e.getSource().equals(btnSearchByCard)){
+			String card=CardField.getText();
+			vo=getVehiclebyPN(card);
+			display();
+		}else if(e.getSource().equals(btnSearchByCode)){
+			String code=CodeField.getText();
+			vo=getVehiclebyVN(code);
+			display();
+		}else if(e.getSource().equals(btndelete)){
+			delVehicle(vo);
+		}else if(e.getSource().equals(btnupdate)){
+				if(isrev==false){
+					isrev=true;
+					btnupdate.setText("确定");
+				}
+				else{
+					isrev=false;
+			        String code=CodeField.getText();
+			        String card=CardField.getText();
+			        long time=Long.parseLong((String)yearSelect.getSelectedItem()+mouthSelect.getSelectedItem()+daySelect.getSelectedItem());
+				    vo=new VehicleVO(code, card, time);
+				    display();
+				    revVehicle(vo);
+				    btnupdate.setText("修改");
+				}
+		}
+	}
 }
