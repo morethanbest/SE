@@ -105,18 +105,21 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		yearSelect = new JComboBox<String>();
 		yearSelect.setBounds(539, 291, 54, 21);
 		yearSelect.setEditable(false);
+		yearSelect.setEnabled(false);
 		add(yearSelect);
 		addyearItem();
 		
 		mouthSelect = new JComboBox<String>();
 		mouthSelect.setBounds(599, 291, 38, 21);
 		mouthSelect.setEditable(false);
+		mouthSelect.setEnabled(false);
 		add(mouthSelect);
 		addmouthItem();
 		
 		daySelect = new JComboBox<String>();
 		daySelect.setBounds(643, 291, 39, 21);
 		daySelect.setEditable(false);
+		daySelect.setEnabled(false);
 		add(daySelect);
 		adddayItem();
 		
@@ -264,9 +267,9 @@ public class VehiclePanel extends JPanel implements ActionListener {
 					isrev=true;
 					btnupdate.setText("确定");
 					CardField.setEditable(true);
-					yearSelect.setEditable(true);
-					mouthSelect.setEditable(true);
-					daySelect.setEditable(true);
+					yearSelect.setEnabled(true);
+					mouthSelect.setEnabled(true);
+					daySelect.setEnabled(true);
 				}
 				else{
 					isrev=false;
@@ -278,9 +281,9 @@ public class VehiclePanel extends JPanel implements ActionListener {
 				    revVehicle(vo);
 				    btnupdate.setText("修改");
 				    CardField.setEditable(false);
-					yearSelect.setEditable(false);
-					mouthSelect.setEditable(false);
-					daySelect.setEditable(false);
+					yearSelect.setEnabled(false);
+					mouthSelect.setEnabled(false);
+					daySelect.setEnabled(false);
 				}
 		}
 	}

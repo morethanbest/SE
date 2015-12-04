@@ -153,6 +153,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		
 		SexSelect = new JComboBox<String>();
 		SexSelect.setEditable(isrev);
+		SexSelect.setEnabled(false);
 		SexSelect.setBounds(588, 117, 143, 21);
 		SexSelect.addItem("男");
 		SexSelect.addItem("女");
@@ -160,36 +161,42 @@ public class DriverPanel extends JPanel implements ActionListener {
 		
 		ByearSelect = new JComboBox<String>();
 		ByearSelect.setEditable(isrev);
+		ByearSelect.setEnabled(false);
 		ByearSelect.setBounds(330, 241, 47, 21);
 		addByearItem();
 		add(ByearSelect);
 		
 		BmouthSelect = new JComboBox<String>();
 		BmouthSelect.setEditable(isrev);
+		BmouthSelect.setEnabled(false);
 		BmouthSelect.setBounds(387, 241, 37, 21);
 		addBmouthItem();
 		add(BmouthSelect);
 		
 		BdaySelect = new JComboBox<String>();
 		BdaySelect.setEditable(isrev);
+		BdaySelect.setEnabled(false);
 		BdaySelect.setBounds(436, 241, 37, 21);
 		addBdayItem();
 		add(BdaySelect);
 		
 		DyearSelect = new JComboBox<String>();
 		DyearSelect.setEditable(isrev);
+		DyearSelect.setEnabled(false);
 		DyearSelect.setBounds(584, 241, 47, 21);
 		addDyearItem();
 		add(DyearSelect);
 		
 		DmouthSelect = new JComboBox<String>();
 		DmouthSelect.setEditable(isrev);
+		DmouthSelect.setEnabled(false);
 		DmouthSelect.setBounds(641, 241, 37, 21);
 		addDmouthItem();
 		add(DmouthSelect);
 		
 		DdaySelect = new JComboBox<String>();
 		DdaySelect.setEditable(isrev);
+		DdaySelect.setEnabled(false);
 		DdaySelect.setBounds(688, 241, 37, 21);
 		addDdayItem();
 		add(DdaySelect);
