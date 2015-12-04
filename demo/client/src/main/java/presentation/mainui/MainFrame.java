@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
+import presentation.administratorui.AdministratorPanel;
 import presentation.courierui.CourierPanel;
 import presentation.hallsalesmanui.HallsalesmanPanel;
 import presentation.managerui.ManagerPanel;
@@ -65,6 +66,10 @@ public class MainFrame extends JFrame {
 			JPanel temp=new HallsalesmanPanel(vo.getOrganizationcode());
 			contentPane.add(temp, "hallsalesman");
 			card.show(contentPane, "hallsalesman");
+		} else if(vo.getJob() == Job.administrator){
+			JPanel temp=new AdministratorPanel(vo.getOrganizationcode());
+			contentPane.add(temp, "administrator");
+			card.show(contentPane, "administrator");
 		}
 	}
 

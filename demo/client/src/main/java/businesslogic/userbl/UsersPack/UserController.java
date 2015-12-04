@@ -3,6 +3,7 @@ package businesslogic.userbl.UsersPack;
 
 import businesslogicservice.userblservice.UserBlService;
 import po.ResultMessage;
+import vo.OrganizationVO;
 import vo.UserVO;
 
 public class UserController implements UserBlService{
@@ -50,5 +51,12 @@ public class UserController implements UserBlService{
 		ResultMessage result=user.revUser(vo);
 		return result;
 	}
-
+	
+	@Override
+	public OrganizationVO findOrgByCode(String orgcode){
+		// TODO Auto-generated method stub
+		FindOrgByCode findOrgByCode=new FindOrgByCode();
+		OrganizationVO vo=findOrgByCode.findOrgByCode(orgcode);
+		return vo;
+	}
 }

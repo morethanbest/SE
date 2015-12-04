@@ -13,7 +13,6 @@ import vo.OrganizationVO;
 public class FindOrganization {
 	String city;
     Organizationtype type;
-	
 	public void setFindInfo(String city){
 		this.city=city;
 	}
@@ -24,7 +23,6 @@ public class FindOrganization {
 		this.city=city;
 		this.type=type;
 	}
-
 	public List<OrganizationVO> findOrganizationbyCity(){
 		OrganizationDataService organization=RMIHelper.getOrgdata();
 		List<OrganizationPO> listpo;
@@ -120,4 +118,5 @@ public class FindOrganization {
 
 		return listvo;
 	}
+
 }

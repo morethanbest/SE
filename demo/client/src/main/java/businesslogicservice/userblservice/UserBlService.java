@@ -1,6 +1,7 @@
 package businesslogicservice.userblservice;
 
 import po.ResultMessage;
+import vo.OrganizationVO;
 import vo.UserVO;
 
 public interface UserBlService {
@@ -13,5 +14,7 @@ public interface UserBlService {
 	public ResultMessage revUser(UserVO vo);
 	
 	public UserVO getUserbyName(String username);
+	
+	public OrganizationVO findOrgByCode(String orgcode);
 
 }
