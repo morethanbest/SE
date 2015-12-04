@@ -25,6 +25,7 @@ import vo.CityVO;
 import vo.ConstantsVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
+import java.awt.SystemColor;
 
 
 public class AddConstantDailog extends JDialog {
@@ -43,6 +44,7 @@ public class AddConstantDailog extends JDialog {
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -104,6 +106,7 @@ public class AddConstantDailog extends JDialog {
 
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{

@@ -27,6 +27,7 @@ import businesslogic.managerbl.StaffPack.StaffController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.managerblservice.StaffBlService;
+import java.awt.SystemColor;
 
 public class StaffManagePanel extends JPanel implements ActionListener{
 	private JTable table;
@@ -44,6 +45,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 	 * Create the panel.
 	 */
 	public StaffManagePanel() {
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
 		staffBlService = new StaffController();

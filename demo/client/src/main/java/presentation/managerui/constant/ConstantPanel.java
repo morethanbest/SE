@@ -25,6 +25,8 @@ import vo.CityVO;
 import vo.ConstantsVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
+import java.awt.SystemColor;
+import java.awt.Font;
 
 public class ConstantPanel extends JPanel implements ActionListener {
 	private JTable table;
@@ -47,6 +49,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	 * @param managerPanel
 	 */
 	public ConstantPanel(final ManagerPanel managerPanel) {
+		setBackground(SystemColor.inactiveCaptionBorder);
 		this.managerPanel = managerPanel;
 		constantsBlService = new ConstantsController();
 		cityList = constantsBlService.getAllCity();
@@ -68,6 +71,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		add(scrollPane);
 
 		table = new JTable();
+		table.setFont(new Font("微软雅黑 Light", Font.BOLD, 15));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null},

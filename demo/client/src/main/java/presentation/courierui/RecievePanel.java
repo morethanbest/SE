@@ -15,6 +15,8 @@ import javax.swing.JComboBox;
 import vo.ReceptionVO;
 import businesslogic.orderbl.ReceptionPack.ReceptionController;
 import businesslogicservice.orderblservice.ReceptionBlService;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class RecievePanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -32,6 +34,7 @@ public class RecievePanel extends JPanel {
 	 * @param courierPanel
 	 */
 	public RecievePanel(CourierPanel courierPanel) {
+		setBackground(new Color(244, 247, 252));
 		receptionBlService = new ReceptionController();
 
 		setLayout(null);

@@ -24,6 +24,7 @@ import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import java.awt.SystemColor;
 
 public class OrganizationPanel extends JPanel implements ActionListener {
 	private JTable table;
@@ -39,6 +40,7 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public OrganizationPanel() {
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
 		organizationBlService = new OrganizationController();

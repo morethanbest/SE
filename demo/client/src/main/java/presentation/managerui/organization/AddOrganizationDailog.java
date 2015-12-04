@@ -17,6 +17,7 @@ import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class AddOrganizationDailog extends JDialog {
 
@@ -33,6 +34,7 @@ public class AddOrganizationDailog extends JDialog {
 	public AddOrganizationDailog(final OrganizationPanel parent) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -53,6 +55,7 @@ public class AddOrganizationDailog extends JDialog {
 		nameField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{

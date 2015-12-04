@@ -17,6 +17,7 @@ import businesslogicservice.managerblservice.ConstantsBlService;
 import javax.swing.JLabel;
 
 import vo.CityVO;
+import java.awt.SystemColor;
 
 public class AddCityDialog extends JDialog {
 
@@ -31,6 +32,7 @@ public class AddCityDialog extends JDialog {
 	public AddCityDialog(final ConstantPanel parent) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -57,6 +59,7 @@ public class AddCityDialog extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{

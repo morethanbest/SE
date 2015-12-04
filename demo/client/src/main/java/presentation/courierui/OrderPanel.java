@@ -29,6 +29,9 @@ import businesslogic.orderbl.OrderPack.OrderController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.OrderBlService;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class OrderPanel extends JPanel {
 	private JTextField snameField;
@@ -66,6 +69,7 @@ public class OrderPanel extends JPanel {
 	 * @param courierPanel
 	 */
 	public OrderPanel(CourierPanel courierPanel) {
+		setBackground(new Color(244, 247, 252));
 		orderBlService = new OrderController();
 		setLayout(null);
 
