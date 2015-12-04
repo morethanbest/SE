@@ -7,7 +7,6 @@ import java.util.List;
 
 import data.database.DBHelper;
 import data.database.Serialize;
-import data.database.userDB.UserDB;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -75,8 +74,8 @@ public class StaffDB {
 	}
 	
 	public static ResultMessage delete(long id){
-		StaffPO po=search(id);
-		UserDB.deletebyStaff(po.getOrganizationcode());
+//		StaffPO po=search(id);
+//		UserDB.deletebyStaff(po.getOrganizationcode());
 		dbh=new DBHelper();
 		sql="delete from StaffPO where id=?";
 		pst=dbh.prepare(sql);
@@ -114,8 +113,8 @@ public class StaffDB {
 	}
 	
 	public static ResultMessage deletebyorganization(String organizationcode){
-		UserDB.deletebyStaff(organizationcode);
-		dbh=new DBHelper();
+//		UserDB.deletebyStaff(organizationcode);
+//		dbh=new DBHelper();
 		sql="delete from StaffPO where organizationcode=?";
 		pst=dbh.prepare(sql);
 		try{

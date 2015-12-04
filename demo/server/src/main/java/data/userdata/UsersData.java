@@ -1,12 +1,14 @@
 package data.userdata;
 
 import dataservice.userdataservice.UserDataService;
+import po.OrganizationPO;
 import po.ResultMessage;
 import po.UserPO;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import data.database.managerDB.OrganizationDB;
 import data.database.userDB.UserDB;
 
 public class UsersData extends UnicastRemoteObject implements UserDataService{
@@ -34,5 +36,11 @@ public class UsersData extends UnicastRemoteObject implements UserDataService{
 	@Override
 	public ResultMessage update(UserPO po) throws RemoteException {
 		return UserDB.update(po);
+	}
+
+	@Override
+	public OrganizationPO getOrganization(String organizationcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return OrganizationDB.search(organizationcode);
 	}
 }
