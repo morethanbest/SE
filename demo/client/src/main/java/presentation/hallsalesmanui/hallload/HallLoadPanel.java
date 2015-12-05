@@ -1,7 +1,14 @@
 package presentation.hallsalesmanui.hallload;
 
 import javax.swing.JPanel;
+
 import java.awt.SystemColor;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -11,90 +18,213 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
+import po.Formstate;
+import po.Organizationtype;
+import vo.HallLoadVO;
+import vo.OrganizationVO;
+import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.logisticsblservice.HallLoadBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+
 public class HallLoadPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField carField;
+	private JTextField jianField;
+	private JTextField yaField;
 	private JTable table;
+	private JComboBox<String> destinBox;
+	private JComboBox<Long> yearBox;
+	private JComboBox<Long> monthBox;
+	private JComboBox<Long> dateBox;
+	private JButton button;
+	private HallLoadBlService hallLoadBlService;
+	private JLabel moterLabel;
+	private JLabel orgLabel;
 
 	/**
 	 * Create the panel.
 	 */
-	public HallLoadPanel() {
+	public HallLoadPanel(String orgCode) {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
-		
+
+		hallLoadBlService = new HallLoadController();
+
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(302, 0, 2, 357);
 		add(separator);
-		
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		separator_1.setBounds(634, 0, 2, 357);
 		add(separator_1);
 		
-		textField = new JTextField();
-		textField.setBounds(89, 44, 199, 24);
-		add(textField);
-		textField.setColumns(10);
+		orgLabel = new JLabel(orgCode);
+		orgLabel.setBounds(89, 47, 199, 18);
+		add(orgLabel);
+
+		carField = new JTextField();
+		carField.setColumns(10);
+		carField.setBounds(421, 44, 199, 24);
+		add(carField);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(89, 214, 199, 24);
-		add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(421, 44, 199, 24);
-		add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(421, 126, 199, 24);
-		add(textField_3);
-		
-		JComboBox<Long> comboBox = new JComboBox<Long>();
-		comboBox.setBounds(89, 126, 69, 24);
-		add(comboBox);
-		
-		JComboBox<Long> comboBox_1 = new JComboBox<Long>();
-		comboBox_1.setBounds(172, 126, 51, 24);
-		add(comboBox_1);
-		
-		JComboBox<Long> comboBox_2 = new JComboBox<Long>();
-		comboBox_2.setBounds(237, 126, 51, 24);
-		add(comboBox_2);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(89, 303, 199, 24);
-		add(comboBox_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setBounds(421, 214, 199, 24);
-		add(textField_4);
-		textField_4.setColumns(10);
-		
+		moterLabel = new JLabel("");
+		moterLabel.setBounds(86, 217, 202, 18);
+		add(moterLabel);
+
+		jianField = new JTextField();
+		jianField.setColumns(10);
+		jianField.setBounds(421, 126, 199, 24);
+		add(jianField);
+
+		yaField = new JTextField();
+		yaField.setBounds(421, 214, 199, 24);
+		add(yaField);
+		yaField.setColumns(10);
+
+		yearBox = new JComboBox<Long>();
+		yearBox.setBounds(89, 126, 69, 24);
+		add(yearBox);
+
+		monthBox = new JComboBox<Long>();
+		monthBox.setBounds(172, 126, 51, 24);
+		add(monthBox);
+
+		addYearItems(yearBox, monthBox);
+
+		dateBox = new JComboBox<Long>();
+		dateBox.setBounds(237, 126, 51, 24);
+		add(dateBox);
+
+		addDateItems(yearBox, monthBox, dateBox);
+
+		destinBox = new JComboBox<String>();
+		destinBox.setBounds(89, 303, 199, 24);
+		add(destinBox);
+		addOrganizationItems(destinBox);
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(674, 44, 266, 283);
 		add(scrollPane);
-		
+
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"\u672C\u6B21\u88C5\u8F66\u6240\u6709\u6761\u5F62\u7801"
-			}
-		));
+				new Object[][] {},
+				new String[] { "\u672C\u6B21\u88C5\u8F66\u6240\u6709\u6761\u5F62\u7801" }));
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
-		
-		JButton button = new JButton("提交装车单");
+
+		button = new JButton("提交装车单");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Long date = (Long) yearBox.getSelectedItem() * 10000
+						+ (Long) monthBox.getSelectedItem() * 100
+						+ (Long) dateBox.getSelectedItem();
+				List<String> barcodes = new ArrayList<String>();
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				int rowCount=tableModel.getRowCount();
+				for (int i = 0; i < rowCount; i++) {
+					barcodes.add((String) tableModel.getValueAt(i, 0));
+				}
+				hallLoadBlService.addHallLoadForm(new HallLoadVO(date, orgCode,
+						moterLabel.getText(), (String) destinBox
+								.getSelectedItem(), carField.getText(),
+						jianField.getText(), yaField.getText(), barcodes,
+						//TODO
+						0, Formstate.waiting));
+			}
+		});
 		button.setBounds(427, 366, 113, 27);
 		add(button);
 
+		ItemListener listener = new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDateItems(yearBox, monthBox, dateBox);
+			}
+		};
+		yearBox.addItemListener(listener);
+		monthBox.addItemListener(listener);
+
+		Calendar c = Calendar.getInstance();
+		yearBox.setSelectedItem(c.get(Calendar.YEAR));
+		monthBox.setSelectedItem(c.get(Calendar.MONTH) + 1);
+		dateBox.setSelectedItem(c.get(Calendar.DAY_OF_MONTH));
+
+		JButton button_1 = new JButton("增加一条");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				tableModel.addRow(new String[]{""});
+			}
+		});
+		button_1.setBounds(674, 340, 113, 27);
+		add(button_1);
+
+		JButton button_2 = new JButton("删除该条");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				int rownum = table.getSelectedRow();
+				tableModel.removeRow(rownum);
+			}
+		});
+		button_2.setBounds(827, 340, 113, 27);
+		add(button_2);
+	}
+
+	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
+		for (long i = 2000; i <= 2050; i++) {
+			year.addItem(i);
+		}
+
+		for (long i = 1; i <= 12; i++) {
+			month.addItem(i);
+		}
+	}
+
+	private void addDateItems(JComboBox<Long> yearBox,
+			JComboBox<Long> monthBox, JComboBox<Long> dateBox) {
+		dateBox.removeAllItems();
+		if ((Long) monthBox.getSelectedItem() == 1
+				|| (Long) monthBox.getSelectedItem() == 3
+				|| (Long) monthBox.getSelectedItem() == 5
+				|| (Long) monthBox.getSelectedItem() == 7
+				|| (Long) monthBox.getSelectedItem() == 8
+				|| (Long) monthBox.getSelectedItem() == 10
+				|| (Long) monthBox.getSelectedItem() == 12) {
+			for (long i = 1; i <= 31; i++) {
+				dateBox.addItem(i);
+			}
+		} else if ((Long) monthBox.getSelectedItem() == 4
+				|| (Long) monthBox.getSelectedItem() == 6
+				|| (Long) monthBox.getSelectedItem() == 9
+				|| (Long) monthBox.getSelectedItem() == 11) {
+			for (long i = 1; i <= 30; i++) {
+				dateBox.addItem(i);
+			}
+		} else {
+			for (long i = 1; i <= 28; i++) {
+				dateBox.addItem(i);
+			}
+			if ((Long) yearBox.getSelectedItem() % 4 == 0)
+				dateBox.addItem((long) 29);
+		}
+	}
+
+	public void addOrganizationItems(JComboBox<String> orgSelect) {
+		orgSelect.removeAllItems();
+		OrganizationBlService organizationBlService = new OrganizationController();
+		List<OrganizationVO> orgList = organizationBlService
+				.getOrganizationbyType(Organizationtype.transfercenter);
+		for (OrganizationVO org : orgList) {
+			orgSelect.addItem(org.getName());
+		}
 	}
 }

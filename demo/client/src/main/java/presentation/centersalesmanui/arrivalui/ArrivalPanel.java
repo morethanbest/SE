@@ -5,55 +5,57 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.SystemColor;
+import javax.swing.JLabel;
 
 public class ArrivalPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField codeField;
+	private JLabel orgLabel;
+	private JComboBox<Long> yearBox;
+	private JComboBox<Long> monthBox;
+	private JComboBox<Long> dateBox;
+	private JButton button;
+	private JComboBox<String> departureBox;
+	private JComboBox<String> stateBox;
 
 	/**
 	 * Create the panel.
 	 */
-	public ArrivalPanel() {
+	public ArrivalPanel(String orgCode) {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(139, 47, 242, 24);
-		add(textField);
+		orgLabel = new JLabel("");
+		orgLabel.setBounds(139, 50, 242, 18);
+		add(orgLabel);
 		
-		JComboBox<Long> comboBox = new JComboBox<Long>();
-		comboBox.setBounds(546, 47, 74, 24);
-		add(comboBox);
+		yearBox = new JComboBox<Long>();
+		yearBox.setBounds(139, 132, 74, 24);
+		add(yearBox);
 		
-		JComboBox<Long> comboBox_1 = new JComboBox<Long>();
-		comboBox_1.setBounds(644, 47, 61, 24);
-		add(comboBox_1);
+		monthBox = new JComboBox<Long>();
+		monthBox.setBounds(237, 132, 61, 24);
+		add(monthBox);
 		
-		JComboBox<Long> comboBox_2 = new JComboBox<Long>();
-		comboBox_2.setBounds(727, 47, 61, 24);
-		add(comboBox_2);
+		dateBox = new JComboBox<Long>();
+		dateBox.setBounds(320, 132, 61, 24);
+		add(dateBox);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(546, 213, 242, 24);
-		add(comboBox_3);
+		stateBox = new JComboBox<String>();
+		stateBox.setBounds(547, 131, 242, 24);
+		add(stateBox);
 		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(139, 132, 242, 24);
-		add(comboBox_4);
-		
-		JButton button = new JButton("提交");
+		button = new JButton("提交");
 		button.setBounds(416, 309, 113, 27);
 		add(button);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(139, 213, 242, 24);
-		add(textField_1);
+		codeField = new JTextField();
+		codeField.setColumns(10);
+		codeField.setBounds(139, 213, 242, 24);
+		add(codeField);
 		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(546, 132, 242, 24);
-		add(comboBox_5);
+		departureBox = new JComboBox<String>();
+		departureBox.setBounds(547, 50, 242, 24);
+		add(departureBox);
 
 	}
 }
