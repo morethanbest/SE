@@ -14,14 +14,14 @@ import vo.OrganizationVO;
 
 public interface DebitnoteBlService {
 
-	public List<CityVO> getALLCity()throws RemoteException;
+	public List<CityVO> getALLCity();
 
-	public List<OrganizationVO> getAllOrganization(String city)throws RemoteException;
+	public List<OrganizationVO> getAllOrganization(String city);
 
-	public DebitnoteVO getRecordcollectbyhall(String orgcode)throws RemoteException;
+	public DebitnoteVO getRecordcollectbyhall(String orgcode);
 
-	public DebitnoteVO getRecordcollectbydate(long date)throws RemoteException;
+	public DebitnoteVO getRecordcollectbydate(long date);
 
-	public DebitnoteExamVO examcollect(DebitnoteVO vo)throws  RemoteException;
+	public DebitnoteExamVO examcollect(DebitnoteVO vo);
 
 }

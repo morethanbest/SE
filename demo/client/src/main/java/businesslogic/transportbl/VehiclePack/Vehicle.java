@@ -25,7 +25,7 @@ public class Vehicle {
 
 	
 	
-	public ResultMessage addVehicle(VehicleVO vo) throws RemoteException {
+	public ResultMessage addVehicle(VehicleVO vo)  {
 		// TODO Auto-generated method stub
 		String vehiclecode=vo.getVehiclecode();
 		String vehiclenum=vo.getVehiclenum();
@@ -36,7 +36,7 @@ public class Vehicle {
 	}
 
 
-	public ResultMessage delVehicle(VehicleVO vo) throws RemoteException {
+	public ResultMessage delVehicle(VehicleVO vo) {
 		// TODO Auto-generated method stub
 		String vehiclecode=vo.getVehiclecode();
 		String vehiclenum=vo.getVehiclenum();
@@ -46,7 +46,7 @@ public class Vehicle {
 		return result;
 	}
 
-	public ResultMessage revVehicle(VehicleVO vo) throws RemoteException {
+	public ResultMessage revVehicle(VehicleVO vo)  {
 		// TODO Auto-generated method stub
 		String vehiclecode=vo.getVehiclecode();
 		String vehiclenum=vo.getVehiclenum();
@@ -57,14 +57,14 @@ public class Vehicle {
 	}
 
 	
-	public VehicleVO getVehiclebyVN(String vehicleNumber,String orgcode) throws RemoteException {
+	public VehicleVO getVehiclebyVN(String vehicleNumber,String orgcode)  {
 		// TODO Auto-generated method stub
 		VehicleVO vo=find.getvehiclebyvn(vehicleNumber,orgcode);
 		return vo;
 	}
 
 	
-	public VehicleVO getVehiclebyPN(String plateNumber,String orgcode) throws RemoteException {
+	public VehicleVO getVehiclebyPN(String plateNumber,String orgcode)  {
 		// TODO Auto-generated method stub
 		VehicleVO vo=find.getvehiclebypn(plateNumber,orgcode);
 		return vo;

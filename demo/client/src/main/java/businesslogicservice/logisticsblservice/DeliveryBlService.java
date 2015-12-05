@@ -8,13 +8,13 @@ import po.ResultMessage;
 import vo.DeliveryVO;
 
 public interface DeliveryBlService {
-	public ResultMessage Delivery(DeliveryVO vo)throws RemoteException;
+	public ResultMessage Delivery(DeliveryVO vo);
 
-	public List<DeliveryVO> find(Formstate state,String orgcode) throws  RemoteException;
+	public List<DeliveryVO> find(Formstate state,String orgcode) ;
 
-	public String findID(String orgcode) throws  RemoteException;
+	public String findID(String orgcode) ;
 
-	public ResultMessage update(DeliveryVO vo)throws RemoteException;
+	public ResultMessage update(DeliveryVO vo);
 
 
 

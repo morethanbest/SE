@@ -12,14 +12,14 @@ public class InboundController implements businesslogicservice.commodityblservic
 
 
 	@Override
-	public boolean wheOverLoad(StockinVO vo) throws RemoteException {
+	public boolean wheOverLoad(StockinVO vo) {
 		Alarm ring=new Alarm();
 		boolean result=ring.getwhe(vo);
 		return result;
 	}
 
 	@Override
-	public ResultMessage Inbound(StockinVO vo) throws RemoteException {
+	public ResultMessage Inbound(StockinVO vo)  {
 		// TODO Auto-generated method stub
 		AddInbound add=new AddInbound();
 		Inbound inbound=new Inbound(add);
@@ -31,7 +31,7 @@ public class InboundController implements businesslogicservice.commodityblservic
 	}
 
 	@Override
-	public ResultMessage update(StockinVO vo) throws RemoteException {
+	public ResultMessage update(StockinVO vo)  {
 		UpdateInbound update=new UpdateInbound();
 		Inbound inbound=new Inbound(update);
 		ResultMessage result=inbound.updateForm(vo);
@@ -39,7 +39,7 @@ public class InboundController implements businesslogicservice.commodityblservic
 	}
 
 	@Override
-	public List<StockinVO> findInboundForm(Formstate state,String orgcode) throws RemoteException {
+	public List<StockinVO> findInboundForm(Formstate state,String orgcode) {
 		FindInbound find=new FindInbound();
 		Inbound inbound=new Inbound(find);
 		List<StockinVO> list=inbound.findforms(state,orgcode);
@@ -48,14 +48,14 @@ public class InboundController implements businesslogicservice.commodityblservic
 	}
 
 	@Override
-		 public String getid(String orgcode) throws RemoteException {
+		 public String getid(String orgcode) {
 		StockinId idgetter=new StockinId();
 		String id=idgetter.getid(orgcode);
 		return id;
 	}
 
 	@Override
-	public CommodityLocation getAvailLoc(String orgcode,long blocknum) throws RemoteException {
+	public CommodityLocation getAvailLoc(String orgcode,long blocknum) {
 		LocationGet get=new LocationGet();
 		CommodityLocation location=get.getLoc(orgcode,blocknum);
 		return location;

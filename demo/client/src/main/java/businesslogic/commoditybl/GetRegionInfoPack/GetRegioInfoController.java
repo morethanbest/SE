@@ -11,7 +11,7 @@ public class GetRegioInfoController implements GetRegionInfoBlService{
 	
 
 	@Override
-	public RegionInfoVO getRegionInfo(String orgcode,long blocknum) throws RemoteException {
+	public RegionInfoVO getRegionInfo(String orgcode,long blocknum) {
 		// TODO Auto-generated method stub
 		RegionGet geter=new RegionGet();
 		GetRegionInfo regioninfo=new GetRegionInfo(geter);

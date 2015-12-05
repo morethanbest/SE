@@ -13,7 +13,7 @@ public class SubregionController implements SubregionBlService{
 
 	@Override
 	public ResultMessage Subregion(String orgcode,CommodityLocation beforeLocation,
-			CommodityLocation afterLocation) throws RemoteException {
+			CommodityLocation afterLocation)  {
 		// TODO Auto-generated method stub
 		ChangeLocation change=new ChangeLocation();
 		Subregion sub=new Subregion(change);

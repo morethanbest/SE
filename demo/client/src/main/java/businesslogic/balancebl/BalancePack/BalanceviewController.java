@@ -7,7 +7,7 @@ import businesslogicservice.balanceblservice.BalanceviewBlService;
 
 public class BalanceviewController implements BalanceviewBlService {
 	@Override
-	public BalanceviewVO getBalanceview() throws RemoteException {
+	public BalanceviewVO getBalanceview()  {
 		Balanceview balance=new Balanceview();
 		BalanceviewVO vo=balance.viewbalance();
 		return vo;

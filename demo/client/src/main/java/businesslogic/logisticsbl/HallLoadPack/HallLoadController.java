@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class HallLoadController implements HallLoadBlService{
     @Override
-    public ResultMessage addHallLoadForm(HallLoadVO vo) throws RemoteException {
+    public ResultMessage addHallLoadForm(HallLoadVO vo)  {
         AddLoad add=new AddLoad();
         HallLoad load=new HallLoad(add);
         ResultMessage result=load.addform(vo);
@@ -23,14 +23,14 @@ public class HallLoadController implements HallLoadBlService{
     }
 
     @Override
-    public double computeHallLoadFare(HallLoadVO vo, String City1, String City2, String transporttype) throws RemoteException {
+    public double computeHallLoadFare(HallLoadVO vo, String City1, String City2, String transporttype)  {
         HallFeeCount count=new HallFeeCount();
         double fee=count.countfee(vo,City1,City2,transporttype);
         return fee;
     }
 
     @Override
-    public ResultMessage update(HallLoadVO vo) throws RemoteException {
+    public ResultMessage update(HallLoadVO vo)  {
         HallloadUpdateLogistics updatehistory=new HallloadUpdateLogistics();
         updatehistory.updatehistory(vo);
 
@@ -41,7 +41,7 @@ public class HallLoadController implements HallLoadBlService{
     }
 
     @Override
-    public List<HallLoadVO> findforms(Formstate state,String orgcode) throws RemoteException {
+    public List<HallLoadVO> findforms(Formstate state,String orgcode)  {
         FindLoad find=new FindLoad();
         HallLoad load=new HallLoad(find);
         List<HallLoadVO> list=load.findforms(state,orgcode);
@@ -49,7 +49,7 @@ public class HallLoadController implements HallLoadBlService{
     }
 
     @Override
-    public String getid(String orgcode, long date) throws RemoteException {
+    public String getid(String orgcode, long date) {
         Idget idgetter=new Idget();
         String id=idgetter.idget(orgcode,date);
         return id;

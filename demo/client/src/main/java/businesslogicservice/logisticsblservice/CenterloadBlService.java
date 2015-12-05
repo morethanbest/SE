@@ -11,17 +11,17 @@ import vo.CLFareVO;
 import vo.CenterloadVO;
 
 public interface CenterloadBlService {
-	public ResultMessage addCenterLoadForm(CenterloadVO vo)throws RemoteException;
+	public ResultMessage addCenterLoadForm(CenterloadVO vo);
 
 
 
 
-	public List<CenterloadVO>  findCenterloadForm(Formstate state,String orgcode) throws  RemoteException;
+	public List<CenterloadVO>  findCenterloadForm(Formstate state,String orgcode) ;
 
-	public ResultMessage update(CenterloadVO vo)throws RemoteException;
+	public ResultMessage update(CenterloadVO vo);
 
 	//传入两个参数 一个是组织编号 一个是当前日期  由此得到string类型的汽运编号
-	public String getid(String orgcode,long date) throws  RemoteException;
+	public String getid(String orgcode,long date) ;
 
 
 	//得到运费的方法

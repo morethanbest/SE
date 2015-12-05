@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CentertransController implements RecordtransBlService{
     @Override
-    public ResultMessage Recordtrans(RecordtransVO vo) throws RemoteException {
+    public ResultMessage Recordtrans(RecordtransVO vo)  {
         AddTrans add=new AddTrans();
         Recordtrans trans=new Recordtrans(add);
         ResultMessage result=trans.addform(vo);
@@ -23,7 +23,7 @@ public class CentertransController implements RecordtransBlService{
     }
 
     @Override
-    public ResultMessage update(RecordtransVO vo) throws RemoteException {
+    public ResultMessage update(RecordtransVO vo)  {
         RecordtransUpdateLogistics updatehistory=new RecordtransUpdateLogistics();
         updatehistory.updatehistory(vo);
 
@@ -34,7 +34,7 @@ public class CentertransController implements RecordtransBlService{
     }
 
     @Override
-    public List<RecordtransVO> find(Formstate state,String orgcode) throws RemoteException {
+    public List<RecordtransVO> find(Formstate state,String orgcode)  {
         FindTrans find=new FindTrans();
         Recordtrans trans=new Recordtrans(find);
         List<RecordtransVO> list=trans.findforms(state,orgcode);
@@ -42,7 +42,7 @@ public class CentertransController implements RecordtransBlService{
     }
 
     @Override
-    public String getid(String orgcode, long date) throws RemoteException {
+    public String getid(String orgcode, long date)  {
         Idget idgetter=new Idget();
         String id=idgetter.getid(orgcode,date);
 

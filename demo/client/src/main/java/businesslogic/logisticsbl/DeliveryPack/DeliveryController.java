@@ -1,6 +1,6 @@
 package businesslogic.logisticsbl.DeliveryPack;
 
-import businesslogic.logisticsbl.stub.DeliveryBlServiceImpl;
+
 import businesslogicservice.logisticsblservice.DeliveryBlService;
 import po.Formstate;
 import po.ResultMessage;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DeliveryController implements DeliveryBlService{
     @Override
-    public ResultMessage Delivery(DeliveryVO vo) throws RemoteException {
+    public ResultMessage Delivery(DeliveryVO vo) {
         AddDelivery add=new AddDelivery();
         Delivery dev=new Delivery(add);
         ResultMessage result=dev.adddelivery(vo);
@@ -22,7 +22,7 @@ public class DeliveryController implements DeliveryBlService{
     }
 
     @Override
-    public List<DeliveryVO> find(Formstate state,String orgcode) throws RemoteException {
+    public List<DeliveryVO> find(Formstate state,String orgcode) {
         FindDelivery finder=new FindDelivery();
         Delivery dev=new Delivery(finder);
         List<DeliveryVO> list=dev.find(state,orgcode);
@@ -31,7 +31,7 @@ public class DeliveryController implements DeliveryBlService{
     }
 
     @Override
-    public String findID(String orgcode) throws RemoteException {
+    public String findID(String orgcode) {
         IdGet idgetter=new IdGet();
         String id=idgetter.getid(orgcode);
         return id;
@@ -39,7 +39,7 @@ public class DeliveryController implements DeliveryBlService{
     }
 
     @Override
-    public ResultMessage update(DeliveryVO vo) throws RemoteException {
+    public ResultMessage update(DeliveryVO vo) {
         UpdateDelivery update=new UpdateDelivery();
         Delivery dev=new Delivery(update);
         ResultMessage result=dev.updatedelivery(vo);

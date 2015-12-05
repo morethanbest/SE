@@ -12,7 +12,7 @@ public class DriverController implements DriverBlService{
 	
 
 	@Override
-	public ResultMessage addDriver(DriverVO vo) throws RemoteException {
+	public ResultMessage addDriver(DriverVO vo)  {
 		// TODO Auto-generated method stub
 
 		AddDriver add=new AddDriver();
@@ -26,7 +26,7 @@ public class DriverController implements DriverBlService{
 	
 	
 	@Override
-	public ResultMessage delDriver(DriverVO vo) throws RemoteException {
+	public ResultMessage delDriver(DriverVO vo)  {
 		// TODO Auto-generated method stub
 		DelDriver del=new DelDriver();
 		Driver driver=new Driver(del);
@@ -40,7 +40,7 @@ public class DriverController implements DriverBlService{
 	
 	
 	@Override
-	public ResultMessage revDriver(DriverVO vo) throws RemoteException {
+	public ResultMessage revDriver(DriverVO vo) {
 		// TODO Auto-generated method stub
 		RevDriver rev=new RevDriver();
 		Driver driver=new Driver(rev);
@@ -52,7 +52,7 @@ public class DriverController implements DriverBlService{
 	
 	
 	@Override
-	public DriverVO getDriverbyDN(String driverNumber,String orgcode) throws RemoteException {
+	public DriverVO getDriverbyDN(String driverNumber,String orgcode) {
 		// TODO Auto-generated method stub
 
 		FindDriver fd=new FindDriver();
@@ -66,7 +66,7 @@ public class DriverController implements DriverBlService{
 	
 	
 	@Override
-	public List<DriverVO> getDriverbyName(String name,String orgcode) throws RemoteException {
+	public List<DriverVO> getDriverbyName(String name,String orgcode)  {
 		// TODO Auto-generated method stub
 		
 
@@ -77,7 +77,7 @@ public class DriverController implements DriverBlService{
 	}
 
 	@Override
-	public String getid(String orgcode) throws RemoteException {
+	public String getid(String orgcode)  {
 		DriverId idgetter=new DriverId();
 		String id=idgetter.getid(orgcode);
 		return id;

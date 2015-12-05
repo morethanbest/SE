@@ -11,7 +11,7 @@ public class VehicleController implements VehicleBlService{
 	
 
 	@Override
-	public ResultMessage addVehicle(VehicleVO vo) throws RemoteException {
+	public ResultMessage addVehicle(VehicleVO vo)  {
 		// TODO Auto-generated method stub
 		AddVehicle add=new AddVehicle();
 		Vehicle ve=new Vehicle(add);
@@ -20,7 +20,7 @@ public class VehicleController implements VehicleBlService{
 	}
 
 	@Override
-	public ResultMessage delVehicle(VehicleVO vo) throws RemoteException {
+	public ResultMessage delVehicle(VehicleVO vo)  {
 		// TODO Auto-generated method stub
 		DelVehicle del=new DelVehicle();
 		Vehicle ve=new Vehicle(del);
@@ -29,7 +29,7 @@ public class VehicleController implements VehicleBlService{
 	}
 
 	@Override
-	public ResultMessage revVehicle(VehicleVO vo) throws RemoteException {
+	public ResultMessage revVehicle(VehicleVO vo) {
 		// TODO Auto-generated method stub
 		RevVehicle rev=new RevVehicle();
 		Vehicle ve=new Vehicle(rev);
@@ -39,7 +39,7 @@ public class VehicleController implements VehicleBlService{
 
 	@Override
 	public VehicleVO getVehiclebyVN(String vehicleCode,String orgcode)
-			throws RemoteException {
+			 {
 		// TODO Auto-generated method stub
 
 		FindVehicle find=new FindVehicle();
@@ -49,7 +49,7 @@ public class VehicleController implements VehicleBlService{
 	}
 
 	@Override
-	public VehicleVO getVehiclebyPN(String plateNumber,String orgcode) throws RemoteException {
+	public VehicleVO getVehiclebyPN(String plateNumber,String orgcode)  {
 		// TODO Auto-generated method stub
 
 		FindVehicle find=new FindVehicle();
@@ -60,7 +60,7 @@ public class VehicleController implements VehicleBlService{
 	}
 
 	@Override
-	public String getid(String orgcode) throws RemoteException {
+	public String getid(String orgcode)  {
 		IdGet idgetter=new IdGet();
 		String  id=idgetter.getid(orgcode);
 		return id;

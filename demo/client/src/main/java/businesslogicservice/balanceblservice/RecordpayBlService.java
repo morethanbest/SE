@@ -8,11 +8,11 @@ import po.ResultMessage;
 import vo.RecordpayVO;
 
 public interface RecordpayBlService {
-	public ResultMessage AddRecordpay(RecordpayVO vo)throws RemoteException;
+	public ResultMessage AddRecordpay(RecordpayVO vo);
 
-	public ResultMessage updateRecordpay(RecordpayVO vo)throws  RemoteException;
+	public ResultMessage updateRecordpay(RecordpayVO vo);
 
-	public List<RecordpayVO> findforms(Formstate formstate)throws  RemoteException;
+	public List<RecordpayVO> findforms(Formstate formstate);
 
-	public String getid()throws  RemoteException;
+	public String getid();
 }

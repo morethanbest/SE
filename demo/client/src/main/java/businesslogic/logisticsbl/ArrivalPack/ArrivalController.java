@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ArrivalController implements ArrivalBlService {
     @Override
-    public ResultMessage addArrival(ArrivalVO vo) throws RemoteException {
+    public ResultMessage addArrival(ArrivalVO vo) {
         AddArrival addarriv=new AddArrival();
         Arrival newarriv=new Arrival(addarriv);
         ResultMessage result=newarriv.addArrivalForm(vo);
@@ -24,7 +24,7 @@ public class ArrivalController implements ArrivalBlService {
 
 
 
-    public ResultMessage update(ArrivalVO vo) throws RemoteException {
+    public ResultMessage update(ArrivalVO vo) {
         UpdateArrival updatearriv=new UpdateArrival();
         Arrival newarriv=new Arrival(updatearriv);
         ResultMessage result=newarriv.updataArrivalForm(vo);
@@ -34,7 +34,7 @@ public class ArrivalController implements ArrivalBlService {
 
 
     @Override
-    public ResultMessage updateFromHall(ArrivalVO vo, String orgname) throws RemoteException {
+    public ResultMessage updateFromHall(ArrivalVO vo, String orgname) {
         UpdateLogistics updatelog=new UpdateLogistics();
         updatelog.updatebyhall(vo,orgname);
 
@@ -43,7 +43,7 @@ public class ArrivalController implements ArrivalBlService {
     }
 
     @Override
-    public ResultMessage updateFromCenter(ArrivalVO vo, String orgname) throws RemoteException {
+    public ResultMessage updateFromCenter(ArrivalVO vo, String orgname) {
         UpdateLogistics updatelog=new UpdateLogistics();
         updatelog.updatebycenter(vo, orgname);
 
@@ -52,7 +52,7 @@ public class ArrivalController implements ArrivalBlService {
     }
 
     @Override
-    public List<ArrivalVO> search(String orgcode, Formstate state) throws RemoteException {
+    public List<ArrivalVO> search(String orgcode, Formstate state) {
         FindArrival find=new FindArrival();
         Arrival newarriv=new Arrival(find);
         List<ArrivalVO> list=newarriv.findArrivalForm(state,orgcode);
@@ -62,7 +62,7 @@ public class ArrivalController implements ArrivalBlService {
 
 
     @Override
-    public String getid(String orgcode) throws RemoteException {
+    public String getid(String orgcode)  {
         IdGet idgetter=new IdGet();
         String  result=idgetter.getid(orgcode);
 

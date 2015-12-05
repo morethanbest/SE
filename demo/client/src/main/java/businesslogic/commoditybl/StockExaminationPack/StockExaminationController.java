@@ -11,7 +11,7 @@ public class StockExaminationController implements StockExaminationBlService{
 
 	@Override
 	public StockExaminationVO StockExamination(String orgcode,long startTime, long endTime)
-			throws RemoteException {
+			 {
 		// TODO Auto-generated method stub
 		Exam examer=new Exam();
 		getPara para=new getPara();

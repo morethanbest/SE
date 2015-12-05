@@ -17,21 +17,21 @@ public class DebitnoteController implements DebitnoteBlService {
 
 
 	@Override
-	public List<CityVO> getALLCity() throws RemoteException {
+	public List<CityVO> getALLCity()  {
 		CityGet getter=new CityGet();
 		List<CityVO> list=getter.getcity();
 		return list;
 	}
 
 	@Override
-	public List<OrganizationVO> getAllOrganization(String city) throws RemoteException {
+	public List<OrganizationVO> getAllOrganization(String city)  {
 		OrgGet getter=new OrgGet();
 		List<OrganizationVO> list=getter.getorg(city);
 		return list;
 	}
 
 	@Override
-	public DebitnoteVO getRecordcollectbyhall(String orgcode) throws RemoteException {
+	public DebitnoteVO getRecordcollectbyhall(String orgcode) {
 		HallCollect collect=new HallCollect();
 		Debitnote deb=new Debitnote(collect);
 		DebitnoteVO vo=deb.gethall(orgcode);
@@ -39,7 +39,7 @@ public class DebitnoteController implements DebitnoteBlService {
 	}
 
 	@Override
-	public DebitnoteVO getRecordcollectbydate(long date) throws RemoteException {
+	public DebitnoteVO getRecordcollectbydate(long date){
 		DateCollect collect=new DateCollect();
 		Debitnote deb=new Debitnote(collect);
 		DebitnoteVO vo=deb.getdate(date);
@@ -47,7 +47,7 @@ public class DebitnoteController implements DebitnoteBlService {
 	}
 
 	@Override
-	public DebitnoteExamVO examcollect(DebitnoteVO vo) throws RemoteException {
+	public DebitnoteExamVO examcollect(DebitnoteVO vo) {
 		DebitExam exam=new DebitExam();
 		Debitnote det=new Debitnote(exam);
 

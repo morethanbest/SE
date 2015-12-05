@@ -35,7 +35,7 @@ public class Driver {
 	
 	
 	
-	public ResultMessage addDriver(DriverVO vo) throws RemoteException {
+	public ResultMessage addDriver(DriverVO vo)  {
 		// TODO Auto-generated method stub
 		String drivercode=vo.getDrivercode();
 		String drivername=vo.getDrivername();
@@ -53,7 +53,7 @@ public class Driver {
 	}
 
 	
-	public ResultMessage delDriver(DriverVO vo) throws RemoteException {
+	public ResultMessage delDriver(DriverVO vo)  {
 		// TODO Auto-generated method stub
 		String drivercode=vo.getDrivercode();
 		String drivername=vo.getDrivername();
@@ -71,7 +71,7 @@ public class Driver {
 	}
 
 	
-	public ResultMessage revDriver(DriverVO vo) throws RemoteException {
+	public ResultMessage revDriver(DriverVO vo) {
 		// TODO Auto-generated method stub
 		String drivercode=vo.getDrivercode();
 		String drivername=vo.getDrivername();
@@ -87,14 +87,14 @@ public class Driver {
 	}
 
 	
-	public DriverVO getDriverbyDN(String driverNumber,String orgcode) throws RemoteException {
+	public DriverVO getDriverbyDN(String driverNumber,String orgcode)  {
 		// TODO Auto-generated method stub
 		DriverVO vo=findd.getdriverbynum(driverNumber,orgcode);
 		return vo;
 	}
 
 	
-	public List<DriverVO> getDriverbyName(String name,String orgcode) throws RemoteException {
+	public List<DriverVO> getDriverbyName(String name,String orgcode)  {
 		// TODO Auto-generated method stub
 		List<DriverVO> list=findd.getdriverbyname(name,orgcode);
 		return list;

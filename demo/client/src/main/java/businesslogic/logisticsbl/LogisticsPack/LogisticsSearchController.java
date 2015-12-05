@@ -12,7 +12,7 @@ public class LogisticsSearchController implements SearchOrderBlService{
 
 
     @Override
-    public LogisticsVO getOrderbyOrderNumber(String orderNumber) throws RemoteException {
+    public LogisticsVO getOrderbyOrderNumber(String orderNumber) {
         Search searcher=new Search();
         LogisticsVO vo=searcher.searchorder(orderNumber);
         return vo;

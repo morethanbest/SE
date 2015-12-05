@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CenterloadController implements CenterloadBlService{
     @Override
-    public ResultMessage addCenterLoadForm(CenterloadVO vo) throws RemoteException {
+    public ResultMessage addCenterLoadForm(CenterloadVO vo)  {
         AddCenterload add=new AddCenterload();
         Centerload contro=new Centerload(add);
         ResultMessage result=contro.addform(vo);
@@ -29,7 +29,7 @@ public class CenterloadController implements CenterloadBlService{
 
 
     @Override
-    public List<CenterloadVO> findCenterloadForm(Formstate state,String orgcode) throws RemoteException {
+    public List<CenterloadVO> findCenterloadForm(Formstate state,String orgcode)  {
         FindCenterload find=new FindCenterload();
         Centerload center=new Centerload(find);
         List<CenterloadVO>  list=center.findforms(state,orgcode);
@@ -37,7 +37,7 @@ public class CenterloadController implements CenterloadBlService{
     }
 
     @Override
-    public ResultMessage update(CenterloadVO vo) throws RemoteException {
+    public ResultMessage update(CenterloadVO vo) {
         UpdateCenterload update=new UpdateCenterload();
         Centerload center=new Centerload(update);
         ResultMessage result=center.updateform(vo);
@@ -50,7 +50,7 @@ public class CenterloadController implements CenterloadBlService{
     }
 
     @Override
-    public String getid(String orgcode,long date) throws RemoteException {
+    public String getid(String orgcode,long date)  {
         Idget idgetter=new Idget();
         String id=idgetter.getid(orgcode,date);
         return id;

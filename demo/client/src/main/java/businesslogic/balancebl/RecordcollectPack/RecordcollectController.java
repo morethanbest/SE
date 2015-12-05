@@ -14,7 +14,7 @@ import po.ResultMessage;
 public class RecordcollectController implements RecordCollectBlService{
 	
 	@Override
-	public ResultMessage Recordcollect(RecordcollectVO vo) throws RemoteException {
+	public ResultMessage Recordcollect(RecordcollectVO vo) {
 		// TODO Auto-generated method stub
 		Addcollect add=new Addcollect();
 		Recordcollect record=new Recordcollect(add);
@@ -23,7 +23,7 @@ public class RecordcollectController implements RecordCollectBlService{
 	}
 
 	@Override
-	public ResultMessage updateCollect(RecordcollectVO vo) throws RemoteException {
+	public ResultMessage updateCollect(RecordcollectVO vo)  {
 		Updatecollect update=new Updatecollect();
 		Recordcollect record=new Recordcollect(update);
 		ResultMessage result=record.updateRecordcollect(vo);
@@ -31,7 +31,7 @@ public class RecordcollectController implements RecordCollectBlService{
 	}
 
 	@Override
-	public List<RecordcollectVO> findform(Formstate state, String orgcode) throws RemoteException {
+	public List<RecordcollectVO> findform(Formstate state, String orgcode)  {
 		Findcollect find=new Findcollect();
 		Recordcollect record=new Recordcollect(find);
 		List<RecordcollectVO> list=record.findforms(state,orgcode);
@@ -41,7 +41,7 @@ public class RecordcollectController implements RecordCollectBlService{
 
 
 	@Override
-	public String getid(String orgcode) throws RemoteException {
+	public String getid(String orgcode)  {
 		IdInfo idgetter=new IdInfo();
 		String id=idgetter.getid(orgcode);
 		return id;

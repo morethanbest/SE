@@ -14,7 +14,7 @@ public class RecordpayController implements RecordpayBlService{
 
 
 	@Override
-	public ResultMessage AddRecordpay(RecordpayVO vo) throws RemoteException {
+	public ResultMessage AddRecordpay(RecordpayVO vo)  {
 		AddRecord add=new AddRecord();
 		Recordpay record=new Recordpay(add);
 		ResultMessage result=record.add(vo);
@@ -22,7 +22,7 @@ public class RecordpayController implements RecordpayBlService{
 	}
 
 	@Override
-	public ResultMessage updateRecordpay(RecordpayVO vo) throws RemoteException {
+	public ResultMessage updateRecordpay(RecordpayVO vo) {
 		UpdateRecord update=new UpdateRecord();
 		Recordpay record=new Recordpay(update);
 		ResultMessage result=record.update(vo);
@@ -30,7 +30,7 @@ public class RecordpayController implements RecordpayBlService{
 	}
 
 	@Override
-	public List<RecordpayVO> findforms(Formstate formstate) throws RemoteException {
+	public List<RecordpayVO> findforms(Formstate formstate) {
 		FindRecord find=new FindRecord();
 		Recordpay record=new Recordpay(find);
 		List<RecordpayVO> list=record.find(formstate);
@@ -38,7 +38,7 @@ public class RecordpayController implements RecordpayBlService{
 	}
 
 	@Override
-	public String getid() throws RemoteException {
+	public String getid()  {
 		IdInfo idgetter=new IdInfo();
 		String id=idgetter.getid();
 		return id;

@@ -8,11 +8,11 @@ import po.ResultMessage;
 import vo.StockoutVO;
 
 public interface StockoutBlService {
-	public ResultMessage Stockout(StockoutVO vo)throws RemoteException;
+	public ResultMessage Stockout(StockoutVO vo);
 
-	public ResultMessage update(StockoutVO vo) throws  RemoteException;
+	public ResultMessage update(StockoutVO vo) ;
 
-	public List<StockoutVO> findforms(Formstate state,String orgcode) throws  RemoteException;
+	public List<StockoutVO> findforms(Formstate state,String orgcode) ;
 
-	public String getid(String orgcode) throws  RemoteException;
+	public String getid(String orgcode) ;
 }

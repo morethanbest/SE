@@ -13,7 +13,7 @@ public class StockoutController implements StockoutBlService{
 
 
 	@Override
-	public ResultMessage Stockout(StockoutVO vo) throws RemoteException {
+	public ResultMessage Stockout(StockoutVO vo) {
 		AddStockout add=new AddStockout();
 		Stockout out=new Stockout(add);
 		ResultMessage result=out.addform(vo);
@@ -21,7 +21,7 @@ public class StockoutController implements StockoutBlService{
 	}
 
 	@Override
-	public ResultMessage update(StockoutVO vo) throws RemoteException {
+	public ResultMessage update(StockoutVO vo) {
 		UpdateStockout update=new UpdateStockout();
 		Stockout out=new Stockout(update);
 		ResultMessage result=out.updateform(vo);
@@ -29,7 +29,7 @@ public class StockoutController implements StockoutBlService{
 	}
 
 	@Override
-	public List<StockoutVO> findforms(Formstate state,String orgcode) throws RemoteException {
+	public List<StockoutVO> findforms(Formstate state,String orgcode) {
 		FindStockout find=new FindStockout();
 		Stockout out=new Stockout(find);
 		List<StockoutVO> list=out.findforms(state,orgcode);
@@ -37,7 +37,7 @@ public class StockoutController implements StockoutBlService{
 	}
 
 	@Override
-	public String getid(String orgcode) throws RemoteException {
+	public String getid(String orgcode)  {
 		StockoutId idgetter=new StockoutId();
 		String id=idgetter.getid(orgcode);
 		return id;

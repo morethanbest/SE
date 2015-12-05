@@ -9,9 +9,9 @@ import vo.CenterloadVO;
 import vo.RecordtransVO;
 
 public interface RecordtransBlService {
-	public ResultMessage Recordtrans (RecordtransVO vo)throws RemoteException;
-	public ResultMessage update(RecordtransVO vo)throws RemoteException;
-	public List<RecordtransVO> find(Formstate state,String orgcode)  throws RemoteException;
+	public ResultMessage Recordtrans (RecordtransVO vo);
+	public ResultMessage update(RecordtransVO vo);
+	public List<RecordtransVO> find(Formstate state,String orgcode)  ;
 
 
 

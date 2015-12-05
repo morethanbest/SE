@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GoodsRecevingController implements GoodsRecevingBlService{
     @Override
-    public ResultMessage GoodsReceving(GoodsReceivingVO vo) throws RemoteException {
+    public ResultMessage GoodsReceving(GoodsReceivingVO vo) {
 
         AddGoods add=new AddGoods();
         GoodsReceving goodsrev=new GoodsReceving(add);
@@ -31,7 +31,7 @@ public class GoodsRecevingController implements GoodsRecevingBlService{
 
 
     @Override
-    public List<GoodsReceivingVO> findform(Formstate state,String orgcode) throws RemoteException {
+    public List<GoodsReceivingVO> findform(Formstate state,String orgcode)  {
         FindGoods find=new FindGoods();
         GoodsReceving rev=new GoodsReceving(find);
         List<GoodsReceivingVO> list=rev.findgoodsform(state,orgcode);
@@ -39,7 +39,7 @@ public class GoodsRecevingController implements GoodsRecevingBlService{
     }
 
     @Override
-    public ResultMessage updateFromHall(GoodsReceivingVO vo, String orgname) throws RemoteException {
+    public ResultMessage updateFromHall(GoodsReceivingVO vo, String orgname) {
         GoodsRevUpdateLogistics updatelog=new GoodsRevUpdateLogistics();
         updatelog.updatabyhall(vo,orgname);////////////////////////////////////////////
 
@@ -48,7 +48,7 @@ public class GoodsRecevingController implements GoodsRecevingBlService{
     }
 
     @Override
-    public ResultMessage updateFromCenter(GoodsReceivingVO vo, String orgname) throws RemoteException {
+    public ResultMessage updateFromCenter(GoodsReceivingVO vo, String orgname) {
         GoodsRevUpdateLogistics updatelog=new GoodsRevUpdateLogistics();
         updatelog.updatabyhall(vo,orgname);////////////////////////////////////////////
 
@@ -57,7 +57,7 @@ public class GoodsRecevingController implements GoodsRecevingBlService{
     }
 
 
-    public ResultMessage update(GoodsReceivingVO vo) throws RemoteException {
+    public ResultMessage update(GoodsReceivingVO vo) {
 
 
         UpdateGoods update=new UpdateGoods();
@@ -68,7 +68,7 @@ public class GoodsRecevingController implements GoodsRecevingBlService{
     }
 
     @Override
-    public String getid(String orgcode) throws RemoteException {
+    public String getid(String orgcode) {
         Idget idgetter=new Idget();
         String result=idgetter.getid(orgcode);
         return result;
