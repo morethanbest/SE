@@ -8,7 +8,6 @@ import java.util.List;
 import data.database.DBHelper;
 import data.database.Serialize;
 import po.Formstate;
-import po.HallLoadPO;
 import po.RecordtransPO;
 import po.ResultMessage;
 
@@ -24,7 +23,7 @@ public class RecordtransDB {
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table RecordtransPO(loadtime bigint,arrivaltime bigint,transcode text,transport text,transportcode text,"
+			sql = "create table RecordtransPO(loadtime bigint,transcode text,transport text,transportcode text,"
 					+ "departrue text,destination text,countercode text,supervisor text,allcode blob,fee double,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
@@ -39,21 +38,20 @@ public class RecordtransDB {
 			byte[] listbytes = Serialize.Object2Bytes(po.getAllcode());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "insert into RecordtransPO values(?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into RecordtransPO values(?,?,?,?,?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 
 			pst.setLong(1, po.getLoadtime());
-			pst.setLong(2, po.getArrivaltime());
-			pst.setString(3, po.getTranscode());
-			pst.setString(4, po.getTransportType());
-			pst.setString(5, po.getTransportCode());
-			pst.setString(6, po.getDepartrue());
-			pst.setString(7, po.getDestination());
-			pst.setString(8, po.getCountercode());
-			pst.setString(9, po.getSupervisor());
-			pst.setBytes(10, listbytes);
-			pst.setDouble(11, po.getFee());
-			pst.setBytes(12, formstate);
+			pst.setString(2, po.getTranscode());
+			pst.setString(3, po.getTransportType());
+			pst.setString(4, po.getTransportCode());
+			pst.setString(5, po.getDepartrue());
+			pst.setString(6, po.getDestination());
+			pst.setString(7, po.getCountercode());
+			pst.setString(8, po.getSupervisor());
+			pst.setBytes(9, listbytes);
+			pst.setDouble(10, po.getFee());
+			pst.setBytes(11, formstate);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -75,21 +73,20 @@ public class RecordtransDB {
 			byte[] listbytes=Serialize.Object2Bytes(po.getAllcode());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "update RecordtransPO set loadtime=?,arrivaltime=?,transport=?,transportcode=?,"
+			sql = "update RecordtransPO set loadtime=?,transport=?,transportcode=?,"
 					+ "departrue=?,destination=?,countercode=?,supervisor=?,allcode=?,fee=?,documentstate=? where transcode=?";
 			pst = dbh.prepare(sql);
 			pst.setLong(1, po.getLoadtime());
-			pst.setLong(2, po.getArrivaltime());
-			pst.setString(3, po.getTransportType());
-			pst.setString(4, po.getTransportCode());
-			pst.setString(5, po.getDepartrue());
-			pst.setString(6, po.getDestination());
-			pst.setString(7, po.getCountercode());
-			pst.setString(8, po.getSupervisor());
-			pst.setBytes(9, listbytes);
-			pst.setDouble(10, po.getFee());
-			pst.setBytes(11, formstate);
-			pst.setString(12, po.getTranscode());
+			pst.setString(2, po.getTransportType());
+			pst.setString(3, po.getTransportCode());
+			pst.setString(4, po.getDepartrue());
+			pst.setString(5, po.getDestination());
+			pst.setString(6, po.getCountercode());
+			pst.setString(7, po.getSupervisor());
+			pst.setBytes(8, listbytes);
+			pst.setDouble(9, po.getFee());
+			pst.setBytes(10, formstate);
+			pst.setString(11, po.getTranscode());
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -110,15 +107,15 @@ public class RecordtransDB {
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select loadtime,arrivaltime,transcode,transport,transportcode,"
+			sql = "select loadtime,transcode,transport,transportcode,"
 					+ "departrue,destination,countercode,supervisor,allcode,fee from RecordtransPO where documentstate = ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(10));
-				po = new RecordtransPO(ret.getLong(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
-						ret.getString(6),ret.getString(7),ret.getString(8),ret.getString(9),allbarcode,ret.getDouble(11),documentstate);
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(9));
+				po = new RecordtransPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4),
+						ret.getString(5),ret.getString(6),ret.getString(7),ret.getString(8),allbarcode,ret.getDouble(10),documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -136,7 +133,7 @@ public class RecordtransDB {
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select loadtime,arrivaltime,transcode,transport,transportcode,departrue,destination,"
+			sql = "select loadtime,transcode,transport,transportcode,departrue,destination,"
 					+ "countercode,supervisor,allcode,fee from RecordtransPO where documentstate = ? and transcode like ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
@@ -145,9 +142,9 @@ public class RecordtransDB {
 			while (ret.next()) {
 				if(!ret.getString(3).startsWith(orgcode))
 					continue;
-				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(10));
-				po = new RecordtransPO(ret.getLong(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
-						ret.getString(6),ret.getString(7),ret.getString(8),ret.getString(9),allbarcode,ret.getDouble(11),documentstate);
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(9));
+				po = new RecordtransPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4),
+						ret.getString(5),ret.getString(6),ret.getString(7),ret.getString(8),allbarcode,ret.getDouble(10),documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -184,16 +181,16 @@ public class RecordtransDB {
 		RecordtransPO po=null;
 		dbh=new DBHelper();
 		try {
-			sql = "select loadtime,arrivaltime,transport,transportcode,"
+			sql = "select loadtime,transport,transportcode,"
 					+ "departrue,destination,countercode,supervisor,allcode,fee,documentstate from RecordtransPO where transcode = ?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, transcode);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(9)) ;
-				Formstate state=(Formstate)Serialize.Bytes2Object(ret.getBytes(9)) ;
-				po = new RecordtransPO(ret.getLong(1), ret.getLong(2), transcode,ret.getString(3), ret.getString(4), ret.getString(5),
-						ret.getString(6),ret.getString(7),ret.getString(8),allbarcode,ret.getDouble(10),state);
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;
+				Formstate state=(Formstate)Serialize.Bytes2Object(ret.getBytes(10)) ;
+				po = new RecordtransPO(ret.getLong(1), transcode,ret.getString(2), ret.getString(3), ret.getString(4),
+						ret.getString(5),ret.getString(6),ret.getString(7),allbarcode,ret.getDouble(9),state);
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -208,7 +205,7 @@ public class RecordtransDB {
 		initialize();
 		List<String> list=new ArrayList<String>();
 		list.add("001");
-		RecordtransPO po=new RecordtransPO(1,1,"025000","02500000","1","b","c","d","e",list,10,Formstate.waiting);
+		RecordtransPO po=new RecordtransPO(1,"025000","02500000","1","b","c","d","e",list,10,Formstate.waiting);
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 import presentation.Financial.account.AccountPanel;
+import presentation.Financial.account.StatisticsPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 
@@ -26,6 +27,7 @@ public class FinancialPanel extends JPanel implements ActionListener{
 	private JLabel hint;
 	private CardLayout card;
 	private AccountPanel accountPanel;
+	private StatisticsPanel statisticsPanel;
     private String orgcode;
 	/**
 	 * Create the panel.
@@ -83,8 +85,9 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		
 		//card中添加各种功能面板
 		accountPanel=new AccountPanel(orgcode);
-		panel.add(accountPanel, "driver");
-		
+		panel.add(accountPanel, "account");
+		statisticsPanel=new StatisticsPanel(orgcode);
+		panel.add(statisticsPanel, "statistics");
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);
 		hint.setVisible(false);
@@ -96,8 +99,8 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(btnNewButton_2)) {
 			card.show(panel, "account");
-		}else if (e.getSource().equals(btnNewButton_5)) {
-			
+		}else if (e.getSource().equals(btnNewButton_4)) {
+			card.show(panel, "statistics");
 		}
 	}
 
