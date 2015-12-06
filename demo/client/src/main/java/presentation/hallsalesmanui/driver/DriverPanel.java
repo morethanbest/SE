@@ -2,7 +2,6 @@ package presentation.hallsalesmanui.driver;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -304,12 +303,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 	void addDriver(String drivername,String drivercode,long birthtime,String identifiercode,String cellphone,String drivergender,long timelimit){
 		DriverBlService driverBlService=new DriverController();
 		DriverVO vo=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
-		try {
-			driverBlService.addDriver(vo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		driverBlService.addDriver(vo);
 		System.out.println(vo.getDrivercode());
 		System.out.println(vo.getDrivername());
 		System.out.println(vo.getCellphone());
@@ -321,12 +315,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 	
 	void delDriver(DriverVO VO){
 		DriverBlService driverBlService=new DriverController();
-		try {
-			driverBlService.delDriver(VO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		driverBlService.delDriver(VO);
 		list.remove(row);
 		displayInTable(list);
 		vo=null;
@@ -344,36 +333,19 @@ public class DriverPanel extends JPanel implements ActionListener {
 	}
 	void revDriver(DriverVO VO){
 		DriverBlService driverBlService=new DriverController();
-		try {
-			driverBlService.revDriver(VO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		driverBlService.revDriver(VO);
 	}
 	public String getcode(){
 		DriverBlService driverBlService=new DriverController();
 		String code=null;
-		try {
-			code = driverBlService.getid(orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		code = driverBlService.getid(orgcode);
 		return code;
 	}
 	
 	public DriverVO getDriverbyDN(String driverNumber){
 		DriverBlService driverBlService=new DriverController();
 		DriverVO VO=null;
-		try {
-			VO = driverBlService.getDriverbyDN(driverNumber, orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		VO = driverBlService.getDriverbyDN(driverNumber, orgcode);
 		System.out.println(VO.getDrivername());
 		return VO;
 	}
@@ -381,24 +353,14 @@ public class DriverPanel extends JPanel implements ActionListener {
 	public List<DriverVO> getDriverbyName(String name){
 		DriverBlService driverBlService=new DriverController();
 		List<DriverVO> list=new ArrayList<>();
-		try {
-			list = driverBlService.getDriverbyName(name, orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		list = driverBlService.getDriverbyName(name, orgcode);
 		return list;
 		
 	}
 	public String getid(){
 		DriverBlService driverBlService=new DriverController();
 		String code=null;
-		try {
-			code=driverBlService.getid(orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		code=driverBlService.getid(orgcode);
 		
 		return code;
 	}

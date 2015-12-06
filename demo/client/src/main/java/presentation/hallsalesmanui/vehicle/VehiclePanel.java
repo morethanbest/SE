@@ -1,26 +1,18 @@
 package presentation.hallsalesmanui.vehicle;
 
-import java.awt.Button;
-import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import businesslogic.transportbl.VehiclePack.VehicleController;
 import businesslogicservice.transportblservice.VehicleBlService;
-import po.ResultMessage;
-import sun.awt.DisplayChangedListener;
 import vo.VehicleVO;
 
 public class VehiclePanel extends JPanel implements ActionListener {
@@ -160,21 +152,11 @@ public class VehiclePanel extends JPanel implements ActionListener {
 	}
 	void addVehicle(VehicleVO vo){
 		VehicleBlService vehicleBlService=new VehicleController();
-		try {
-			vehicleBlService.addVehicle(vo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vehicleBlService.addVehicle(vo);
 	}
 	private void delVehicle(VehicleVO vo){
 		VehicleBlService vehicleBlService=new VehicleController();
-		try {
-			vehicleBlService.delVehicle(vo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vehicleBlService.delVehicle(vo);
 		CodeField.setText("");
 		CardField.setText("");
 		yearSelect.setSelectedIndex(0);
@@ -184,44 +166,24 @@ public class VehiclePanel extends JPanel implements ActionListener {
 	}
 	private void revVehicle(VehicleVO vo){
 		VehicleBlService vehicleBlService=new VehicleController();
-		try {
-			vehicleBlService.revVehicle(vo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vehicleBlService.revVehicle(vo);
 	}
 	private VehicleVO getVehiclebyVN(String vehicleCode){
 		VehicleBlService vehicleBlService=new VehicleController();
 		VehicleVO VO=null;
-		try {
-			VO = vehicleBlService.getVehiclebyVN(vehicleCode, orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		VO = vehicleBlService.getVehiclebyVN(vehicleCode, orgcode);
 		return VO;
 	}
 	private VehicleVO getVehiclebyPN(String plateNumber){
 		VehicleBlService vehicleBlService=new VehicleController();
 		VehicleVO VO=null;
-		try {
-			VO = vehicleBlService.getVehiclebyPN(plateNumber, orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		VO = vehicleBlService.getVehiclebyPN(plateNumber, orgcode);
 		return VO;
 	}
 	public String getid(){
 		VehicleBlService vehicleBlService=new VehicleController();
 		String id="";
-		try {
-			id = vehicleBlService.getid(orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		id = vehicleBlService.getid(orgcode);
 		return id;
 	}
 	private void display(){
