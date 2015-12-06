@@ -8,20 +8,24 @@ import vo.CenterloadVO;
 
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/28.
  */
 public class FeeCounter {
 
-    public double countfee(CenterloadVO vo, String city1, String city2){
+    public double countfee(List<String> allbarcode, String city1, String city2){
 
         DecimalFormat format=new DecimalFormat("0.00");
         String transport= TransportType.truck.getName();
 
         CenterLoadFormDataService dataserv= RMIHelper.getCenterloaddata();
         TotalWeight weightgetter=new TotalWeight();
-        double weight=weightgetter.getweight(vo);
+
+        double weight=weightgetter.getweight(allbarcode);
+
+
         double singleprice=0;
         try {
             singleprice=dataserv.getunitprice(transport);

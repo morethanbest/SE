@@ -7,17 +7,21 @@ import vo.RecordtransVO;
 
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/28.
  */
 public class FeeCount {
 
-    public double getfee(RecordtransVO vo, String city1, String city2){
+    public double getfee(List<String> allbarcode, String city1, String city2,String transporttype){
         TotalWeight getweight=new TotalWeight();
-        String transporttype=vo.getTransportType();
-        double weight=getweight.getweight(vo);
+
+        double weight=getweight.getweight(allbarcode);
+
+
         RecordtransFormDataService data= RMIHelper.getRecordtrans();
+
         double singleprice=0;
         try {
             singleprice=data.getunitprice(transporttype);

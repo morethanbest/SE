@@ -13,9 +13,8 @@ import java.util.List;
  * Created by Administrator on 2015/11/29.
  */
 public class HallloadTotalWeight {
-    public double getweight(HallLoadVO vo){
+    public double getweight(List<String> barcode){
         HallLoadFormDataService data=RMIHelper.getHallloadform();
-        List<String> barcode=vo.getAllbarcode();
         int len=barcode.size();
         double totalweight=0;
         for(int i=0;i<=len-1;i++){

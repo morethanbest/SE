@@ -7,15 +7,16 @@ import vo.HallLoadVO;
 
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/29.
  */
 public class HallFeeCount {
-    public double countfee(HallLoadVO vo, String City1, String City2){
+    public double countfee(List<String> allbarcode, String City1, String City2){
         HallloadTotalWeight wei=new HallloadTotalWeight();
         String transporttype= TransportType.truck.getName();
-        double weight=wei.getweight(vo);
+        double weight=wei.getweight(allbarcode);
         HallLoadFormDataService data= RMIHelper.getHallloadform();
         double distance=0;
         try {

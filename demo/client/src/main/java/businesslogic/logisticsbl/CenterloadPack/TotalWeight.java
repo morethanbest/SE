@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class TotalWeight {
 
-    public double getweight(CenterloadVO vo){
+    public double getweight(List<String> barcode){
         CenterLoadFormDataService dataserv= RMIHelper.getCenterloaddata();
-        List<String> barcode=vo.getAllbarcode();
+
         int len=barcode.size();
         double totalweight=0;
         for(int i=0;i<=len-1;i++){

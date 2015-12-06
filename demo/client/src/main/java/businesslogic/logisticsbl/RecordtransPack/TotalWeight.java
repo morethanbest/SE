@@ -11,9 +11,9 @@ import java.util.List;
  * Created by Administrator on 2015/11/28.
  */
 public class TotalWeight {
-    public double getweight(RecordtransVO vo){
+    public double getweight(List<String> allbar){
         RecordtransFormDataService data= RMIHelper.getRecordtrans();
-        List<String> allbar=vo.getAllcode();
+
         double totalweight=0;
         for(int i=0;i<=allbar.size()-1;i++){
             double weight=0;

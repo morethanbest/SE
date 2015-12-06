@@ -23,9 +23,9 @@ public class HallLoadController implements HallLoadBlService{
     }
 
     @Override
-    public double computeHallLoadFare(HallLoadVO vo, String City1, String City2)  {
+    public double computeHallLoadFare(List<String> allbarcode, String City1, String City2)  {
         HallFeeCount count=new HallFeeCount();
-        double fee=count.countfee(vo,City1,City2);
+        double fee=count.countfee(allbarcode,City1,City2);
         return fee;
     }
 

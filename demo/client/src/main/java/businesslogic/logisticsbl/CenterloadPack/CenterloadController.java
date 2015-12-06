@@ -57,9 +57,9 @@ public class CenterloadController implements CenterloadBlService{
     }
 
     @Override
-    public double getfee(CenterloadVO vo, String city1, String city2) {
+    public double getfee(List<String> allbarcode, String city1, String city2) {
         FeeCounter count=new FeeCounter();
-        double fee=count.countfee(vo,city1,city2);
+        double fee=count.countfee(allbarcode,city1,city2);
         return fee;
 
 
