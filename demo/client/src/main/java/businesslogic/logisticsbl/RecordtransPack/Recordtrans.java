@@ -27,7 +27,7 @@ public class Recordtrans {
 
     public ResultMessage addform(RecordtransVO vo){
         long loadtime=vo.getLoadtime();
-        long arrivaltime=vo.getArrivaltime();
+
         String transcode=vo.getTranscode();
         String transport=vo.getTransportType();//交通方式
         String transportcode=vo.getTransportCode();//班次号
@@ -39,14 +39,14 @@ public class Recordtrans {
         double fee=vo.getfee();
         Formstate documentstate=vo.getFormstate();
 
-        add.set(loadtime,arrivaltime,transcode,transport,transportcode,departrue,destination,countercode,supervisor,allcode,fee,documentstate);
+        add.set(loadtime,transcode,transport,transportcode,departrue,destination,countercode,supervisor,allcode,fee,documentstate);
         ResultMessage result=add.passadd();
         return result;
     }
 
     public ResultMessage updateform(RecordtransVO vo){
         long loadtime=vo.getLoadtime();
-        long arrivaltime=vo.getArrivaltime();
+
         String transcode=vo.getTranscode();
         String transport=vo.getTransportType();//交通方式
         String transportcode=vo.getTransportCode();//班次号
@@ -58,7 +58,7 @@ public class Recordtrans {
         double fee=vo.getfee();
         Formstate documentstate=vo.getFormstate();
 
-        update.set(loadtime, arrivaltime, transcode, transport, transportcode, departrue, destination, countercode, supervisor, allcode, fee, documentstate);
+        update.set(loadtime,  transcode, transport, transportcode, departrue, destination, countercode, supervisor, allcode, fee, documentstate);
         ResultMessage result=update.passupdate();
         return result;
     }
@@ -70,7 +70,7 @@ public class Recordtrans {
         for(int i=0;i<=len-1;i++){
             RecordtransPO newpo=pos.get(i);
             long loadtime=newpo.getLoadtime();
-            long arrivaltime=newpo.getArrivaltime();
+
             String transcode=newpo.getTranscode();
             String transport=newpo.getTransportType();//交通方式
             String transportcode=newpo.getTransportCode();//班次号
@@ -82,7 +82,7 @@ public class Recordtrans {
             double fee=newpo.getFee();
             Formstate documentstate=newpo.getDocumentstate();
 
-            RecordtransVO vo=new RecordtransVO(loadtime,arrivaltime,transcode,transport,transportcode,departrue,destination,countercode,supervisor,allcode,fee,documentstate);
+            RecordtransVO vo=new RecordtransVO(loadtime,transcode,transport,transportcode,departrue,destination,countercode,supervisor,allcode,fee,documentstate);
             list.add(vo);
 
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RecordtransVO {
 	long loadtime;
-	long arrivaltime;
+
 	String transcode;
 	String transport;//交通方式
 	String transportcode;//班次号
@@ -18,10 +18,10 @@ public class RecordtransVO {
 	double fee;
 	Formstate formstate;
 
-	public RecordtransVO(long loadtime, long arrivaltime, String transcode, String transport,String transportcode, String departrue,
+	public RecordtransVO(long loadtime,  String transcode, String transport,String transportcode, String departrue,
 			String destination, String countercode, String supervisor, List<String> allcode,double fee,Formstate state) {
 		this.loadtime = loadtime;
-		this.arrivaltime = arrivaltime;
+
 		this.transcode = transcode;
 		this.transport=transport;
 		this.transportcode=transportcode;
@@ -37,9 +37,7 @@ public class RecordtransVO {
 	public long getLoadtime() {
 		return loadtime;
 	}
-	public long getArrivaltime() {
-		return arrivaltime;
-	}
+
 	public String getTranscode() {
 		return transcode;
 	}

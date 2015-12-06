@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class AddTrans {
     private long loadtime;
-    private long arrivaltime;
+
     private String transcode;
     String transport;//交通方式
     String transportcode;//班次号
@@ -26,9 +26,9 @@ public class AddTrans {
     private double fee;
     private Formstate formstate;
 
-    public void set(long loadtime, long arrivaltime, String transcode, String transport,String transportcode, String departrue, String destination, String countercode, String supervisor, List<String> allcode,double fee,Formstate state){
+    public void set(long loadtime,  String transcode, String transport,String transportcode, String departrue, String destination, String countercode, String supervisor, List<String> allcode,double fee,Formstate state){
         this.loadtime=loadtime;
-        this.arrivaltime=arrivaltime;
+
         this.transcode=transcode;
         this.transport=transport;
         this.transportcode=transportcode;
@@ -44,7 +44,7 @@ public class AddTrans {
 
     public ResultMessage passadd(){
         RecordtransFormDataService dataserv= RMIHelper.getRecordtrans();
-        RecordtransPO po=new RecordtransPO(loadtime,arrivaltime,transcode,transport,transportcode,departrue,destination,countercode,supervisor,allcode,fee,formstate);
+        RecordtransPO po=new RecordtransPO(loadtime,transcode,transport,transportcode,departrue,destination,countercode,supervisor,allcode,fee,formstate);
         ResultMessage result=null;
         try {
             result=dataserv.addRecordtransForm(po);
