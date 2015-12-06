@@ -261,8 +261,9 @@ public class OrganizationDB {
 		return lastcode;
 	}
 	public static void main(String[] args) {
-		initialize();
-		System.out.println("test");
+//		initialize();
+//		System.out.println("test");
+		write(new OrganizationPO("总部","025",Organizationtype.headquarters,"南京"));
 //		if(getAll().size()>0){
 //			System.out.println("getall success");
 //		}

@@ -1,26 +1,18 @@
 package presentation.hallsalesmanui.vehicle;
 
-import java.awt.Button;
-import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import businesslogic.transportbl.VehiclePack.VehicleController;
 import businesslogicservice.transportblservice.VehicleBlService;
-import po.ResultMessage;
-import sun.awt.DisplayChangedListener;
 import vo.VehicleVO;
 
 public class VehiclePanel extends JPanel implements ActionListener {

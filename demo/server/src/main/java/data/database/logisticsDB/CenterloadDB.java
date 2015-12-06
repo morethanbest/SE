@@ -23,7 +23,7 @@ public class CenterloadDB {
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table CenterloadPO(id text,loadtime bigint,motorcode text,destination text,"
+			sql = "create table CenterloadPO(loadtime bigint,motorcode text,destination text,"
 					+ "vehiclecode text,supervisor text,supercargo text,allbarcode blob,fee double,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
@@ -38,19 +38,18 @@ public class CenterloadDB {
 			byte[] listbytes = Serialize.Object2Bytes(po.getAllbarcode());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "insert into CenterloadPO values(?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into CenterloadPO values(?,?,?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 
-			pst.setString(1, po.getId());
-			pst.setLong(2, po.getLoadtime());
-			pst.setString(3, po.getMotorcode());
-			pst.setString(4, po.getDestination());
-			pst.setString(5, po.getVehiclecode());
-			pst.setString(6, po.getSupervisor());
-			pst.setString(7, po.getSupercargo());
-			pst.setBytes(8, listbytes);
-			pst.setDouble(9, po.getFee());
-			pst.setBytes(10, formstate);
+			pst.setLong(1, po.getLoadtime());
+			pst.setString(2, po.getMotorcode());
+			pst.setString(3, po.getDestination());
+			pst.setString(4, po.getVehiclecode());
+			pst.setString(5, po.getSupervisor());
+			pst.setString(6, po.getSupercargo());
+			pst.setBytes(7, listbytes);
+			pst.setDouble(8, po.getFee());
+			pst.setBytes(9, formstate);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -72,19 +71,18 @@ public class CenterloadDB {
 			byte[] listbytes=Serialize.Object2Bytes(po.getAllbarcode());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "update CenterloadPO set id=?,loadtime=?,destination=?,vehiclecode=?,supervisor=?,"
+			sql = "update CenterloadPO set loadtime=?,destination=?,vehiclecode=?,supervisor=?,"
 					+ "supercargo=?,allbarcode=?,fee=?,documentstate=? where motorcode=?";
 			pst = dbh.prepare(sql);
-			pst.setString(1, po.getId());
-			pst.setLong(2, po.getLoadtime());
-			pst.setString(3, po.getDestination());
-			pst.setString(4, po.getVehiclecode());
-			pst.setString(5, po.getSupervisor());
-			pst.setString(6, po.getSupercargo());
-			pst.setBytes(7, listbytes);
-			pst.setDouble(8, po.getFee());
-			pst.setBytes(9, formstate);
-			pst.setString(10, po.getMotorcode());
+			pst.setLong(1, po.getLoadtime());
+			pst.setString(2, po.getDestination());
+			pst.setString(3, po.getVehiclecode());
+			pst.setString(4, po.getSupervisor());
+			pst.setString(5, po.getSupercargo());
+			pst.setBytes(6, listbytes);
+			pst.setDouble(7, po.getFee());
+			pst.setBytes(8, formstate);
+			pst.setString(9, po.getMotorcode());
 
 			int result = pst.executeUpdate();
 			if (result == -1) {
@@ -106,15 +104,15 @@ public class CenterloadDB {
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select id,loadtime,motorcode,destination,vehiclecode,supervisor,"
+			sql = "select loadtime,motorcode,destination,vehiclecode,supervisor,"
 					+ "supercargo,allbarcode,fee from CenterloadPO where documentstate = ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;
-				po = new CenterloadPO(ret.getString(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
-						ret.getString(6),ret.getString(7),allbarcode,ret.getDouble(9),documentstate);
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(7)) ;
+				po = new CenterloadPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4),
+						ret.getString(5),ret.getString(6),allbarcode,ret.getDouble(8),documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -132,18 +130,18 @@ public class CenterloadDB {
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select id,loadtime,motorcode,destination,vehiclecode,supervisor,"
+			sql = "select loadtime,motorcode,destination,vehiclecode,supervisor,"
 					+ "supercargo,allbarcode,fee from CenterloadPO where documentstate = ? and orgcode like ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			pst.setString(2, "%"+orgcode+"%");
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				if(!ret.getString(3).startsWith(orgcode))
+				if(!ret.getString(2).startsWith(orgcode))
 					continue;
-				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;
-				po = new CenterloadPO(ret.getString(1), ret.getLong(2), ret.getString(3), ret.getString(4), ret.getString(5),
-						ret.getString(6),ret.getString(7),allbarcode,ret.getDouble(9),documentstate);
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(7)) ;
+				po = new CenterloadPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4),
+						ret.getString(5),ret.getString(6),allbarcode,ret.getDouble(8),documentstate);
 				list.add(po);
 			}
 			ret.close();
@@ -180,16 +178,16 @@ public class CenterloadDB {
 		CenterloadPO po=null;
 		dbh=new DBHelper();
 		try {
-			sql = "select id,loadtime,destination,vehiclecode,supervisor,"
+			sql = "select loadtime,destination,vehiclecode,supervisor,"
 					+ "supercargo,allbarcode,fee,documentstate from CenterloadPO where motorcode = ?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, motorcode);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(7)) ;
-				Formstate state=(Formstate)Serialize.Bytes2Object(ret.getBytes(9)) ;
-				po = new CenterloadPO(ret.getString(1), ret.getLong(2),motorcode, ret.getString(3), ret.getString(4),
-						ret.getString(5),ret.getString(6),allbarcode,ret.getDouble(8),state);
+				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(6)) ;
+				Formstate state=(Formstate)Serialize.Bytes2Object(ret.getBytes(8)) ;
+				po = new CenterloadPO(ret.getLong(1), motorcode, ret.getString(2), ret.getString(3),
+						ret.getString(4),ret.getString(5),allbarcode,ret.getDouble(7),state);
 			}
 			ret.close();
 			dbh.close();// 关闭连接
@@ -204,7 +202,7 @@ public class CenterloadDB {
 		initialize();
 		List<String> list=new ArrayList<String>();
 		list.add("001");
-		CenterloadPO po=new CenterloadPO("0250001",1,"0250002","1","b","c","d",list,10,Formstate.waiting);
+		CenterloadPO po=new CenterloadPO(1,"0250002","1","b","c","d",list,10,Formstate.waiting);
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)

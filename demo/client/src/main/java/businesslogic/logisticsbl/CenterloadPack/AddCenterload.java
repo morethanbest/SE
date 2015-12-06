@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2015/11/25.
  */
 public class AddCenterload {
-    String  id;
+
     long loadtime;
     String motorcode;
     String destination;
@@ -24,8 +24,8 @@ public class AddCenterload {
     double fee;
     Formstate documentstate;
 
-    public void set(String id,long loadtime,String motorcode,String destination,String vehiclecode,String supervisor,String supercargo,List<String> allbarcode,double fee,Formstate state){
-        this.id=id;
+    public void set(long loadtime,String motorcode,String destination,String vehiclecode,String supervisor,String supercargo,List<String> allbarcode,double fee,Formstate state){
+
         this.loadtime=loadtime;
         this.motorcode=motorcode;
         this.destination=destination;
@@ -40,7 +40,7 @@ public class AddCenterload {
     public ResultMessage passadd(){
         CenterLoadFormDataService dataserv= RMIHelper.getCenterloaddata();
         ResultMessage result=null;
-        CenterloadPO po=new CenterloadPO(id,loadtime,motorcode,destination,vehiclecode,supervisor,supercargo,allbarcode,fee,documentstate);
+        CenterloadPO po=new CenterloadPO(loadtime,motorcode,destination,vehiclecode,supervisor,supercargo,allbarcode,fee,documentstate);
         try {
             result=dataserv.addCenterLoadForm(po);
         } catch (RemoteException e) {
