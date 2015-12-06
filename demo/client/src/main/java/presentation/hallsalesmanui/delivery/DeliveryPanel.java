@@ -84,9 +84,9 @@ public class DeliveryPanel extends JPanel {
 		monthBox.addItemListener(listener);
 
 		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem(c.get(Calendar.YEAR));
-		monthBox.setSelectedItem(c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem(c.get(Calendar.DAY_OF_MONTH));
+		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
+		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
+		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
 
 	}
 

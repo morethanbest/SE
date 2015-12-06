@@ -10,67 +10,77 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import presentation.hallsalesmanui.delivery.DeliveryPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
+import presentation.hallsalesmanui.goodrecieving.GoodRecievingPanel;
+import presentation.hallsalesmanui.hallload.HallLoadPanel;
+import presentation.hallsalesmanui.recipient.RecipientPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 
 
 
 public class HallsalesmanPanel extends JPanel implements ActionListener {
 	private JPanel panel;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JButton btnNewButton_3;
-	private JButton btnNewButton_4;
-	private JButton btnNewButton_5;
-	private JButton btnNewButton_6;
+	private JButton loadButton;
+	private JButton goodrecevingButton;
+	private JButton deliveryButton;
+	private JButton reciptionButton;
+	private JButton vehicleButton;
+	private JButton driverButton;
+	private JButton logoutButton;
 	private JLabel hint;
 	private CardLayout card;
+	private HallLoadPanel hallLoadPanel;
+	private GoodRecievingPanel goodRecievingPanel;
+	private DeliveryPanel deliveryPanel;
+	private RecipientPanel recipientPanel;
 	private DriverPanel driverPanel;
 	private VehiclePanel vehiclePanel;
+	
+	
     private String orgcode;
 	/**
 	 * Create the panel.
 	 */
-	public HallsalesmanPanel(String orgcode) {
+	public HallsalesmanPanel(String orgcode, String city) {
 		this.orgcode=orgcode;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
-		btnNewButton = new JButton("装车单");
-		btnNewButton.setBounds(14, 13, 113, 27);
-		btnNewButton.addActionListener(this);
-		add(btnNewButton);
+		loadButton = new JButton("装车单");
+		loadButton.setBounds(14, 13, 113, 27);
+		loadButton.addActionListener(this);
+		add(loadButton);
 
-		btnNewButton_1 = new JButton("到达单");
-		btnNewButton_1.setBounds(141, 13, 113, 27);
-		btnNewButton_1.addActionListener(this);
-		add(btnNewButton_1);
+		goodrecevingButton = new JButton("到达单");
+		goodrecevingButton.setBounds(141, 13, 113, 27);
+		goodrecevingButton.addActionListener(this);
+		add(goodrecevingButton);
 
-		btnNewButton_2 = new JButton("派件单");
-		btnNewButton_2.setBounds(268, 13, 113, 27);
-		btnNewButton_2.addActionListener(this);
-		add(btnNewButton_2);
+		deliveryButton = new JButton("派件单");
+		deliveryButton.setBounds(268, 13, 113, 27);
+		deliveryButton.addActionListener(this);
+		add(deliveryButton);
 
-		btnNewButton_3 = new JButton("收款单");
-		btnNewButton_3.setBounds(395, 13, 113, 27);
-		btnNewButton_3.addActionListener(this);
-		add(btnNewButton_3);
+		reciptionButton = new JButton("收款单");
+		reciptionButton.setBounds(395, 13, 113, 27);
+		reciptionButton.addActionListener(this);
+		add(reciptionButton);
 
-		btnNewButton_4 = new JButton("车辆信息");
-		btnNewButton_4.setBounds(522, 13, 113, 27);
-		btnNewButton_4.addActionListener(this);
-		add(btnNewButton_4);
+		vehicleButton = new JButton("车辆信息");
+		vehicleButton.setBounds(522, 13, 113, 27);
+		vehicleButton.addActionListener(this);
+		add(vehicleButton);
 
-		btnNewButton_5 = new JButton("司机信息");
-		btnNewButton_5.setBounds(649, 13, 113, 27);
-		btnNewButton_5.addActionListener(this);
-		add(btnNewButton_5);
+		driverButton = new JButton("司机信息");
+		driverButton.setBounds(649, 13, 113, 27);
+		driverButton.addActionListener(this);
+		add(driverButton);
      
-		btnNewButton_6 = new JButton("注销");
-		btnNewButton_6.setBounds(855, 13, 113, 27);
-		btnNewButton_6.addActionListener(this);
-		add(btnNewButton_6);
+		logoutButton = new JButton("注销");
+		logoutButton.setBounds(855, 13, 113, 27);
+		logoutButton.addActionListener(this);
+		add(logoutButton);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 58, 982, 2);
@@ -84,8 +94,16 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		panel.setLayout(card);
 		
 		//card中添加各种功能面板
+		hallLoadPanel = new HallLoadPanel(orgcode, city);
+		goodRecievingPanel = new GoodRecievingPanel(orgcode, city);
+		deliveryPanel = new DeliveryPanel(orgcode);
+		
 		driverPanel=new DriverPanel(orgcode);
 		vehiclePanel=new VehiclePanel(orgcode);
+		
+		panel.add(hallLoadPanel, "hallLoad");
+		panel.add(goodRecievingPanel, "goodRecieving");
+		panel.add(deliveryPanel, "delivery");
 		panel.add(driverPanel, "driver");
 		panel.add(vehiclePanel, "vehicle");
 		
@@ -98,10 +116,16 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource().equals(btnNewButton_4)) {
+		if (e.getSource().equals(vehicleButton)) {
 			card.show(panel, "vehicle");
-		}else if (e.getSource().equals(btnNewButton_5)) {
+		} else if (e.getSource().equals(driverButton)) {
 			card.show(panel, "driver");
-		}
+		} else if (e.getSource().equals(loadButton)) {
+			card.show(panel, "hallLoad");
+		} else if (e.getSource().equals(goodrecevingButton)) {
+			card.show(panel, "goodRecieving");
+		} else if (e.getSource().equals(deliveryButton)) {
+			card.show(panel, "delivery");
+		} 
 	}
 }

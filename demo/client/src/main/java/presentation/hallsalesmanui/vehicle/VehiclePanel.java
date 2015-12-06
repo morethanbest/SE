@@ -160,21 +160,11 @@ public class VehiclePanel extends JPanel implements ActionListener {
 	}
 	void addVehicle(VehicleVO vo){
 		VehicleBlService vehicleBlService=new VehicleController();
-		try {
-			vehicleBlService.addVehicle(vo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vehicleBlService.addVehicle(vo);
 	}
 	private void delVehicle(VehicleVO vo){
 		VehicleBlService vehicleBlService=new VehicleController();
-		try {
-			vehicleBlService.delVehicle(vo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vehicleBlService.delVehicle(vo);
 		CodeField.setText("");
 		CardField.setText("");
 		yearSelect.setSelectedIndex(0);
@@ -184,44 +174,24 @@ public class VehiclePanel extends JPanel implements ActionListener {
 	}
 	private void revVehicle(VehicleVO vo){
 		VehicleBlService vehicleBlService=new VehicleController();
-		try {
-			vehicleBlService.revVehicle(vo);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vehicleBlService.revVehicle(vo);
 	}
 	private VehicleVO getVehiclebyVN(String vehicleCode){
 		VehicleBlService vehicleBlService=new VehicleController();
 		VehicleVO VO=null;
-		try {
-			VO = vehicleBlService.getVehiclebyVN(vehicleCode, orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		VO = vehicleBlService.getVehiclebyVN(vehicleCode, orgcode);
 		return VO;
 	}
 	private VehicleVO getVehiclebyPN(String plateNumber){
 		VehicleBlService vehicleBlService=new VehicleController();
 		VehicleVO VO=null;
-		try {
-			VO = vehicleBlService.getVehiclebyPN(plateNumber, orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		VO = vehicleBlService.getVehiclebyPN(plateNumber, orgcode);
 		return VO;
 	}
 	public String getid(){
 		VehicleBlService vehicleBlService=new VehicleController();
 		String id="";
-		try {
-			id = vehicleBlService.getid(orgcode);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		id = vehicleBlService.getid(orgcode);
 		return id;
 	}
 	private void display(){

@@ -44,11 +44,12 @@ public class HallLoadPanel extends JPanel {
 	private HallLoadBlService hallLoadBlService;
 	private JLabel moterLabel;
 	private JLabel orgLabel;
-
+	private String city;
 	/**
 	 * Create the panel.
 	 */
-	public HallLoadPanel(String orgCode) {
+	public HallLoadPanel(String orgCode, String city) {
+		this.city = city;
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
@@ -67,6 +68,10 @@ public class HallLoadPanel extends JPanel {
 		orgLabel = new JLabel(orgCode);
 		orgLabel.setBounds(89, 47, 199, 18);
 		add(orgLabel);
+		
+		JLabel fareLabel = new JLabel("0");
+		fareLabel.setBounds(421, 281, 82, 27);
+		add(fareLabel);
 
 		carField = new JTextField();
 		carField.setColumns(10);
@@ -131,12 +136,12 @@ public class HallLoadPanel extends JPanel {
 				for (int i = 0; i < rowCount; i++) {
 					barcodes.add((String) tableModel.getValueAt(i, 0));
 				}
+				double fare = Double.parseDouble(fareLabel.getText());
 				hallLoadBlService.addHallLoadForm(new HallLoadVO(date, orgCode,
 						moterLabel.getText(), (String) destinBox
 								.getSelectedItem(), carField.getText(),
 						jianField.getText(), yaField.getText(), barcodes,
-						//TODO
-						0, Formstate.waiting));
+						fare, Formstate.waiting));
 			}
 		});
 		button.setBounds(427, 366, 113, 27);
@@ -153,10 +158,15 @@ public class HallLoadPanel extends JPanel {
 		monthBox.addItemListener(listener);
 
 		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem(c.get(Calendar.YEAR));
-		monthBox.setSelectedItem(c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem(c.get(Calendar.DAY_OF_MONTH));
-
+		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
+		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
+		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
+		Long date = (Long) yearBox.getSelectedItem() * 10000
+				+ (Long) monthBox.getSelectedItem() * 100
+				+ (Long) dateBox.getSelectedItem();
+		moterLabel.setText(hallLoadBlService.getid(orgCode, date));
+		
+		
 		JButton button_1 = new JButton("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -177,6 +187,21 @@ public class HallLoadPanel extends JPanel {
 		});
 		button_2.setBounds(827, 340, 113, 27);
 		add(button_2);
+		
+		JButton getFareButton = new JButton("获取运费");
+		getFareButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<String> barcodes = new ArrayList<String>();
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				int rowCount=tableModel.getRowCount();
+				for (int i = 0; i < rowCount; i++) {
+					barcodes.add((String) tableModel.getValueAt(i, 0));
+				}
+				fareLabel.setText(hallLoadBlService.computeHallLoadFare(barcodes, city, city) + "");
+			}
+		});
+		getFareButton.setBounds(517, 281, 103, 27);
+		add(getFareButton);
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
@@ -222,7 +247,7 @@ public class HallLoadPanel extends JPanel {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
 		List<OrganizationVO> orgList = organizationBlService
-				.getOrganizationbyType(Organizationtype.transfercenter);
+				.getOrganizationbyBoth(city, Organizationtype.transfercenter);
 		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}

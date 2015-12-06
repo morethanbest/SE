@@ -15,8 +15,10 @@ import javax.swing.JComboBox;
 import vo.ReceptionVO;
 import businesslogic.orderbl.ReceptionPack.ReceptionController;
 import businesslogicservice.orderblservice.ReceptionBlService;
+
 import java.awt.SystemColor;
 import java.awt.Color;
+import java.util.Calendar;
 
 public class RecievePanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -98,6 +100,11 @@ public class RecievePanel extends JPanel {
 		};
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
+		
+		Calendar c = Calendar.getInstance();
+		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
+		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
+		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {

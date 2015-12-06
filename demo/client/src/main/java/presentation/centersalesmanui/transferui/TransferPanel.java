@@ -4,80 +4,107 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import businesslogic.logisticsbl.RecordtransPack.CentertransController;
+import businesslogicservice.logisticsblservice.RecordtransBlService;
+
 import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class TransferPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField classField;
+	private JTextField counterField;
+	private JTextField manageField;
 	private JTable table;
+	private JComboBox<Long> yearBox;
+	private JComboBox<Long> monthBox;
+	private JComboBox<Long> dateBox;
+	private JComboBox<String> typeBox;
+	private JComboBox<String> destinBox;
+	private JButton button;
+	private RecordtransBlService recordtransBlService;
+	private JButton button_1;
+	private JButton button_2;
+	private JLabel codeLabel;
+	private JLabel departureLabel;
+	private JLabel fareLabel;
+	private JButton farebutton;
 
 	/**
 	 * Create the panel.
 	 */
-	public TransferPanel() {
+	public TransferPanel(String orgCode, String city) {
+		recordtransBlService = new CentertransController();
+		
 		setLayout(null);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(14, 13, 242, 24);
-		add(textField);
+		codeLabel = new JLabel("");
+		codeLabel.setBounds(14, 12, 242, 27);
+		add(codeLabel);
 		
-		JComboBox<Long> comboBox = new JComboBox<Long>();
-		comboBox.setBounds(14, 78, 74, 24);
-		add(comboBox);
+		departureLabel = new JLabel("");
+		departureLabel.setBounds(351, 147, 242, 27);
+		add(departureLabel);
 		
-		JComboBox<Long> comboBox_1 = new JComboBox<Long>();
-		comboBox_1.setBounds(112, 78, 61, 24);
-		add(comboBox_1);
+		yearBox = new JComboBox<Long>();
+		yearBox.setBounds(14, 78, 74, 24);
+		add(yearBox);
 		
-		JComboBox<Long> comboBox_2 = new JComboBox<Long>();
-		comboBox_2.setBounds(195, 78, 61, 24);
-		add(comboBox_2);
+		monthBox = new JComboBox<Long>();
+		monthBox.setBounds(112, 78, 61, 24);
+		add(monthBox);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(14, 147, 242, 24);
-		add(comboBox_3);
+		dateBox = new JComboBox<Long>();
+		dateBox.setBounds(195, 78, 61, 24);
+		add(dateBox);
 		
-		JButton button = new JButton("提交");
+		typeBox = new JComboBox<String>();
+		typeBox.setBounds(14, 147, 242, 24);
+		add(typeBox);
+		
+		classField = new JTextField();
+		classField.setColumns(10);
+		classField.setBounds(14, 215, 242, 24);
+		add(classField);
+		
+		counterField = new JTextField();
+		counterField.setColumns(10);
+		counterField.setBounds(351, 13, 242, 24);
+		add(counterField);
+		
+		manageField = new JTextField();
+		manageField.setColumns(10);
+		manageField.setBounds(351, 78, 242, 24);
+		add(manageField);
+		
+		destinBox = new JComboBox<String>();
+		destinBox.setBounds(351, 215, 242, 24);
+		add(destinBox);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{typeBox, yearBox, monthBox, dateBox, classField, counterField, button}));
+		
+		button = new JButton("提交");
 		button.setBounds(416, 348, 113, 27);
 		add(button);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(14, 215, 242, 24);
-		add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(351, 13, 242, 24);
-		add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(351, 78, 242, 24);
-		add(textField_3);
-		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(351, 147, 242, 24);
-		add(comboBox_5);
-		
-		JComboBox comboBox_6 = new JComboBox();
-		comboBox_6.setBounds(351, 215, 242, 24);
-		add(comboBox_6);
+		farebutton = new JButton("获取运费");
+		farebutton.setBounds(153, 348, 97, 27);
+		add(farebutton);
 		
 		JLabel label = new JLabel("运费合计：");
-		label.setBounds(80, 352, 113, 18);
+		label.setBounds(14, 352, 82, 18);
 		add(label);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(660, 13, 285, 310);
+		scrollPane.setBounds(660, 13, 285, 274);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -90,7 +117,31 @@ public class TransferPanel extends JPanel {
 		));
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{comboBox_3, textField, comboBox, comboBox_1, comboBox_2, textField_1, textField_2, button}));
+		
+		button_1 = new JButton("增加一条");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				tableModel.addRow(new String[]{""});
+			}
+		});
+		button_1.setBounds(670, 300, 113, 27);
+		add(button_1);
+		
+		button_2 = new JButton("删除该条");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				int rownum = table.getSelectedRow();
+				tableModel.removeRow(rownum);
+			}
+		});
+		button_2.setBounds(823, 300, 113, 27);
+		add(button_2);
+		
+		fareLabel = new JLabel("");
+		fareLabel.setBounds(93, 352, 46, 18);
+		add(fareLabel);
 
 	}
 }

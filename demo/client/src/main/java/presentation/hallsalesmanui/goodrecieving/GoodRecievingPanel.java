@@ -37,11 +37,13 @@ public class GoodRecievingPanel extends JPanel {
 	private JButton button;
 	private GoodsRecevingBlService goodsRecevingBlService;
 	private JTextField codeField;
+	private String city;
 
 	/**
 	 * Create the panel.
 	 */
-	public GoodRecievingPanel(String orgCode) {
+	public GoodRecievingPanel(String orgCode, String city) {
+		this.city = city;
 		goodsRecevingBlService = new GoodsRecevingController();
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
@@ -107,9 +109,9 @@ public class GoodRecievingPanel extends JPanel {
 		monthBox.addItemListener(listener);
 
 		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem(c.get(Calendar.YEAR));
-		monthBox.setSelectedItem(c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem(c.get(Calendar.DAY_OF_MONTH));
+		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
+		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
+		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
@@ -169,7 +171,7 @@ public class GoodRecievingPanel extends JPanel {
 	public void addOrganizationItems(JComboBox<String> orgSelect) {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
-		List<OrganizationVO> orgList = organizationBlService.getOrganizationbyType(Organizationtype.transfercenter);
+		List<OrganizationVO> orgList = organizationBlService.getOrganizationbyBoth(city, Organizationtype.transfercenter);
 		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}
