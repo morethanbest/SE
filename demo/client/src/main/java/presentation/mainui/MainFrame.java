@@ -10,6 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
+import presentation.Financial.FinancialPanel;
 import presentation.administratorui.AdministratorPanel;
 import presentation.courierui.CourierPanel;
 import presentation.hallsalesmanui.HallsalesmanPanel;
@@ -72,6 +73,10 @@ public class MainFrame extends JFrame {
 			JPanel temp=new AdministratorPanel(vo.getOrganizationcode());
 			contentPane.add(temp, "administrator");
 			card.show(contentPane, "administrator");
+		} else if(vo.getJob() == Job.Financial){
+			JPanel temp=new FinancialPanel(vo.getOrganizationcode());
+			contentPane.add(temp, "financial");
+			card.show(contentPane, "financial");
 		}
 	}
 

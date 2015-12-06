@@ -138,8 +138,10 @@ public class AccountPanel extends JPanel implements ActionListener{
 			if(isrev==false){
 				btnupdate.setText("确定");
 				nameField.setEditable(true);
+				isrev=true;
 			}
 			else {
+				isrev=false;
 				btnupdate.setText("修改");
 				nameField.setEditable(false);
 				AccountVO newvo=new AccountVO(vo.getId(), nameField.getText(), vo.getAccountsum());
