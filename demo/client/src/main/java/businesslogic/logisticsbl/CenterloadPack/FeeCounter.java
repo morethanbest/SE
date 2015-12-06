@@ -3,6 +3,7 @@ package businesslogic.logisticsbl.CenterloadPack;
 import dataservice.logisticsdataservice.CenterLoadFormDataService;
 import init.RMIHelper;
 import javafx.scene.input.DataFormat;
+import po.TransportType;
 import vo.CenterloadVO;
 
 import java.rmi.RemoteException;
@@ -13,10 +14,10 @@ import java.text.DecimalFormat;
  */
 public class FeeCounter {
 
-    public double countfee(CenterloadVO vo, String city1, String city2, String transport){
+    public double countfee(CenterloadVO vo, String city1, String city2){
 
         DecimalFormat format=new DecimalFormat("0.00");
-
+        String transport= TransportType.truck.getName();
 
         CenterLoadFormDataService dataserv= RMIHelper.getCenterloaddata();
         TotalWeight weightgetter=new TotalWeight();

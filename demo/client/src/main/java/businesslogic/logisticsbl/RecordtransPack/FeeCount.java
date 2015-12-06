@@ -13,8 +13,9 @@ import java.text.DecimalFormat;
  */
 public class FeeCount {
 
-    public double getfee(RecordtransVO vo, String city1, String city2, String transporttype){
+    public double getfee(RecordtransVO vo, String city1, String city2){
         TotalWeight getweight=new TotalWeight();
+        String transporttype=vo.getTransportType();
         double weight=getweight.getweight(vo);
         RecordtransFormDataService data= RMIHelper.getRecordtrans();
         double singleprice=0;

@@ -50,9 +50,9 @@ public class CentertransController implements RecordtransBlService{
     }
 
     @Override
-    public double getfee(RecordtransVO vo, String city1, String city2, String transporttype) {
+    public double getfee(RecordtransVO vo, String city1, String city2) {
         FeeCount counter=new FeeCount();
-        double fee=counter.getfee(vo,city1,city2,transporttype);
+        double fee=counter.getfee(vo,city1,city2);
         return fee;
 
 

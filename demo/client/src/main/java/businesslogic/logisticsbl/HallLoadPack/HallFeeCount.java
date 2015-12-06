@@ -2,6 +2,7 @@ package businesslogic.logisticsbl.HallLoadPack;
 
 import dataservice.logisticsdataservice.HallLoadFormDataService;
 import init.RMIHelper;
+import po.TransportType;
 import vo.HallLoadVO;
 
 import java.rmi.RemoteException;
@@ -11,8 +12,9 @@ import java.text.DecimalFormat;
  * Created by Administrator on 2015/11/29.
  */
 public class HallFeeCount {
-    public double countfee(HallLoadVO vo, String City1, String City2, String transporttype){
+    public double countfee(HallLoadVO vo, String City1, String City2){
         HallloadTotalWeight wei=new HallloadTotalWeight();
+        String transporttype= TransportType.truck.getName();
         double weight=wei.getweight(vo);
         HallLoadFormDataService data= RMIHelper.getHallloadform();
         double distance=0;

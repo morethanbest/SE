@@ -16,5 +16,5 @@ public interface RecordtransBlService {
 
 
 	public String getid(String orgcode,long data) throws  RemoteException;
-	public double getfee(RecordtransVO vo ,String city1,String city2, String transporttype);//为vo装车队呢  现在所在城市 和目的地城市，  运输类型
+	public double getfee(RecordtransVO vo ,String city1,String city2);//为vo装车队呢  现在所在城市 和目的地城市，  运输类型
 }
