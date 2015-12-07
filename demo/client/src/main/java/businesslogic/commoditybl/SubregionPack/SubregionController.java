@@ -21,6 +21,12 @@ public class SubregionController implements SubregionBlService{
 		return result;
 	}
 
-	
-	
+	@Override
+	public boolean wheconflict(String orgcode,CommodityLocation location) {
+		IsEmpty whe=new IsEmpty();
+		boolean result=whe.wheEmpty(orgcode,location);
+		return result;
+	}
+
+
 }

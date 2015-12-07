@@ -55,13 +55,17 @@ public class InboundController implements businesslogicservice.commodityblservic
 	}
 
 	@Override
-	public List<Long> getEachBlockLimit(long blocknum) {
+	public List<Long> getEachBlockLimit(long blocknum,String orgcode) {
 		BlockCondition a=new BlockCondition();
+		List<Long> result=a.getlimit(blocknum,orgcode);
+		return result;
 	}
 
 	@Override
-	public boolean wheConflict(CommodityLocation location) {
-
+	public boolean wheConflict(String orgcode,CommodityLocation location) {
+		WheConflict con=new WheConflict();
+		boolean result=con.getres(orgcode,location);
+		return result;
 
 	}
 

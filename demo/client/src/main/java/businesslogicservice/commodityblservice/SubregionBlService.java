@@ -7,6 +7,8 @@ import po.ResultMessage;
 
 public interface SubregionBlService {
 	public ResultMessage Subregion(String orgcode,CommodityLocation beforeLocation,CommodityLocation afterLocation);
+
+	public boolean wheconflict(String orgcode,CommodityLocation location);
 }
 
 

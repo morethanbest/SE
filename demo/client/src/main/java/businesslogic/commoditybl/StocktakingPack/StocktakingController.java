@@ -19,6 +19,8 @@ public class StocktakingController implements StocktakingBlService{
 		return vo;
 	}
 
+
+
 	@Override
 	public long getId(String orgcode, long date) {
 		IdGet idgetter=new IdGet();
@@ -26,10 +28,5 @@ public class StocktakingController implements StocktakingBlService{
 		return id;
 	}
 
-	@Override
-	public List<Long> getAllBlock(String orgcode) {
-		BlockGet getter=new BlockGet();
-		List<Long> blocks=getter.getBlock(orgcode);
-		return blocks;
-	}
+
 }

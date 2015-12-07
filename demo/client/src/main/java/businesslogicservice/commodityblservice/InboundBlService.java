@@ -21,7 +21,7 @@ public interface InboundBlService {
 
 
 	//	传入每个区的区号  得到 架号位号排号的上限
-	public List<Long> getEachBlockLimit(long blocknum);
-	//查看自己输入的库存位置是否已经有东西
-	public boolean wheConflict(CommodityLocation location);
+	public List<Long> getEachBlockLimit(long blocknum,String orgcode);
+	//查看自己输入的库存位置是否已经有东西  true 为可以使用的空位置 false为已有
+	public boolean wheConflict(String orgcode,CommodityLocation location);
 }

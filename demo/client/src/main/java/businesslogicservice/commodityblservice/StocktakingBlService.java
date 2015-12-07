@@ -3,6 +3,8 @@ package businesslogicservice.commodityblservice;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import dataservice.commoditydataservice.CommodityDataService;
+import po.CommodityLocation;
 import vo.StocktakingVO;
 
 public interface StocktakingBlService {

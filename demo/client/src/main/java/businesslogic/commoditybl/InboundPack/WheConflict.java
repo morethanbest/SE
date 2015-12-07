@@ -2,23 +2,24 @@ package businesslogic.commoditybl.InboundPack;
 
 import dataservice.commoditydataservice.StockinFormDataService;
 import init.RMIHelper;
+import po.CommodityLocation;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/7.
  */
-public class BlockCondition {
-    public List<Long> getlimit(long blocknum,String orgcode){
-        List<Long> result=null;
+public class WheConflict {
+    public boolean getres(String orgcode, CommodityLocation location){
+        boolean result=false;
         StockinFormDataService data= RMIHelper.getStockinform();
         try {
-            result=data.getStockNumbyblocknum(blocknum,orgcode);
+            result=data.isEmpty(orgcode,location);
         } catch (RemoteException e) {
-            System.out.println("stockin form get block condition by block num failed!!!");
+            System.out.println("stock in form whether locatin conflcit judge failed!!!");
             e.printStackTrace();
         }
+
         return result;
 
     }
