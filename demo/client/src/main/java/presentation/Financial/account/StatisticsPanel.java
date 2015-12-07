@@ -9,14 +9,24 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import businesslogic.balancebl.StatisticsPack.StatisticsController;
+import businesslogicservice.balanceblservice.StatisticsBlService;
+import vo.StatisticsVO;
 
 public class StatisticsPanel extends JPanel implements ActionListener {
 	private String orgcode;
 	
+	private JTable table;
+	
 	private JSeparator separator;
 	
 	private JLabel startLabel;
+	private JLabel endLabel;
 	private JButton btnsearch;
 	
 	private JComboBox<String> yearSelectstart;
@@ -27,6 +37,8 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 	private JComboBox<String> monthSelectend;
 	private JComboBox<String> daySelectend;
 	
+	StatisticsVO vo=null;
+	
 	public  StatisticsPanel(String orgcode){
 		this.orgcode = orgcode;
 		setLayout(null);
@@ -35,6 +47,8 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		separator.setBounds(0, 49, 954, 8);
 		add(separator);
 		
+		
+		//开始时间
 		startLabel = new JLabel();
 		startLabel.setBounds(20, 20, 100, 21);
 		startLabel.setText("开始时间点");
@@ -69,6 +83,62 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		
 		yearSelectstart.addItemListener(startlistener);
 		monthSelectstart.addItemListener(startlistener);
+		
+		
+		//结束时间
+		endLabel=new JLabel();
+		endLabel.setBounds(400, 20, 100, 21);
+		endLabel.setText("结束时间点");
+		add(endLabel);
+		
+		
+		yearSelectend = new JComboBox<String>();
+		yearSelectend.setBounds(415, 20, 100, 21);
+		yearSelectend.setEditable(false);
+		yearSelectend.setEnabled(true);
+		add(yearSelectend);
+		addyearItem(yearSelectend);
+
+		ItemListener endlistener= new ItemListener(){			//用于判断这个月的天数
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDayItem(daySelectend,monthSelectend,yearSelectend);
+			}
+		};
+		monthSelectend = new JComboBox<String>();
+		monthSelectend.setBounds(530, 20, 65, 21);
+		monthSelectend.setEditable(false);
+		monthSelectend.setEnabled(true);
+		add(monthSelectend);
+		addmonthItem(monthSelectend);
+		
+		daySelectend = new JComboBox<String>();
+		daySelectend.setBounds(610, 20, 65, 21);
+		daySelectend.setEditable(false);
+		daySelectend.setEnabled(true);
+		add(daySelectend);
+		addDayItem(daySelectend,monthSelectend,daySelectend);
+		
+		yearSelectstart.addItemListener(endlistener);
+		monthSelectstart.addItemListener(endlistener);
+		
+		//加入搜索按钮
+		btnsearch=new JButton();
+		btnsearch.setBounds(710, 20, 40, 21);
+		btnsearch.setText("生成");
+		add(btnsearch);
+		
+		//加入表格
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 60, 954, 200);
+		
+		table=new JTable();
+		scrollPane.setViewportView(table);
+		
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setColumnCount(2);
+		tableModel.setRowCount(10);
+		
 	}
 	
 	private void addyearItem(JComboBox<String> yearselect){
@@ -119,10 +189,24 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		}
 		return day[month-1];
 	}
+	
+	public void getStatistics(long starttime,long endtime){
+		StatisticsBlService statisticsBlService=new StatisticsController();
+		vo=statisticsBlService.Statistics(starttime, endtime);
+	}
+	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource().equals(btnsearch)){
+			long starttime=Long.parseLong((String)yearSelectstart.getSelectedItem())*10000+
+					Long.parseLong((String)monthSelectstart.getSelectedItem())*100+
+					Long.parseLong((String)daySelectstart.getSelectedItem());
+			long endtime=Long.parseLong((String)yearSelectend.getSelectedItem())*10000+
+					Long.parseLong((String)monthSelectend.getSelectedItem())*100+
+					Long.parseLong((String)daySelectend.getSelectedItem());
+			getStatistics(starttime, endtime);
+		}
 	}
 
 }

@@ -40,6 +40,12 @@ public class StockinFormData extends UnicastRemoteObject implements StockinFormD
 		return StockinDB.getLastId(orgcode);
 	}
 
+	@Override
+	public List<Long> getStockNumbyblocknum(long blocknum, String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }

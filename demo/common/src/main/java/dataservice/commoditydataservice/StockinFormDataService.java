@@ -16,5 +16,8 @@ public interface StockinFormDataService extends Remote {
 
 
 	public long getid(String orgcode)throws  RemoteException;
-
+		
+	
+	//根据区号获得linenum，shelfnum，locationnum的上限
+	public List<Long> getStockNumbyblocknum(long blocknum,String orgcode)throws RemoteException;
 }
