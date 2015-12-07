@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.database.commodityDB.CommodityDB;
+import data.database.commodityDB.StockDB;
 import data.database.commodityDB.StockinDB;
 import dataservice.commoditydataservice.StockinFormDataService;
 import po.CommodityLocation;
@@ -43,7 +45,18 @@ public class StockinFormData extends UnicastRemoteObject implements StockinFormD
 	@Override
 	public List<Long> getStockNumbyblocknum(long blocknum, String orgcode) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return StockDB.getStockNumbyblocknum(blocknum, orgcode);
+	}
+
+	@Override
+	public boolean isEmpty(String orgcode,CommodityLocation location) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(CommodityDB.getbyLocation(orgcode, location)==null){
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 
 

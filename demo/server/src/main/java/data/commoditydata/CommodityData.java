@@ -104,6 +104,23 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 		return CommodityDB.getbetween(orgcode, starttime, endtime);
 	}
 
+	@Override
+	public List<Long> getStockNumbyblocknum(long blocknum, String orgcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return StockDB.getStockNumbyblocknum(blocknum, orgcode);
+	}
+
+	@Override
+	public boolean isEmpty(String orgcode,CommodityLocation location) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(CommodityDB.getbyLocation(orgcode, location)==null){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+
 
 	
 }

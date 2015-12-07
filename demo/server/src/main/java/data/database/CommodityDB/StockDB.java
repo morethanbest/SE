@@ -137,6 +137,28 @@ public class StockDB {
 		return list;
 	}
 	
+	public static List<Long> getStockNumbyblocknum(long blocknum,String orgcode){
+		List<Long> list=new ArrayList<Long>();
+		try {
+			dbh = new DBHelper();
+			sql = "select linenum,shelfnum,locationnum from StockPO where orgcode =? and blocknum=?";
+			pst = dbh.prepare(sql);
+			pst.setString(1, orgcode);
+			ret = pst.executeQuery();
+			if(ret.next()){
+				list.add(ret.getLong(1));
+				list.add(ret.getLong(2));
+				list.add(ret.getLong(3));
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public static void main(String[] args) {
 		initialize();

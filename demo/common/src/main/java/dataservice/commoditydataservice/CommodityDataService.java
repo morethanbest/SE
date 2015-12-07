@@ -35,6 +35,10 @@ public interface CommodityDataService extends Remote {
 	public CommodityPO getCommodityByLocation(String orgcode,CommodityLocation location) throws  RemoteException;
 
 	public ResultMessage updateCommodtiy(CommodityPO po)throws  RemoteException;
+	
+	public List<Long> getStockNumbyblocknum(long blocknum,String orgcode)throws RemoteException;
+	
+	public boolean isEmpty(String orgcode,CommodityLocation location)throws RemoteException;
 
 
 	////出库管理
