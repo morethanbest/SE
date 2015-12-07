@@ -127,7 +127,7 @@ public class RecordpayDB {
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
 			sql = "select id,paytime,paysum,payman,payaccount,entry,remark from RecordpayPO where documentstate = ?"
-					+ "and ?<=paytime<=?";
+					+ "and paytime>=? and paytime<=?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			pst.setLong(2, starttime);
@@ -178,6 +178,9 @@ public class RecordpayDB {
 			System.out.println("update success");
 		if(fuzzySearch(Formstate.waiting).size()>0)
 			System.out.println("fuzzysearch success");
+		if(getbetween(Formstate.checked,20000101,20150101).size()>0){
+			System.out.println("getbetween success");
+		}
 		System.out.println(getLastId());
 					
 	}

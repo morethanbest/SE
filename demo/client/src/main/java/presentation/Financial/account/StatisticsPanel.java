@@ -15,6 +15,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -44,6 +46,8 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 	private JComboBox<String> daySelectend;
 	
 	private StatisticsVO vo=null;
+	
+	JScrollPane paypanel;
 	
 	public  StatisticsPanel(String orgcode){
 		this.orgcode = orgcode;
@@ -154,51 +158,101 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		tableModel.setRowCount(30);
 		
 		
+		
 		//收款详情
-		JScrollPane paypanel = new JScrollPane();
-		paypanel.setBounds(320, 60, 734, 300);
+		paypanel = new JScrollPane();
+		paypanel.setBounds(320, 60, 734, 400);
 		paypanel.setBorder(null);
 		paypanel.setLayout(null);
 		add(paypanel);
-		paypanel.setVisible(true);
+		paypanel.setVisible(false);
 		
 		JLabel paysum=new JLabel();
-		paysum.setText("付款金额");
-		paysum.setBounds(20, 50, 100, 21);
+		paysum.setText("付款金额：");
+		paysum.setBounds(100, 50, 100, 21);
 		paypanel.add(paysum);
 		
-		JTextField account=new JTextField();
-		account.setText("");
-		account.setEditable(false);
-		account.setBounds(130, 50, 200, 21);
-		paypanel.add(account);
-		
 		JTextField sumField = new JTextField();
-		sumField.setBounds(187, 116, 172, 21);
+		sumField.setBounds(200, 50, 172, 21);
+		sumField.setEditable(false);
 		paypanel.add(sumField);
 		sumField.setColumns(10);
 		
+		JLabel payman=new JLabel();
+		payman.setText("付款人：");
+		payman.setBounds(100, 100, 100, 21);
+		paypanel.add(payman);
+		
 		JTextField manField = new JTextField();
-		manField.setBounds(187, 163, 172, 21);
+		manField.setBounds(200, 100, 172, 21);
+		manField.setEditable(false);
 		paypanel.add(manField);
 		manField.setColumns(10);
 		
+		JLabel payaccount=new JLabel();
+		payaccount.setText("付款账号：");
+		payaccount.setBounds(100, 150, 100, 21);
+		paypanel.add(payaccount);
+		
 		JTextField accountField = new JTextField();
-		accountField.setBounds(187, 210, 172, 21);
+		accountField.setBounds(200, 150, 172, 21);
+		accountField.setEditable(false);
 		paypanel.add(accountField);
 		accountField.setColumns(10);
 		
+		JLabel tip=new JLabel();
+		tip.setText("条目：");
+		tip.setBounds(100, 200, 100, 21);
+		paypanel.add(tip);
+		
 		JComboBox<String> tipSelect = new JComboBox<String>();
-		tipSelect.setBounds(187, 255, 172, 21);
+		tipSelect.setBounds(200, 200, 172, 21);
+		tipSelect.setEditable(false);
+		tipSelect.setEnabled(false);
 		addtipItem(tipSelect);
 		paypanel.add(tipSelect);
 		
+		JLabel text=new JLabel();
+		text.setText("备注：");
+		text.setBounds(100, 250, 100, 21);
+		paypanel.add(text);
+		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(187,300, 172, 100);
+		textArea.setBounds(200,250, 172, 120);
+		textArea.setEditable(false);
 		paypanel.add(textArea);
+		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				int row=table.getSelectedRow();
+				if(row<0){
+					paypanel.setVisible(false);
+				}
+				else{
+					if (row < vo.getList1().size()) {
+						paypanel.setVisible(true);
+						RecordpayVO recordpay = vo.getList1().get(row);
+						sumField.setText(recordpay.getPaysum() + "");
+						manField.setText(recordpay.getPayman());
+						accountField.setText(recordpay.getPayaccount());
+						tipSelect.setSelectedItem(recordpay.getEntry().getName());
+						textArea.setText(recordpay.getRemark());
+					}else{
+						paypanel.setVisible(false);
+						row-=vo.getList1().size();
+					}
+
+				}
+				
+			}
+		});
 	}
 	
-	public void addtipItem(JComboBox<String> tipSelect){
+	
+	private void addtipItem(JComboBox<String> tipSelect){
 		tipSelect.addItem("租金");
 		tipSelect.addItem("运费");
 		tipSelect.addItem("人员工资");
@@ -261,7 +315,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		}
 	}
 	
-	public boolean isleap(Integer year){
+	private boolean isleap(Integer year){
 		if(year%400==0){
 			return true;
 		}else if(year%100==0){
@@ -273,7 +327,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		}
 	}
 	
-	public int getDays(Integer year,Integer month){				//得到这个月的天数
+	private int getDays(Integer year,Integer month){				//得到这个月的天数
 		int day[]={31,28,31,30,31,30,31,31,30,31,30,31};
 		if(month==2&&isleap(year)){
 			return 29;
@@ -281,7 +335,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		return day[month-1];
 	}
 	
-	public void getStatistics(long starttime,long endtime){
+	private void getStatistics(long starttime,long endtime){
 		StatisticsBlService statisticsBlService=new StatisticsController();
 		vo=statisticsBlService.Statistics(starttime, endtime);
 	}
