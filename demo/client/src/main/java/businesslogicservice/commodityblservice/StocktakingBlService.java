@@ -15,5 +15,5 @@ public interface StocktakingBlService {
 	//每进行一次库存盘点 就调用一次这个方法  得到你这次盘点的批号
 	public long getId(String orgcode,long date) ;
 
-	public List<Long> getAllBlock(String orgcode) ;
+
 }

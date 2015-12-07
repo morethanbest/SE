@@ -55,11 +55,16 @@ public class InboundController implements businesslogicservice.commodityblservic
 	}
 
 	@Override
-	public CommodityLocation getAvailLoc(String orgcode,long blocknum) {
-		LocationGet get=new LocationGet();
-		CommodityLocation location=get.getLoc(orgcode,blocknum);
-		return location;
+	public List<Long> getEachBlockLimit(long blocknum) {
+		BlockCondition a=new BlockCondition();
 	}
+
+	@Override
+	public boolean wheConflict(CommodityLocation location) {
+
+
+	}
+
 
 }
 

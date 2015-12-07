@@ -20,7 +20,8 @@ public interface InboundBlService {
 	public String getid(String orgcode);
 
 
-	//位置自动生成     填写入库单的时候  只要选择自己的区号 并且传入组织编号 就可以 得到这个区有空的位置
-	public CommodityLocation getAvailLoc(String orgcode,long blocknum) ;
-
+	//	传入每个区的区号  得到 架号位号排号的上限
+	public List<Long> getEachBlockLimit(long blocknum);
+	//查看自己输入的库存位置是否已经有东西
+	public boolean wheConflict(CommodityLocation location);
 }
