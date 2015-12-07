@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 
 import businesslogic.balancebl.StatisticsPack.StatisticsController;
 import businesslogicservice.balanceblservice.StatisticsBlService;
+import vo.RecordcollectVO;
+import vo.RecordpayVO;
 import vo.StatisticsVO;
 
 public class StatisticsPanel extends JPanel implements ActionListener {
@@ -37,7 +40,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 	private JComboBox<String> monthSelectend;
 	private JComboBox<String> daySelectend;
 	
-	StatisticsVO vo=null;
+	private StatisticsVO vo=null;
 	
 	public  StatisticsPanel(String orgcode){
 		this.orgcode = orgcode;
@@ -87,13 +90,13 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		
 		//结束时间
 		endLabel=new JLabel();
-		endLabel.setBounds(400, 20, 100, 21);
+		endLabel.setBounds(420, 20, 100, 21);
 		endLabel.setText("结束时间点");
 		add(endLabel);
 		
 		
 		yearSelectend = new JComboBox<String>();
-		yearSelectend.setBounds(415, 20, 100, 21);
+		yearSelectend.setBounds(515, 20, 100, 21);
 		yearSelectend.setEditable(false);
 		yearSelectend.setEnabled(true);
 		add(yearSelectend);
@@ -106,25 +109,25 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 			}
 		};
 		monthSelectend = new JComboBox<String>();
-		monthSelectend.setBounds(530, 20, 65, 21);
+		monthSelectend.setBounds(630, 20, 65, 21);
 		monthSelectend.setEditable(false);
 		monthSelectend.setEnabled(true);
 		add(monthSelectend);
 		addmonthItem(monthSelectend);
 		
 		daySelectend = new JComboBox<String>();
-		daySelectend.setBounds(610, 20, 65, 21);
+		daySelectend.setBounds(710, 20, 65, 21);
 		daySelectend.setEditable(false);
 		daySelectend.setEnabled(true);
 		add(daySelectend);
-		addDayItem(daySelectend,monthSelectend,daySelectend);
+		addDayItem(daySelectend,monthSelectend,yearSelectend);
 		
-		yearSelectstart.addItemListener(endlistener);
-		monthSelectstart.addItemListener(endlistener);
+		yearSelectend.addItemListener(endlistener);
+		monthSelectend.addItemListener(endlistener);
 		
 		//加入搜索按钮
 		btnsearch=new JButton();
-		btnsearch.setBounds(710, 20, 40, 21);
+		btnsearch.setBounds(810, 19, 76, 23);
 		btnsearch.setText("生成");
 		add(btnsearch);
 		
@@ -132,13 +135,39 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 60, 954, 200);
 		
-		table=new JTable();
-		scrollPane.setViewportView(table);
 		
-		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		tableModel.setColumnCount(2);
-		tableModel.setRowCount(10);
+		String s[]={"类别","日期"};
+//		table=new JTable(null, s);
+//		scrollPane.setViewportView(table);
+//		
+//		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+//		tableModel.setColumnCount(4);
+//		tableModel.setRowCount(10);
 		
+		
+		
+		
+	}
+	
+	private void displayinTable(){
+		if(vo!=null){
+			List<RecordpayVO> recordpaylist=vo.getList1();
+			List<RecordcollectVO> recordcollectlist=vo.getList2();
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			tableModel.setRowCount(0);
+			for(RecordpayVO reocordpay : recordpaylist){
+				String[] rowString =new String[2];
+				rowString[0]="付款单";
+				rowString[1]=reocordpay.getPaytime()+"";		//转为字符串
+				tableModel.addRow(rowString);
+			}
+			for(RecordcollectVO recordcollect : recordcollectlist){
+				String[] rowString =new String[2];
+				rowString[0]="收款单";
+				rowString[1]=recordcollect.getCollectiontime()+"";		//转为字符串
+				tableModel.addRow(rowString);
+			}
+		}
 	}
 	
 	private void addyearItem(JComboBox<String> yearselect){
@@ -206,6 +235,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 					Long.parseLong((String)monthSelectend.getSelectedItem())*100+
 					Long.parseLong((String)daySelectend.getSelectedItem());
 			getStatistics(starttime, endtime);
+			displayinTable();
 		}
 	}
 
