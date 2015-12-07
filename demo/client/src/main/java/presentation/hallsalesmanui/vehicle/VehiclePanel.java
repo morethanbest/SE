@@ -99,21 +99,21 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		yearSelect.setEditable(false);
 		yearSelect.setEnabled(false);
 		add(yearSelect);
-		addyearItem();
+		addyearItem(yearSelect);
 		
 		mouthSelect = new JComboBox<String>();
 		mouthSelect.setBounds(599, 291, 38, 21);
 		mouthSelect.setEditable(false);
 		mouthSelect.setEnabled(false);
 		add(mouthSelect);
-		addmouthItem();
+		addmonthItem(mouthSelect);
 		
 		daySelect = new JComboBox<String>();
 		daySelect.setBounds(643, 291, 39, 21);
 		daySelect.setEditable(false);
 		daySelect.setEnabled(false);
 		add(daySelect);
-		adddayItem();
+		addDayItem(daySelect,mouthSelect,yearSelect);
 		
 		btnupdate = new JButton("修改");
 		btnupdate.setBounds(276, 371, 93, 23);
@@ -129,26 +129,53 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		btnupdate.addActionListener(this);
 		btndelete.addActionListener(this);
 	}
-	private void addyearItem(){
-		for(int i=1950;i<2050;i++){
-			yearSelect.addItem(Integer.toString(i));
+	private void addyearItem(JComboBox<String> yearselect){
+		for(int i=2000;i<2100;i++){
+			yearselect.addItem(Integer.toString(i));
 		}
 	}
-	private void addmouthItem(){
-		for(int i=1;i<10;i++){
-			mouthSelect.addItem("0"+Integer.toString(i));
+	
+	private void addmonthItem(JComboBox<String> monthselect){
+		for(int i=1;i<=9;i++){
+			monthselect.addItem("0"+Integer.toString(i));
 		}
-		mouthSelect.addItem("10");
-		mouthSelect.addItem("11");
-		mouthSelect.addItem("12");
+		for(int i=10;i<=12;i++){
+			monthselect.addItem(Integer.toString(i));
+		}
 	}
-	private void adddayItem(){
-		for(int i=1;i<10;i++){
-			daySelect.addItem("0"+Integer.toString(i));
+	
+	private void addDayItem(JComboBox<String> dayselect,JComboBox<String> monthselect,JComboBox<String> yearselect){
+		dayselect.removeAllItems();
+		
+		//得到这个月的天数
+		int days=getDays(Integer.parseInt((String)yearselect.getSelectedItem()),Integer.parseInt((String)monthselect.getSelectedItem()));
+			
+		for(int i=1;i<=9;i++){
+			dayselect.addItem("0"+Integer.toString(i));
 		}
-		for(int i=10;i<32;i++){
-			daySelect.addItem(Integer.toString(i));
+		for(int i=10;i<=days;i++){
+			dayselect.addItem(Integer.toString(i));
 		}
+	}
+	
+	public boolean isleap(Integer year){
+		if(year%400==0){
+			return true;
+		}else if(year%100==0){
+			return false;
+		}else if(year%4==0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public int getDays(Integer year,Integer month){				//得到这个月的天数
+		int day[]={31,28,31,30,31,30,31,31,30,31,30,31};
+		if(month==2&&isleap(year)){
+			return 29;
+		}
+		return day[month-1];
 	}
 	void addVehicle(VehicleVO vo){
 		VehicleBlService vehicleBlService=new VehicleController();

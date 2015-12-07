@@ -85,17 +85,17 @@ public class AddDriverDialog extends JDialog {
 		ByearSelect = new JComboBox<String>();
 		ByearSelect.setBounds(80, 156, 60, 20);
 		contentPanel.add(ByearSelect);
-		addByearItem();
+		addyearItem(ByearSelect);
 		
 		BmouthSelect = new JComboBox<String>();
 		BmouthSelect.setBounds(147, 156, 40, 20);
 		contentPanel.add(BmouthSelect);
-		addBmouthItem();
+		addmonthItem(BmouthSelect);
 		
 		BdaySelect = new JComboBox<String>();
 		BdaySelect.setBounds(195, 156, 40, 20);
 		contentPanel.add(BdaySelect);
-		addBdayItem();
+		addDayItem(BdaySelect,BmouthSelect,ByearSelect);
 		
 		JLabel JLDriver = new JLabel("行驶期限：");
 		JLDriver.setBounds(250, 156, 70, 20);
@@ -104,17 +104,17 @@ public class AddDriverDialog extends JDialog {
 		DyearSelect = new JComboBox<String>();
 		DyearSelect.setBounds(320, 156, 65, 20);
 		contentPanel.add(DyearSelect);
-		addDyearItem();
+		addyearItem(DyearSelect);
 		
 		DmouthSelect = new JComboBox<String>();
 		DmouthSelect.setBounds(391, 156, 40, 20);
 		contentPanel.add(DmouthSelect);
-		addDmouthItem();
+		addmonthItem(DmouthSelect);
 		
 		DdaySelect = new JComboBox<String>();
 		DdaySelect.setBounds(435, 156, 40, 20);
 		contentPanel.add(DdaySelect);
-		addDdayItem();
+		addDayItem(DdaySelect,DmouthSelect,DyearSelect);
 		
 		JLabel JLidentity = new JLabel("身份证号：");
 		JLidentity.setBounds(25, 216, 70, 20);
@@ -156,47 +156,53 @@ public class AddDriverDialog extends JDialog {
 			}
 		}
 	}
-	private void addByearItem(){
-		for(int i=1950;i<2050;i++){
-			ByearSelect.addItem(Integer.toString(i));
+	private void addyearItem(JComboBox<String> yearselect){
+		for(int i=2000;i<2100;i++){
+			yearselect.addItem(Integer.toString(i));
 		}
 	}
-	private void addBmouthItem(){
-		for(int i=1;i<10;i++){
-			BmouthSelect.addItem("0"+Integer.toString(i));
+	
+	private void addmonthItem(JComboBox<String> monthselect){
+		for(int i=1;i<=9;i++){
+			monthselect.addItem("0"+Integer.toString(i));
 		}
-		BmouthSelect.addItem("10");
-		BmouthSelect.addItem("11");
-		BmouthSelect.addItem("12");
-	}
-	private void addBdayItem(){
-		for(int i=1;i<10;i++){
-			BdaySelect.addItem("0"+Integer.toString(i));
-		}
-		for(int i=10;i<32;i++){
-			BdaySelect.addItem(Integer.toString(i));
+		for(int i=10;i<=12;i++){
+			monthselect.addItem(Integer.toString(i));
 		}
 	}
-	private void addDyearItem(){
-		for(int i=2015;i<2050;i++){
-			DyearSelect.addItem(Integer.toString(i));
+	
+	private void addDayItem(JComboBox<String> dayselect,JComboBox<String> monthselect,JComboBox<String> yearselect){
+		dayselect.removeAllItems();
+		
+		//得到这个月的天数
+		int days=getDays(Integer.parseInt((String)yearselect.getSelectedItem()),Integer.parseInt((String)monthselect.getSelectedItem()));
+			
+		for(int i=1;i<=9;i++){
+			dayselect.addItem("0"+Integer.toString(i));
+		}
+		for(int i=10;i<=days;i++){
+			dayselect.addItem(Integer.toString(i));
 		}
 	}
-	private void addDmouthItem(){
-		for(int i=1;i<10;i++){
-			DmouthSelect.addItem("0"+Integer.toString(i));
+	
+	public boolean isleap(Integer year){
+		if(year%400==0){
+			return true;
+		}else if(year%100==0){
+			return false;
+		}else if(year%4==0){
+			return true;
+		}else{
+			return false;
 		}
-		DmouthSelect.addItem("10");
-		DmouthSelect.addItem("11");
-		DmouthSelect.addItem("12");
 	}
-	private void addDdayItem(){
-		for(int i=1;i<10;i++){
-			DdaySelect.addItem("0"+Integer.toString(i));
+	
+	public int getDays(Integer year,Integer month){				//得到这个月的天数
+		int day[]={31,28,31,30,31,30,31,31,30,31,30,31};
+		if(month==2&&isleap(year)){
+			return 29;
 		}
-		for(int i=10;i<32;i++){
-			DdaySelect.addItem(Integer.toString(i));
-		}
+		return day[month-1];
 	}
 	
 
