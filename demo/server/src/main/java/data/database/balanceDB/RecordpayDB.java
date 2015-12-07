@@ -171,7 +171,7 @@ public class RecordpayDB {
 
 	public static void main(String[] args) {
 		initialize();
-		RecordpayPO po=new RecordpayPO("0000001",20150522,2,"sunchao","123",RecordpayList.bonus,"a",Formstate.waiting);
+		RecordpayPO po=new RecordpayPO("0000001",20150522,2,"sunchao","123",RecordpayList.bonus,"a",Formstate.checked);
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)

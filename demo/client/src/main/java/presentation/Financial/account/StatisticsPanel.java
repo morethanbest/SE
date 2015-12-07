@@ -13,7 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import businesslogic.balancebl.StatisticsPack.StatisticsController;
 import businesslogicservice.balanceblservice.StatisticsBlService;
@@ -129,24 +132,77 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		btnsearch=new JButton();
 		btnsearch.setBounds(810, 19, 76, 23);
 		btnsearch.setText("生成");
+		btnsearch.addActionListener(this);
 		add(btnsearch);
 		
 		//加入表格
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 60, 954, 200);
+		scrollPane.setBounds(20, 60, 300, 350);
+		add(scrollPane);
+		
+		Object[][] rowData={null,null,null};
+		String columnNames[]={"类别","日期","金额"};
+		table=new JTable();
+		table.setModel(new DefaultTableModel(rowData, columnNames){
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		});
+		scrollPane.setViewportView(table);
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setColumnCount(3);
+		tableModel.setRowCount(30);
 		
 		
-		String s[]={"类别","日期"};
-//		table=new JTable(null, s);
-//		scrollPane.setViewportView(table);
-//		
-//		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-//		tableModel.setColumnCount(4);
-//		tableModel.setRowCount(10);
+		//收款详情
+		JScrollPane paypanel = new JScrollPane();
+		paypanel.setBounds(320, 60, 734, 300);
+		paypanel.setBorder(null);
+		paypanel.setLayout(null);
+		add(paypanel);
+		paypanel.setVisible(true);
 		
+		JLabel paysum=new JLabel();
+		paysum.setText("付款金额");
+		paysum.setBounds(20, 50, 100, 21);
+		paypanel.add(paysum);
 		
+		JTextField account=new JTextField();
+		account.setText("");
+		account.setEditable(false);
+		account.setBounds(130, 50, 200, 21);
+		paypanel.add(account);
 		
+		JTextField sumField = new JTextField();
+		sumField.setBounds(187, 116, 172, 21);
+		paypanel.add(sumField);
+		sumField.setColumns(10);
 		
+		JTextField manField = new JTextField();
+		manField.setBounds(187, 163, 172, 21);
+		paypanel.add(manField);
+		manField.setColumns(10);
+		
+		JTextField accountField = new JTextField();
+		accountField.setBounds(187, 210, 172, 21);
+		paypanel.add(accountField);
+		accountField.setColumns(10);
+		
+		JComboBox<String> tipSelect = new JComboBox<String>();
+		tipSelect.setBounds(187, 255, 172, 21);
+		addtipItem(tipSelect);
+		paypanel.add(tipSelect);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(187,300, 172, 100);
+		paypanel.add(textArea);
+	}
+	
+	public void addtipItem(JComboBox<String> tipSelect){
+		tipSelect.addItem("租金");
+		tipSelect.addItem("运费");
+		tipSelect.addItem("人员工资");
+		tipSelect.addItem("奖励");
 	}
 	
 	private void displayinTable(){
@@ -155,17 +211,23 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 			List<RecordcollectVO> recordcollectlist=vo.getList2();
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 			tableModel.setRowCount(0);
-			for(RecordpayVO reocordpay : recordpaylist){
-				String[] rowString =new String[2];
+			for(RecordpayVO recordpay : recordpaylist){
+
+				String[] rowString =new String[3];
 				rowString[0]="付款单";
-				rowString[1]=reocordpay.getPaytime()+"";		//转为字符串
+				rowString[1]=recordpay.getPaytime()+"";		//转为字符串
+				rowString[2]=recordpay.getPaysum()+"";
 				tableModel.addRow(rowString);
 			}
 			for(RecordcollectVO recordcollect : recordcollectlist){
-				String[] rowString =new String[2];
+				String[] rowString =new String[3];
 				rowString[0]="收款单";
 				rowString[1]=recordcollect.getCollectiontime()+"";		//转为字符串
+				rowString[2]=recordcollect.getCollectionsum()+"";
 				tableModel.addRow(rowString);
+			}
+			for(int i=tableModel.getRowCount();i<30;i++){
+				tableModel.addRow(new String[3]);
 			}
 		}
 	}

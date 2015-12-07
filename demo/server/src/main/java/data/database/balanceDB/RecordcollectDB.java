@@ -247,7 +247,7 @@ public class RecordcollectDB {
 
 	public static void main(String[] args) {
 		initialize();
-		RecordcollectPO po=new RecordcollectPO("0250001",20150522,"123",2,"sunchao",new ArrayList<String>(),Formstate.waiting);
+		RecordcollectPO po=new RecordcollectPO("0250001",20150522,"123",2,"sunchao",new ArrayList<String>(),Formstate.checked);
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)
