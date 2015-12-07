@@ -37,13 +37,11 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	private DriverPanel driverPanel;
 	private VehiclePanel vehiclePanel;
 	
-	
-    private String orgcode;
+
 	/**
 	 * Create the panel.
 	 */
 	public HallsalesmanPanel(String orgcode, String city) {
-		this.orgcode=orgcode;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 

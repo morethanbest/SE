@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import po.Job;
 import presentation.Financial.FinancialPanel;
 import presentation.administratorui.AdministratorPanel;
+import presentation.centersalesmanui.CenterSalesmanPanel;
 import presentation.courierui.CourierPanel;
 import presentation.hallsalesmanui.HallsalesmanPanel;
 import presentation.managerui.ManagerPanel;
@@ -77,6 +78,10 @@ public class MainFrame extends JFrame {
 			JPanel temp=new FinancialPanel(vo.getOrganizationcode());
 			contentPane.add(temp, "financial");
 			card.show(contentPane, "financial");
+		} else if(vo.getJob() == Job.transfercentersalesman){
+			JPanel temp=new CenterSalesmanPanel(vo.getOrganizationcode(), vo.getCity());
+			contentPane.add(temp, "centersalesman");
+			card.show(contentPane, "centersalesman");
 		}
 	}
 
