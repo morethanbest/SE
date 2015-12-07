@@ -14,6 +14,7 @@ import presentation.Financial.FinancialPanel;
 import presentation.administratorui.AdministratorPanel;
 import presentation.centersalesmanui.CenterSalesmanPanel;
 import presentation.courierui.CourierPanel;
+import presentation.depotui.DepotPanel;
 import presentation.hallsalesmanui.HallsalesmanPanel;
 import presentation.managerui.ManagerPanel;
 import vo.LoginVO;
@@ -82,6 +83,10 @@ public class MainFrame extends JFrame {
 			JPanel temp=new CenterSalesmanPanel(vo.getOrganizationcode(), vo.getCity());
 			contentPane.add(temp, "centersalesman");
 			card.show(contentPane, "centersalesman");
+		} else if(vo.getJob() == Job.CenterDepot){
+			JPanel temp=new DepotPanel(vo.getOrganizationcode(), vo.getCity());
+			contentPane.add(temp, "centerdepot");
+			card.show(contentPane, "centerdepot");
 		}
 	}
 

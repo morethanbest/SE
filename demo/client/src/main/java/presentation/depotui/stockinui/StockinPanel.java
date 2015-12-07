@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+import po.Block;
 import po.CommodityLocation;
 import po.Formstate;
 import po.Organizationtype;
@@ -39,6 +40,10 @@ public class StockinPanel extends JPanel {
 	private String city;
 	private CommodityLocation location;
 	private InboundBlService inboundBlService;
+	private JComboBox<Long> paiBox;
+	private JComboBox<Long> jiaBox;
+	private JComboBox<Long> weiBox;
+	private JLabel label;
 
 	/**
 	 * Create the panel.
@@ -69,10 +74,6 @@ public class StockinPanel extends JPanel {
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
-		
-		JLabel locationLabel = new JLabel("");
-		locationLabel.setBounds(557, 188, 220, 18);
-		add(locationLabel);
 
 		typeBox = new JComboBox<String>();
 		typeBox.setBounds(143, 106, 220, 24);
@@ -84,36 +85,8 @@ public class StockinPanel extends JPanel {
 		orgBox.setBounds(143, 185, 220, 24);
 		add(orgBox);
 		addOrganizationItems(orgBox);
+		addBlockItems();
 
-		quBox = new JComboBox<String>();
-		quBox.setBounds(557, 106, 220, 24);
-		add(quBox);
-		quBox.addItemListener(new ItemListener() {
-			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				location = inboundBlService.getAvailLoc(orgCode, quBox.getSelectedIndex() + 1);
-				locationLabel.setText("货物将被安置在 " + location.getLinenum() + "排 " + location.getShelfnum() + "架 " + location.getLocationnum() + "位");
-			}
-		});
-		quBox.addItem("航运区");
-		quBox.addItem("铁运区");
-		quBox.addItem("汽运区");
-		quBox.addItem("机动区");
-
-		
-		button = new JButton("提交");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Long date = (Long) yearBox.getSelectedItem() * 10000
-						+ (Long) monthBox.getSelectedItem() * 100
-						+ (Long) dateBox.getSelectedItem();
-				inboundBlService.Inbound(new StockinVO(inboundBlService.getid(orgCode), codeField.getText(), date, location, (String) orgBox.getSelectedItem(), Formstate.waiting));
-			}
-		});
-		button.setBounds(416, 312, 113, 27);
-		add(button);
-		
 		ItemListener listener = new ItemListener() {
 
 			@Override
@@ -125,9 +98,76 @@ public class StockinPanel extends JPanel {
 		monthBox.addItemListener(listener);
 
 		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
-		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
+		yearBox.setSelectedItem((long) c.get(Calendar.YEAR));
+		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
+		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
+
+		label = new JLabel("");
+		label.setBounds(823, 188, 72, 18);
+		add(label);
+
+		paiBox = new JComboBox<Long>();
+		paiBox.setBounds(557, 185, 65, 24);
+		add(paiBox);
+
+		jiaBox = new JComboBox<Long>();
+		jiaBox.setBounds(636, 185, 65, 24);
+		add(jiaBox);
+
+		weiBox = new JComboBox<Long>();
+		weiBox.setBounds(712, 185, 65, 24);
+		add(weiBox);
+
+		ItemListener listener2 = new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				location = new CommodityLocation(
+						(Long) quBox.getSelectedItem(),
+						(Long) paiBox.getSelectedItem(),
+						(Long) jiaBox.getSelectedItem(),
+						(Long) weiBox.getSelectedItem());
+				setAvailableTip(inboundBlService.wheConflict(orgCode, location));
+			}
+		};
+		paiBox.addItemListener(listener2);
+		jiaBox.addItemListener(listener2);
+		weiBox.addItemListener(listener2);
+
+		quBox = new JComboBox<String>();
+		quBox.setBounds(557, 106, 220, 24);
+		add(quBox);
+		quBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				List<Long> list = inboundBlService.getEachBlockLimit(
+						getBlockIndex((String) quBox.getSelectedItem()),
+						orgCode);
+				fillBox(paiBox, list.get(0));
+				fillBox(jiaBox, list.get(1));
+				fillBox(weiBox, list.get(2));
+			}
+		});
+
+		button = new JButton("提交");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Long date = (Long) yearBox.getSelectedItem() * 10000
+						+ (Long) monthBox.getSelectedItem() * 100
+						+ (Long) dateBox.getSelectedItem();
+				location = new CommodityLocation(
+						(Long) quBox.getSelectedItem(),
+						(Long) paiBox.getSelectedItem(),
+						(Long) jiaBox.getSelectedItem(),
+						(Long) weiBox.getSelectedItem());
+				inboundBlService.Inbound(new StockinVO(inboundBlService
+						.getid(orgCode), codeField.getText(), date, location,
+						(String) orgBox.getSelectedItem(), Formstate.waiting));
+			}
+		});
+		button.setBounds(416, 312, 113, 27);
+		add(button);
 
 		typeBox.addItemListener(new ItemListener() {
 
@@ -137,8 +177,6 @@ public class StockinPanel extends JPanel {
 
 			}
 		});
-		
-		
 
 	}
 
@@ -195,6 +233,34 @@ public class StockinPanel extends JPanel {
 			orgSelect.addItem(org.getName());
 		}
 	}
-	
-	
+
+	private void addBlockItems() {
+		for (Block block : Block.values()) {
+			quBox.addItem(block.getName());
+		}
+	}
+
+	private long getBlockIndex(String str) {
+		for (Block block : Block.values()) {
+			if (block.getName().equals(str))
+				return block.getBlocknum();
+		}
+
+		return -1;
+	}
+
+	private void fillBox(JComboBox<Long> box, long k) {
+		box.removeAllItems();
+		for (int i = 1; i <= k; i++) {
+			box.addItem(k);
+		}
+	}
+
+	private void setAvailableTip(boolean isFilled) {
+		button.setEnabled(!isFilled);
+		if (isFilled)
+			label.setText("可用");
+		else
+			label.setText("不可用");
+	}
 }
