@@ -15,6 +15,7 @@ import presentation.hallsalesmanui.driver.DriverPanel;
 import presentation.hallsalesmanui.goodrecieving.GoodRecievingPanel;
 import presentation.hallsalesmanui.hallload.HallLoadPanel;
 import presentation.hallsalesmanui.recipient.RecipientPanel;
+import presentation.hallsalesmanui.recordcollect.RecordcollectPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 
 
@@ -36,7 +37,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	private RecipientPanel recipientPanel;
 	private DriverPanel driverPanel;
 	private VehiclePanel vehiclePanel;
-	
+	private RecordcollectPanel recordcollectPanel;
 
 	/**
 	 * Create the panel.
@@ -86,7 +87,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 
 		panel = new JPanel();
 		panel.setBackground(SystemColor.controlHighlight);
-		panel.setBounds(14, 75, 954, 420);
+		panel.setBounds(14, 75, 954, 450);
 		add(panel);
 		card = new CardLayout();
 		panel.setLayout(card);
@@ -98,19 +99,21 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		
 		driverPanel=new DriverPanel(orgcode);
 		vehiclePanel=new VehiclePanel(orgcode);
+		recordcollectPanel=new RecordcollectPanel(orgcode);
 		
 		panel.add(hallLoadPanel, "hallLoad");
 		panel.add(goodRecievingPanel, "goodRecieving");
 		panel.add(deliveryPanel, "delivery");
 		panel.add(driverPanel, "driver");
 		panel.add(vehiclePanel, "vehicle");
+		panel.add(recordcollectPanel, "recordcollect");
 		
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);
 		hint.setVisible(false);
 		add(hint);
 
-}
+    }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -124,6 +127,8 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 			card.show(panel, "goodRecieving");
 		} else if (e.getSource().equals(deliveryButton)) {
 			card.show(panel, "delivery");
-		} 
+		} else if(e.getSource().equals(reciptionButton)){
+			card.show(panel, "recordcollect");
+		}
 	}
 }
