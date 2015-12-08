@@ -5,11 +5,12 @@ import java.util.List;
 public class NewbookVO {
 	long id;
 	List<AccountVO> account;
-	List<CommodityGetRegionVO> commodity;
+	List<CommodityVO> commodity;
 	List<OrganizationVO> organization;
 	List<StaffVO> staff;
 	List<VehicleVO> vehicles;
-	public NewbookVO(long id, List<AccountVO> account, List<CommodityGetRegionVO> commodity,
+
+	public NewbookVO(long id, List<AccountVO> account, List<CommodityVO> commodity,
 			List<OrganizationVO> organization,
 			List<StaffVO> staff, List<VehicleVO> vehicles) {
 		super();
@@ -26,7 +27,7 @@ public class NewbookVO {
 	public List<AccountVO> getAccount() {
 		return account;
 	}
-	public List<CommodityGetRegionVO> getCommodity() {
+	public List<CommodityVO> getCommodity() {
 		return commodity;
 	}
 	public List<OrganizationVO> getOrganization() {

@@ -10,7 +10,9 @@ import po.ResultMessage;
 public interface NewBookDataService extends Remote {
 	public ResultMessage addNewBook(NewbookPO po)throws RemoteException;
 	
-	public List<NewbookPO> findNewBook(long time)throws RemoteException;
+	public 	NewbookPO findNewBook(long time)throws RemoteException;
 
-	public
-}
+	public NewbookPO getLastBook() throws RemoteException;
+
+	public long getid()throws  RemoteException;
+	}
