@@ -93,7 +93,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		add(label_5);
 		
 		JLabel label_6 = new JLabel("所属机构编号：");
-		label_6.setBounds(249, 344, 93, 15);
+		label_6.setBounds(249, 344, 108, 15);
 		add(label_6);
 		
 		btnupdate = new JButton("修改");

@@ -90,7 +90,7 @@ public class AddUserDialog extends JDialog {
 		contentPanel.add(orgnameField);
 		
 		JLabel JLorgtype = new JLabel("机构类别：");
-		JLorgtype.setBounds(25, 336, 60, 20);
+		JLorgtype.setBounds(25, 336, 80, 20);
 		contentPanel.add(JLorgtype);
 		
 		orgSelect = new JComboBox<String >();
@@ -100,7 +100,7 @@ public class AddUserDialog extends JDialog {
 		contentPanel.add(orgSelect);
 		
 		JLabel JLprgcode = new JLabel("机构编号：");
-		JLprgcode.setBounds(25, 396, 60, 20);
+		JLprgcode.setBounds(25, 396, 80, 20);
 		contentPanel.add(JLprgcode);
 		
 		orgcodeField = new JTextField();
