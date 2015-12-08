@@ -71,7 +71,7 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("车辆代号搜索：");
-		label_2.setBounds(307, 17, 85, 15);
+		label_2.setBounds(307, 17, 103, 15);
 		add(label_2);
 		
 		CodeField = new JTextField();

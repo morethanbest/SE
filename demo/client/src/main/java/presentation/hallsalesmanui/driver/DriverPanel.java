@@ -92,7 +92,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("司机代号搜索：");
-		label_2.setBounds(292, 17, 85, 15);
+		label_2.setBounds(292, 17, 99, 15);
 		add(label_2);
 		
 		textName = new JTextField();

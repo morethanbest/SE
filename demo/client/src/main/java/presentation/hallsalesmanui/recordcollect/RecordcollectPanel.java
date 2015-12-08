@@ -45,7 +45,7 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 		this.orgcode=orgcode;
 		setLayout(null);
 		
-		JLabel label = new JLabel("首款信息：");
+		JLabel label = new JLabel("收款信息：");
 		label.setFont(new Font("宋体", Font.PLAIN, 16));
 		label.setBounds(145, 10, 80, 32);
 		add(label);

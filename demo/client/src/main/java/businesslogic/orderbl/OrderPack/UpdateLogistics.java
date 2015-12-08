@@ -18,12 +18,13 @@ public class UpdateLogistics {
 		OrderFormDataService orderFormDataService=RMIHelper.getOrderformdata();
 		ResultMessage resultMessage=ResultMessage.failure;
 		if(vo.getFormstate()==Formstate.pass){
-			OrderPO po=new OrderPO(vo.getOrdercode(), vo.getSendername(), vo.getSenderaddress(), vo.getSenderunit(), 
-					vo.getSenderphone(), vo.getSendercellphone(), vo.getReceivername(), vo.getReceiveraddress(),
-					 vo.getReceiverunit(), vo.getReceiverphone(), vo.getReceivercellphone(), vo.getNumbers(), vo.getWeight(), 
-					 vo.getVolume(), vo.getProductname(), 
-					vo.getPackagetype(), vo.getTotalfee(), vo.getOrdercode(), vo.getOrdertype(), vo.getFormstate());
 			try {
+				OrderPO po=orderFormDataService.getOrderForm(vo.getOrdercode());
+				OrderPO newpo=new OrderPO(po.getOrgcode(), vo.getSendername(), vo.getSenderaddress(), vo.getSenderunit(), vo.getSenderphone(), 
+						vo.getSendercellphone(), vo.getReceivername(), vo.getReceiveraddress(), vo.getReceiverunit(),
+						vo.getReceiverphone(), vo.getReceivercellphone(), vo.getNumbers(), vo.getWeight(), 
+						vo.getVolume(), vo.getProductname(), vo.getPackagetype(), vo.getTotalfee(), vo.getOrdercode(), vo.getOrdertype(), 
+						po.getCodeofreceiving(), po.getReceiver(), po.getReceivingtime(), Formstate.checked);
 				orderFormDataService.updateOrderForm(po);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
