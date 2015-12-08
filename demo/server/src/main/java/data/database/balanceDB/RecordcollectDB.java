@@ -254,7 +254,7 @@ public class RecordcollectDB {
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)
 			System.out.println("update success");
-		if(fuzzySearch(Formstate.waiting,"025").size()>0)
+		if(getbydate(20150522).size()>0)
 			System.out.println("fuzzysearch success");
 		System.out.println(getLastId("025"));
 					

@@ -88,6 +88,29 @@ public class CommodityDB {
 		return ResultMessage.failure;
 	}
 	
+	
+	public static List<CommodityPO> getAll(){
+		List<CommodityPO> list=new ArrayList<CommodityPO>();
+		CommodityPO po;
+		dbh=new DBHelper();
+		try {
+			sql = "select id,ordercode,intime,outtime,destination,Location from CommodityPO and outtime < 0";
+			pst = dbh.prepare(sql);
+			ret = pst.executeQuery();
+			while (ret.next()) {
+				CommodityLocation location=(CommodityLocation)Serialize.Bytes2Object(ret.getBytes(6)) ;
+				po = new CommodityPO(ret.getString(1), ret.getString(2), ret.getLong(3),ret.getLong(4),  ret.getString(5),location);
+				list.add(po);
+			}
+			ret.close();
+			dbh.close();// 关闭连接
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	//获取某个仓库所有的库存
 	public static List<CommodityPO> getAll(String orgcode){
 		List<CommodityPO> list=new ArrayList<CommodityPO>();

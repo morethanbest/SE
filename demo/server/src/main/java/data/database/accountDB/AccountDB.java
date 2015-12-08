@@ -3,6 +3,8 @@ package data.database.accountDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.database.DBHelper;
 import po.AccountPO;
@@ -99,7 +101,23 @@ public class AccountDB {
 	}
 	
 	
-	
+	public static List<AccountPO> getAll(){
+		List<AccountPO> list=new ArrayList<>();
+		dbh=new DBHelper();
+		sql="select id,accountname,accountsum from AccountPO ";
+		pst = dbh.prepare(sql);
+		try{
+			ret=pst.executeQuery();
+			while(ret.next()){
+				list.add(new AccountPO(ret.getLong(1), ret.getString(2), ret.getDouble(3)));
+			}
+			ret.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		dbh.close();
+		return list;
+	}
 	
 	public static AccountPO search(String accountname){
 		AccountPO po=null;
