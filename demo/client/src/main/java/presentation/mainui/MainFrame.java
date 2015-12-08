@@ -65,8 +65,6 @@ public class MainFrame extends JFrame {
 			JPanel temp = new CourierPanel(vo.getOrganizationcode(), vo.getOrganizationname());
 			contentPane.add(temp, "courier");
 			card.show(contentPane, "courier");
-		} else if (vo.getJob() == Job.visitor) {
-			System.out.println("Login failed!!!");
 		} else if(vo.getJob() == Job.hallsalesman){
 			JPanel temp=new HallsalesmanPanel(vo.getOrganizationcode(), vo.getCity());
 			contentPane.add(temp, "hallsalesman");

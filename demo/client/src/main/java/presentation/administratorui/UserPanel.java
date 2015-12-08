@@ -157,7 +157,6 @@ public class UserPanel extends JPanel implements ActionListener{
 		jobSelect.addItem("财务人员");
 		jobSelect.addItem("司机");
 		jobSelect.addItem("总经理");
-		jobSelect.addItem("游客");
 		jobSelect.addItem("管理员");
 	}
 	private void addOrgItem(){
@@ -222,11 +221,8 @@ public class UserPanel extends JPanel implements ActionListener{
             case manager:
             	jobSelect.setSelectedIndex(6);
             	break;
-            case visitor:
-            	jobSelect.setSelectedIndex(7);
-            	break;
             case administrator:
-            	jobSelect.setSelectedIndex(8);
+            	jobSelect.setSelectedIndex(7);
             	break;
 			default:
 				break;
@@ -312,9 +308,6 @@ public class UserPanel extends JPanel implements ActionListener{
 	            	newjob=Job.manager;
 	            	break;
 	            case 7:
-	            	newjob=Job.visitor;
-	            	break;
-	            case 8:
 	            	newjob=Job.administrator;
 	            	break;
 				default:

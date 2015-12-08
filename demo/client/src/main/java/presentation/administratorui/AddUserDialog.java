@@ -150,9 +150,6 @@ public class AddUserDialog extends JDialog {
 				            	newjob=Job.manager;
 				            	break;
 				            case 7:
-				            	newjob=Job.visitor;
-				            	break;
-				            case 8:
 				            	newjob=Job.administrator;
 				            	break;
 							default:
@@ -212,7 +209,6 @@ public class AddUserDialog extends JDialog {
 		jobSelect.addItem("财务人员");
 		jobSelect.addItem("司机");
 		jobSelect.addItem("总经理");
-		jobSelect.addItem("游客");
 		jobSelect.addItem("管理员");
 	}
 	private void addOrgItem(){
