@@ -1,5 +1,6 @@
 package presentation.Financial.account;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,6 +34,7 @@ public class AccountPanel extends JPanel implements ActionListener{
 	 */
 	public AccountPanel(String orgcode) {
 		this.orgcode=orgcode;
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
 		JSeparator separator = new JSeparator();
