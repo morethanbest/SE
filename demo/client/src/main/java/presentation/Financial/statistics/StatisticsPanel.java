@@ -1,5 +1,6 @@
 package presentation.Financial.statistics;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -171,44 +172,44 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		
 		JLabel paysum=new JLabel();
 		paysum.setText("付款金额：");
-		paysum.setBounds(100, 50, 100, 21);
+		paysum.setBounds(120, 60, 100, 21);
 		paypanel.add(paysum);
 		
 		JTextField sumField = new JTextField();
-		sumField.setBounds(200, 50, 172, 21);
+		sumField.setBounds(250, 60, 172, 21);
 		sumField.setEditable(false);
 		paypanel.add(sumField);
 		sumField.setColumns(10);
 		
 		JLabel payman=new JLabel();
 		payman.setText("付款人：");
-		payman.setBounds(100, 100, 100, 21);
+		payman.setBounds(120, 120, 100, 21);
 		paypanel.add(payman);
 		
 		JTextField manField = new JTextField();
-		manField.setBounds(200, 100, 172, 21);
+		manField.setBounds(250, 120, 172, 21);
 		manField.setEditable(false);
 		paypanel.add(manField);
 		manField.setColumns(10);
 		
 		JLabel payaccount=new JLabel();
 		payaccount.setText("付款账号：");
-		payaccount.setBounds(100, 150, 100, 21);
+		payaccount.setBounds(120, 180, 100, 21);
 		paypanel.add(payaccount);
 		
 		JTextField accountField = new JTextField();
-		accountField.setBounds(200, 150, 172, 21);
+		accountField.setBounds(250, 180, 172, 21);
 		accountField.setEditable(false);
 		paypanel.add(accountField);
 		accountField.setColumns(10);
 		
 		JLabel tip=new JLabel();
 		tip.setText("条目：");
-		tip.setBounds(100, 200, 100, 21);
+		tip.setBounds(120, 240, 100, 21);
 		paypanel.add(tip);
 		
 		JComboBox<String> tipSelect = new JComboBox<String>();
-		tipSelect.setBounds(200, 200, 172, 21);
+		tipSelect.setBounds(250, 240, 172, 21);
 		tipSelect.setEditable(false);
 		tipSelect.setEnabled(false);
 		addtipItem(tipSelect);
@@ -216,17 +217,82 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		
 		JLabel text=new JLabel();
 		text.setText("备注：");
-		text.setBounds(100, 250, 100, 21);
+		text.setBounds(120, 300, 100, 21);
 		paypanel.add(text);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(200,250, 172, 120);
+		textArea.setBounds(250,300, 172, 120);
 		textArea.setEditable(false);
 		paypanel.add(textArea);
 		
 		//收款详情
 		collectpanel = new JScrollPane();
+		collectpanel.setBounds(320, 60, 734, 400);
+		collectpanel.setBorder(null);
+		collectpanel.setLayout(null);
+		add(collectpanel);
+		collectpanel.setVisible(false);
 		
+		
+		JLabel label_2 = new JLabel("收款金额：");
+		label_2.setBounds(120, 60, 70, 15);
+		collectpanel.add(label_2);
+		
+		JLabel label_3 = new JLabel("收款人：");
+		label_3.setBounds(120, 120, 54, 15);
+		collectpanel.add(label_3);
+		
+		JLabel label_4 = new JLabel("收款账号：");
+		label_4.setBounds(120, 180, 70, 15);
+		collectpanel.add(label_4);
+		
+		JLabel label_5 = new JLabel("订单号：");
+		label_5.setBounds(120, 240, 54, 15);
+		collectpanel.add(label_5);
+		
+		JTextField collectsum = new JTextField();
+		collectsum.setBounds(250, 60, 172, 21);
+		collectsum.setEditable(false);
+		collectpanel.add(collectsum);
+		collectsum.setColumns(10);
+		
+		JTextField collectman = new JTextField();
+		collectman.setBounds(250, 120, 172, 21);
+		collectman.setEditable(false);
+		collectpanel.add(collectman);
+		collectman.setColumns(10);
+		
+		JTextField collectaccount = new JTextField();
+		collectaccount.setBounds(250, 180, 172, 21);
+		collectaccount.setEditable(false);
+		collectpanel.add(collectaccount);
+		collectaccount.setColumns(10);
+		
+		
+		JScrollPane orderpanel = new JScrollPane();
+		orderpanel.setBounds(250,240,172,100);
+		collectpanel.add(orderpanel);
+		
+		JTable ordertable = new JTable();
+		ordertable.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null},
+				},
+				new String[] {
+					"订单号"
+				}
+			) {
+				boolean[] columnEditables = new boolean[] {
+					false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+			});
+		orderpanel.setViewportView(ordertable);
+		DefaultTableModel ordertableModel = (DefaultTableModel) ordertable.getModel();
+		ordertableModel.setColumnCount(1);
+		ordertableModel.setRowCount(10);
 		
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -237,19 +303,37 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 				int row=table.getSelectedRow();
 				if(row<0){
 					paypanel.setVisible(false);
+					collectpanel.setVisible(false);
 				}
 				else{
 					if (row < vo.getList1().size()) {
 						paypanel.setVisible(true);
+						collectpanel.setVisible(false);
 						RecordpayVO recordpay = vo.getList1().get(row);
 						sumField.setText(recordpay.getPaysum() + "");
 						manField.setText(recordpay.getPayman());
 						accountField.setText(recordpay.getPayaccount());
 						tipSelect.setSelectedItem(recordpay.getEntry().getName());
 						textArea.setText(recordpay.getRemark());
+					}else if(row<vo.getList1().size()+vo.getList2().size()){
+						paypanel.setVisible(false);
+						collectpanel.setVisible(true);
+						row-=vo.getList1().size();
+						RecordcollectVO recordcollect=vo.getList2().get(row);
+						collectsum.setText(recordcollect.getCollectionsum()+"");
+						collectman.setText(recordcollect.getCollectionman());
+						collectaccount.setText(recordcollect.getAccountcode());
+						List<String> list=recordcollect.getAllordercode();
+						DefaultTableModel ordertableModel = (DefaultTableModel) ordertable.getModel();
+						ordertableModel.setRowCount(0);
+						for(String order:list){
+							String [] str=new String[1];
+							str[0]=order;
+							ordertableModel.addRow(str);
+						}
 					}else{
 						paypanel.setVisible(false);
-						row-=vo.getList1().size();
+						collectpanel.setVisible(false);
 					}
 
 				}
