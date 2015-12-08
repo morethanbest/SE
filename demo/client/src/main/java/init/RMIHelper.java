@@ -68,6 +68,7 @@ public class RMIHelper {
     private static UserLoginDataService userlogindata;
     private static CityDataService citydata;
     private  static ExamDataService examdata;
+    private static ManagerBalanceDataService managerbalance;
 
     public synchronized static void init() throws ClientInitException {
         if (inited) {
@@ -115,8 +116,7 @@ public class RMIHelper {
         userlogindata = (UserLoginDataService) Naming.lookup(urlPrefix + "userlogindata");
         citydata=(CityDataService)Naming.lookup(urlPrefix + "citydata");
         examdata=(ExamDataService)Naming.lookup(urlPrefix + "examdata");
-
-
+        managerbalance=(ManagerBalanceDataService) Naming.lookup(urlPrefix + "managerbalance");
 
     }
 
@@ -231,4 +231,6 @@ public class RMIHelper {
     public static CityDataService getCitydata(){ return citydata;}
 
     public  static ExamDataService getExamdata(){return examdata;}
+
+    public static ManagerBalanceDataService getManagerbalance(){return managerbalance;}
 }

@@ -47,10 +47,11 @@ public class OrderExam {
             String ordercode=po.getOrdercode();
             Ordertype ordertype=po.getOrdertype();
             double totalfee=po.getTotalfee();
+            Formstate documentstate=po.getDocumentstate();
 
             OrderVO vo= new OrderVO(sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,
                     receiveraddress,receiverunit,receiverphone,receivercellphone,numbers,weight,volume,productname,
-                    packagetype,ordercode,ordertype,totalfee);
+                    packagetype,ordercode,ordertype,totalfee,documentstate);
             list.add(vo);
         }
         return list;
@@ -59,6 +60,10 @@ public class OrderExam {
     public ResultMessage update(OrderVO vo){
         ResultMessage result=null;
         ExamDataService data=RMIHelper.getExamdata();
-        OrderPO po=new OrderPO(vo.)
+        OrderPO po=new OrderPO(vo.getSendername(),vo.getSenderaddress(),vo.getSenderunit()
+        ,vo.getSenderphone(),vo.getSendercellphone(),vo.getReceivername(),vo.getReceiveraddress(),vo.getReceiverunit()
+        ,vo.getReceiverphone(),vo.getReceivercellphone(),vo.getNumbers(),vo.getWeight(),vo.getVolume(),
+                vo.getProductname(),vo.getPackagetype(),vo.getTotalfee(),vo.getOrdercode(),vo.getOrdertype(),
+                vo.get)
     }
 }

@@ -23,11 +23,7 @@ import data.logisticsdata.GoodsReceivingFormData;
 import data.logisticsdata.HallLoadFormData;
 import data.logisticsdata.LogisticsInfo;
 import data.logisticsdata.RecordtransFormData;
-import data.managerdata.CityData;
-import data.managerdata.ConstantsData;
-import data.managerdata.OrganizationData;
-import data.managerdata.SalaryData;
-import data.managerdata.StaffData;
+import data.managerdata.*;
 import data.orderdata.LogisticsData;
 import data.orderdata.OrderFormData;
 import data.transportdata.DriversData;
@@ -79,6 +75,7 @@ public class ServerRMIHelper {
         NAMING_MAP.put("userlogindata",  UserLoginData.class);
         NAMING_MAP.put("citydata",  CityData.class);
         NAMING_MAP.put("examdata",  ExamData.class);
+        NAMING_MAP.put("managerbalance",  ManagerBalanceData.class);
 
 
     }
