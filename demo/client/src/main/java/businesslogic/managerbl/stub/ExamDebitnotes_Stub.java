@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import businesslogicservice.managerblservice.ExamDebitnotes;
 import vo.DebitnoteExamVO;
 import vo.ResultMessage;
 

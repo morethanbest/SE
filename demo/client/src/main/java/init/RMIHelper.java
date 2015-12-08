@@ -4,6 +4,7 @@ package init;
  * Created by Administrator on 2015/11/23.
  */
 
+import businesslogicservice.managerblservice.ExamBlService;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.accountdataservice.NewBookDataService;
 import dataservice.balancedataservice.*;
@@ -66,7 +67,7 @@ public class RMIHelper {
     private static UserDataService userdata;
     private static UserLoginDataService userlogindata;
     private static CityDataService citydata;
-
+    private  static ExamDataService examdata;
 
     public synchronized static void init() throws ClientInitException {
         if (inited) {
@@ -113,7 +114,7 @@ public class RMIHelper {
         userdata = (UserDataService) Naming.lookup(urlPrefix + "userdata");
         userlogindata = (UserLoginDataService) Naming.lookup(urlPrefix + "userlogindata");
         citydata=(CityDataService)Naming.lookup(urlPrefix + "citydata");
-
+        examdata=(ExamDataService)Naming.lookup(urlPrefix + "examdata");
 
 
 
@@ -228,4 +229,6 @@ public class RMIHelper {
     }
 
     public static CityDataService getCitydata(){ return citydata;}
+
+    public  static ExamDataService getExamdata(){return examdata;}
 }

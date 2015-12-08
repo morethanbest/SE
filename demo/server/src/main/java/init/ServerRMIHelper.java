@@ -78,6 +78,7 @@ public class ServerRMIHelper {
         NAMING_MAP.put("userdata",  UsersData.class);
         NAMING_MAP.put("userlogindata",  UserLoginData.class);
         NAMING_MAP.put("citydata",  CityData.class);
+        NAMING_MAP.put("examdata",  ExamData.class);
 
 
     }

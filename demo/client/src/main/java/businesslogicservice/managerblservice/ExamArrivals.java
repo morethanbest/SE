@@ -3,12 +3,15 @@ package businesslogicservice.managerblservice;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import po.ArrivalPO;
+import po.Formstate;
 import po.ResultMessage;
 import vo.ArrivalExamVO;
+import vo.ArrivalVO;
 
 public interface ExamArrivals {
-	public List<ArrivalExamVO> getArrivals()throws RemoteException;
-	
-	public ResultMessage ArrivalsExam (List<ArrivalExamVO> volist)throws RemoteException;
+	public List<ArrivalVO> getArrivalForm (Formstate state);
+
+	public ResultMessage updateArrivalForm (ArrivalVO vo);
 
 }

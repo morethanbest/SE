@@ -4,164 +4,166 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import businesslogicservice.managerblservice.ExamBlService;
-import vo.ArrivalExamVO;
-import vo.CLFormsExamVO;
-import vo.DebitnoteExamVO;
-import vo.DeliveryExamVO;
-import vo.GoodsReceivingExamVO;
-import vo.HLFormsExamVO;
-import vo.OrderExamVO;
-import vo.RecordcollectExamVO;
-import vo.RecordpayExamVO;
-import vo.RecordtranExamVO;
-import vo.ResultMessage;
-import vo.StockinExamVO;
-import vo.StockoutExamVO;
+import po.Formstate;
+import vo.*;
+import po.ResultMessage;
 
 public class ExamController implements ExamBlService {
 
+
 	@Override
-	public List<ArrivalExamVO> getArrivals() throws RemoteException {
-		// TODO Auto-generated method stub
+	public List<ArrivalVO> getArrivalForm(Formstate state) {
+		ArrivalExam exam=new ArrivalExam();
+		List<ArrivalVO> vos=exam.find(state);
+		return vos;
+	}
+
+	@Override
+	public ResultMessage updateArrivalForm(ArrivalVO vo) {
+		ArrivalExam exam=new ArrivalExam();
+		ResultMessage result=exam.update(vo);
+		return result;
+	}
+
+	@Override
+	public List<CenterloadVO> getCenterLoadForm(Formstate state) {
+		CenterLoadExam exam=new CenterLoadExam();
+		List<CenterloadVO> list=exam.find(state);
+		return list;
+	}
+
+	@Override
+	public ResultMessage updateCenterLoadForm(CenterloadVO vo) {
+		CenterLoadExam exam=new CenterLoadExam();
+		ResultMessage result=exam.update(vo);
+		return result;
+	}
+
+
+
+	@Override
+	public List<DeliveryVO> getDeliveryForm(Formstate state) {
+		DeliveryExam exam=new DeliveryExam();
+		List<DeliveryVO> list=exam.find(state);
+		return list;
+	}
+
+	@Override
+	public ResultMessage updateDeliveryForm(DeliveryVO vo) {
+		DeliveryExam exam=new DeliveryExam();
+		ResultMessage result=exam.update(vo);
+		return result;
+
+	}
+
+	@Override
+	public List<GoodsReceivingVO> getGoodsReceivingForm(Formstate state) {
+		GoodsRevExam exam=new GoodsRevExam();
+		List<GoodsReceivingVO> list=exam.find(state);
+		return list;
+	}
+
+	@Override
+	public ResultMessage updateGoodsReceivingForm(GoodsReceivingVO vo) {
+		GoodsRevExam exam=new GoodsRevExam();
+		ResultMessage result=exam.update(vo);
+		return result;
+	}
+
+	@Override
+	public List<HallLoadVO> getLoadForm(Formstate state) {
+		HallLoadExam exam=new HallLoadExam();
+		List<HallLoadVO> vos=exam.find(state);
+		return vos;
+	}
+
+	@Override
+	public ResultMessage updateLoadForm(HallLoadVO vo) {
+		HallLoadExam exam=new HallLoadExam();
+		ResultMessage result=exam.update(vo);
+		return result;
+	}
+
+	@Override
+	public List<StockinVO> getStockinForm(Formstate state) {
+		StockinExam exam=new StockinExam();
+		List<StockinVO> list=exam.find(state);
+		return list;
+	}
+
+	@Override
+	public ResultMessage updateStockinForm(StockinVO vo) {
+		StockinExam exam=new StockinExam();
+		ResultMessage result=exam.update(vo);
+		return result;
+	}
+
+	@Override
+	public List<OrderVO> getOrderForm(Formstate state) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage ArrivalsExam(List<ArrivalExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateOrderForm(OrderVO vo) {
+
 	}
 
 	@Override
-	public List<CLFormsExamVO> getCLForms() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecordcollectVO> getRecordcollectForm(Formstate statee) {
+		RecordcollectExam exam=new RecordcollectExam();
+		List<RecordcollectVO> list=exam.find(statee);
+		return list;
 	}
 
 	@Override
-	public ResultMessage CLFormsExam(List<CLFormsExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateRecordcollectForm(RecordcollectVO vo) {
+		RecordcollectExam exam=new RecordcollectExam();
+
+		ResultMessage result=exam.update(vo);
+		return result;
+	}
+
+
+
+	@Override
+	public List<RecordpayVO> getRecordpayForm(Formstate state) {
+		RecordpayExam exam=new RecordpayExam();
+		List<RecordpayVO> list=exam.find(state);
+		return list;
 	}
 
 	@Override
-	public List<DebitnoteExamVO> getDebitnotes() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateRecordpayForm(RecordpayVO vo) {
+		RecordpayExam exam=new RecordpayExam();
+		ResultMessage result=exam.update(vo);
+		return result;
 	}
 
 	@Override
-	public ResultMessage DebitnotesExam(List<DebitnoteExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecordtransVO> getRecordtransForm(Formstate state) {
+		RecordtransExam exam=new RecordtransExam();
+		List<RecordtransVO> list=exam.find(state);
+		return list;
 	}
 
 	@Override
-	public List<StockinExamVO> getInbounds() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateRecordtransForm(RecordtransVO vo) {
+		RecordtransExam exam=new RecordtransExam();
+		ResultMessage result=exam.update(vo);
+		return result;
 	}
 
 	@Override
-	public ResultMessage InboundsExam(List<StockinExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<StockoutVO> getStockoutForm(Formstate state) {
+		StockoutExam exam=new StockoutExam();
+		List<StockoutVO> list=exam.find(state);
+		return list;
 	}
 
 	@Override
-	public List<OrderExamVO> getOrders() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateStockoutForm(StockoutVO vo) {
+		StockoutExam exam=new StockoutExam();
+		ResultMessage result=exam.update(vo);
+		return  result;
 	}
-
-	@Override
-	public ResultMessage OrdersExam(List<OrderExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<HLFormsExamVO> getHLForms() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage HLFormsExam(List<HLFormsExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<GoodsReceivingExamVO> getGoodsRecevings() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage GoodsRecevingsExam(List<GoodsReceivingExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DeliveryExamVO> getDeliverys() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage DeliverysExam(List<DeliveryExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<RecordcollectExamVO> getRecordcollects() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage RecordcollectsExam(List<RecordcollectExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<RecordpayExamVO> getRecordpays() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage RecordpaysExam(List<RecordpayExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<RecordtranExamVO> getRecordtrans() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage RecordtransExam(List<RecordtranExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<StockoutExamVO> getStockouts() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage StockoutsExam(List<StockoutExamVO> volist) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
