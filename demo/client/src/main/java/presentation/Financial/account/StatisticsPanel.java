@@ -49,6 +49,8 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 	
 	JScrollPane paypanel;
 	
+	JScrollPane collectpanel;
+	
 	public  StatisticsPanel(String orgcode){
 		this.orgcode = orgcode;
 		setLayout(null);
@@ -159,7 +161,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		
 		
 		
-		//收款详情
+		//付款详情
 		paypanel = new JScrollPane();
 		paypanel.setBounds(320, 60, 734, 400);
 		paypanel.setBorder(null);
@@ -221,6 +223,9 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		textArea.setBounds(200,250, 172, 120);
 		textArea.setEditable(false);
 		paypanel.add(textArea);
+		
+		//收款详情
+		collectpanel = new JScrollPane();
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
