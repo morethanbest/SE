@@ -6,14 +6,14 @@ import java.util.List;
 
 import data.database.balanceDB.RecordcollectDB;
 import data.database.balanceDB.RecordpayDB;
-import dataservice.managerdataservice.BalanceDataService;
+import dataservice.managerdataservice.ManagerBalanceDataService;
 import po.Formstate;
 import po.RecordcollectPO;
 import po.RecordpayPO;
 
-public class BalanceData extends UnicastRemoteObject implements BalanceDataService {
+public class ManagerBalanceData extends UnicastRemoteObject implements ManagerBalanceDataService {
 
-	public BalanceData() throws RemoteException {
+	public ManagerBalanceData() throws RemoteException {
 		// TODO Auto-generated constructor stub
 	}
 

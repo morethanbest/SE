@@ -6,14 +6,14 @@ import java.util.List;
 
 import data.database.balanceDB.RecordcollectDB;
 import data.database.balanceDB.RecordpayDB;
-import dataservice.managerdataservice.StatisticsDataService;
+import dataservice.managerdataservice.ManagerStatisticsDataService;
 import po.Formstate;
 import po.RecordcollectPO;
 import po.RecordpayPO;
 
-public class StatisticsData extends UnicastRemoteObject implements StatisticsDataService {
+public class ManagerStatisticsData extends UnicastRemoteObject implements ManagerStatisticsDataService {
 
-	public StatisticsData() throws RemoteException {
+	public ManagerStatisticsData() throws RemoteException {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 import presentation.Financial.account.AccountPanel;
-import presentation.Financial.account.StatisticsPanel;
 import presentation.Financial.recordpay.RecordpayPanel;
+import presentation.Financial.statistics.StatisticsPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 

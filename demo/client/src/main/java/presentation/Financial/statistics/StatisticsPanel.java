@@ -1,4 +1,4 @@
-package presentation.Financial.account;
+package presentation.Financial.statistics;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -226,6 +226,8 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		
 		//收款详情
 		collectpanel = new JScrollPane();
+		
+		
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
