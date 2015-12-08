@@ -11,4 +11,6 @@ public interface NewBookDataService extends Remote {
 	public ResultMessage addNewBook(NewbookPO po)throws RemoteException;
 	
 	public List<NewbookPO> findNewBook(long time)throws RemoteException;
+
+	public
 }

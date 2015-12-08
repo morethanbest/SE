@@ -100,12 +100,16 @@ public class ExamController implements ExamBlService {
 
 	@Override
 	public List<OrderVO> getOrderForm(Formstate state) {
-		return null;
+		OrderExam exam=new OrderExam();
+		List<OrderVO> list=exam.find(state);
+		return list;
 	}
 
 	@Override
 	public ResultMessage updateOrderForm(OrderVO vo) {
-
+		OrderExam exam=new OrderExam();
+		ResultMessage result=exam.update(vo);
+		return result;
 	}
 
 	@Override

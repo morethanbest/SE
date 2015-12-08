@@ -60,10 +60,26 @@ public class OrderExam {
     public ResultMessage update(OrderVO vo){
         ResultMessage result=null;
         ExamDataService data=RMIHelper.getExamdata();
-        OrderPO po=new OrderPO(vo.getSendername(),vo.getSenderaddress(),vo.getSenderunit()
-        ,vo.getSenderphone(),vo.getSendercellphone(),vo.getReceivername(),vo.getReceiveraddress(),vo.getReceiverunit()
-        ,vo.getReceiverphone(),vo.getReceivercellphone(),vo.getNumbers(),vo.getWeight(),vo.getVolume(),
+        OrderPO newpo=null;
+        try {
+            newpo=data.getpo(vo.getOrdercode());
+        } catch (RemoteException e) {
+            System.out.println("manager exam order get orderpo by ordercode failed!!!");
+            e.printStackTrace();
+        }
+
+        OrderPO po=new OrderPO(newpo.getOrgcode(),vo.getSendername(),vo.getSenderaddress(),vo.getSenderunit()
+                ,vo.getSenderphone(),vo.getSendercellphone(),vo.getReceivername(),vo.getReceiveraddress(),vo.getReceiverunit()
+                ,vo.getReceiverphone(),vo.getReceivercellphone(),vo.getNumbers(),vo.getWeight(),vo.getVolume(),
                 vo.getProductname(),vo.getPackagetype(),vo.getTotalfee(),vo.getOrdercode(),vo.getOrdertype(),
-                vo.get)
+                newpo.getCodeofreceiving(),newpo.getReceiver(),newpo.getReceivingtime(),vo.getFormstate());
+
+        try {
+            result=data.updateOrderForm(po);
+        } catch (RemoteException e) {
+            System.out.println("manager exam order update forms failed!!!");
+            e.printStackTrace();
+        }
+        return result;
     }
 }

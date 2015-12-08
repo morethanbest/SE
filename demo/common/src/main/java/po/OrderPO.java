@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 
 public class OrderPO  implements Serializable{
-	String orgcode;
+	String orgcode;//
 	String sendername;
 	String senderaddress;
 	String senderunit;
@@ -22,9 +22,9 @@ public class OrderPO  implements Serializable{
 	double totalfee;
 	String ordercode;
 	Ordertype ordertype;
-	String codeofreceiving;
-	String receiver;
-	long receivingtime;
+	String codeofreceiving;//
+	String receiver;//
+	long receivingtime;//
 	Formstate documentstate;	
 	
 	public OrderPO(String orgcode,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,

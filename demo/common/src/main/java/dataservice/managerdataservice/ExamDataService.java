@@ -24,6 +24,8 @@ public interface ExamDataService extends Remote{
 	public List<OrderPO> getOrderForm (Formstate state)throws RemoteException;
 	
 	public ResultMessage updateOrderForm (OrderPO po)throws RemoteException;
+
+	public OrderPO getpo(String ordercode) throws RemoteException;
 	
 	
 	//exam Arrival
