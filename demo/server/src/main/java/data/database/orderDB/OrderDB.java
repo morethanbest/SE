@@ -31,7 +31,7 @@ public class OrderDB {
 			pst.executeUpdate();
 
 			OrderPO po=new OrderPO("025000","孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
-					"56565656","13234567890",1,5,3,"iphone6","快递袋",5,"0000000000",Ordertype.fast);
+					"56565656","13234567890",1,5,3,"iphone6","快递袋",5,"0000000000",Ordertype.fast,Formstate.waiting);
 			write(po);
 			dbh.close();// 关闭连接
 		}catch(Exception e){
@@ -321,7 +321,7 @@ public class OrderDB {
 //		}
 
 		if(update(new OrderPO("025000","孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
-				"56565656","13234567890",1,5,3,"iphone6","快递袋",5,"0000000001",Ordertype.fast))==ResultMessage.success){
+				"56565656","13234567890",1,5,3,"iphone6","快递袋",5,"0000000001",Ordertype.fast,Formstate.waiting))==ResultMessage.success){
 			System.out.println("update success");
 		}
 		if(search("0000000001")!=null){

@@ -59,7 +59,7 @@ public interface ExamDataService extends Remote{
 	public ResultMessage updateRecordtransForm (RecordtransPO po)throws RemoteException;
 
 	//exam recordcollect
-	public List<RecordcollectPO> getRecordcollectForm (Formstate statee)throws RemoteException;
+	public List<RecordcollectPO> getRecordcollectForm (Formstate state)throws RemoteException;
 	
 	public ResultMessage updateRecordcollectForm (RecordcollectPO po)throws RemoteException;
 	
