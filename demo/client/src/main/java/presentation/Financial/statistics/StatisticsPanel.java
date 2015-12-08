@@ -158,7 +158,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 		scrollPane.setViewportView(table);
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnCount(3);
-		tableModel.setRowCount(30);
+		tableModel.setRowCount(0);
 		
 		
 		
@@ -371,9 +371,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 				rowString[2]=recordcollect.getCollectionsum()+"";
 				tableModel.addRow(rowString);
 			}
-			for(int i=tableModel.getRowCount();i<30;i++){
-				tableModel.addRow(new String[3]);
-			}
+
 		}
 	}
 	

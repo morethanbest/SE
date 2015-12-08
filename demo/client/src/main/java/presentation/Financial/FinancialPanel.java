@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 import presentation.Financial.account.AccountPanel;
+import presentation.Financial.balance.BalancePanel;
 import presentation.Financial.recordpay.RecordpayPanel;
 import presentation.Financial.statistics.StatisticsPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
@@ -30,6 +31,7 @@ public class FinancialPanel extends JPanel implements ActionListener{
 	private AccountPanel accountPanel;
 	private StatisticsPanel statisticsPanel;
 	private RecordpayPanel recordpayPanel;
+	private BalancePanel balancePanel;
     private String orgcode;
 	/**
 	 * Create the panel.
@@ -92,6 +94,8 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		panel.add(statisticsPanel, "statistics");
 		recordpayPanel=new RecordpayPanel(orgcode);
 		panel.add(recordpayPanel, "recordpay");
+		balancePanel=new BalancePanel();
+		panel.add(balancePanel, "balance");
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);
 		hint.setVisible(false);
@@ -107,6 +111,8 @@ public class FinancialPanel extends JPanel implements ActionListener{
 			card.show(panel, "statistics");
 		}else if(e.getSource().equals(btnNewButton_1)){
 			card.show(panel, "recordpay");
+		}else if(e.getSource().equals(btnNewButton_3)){
+			card.show(panel, "balance");
 		}
 	}
 

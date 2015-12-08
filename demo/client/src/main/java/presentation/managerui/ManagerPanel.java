@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.Financial.balance.BalancePanel;
 import presentation.managerui.account.AccountPanel;
 import presentation.managerui.constant.ConstantPanel;
 import presentation.managerui.organization.OrganizationPanel;
@@ -36,6 +37,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private OrganizationPanel organization;
 	private AccountPanel accountPanel;
 	private SalaryPanel salaryPanel;
+	private BalancePanel balancePanel;
 	/**
 	 * Create the panel.
 	 */
@@ -136,11 +138,13 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		constant = new ConstantPanel(this);
 		accountPanel=new AccountPanel();
 		salaryPanel=new SalaryPanel();
+		balancePanel=new BalancePanel();
 		panel.add(staff, "staff");
 		panel.add(organization, "organization");
 		panel.add(constant, "constant");
 		panel.add(accountPanel, "account");
 		panel.add(salaryPanel, "salary");
+		panel.add(balancePanel, "balance");
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);
 		hint.setVisible(false);
@@ -164,6 +168,8 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			card.show(panel, "constant");
 		}else if(e.getSource().equals(btnNewButton_7)){
 			card.show(panel, "salary");
+		}else if(e.getSource().equals(btnNewButton_4)){
+			card.show(panel, "balance");
 		}
 
 	}
