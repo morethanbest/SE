@@ -42,9 +42,10 @@ public class FindOrder {
 				String ordercode=po.getOrdercode();
 				Ordertype ordertype=po.getOrdertype();
 				double totalfee=po.getTotalfee();
+				Formstate documentstate=po.getDocumentstate();
 				OrderVO vo=new OrderVO(sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 						receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, productname, 
-						packagetype, ordercode, ordertype, totalfee);
+						packagetype, ordercode, ordertype, totalfee, documentstate);
 				listvo.add(vo);
 			}
 		} catch (RemoteException e) {

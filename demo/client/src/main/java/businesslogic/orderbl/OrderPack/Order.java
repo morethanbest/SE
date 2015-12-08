@@ -48,9 +48,10 @@ public class Order {
 		String ordercode=vo.getOrdercode();
 		Ordertype ordertype=vo.getOrdertype();
 		double totalfee=vo.getTotalfee();
+		Formstate documentstate=vo.getFormstate();
 		add.setOrder(orgcode, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, 
-				productname, packagetype, totalfee, ordercode, ordertype);
+				productname, packagetype, totalfee, ordercode, ordertype,documentstate);
 		ResultMessage result=add.addOrder();
 		return result;
 	}

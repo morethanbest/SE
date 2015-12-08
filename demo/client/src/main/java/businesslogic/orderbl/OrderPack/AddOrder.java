@@ -2,6 +2,7 @@ package businesslogic.orderbl.OrderPack;
 
 import dataservice.orderdataservice.OrderFormDataService;
 import init.RMIHelper;
+import po.Formstate;
 import po.OrderPO;
 import po.Ordertype;
 import po.ResultMessage;
@@ -26,10 +27,11 @@ public class AddOrder {
 	double totalfee;
 	String ordercode;
 	Ordertype ordertype;
+	Formstate documentstate;
 	
 	public void setOrder(String orgcode,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
-			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype){
+			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype,Formstate documentstate){
 		this.orgcode=orgcode;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
@@ -49,13 +51,14 @@ public class AddOrder {
 		this.totalfee=totalfee;
 		this.ordercode=ordercode;
 		this.ordertype=ordertype;
+		this.documentstate=documentstate;
 
 	}
 	
 	public ResultMessage addOrder(){
 		OrderPO po=new OrderPO(orgcode, sendername, senderaddress, senderunit, senderphone, sendercellphone, receivername, 
 				receiveraddress, receiverunit, receiverphone, receivercellphone, numbers, weight, volume, productname, 
-				packagetype, totalfee, ordercode, ordertype);
+				packagetype, totalfee, ordercode, ordertype, documentstate);
 		OrderFormDataService order=RMIHelper.getOrderformdata();
 		ResultMessage result;
 		try {

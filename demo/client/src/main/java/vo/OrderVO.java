@@ -1,5 +1,6 @@
 package vo;
 
+import po.Formstate;
 import po.Ordertype;
 
 public class OrderVO {
@@ -21,10 +22,11 @@ public class OrderVO {
 	String ordercode;
 	Ordertype ordertype;
 	double totalfee;
+	Formstate documentstate;
 	
 	public OrderVO(String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
-			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,
-			double numbers,double weight,double volume,String productname,String packagetype,String ordercode,Ordertype ordertype,double totalfee){
+			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,
+			double weight,double volume,String productname,String packagetype,String ordercode,Ordertype ordertype,double totalfee,Formstate documentstate){
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
 		this.senderunit=senderunit;
@@ -43,6 +45,7 @@ public class OrderVO {
 		this.ordercode=ordercode;
 		this.ordertype=ordertype;
 		this.totalfee=totalfee;
+		this.documentstate=documentstate;
 	}
 
 	public String getReceivername() {
@@ -101,5 +104,8 @@ public class OrderVO {
 	}
 	public double getTotalfee(){
 		return this.totalfee;
+	}
+	public Formstate getFormstate(){
+		return this.documentstate;
 	}
 }

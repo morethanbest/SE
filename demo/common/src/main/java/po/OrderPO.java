@@ -29,7 +29,7 @@ public class OrderPO  implements Serializable{
 	
 	public OrderPO(String orgcode,String sendername,String senderaddress,String senderunit,String senderphone,String sendercellphone,String receivername,
 			String receiveraddress,String receiverunit,String receiverphone,String receivercellphone,double numbers,double weight,
-			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype){
+			double volume,String productname,String packagetype,double totalfee,String ordercode,Ordertype ordertype,Formstate documentstate){
 		this.orgcode=orgcode;
 		this.sendername=sendername;
 		this.senderaddress=senderaddress;
@@ -52,7 +52,7 @@ public class OrderPO  implements Serializable{
 		this.codeofreceiving="";
 		this.receiver="";
 		this.receivingtime=0;
-		this.documentstate=Formstate.waiting;
+		this.documentstate=documentstate;
 	}
 	public OrderPO(String orgcode, String sendername, String senderaddress, String senderunit, String senderphone,
 			String sendercellphone, String receivername, String receiveraddress, String receiverunit,
