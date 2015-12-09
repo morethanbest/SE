@@ -14,7 +14,6 @@ import presentation.hallsalesmanui.delivery.DeliveryPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
 import presentation.hallsalesmanui.goodrecieving.GoodRecievingPanel;
 import presentation.hallsalesmanui.hallload.HallLoadPanel;
-import presentation.hallsalesmanui.recipient.RecipientPanel;
 import presentation.hallsalesmanui.recordcollect.RecordcollectPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 
@@ -34,7 +33,6 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	private HallLoadPanel hallLoadPanel;
 	private GoodRecievingPanel goodRecievingPanel;
 	private DeliveryPanel deliveryPanel;
-	private RecipientPanel recipientPanel;
 	private DriverPanel driverPanel;
 	private VehiclePanel vehiclePanel;
 	private RecordcollectPanel recordcollectPanel;

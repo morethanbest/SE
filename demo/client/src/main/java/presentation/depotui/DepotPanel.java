@@ -64,6 +64,11 @@ public class DepotPanel extends JPanel implements ActionListener {
 		panel.add(out, "out");
 		panel.add(exam, "exam");
 		panel.add(taking, "taking");
+		
+		button.addActionListener(this);
+		button_1.addActionListener(this);
+		button_2.addActionListener(this);
+		button_3.addActionListener(this);
 
 	}
 

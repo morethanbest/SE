@@ -46,4 +46,10 @@ public class ArrivalVO {
 		return this.documentstate;
 	}
 
+
+
+	public void setDocumentstate(Formstate documentstate) {
+		this.documentstate = documentstate;
+	}
+
 }

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import presentation.Financial.balance.BalancePanel;
 import presentation.managerui.account.AccountPanel;
 import presentation.managerui.constant.ConstantPanel;
+import presentation.managerui.examui.ExamPanel;
 import presentation.managerui.organization.OrganizationPanel;
 import presentation.managerui.salary.SalaryPanel;
 import presentation.managerui.staff.StaffManagePanel;
@@ -38,6 +39,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private AccountPanel accountPanel;
 	private SalaryPanel salaryPanel;
 	private BalancePanel balancePanel;
+	private ExamPanel examPanel;
 	/**
 	 * Create the panel.
 	 */
@@ -139,6 +141,10 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		accountPanel=new AccountPanel();
 		salaryPanel=new SalaryPanel();
 		balancePanel=new BalancePanel();
+		examPanel = new ExamPanel();
+		
+		
+		panel.add(examPanel, "exam");
 		panel.add(staff, "staff");
 		panel.add(organization, "organization");
 		panel.add(constant, "constant");
@@ -157,19 +163,21 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
 		setSelectButton(button);
-		if (e.getSource().equals(btnNewButton_1)) {
+		if (e.getSource().equals(btnNewButton)) {
+			card.show(panel, "exam");
+		}else if (e.getSource().equals(btnNewButton_1)) {
 			card.show(panel, "staff");
 		}else if (e.getSource().equals(btnNewButton_2)) {
 			card.show(panel, "organization");
 			organization.addCityItems();
 		}else if(e.getSource().equals(btnNewButton_3)){
 			card.show(panel, "account");
+		}else if(e.getSource().equals(btnNewButton_4)){
+			card.show(panel, "balance");
 		}else if (e.getSource().equals(btnNewButton_6)) {
 			card.show(panel, "constant");
 		}else if(e.getSource().equals(btnNewButton_7)){
 			card.show(panel, "salary");
-		}else if(e.getSource().equals(btnNewButton_4)){
-			card.show(panel, "balance");
 		}
 
 	}

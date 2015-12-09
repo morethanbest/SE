@@ -63,4 +63,10 @@ public class RecordtransVO {
 	}
 	public double getfee(){return fee;}
 	public Formstate getFormstate(){return formstate;}
+
+	public void setFormstate(Formstate formstate) {
+		this.formstate = formstate;
+	}
+	
+	
 }

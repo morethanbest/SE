@@ -14,6 +14,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import po.Formstate;
 import po.Job;
 import po.Ordertype;
 import presentation.enums.OrderTypes;
@@ -29,7 +30,9 @@ import businesslogic.orderbl.OrderPack.OrderController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.OrderBlService;
+
 import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 
@@ -272,7 +275,7 @@ public class OrderPanel extends JPanel {
 									orderBlService.getOrdercode(courierPanel
 											.getOrgCode()),
 									getOrderType((String) orderBox
-											.getSelectedItem()), fare),
+											.getSelectedItem()), fare, Formstate.waiting),
 							courierPanel.getOrgCode());
 					// System.out.println(orderBlService.getOrdercode(courierPanel.getOrgCode()));
 				} catch (NumberFormatException e1) {
