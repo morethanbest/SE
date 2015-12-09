@@ -240,7 +240,7 @@ public class DebitnotePanel extends JPanel implements ActionListener{
 					}
 				}
 				else{
-					RecordcollectVO reVo=vo.getList().get(table.getSelectedColumn());
+					RecordcollectVO reVo=vo.getList().get(table.getSelectedRow());
 					long year=reVo.getCollectiontime()/10000;
 					long mouth=reVo.getCollectiontime()/100-year*100;
 					long day=reVo.getCollectiontime()%100;
