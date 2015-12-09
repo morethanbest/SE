@@ -12,6 +12,7 @@ import javax.swing.JSeparator;
 
 import presentation.Financial.account.AccountPanel;
 import presentation.Financial.balance.BalancePanel;
+import presentation.Financial.debitnote.DebitnotePanel;
 import presentation.Financial.recordpay.RecordpayPanel;
 import presentation.Financial.statistics.StatisticsPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
@@ -33,6 +34,7 @@ public class FinancialPanel extends JPanel implements ActionListener{
 	private RecordpayPanel recordpayPanel;
 	private BalancePanel balancePanel;
     private String orgcode;
+    private DebitnotePanel debitnotePanel;
 	/**
 	 * Create the panel.
 	 */
@@ -41,7 +43,7 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
-		btnNewButton = new JButton("收款");
+		btnNewButton = new JButton("结算");
 		btnNewButton.setBounds(14, 13, 113, 27);
 		btnNewButton.addActionListener(this);
 		add(btnNewButton);
@@ -96,6 +98,8 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		panel.add(recordpayPanel, "recordpay");
 		balancePanel=new BalancePanel();
 		panel.add(balancePanel, "balance");
+		debitnotePanel=new DebitnotePanel();
+		panel.add(debitnotePanel, "debitnote");
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);
 		hint.setVisible(false);
@@ -113,6 +117,8 @@ public class FinancialPanel extends JPanel implements ActionListener{
 			card.show(panel, "recordpay");
 		}else if(e.getSource().equals(btnNewButton_3)){
 			card.show(panel, "balance");
+		}else if(e.getSource().equals(btnNewButton)){
+			card.show(panel, "debitnote");
 		}
 	}
 

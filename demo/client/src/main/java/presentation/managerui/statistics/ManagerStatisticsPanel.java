@@ -1,6 +1,5 @@
-package presentation.Financial.statistics;
+package presentation.managerui.statistics;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -19,7 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import businesslogic.balancebl.StatisticsPack.StatisticsController;
 import businesslogicservice.balanceblservice.StatisticsBlService;
@@ -27,8 +25,7 @@ import vo.RecordcollectVO;
 import vo.RecordpayVO;
 import vo.StatisticsVO;
 
-public class StatisticsPanel extends JPanel implements ActionListener {
-	private String orgcode;
+public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 	
 	private JTable table;
 	
@@ -52,8 +49,7 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 	
 	JScrollPane collectpanel;
 	
-	public  StatisticsPanel(String orgcode){
-		this.orgcode = orgcode;
+	public  ManagerStatisticsPanel(){
 		setLayout(null);
 		
 		separator = new JSeparator();
@@ -445,3 +441,4 @@ public class StatisticsPanel extends JPanel implements ActionListener {
 	}
 
 }
+

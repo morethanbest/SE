@@ -6,17 +6,18 @@ import java.util.List;
 public class NewbookPO  implements Serializable{
 	long id;
 	long time;
-	List<OrignalAccountPO> account;
-	List<OrignalCommodityPO> commodity;
-	List<OrignalOrganizationPO> organization;
-	List<OrignalStaffPO> staff;
-	List<OrignalVehiclesPO> vehicles;
-	public NewbookPO(long id, List<OrignalAccountPO> account,
-			List<OrignalCommodityPO> commodity,
-			List<OrignalOrganizationPO> organization,
-			List<OrignalStaffPO> staff, List<OrignalVehiclesPO> vehicles) {
+	List<AccountPO> account;
+	List<CommodityPO> commodity;
+	List<OrganizationPO> organization;
+	List<StaffPO> staff;
+	List<VehiclesPO> vehicles;
+
+	public NewbookPO(long id, long time,List<AccountPO> account, List<CommodityPO> commodity,
+			List<OrganizationPO> organization,
+			List<StaffPO> staff, List<VehiclesPO> vehicles) {
 		super();
 		this.id = id;
+		this.time=time;
 		this.account = account;
 		this.commodity = commodity;
 		this.organization = organization;
@@ -26,19 +27,20 @@ public class NewbookPO  implements Serializable{
 	public long getId() {
 		return id;
 	}
-	public List<OrignalAccountPO> getAccount() {
+	public long getTime(){return time;}
+	public List<AccountPO> getAccount() {
 		return account;
 	}
-	public List<OrignalCommodityPO> getCommodity() {
+	public List<CommodityPO> getCommodity() {
 		return commodity;
 	}
-	public List<OrignalOrganizationPO> getOrganization() {
+	public List<OrganizationPO> getOrganization() {
 		return organization;
 	}
-	public List<OrignalStaffPO> getStaff() {
+	public List<StaffPO> getStaff() {
 		return staff;
 	}
-	public List<OrignalVehiclesPO> getVehicles() {
+	public List<VehiclesPO> getVehicles() {
 		return vehicles;
 	}
 

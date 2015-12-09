@@ -2,6 +2,8 @@ package data.database.transportDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.database.DBHelper;
 import po.ResultMessage;
@@ -102,6 +104,25 @@ public class VehicleDB {
 		return ResultMessage.failure;
 	}
 
+	public static List<VehiclesPO> getAll(){
+		List<VehiclesPO> list=new ArrayList<VehiclesPO>();
+		dbh = new DBHelper();
+		try {
+			sql = "select vehiclecode,vehiclenum,extendtime from VehiclesPO";
+			pst = dbh.prepare(sql);
+			ret = pst.executeQuery();
+			while(ret.next()) {
+				list.add(new VehiclesPO(ret.getString(1), ret.getString(2), ret.getLong(3)));
+			}
+			ret.close();
+			dbh.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static VehiclesPO searchbycode(String vehiclecode) {
 		VehiclesPO po = null;
 		dbh = new DBHelper();

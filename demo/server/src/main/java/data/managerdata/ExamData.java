@@ -49,6 +49,12 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	}
 
 	@Override
+	public OrderPO getpo(String ordercode) throws RemoteException {
+		// TODO Auto-generated method stub
+		return OrderDB.search(ordercode);
+	}
+
+	@Override
 	public List<ArrivalPO> getArrivalForm(Formstate state) throws RemoteException {
 		// TODO Auto-generated method stub
 		return ArrivalDB.fuzzySearch(state);

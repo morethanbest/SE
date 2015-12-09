@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -43,7 +44,7 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 0, 954, 8);
 		add(separator);
 		scrollPane=new JScrollPane();
-		scrollPane.setBounds(40, 40, 700, 350);
+		scrollPane.setBounds(40, 20, 700, 330);
 		add(scrollPane);
 		table=new JTable();
 		table.setModel(new DefaultTableModel(
@@ -69,9 +70,27 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		table.setRowHeight(50);
 		
 		refreshList();
+		
+		addBtn = new JButton();
+		addBtn.setText("增加薪水策略");
+		addBtn.setBounds(800, 20, 150, 40);
+		add(addBtn);
+		addBtn.addActionListener(this);
+		
+		delBtn = new JButton();
+		delBtn.setText("删除选中项");
+		delBtn.setBounds(200, 380, 150, 40);
+		add(delBtn);
+		delBtn.addActionListener(this);
+		
+		revBtn = new JButton();
+		revBtn.setText("修改选中项");
+		revBtn.setBounds(500, 380, 150, 40);
+		add(revBtn);
+		revBtn.addActionListener(this);
 	}
 	
-	private void refreshList(){
+	public void refreshList(){
 		SalaryBlService salaryBlService=new SalaryController();
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		Job[] jobs=Job.values();
@@ -88,11 +107,54 @@ public class SalaryPanel extends JPanel implements ActionListener{
 			}
 		}
 	}
-
+	
+	public void deleteSalary(Job job){
+		SalaryBlService salaryBlService=new SalaryController();
+		vo=salaryBlService.getSalary(job);
+		salaryBlService.delSalary(vo);
+		refreshList();
+	}
+	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource().equals(delBtn)){
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			String string=(String)tableModel.getValueAt(table.getSelectedRow(), 0);
+			switch (string) {
+			case "快递员":
+				deleteSalary(Job.Courier);
+				break;
+			case "营业厅业务员":
+				deleteSalary(Job.hallsalesman);
+				break;
+			case "中转中心业务员":
+				deleteSalary(Job.transfercentersalesman);
+				break;
+			case "中转中心库存管理人员":
+				deleteSalary(Job.CenterDepot);
+				break;
+			case "财务人员":
+				deleteSalary(Job.Financial);
+				break;
+			case "司机":
+				deleteSalary(Job.drivers);
+				break;
+			case "管理员":
+				deleteSalary(Job.administrator);
+				break;
+			case "总经理":
+				deleteSalary(Job.manager);
+				break;
+			default:
+				break;
+			}
+		}else if(e.getSource().equals(addBtn)){
+			AddSalaryDialog dialog=new AddSalaryDialog(this);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+			refreshList();
+		}
 	}
 
 }

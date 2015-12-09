@@ -6,6 +6,11 @@ import po.ResultMessage;
 import vo.NewbookVO;
 
 public interface NewBookBlService {
-	public ResultMessage NewBook (NewbookVO vo)throws RemoteException;
+	public ResultMessage NewBook (long id);
+
+	public NewbookVO find(long time);
+
+
+	public long getid();
 
 }
