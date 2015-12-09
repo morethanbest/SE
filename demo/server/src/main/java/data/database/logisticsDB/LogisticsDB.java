@@ -109,14 +109,16 @@ public class LogisticsDB {
 
 	public static void main(String[] args) {
 		initialize();
-		if (write(new LogisticsPO("a", new ArrayList<String>(), "123")) == ResultMessage.success) {
+		List<String> list=new ArrayList<String>();
+		list.add("a");
+		if (write(new LogisticsPO("a", list, "123")) == ResultMessage.success) {
 			System.out.println("write success");
 		}
 		if (find("123") != null) {
 			System.out.println("find success");
 		}
-		if (update(new LogisticsPO( "b", new ArrayList<String>(), "123")) == ResultMessage.success) {
-			System.out.println("update success");
-		}
+//		if (update(new LogisticsPO( "b", new ArrayList<String>(), "123")) == ResultMessage.success) {
+//			System.out.println("update success");
+//		}
 	}
 }
