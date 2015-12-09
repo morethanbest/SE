@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
+import presentation.searchorder.Searchorder;
 import businesslogic.userbl.UsersloginPack.UserloginController;
 import businesslogicservice.userblservice.UserloginBlService;
 
@@ -66,11 +67,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 		add(button);
 
 		button_1 = new JButton("\u67E5\u8BE2\u7269\u6D41\u4FE1\u606F");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Cannot use!!!!");
-			}
-		});
+		button_1.addActionListener(this);
 		button_1.setFont(new Font("����", Font.BOLD, 18));
 		button_1.setBounds(759, 473, 158, 43);
 		add(button_1);
@@ -111,6 +108,8 @@ public class LoginPanel extends JPanel implements ActionListener {
 					e2.printStackTrace();
 				}
 			}
+		}else if(e.getSource().equals(button_1)){
+			frame.showLogistics();
 		}
 	}
 

@@ -17,12 +17,14 @@ import presentation.courierui.CourierPanel;
 import presentation.depotui.DepotPanel;
 import presentation.hallsalesmanui.HallsalesmanPanel;
 import presentation.managerui.ManagerPanel;
+import presentation.searchorder.Searchorder;
 import vo.LoginVO;
 
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private CardLayout card;
+	private Searchorder searchorder;
 	/**
 	 * Launch the application.
 	 */
@@ -53,6 +55,8 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(card);
 		LoginPanel login = new LoginPanel(this);
 		contentPane.add(login, "login");
+		searchorder=new Searchorder();
+		contentPane.add(searchorder, "searchorder");
 	
 	}
 
@@ -86,6 +90,9 @@ public class MainFrame extends JFrame {
 			contentPane.add(temp, "centerdepot");
 			card.show(contentPane, "centerdepot");
 		}
+	}
+	public void showLogistics(){
+		card.show(contentPane, "searchorder");
 	}
 
 
