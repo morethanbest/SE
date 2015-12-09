@@ -8,7 +8,7 @@ import vo.AccountVO;
 import java.rmi.RemoteException;
 
 /**
- * Created by ³¬ on 2015/11/25.
+ * Created by  on 2015/11/25.
  */
 public class GetAccountbyName {
     String accountname;

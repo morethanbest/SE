@@ -6,7 +6,7 @@ import init.RMIHelper;
 import java.rmi.RemoteException;
 
 /**
- * Created by ³¬ on 2015/11/26.
+ * Created by  on 2015/11/26.
  */
 public class IdInfo {
     public long getId(){
