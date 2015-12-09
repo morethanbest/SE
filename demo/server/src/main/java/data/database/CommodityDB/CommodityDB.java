@@ -1,4 +1,4 @@
-package data.database.CommodityDB;
+package data.database.commodityDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

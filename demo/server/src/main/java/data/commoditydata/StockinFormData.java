@@ -4,14 +4,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.database.commodityDB.CommodityDB;
+import data.database.commodityDB.StockDB;
+import data.database.commodityDB.StockinDB;
+import dataservice.commoditydataservice.StockinFormDataService;
 import po.CommodityLocation;
 import po.Formstate;
 import po.ResultMessage;
 import po.StockinPO;
-import data.database.CommodityDB.CommodityDB;
-import data.database.CommodityDB.StockDB;
-import data.database.CommodityDB.StockinDB;
-import dataservice.commoditydataservice.StockinFormDataService;
 
 public class StockinFormData extends UnicastRemoteObject implements StockinFormDataService{
 

@@ -1,20 +1,17 @@
 package data.accountdata;
 
-import dataservice.accountdataservice.NewBookDataService;
-import po.AccountPO;
-import po.NewbookPO;
-import po.ResultMessage;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
 
-import data.database.CommodityDB.CommodityDB;
 import data.database.accountDB.AccountDB;
 import data.database.accountDB.NewBookDB;
+import data.database.commodityDB.CommodityDB;
 import data.database.managerDB.OrganizationDB;
 import data.database.managerDB.StaffDB;
 import data.database.transportDB.VehicleDB;
+import dataservice.accountdataservice.NewBookDataService;
+import po.NewbookPO;
+import po.ResultMessage;
 
 public class NewBookData extends UnicastRemoteObject implements NewBookDataService{
 
