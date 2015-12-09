@@ -298,8 +298,8 @@ public class NewBookPanel extends JPanel implements ActionListener{
 				String[] rowString =new String[4];
 				rowString[0]=comvo.getOrdercode();
 				rowString[1]=comvo.getDestination();
-				rowString[2]=Double.toString(comvo.getIntime());
-				rowString[3]=Double.toString(comvo.getOuttime());
+				rowString[2]=Long.toString(comvo.getIntime());
+				rowString[3]=Long.toString(comvo.getOuttime());
 				tableModel.addRow(rowString);
 			}
 		}
@@ -349,7 +349,7 @@ public class NewBookPanel extends JPanel implements ActionListener{
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnCount(0);
 		tableModel.setRowCount(0);
-		if(vo==null){
+		if(vo.getCommodity().size()==0){
 			System.out.println("然并卵");
 		}
     }

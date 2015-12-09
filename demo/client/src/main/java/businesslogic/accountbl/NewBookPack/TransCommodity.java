@@ -22,7 +22,7 @@ public class TransCommodity {
             String destination=newvo.getDestination();
             CommodityLocation location=newvo.getLocation();
 
-            CommodityPO po=new CommodityPO(id,ordercode,i,outtime,destination,location);
+            CommodityPO po=new CommodityPO(id,ordercode,intime,outtime,destination,location);
             list.add(po);
         }
         return list;
@@ -39,7 +39,7 @@ public class TransCommodity {
             String destination=newpo.getDestination();
             CommodityLocation location=newpo.getLocation();
 
-            CommodityVO vo=new CommodityVO(id,ordercode,i,outtime,destination,location);
+            CommodityVO vo=new CommodityVO(id,ordercode,intime,outtime,destination,location);
             list.add(vo);
         }
         return list;

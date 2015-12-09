@@ -94,7 +94,7 @@ public class CommodityDB {
 		CommodityPO po;
 		dbh=new DBHelper();
 		try {
-			sql = "select id,ordercode,intime,outtime,destination,Location from CommodityPO and outtime < 0";
+			sql = "select id,ordercode,intime,outtime,destination,Location from CommodityPO where outtime < 0";
 			pst = dbh.prepare(sql);
 			ret = pst.executeQuery();
 			while (ret.next()) {
@@ -350,6 +350,9 @@ public class CommodityDB {
 		}
 		if(getbyblock("025",1).size()>0){
 			System.out.println("getbyblock success");
+		}
+		if(getAll().size()>0){
+			System.out.println("getAll success");
 		}
 					
 	}

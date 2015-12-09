@@ -30,7 +30,7 @@ public class AddNewbook {
         List<OrganizationPO> opo=null;
         List<StaffPO> spo=null;
         List<VehiclesPO> vpo=null;
-        if(id!=1) {
+        if(id!=0) {
             NewbookPO anotherpo = null;
             try {
                 anotherpo = data.getLastBook();
