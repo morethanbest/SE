@@ -19,8 +19,9 @@ public class AddNewbook {
         int day = cal.get(Calendar.DATE);
         int month = cal.get(Calendar.MONTH) + 1;
         int year = cal.get(Calendar.YEAR);
-        String date=Integer.toString(year)+Integer.toString(month)+Integer.toString(day);
-        long time=Long.valueOf(date);
+//        String date=Integer.toString(year)+Integer.toString(month)+Integer.toString(day);
+//        long time=Long.valueOf(date);
+        long time=year*10000+month*100+day;
 
         NewBookDataService data= RMIHelper.getNewbook();
 
