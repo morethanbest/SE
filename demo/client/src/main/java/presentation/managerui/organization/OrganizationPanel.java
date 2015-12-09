@@ -219,7 +219,9 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 						table.getSelectedRow(), 3);
 				organizationBlService.delOrganization(new OrganizationVO(cellValue2, cellValue1, getOrganizationType(cellValue4), cellValue3));
 				refreshList();
-			} catch (ArrayIndexOutOfBoundsException | NullPointerException e1) {
+			} catch (ArrayIndexOutOfBoundsException e1) {
+//				managerPanel.setHint("系统提示：未选择删除项！");
+			} catch (NullPointerException e1) {
 //				managerPanel.setHint("系统提示：未选择删除项！");
 			}
 		}

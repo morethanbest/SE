@@ -54,6 +54,11 @@ public class ExamSelectPanel extends JPanel {
 		add(button_3);
 		
 		button_4 = new JButton("订单");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "order");
+			}
+		});
 		button_4.setBounds(166, 59, 113, 27);
 		add(button_4);
 		
@@ -67,10 +72,20 @@ public class ExamSelectPanel extends JPanel {
 		add(button_5);
 		
 		button_6 = new JButton("中转单");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "trans");
+			}
+		});
 		button_6.setBounds(293, 167, 113, 27);
 		add(button_6);
 		
 		button_7 = new JButton("装车单");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "cl");
+			}
+		});
 		button_7.setBounds(420, 167, 113, 27);
 		add(button_7);
 		

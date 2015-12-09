@@ -108,4 +108,10 @@ public class OrderVO {
 	public Formstate getFormstate(){
 		return this.documentstate;
 	}
+
+	public void setDocumentstate(Formstate documentstate) {
+		this.documentstate = documentstate;
+	}
+	
+	
 }

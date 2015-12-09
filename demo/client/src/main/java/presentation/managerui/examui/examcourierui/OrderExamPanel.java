@@ -1,7 +1,6 @@
-package presentation.managerui.examui.examcentersalesmanui;
+package presentation.managerui.examui.examcourierui;
 
 import java.awt.CardLayout;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -13,98 +12,96 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import vo.ArrivalVO;
+import vo.OrderVO;
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogicservice.managerblservice.ExamOrdersBlService;
+
 import javax.swing.table.DefaultTableModel;
 
 import po.Formstate;
 import presentation.managerui.examui.ExamPanel;
-import vo.ArrivalVO;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.managerblservice.ExamArrivals;
 
-public class ArrivalExamPanel extends JPanel {
+public class OrderExamPanel extends JPanel {
 	private JTable table;
-	private ExamArrivals ea;
-	private List<ArrivalVO> volist;
-	private JComboBox<String> stateBox;
+	private ExamOrdersBlService ea;
+	private List<OrderVO> volist;
 	private JButton pass;
 	private JButton refused;
 	private JButton revise;
 	private JButton back;
+	private JComboBox<String> stateBox;
 
 	/**
 	 * Create the panel.
-	 * 
-	 * @param card
-	 * @param examPanel
 	 */
-	public ArrivalExamPanel(ExamPanel parent, CardLayout card) {
-		setBackground(SystemColor.inactiveCaptionBorder);
+	public OrderExamPanel(ExamPanel parent, CardLayout card) {
 		ea = new ExamController();
-
+		
 		setLayout(null);
-
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(14, 35, 917, 335);
+		scrollPane.setBounds(14, 13, 917, 335);
 		add(scrollPane);
-
+		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] { { null, null,
-				null, null, null, null }, }, new String[] { "\u9009\u9879",
-				"\u4E2D\u8F6C\u4E2D\u5FC3\u7F16\u53F7",
-				"\u5230\u8FBE\u65F6\u95F4", "\u4E2D\u8F6C\u5355\u7F16\u53F7",
-				"\u76EE\u7684\u5730", "\u5BA1\u6279\u72B6\u6001" }) {
-			Class[] columnTypes = new Class[] { Boolean.class, String.class,
-					Long.class, String.class, String.class, String.class };
-
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"\u9009\u9879", "\u8BA2\u5355\u7F16\u53F7", "\u51FA\u53D1\u5730", "\u76EE\u7684\u5730", "\u8FD0\u8D39", "\u5305\u88C5\u7C7B\u578B", "\u5355\u636E\u7C7B\u578B", "\u5BA1\u6279\u72B6\u6001"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Boolean.class, String.class, String.class, String.class, Double.class, Object.class, String.class, String.class
+			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-
-			boolean[] columnEditables = new boolean[] { true, false, false,
-					false, false, false };
-
+			boolean[] columnEditables = new boolean[] {
+				true, false, false, false, false, false, false, false
+			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(15);
-
 		scrollPane.setViewportView(table);
-
+		
 		pass = new JButton("通过");
 		pass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.pass);
 			}
 		});
-		pass.setBounds(411, 380, 113, 27);
+		pass.setBounds(411, 358, 113, 27);
 		add(pass);
-
+		
 		refused = new JButton("否决");
 		refused.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.fail);
 			}
 		});
-		refused.setBounds(538, 380, 113, 27);
+		refused.setBounds(538, 358, 113, 27);
 		add(refused);
-
+		
 		revise = new JButton("查看详细");
-		revise.setBounds(665, 380, 113, 27);
+		revise.setBounds(665, 358, 113, 27);
 		add(revise);
-
+		
 		back = new JButton("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.show(parent, "select");
 			}
 		});
-		back.setBounds(792, 380, 113, 27);
+		back.setBounds(792, 358, 113, 27);
 		add(back);
-
+		
 		stateBox = new JComboBox<String>();
-		stateBox.setBounds(67, 381, 169, 24);
+		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
 		stateBox.addItemListener(new ItemListener() {
 
@@ -132,7 +129,7 @@ public class ArrivalExamPanel extends JPanel {
 		addStateItems();
 
 	}
-
+	
 	private void addStateItems() {
 		for (Formstate state : Formstate.values()) {
 			stateBox.addItem(state.getName());
@@ -143,9 +140,9 @@ public class ArrivalExamPanel extends JPanel {
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		for (int i = 0; i < volist.size(); i++) {
 			if ((boolean) tableModel.getValueAt(i, 0)) {
-				ArrivalVO vo = volist.get(i);
+				OrderVO vo = volist.get(i);
 				vo.setDocumentstate(state);
-				ea.updateArrivalForm(vo);
+				ea.updateOrderForm(vo);
 			}
 		}
 		refreshList();
@@ -154,20 +151,22 @@ public class ArrivalExamPanel extends JPanel {
 	private void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
-				volist = ea.getArrivalForm(state);
+				volist = ea.getOrderForm(state);
 		}
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);// 清除原有行
 
-		for (ArrivalVO vo : volist) {
-			Object[] row = new Object[6];
+		for (OrderVO vo : volist) {
+			Object[] row = new Object[8];
 			row[0] = false;
-			row[1] = vo.getCentercode();
-			row[2] = vo.getArrivaltime();
-			row[3] = vo.getTranscode();
-			row[4] = vo.getDeparture();
-			row[5] = vo.getFormstate().getName();
+			row[1] = vo.getOrdercode();
+			row[2] = vo.getSenderaddress();
+			row[3] = vo.getReceiveraddress();
+			row[4] = vo.getTotalfee();
+			row[5] = vo.getPackagetype();
+			row[6] = vo.getOrdertype().getName();
+			row[7] = vo.getFormstate().getName();
 
 			tableModel.addRow(row);
 		}

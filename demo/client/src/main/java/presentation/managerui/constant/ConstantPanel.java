@@ -162,7 +162,9 @@ public class ConstantPanel extends JPanel implements ActionListener {
 					constantsBlService.delConstants(new ConstantsVO(cellValue1,
 							cellValue2));
 					refreshList();
-				} catch (ArrayIndexOutOfBoundsException | NullPointerException e1) {
+				} catch (ArrayIndexOutOfBoundsException  e1) {
+					managerPanel.setHint("系统提示：未选择删除项！");
+				} catch (NullPointerException e1) {
 					managerPanel.setHint("系统提示：未选择删除项！");
 				}
 			}

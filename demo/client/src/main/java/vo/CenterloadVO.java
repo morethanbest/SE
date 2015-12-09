@@ -55,4 +55,8 @@ public class CenterloadVO {
 	}
 	public double getfee(){return this.fee;}
 
+	public void setDocumentstate(Formstate documentstate) {
+		this.documentstate = documentstate;
+	}
+
 }

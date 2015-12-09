@@ -34,4 +34,9 @@ public class StockinVO {
 		return destination;
 	}
 	public Formstate getFormstate(){return  formstate;}
+	public void setFormstate(Formstate formstate) {
+		this.formstate = formstate;
+	}
+	
+	
 }
