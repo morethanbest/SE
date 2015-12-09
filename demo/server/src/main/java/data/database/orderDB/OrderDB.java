@@ -313,7 +313,7 @@ public class OrderDB {
 		return lastId;
 	}
 	public static void main(String[] args) {
-//		initialize();
+		initialize();
 		System.out.println("test");
 
 //		if(getLastId("025")==1){

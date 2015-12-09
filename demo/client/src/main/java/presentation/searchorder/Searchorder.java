@@ -1,5 +1,6 @@
 package presentation.searchorder;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import businesslogic.logisticsbl.LogisticsPack.LogisticsSearchController;
@@ -44,7 +46,7 @@ public class Searchorder extends JPanel implements ActionListener{
 		searchBtn.addActionListener(this);
 		
 		scrollPane=new JScrollPane();
-		scrollPane.setBounds(350,20,500,400);
+		scrollPane.setBounds(450,20,500,500);
 		scrollPane.setBorder(null);
 		add(scrollPane);
 		
@@ -54,14 +56,50 @@ public class Searchorder extends JPanel implements ActionListener{
 	private void showLogisics(){
 		scrollPane.removeAll();
 		if(vo!=null){
-			System.out.println("111");
 			List<String> history=vo.getHistory();
 			if(history.size()>0){
-				history.get(0);
-				JRadioButton radioButton=new  JRadioButton();
-				radioButton.setBounds(50, 50, 50, 50);
+				JRadioButton radioButtons[]=new JRadioButton[history.size()];
+				JLabel labels[]=new JLabel[history.size()];
+				JSeparator separator[]=new JSeparator[history.size()];
+				if(history.size()>1){
+					radioButtons[0]=new JRadioButton(history.get(0),false);
+					radioButtons[0].setBounds(200, 50, 50, 21);
+					radioButtons[0].setEnabled(false);
+					scrollPane.add(radioButtons[0]);
+				}else{
+					radioButtons[0]=new JRadioButton(history.get(0),true);
+					radioButtons[0].setBounds(200, 50, 50, 21);
+					radioButtons[0].setEnabled(false);
+					scrollPane.add(radioButtons[0]);
+				}
+				for(int i=1;i<history.size();i++){
+					if(history.size()>i+1){
+						separator[i]=new JSeparator(separator[i].VERTICAL);
+						separator[i].setBounds(210, 50*i+20, 8, 30);
+						scrollPane.add(separator[i]);
+						radioButtons[i]=new JRadioButton(history.get(i),false);
+						radioButtons[i].setBounds(200, 50*(i+1), 50, 21);
+						radioButtons[i].setEnabled(false);
+						scrollPane.add(radioButtons[i]);
+
+					}else{
+						separator[i]=new JSeparator(separator[i].VERTICAL);
+						separator[i].setBounds(210, 50*i+20, 8, 30);
+						scrollPane.add(separator[i]);
+						radioButtons[i]=new JRadioButton(history.get(i),true);
+						radioButtons[i].setBounds(200, 50*(i+1), 50, 21);
+						radioButtons[i].setEnabled(false);
+						scrollPane.add(radioButtons[i]);
+
+					}
+				}
+
 				
-				scrollPane.add(radioButton);
+
+				scrollPane.repaint();
+				
+
+				
 			}
 		}
 	}

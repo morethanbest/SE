@@ -15,15 +15,16 @@ public class Search {
     public LogisticsVO searchorder(String ordernum){
         LogisticsInfoService dataserv= RMIHelper.getLogisticsinfo();
         LogisticsPO po=null;
+        LogisticsVO vo=null;
         try {
             po=dataserv.findLogisticsInfo(ordernum);
+			String state = po.getState();
+			List<String> history = po.getHistory();
+			vo = new LogisticsVO(state, history, ordernum);
         } catch (RemoteException e) {
-            System.out.println("search logistics by num failed!!!");
-            e.printStackTrace();
+        	System.out.println("search logistics by num failed!!!");
+        	e.printStackTrace();
         }
-        String state=po.getState();
-        List<String> history=po.getHistory();
-        LogisticsVO vo=new LogisticsVO(state,history,ordernum);
         return vo;
 
 

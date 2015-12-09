@@ -111,6 +111,12 @@ public class LogisticsDB {
 		initialize();
 		List<String> list=new ArrayList<String>();
 		list.add("a");
+		list.add("b");
+		list.add("c");
+		list.add("a");
+		list.add("b");
+		list.add("c");
+
 		if (write(new LogisticsPO("a", list, "123")) == ResultMessage.success) {
 			System.out.println("write success");
 		}
