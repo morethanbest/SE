@@ -2,7 +2,7 @@ package businesslogic.accountbl.AccountPack;
 
 import java.rmi.RemoteException;
 
-import com.sun.xml.internal.fastinfoset.tools.FI_StAX_SAX_Or_XML_SAX_SAXEvent;
+
 import vo.AccountVO;
 import po.ResultMessage;
 import businesslogicservice.accountblservice.AccountBlService;
