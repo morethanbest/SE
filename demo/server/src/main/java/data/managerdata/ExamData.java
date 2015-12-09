@@ -4,18 +4,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import data.database.balanceDB.RecordcollectDB;
-import data.database.balanceDB.RecordpayDB;
-import data.database.commodityDB.StockinDB;
-import data.database.commodityDB.StockoutDB;
-import data.database.logisticsDB.ArrivalDB;
-import data.database.logisticsDB.CenterloadDB;
-import data.database.logisticsDB.DeliveryDB;
-import data.database.logisticsDB.GoodsReceivingDB;
-import data.database.logisticsDB.HallLoadDB;
-import data.database.logisticsDB.RecordtransDB;
-import data.database.orderDB.OrderDB;
-import dataservice.managerdataservice.ExamDataService;
 import po.ArrivalPO;
 import po.CenterloadPO;
 import po.DeliveryPO;
@@ -29,6 +17,18 @@ import po.RecordtransPO;
 import po.ResultMessage;
 import po.StockinPO;
 import po.StockoutPO;
+import data.database.CommodityDB.StockinDB;
+import data.database.CommodityDB.StockoutDB;
+import data.database.balanceDB.RecordcollectDB;
+import data.database.balanceDB.RecordpayDB;
+import data.database.logisticsDB.ArrivalDB;
+import data.database.logisticsDB.CenterloadDB;
+import data.database.logisticsDB.DeliveryDB;
+import data.database.logisticsDB.GoodsReceivingDB;
+import data.database.logisticsDB.HallLoadDB;
+import data.database.logisticsDB.RecordtransDB;
+import data.database.orderDB.OrderDB;
+import dataservice.managerdataservice.ExamDataService;
 
 public class ExamData extends UnicastRemoteObject implements ExamDataService {
 

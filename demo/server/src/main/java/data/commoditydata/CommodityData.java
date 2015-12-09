@@ -5,13 +5,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.database.commodityDB.CommodityDB;
-import data.database.commodityDB.StockDB;
-import data.database.commodityDB.StopPointDB;
-import dataservice.commoditydataservice.CommodityDataService;
 import po.CommodityLocation;
 import po.CommodityPO;
 import po.ResultMessage;
+import data.database.CommodityDB.CommodityDB;
+import data.database.CommodityDB.StockDB;
+import data.database.CommodityDB.StopPointDB;
+import dataservice.commoditydataservice.CommodityDataService;
 
 public class CommodityData extends UnicastRemoteObject implements CommodityDataService{
 
