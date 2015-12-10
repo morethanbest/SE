@@ -38,9 +38,15 @@ public class RecordpayFormData extends UnicastRemoteObject implements RecordpayF
 	@Override
 	public ResultMessage removeTheCost(String accountname, double fee) throws RemoteException {
 		// TODO Auto-generated method stub
-		AccountPO account=AccountDB.search(accountname);
-		account.setAccountsum(account.getAccountsum()-fee);			//账户的钱为原来的钱减去这次应扣除的钱
-		return AccountDB.update(account);							//更新数据库中的账户信息
+		ResultMessage result=ResultMessage.failure;
+		try{
+			AccountPO account=AccountDB.search(accountname);
+			account.setAccountsum(account.getAccountsum()-fee);			//账户的钱为原来的钱减去这次应扣除的钱
+			result=AccountDB.update(account);							//更新数据库中的账户信息
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override

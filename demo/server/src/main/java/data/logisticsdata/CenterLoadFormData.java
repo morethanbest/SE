@@ -47,8 +47,12 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 		// TODO Auto-generated method stub
 		double unitprice=0;
 		String name="运输类型-"+transporttype;
-		ConstantsPO constants=ConstantsDB.search(name);
-		unitprice=constants.getValue();
+		try{
+			ConstantsPO constants=ConstantsDB.search(name);
+			unitprice=constants.getValue();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		return unitprice;
 	}
 
@@ -57,8 +61,12 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 		// TODO Auto-generated method stub
 		double distance=0;
 		String name="距离-"+city1+"-"+city2;
-		ConstantsPO constants=ConstantsDB.search(name);
-		distance=constants.getValue();
+		try{
+			ConstantsPO constants=ConstantsDB.search(name);
+			distance=constants.getValue();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return distance;
 	}
 

@@ -24,7 +24,7 @@ public class ArrivalDB {
 		pst = dbh.prepare(sql);
 		try {
 			pst.executeUpdate();
-			sql = "create table ArrivalPO(id text,centercode text,arrivaltime bigint,"
+			sql = "create table ArrivalPO(id text,centercode text,arrivaltime bigint,whefromhall boolean,"
 					+ "transcode text,departure text,arrivalstate blob,documentstate blob)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
@@ -39,15 +39,16 @@ public class ArrivalDB {
 			byte[] statebytes = Serialize.Object2Bytes(po.getArrivalstate());
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			dbh = new DBHelper();
-			sql = "insert into ArrivalPO values(?,?,?,?,?,?,?)";
+			sql = "insert into ArrivalPO values(?,?,?,?,?,?,?,?)";
 			pst = dbh.prepare(sql);
 			pst.setString(1, po.getId());
 			pst.setString(2, po.getCentercode());
-			pst.setLong(3, po.getArrivaltime());
-			pst.setString(4, po.getTranscode());
-			pst.setString(5, po.getDeparture());
-			pst.setBytes(6, statebytes);
-			pst.setBytes(7, formstate);
+			pst.setBoolean(3, po.isWhefromhall());
+			pst.setLong(4, po.getArrivaltime());
+			pst.setString(5, po.getTranscode());
+			pst.setString(6, po.getDeparture());
+			pst.setBytes(7, statebytes);
+			pst.setBytes(8, formstate);
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -69,15 +70,16 @@ public class ArrivalDB {
 			byte[] formstate =Serialize.Object2Bytes(po.getDocumentstate());
 			byte[] arrivalstate =Serialize.Object2Bytes(po.getArrivalstate());
 			dbh = new DBHelper();
-			sql = "update ArrivalPO set centercode=?,arrivaltime=?,transcode=?,departure=?,arrivalstate=?,documentstate=? where id=?";
+			sql = "update ArrivalPO set centercode=?,arrivaltime=?,whefromhall=?,transcode=?,departure=?,arrivalstate=?,documentstate=? where id=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, po.getCentercode());
 			pst.setLong(2, po.getArrivaltime());
-			pst.setString(3, po.getTranscode());
-			pst.setString(4, po.getDeparture());
-			pst.setBytes(5, arrivalstate);
-			pst.setBytes(6, formstate);
-			pst.setString(7,po.getId());
+			pst.setBoolean(3, po.isWhefromhall());
+			pst.setString(4, po.getTranscode());
+			pst.setString(5, po.getDeparture());
+			pst.setBytes(6, arrivalstate);
+			pst.setBytes(7, formstate);
+			pst.setString(8,po.getId());
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -98,13 +100,13 @@ public class ArrivalDB {
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select id,centercode,arrivaltime,transcode,departure,arrivalstate from ArrivalPO where documentstate = ?";
+			sql = "select id,centercode,arrivaltime,whefromhall,transcode,departure,arrivalstate from ArrivalPO where documentstate = ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				Arrivalstate arrivalstate=(Arrivalstate)Serialize.Bytes2Object(ret.getBytes(6)) ;
-				po = new ArrivalPO(ret.getString(1), ret.getString(2), ret.getLong(3), ret.getString(4), ret.getString(5),
+				Arrivalstate arrivalstate=(Arrivalstate)Serialize.Bytes2Object(ret.getBytes(7)) ;
+				po = new ArrivalPO(ret.getString(1), ret.getString(2), ret.getLong(3), ret.getBoolean(4),ret.getString(5), ret.getString(6),
 						arrivalstate,documentstate);
 				list.add(po);
 			}
@@ -131,8 +133,8 @@ public class ArrivalDB {
 			while (ret.next()) {
 				if(!ret.getString(1).startsWith(orgcode))
 					continue;
-				Arrivalstate arrivalstate=(Arrivalstate)Serialize.Bytes2Object(ret.getBytes(6)) ;
-				po = new ArrivalPO(ret.getString(1), ret.getString(2), ret.getLong(3), ret.getString(4), ret.getString(5),
+				Arrivalstate arrivalstate=(Arrivalstate)Serialize.Bytes2Object(ret.getBytes(7)) ;
+				po = new ArrivalPO(ret.getString(1), ret.getString(2), ret.getLong(3), ret.getBoolean(4),ret.getString(5), ret.getString(6),
 						arrivalstate,documentstate);
 				list.add(po);
 			}
@@ -168,7 +170,7 @@ public class ArrivalDB {
 
 	public static void main(String[] args) {
 		initialize();
-		ArrivalPO po=new ArrivalPO("0250001","a",1,"b","c",Arrivalstate.lost,Formstate.waiting);
+		ArrivalPO po=new ArrivalPO("0250001","a",1,true,"b","c",Arrivalstate.lost,Formstate.waiting);
 		if(write(po)==ResultMessage.success)
 			System.out.println("write success");
 		if(update(po)==ResultMessage.success)

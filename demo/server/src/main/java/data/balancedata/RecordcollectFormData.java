@@ -46,9 +46,15 @@ public class RecordcollectFormData extends UnicastRemoteObject implements Record
 	@Override
 	public ResultMessage addmoney(String accountname, double fee) throws RemoteException {
 		// TODO Auto-generated method stub
-		AccountPO account=AccountDB.search(accountname);
-		account.setAccountsum(fee+account.getAccountsum());			//账户的钱为原来的钱加上这次增加的钱
-		return AccountDB.update(account);							//更新数据库中的账户信息
+		ResultMessage result=ResultMessage.failure;
+		try{
+			AccountPO account=AccountDB.search(accountname);
+			account.setAccountsum(fee+account.getAccountsum());			//账户的钱为原来的钱加上这次增加的钱
+			result=AccountDB.update(account);									//更新数据库中的账户信息
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;							
 
 	}
 
