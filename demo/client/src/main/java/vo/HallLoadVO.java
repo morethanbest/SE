@@ -56,4 +56,13 @@ public class HallLoadVO {
 	}
 	public double getfee(){return this.fee;}
 	public Formstate getstate(){return this.documentstate;}
+
+	public Formstate getDocumentstate() {
+		return documentstate;
+	}
+
+	public void setFormstate(Formstate state) {
+		this.documentstate = state;
+		
+	}
 }

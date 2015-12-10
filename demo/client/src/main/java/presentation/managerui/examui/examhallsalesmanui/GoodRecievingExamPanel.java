@@ -16,25 +16,23 @@ import javax.swing.table.DefaultTableModel;
 
 import po.Formstate;
 import presentation.managerui.examui.ExamPanel;
-import vo.HallLoadVO;
-import vo.StockinVO;
+import vo.GoodsReceivingVO;
 import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.managerblservice.ExamHLForms;
+import businesslogicservice.managerblservice.ExamGoodsRecevings;
 
-public class HallLoadExamPanel extends JPanel {
-	private JTable table;
-	private JComboBox<String> stateBox;
+public class GoodRecievingExamPanel extends JPanel {
 	private JButton pass;
 	private JButton refused;
 	private JButton revise;
 	private JButton back;
-	private ExamHLForms ea;
-	private List<HallLoadVO> volist;
-
+	private JComboBox<String> stateBox;
+	private ExamGoodsRecevings ea;
+	private List<GoodsReceivingVO> volist;
+	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public HallLoadExamPanel(ExamPanel parent, CardLayout card) {
+	public GoodRecievingExamPanel(ExamPanel parent, CardLayout card) {
 		ea = new ExamController();
 		setLayout(null);
 		
@@ -45,20 +43,20 @@ public class HallLoadExamPanel extends JPanel {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null},
+				{null, null, null, null, null},
 			},
 			new String[] {
-				"\u9009\u9879", "\u88C5\u8F66\u65F6\u95F4", "\u6C7D\u8FD0\u7F16\u53F7", "\u76EE\u7684\u5730", "\u6C7D\u8F66\u7F16\u53F7", "\u8FD0\u8D39", "\u5BA1\u6279\u72B6\u6001"
+				"\u9009\u9879", "\u5230\u8FBE\u65F6\u95F4", "\u4E2D\u8F6C\u6216\u88C5\u8F66\u5355\u7F16\u53F7", "\u51FA\u53D1\u5730", "\u5BA1\u6279\u72B6\u6001"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Boolean.class, Long.class, String.class, String.class, String.class, Double.class, String.class
+				Boolean.class, Long.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
-				true, false, false, false, false, false, false
+				true, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -124,6 +122,7 @@ public class HallLoadExamPanel extends JPanel {
 			}
 		});
 		addStateItems();
+
 	}
 	private void addStateItems() {
 		for (Formstate state : Formstate.values()) {
@@ -135,9 +134,9 @@ public class HallLoadExamPanel extends JPanel {
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		for (int i = 0; i < volist.size(); i++) {
 			if ((boolean) tableModel.getValueAt(i, 0)) {
-				HallLoadVO vo = volist.get(i);
+				GoodsReceivingVO vo = volist.get(i);
 				vo.setFormstate(state);
-				ea.updateLoadForm(vo);
+				ea.updateGoodsReceivingForm(vo);
 			}
 		}
 		refreshList();
@@ -146,21 +145,19 @@ public class HallLoadExamPanel extends JPanel {
 	private void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
-				volist = ea.getLoadForm(state);
+				volist = ea.getGoodsReceivingForm(state);
 		}
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);// 清除原有行
 
-		for (HallLoadVO vo : volist) {
-			Object[] row = new Object[7];
+		for (GoodsReceivingVO vo : volist) {
+			Object[] row = new Object[5];
 			row[0] = false;
-			row[1] = vo.getLoadtime();
-			row[2] = vo.getMotorcode();
-			row[3] = vo.getDestination();
-			row[4] = vo.getVehicldecode();
-			row[5] = vo.getfee();
-			row[6] = vo.getDocumentstate().getName();
+			row[1] = vo.getArrivaltime();
+			row[2] = vo.getTranscode();
+			row[3] = vo.getDeparture();
+			row[4] = vo.getFormstate().getName();
 
 			tableModel.addRow(row);
 		}
