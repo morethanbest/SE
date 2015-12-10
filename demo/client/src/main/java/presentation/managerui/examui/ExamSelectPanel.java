@@ -21,7 +21,6 @@ public class ExamSelectPanel extends JPanel {
 	private JButton button_10;
 	private JButton button_11;
 	private JButton button_9;
-	private JButton button_8;
 
 	/**
 	 * Create the panel.
@@ -89,12 +88,13 @@ public class ExamSelectPanel extends JPanel {
 		button_7.setBounds(420, 167, 113, 27);
 		add(button_7);
 		
-		button_8 = new JButton("收款单");
-		button_8.setBounds(166, 278, 113, 27);
-		add(button_8);
-		
 		button_9 = new JButton("付款单");
-		button_9.setBounds(293, 278, 113, 27);
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "pay");
+			}
+		});
+		button_9.setBounds(166, 280, 113, 27);
 		add(button_9);
 		
 		button_10 = new JButton("入库单");
