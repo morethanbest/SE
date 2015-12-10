@@ -77,8 +77,8 @@ public class MainFrame extends JFrame {
 			JPanel temp=new AdministratorPanel(vo.getOrganizationcode());
 			contentPane.add(temp, "administrator");
 			card.show(contentPane, "administrator");
-		} else if(vo.getJob() == Job.Financial){
-			JPanel temp=new FinancialPanel(vo.getOrganizationcode());
+		} else if(vo.getJob() == Job.Financial||vo.getJob() == Job.advanceFinancial){
+			JPanel temp=new FinancialPanel(vo.getOrganizationcode(),vo.getJob());
 			contentPane.add(temp, "financial");
 			card.show(contentPane, "financial");
 		} else if(vo.getJob() == Job.transfercentersalesman){

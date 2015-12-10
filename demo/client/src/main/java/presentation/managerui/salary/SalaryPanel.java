@@ -137,6 +137,9 @@ public class SalaryPanel extends JPanel implements ActionListener{
 			case "财务人员":
 				deleteSalary(Job.Financial);
 				break;
+			case "高级财务人员":
+				deleteSalary(Job.advanceFinancial);
+				break;
 			case "司机":
 				deleteSalary(Job.drivers);
 				break;

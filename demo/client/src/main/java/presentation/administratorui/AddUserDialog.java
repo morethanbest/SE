@@ -8,21 +8,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
-import po.Organizationtype;
 import vo.OrganizationVO;
 import vo.UserVO;
-
-import javax.swing.JLabel;
 
 public class AddUserDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField nameToSearch;
 	private JTextField nameField;
 	private JTextField passwordField;
 	private JTextField orgcodeField;
@@ -144,12 +141,15 @@ public class AddUserDialog extends JDialog {
 				            	newjob=Job.Financial;
 				            	break;
 				            case 5:
-				            	newjob=Job.drivers;
+				            	newjob=Job.advanceFinancial;
 				            	break;
 				            case 6:
-				            	newjob=Job.manager;
+				            	newjob=Job.drivers;
 				            	break;
 				            case 7:
+				            	newjob=Job.manager;
+				            	break;
+				            case 8:
 				            	newjob=Job.administrator;
 				            	break;
 							default:
@@ -205,8 +205,9 @@ public class AddUserDialog extends JDialog {
 		jobSelect.addItem("快递员");
 		jobSelect.addItem("营业厅业务员");
 		jobSelect.addItem("中转中心业务员");
-		jobSelect.addItem("仓库管理员");
+		jobSelect.addItem("中转中心库存管理人员");
 		jobSelect.addItem("财务人员");
+		jobSelect.addItem("高级财务人员");
 		jobSelect.addItem("司机");
 		jobSelect.addItem("总经理");
 		jobSelect.addItem("管理员");

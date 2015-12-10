@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import po.Job;
 import presentation.Financial.account.AccountPanel;
 import presentation.Financial.balance.BalancePanel;
 import presentation.Financial.debitnote.DebitnotePanel;
@@ -37,11 +38,13 @@ public class FinancialPanel extends JPanel implements ActionListener{
     private String orgcode;
     private DebitnotePanel debitnotePanel;
     private NewBookPanel newBookPanel;
+    private Job job;
 	/**
 	 * Create the panel.
 	 */
-	public FinancialPanel(String orgcode) {
+	public FinancialPanel(String orgcode,Job job) {
 		this.orgcode=orgcode;
+		this.job=job;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
@@ -114,7 +117,9 @@ public class FinancialPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(btnNewButton_2)) {
-			card.show(panel, "account");
+			if(job==Job.advanceFinancial){
+				card.show(panel, "account");
+			}
 		}else if (e.getSource().equals(btnNewButton_4)) {
 			card.show(panel, "statistics");
 		}else if(e.getSource().equals(btnNewButton_1)){

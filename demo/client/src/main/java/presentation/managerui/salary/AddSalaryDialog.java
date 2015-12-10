@@ -127,6 +127,8 @@ public class AddSalaryDialog extends JDialog {
 			return Job.CenterDepot;
 		case "财务人员":
 			return Job.Financial;
+		case "高级财务人员":
+			return Job.advanceFinancial;
 		case "司机":
 			return Job.drivers;
 		case "管理员":

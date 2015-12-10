@@ -235,34 +235,7 @@ public class NewBookPanel extends JPanel implements ActionListener{
 				String[] rowString =new String[5];
 				rowString[0]=Long.toString(staffvo.getId());
 				rowString[1]=staffvo.getName();
-				switch (staffvo.getJob()) {
-					case Courier:
-						rowString[2]="快递员";
-						break;
-			        case hallsalesman:
-			        	rowString[2]="营业厅业务员";
-						break;
-			        case transfercentersalesman:
-			        	rowString[2]="中转中心业务员";
-			            break;
-			        case CenterDepot:
-			        	rowString[2]="仓库管理人员";
-			            break;
-			        case Financial:
-			        	rowString[2]="财务人员";
-			            break;
-			        case drivers:
-			        	rowString[2]="司机";
-			            break;
-			        case manager:
-			        	rowString[2]="总经理";
-			            break;
-			        case administrator:
-			        	rowString[2]="管理员";
-			            break;
-				    default:
-						break;
-					}
+				rowString[2]=staffvo.getJob().getName();
 				rowString[3]=staffvo.getOrganizationname();
 				rowString[4]=staffvo.getCity();
 				tableModel.addRow(rowString);
