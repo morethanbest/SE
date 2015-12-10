@@ -14,15 +14,19 @@ public class UpdateArrival {
     String id;
     String centercode;
     long arrivaltime;
+
+    boolean whefromhall;
     String transcode;
     String departure;
     Arrivalstate arrivalstate;
     Formstate documentstate;
 
-    public void setUpdataArrival(String id,String centercode,long arrivaltime, String transcode,String departure,Arrivalstate arrivalstate,Formstate documentstate){
+    public void setUpdataArrival(String id,String centercode,long arrivaltime,boolean whefromhall, String transcode,String departure,Arrivalstate arrivalstate,Formstate documentstate){
         this.id=id;
         this.centercode=centercode;
         this.arrivaltime=arrivaltime;
+
+        this.whefromhall=whefromhall;
         this.transcode=transcode;
         this.departure=departure;
         this.arrivalstate=arrivalstate;
@@ -34,7 +38,7 @@ public class UpdateArrival {
         if(this.documentstate==Formstate.pass){
             this.documentstate=Formstate.checked;
         }
-        ArrivalPO po=new ArrivalPO(id,centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
+        ArrivalPO po=new ArrivalPO(id,centercode,arrivaltime,whefromhall,transcode,departure,arrivalstate,documentstate);
         ArrivalFormDataService  dataserv= RMIHelper.getArrivalform();
         ResultMessage result=ResultMessage.failure;
         try {

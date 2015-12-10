@@ -32,12 +32,14 @@ public class GoodsReceving {
     public ResultMessage addgoodsform(GoodsReceivingVO vo){
         String id=vo.getid();
         long arrivaltime=vo.getArrivaltime();
+
+        boolean whefromhall=vo.getwhefromhalll();
         String transcode=vo.getTranscode();
         String departure=vo.getDeparture();
         Arrivalstate arrivalstate=vo.getArrivalstate();
         Formstate documentstate=vo.getFormstate();
 
-        add.set(id,arrivaltime,transcode,departure,arrivalstate,documentstate);
+        add.set(id,arrivaltime,whefromhall,transcode,departure,arrivalstate,documentstate);
         ResultMessage result=add.passadd();
         return result;
     }
@@ -45,12 +47,14 @@ public class GoodsReceving {
     public ResultMessage updategoodsform(GoodsReceivingVO vo){
         String id=vo.getid();
         long arrivaltime=vo.getArrivaltime();
+
+        boolean whefromhall=vo.getwhefromhalll();
         String transcode=vo.getTranscode();
         String departure=vo.getDeparture();
         Arrivalstate arrivalstate=vo.getArrivalstate();
         Formstate documentstate=vo.getFormstate();
 
-        update.set(id,arrivaltime,transcode,departure,arrivalstate,documentstate);
+        update.set(id,arrivaltime,whefromhall,transcode,departure,arrivalstate,documentstate);
         ResultMessage result=update.passupdate();
         return result;
     }
@@ -63,12 +67,14 @@ public class GoodsReceving {
             GoodsReceivingPO po=pos.get(i);
             String id=po.getId();
             long arrivaltime=po.getArrivaltime();
+
+            boolean whefromhall=po.isWhefromhall();
             String transcode=po.getTranscode();
             String departure=po.getDeparture();
             Arrivalstate arrivalstate=po.getArrivalstate();
             Formstate documentstate=po.getDocumentstate();
 
-            GoodsReceivingVO newvo=new GoodsReceivingVO(id,arrivaltime,transcode,departure,arrivalstate,documentstate);
+            GoodsReceivingVO newvo=new GoodsReceivingVO(id,arrivaltime,whefromhall,transcode,departure,arrivalstate,documentstate);
             list.add(newvo);
         }
         return list;

@@ -8,15 +8,19 @@ public class ArrivalVO {
 	String  id;//为中转中心的编号加上id
 	String centercode;
 	long arrivaltime;
+
+	boolean whefromhall;
 	String transcode;
 
 	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
-	public ArrivalVO(String id,String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate, Formstate documentstate) {
+	public ArrivalVO(String id,String centercode, long arrivaltime,boolean whefromhall, String transcode, String departure, Arrivalstate arrivalstate, Formstate documentstate) {
 		this.id=id;
 		this.centercode = centercode;
 		this.arrivaltime = arrivaltime;
+
+		this.whefromhall=whefromhall;
 		this.transcode = transcode;
 		this.departure = departure;
 		this.arrivalstate = arrivalstate;
@@ -46,10 +50,6 @@ public class ArrivalVO {
 		return this.documentstate;
 	}
 
-
-
-	public void setDocumentstate(Formstate documentstate) {
-		this.documentstate = documentstate;
-	}
+	public boolean getwhefromhall(){return this.whefromhall;}
 
 }

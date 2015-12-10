@@ -15,14 +15,18 @@ import java.rmi.RemoteException;
 public class AddGoods {
     String id;
     long arrivaltime;
+
+    boolean whefromhall;
     String transcode;
     String departure;
     Arrivalstate arrivalstate;
     Formstate documentstate;
 
-    public void set(String id,long arrivaltime,String transcode,String departure,Arrivalstate arrivalstate, Formstate documentstate){
+    public void set(String id,long arrivaltime,boolean whefromhall,String transcode,String departure,Arrivalstate arrivalstate, Formstate documentstate){
         this.id=id;
         this.arrivaltime=arrivaltime;
+
+        this.whefromhall=whefromhall;
         this.transcode=transcode;
         this.departure=departure;
         this.arrivalstate=arrivalstate;
@@ -30,7 +34,7 @@ public class AddGoods {
             }
 
     public ResultMessage passadd(){
-        GoodsReceivingPO po=new GoodsReceivingPO(this.id,this.arrivaltime,this.transcode,this.departure,this.arrivalstate,this.documentstate);
+        GoodsReceivingPO po=new GoodsReceivingPO(this.id,this.arrivaltime,this.whefromhall,this.transcode,this.departure,this.arrivalstate,this.documentstate);
         GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
         ResultMessage result=null;
         try {

@@ -6,15 +6,19 @@ public class ArrivalPO  implements Serializable{
 	String id;
 	String centercode;
 	long arrivaltime;
+
+	boolean whefromhall;
 	String transcode;
 	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
 
-	public ArrivalPO(String id,String centercode, long arrivaltime, String transcode, String departure, Arrivalstate arrivalstate,Formstate documentstate) {
+	public ArrivalPO(String id,String centercode, long arrivaltime,boolean whefromhall, String transcode, String departure, Arrivalstate arrivalstate,Formstate documentstate) {
 		this.id=id;
 		this.centercode = centercode;
 		this.arrivaltime = arrivaltime;
+
+		this.whefromhall=whefromhall;
 		this.transcode = transcode;
 		this.departure = departure;
 		this.arrivalstate = arrivalstate;
@@ -58,4 +62,12 @@ public class ArrivalPO  implements Serializable{
 		return arrivalstate;
 	}
 	public String getId(){return this.id;}
+
+	public boolean isWhefromhall() {
+		return whefromhall;
+	}
+
+	public void setWhefromhall(boolean whefromhall) {
+		this.whefromhall = whefromhall;
+	}
 }

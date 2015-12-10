@@ -6,13 +6,16 @@ import po.Formstate;
 public class GoodsReceivingVO {
 	String id;
 	long arrivaltime;
+
+	boolean whefromhall;
 	String transcode;
 	String departure;
 	Arrivalstate arrivalstate;
 	Formstate documentstate;
-	public GoodsReceivingVO(String id,long arrivaltime,String transcode,String departure,Arrivalstate arrivalstate,Formstate state){
+	public GoodsReceivingVO(String id,long arrivaltime,boolean wheformhall,String transcode,String departure,Arrivalstate arrivalstate,Formstate state){
 		this.id=id;
 		this.arrivaltime=arrivaltime;
+		this.whefromhall=wheformhall;
 		this.transcode=transcode;
 		this.departure=departure;
 		this.arrivalstate=arrivalstate;
@@ -33,4 +36,5 @@ public class GoodsReceivingVO {
 		return this.arrivalstate;
 	}
 	public Formstate getFormstate(){return this.documentstate;}
+	public boolean getwhefromhalll(){return this.whefromhall;}
 }
