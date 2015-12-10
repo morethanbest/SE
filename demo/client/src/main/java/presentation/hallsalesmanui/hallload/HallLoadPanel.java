@@ -45,11 +45,14 @@ public class HallLoadPanel extends JPanel {
 	private JLabel moterLabel;
 	private JLabel orgLabel;
 	private String city;
+	private JComboBox<String> typeBox;
+	private String orgName;
 	/**
 	 * Create the panel.
 	 */
-	public HallLoadPanel(String orgCode, String city) {
+	public HallLoadPanel(String orgCode, String city, String orgName) {
 		this.city = city;
+		this.orgName = orgName;
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
@@ -79,7 +82,7 @@ public class HallLoadPanel extends JPanel {
 		add(carField);
 		
 		moterLabel = new JLabel("");
-		moterLabel.setBounds(86, 217, 202, 18);
+		moterLabel.setBounds(89, 95, 202, 18);
 		add(moterLabel);
 
 		jianField = new JTextField();
@@ -93,25 +96,39 @@ public class HallLoadPanel extends JPanel {
 		yaField.setColumns(10);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(89, 126, 69, 24);
+		yearBox.setBounds(89, 147, 69, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(172, 126, 51, 24);
+		monthBox.setBounds(172, 147, 51, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(237, 126, 51, 24);
+		dateBox.setBounds(237, 147, 51, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(89, 303, 199, 24);
+		destinBox.setBounds(89, 282, 199, 24);
 		add(destinBox);
-		addOrganizationItems(destinBox);
+		
+		typeBox = new JComboBox<String>();
+		typeBox.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(typeBox.getSelectedIndex() == 0)
+					addOrganizationItems(Organizationtype.transfercenter);
+				else
+					addOrganizationItems(Organizationtype.hall);
+			}
+		});
+		typeBox.setBounds(89, 214, 199, 24);
+		add(typeBox);
+		addTypeItems();
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(674, 44, 266, 283);
@@ -203,6 +220,11 @@ public class HallLoadPanel extends JPanel {
 		getFareButton.setBounds(517, 281, 103, 27);
 		add(getFareButton);
 	}
+	
+	private void addTypeItems() {
+		typeBox.addItem("运往中转中心");
+		typeBox.addItem("运往其他营业厅");
+	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
 		for (long i = 2000; i <= 2050; i++) {
@@ -243,13 +265,14 @@ public class HallLoadPanel extends JPanel {
 		}
 	}
 
-	public void addOrganizationItems(JComboBox<String> orgSelect) {
-		orgSelect.removeAllItems();
+	public void addOrganizationItems(Organizationtype type) {
+		destinBox.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
 		List<OrganizationVO> orgList = organizationBlService
-				.getOrganizationbyBoth(city, Organizationtype.transfercenter);
+				.getOrganizationbyBoth(city, type);
 		for (OrganizationVO org : orgList) {
-			orgSelect.addItem(org.getName());
+			if(!org.getName().equals(orgName))
+				destinBox.addItem(org.getName());
 		}
 	}
 }

@@ -25,7 +25,7 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	public CenterSalesmanPanel(String orgCode, String city) {
+	public CenterSalesmanPanel(String orgName, String orgCode, String city) {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		

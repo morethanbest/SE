@@ -36,6 +36,7 @@ public class ArrivalPanel extends JPanel {
 	private JComboBox<String> departureBox;
 	private JComboBox<String> stateBox;
 	private ArrivalBlService arrivalBlService;
+	private JComboBox<String> typeBox;
 
 	/**
 	 * Create the panel.
@@ -78,7 +79,7 @@ public class ArrivalPanel extends JPanel {
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
 				arrivalBlService.addArrival(new ArrivalVO(arrivalBlService
-						.getid(orgCode), orgCode, date, codeField.getText(),
+						.getid(orgCode), orgCode, date,typeBox.getSelectedIndex() == 1 ,codeField.getText(),
 						(String) departureBox.getSelectedItem(),
 						getStateType((String) stateBox.getSelectedItem()),
 						Formstate.waiting));
@@ -89,7 +90,7 @@ public class ArrivalPanel extends JPanel {
 
 		codeField = new JTextField();
 		codeField.setColumns(10);
-		codeField.setBounds(139, 213, 242, 24);
+		codeField.setBounds(547, 213, 242, 24);
 		add(codeField);
 
 		departureBox = new JComboBox<String>();
@@ -111,6 +112,16 @@ public class ArrivalPanel extends JPanel {
 		yearBox.setSelectedItem((long) c.get(Calendar.YEAR));
 		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
 		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
+		
+		typeBox = new JComboBox<String>();
+		typeBox.setBounds(139, 213, 242, 24);
+		add(typeBox);
+		addTypeItems();
+	}
+	
+	private void addTypeItems() {
+		typeBox.addItem("中转中心-中转单编号");
+		typeBox.addItem("营业厅-汽运编号");
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {

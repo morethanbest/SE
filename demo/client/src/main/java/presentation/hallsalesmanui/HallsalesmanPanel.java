@@ -40,7 +40,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public HallsalesmanPanel(String orgcode, String city) {
+	public HallsalesmanPanel(String orgName,String orgcode, String city) {
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
@@ -91,7 +91,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		panel.setLayout(card);
 		
 		//card中添加各种功能面板
-		hallLoadPanel = new HallLoadPanel(orgcode, city);
+		hallLoadPanel = new HallLoadPanel(orgName,orgcode, city);
 		goodRecievingPanel = new GoodRecievingPanel(orgcode, city);
 		deliveryPanel = new DeliveryPanel(orgcode);
 		

@@ -4,11 +4,11 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
-import presentation.centersalesmanui.transferui.TransferPanel;
 import presentation.managerui.examui.examcentersalesmanui.ArrivalExamPanel;
 import presentation.managerui.examui.examcentersalesmanui.CenterLoadExamPanel;
 import presentation.managerui.examui.examcentersalesmanui.TransferExamPanel;
 import presentation.managerui.examui.examcourierui.OrderExamPanel;
+import presentation.managerui.examui.examdepotui.StockinExamPanel;
 
 public class ExamPanel extends JPanel {
 
@@ -26,13 +26,14 @@ public class ExamPanel extends JPanel {
 		TransferExamPanel trans = new TransferExamPanel(this, card);
 		CenterLoadExamPanel cl = new CenterLoadExamPanel(this, card);
 		OrderExamPanel order = new OrderExamPanel(this, card);
-		
+		StockinExamPanel in = new StockinExamPanel(this, card);
 		
 		add(select, "select");
 		add(arrival, "arrival");
 		add(trans, "trans");
 		add(cl, "cl");
 		add(order, "order");
+		add(in, "in");
 	}
 
 }

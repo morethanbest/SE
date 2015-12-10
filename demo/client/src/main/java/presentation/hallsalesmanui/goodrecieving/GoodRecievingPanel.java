@@ -38,6 +38,7 @@ public class GoodRecievingPanel extends JPanel {
 	private GoodsRecevingBlService goodsRecevingBlService;
 	private JTextField codeField;
 	private String city;
+	private JComboBox<String> typeBox;
 
 	/**
 	 * Create the panel.
@@ -49,54 +50,35 @@ public class GoodRecievingPanel extends JPanel {
 		setLayout(null);
 
 		codeField = new JTextField();
-		codeField.setBounds(349, 67, 242, 24);
+		codeField.setBounds(140, 230, 242, 24);
 		add(codeField);
 		codeField.setColumns(10);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(349, 126, 74, 24);
+		yearBox.setBounds(140, 67, 74, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(447, 126, 61, 24);
+		monthBox.setBounds(238, 67, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(530, 126, 61, 24);
+		dateBox.setBounds(321, 67, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(349, 191, 242, 24);
+		destinBox.setBounds(518, 67, 242, 24);
 		add(destinBox);
 		addOrganizationItems(destinBox);
-		
 
 		stateBox = new JComboBox<String>();
-		stateBox.setBounds(349, 265, 242, 24);
+		stateBox.setBounds(518, 149, 242, 24);
 		add(stateBox);
 		addStateTypeItems();
-
-		button = new JButton("提交");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Long date = (Long) yearBox.getSelectedItem() * 10000
-						+ (Long) monthBox.getSelectedItem() * 100
-						+ (Long) dateBox.getSelectedItem();
-				goodsRecevingBlService.GoodsReceving(new GoodsReceivingVO(
-						goodsRecevingBlService.getid(orgCode),
-						date,
-						codeField.getText(),
-						(String) destinBox.getSelectedItem(),
-						getStateType((String) stateBox.getSelectedItem()),
-						Formstate.waiting));
-			}
-		});
-		button.setBounds(423, 336, 113, 27);
-		add(button);
 
 		ItemListener listener = new ItemListener() {
 
@@ -109,9 +91,36 @@ public class GoodRecievingPanel extends JPanel {
 		monthBox.addItemListener(listener);
 
 		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
-		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
+		yearBox.setSelectedItem((long) c.get(Calendar.YEAR));
+		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
+		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
+
+		typeBox = new JComboBox<String>();
+		typeBox.setBounds(140, 149, 242, 24);
+		add(typeBox);
+		addTypeItems();
+
+		button = new JButton("提交");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Long date = (Long) yearBox.getSelectedItem() * 10000
+						+ (Long) monthBox.getSelectedItem() * 100
+						+ (Long) dateBox.getSelectedItem();
+				goodsRecevingBlService.GoodsReceving(new GoodsReceivingVO(
+						goodsRecevingBlService.getid(orgCode), date,typeBox.getSelectedIndex() == 1 ,codeField
+								.getText(), (String) destinBox
+								.getSelectedItem(),
+						getStateType((String) stateBox.getSelectedItem()),
+						Formstate.waiting));
+			}
+		});
+		button.setBounds(423, 336, 113, 27);
+		add(button);
+	}
+
+	private void addTypeItems() {
+		typeBox.addItem("中转中心-装车单编号");
+		typeBox.addItem("营业厅-汽运编号");
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
@@ -167,11 +176,12 @@ public class GoodRecievingPanel extends JPanel {
 		}
 		return null;
 	}
-	
+
 	public void addOrganizationItems(JComboBox<String> orgSelect) {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
-		List<OrganizationVO> orgList = organizationBlService.getOrganizationbyBoth(city, Organizationtype.transfercenter);
+		List<OrganizationVO> orgList = organizationBlService
+				.getOrganizationbyBoth(city, Organizationtype.transfercenter);
 		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}

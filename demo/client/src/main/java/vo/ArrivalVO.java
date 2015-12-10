@@ -52,4 +52,12 @@ public class ArrivalVO {
 
 	public boolean getwhefromhall(){return this.whefromhall;}
 
+
+
+	public void setDocumentstate(Formstate documentstate) {
+		this.documentstate = documentstate;
+	}
+	
+	
+
 }

@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
 			contentPane.add(temp, "courier");
 			card.show(contentPane, "courier");
 		} else if(vo.getJob() == Job.hallsalesman){
-			JPanel temp=new HallsalesmanPanel(vo.getOrganizationcode(), vo.getCity());
+			JPanel temp=new HallsalesmanPanel(vo.getOrganizationname(), vo.getOrganizationcode(), vo.getCity());
 			contentPane.add(temp, "hallsalesman");
 			card.show(contentPane, "hallsalesman");
 		} else if(vo.getJob() == Job.administrator){
@@ -82,7 +82,7 @@ public class MainFrame extends JFrame {
 			contentPane.add(temp, "financial");
 			card.show(contentPane, "financial");
 		} else if(vo.getJob() == Job.transfercentersalesman){
-			JPanel temp=new CenterSalesmanPanel(vo.getOrganizationcode(), vo.getCity());
+			JPanel temp=new CenterSalesmanPanel(vo.getOrganizationname(), vo.getOrganizationcode(), vo.getCity());
 			contentPane.add(temp, "centersalesman");
 			card.show(contentPane, "centersalesman");
 		} else if(vo.getJob() == Job.CenterDepot){
