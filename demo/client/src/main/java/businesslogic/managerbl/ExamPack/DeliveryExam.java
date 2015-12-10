@@ -17,29 +17,33 @@ import java.util.List;
 public class DeliveryExam {
     public List<DeliveryVO> find(Formstate state){
         List<DeliveryPO> pos=null;
+        List<DeliveryVO> list=new ArrayList<DeliveryVO>();
         ExamDataService data= RMIHelper.getExamdata();
         try {
             pos=data.getDeliveryForm(state);
+
+            for(int i=0;i<=pos.size()-1;i++){
+                DeliveryPO po=pos.get(i);
+                String id=po.getId();
+                long arrivaltime=po.getArrivaltime();
+                String barcode=po.getBarcode();
+                String delivorinfo=po.getDelivorinfo();
+
+                Formstate documentstate=po.getDocumentstate();
+
+                DeliveryVO vo=new DeliveryVO(id,arrivaltime,barcode,delivorinfo,documentstate);
+                list.add(vo);
+
+            }
+
         } catch (RemoteException e) {
             System.out.println("manager exam delivery get forms by state failed!!!");
             e.printStackTrace();
         }
 
 
-        List<DeliveryVO> list=new ArrayList<DeliveryVO>();
-        for(int i=0;i<=pos.size()-1;i++){
-            DeliveryPO po=pos.get(i);
-            String id=po.getId();
-            long arrivaltime=po.getArrivaltime();
-            String barcode=po.getBarcode();
-            String delivorinfo=po.getDelivorinfo();
 
-            Formstate documentstate=po.getDocumentstate();
 
-            DeliveryVO vo=new DeliveryVO(id,arrivaltime,barcode,delivorinfo,documentstate);
-            list.add(vo);
-
-        }
         return list;
     }
 

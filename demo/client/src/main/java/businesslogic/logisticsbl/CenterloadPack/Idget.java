@@ -19,8 +19,11 @@ public class Idget {
             System.out.println("Get centerload transcode id failed!!!");
             e.printStackTrace();
         }
+
         result=Long.toString(id);
         int len=result.length();
+
+
         if(len>7){
 
             System.out.println("the id is overflow!!!");

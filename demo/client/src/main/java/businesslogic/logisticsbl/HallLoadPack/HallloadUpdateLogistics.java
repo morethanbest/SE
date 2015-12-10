@@ -26,26 +26,29 @@ public class HallloadUpdateLogistics {
             LogisticsPO po=null;
             try {
                 po=data.findLogisticsInfo(allbar.get(i));
+
+                String newstate="发往"+vo.getDestination();
+                List<String> history=po.getHistory();
+                history.add(newstate);
+                po.setState(newstate);
+                po.setHistory(history);
+
+                ResultMessage res=data.update(po);
+
+                if(res==ResultMessage.failure){
+                    result=ResultMessage.failure;
+                }
+
             } catch (RemoteException e) {
                 System.out.println("hall load update history find logistics info failed!!!");
                 e.printStackTrace();
             }
-            String newstate="发往"+vo.getDestination();
-            List<String> history=po.getHistory();
-            history.add(newstate);
-            po.setState(newstate);
-            po.setHistory(history);
 
-            ResultMessage res=null;
-            try {
-                res=data.update(po);
-            } catch (RemoteException e) {
-                System.out.println("hall load update logistis history failed!!!");
-                e.printStackTrace();
-            }
-            if(res==ResultMessage.failure){
-                result=ResultMessage.failure;
-            }
+
+
+
+
+
 
         }
 

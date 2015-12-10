@@ -20,28 +20,36 @@ import java.util.List;
 public class ArrivalExam {
     public List<ArrivalVO> find(Formstate formstate){
         List<ArrivalPO> pos=null;
+
+        List<ArrivalVO> list=new ArrayList<ArrivalVO>();
         ExamDataService data= RMIHelper.getExamdata();
         try {
             pos=data.getArrivalForm(formstate);
+
+            for(int i=0;i<=pos.size()-1;i++){
+                ArrivalPO po=pos.get(i);
+                String  id=po.getId();
+                String centercode=po.getCentercode();
+                long arrivaltime=po.getArrivaltime();
+
+                boolean whefromhall=po.isWhefromhall();
+                String transcode=po.getTranscode();
+
+                String departure=po.getDeparture();
+                Arrivalstate arrivalstate=po.getArrivalstate();
+                Formstate documentstate=po.getDocumentstate();
+
+                ArrivalVO vo=new ArrivalVO(id,centercode,arrivaltime,whefromhall,transcode,departure,arrivalstate,documentstate);
+                list.add(vo);
+            }
+
+
         } catch (RemoteException e) {
             System.out.println("manager exam  get arrival forms failed!!!");
             e.printStackTrace();
         }
-        List<ArrivalVO> list=new ArrayList<ArrivalVO>();
-        for(int i=0;i<=pos.size()-1;i++){
-            ArrivalPO po=pos.get(i);
-            String  id=po.getId();
-            String centercode=po.getCentercode();
-            long arrivaltime=po.getArrivaltime();
-            String transcode=po.getTranscode();
 
-            String departure=po.getDeparture();
-            Arrivalstate arrivalstate=po.getArrivalstate();
-            Formstate documentstate=po.getDocumentstate();
 
-            ArrivalVO vo=new ArrivalVO(id,centercode,arrivaltime,transcode,departure,arrivalstate,documentstate);
-            list.add(vo);
-        }
 
         return list;
 
@@ -50,7 +58,7 @@ public class ArrivalExam {
     public ResultMessage update(ArrivalVO vo){
         ResultMessage result=null;
         ExamDataService data= RMIHelper.getExamdata();
-        ArrivalPO po=new ArrivalPO(vo.getId(),vo.getCentercode(),vo.getArrivaltime(),vo.getTranscode(),
+        ArrivalPO po=new ArrivalPO(vo.getId(),vo.getCentercode(),vo.getArrivaltime(),vo.getwhefromhall(),vo.getTranscode(),
                 vo.getDeparture(),vo.getArrivalstate(),vo.getFormstate());
         try {
             result=data.updateArrivalForm(po);

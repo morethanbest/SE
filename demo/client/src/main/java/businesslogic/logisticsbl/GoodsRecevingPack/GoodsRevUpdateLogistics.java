@@ -8,6 +8,7 @@ import vo.GoodsReceivingVO;
 
 import java.rmi.RemoteException;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,15 +22,24 @@ public class GoodsRevUpdateLogistics {
         }
         GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
         HallLoadPO hallload=null;
+
+        List<String> allbarcode=new ArrayList<String>();
         ResultMessage result=ResultMessage.failure;
         try {
+
+
             hallload=dataserv.getHallLoadBycode(vo.getTranscode());
+            allbarcode=hallload.getAllbarcode();
+
+
         } catch (RemoteException e) {
             System.out.println("update goodsreceving logistics information failed!!!");
             e.printStackTrace();
         }
 
-        List<String> allbarcode=hallload.getAllbarcode();
+
+
+
 
         LogisticsInfoService infoserv=RMIHelper.getLogisticsinfo();
 

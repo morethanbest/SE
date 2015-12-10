@@ -34,16 +34,18 @@ public class AddNewbook {
             NewbookPO anotherpo = null;
             try {
                 anotherpo = data.getLastBook();
+
+                apo=anotherpo.getAccount();
+                cpo=anotherpo.getCommodity();
+                opo=anotherpo.getOrganization();
+                spo=anotherpo.getStaff();
+                vpo=anotherpo.getVehicles();
             } catch (RemoteException e) {
                 System.out.println("add new book get last book failed!!!");
                 e.printStackTrace();
             }
 
-            apo=anotherpo.getAccount();
-            cpo=anotherpo.getCommodity();
-            opo=anotherpo.getOrganization();
-            spo=anotherpo.getStaff();
-            vpo=anotherpo.getVehicles();
+
 
         }
 

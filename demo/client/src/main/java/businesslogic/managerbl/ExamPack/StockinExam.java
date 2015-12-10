@@ -18,27 +18,30 @@ import java.util.List;
 public class StockinExam {
     public List<StockinVO> find(Formstate state){
         List<StockinPO> pos=null;
+        List<StockinVO> list=new ArrayList<StockinVO>();
         ExamDataService data= RMIHelper.getExamdata();
         try {
             pos=data.getStockinForm(state);
+
+            for(int i=0;i<=pos.size()-1;i++){
+                StockinPO po=pos.get(i);
+                String id=po.getId();
+                String ordercode=po.getOrdercode();
+                long intime=po.getIntime();
+                CommodityLocation location=po.getLocation();
+                String destination=po.getDestination();
+                Formstate formstate=po.getFormstate();
+
+                StockinVO vo=new StockinVO(id,ordercode,intime,location,destination,formstate);
+                list.add(vo);
+            }
         } catch (RemoteException e) {
             System.out.println("manager exam stock in forms get forms by state failed!!!");
             e.printStackTrace();
         }
 
-        List<StockinVO> list=new ArrayList<StockinVO>();
-        for(int i=0;i<=pos.size()-1;i++){
-            StockinPO po=pos.get(i);
-            String id=po.getId();
-            String ordercode=po.getOrdercode();
-            long intime=po.getIntime();
-            CommodityLocation location=po.getLocation();
-            String destination=po.getDestination();
-            Formstate formstate=po.getFormstate();
 
-            StockinVO vo=new StockinVO(id,ordercode,intime,location,destination,formstate);
-            list.add(vo);
-        }
+
         return list;
     }
 

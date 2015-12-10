@@ -17,32 +17,43 @@ public class RecordtransUpdateLogistics {
 
     public ResultMessage updatehistory(RecordtransVO vo){
         ResultMessage result=ResultMessage.success;
+
         LogisticsInfoService dataserv=RMIHelper.getLogisticsinfo();
+
         List<String> allbar=vo.getAllcode();
+
         int len=allbar.size();
+
         for(int i=0;i<=len-1;i++)
         {
             LogisticsPO newpo=null;
             try {
                 newpo=dataserv.findLogisticsInfo(allbar.get(i));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-            String nowstate="发往"+vo.getDepartrue();
-            List<String> history=newpo.getHistory();
-            history.add(nowstate);
-            newpo.setHistory(history);
-            newpo.setState(nowstate);
-            ResultMessage res=null;
-            try {
+
+                String nowstate="发往"+vo.getDepartrue();
+                List<String> history=newpo.getHistory();
+                history.add(nowstate);
+                newpo.setHistory(history);
+                newpo.setState(nowstate);
+
+                ResultMessage res=null;
                 res=dataserv.update(newpo);
+                if(res==ResultMessage.failure){
+                    result=ResultMessage.failure;
+                }
+
+
+
             } catch (RemoteException e) {
-                System.out.println(" recordtrans update logistics failed!!!");
                 e.printStackTrace();
             }
-            if(res==ResultMessage.failure){
-                result=ResultMessage.failure;
-            }
+
+
+
+
+
+
+
 
 
         }

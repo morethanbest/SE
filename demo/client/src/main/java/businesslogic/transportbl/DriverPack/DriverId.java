@@ -35,13 +35,14 @@ public class DriverId {
                 result="0"+result;
             }
 
+            result=orgcode+result;
         } catch (RemoteException e) {
             e.printStackTrace();
             System.out.println("Get Latest DriverID Failed!!!");
             result="-2";
         }
 
-        result=orgcode+result;
+
         return result;
     }
 

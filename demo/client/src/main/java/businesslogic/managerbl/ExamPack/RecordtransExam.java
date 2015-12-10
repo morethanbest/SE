@@ -17,33 +17,37 @@ import java.util.List;
 public class RecordtransExam {
     public List<RecordtransVO> find(Formstate state){
         List<RecordtransPO> pos=null;
+        List<RecordtransVO> list=new ArrayList<RecordtransVO>();
         ExamDataService data= RMIHelper.getExamdata();
         try {
             pos=data.getRecordtransForm(state);
+
+            for(int i=0;i<=pos.size()-1;i++){
+                RecordtransPO po=pos.get(i);
+                long loadtime=po.getLoadtime();
+
+                String transcode=po.getTranscode();
+                String transport=po.getTransportType();//交通方式
+                String transportcode=po.getTransportCode();//班次号
+                String departrue=po.getDepartrue();
+                String destination=po.getDestination();
+                String countercode=po.getCountercode();
+                String supervisor=po.getSupervisor();
+                List<String> allcode=po.getAllcode();
+                double fee=po.getFee();
+                Formstate formstate=po.getDocumentstate();
+
+                RecordtransVO vo=new RecordtransVO(loadtime,transcode,transport,transportcode,departrue,destination,countercode,supervisor
+                        ,allcode,fee,formstate);
+                list.add(vo);
+            }
+
         } catch (RemoteException e) {
             System.out.println("manager exam recordtrans get forms failed!!!");
             e.printStackTrace();
         }
-        List<RecordtransVO> list=new ArrayList<RecordtransVO>();
-        for(int i=0;i<=pos.size()-1;i++){
-            RecordtransPO po=pos.get(i);
-            long loadtime=po.getLoadtime();
 
-            String transcode=po.getTranscode();
-            String transport=po.getTransportType();//交通方式
-            String transportcode=po.getTransportCode();//班次号
-            String departrue=po.getDepartrue();
-            String destination=po.getDestination();
-            String countercode=po.getCountercode();
-            String supervisor=po.getSupervisor();
-            List<String> allcode=po.getAllcode();
-            double fee=po.getFee();
-            Formstate formstate=po.getDocumentstate();
 
-            RecordtransVO vo=new RecordtransVO(loadtime,transcode,transport,transportcode,departrue,destination,countercode,supervisor
-            ,allcode,fee,formstate);
-            list.add(vo);
-        }
         return list;
     }
 

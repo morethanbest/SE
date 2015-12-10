@@ -10,14 +10,14 @@ public class Balanceview {
 
     public BalanceviewVO viewbalance(){
         BalanceDataService data= RMIHelper.getBalancedata();
-        double allin=0;
+        double allin=-1;
         try {
             allin=data.allin();
         } catch (RemoteException e) {
             System.out.println("balance view get all in failed!!!");
             e.printStackTrace();
         }
-        double allout=0;
+        double allout=-1;
         try {
             allout=data.allout();
         } catch (RemoteException e) {

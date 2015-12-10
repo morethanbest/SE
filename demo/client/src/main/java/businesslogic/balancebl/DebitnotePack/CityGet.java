@@ -16,25 +16,31 @@ public class CityGet {
     public List<CityVO> getcity(){
         DebitnoteFormDataService data= RMIHelper.getDebitnote();
         List<CityPO> citys=null;
+
+        List<CityVO> list=null;
         try {
             citys=data.getALLCity();
+
+            list=new ArrayList<CityVO>();
+            for(int i=0;i<=citys.size()-1;i++){
+                CityPO po=citys.get(i);
+                String name=po.getName();
+                String zone=po.getZone();
+
+                CityVO vo=new CityVO(name,zone);
+                list.add(vo);
+
+
+
+            }
+
+
         } catch (RemoteException e) {
             System.out.println("debitnote get all citys failed!!!");
             e.printStackTrace();
         }
 
-        List<CityVO> list=new ArrayList<CityVO>();
-        for(int i=0;i<=citys.size()-1;i++){
-            CityPO po=citys.get(i);
-            String name=po.getName();
-            String zone=po.getZone();
 
-            CityVO vo=new CityVO(name,zone);
-            list.add(vo);
-
-
-
-        }
 
         return list;
     }

@@ -21,25 +21,29 @@ public class CollectGet {
         List<RecordcollectPO> pos=null;
         try {
             pos=data.getallRecordcollect(starttime,endtime);
+            for(int i=0;i<=pos.size()-1;i++){
+                RecordcollectPO po=pos.get(i);
+                String id=po.getId();
+                long collectiontime=po.getCollectiontime();
+                String accountcode=po.getAccountcode();
+                double collectionsum=po.getCollectionsum();
+                String collectionman=po.getCollectionman();
+                List<String> allordercode=po.getAllordercode();
+                Formstate formstate=po.getDocumentstate();
+
+                RecordcollectVO vo=new RecordcollectVO(id,collectiontime,accountcode,collectionsum,collectionman,allordercode,formstate);
+                list.add(vo);
+
+
+            }
+
+
+
         } catch (RemoteException e) {
             System.out.println("statistics get recordcollect po failed!!!");
             e.printStackTrace();
         }
-        for(int i=0;i<=pos.size()-1;i++){
-            RecordcollectPO po=pos.get(i);
-            String id=po.getId();
-            long collectiontime=po.getCollectiontime();
-            String accountcode=po.getAccountcode();
-            double collectionsum=po.getCollectionsum();
-            String collectionman=po.getCollectionman();
-            List<String> allordercode=po.getAllordercode();
-            Formstate formstate=po.getDocumentstate();
 
-            RecordcollectVO vo=new RecordcollectVO(id,collectiontime,accountcode,collectionsum,collectionman,allordercode,formstate);
-            list.add(vo);
-
-
-        }
         return list;
 
 

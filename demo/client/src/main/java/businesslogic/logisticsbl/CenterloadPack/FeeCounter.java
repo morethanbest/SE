@@ -26,7 +26,7 @@ public class FeeCounter {
         double weight=weightgetter.getweight(allbarcode);
 
 
-        double singleprice=0;
+        double singleprice=-1;
         try {
             singleprice=dataserv.getunitprice(transport);
         } catch (RemoteException e) {
@@ -34,7 +34,7 @@ public class FeeCounter {
             e.printStackTrace();
         }
 
-        double distance=0;
+        double distance=-1;
         try {
             distance=dataserv.getdistance(city1,city2);
         } catch (RemoteException e) {

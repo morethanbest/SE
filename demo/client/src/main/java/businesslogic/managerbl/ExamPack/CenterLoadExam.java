@@ -21,28 +21,32 @@ public class CenterLoadExam {
         ExamDataService data= RMIHelper.getExamdata();
         try {
             pos=data.getCenterLoadForm(state);
+
+            for(int i=0;i<=pos.size()-1;i++){
+                CenterloadPO po=pos.get(i);
+                long loadtime=po.getLoadtime();
+                String motorcode=po.getMotorcode();
+                String destination=po.getDestination();
+                String vehiclecode=po.getVehiclecode();
+                String supervisor=po.getSupervisor();
+                String supercargo=po.getSupercargo();
+                List<String> allbarcode=po.getAllbarcode();
+                double fee=po.getFee();
+                Formstate documentstate=po.getDocumentstate();
+
+                CenterloadVO vo=new CenterloadVO(loadtime,motorcode,destination,vehiclecode,supervisor,supercargo,allbarcode
+                        ,fee,documentstate);
+                list.add(vo);
+
+            }
+
+
         } catch (RemoteException e) {
             System.out.println("manager exam centerload get forms failed!!!");
             e.printStackTrace();
         }
 
-        for(int i=0;i<=pos.size()-1;i++){
-            CenterloadPO po=pos.get(i);
-            long loadtime=po.getLoadtime();
-            String motorcode=po.getMotorcode();
-            String destination=po.getDestination();
-            String vehiclecode=po.getVehiclecode();
-            String supervisor=po.getSupervisor();
-            String supercargo=po.getSupercargo();
-            List<String> allbarcode=po.getAllbarcode();
-            double fee=po.getFee();
-            Formstate documentstate=po.getDocumentstate();
 
-            CenterloadVO vo=new CenterloadVO(loadtime,motorcode,destination,vehiclecode,supervisor,supercargo,allbarcode
-                    ,fee,documentstate);
-            list.add(vo);
-
-        }
         return list;
 
 

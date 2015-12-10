@@ -17,31 +17,35 @@ import java.util.List;
 public class HallLoadExam {
     public List<HallLoadVO> find(Formstate state){
         List<HallLoadPO> pos=null;
+        List<HallLoadVO> list=new ArrayList<HallLoadVO>();
         ExamDataService data= RMIHelper.getExamdata();
         try {
             pos=data.getLoadForm(state);
+
+            for(int i=0;i<=pos.size()-1;i++){
+                HallLoadPO po=pos.get(i);
+                long loadtime=po.getLoadtime();
+                String hallcode=po.getHallcode();
+                String motorcode=po.getMotorcode();
+                String destination=po.getDestination();
+                String vehiclecode=po.getVehiclecode();
+                String supervisor=po.getSupervisor();
+                String supercargo=po.getSupercargo();
+                List<String> allbarcode=po.getAllbarcode();
+                double fee=po.getFee();
+                Formstate documentstate=po.getDocumentstate();
+
+                HallLoadVO vo=new HallLoadVO(loadtime,hallcode,motorcode,destination,vehiclecode,supervisor,supercargo
+                        ,allbarcode,fee,documentstate);
+                list.add(vo);
+            }
+
         } catch (RemoteException e) {
             System.out.println("manager exam hall load get forms by state failed@!!!");
             e.printStackTrace();
         }
-        List<HallLoadVO> list=new ArrayList<HallLoadVO>();
-        for(int i=0;i<=pos.size()-1;i++){
-            HallLoadPO po=pos.get(i);
-            long loadtime=po.getLoadtime();
-            String hallcode=po.getHallcode();
-            String motorcode=po.getMotorcode();
-            String destination=po.getDestination();
-            String vehiclecode=po.getVehiclecode();
-            String supervisor=po.getSupervisor();
-            String supercargo=po.getSupercargo();
-            List<String> allbarcode=po.getAllbarcode();
-            double fee=po.getFee();
-            Formstate documentstate=po.getDocumentstate();
 
-            HallLoadVO vo=new HallLoadVO(loadtime,hallcode,motorcode,destination,vehiclecode,supervisor,supercargo
-                    ,allbarcode,fee,documentstate);
-            list.add(vo);
-        }
+
         return list;
     }
 

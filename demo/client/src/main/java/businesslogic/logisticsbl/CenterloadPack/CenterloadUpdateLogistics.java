@@ -35,30 +35,33 @@ public class CenterloadUpdateLogistics {
             LogisticsPO po=null;
             try {
                 po=dataserv.findLogisticsInfo(allbarcode.get(i));
+
+                List<String> history=po.getHistory();
+                String state="已发往"+destination;
+                history.add(state);
+                po.setHistory(history);
+                po.setState(state);
+
+                ResultMessage res=dataserv.update(po);
+
+                if(res==ResultMessage.failure)
+                {
+                    result=ResultMessage.failure;
+                }
+
+
             } catch (RemoteException e) {
                 System.out.println("centerload update history get logisticspo failed!!!");
                 e.printStackTrace();
             }
 
-            List<String> history=po.getHistory();
-            String state="已发往"+destination;
-            history.add(state);
-            po.setHistory(history);
-            po.setState(state);
 
 
 
-            ResultMessage res=null;
-            try {
-                res=dataserv.update(po);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
 
-            if(res==ResultMessage.failure)
-            {
-                result=ResultMessage.failure;
-            }
+
+
+
 
 
         }

@@ -19,15 +19,17 @@ public class HallCollect {
 
         DebitnoteFormDataService data= RMIHelper.getDebitnote();
         List<RecordcollectPO> pos=null;
+        List<RecordcollectVO> list=null;
         try {
             pos=data.getRecordcollectbyhall(orgcode);
+            TransPO tr=new TransPO();
+            list=tr.trans(pos);
         } catch (RemoteException e) {
             System.out.println("debitenote get recordcollect by hall failed!!!");
             e.printStackTrace();
         }
 
-        TransPO tr=new TransPO();
-        List<RecordcollectVO> list=tr.trans(pos);
+
         return list;
 
 

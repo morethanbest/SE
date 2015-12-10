@@ -18,11 +18,16 @@ public class ChangeLocation {
         CommodityPO po=null;
         try {
             po=data.getCommodityByLocation(orgcode,location1);
+
+            po.setLocation(location2);
+
         } catch (RemoteException e) {
             System.out.println("subregion get commodtiy po by location faield!!!");
             e.printStackTrace();
         }
-        po.setLocation(location2);
+
+
+
         ResultMessage result=null;
         try {
             result=data.updateCommodtiy(po);

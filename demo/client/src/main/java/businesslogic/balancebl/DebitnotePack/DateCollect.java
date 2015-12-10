@@ -15,15 +15,20 @@ public class DateCollect {
     public List<RecordcollectVO> getbydate(long date){
         DebitnoteFormDataService data= RMIHelper.getDebitnote();
         List<RecordcollectPO> pos=null;
+        List<RecordcollectVO> list=null;
         try {
+
             pos=data.getRecordcollectbydate(date);
+
+            TransPO tr=new TransPO();
+            list=tr.trans(pos);
+
         } catch (RemoteException e) {
             System.out.println("debitnote get recordcollect by date failed!!!");
             e.printStackTrace();
         }
 
-        TransPO tr=new TransPO();
-        List<RecordcollectVO> list=tr.trans(pos);
+
         return list;
 
 

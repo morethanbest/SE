@@ -21,26 +21,30 @@ public class PayGet {
         List<RecordpayPO> pos=null;
         try {
             pos=data.getallRecordpay(starttime,endtime);
+
+            for(int i=0;i<=pos.size()-1;i++){
+                RecordpayPO po=pos.get(i);
+
+                String id=po.getId();
+                long paytime=po.getPaytime();
+                double paysum=po.getPaysum();
+                String payman=po.getPayman();
+                String payaccount=po.getPayaccount();
+                RecordpayList entry=po.getEntry();
+                String remark=po.getRemark();
+                Formstate formstate=po.getFormstate();
+
+                RecordpayVO vo=new RecordpayVO(id,paytime,paysum,payman,payaccount,entry,remark,formstate);
+                list.add(vo);
+
+            }
+
+
         } catch (RemoteException e) {
             System.out.println("statistics get all recordpaypo failed@@@");
             e.printStackTrace();
         }
-        for(int i=0;i<=pos.size()-1;i++){
-            RecordpayPO po=pos.get(i);
 
-            String id=po.getId();
-            long paytime=po.getPaytime();
-            double paysum=po.getPaysum();
-            String payman=po.getPayman();
-            String payaccount=po.getPayaccount();
-            RecordpayList entry=po.getEntry();
-            String remark=po.getRemark();
-            Formstate formstate=po.getFormstate();
-
-            RecordpayVO vo=new RecordpayVO(id,paytime,paysum,payman,payaccount,entry,remark,formstate);
-            list.add(vo);
-
-        }
         return list;
     }
 }

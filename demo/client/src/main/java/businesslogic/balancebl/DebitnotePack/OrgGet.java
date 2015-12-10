@@ -15,6 +15,8 @@ import java.util.List;
  * Created by Administrator on 2015/12/3.
  */
 public class OrgGet {
+
+
     public List<OrganizationVO> getorg(String city){
         List<OrganizationVO> list=new ArrayList<OrganizationVO>();
         DebitnoteFormDataService data= RMIHelper.getDebitnote();
@@ -44,4 +46,6 @@ public class OrgGet {
 
 
     }
+
+
 }
