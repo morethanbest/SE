@@ -41,6 +41,10 @@ public class StockoutVO {
 	public Formstate getFormstate() {
 		return formstate;
 	}
+	public void setFormstate(Formstate formstate) {
+		this.formstate = formstate;
+		
+	}
 	
 	
 }
