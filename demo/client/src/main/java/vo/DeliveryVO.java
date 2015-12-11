@@ -32,4 +32,8 @@ public class DeliveryVO {
 	public Formstate getDocumentstate(){
 		return this.documentstate;
 	}
+	public void setFormstate(Formstate state) {
+		this.documentstate = state;
+		
+	}
 }

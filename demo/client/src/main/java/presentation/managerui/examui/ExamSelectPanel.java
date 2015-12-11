@@ -34,17 +34,27 @@ public class ExamSelectPanel extends JPanel {
 		button = new JButton("到达单");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				card.show(parent, "gr");
 			}
 		});
 		button.setBounds(166, 114, 113, 27);
 		add(button);
 		
 		button_1 = new JButton("装车单");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "hl");
+			}
+		});
 		button_1.setBounds(293, 114, 113, 27);
 		add(button_1);
 		
 		button_2 = new JButton("派件单");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "delivery");
+			}
+		});
 		button_2.setBounds(420, 114, 113, 27);
 		add(button_2);
 		
@@ -107,6 +117,11 @@ public class ExamSelectPanel extends JPanel {
 		add(button_10);
 		
 		button_11 = new JButton("出库单");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "out");
+			}
+		});
 		button_11.setBounds(293, 222, 113, 27);
 		add(button_11);
 
