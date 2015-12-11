@@ -14,6 +14,7 @@ import presentation.managerui.examui.examfinancial.RecordpayExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.DeliveryExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.GoodRecievingExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.HallLoadExamPanel;
+import presentation.managerui.examui.examhallsalesmanui.RecordcollectExamPanel;
 
 
 public class ExamPanel extends JPanel {
@@ -36,7 +37,7 @@ public class ExamPanel extends JPanel {
 		HallLoadExamPanel hl = new HallLoadExamPanel(this, card);
 		GoodRecievingExamPanel gr = new GoodRecievingExamPanel(this, card);
 		DeliveryExamPanel delivery = new DeliveryExamPanel(this, card);
-		
+		RecordcollectExamPanel collect=new RecordcollectExamPanel(this, card);
 		//快递员
 		OrderExamPanel order = new OrderExamPanel(this, card);
 		//仓库管理员
@@ -54,6 +55,7 @@ public class ExamPanel extends JPanel {
 		add(hl, "hl");
 		add(gr, "gr");
 		add(delivery, "delivery");
+		add(collect, "collect");
 		
 		add(order, "order");
 		

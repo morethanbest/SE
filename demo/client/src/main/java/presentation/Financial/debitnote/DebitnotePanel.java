@@ -256,6 +256,12 @@ public class DebitnotePanel extends JPanel implements ActionListener{
 				
 			}
 		});
+        sumField.setEditable(false);
+        manField.setEditable(false);
+    	accountField.setEditable(false);
+    	yearField.setEditable(false);
+    	monthField.setEditable(false);
+    	dayField.setEditable(false);
 	}
 	private void displayInOrderTable(List<String> orderlist){
 		DefaultTableModel ordertableModel = (DefaultTableModel) ordertable.getModel();

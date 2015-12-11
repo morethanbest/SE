@@ -1,4 +1,4 @@
-package presentation.managerui.examui.examfinancial;
+package presentation.managerui.examui.examhallsalesmanui;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -15,17 +15,17 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.managerblservice.ExamCLForms;
+import businesslogicservice.managerblservice.ExamRecordcollects;
 import businesslogicservice.managerblservice.ExamRecordpays;
 import po.Formstate;
 import presentation.managerui.examui.ExamPanel;
-import vo.CenterloadVO;
+import vo.RecordcollectVO;
 import vo.RecordpayVO;
 
-public class RecordpayExamPanel extends JPanel {
+public class RecordcollectExamPanel extends JPanel {
 	private JTable table;
-	private ExamRecordpays ea;
-	private List<RecordpayVO> volist;
+	private ExamRecordcollects ea;
+	private List<RecordcollectVO> volist;
 	private JButton pass;
 	private JButton refused;
 	private JButton back;
@@ -34,7 +34,7 @@ public class RecordpayExamPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public RecordpayExamPanel(ExamPanel parent, CardLayout card) {
+	public RecordcollectExamPanel(ExamPanel parent, CardLayout card) {
 		setLayout(null);
 		ea = new ExamController();
 
@@ -46,23 +46,17 @@ public class RecordpayExamPanel extends JPanel {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{Boolean.FALSE, null, null, null, null, null, null},
+				{Boolean.FALSE, null, null, null, null, null},
 			},
 			new String[] {
-				"\u9009\u9879", "\u4ED8\u6B3E\u65F6\u95F4", "\u4ED8\u6B3E\u91D1\u989D", "\u4ED8\u6B3E\u8D26\u53F7", "\u4ED8\u6B3E\u4EBA", "\u6761\u76EE", "\u5BA1\u6279\u72B6\u6001"
+				"\u9009\u9879", "\u6536\u6B3E\u65F6\u95F4", "\u6536\u6B3E\u91D1\u989D", "\u6536\u6B3E\u8D26\u53F7", "\u6536\u6B3E\u4EBA", "\u5BA1\u6279\u72B6\u6001"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Boolean.class, Long.class, Double.class, String.class, String.class, String.class, String.class
+				Boolean.class, Long.class, Double.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				true, false, false, false, false, false, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -138,9 +132,9 @@ public class RecordpayExamPanel extends JPanel {
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		for (int i = 0; i < volist.size(); i++) {
 			if ((boolean) tableModel.getValueAt(i, 0)) {
-				RecordpayVO vo = volist.get(i);
+				RecordcollectVO vo = volist.get(i);
 			    vo.setFormstate(state);
-				ea.updateRecordpayForm(vo);
+				ea.updateRecordcollectForm(vo);
 			}
 		}
 		refreshList();
@@ -149,21 +143,20 @@ public class RecordpayExamPanel extends JPanel {
 	private void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
-				volist = ea.getRecordpayForm(state);
+				volist = ea.getRecordcollectForm(state);
 		}
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);// 清除原有行
 
-		for (RecordpayVO vo : volist) {
-			Object[] row = new Object[7];
+		for (RecordcollectVO vo : volist) {
+			Object[] row = new Object[6];
 			row[0] = false;
-			row[1] = vo.getPaytime();
-			row[2] = vo.getPaysum();
-			row[3] = vo.getPayaccount();
-			row[4] = vo.getPayman();
-			row[5] = vo.getEntry().getName();
-			row[6] = vo.getFormstate().getName();
+			row[1] = vo.getCollectiontime();
+			row[2] = vo.getCollectionsum();
+			row[3] = vo.getAccountcode();
+			row[4] = vo.getCollectiontime();
+			row[5] = vo.getFormstate().getName();
 			tableModel.addRow(row);
 		}
 

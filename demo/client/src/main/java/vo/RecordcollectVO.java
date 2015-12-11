@@ -37,4 +37,7 @@ public class RecordcollectVO {
 		return allordercode;
 	}
 	public Formstate getFormstate(){return this.formstate;}
+	public void setFormstate(Formstate formstate){
+		this.formstate=formstate;
+	}
 }

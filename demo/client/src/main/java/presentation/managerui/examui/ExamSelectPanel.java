@@ -59,6 +59,11 @@ public class ExamSelectPanel extends JPanel {
 		add(button_2);
 		
 		button_3 = new JButton("收款单");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(parent, "collect");
+			}
+		});
 		button_3.setBounds(547, 114, 113, 27);
 		add(button_3);
 		
