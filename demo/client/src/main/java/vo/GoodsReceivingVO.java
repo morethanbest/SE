@@ -37,4 +37,5 @@ public class GoodsReceivingVO {
 	}
 	public Formstate getFormstate(){return this.documentstate;}
 	public boolean getwhefromhalll(){return this.whefromhall;}
+
 }
