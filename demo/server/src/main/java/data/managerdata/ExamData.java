@@ -45,7 +45,10 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateOrderForm(OrderPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return OrderDB.update(po);
+		if(po!=null)
+			return OrderDB.update(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
@@ -63,7 +66,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateArrivalForm(ArrivalPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ArrivalDB.update(po);
+		if(po!=null)
+			return ArrivalDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -75,7 +82,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateCenterLoadForm(CenterloadPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return CenterloadDB.update(po);
+		if(po!=null)
+			return CenterloadDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -87,7 +98,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateDeliveryForm(DeliveryPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return DeliveryDB.update(po);
+		if(po!=null)
+			return DeliveryDB.update(po);
+		else 
+			return ResultMessage.failure;
+	
 	}
 
 	@Override
@@ -99,7 +114,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateGoodsReceivingForm(GoodsReceivingPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return GoodsReceivingDB.update(po);
+		if(po!=null)
+			return GoodsReceivingDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -111,7 +130,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateLoadForm(HallLoadPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return HallLoadDB.update(po);
+		if(po!=null)
+			return HallLoadDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -123,7 +146,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateRecordtransForm(RecordtransPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return RecordtransDB.update(po);
+		if(po!=null)
+			return RecordtransDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -135,7 +162,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateRecordcollectForm(RecordcollectPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return RecordcollectDB.update(po);
+		if(po!=null)
+			return RecordcollectDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -147,7 +178,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateRecordpayForm(RecordpayPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return RecordpayDB.update(po);
+		if(po!=null)
+			return RecordpayDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -159,7 +194,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateStockinForm(StockinPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return StockinDB.update(po);
+		if(po!=null)
+			return StockinDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -171,7 +210,11 @@ public class ExamData extends UnicastRemoteObject implements ExamDataService {
 	@Override
 	public ResultMessage updateStockoutForm(StockoutPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return StockoutDB.update(po);
+		if(po!=null)
+			return StockoutDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 }

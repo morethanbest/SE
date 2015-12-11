@@ -19,12 +19,19 @@ public class StockoutFormData extends UnicastRemoteObject implements StockoutFor
 
 	@Override
 	public ResultMessage updateStockoutForm(StockoutPO po) throws RemoteException {
-		return StockoutDB.update(po);
+		if(po!=null)
+			return StockoutDB.update(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage addStockoutForm(StockoutPO po) throws RemoteException {
-		return StockoutDB.write(po);
+		if(po!=null)
+			return StockoutDB.write(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

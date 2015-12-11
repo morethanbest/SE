@@ -17,8 +17,10 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 	@Override
 	public ResultMessage addOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=OrganizationDB.write(po);
-		return result;
+		if(po!=null)
+			return OrganizationDB.write(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
@@ -29,15 +31,20 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 	@Override
 	public ResultMessage deleteOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=OrganizationDB.delete(po);
-		return result;
+		if(po!=null)
+			return OrganizationDB.delete(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage updateOrganization(OrganizationPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=OrganizationDB.update(po);
-		return result;
+		if(po!=null)
+			return OrganizationDB.update(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 

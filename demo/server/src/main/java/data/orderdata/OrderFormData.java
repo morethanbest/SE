@@ -17,9 +17,10 @@ public class OrderFormData extends UnicastRemoteObject implements OrderFormDataS
 	@Override
 	public ResultMessage addOrderForm(OrderPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		
-		
-		return OrderDB.write(po);
+		if(po!=null)
+			return OrderDB.write(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
@@ -38,7 +39,11 @@ public class OrderFormData extends UnicastRemoteObject implements OrderFormDataS
 	@Override
 	public ResultMessage updateOrderForm(OrderPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return OrderDB.update(po);
+		if(po!=null)
+			return OrderDB.update(po);
+		else
+			return ResultMessage.failure;
+
 	}
 
 	@Override

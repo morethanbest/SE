@@ -20,12 +20,20 @@ public class UsersData extends UnicastRemoteObject implements UserDataService{
 
 	@Override
 	public ResultMessage add(UserPO po) throws RemoteException {
-		return UserDB.write(po);
+		if(po!=null)
+			return UserDB.write(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage delete(UserPO po) throws RemoteException {
-		return UserDB.deletebyusername(po);
+		if(po!=null)
+			return UserDB.deletebyusername(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -35,7 +43,11 @@ public class UsersData extends UnicastRemoteObject implements UserDataService{
 
 	@Override
 	public ResultMessage update(UserPO po) throws RemoteException {
-		return UserDB.update(po);
+		if(po!=null)
+			return UserDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

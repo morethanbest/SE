@@ -28,12 +28,19 @@ public class ArrivalFormData extends UnicastRemoteObject implements ArrivalFormD
 
 	@Override
 	public ResultMessage updateArrivalForm(ArrivalPO po) throws RemoteException {
-		return ArrivalDB.update(po);
+		if(po!=null)
+			return ArrivalDB.update(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
 	 public ResultMessage addArrivalForm(ArrivalPO po) throws RemoteException {
-		return ArrivalDB.write(po);
+		if(po!=null)
+			return ArrivalDB.write(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

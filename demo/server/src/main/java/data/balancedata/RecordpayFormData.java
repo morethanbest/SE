@@ -1,17 +1,16 @@
 package data.balancedata;
 
-import dataservice.balancedataservice.RecordpayFormDataService;
-import po.AccountPO;
-import po.Formstate;
-import po.RecordpayPO;
-import po.ResultMessage;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import data.database.accountDB.AccountDB;
 import data.database.balanceDB.RecordpayDB;
+import dataservice.balancedataservice.RecordpayFormDataService;
+import po.AccountPO;
+import po.Formstate;
+import po.RecordpayPO;
+import po.ResultMessage;
 
 public class RecordpayFormData extends UnicastRemoteObject implements RecordpayFormDataService{
 
@@ -27,12 +26,20 @@ public class RecordpayFormData extends UnicastRemoteObject implements RecordpayF
 
 	@Override
 	public ResultMessage updateRecordpayForm(RecordpayPO po) throws RemoteException {
-		return RecordpayDB.update(po);
+		if(po!=null)
+			return RecordpayDB.update(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage addRecordpayForm(RecordpayPO po) throws RemoteException {
-		return RecordpayDB.write(po);
+		if(po!=null)
+			return RecordpayDB.write(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

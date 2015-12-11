@@ -16,7 +16,10 @@ public class LogisticsData extends UnicastRemoteObject implements LogisticsDataS
 
 	@Override
 	public ResultMessage addLogistics(LogisticsPO po) throws RemoteException {
-		return LogisticsDB.write(po);
+		if(po!=null)
+			return LogisticsDB.write(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 }

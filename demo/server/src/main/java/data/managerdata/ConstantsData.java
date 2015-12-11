@@ -15,23 +15,28 @@ public class ConstantsData extends UnicastRemoteObject implements ConstantsDataS
 	}
 	@Override
 	public ResultMessage addConstants(ConstantsPO po) throws RemoteException {
-		ResultMessage result=ConstantsDB.write(po.getName(), po.getValue());
-		// TODO Auto-generated method stub
-		return result;
+		if(po!=null)
+			return ConstantsDB.write(po.getName(), po.getValue());
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage deleteConstants(ConstantsPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=ConstantsDB.delete(po.getId());
-		return result;
+		if(po!=null)
+			return ConstantsDB.delete(po.getId());
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage updateConstants(ConstantsPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=ConstantsDB.update(po.getName(), po.getValue());
-		return result;
+		if(po!=null)
+			return ConstantsDB.update(po.getName(), po.getValue());
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override

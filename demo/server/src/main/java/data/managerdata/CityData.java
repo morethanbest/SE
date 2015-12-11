@@ -17,19 +17,31 @@ public class CityData extends UnicastRemoteObject implements CityDataService{
 	@Override
 	public ResultMessage addCity(CityPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return CityDB.write(po);
+		if(po!=null)
+			return CityDB.write(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage deleteCity(CityPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return CityDB.delete(po);
+		if(po!=null)
+			return CityDB.delete(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage updateCity(CityPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return CityDB.update(po);
+		if(po!=null)
+			return CityDB.update(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

@@ -17,22 +17,28 @@ public class StaffData extends UnicastRemoteObject implements StaffDataService {
 	@Override
 	public ResultMessage addStaff(StaffPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=StaffDB.write(po);
-		return result;
+		if(po!=null)
+			return StaffDB.write(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage deleteStaff(StaffPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=StaffDB.delete(po.getId());
-		return result;
+		if(po!=null)
+			return StaffDB.delete(po.getId());
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage updateStaff(StaffPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		ResultMessage result=StaffDB.update(po);
-		return result;
+		if(po!=null)
+			return StaffDB.update(po);
+		else 
+			return ResultMessage.failure;
 	}
 	
 

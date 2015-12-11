@@ -20,17 +20,28 @@ public class DriversData extends UnicastRemoteObject implements DriversDataServi
 
 	@Override
 	public ResultMessage insertDriver(DriversPO po) throws RemoteException {
-		return DriverDB.write(po);
+		if(po!=null)
+			return DriverDB.write(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage deleteDriver(DriversPO po) throws RemoteException {
-		return  DriverDB.delete(po);
+		if(po!=null)
+			return  DriverDB.delete(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage updateDriver(DriversPO po) throws RemoteException {
-		return DriverDB.update(po);
+		if(po!=null)
+			return DriverDB.update(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

@@ -29,7 +29,10 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public ResultMessage addnew(CommodityPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return CommodityDB.write(po);
+		if(po!=null)
+			return CommodityDB.write(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
@@ -48,7 +51,11 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public ResultMessage updateCommodtiy(CommodityPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return CommodityDB.update(po);
+		if(po!=null)
+			return CommodityDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
@@ -60,8 +67,12 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	@Override
 	public ResultMessage setOuttime(CommodityPO po, long outtime) throws RemoteException {
 		// TODO Auto-generated method stub
-		po.setOuttime(outtime);
-		return CommodityDB.update(po);
+		if(po!=null){
+			po.setOuttime(outtime);
+			return CommodityDB.update(po);
+		}else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

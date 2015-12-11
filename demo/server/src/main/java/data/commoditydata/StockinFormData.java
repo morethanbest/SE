@@ -22,12 +22,20 @@ public class StockinFormData extends UnicastRemoteObject implements StockinFormD
 
 	@Override
 	public ResultMessage addStockinForm(StockinPO po) throws RemoteException {
-		return StockinDB.write(po);
+		if(po!=null)
+			return StockinDB.write(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage updateStockinForm(StockinPO po) throws RemoteException {
-		return StockinDB.update(po);
+		if(po!=null)
+			return StockinDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

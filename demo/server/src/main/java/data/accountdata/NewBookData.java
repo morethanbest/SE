@@ -22,7 +22,10 @@ public class NewBookData extends UnicastRemoteObject implements NewBookDataServi
 	@Override
 	public ResultMessage addNewBook(NewbookPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return NewBookDB.write(po);
+		if(po!=null)
+			return NewBookDB.write(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override

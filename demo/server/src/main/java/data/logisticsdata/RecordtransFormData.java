@@ -27,12 +27,20 @@ public class RecordtransFormData extends UnicastRemoteObject implements Recordtr
 
 	@Override
 	public ResultMessage updateRecordtransForm(RecordtransPO po) throws RemoteException {
-		return RecordtransDB.update(po);
+		if(po!=null)
+			return RecordtransDB.update(po);
+		else 
+			return ResultMessage.failure ;
+		
 	}
 
 	@Override
 	public ResultMessage addRecordtransForm(RecordtransPO po) throws RemoteException {
-		return RecordtransDB.write(po);
+		if(po!=null)
+			return RecordtransDB.write(po);
+		else 
+			return ResultMessage.failure ;
+		
 	}
 
 	@Override

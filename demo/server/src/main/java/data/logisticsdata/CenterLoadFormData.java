@@ -28,12 +28,19 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 
 	@Override
 	public ResultMessage updateCenterLoadForm(CenterloadPO po) throws RemoteException {
-		return CenterloadDB.update(po);
+		if(po!=null)
+			return CenterloadDB.update(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage addCenterLoadForm(CenterloadPO po) throws RemoteException {
-		return CenterloadDB.write(po);
+		if(po!=null)
+			return CenterloadDB.write(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

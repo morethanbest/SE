@@ -22,7 +22,10 @@ public class HallLoadFormData extends UnicastRemoteObject implements HallLoadFor
 
 	@Override
 	public ResultMessage addLoadForm(HallLoadPO po) throws RemoteException {
-		return HallLoadDB.write(po);
+		if(po!=null)
+			return HallLoadDB.write(po);
+		else 
+			return ResultMessage.failure;
 	}
 
 	@Override
@@ -32,7 +35,11 @@ public class HallLoadFormData extends UnicastRemoteObject implements HallLoadFor
 
 	@Override
 	public ResultMessage updateLoadForm(HallLoadPO po) throws RemoteException {
-		return HallLoadDB.update(po);
+		if(po!=null)
+			return HallLoadDB.update(po);
+		else 
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

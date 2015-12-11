@@ -17,19 +17,30 @@ public class SalaryData extends UnicastRemoteObject implements SalaryDataService
 	@Override
 	public ResultMessage addSalary(SalaryPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return SalaryDB.write(po.getJob(), po.getSalarymode(), po.getBase(), po.getBonus());
+		if(po!=null)
+			return SalaryDB.write(po.getJob(), po.getSalarymode(), po.getBase(), po.getBonus());
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage updateSalary(SalaryPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return SalaryDB.update(po.getJob(), po.getSalarymode(), po.getBase(), po.getBonus());
+		if(po!=null)
+			return SalaryDB.update(po.getJob(), po.getSalarymode(), po.getBase(), po.getBonus());
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override
 	public ResultMessage delSalary(SalaryPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return SalaryDB.delete(po.getJob());
+		if(po!=null)
+			return SalaryDB.delete(po.getJob());
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

@@ -24,12 +24,19 @@ public class DeliveryFormData extends UnicastRemoteObject implements DeliveryFor
 
 	@Override
 	public ResultMessage updateDeliveryForm(DeliveryPO po) throws RemoteException {
-		return DeliveryDB.update(po);
+		if(po!=null)
+			return DeliveryDB.update(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
 	public ResultMessage addDeliveryForm(DeliveryPO po) throws RemoteException {
-		return DeliveryDB.write(po);
+		if(po!=null)
+			return DeliveryDB.write(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

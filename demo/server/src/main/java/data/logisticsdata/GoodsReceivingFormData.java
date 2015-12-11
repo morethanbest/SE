@@ -26,7 +26,10 @@ public class GoodsReceivingFormData extends UnicastRemoteObject implements Goods
 
 	@Override
 	public ResultMessage addGoodsReceivingForm(GoodsReceivingPO po) throws RemoteException {
-		return GoodsReceivingDB.write(po);
+		if(po!=null)
+			return GoodsReceivingDB.write(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
@@ -36,7 +39,11 @@ public class GoodsReceivingFormData extends UnicastRemoteObject implements Goods
 
 	@Override
 	public ResultMessage updateGoodsReceivingForm(GoodsReceivingPO po) throws RemoteException {
-		return GoodsReceivingDB.update(po);
+		if(po!=null)
+			return GoodsReceivingDB.update(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

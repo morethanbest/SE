@@ -22,7 +22,10 @@ public class RecordcollectFormData extends UnicastRemoteObject implements Record
 	@Override
 	public ResultMessage addRecordcollectForm(RecordcollectPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return RecordcollectDB.write(po);
+		if(po!=null)
+			return RecordcollectDB.write(po);
+		else
+			return ResultMessage.failure;
 	}
 
 	@Override
@@ -34,7 +37,11 @@ public class RecordcollectFormData extends UnicastRemoteObject implements Record
 	@Override
 	public ResultMessage updateRecordcollectForm(RecordcollectPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return RecordcollectDB.update(po);
+		if(po!=null)
+			return RecordcollectDB.update(po);
+		else
+			return ResultMessage.failure;
+		
 	}
 
 	@Override

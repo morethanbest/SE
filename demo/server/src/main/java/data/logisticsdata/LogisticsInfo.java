@@ -22,7 +22,10 @@ public class LogisticsInfo extends UnicastRemoteObject implements LogisticsInfoS
 	@Override
 	public ResultMessage update(LogisticsPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return LogisticsDB.update(po);
+		if(po!=null)
+			return LogisticsDB.update(po);
+		else
+			return ResultMessage.failure;
 	}
 
 
