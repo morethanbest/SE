@@ -38,4 +38,9 @@ public class GoodsReceivingVO {
 	public Formstate getFormstate(){return this.documentstate;}
 	public boolean getwhefromhalll(){return this.whefromhall;}
 
+	public void setFormstate(Formstate state) {
+		this.documentstate = state;
+		
+	}
+
 }
