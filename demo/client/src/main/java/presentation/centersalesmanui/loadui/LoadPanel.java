@@ -242,7 +242,7 @@ public class LoadPanel extends JPanel {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
 		List<OrganizationVO> orgList = organizationBlService
-				.getOrganizationbyCity(city);
+				.getOrganizationbyBoth(city, Organizationtype.hall);
 		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}

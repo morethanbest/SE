@@ -8,6 +8,7 @@ import presentation.managerui.examui.examcentersalesmanui.ArrivalExamPanel;
 import presentation.managerui.examui.examcentersalesmanui.CenterLoadExamPanel;
 import presentation.managerui.examui.examcentersalesmanui.TransferExamPanel;
 import presentation.managerui.examui.examcourierui.OrderExamPanel;
+import presentation.managerui.examui.examcourierui.OrderRevisePanel;
 import presentation.managerui.examui.examdepotui.StockinExamPanel;
 import presentation.managerui.examui.examdepotui.StockoutExamPanel;
 import presentation.managerui.examui.examfinancial.RecordpayExamPanel;
@@ -21,6 +22,21 @@ public class ExamPanel extends JPanel {
 
 	private CardLayout card;
 	
+	private ArrivalExamPanel arrival;
+	private TransferExamPanel trans;
+	private CenterLoadExamPanel cl;
+	
+	private HallLoadExamPanel hl;
+	private GoodRecievingExamPanel gr;
+	private DeliveryExamPanel delivery;
+	private RecordcollectExamPanel collect;
+	
+	private OrderExamPanel order;
+	
+	private StockinExamPanel in;
+	private StockoutExamPanel out;
+	
+	private RecordpayExamPanel pay;
 	/**
 	 * Create the panel.
 	 */
@@ -30,21 +46,22 @@ public class ExamPanel extends JPanel {
 		
 		ExamSelectPanel select = new ExamSelectPanel(this, card);
 		//中转中心业务员
-		ArrivalExamPanel arrival = new ArrivalExamPanel(this, card);
-		TransferExamPanel trans = new TransferExamPanel(this, card);
-		CenterLoadExamPanel cl = new CenterLoadExamPanel(this, card);
+		arrival = new ArrivalExamPanel(this, card);
+		trans = new TransferExamPanel(this, card);
+		cl = new CenterLoadExamPanel(this, card);
 		//营业厅业务员
-		HallLoadExamPanel hl = new HallLoadExamPanel(this, card);
-		GoodRecievingExamPanel gr = new GoodRecievingExamPanel(this, card);
-		DeliveryExamPanel delivery = new DeliveryExamPanel(this, card);
-		RecordcollectExamPanel collect=new RecordcollectExamPanel(this, card);
+		hl = new HallLoadExamPanel(this, card);
+		gr = new GoodRecievingExamPanel(this, card);
+		delivery = new DeliveryExamPanel(this, card);
+		collect=new RecordcollectExamPanel(this, card);
 		//快递员
-		OrderExamPanel order = new OrderExamPanel(this, card);
+		OrderRevisePanel orderR = new OrderRevisePanel(this, card);
+		order = new OrderExamPanel(this, card, orderR);
 		//仓库管理员
-		StockinExamPanel in = new StockinExamPanel(this, card);
-		StockoutExamPanel out = new StockoutExamPanel(this, card);
+		in = new StockinExamPanel(this, card);
+		out = new StockoutExamPanel(this, card);
 		//财务人员
-		RecordpayExamPanel pay= new RecordpayExamPanel(this, card);
+		pay= new RecordpayExamPanel(this, card);
 		
 		add(select, "select");
 		
@@ -58,11 +75,46 @@ public class ExamPanel extends JPanel {
 		add(collect, "collect");
 		
 		add(order, "order");
+		add(orderR, "orderR");
 		
 		add(in, "in");
 		add(out, "out");
 		
 		add(pay, "pay");
+	}
+	
+	public ArrivalExamPanel getArrival() {
+		return arrival;
+	}
+	public TransferExamPanel getTrans() {
+		return trans;
+	}
+	public CenterLoadExamPanel getCl() {
+		return cl;
+	}
+	public HallLoadExamPanel getHl() {
+		return hl;
+	}
+	public GoodRecievingExamPanel getGr() {
+		return gr;
+	}
+	public DeliveryExamPanel getDelivery() {
+		return delivery;
+	}
+	public RecordcollectExamPanel getCollect() {
+		return collect;
+	}
+	public OrderExamPanel getOrder() {
+		return order;
+	}
+	public StockinExamPanel getIn() {
+		return in;
+	}
+	public StockoutExamPanel getOut() {
+		return out;
+	}
+	public RecordpayExamPanel getPay() {
+		return pay;
 	}
 
 }

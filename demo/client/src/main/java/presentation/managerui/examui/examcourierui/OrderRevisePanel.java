@@ -1,4 +1,4 @@
-package presentation.courierui;
+package presentation.managerui.examui.examcourierui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,23 +20,27 @@ import po.Ordertype;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.StaffType;
+import presentation.managerui.examui.ExamPanel;
 import vo.CityVO;
 import vo.OrderFareVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.orderbl.OrderPack.OrderController;
 import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.ExamOrdersBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.OrderBlService;
 
 import javax.swing.ImageIcon;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
 
-public class OrderPanel extends JPanel {
+public class OrderRevisePanel extends JPanel {
 	private JTextField snameField;
 	private JTextField sdetailField;
 	private JTextField sjobField;
@@ -54,9 +58,7 @@ public class OrderPanel extends JPanel {
 	private JLabel label_2;
 	private JSeparator separator_3;
 	private JTextField fareField;
-	private JButton button;
-	private JButton button_2;
-	private JButton btnNewButton;
+	private JButton update;
 	private JSeparator separator_4;
 	private JComboBox<String> scityBox;
 	private JComboBox<String> sareaBox;
@@ -64,188 +66,175 @@ public class OrderPanel extends JPanel {
 	private JComboBox<String> rareaBox;
 	private JComboBox<String> orderBox;
 	private JTextField rjobField;
+//换成exam开头的方法
 	private OrderBlService orderBlService;
+	private ExamOrdersBlService ea;
+	private JButton back;
+	private JLabel orderCode;
+	private OrderVO temp;
 
 	/**
 	 * Create the panel.
 	 * 
-	 * @param courierPanel
 	 */
-	public OrderPanel(CourierPanel courierPanel) {
+//这里换参数
+	public OrderRevisePanel(ExamPanel parent, CardLayout card) {
 		setBackground(new Color(244, 247, 252));
-		orderBlService = new OrderController();
+		ea = new ExamController();
 		setLayout(null);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(98, 74, 2, 466);
+		separator.setBounds(98, 43, 2, 466);
 		add(separator);
 
 		JLabel label = new JLabel("寄件人信息");
-		label.setBounds(14, 88, 75, 18);
+		label.setBounds(0, 54, 75, 18);
 		add(label);
 
 		snameField = new JTextField();
 		snameField.setText("奥巴马");
-		snameField.setBounds(172, 85, 96, 24);
+		snameField.setBounds(151, 51, 96, 24);
 		add(snameField);
 		snameField.setColumns(10);
 
 		scityBox = new JComboBox<String>();
-		scityBox.setBounds(326, 85, 86, 24);
+		scityBox.setBounds(305, 51, 86, 24);
 		add(scityBox);
 		addCityItems(scityBox);
 
 		sareaBox = new JComboBox<String>();
-		sareaBox.setBounds(470, 85, 86, 24);
+		sareaBox.setBounds(449, 51, 86, 24);
 		add(sareaBox);
 		addOrganizationItems(scityBox, sareaBox);
 
 		sdetailField = new JTextField();
 		sdetailField.setText("白宫");
-		sdetailField.setBounds(620, 85, 270, 24);
+		sdetailField.setBounds(599, 51, 270, 24);
 		add(sdetailField);
 		sdetailField.setColumns(10);
 
 		sjobField = new JTextField();
 		sjobField.setText("美国总统");
-		sjobField.setBounds(172, 148, 226, 24);
+		sjobField.setBounds(151, 105, 226, 24);
 		add(sjobField);
 		sjobField.setColumns(10);
 
 		stelField = new JTextField();
 		stelField.setText("911");
-		stelField.setBounds(480, 148, 159, 24);
+		stelField.setBounds(458, 105, 159, 24);
 		add(stelField);
 		stelField.setColumns(10);
 
 		sphoneField = new JTextField();
 		sphoneField.setText("911");
-		sphoneField.setBounds(732, 148, 196, 24);
+		sphoneField.setBounds(710, 105, 196, 24);
 		add(sphoneField);
 		sphoneField.setColumns(10);
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(114, 191, 854, 2);
+		separator_1.setBounds(114, 142, 831, 2);
 		add(separator_1);
 
 		JLabel label_1 = new JLabel("收件人信息");
-		label_1.setBounds(14, 228, 75, 18);
+		label_1.setBounds(0, 191, 75, 18);
 		add(label_1);
 
 		rnameField = new JTextField();
 		rnameField.setText("习近平");
 		rnameField.setColumns(10);
-		rnameField.setBounds(172, 225, 96, 24);
+		rnameField.setBounds(151, 157, 96, 24);
 		add(rnameField);
 
 		rcityBox = new JComboBox<String>();
-		rcityBox.setBounds(326, 225, 86, 24);
+		rcityBox.setBounds(305, 157, 86, 24);
 		add(rcityBox);
 		addCityItems(rcityBox);
 
 		rareaBox = new JComboBox<String>();
-		rareaBox.setBounds(470, 225, 86, 24);
+		rareaBox.setBounds(449, 157, 86, 24);
 		add(rareaBox);
 		addOrganizationItems(rcityBox, rareaBox);
 
 		rdetailField = new JTextField();
 		rdetailField.setText("中南海");
 		rdetailField.setColumns(10);
-		rdetailField.setBounds(620, 225, 270, 24);
+		rdetailField.setBounds(599, 157, 270, 24);
 		add(rdetailField);
 
 		rjobField = new JTextField();
 		rjobField.setText("中国主席");
 		rjobField.setColumns(10);
-		rjobField.setBounds(172, 286, 226, 24);
+		rjobField.setBounds(150, 207, 226, 24);
 		add(rjobField);
 
 		rtelField = new JTextField();
 		rtelField.setText("110");
 		rtelField.setColumns(10);
-		rtelField.setBounds(480, 287, 159, 24);
+		rtelField.setBounds(458, 208, 159, 24);
 		add(rtelField);
 
 		rphoneField = new JTextField();
 		rphoneField.setText("110");
 		rphoneField.setColumns(10);
-		rphoneField.setBounds(732, 286, 196, 24);
+		rphoneField.setBounds(710, 207, 196, 24);
 		add(rphoneField);
 
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(114, 336, 854, 2);
+		separator_2.setBounds(125, 244, 820, 2);
 		add(separator_2);
 
 		numberField = new JTextField();
 		numberField.setText("1");
-		numberField.setBounds(172, 361, 86, 24);
+		numberField.setBounds(151, 259, 86, 24);
 		add(numberField);
 		numberField.setColumns(10);
 
 		weightField = new JTextField();
 		weightField.setText("1");
-		weightField.setBounds(354, 361, 86, 24);
+		weightField.setBounds(333, 259, 86, 24);
 		add(weightField);
 		weightField.setColumns(10);
 
 		volumeField = new JTextField();
 		volumeField.setText("1");
-		volumeField.setBounds(553, 361, 86, 24);
+		volumeField.setBounds(532, 259, 86, 24);
 		add(volumeField);
 		volumeField.setColumns(10);
 
 		nameField = new JTextField();
 		nameField.setText("核弹");
-		nameField.setBounds(732, 361, 196, 24);
+		nameField.setBounds(711, 259, 196, 24);
 		add(nameField);
 		nameField.setColumns(10);
 
 		packBox = new JComboBox<String>();
-		packBox.setBounds(172, 417, 159, 24);
+		packBox.setBounds(151, 315, 159, 24);
 		add(packBox);
 		addPackTypeItems();
 
 		orderBox = new JComboBox<String>();
-		orderBox.setBounds(480, 417, 159, 24);
+		orderBox.setBounds(459, 315, 159, 24);
 		add(orderBox);
 		addOrderTypeItems();
 
 		label_2 = new JLabel("托运货物信息");
-		label_2.setBounds(4, 364, 96, 18);
+		label_2.setBounds(0, 262, 96, 18);
 		add(label_2);
 
 		separator_3 = new JSeparator();
-		separator_3.setBounds(114, 463, 854, 2);
+		separator_3.setBounds(125, 352, 820, 2);
 		add(separator_3);
 
 		fareField = new JTextField();
 		fareField.setText("0");
-		fareField.setBounds(172, 500, 68, 24);
+		fareField.setBounds(571, 0, 68, 24);
 		add(fareField);
 		fareField.setColumns(10);
+//所有运费删掉
 
-		button = new JButton("获取运费");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String saddress = (String) scityBox.getSelectedItem();
-				String raddress = (String) rcityBox.getSelectedItem();
-				double number = Double.parseDouble(numberField.getText());
-				double weight = Double.parseDouble(weightField.getText());
-				double volume = Double.parseDouble(volumeField.getText());
-				double fare = orderBlService.orderFare(new OrderFareVO(saddress, raddress,
-						number, weight, volume, (String) packBox
-								.getSelectedItem(),
-						getOrderType((String) orderBox.getSelectedItem())));
-				fareField.setText(fare + "");
-
-			}
-		});
-		button.setBounds(254, 499, 86, 27);
-		add(button);
-
-		button_2 = new JButton("提交订单");
-		button_2.addActionListener(new ActionListener() {
+		update = new JButton("提交修改");
+		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 添加订单
 				try {
@@ -263,7 +252,8 @@ public class OrderPanel extends JPanel {
 					double weight = Double.parseDouble(weightField.getText());
 					double volume = Double.parseDouble(volumeField.getText());
 					double fare = Double.parseDouble(fareField.getText());
-					orderBlService.addOrder(
+//原本的添加单据要删掉
+					ea.updateOrderForm(
 							new OrderVO(snameField.getText(), saddress,
 									sjobField.getText(), stelField.getText(),
 									sphoneField.getText(),
@@ -272,33 +262,44 @@ public class OrderPanel extends JPanel {
 									rphoneField.getText(), number, weight,
 									volume, nameField.getText(),
 									(String) packBox.getSelectedItem(),
-									orderBlService.getOrdercode(courierPanel
-											.getOrgCode()),
+									orderCode.getText(),
 									getOrderType((String) orderBox
-											.getSelectedItem()), fare, Formstate.waiting),
-							courierPanel.getOrgCode());
-					// System.out.println(orderBlService.getOrdercode(courierPanel.getOrgCode()));
+											.getSelectedItem()), fare, Formstate.waiting));
 				} catch (NumberFormatException e1) {
 					System.out.println("wronginput");
 				}
 
 			}
 		});
-		button_2.setBounds(434, 489, 133, 47);
-		add(button_2);
-
-		btnNewButton = new JButton("收件");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				courierPanel.switchPanel();
-			}
-		});
-		btnNewButton.setBounds(823, 13, 145, 42);
-		add(btnNewButton);
+		update.setBounds(434, 362, 133, 36);
+		add(update);
 
 		separator_4 = new JSeparator();
-		separator_4.setBounds(14, 68, 954, 1);
+		separator_4.setBounds(0, 31, 954, 1);
 		add(separator_4);
+
+		orderCode = new JLabel("");
+		orderCode.setBounds(98, 0, 314, 18);
+		add(orderCode);
+		
+		back = new JButton("返回");
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.previous(parent);
+				parent.getOrder().refreshList();
+			}
+		});
+		back.setBounds(717, 362, 122, 36);
+		add(back);
+		
+		JButton undo = new JButton("恢复原值");
+		undo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				init(temp);
+			}
+		});
+		undo.setBounds(581, 362, 122, 36);
+		add(undo);
 
 		rcityBox.addItemListener(new ItemListener() {
 
@@ -362,4 +363,37 @@ public class OrderPanel extends JPanel {
 		}
 	}
 
+	
+	public void init(OrderVO vo){
+		this.temp = vo;
+		orderCode.setText(vo.getOrdercode());
+		fareField.setText(vo.getTotalfee() + "");
+		
+		snameField.setText(vo.getSendername());
+		String[] saddress = vo.getSenderaddress().split("-");
+		scityBox.setSelectedItem(saddress[0]);
+		sareaBox.setSelectedItem(saddress[1]);
+		sdetailField.setText(saddress[2]);
+		sjobField.setText(vo.getSenderunit());
+		stelField.setText(vo.getSenderphone());
+		sphoneField.setText(vo.getSendercellphone());
+		
+		rnameField.setText(vo.getReceivername());
+		String[] raddress = vo.getReceiveraddress().split("-");
+		rcityBox.setSelectedItem(raddress[0]);
+		rareaBox.setSelectedItem(raddress[1]);
+		rdetailField.setText(raddress[2]);
+		rjobField.setText(vo.getReceiverunit());
+		rtelField.setText(vo.getReceiverphone());
+		rphoneField.setText(vo.getReceivercellphone());
+		
+		numberField.setText(vo.getNumbers() + "");
+		weightField.setText(vo.getWeight() + "");
+		volumeField.setText(vo.getVolume() + "");
+		nameField.setText(vo.getProductname());
+		packBox.setSelectedItem(vo.getPackagetype());
+		orderBox.setSelectedItem(vo.getOrdertype().getName());
+		
+		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+	}
 }
