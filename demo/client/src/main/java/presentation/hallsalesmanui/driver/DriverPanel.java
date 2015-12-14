@@ -46,7 +46,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 	private JComboBox<String> DdaySelect;
 	private List<DriverVO> list;
 	private DriverVO vo=null;
-	private int row;
+	private int r;
 	private boolean isrev=false;
 	private String orgcode;
 	
@@ -250,6 +250,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 				}
 				else{
 					vo=list.get(row);
+					r=row;
 					textName.setText(vo.getDrivername());
 					SexSelect.setSelectedItem(vo.getDrivergender());
 					textCode.setText(vo.getDrivercode());
@@ -274,7 +275,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 
 	}
 	private void addyearItem(JComboBox<String> yearselect){
-		for(int i=2000;i<2100;i++){
+		for(int i=1950;i<2100;i++){
 			yearselect.addItem(Integer.toString(i));
 		}
 	}
@@ -323,6 +324,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 	}
 	void addDriver(String drivername,String drivercode,long birthtime,String identifiercode,String cellphone,String drivergender,long timelimit){
 		DriverBlService driverBlService=new DriverController();
+		drivercode=getcode();
 		DriverVO vo=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
 		driverBlService.addDriver(vo);
 		System.out.println(vo.getDrivercode());
@@ -337,20 +339,23 @@ public class DriverPanel extends JPanel implements ActionListener {
 	void delDriver(DriverVO VO){
 		DriverBlService driverBlService=new DriverController();
 		driverBlService.delDriver(VO);
-		list.remove(row);
+		list.remove(r);
 		displayInTable(list);
-		vo=null;
-		textName.setText("");
-		SexSelect.setSelectedItem("");
-		textCode.setText("");
-		textPhone.setText("");
-		textidentity.setText("");
-		ByearSelect.setSelectedItem("");
-		BmouthSelect.setSelectedItem("");
-		BdaySelect.setSelectedItem("");
-		DyearSelect.setSelectedItem("");
-		DmouthSelect.setSelectedItem("");
-		DdaySelect.setSelectedItem("");
+		if(vo!=null){
+			vo=null;
+			textName.setText("");
+			SexSelect.setSelectedItem("");
+			textCode.setText("");
+			textPhone.setText("");
+			textidentity.setText("");
+			ByearSelect.setSelectedItem("");
+			BmouthSelect.setSelectedItem("");
+			BdaySelect.setSelectedItem("");
+			DyearSelect.setSelectedItem("");
+			DmouthSelect.setSelectedItem("");
+			DdaySelect.setSelectedItem("");
+		}
+		
 	}
 	void revDriver(DriverVO VO){
 		DriverBlService driverBlService=new DriverController();
@@ -380,13 +385,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		return list;
 		
 	}
-	public String getid(){
-		DriverBlService driverBlService=new DriverController();
-		String code=null;
-		code=driverBlService.getid(orgcode);
-		
-		return code;
-	}
+
 	public void displayInTable(List<DriverVO> list){
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);
@@ -412,12 +411,14 @@ public class DriverPanel extends JPanel implements ActionListener {
 			String nameToSearch=textNameToSearch.getText();
 			list=this.getDriverbyName(nameToSearch);
 			displayInTable(list);
+			vo=null;
 		}
 		else if(e.getSource().equals(BTNsearchByCode)){
 			String code=textCodeToSearch.getText();
 			list=new ArrayList<>();
 			list.add(this.getDriverbyDN(code));		
 			displayInTable(list);
+			vo=null;
 		}
 		else if(e.getSource().equals(BTNupdate)){
 			if(isrev==false){
@@ -456,8 +457,8 @@ public class DriverPanel extends JPanel implements ActionListener {
 				DriverVO VO=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
 				vo=VO;
 				BTNupdate.setText("修改");
-				list.remove(row);
-				list.add(row, vo);
+				list.remove(r);
+				list.add(r, vo);
 				revDriver(VO);
 			}
 		}

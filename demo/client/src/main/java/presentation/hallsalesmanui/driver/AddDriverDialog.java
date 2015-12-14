@@ -10,6 +10,10 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import presentation.tip.FailDialog;
+import presentation.tip.NumberField;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -19,7 +23,7 @@ public class AddDriverDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
     private JTextField nameField;
     private JTextField codeField;
-    private JTextField phoneField;
+    private NumberField phoneField;
     private JTextField identityField;
     private JComboBox<String> SexSelect;
     private JComboBox<String> ByearSelect;
@@ -65,7 +69,6 @@ public class AddDriverDialog extends JDialog {
 		codeField = new JTextField();
 		codeField.setBounds(90, 96, 155, 20);
 		codeField.setEditable(false);
-		codeField.setText(parent.getid());
 		contentPanel.add(codeField);
 		codeField.setColumns(10);
 		
@@ -73,10 +76,11 @@ public class AddDriverDialog extends JDialog {
 		JLPhone.setBounds(260, 96, 60, 20);
 		contentPanel.add(JLPhone);
 		
-		phoneField = new JTextField();
+		phoneField = new NumberField(20);
 		phoneField.setBounds(330, 96, 155, 20);
 		contentPanel.add(phoneField);
 		phoneField.setColumns(10);
+
 		
 		JLabel JLBirth = new JLabel("出生日期：");
 		JLBirth.setBounds(25, 156, 70, 20);
@@ -141,8 +145,22 @@ public class AddDriverDialog extends JDialog {
 						String cellphone=phoneField.getText();
 						String drivergender=(String)SexSelect.getSelectedItem();
 						long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
-						parent.addDriver(drivername, drivercode, birthtime, identifiercode, cellphone, drivergender, timelimit);
-						dispose();
+						if(drivername.equals("")){
+							System.out.println("xm");
+							FailDialog failDialog=new FailDialog("姓名不能为空！");
+							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							failDialog.setVisible(true);
+						}
+						else if(identifiercode.equals("")){
+							System.out.println("sfz");
+							FailDialog failDialog=new FailDialog("身份证号不能为空！");
+							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							failDialog.setVisible(true);
+						}
+						else {
+							parent.addDriver(drivername, drivercode, birthtime, identifiercode, cellphone, drivergender, timelimit);
+							dispose();											
+						}
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -157,7 +175,7 @@ public class AddDriverDialog extends JDialog {
 		}
 	}
 	private void addyearItem(JComboBox<String> yearselect){
-		for(int i=2000;i<2100;i++){
+		for(int i=1950;i<2100;i++){
 			yearselect.addItem(Integer.toString(i));
 		}
 	}
