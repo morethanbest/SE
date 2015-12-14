@@ -37,7 +37,7 @@ public class ArrivalExamPanel extends JPanel {
 	 * @param card
 	 * @param examPanel
 	 */
-	public ArrivalExamPanel(ExamPanel parent, CardLayout card) {
+	public ArrivalExamPanel(ExamPanel parent, CardLayout card, ArrivalRevisePanel child) {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		ea = new ExamController();
 
@@ -91,6 +91,11 @@ public class ArrivalExamPanel extends JPanel {
 		add(refused);
 
 		revise = new JButton("查看详细");
+		revise.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+			}
+		});
 		revise.setBounds(665, 380, 113, 27);
 		add(revise);
 
@@ -98,6 +103,9 @@ public class ArrivalExamPanel extends JPanel {
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.show(parent, "select");
+				int index = table.getSelectedRow();
+				if(index >= 0)
+					child.init(volist.get(index));
 			}
 		});
 		back.setBounds(792, 380, 113, 27);
@@ -151,7 +159,7 @@ public class ArrivalExamPanel extends JPanel {
 		refreshList();
 	}
 
-	private void refreshList() {
+	void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
 				volist = ea.getArrivalForm(state);

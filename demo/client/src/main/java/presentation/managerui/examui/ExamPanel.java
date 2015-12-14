@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 import presentation.managerui.examui.examcentersalesmanui.ArrivalExamPanel;
+import presentation.managerui.examui.examcentersalesmanui.ArrivalRevisePanel;
 import presentation.managerui.examui.examcentersalesmanui.CenterLoadExamPanel;
 import presentation.managerui.examui.examcentersalesmanui.TransferExamPanel;
 import presentation.managerui.examui.examcourierui.OrderExamPanel;
@@ -46,7 +47,8 @@ public class ExamPanel extends JPanel {
 		
 		ExamSelectPanel select = new ExamSelectPanel(this, card);
 		//中转中心业务员
-		arrival = new ArrivalExamPanel(this, card);
+		ArrivalRevisePanel arrivalR = new ArrivalRevisePanel(this, card);
+		arrival = new ArrivalExamPanel(this, card, arrivalR);
 		trans = new TransferExamPanel(this, card);
 		cl = new CenterLoadExamPanel(this, card);
 		//营业厅业务员
@@ -66,6 +68,7 @@ public class ExamPanel extends JPanel {
 		add(select, "select");
 		
 		add(arrival, "arrival");
+		add(arrivalR, "arrivalR");
 		add(trans, "trans");
 		add(cl, "cl");
 		

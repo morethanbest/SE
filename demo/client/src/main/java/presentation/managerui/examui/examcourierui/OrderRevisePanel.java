@@ -67,7 +67,6 @@ public class OrderRevisePanel extends JPanel {
 	private JComboBox<String> orderBox;
 	private JTextField rjobField;
 //换成exam开头的方法
-	private OrderBlService orderBlService;
 	private ExamOrdersBlService ea;
 	private JButton back;
 	private JLabel orderCode;
@@ -264,7 +263,7 @@ public class OrderRevisePanel extends JPanel {
 									(String) packBox.getSelectedItem(),
 									orderCode.getText(),
 									getOrderType((String) orderBox
-											.getSelectedItem()), fare, Formstate.waiting));
+											.getSelectedItem()), fare, temp.getFormstate()));
 				} catch (NumberFormatException e1) {
 					System.out.println("wronginput");
 				}
