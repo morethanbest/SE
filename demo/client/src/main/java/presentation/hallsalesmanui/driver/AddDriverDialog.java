@@ -44,16 +44,16 @@ public class AddDriverDialog extends JDialog {
 		contentPanel.add(JLName);
 		
 		nameField = new JTextField();
-		nameField.setBounds(80, 36, 155, 20);
+		nameField.setBounds(90, 36, 155, 20);
 		contentPanel.add(nameField);
 		nameField.setColumns(10);
 		
 		JLabel JLSex = new JLabel("性别：");
-		JLSex.setBounds(250, 36, 40, 20);
+		JLSex.setBounds(260, 36, 40, 20);
 		contentPanel.add(JLSex);
 		
 		SexSelect = new JComboBox<String>();
-		SexSelect.setBounds(320, 36, 155, 20);
+		SexSelect.setBounds(330, 36, 155, 20);
 		SexSelect.addItem("男");
 		SexSelect.addItem("女");
 		contentPanel.add(SexSelect);
@@ -63,18 +63,18 @@ public class AddDriverDialog extends JDialog {
 		contentPanel.add(JLCode);
 		
 		codeField = new JTextField();
-		codeField.setBounds(80, 96, 155, 20);
+		codeField.setBounds(90, 96, 155, 20);
 		codeField.setEditable(false);
 		codeField.setText(parent.getid());
 		contentPanel.add(codeField);
 		codeField.setColumns(10);
 		
 		JLabel JLPhone = new JLabel("手机号：");
-		JLPhone.setBounds(250, 96, 60, 20);
+		JLPhone.setBounds(260, 96, 60, 20);
 		contentPanel.add(JLPhone);
 		
 		phoneField = new JTextField();
-		phoneField.setBounds(320, 96, 155, 20);
+		phoneField.setBounds(330, 96, 155, 20);
 		contentPanel.add(phoneField);
 		phoneField.setColumns(10);
 		
@@ -83,36 +83,36 @@ public class AddDriverDialog extends JDialog {
 		contentPanel.add(JLBirth);
 		
 		ByearSelect = new JComboBox<String>();
-		ByearSelect.setBounds(80, 156, 60, 20);
+		ByearSelect.setBounds(90, 156, 60, 20);
 		contentPanel.add(ByearSelect);
 		addyearItem(ByearSelect);
 		
 		BmouthSelect = new JComboBox<String>();
-		BmouthSelect.setBounds(147, 156, 40, 20);
+		BmouthSelect.setBounds(157, 156, 40, 20);
 		contentPanel.add(BmouthSelect);
 		addmonthItem(BmouthSelect);
 		
 		BdaySelect = new JComboBox<String>();
-		BdaySelect.setBounds(195, 156, 40, 20);
+		BdaySelect.setBounds(205, 156, 40, 20);
 		contentPanel.add(BdaySelect);
 		addDayItem(BdaySelect,BmouthSelect,ByearSelect);
 		
 		JLabel JLDriver = new JLabel("行驶期限：");
-		JLDriver.setBounds(250, 156, 70, 20);
+		JLDriver.setBounds(260, 156, 70, 20);
 		contentPanel.add(JLDriver);
 		
 		DyearSelect = new JComboBox<String>();
-		DyearSelect.setBounds(320, 156, 65, 20);
+		DyearSelect.setBounds(330, 156, 65, 20);
 		contentPanel.add(DyearSelect);
 		addyearItem(DyearSelect);
 		
 		DmouthSelect = new JComboBox<String>();
-		DmouthSelect.setBounds(391, 156, 40, 20);
+		DmouthSelect.setBounds(401, 156, 40, 20);
 		contentPanel.add(DmouthSelect);
 		addmonthItem(DmouthSelect);
 		
 		DdaySelect = new JComboBox<String>();
-		DdaySelect.setBounds(435, 156, 40, 20);
+		DdaySelect.setBounds(445, 156, 40, 20);
 		contentPanel.add(DdaySelect);
 		addDayItem(DdaySelect,DmouthSelect,DyearSelect);
 		
@@ -121,7 +121,7 @@ public class AddDriverDialog extends JDialog {
 		contentPanel.add(JLidentity);
 		
 		identityField = new JTextField();
-		identityField.setBounds(80, 216, 155, 20);
+		identityField.setBounds(90, 216, 155, 20);
 		contentPanel.add(identityField);
 		identityField.setColumns(10);
 		{

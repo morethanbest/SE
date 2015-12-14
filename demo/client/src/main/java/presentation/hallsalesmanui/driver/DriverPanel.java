@@ -99,10 +99,10 @@ public class DriverPanel extends JPanel implements ActionListener {
 		textName.setBounds(330, 117, 143, 21);
 		add(textName);
 		textName.setColumns(10);
-		textName.setEditable(isrev);
+		textName.setEditable(false);
 		
 		JLabel label_3 = new JLabel("性别：");
-		label_3.setBounds(524, 120, 54, 15);
+		label_3.setBounds(584, 120, 54, 15);
 		add(label_3);
 		
 		JLabel label_4 = new JLabel("编号：");
@@ -116,21 +116,21 @@ public class DriverPanel extends JPanel implements ActionListener {
 		textCode.setEditable(false);
 		
 		JLabel label_5 = new JLabel("手机号：");
-		label_5.setBounds(524, 183, 54, 15);
+		label_5.setBounds(584, 183, 54, 15);
 		add(label_5);
 		
 		textPhone = new JTextField();
-		textPhone.setBounds(584, 180, 143, 21);
+		textPhone.setBounds(681, 180, 143, 21);
 		add(textPhone);
 		textPhone.setColumns(10);
-		textPhone.setEditable(isrev);
+		textPhone.setEditable(false);
 		
 		JLabel label_6 = new JLabel("出生日期：");
 		label_6.setBounds(266, 244, 66, 15);
 		add(label_6);
 		
 		JLabel label_7 = new JLabel("行驶期限：");
-		label_7.setBounds(524, 244, 66, 15);
+		label_7.setBounds(584, 244, 66, 15);
 		add(label_7);
 		
 		JLabel lblNewLabel = new JLabel("身份证号：");
@@ -141,7 +141,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		textidentity.setBounds(330, 307, 143, 21);
 		add(textidentity);
 		textidentity.setColumns(10);
-		textidentity.setEditable(isrev);
+		textidentity.setEditable(false);
 		
 		BTNdelete = new JButton("删除");
 		BTNdelete.setBounds(383, 388, 76, 23);
@@ -152,52 +152,52 @@ public class DriverPanel extends JPanel implements ActionListener {
 		add(BTNupdate);
 		
 		SexSelect = new JComboBox<String>();
-		SexSelect.setEditable(isrev);
+		SexSelect.setEditable(false);
 		SexSelect.setEnabled(false);
-		SexSelect.setBounds(588, 117, 143, 21);
+		SexSelect.setBounds(681, 117, 143, 21);
 		SexSelect.addItem("男");
 		SexSelect.addItem("女");
 		add(SexSelect);
 		
 		ByearSelect = new JComboBox<String>();
-		ByearSelect.setEditable(isrev);
+		ByearSelect.setEditable(false);
 		ByearSelect.setEnabled(false);
-		ByearSelect.setBounds(330, 241, 47, 21);
+		ByearSelect.setBounds(330, 241, 76, 21);
 		addyearItem(ByearSelect);
 		add(ByearSelect);
 		
 		BmouthSelect = new JComboBox<String>();
-		BmouthSelect.setEditable(isrev);
+		BmouthSelect.setEditable(false);
 		BmouthSelect.setEnabled(false);
-		BmouthSelect.setBounds(387, 241, 37, 21);
+		BmouthSelect.setBounds(416, 241, 57, 21);
 		addmonthItem(BmouthSelect);
 		add(BmouthSelect);
 		
 		BdaySelect = new JComboBox<String>();
-		BdaySelect.setEditable(isrev);
+		BdaySelect.setEditable(false);
 		BdaySelect.setEnabled(false);
-		BdaySelect.setBounds(436, 241, 37, 21);
+		BdaySelect.setBounds(483, 241, 57, 21);
 		addDayItem(BdaySelect,BmouthSelect,ByearSelect);
 		add(BdaySelect);
 		
 		DyearSelect = new JComboBox<String>();
-		DyearSelect.setEditable(isrev);
+		DyearSelect.setEditable(false);
 		DyearSelect.setEnabled(false);
-		DyearSelect.setBounds(584, 241, 47, 21);
+		DyearSelect.setBounds(681, 241, 76, 21);
 		addyearItem(DyearSelect);
 		add(DyearSelect);
 		
 		DmouthSelect = new JComboBox<String>();
-		DmouthSelect.setEditable(isrev);
+		DmouthSelect.setEditable(false);
 		DmouthSelect.setEnabled(false);
-		DmouthSelect.setBounds(641, 241, 37, 21);
+		DmouthSelect.setBounds(767, 241, 57, 21);
 		addmonthItem(DmouthSelect);
 		add(DmouthSelect);
 		
 		DdaySelect = new JComboBox<String>();
-		DdaySelect.setEditable(isrev);
+		DdaySelect.setEditable(false);
 		DdaySelect.setEnabled(false);
-		DdaySelect.setBounds(688, 241, 37, 21);
+		DdaySelect.setBounds(834, 241, 54, 21);
 		addDayItem(DdaySelect,DmouthSelect,DyearSelect);
 		add(DdaySelect);
 		
@@ -212,8 +212,22 @@ public class DriverPanel extends JPanel implements ActionListener {
 		BTNupdate.addActionListener(this);
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"姓名", "编号",
+				}
+			) {
+				boolean[] columnEditables = new boolean[] {
+					false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+			});
 		tableModel.setColumnCount(2);
-		tableModel.setRowCount(10);
+		tableModel.setRowCount(1);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
@@ -408,10 +422,30 @@ public class DriverPanel extends JPanel implements ActionListener {
 		else if(e.getSource().equals(BTNupdate)){
 			if(isrev==false){
 				isrev=true;
+				textName.setEditable(true);
+				textPhone.setEditable(true);
+				textidentity.setEditable(true);
+				SexSelect.setEnabled(true);
+				ByearSelect.setEnabled(true);
+				BmouthSelect.setEnabled(true);
+				BdaySelect.setEnabled(true);
+				DyearSelect.setEnabled(true);
+				DmouthSelect.setEnabled(true);
+				DdaySelect.setEnabled(true);
 				BTNupdate.setText("确定");
 			}
 			else{
 				isrev=false;
+				textName.setEditable(false);
+				textPhone.setEditable(false);
+				textidentity.setEditable(false);
+				SexSelect.setEnabled(false);
+				ByearSelect.setEnabled(false);
+				BmouthSelect.setEnabled(false);
+				BdaySelect.setEnabled(false);
+				DyearSelect.setEnabled(false);
+				DmouthSelect.setEnabled(false);
+				DdaySelect.setEnabled(false);
 				String drivername=textName.getText();
 				String drivercode=textCode.getText();
 				long birthtime=Long.parseLong((String)ByearSelect.getSelectedItem()+BmouthSelect.getSelectedItem()+BdaySelect.getSelectedItem());
