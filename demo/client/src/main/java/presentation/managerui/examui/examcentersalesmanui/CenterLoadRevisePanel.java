@@ -182,10 +182,20 @@ public class CenterLoadRevisePanel extends JPanel {
 		add(button_3);
 		
 		JButton button = new JButton("恢复原值");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				init(vo);
+			}
+		});
 		button.setBounds(630, 376, 113, 27);
 		add(button);
 		
 		JButton button_1 = new JButton("返回");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.previous(parent);
+			}
+		});
 		button_1.setBounds(757, 376, 113, 27);
 		add(button_1);
 	}

@@ -7,10 +7,13 @@ import javax.swing.JPanel;
 import presentation.managerui.examui.examcentersalesmanui.ArrivalExamPanel;
 import presentation.managerui.examui.examcentersalesmanui.ArrivalRevisePanel;
 import presentation.managerui.examui.examcentersalesmanui.CenterLoadExamPanel;
+import presentation.managerui.examui.examcentersalesmanui.CenterLoadRevisePanel;
 import presentation.managerui.examui.examcentersalesmanui.TransferExamPanel;
+import presentation.managerui.examui.examcentersalesmanui.TransferRevisePanel;
 import presentation.managerui.examui.examcourierui.OrderExamPanel;
 import presentation.managerui.examui.examcourierui.OrderRevisePanel;
 import presentation.managerui.examui.examdepotui.StockinExamPanel;
+import presentation.managerui.examui.examdepotui.StockinRevisePanel;
 import presentation.managerui.examui.examdepotui.StockoutExamPanel;
 import presentation.managerui.examui.examfinancial.RecordpayExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.DeliveryExamPanel;
@@ -49,8 +52,10 @@ public class ExamPanel extends JPanel {
 		//中转中心业务员
 		ArrivalRevisePanel arrivalR = new ArrivalRevisePanel(this, card);
 		arrival = new ArrivalExamPanel(this, card, arrivalR);
-		trans = new TransferExamPanel(this, card);
-		cl = new CenterLoadExamPanel(this, card);
+		TransferRevisePanel transR = new TransferRevisePanel(this, card);
+		trans = new TransferExamPanel(this, card, transR);
+		CenterLoadRevisePanel clR = new CenterLoadRevisePanel(this, card);
+		cl = new CenterLoadExamPanel(this, card, clR);
 		//营业厅业务员
 		hl = new HallLoadExamPanel(this, card);
 		gr = new GoodRecievingExamPanel(this, card);
@@ -60,7 +65,9 @@ public class ExamPanel extends JPanel {
 		OrderRevisePanel orderR = new OrderRevisePanel(this, card);
 		order = new OrderExamPanel(this, card, orderR);
 		//仓库管理员
-		in = new StockinExamPanel(this, card);
+		StockinRevisePanel inR = new StockinRevisePanel(this, card);
+		in = new StockinExamPanel(this, card, inR);
+		
 		out = new StockoutExamPanel(this, card);
 		//财务人员
 		pay= new RecordpayExamPanel(this, card);
@@ -70,7 +77,9 @@ public class ExamPanel extends JPanel {
 		add(arrival, "arrival");
 		add(arrivalR, "arrivalR");
 		add(trans, "trans");
+		add(transR, "transR");
 		add(cl, "cl");
+		add(clR, "clR");
 		
 		add(hl, "hl");
 		add(gr, "gr");
@@ -81,6 +90,7 @@ public class ExamPanel extends JPanel {
 		add(orderR, "orderR");
 		
 		add(in, "in");
+		add(inR, "inR");
 		add(out, "out");
 		
 		add(pay, "pay");

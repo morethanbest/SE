@@ -36,8 +36,9 @@ public class CenterLoadExamPanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param clR 
 	 */
-	public CenterLoadExamPanel(ExamPanel parent, CardLayout card) {
+	public CenterLoadExamPanel(ExamPanel parent, CardLayout card, CenterLoadRevisePanel child) {
 		setLayout(null);
 		ea = new ExamController();
 
@@ -89,6 +90,14 @@ public class CenterLoadExamPanel extends JPanel {
 		add(refused);
 		
 		revise = new JButton("查看详细");
+		revise.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+				int index = table.getSelectedRow();
+				if(index >= 0)
+					child.init(volist.get(index));
+			}
+		});
 		revise.setBounds(665, 358, 113, 27);
 		add(revise);
 		
@@ -149,7 +158,7 @@ public class CenterLoadExamPanel extends JPanel {
 		refreshList();
 	}
 
-	private void refreshList() {
+	void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
 				volist = ea.getCenterLoadForm(state);

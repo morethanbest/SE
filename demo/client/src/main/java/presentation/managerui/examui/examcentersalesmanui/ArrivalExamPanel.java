@@ -94,6 +94,9 @@ public class ArrivalExamPanel extends JPanel {
 		revise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent);
+				int index = table.getSelectedRow();
+				if(index >= 0)
+					child.init(volist.get(index));
 			}
 		});
 		revise.setBounds(665, 380, 113, 27);
@@ -103,9 +106,6 @@ public class ArrivalExamPanel extends JPanel {
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.show(parent, "select");
-				int index = table.getSelectedRow();
-				if(index >= 0)
-					child.init(volist.get(index));
 			}
 		});
 		back.setBounds(792, 380, 113, 27);
