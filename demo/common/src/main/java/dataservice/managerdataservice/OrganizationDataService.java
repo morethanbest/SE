@@ -23,6 +23,6 @@ public interface OrganizationDataService extends Remote {
 	
 	public List<OrganizationPO> fuzzyfindbyboth(String city,Organizationtype type)throws RemoteException;
 	
-	public String getlasthallcode(String city)throws RemoteException;
+	public long getlasthallcode(String city)throws RemoteException;
 
 }

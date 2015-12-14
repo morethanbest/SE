@@ -25,8 +25,8 @@ public class GetOrganizationcode {
 			code+=po.getZone();
 			if(type==Organizationtype.hall){
 	            OrganizationDataService organization= RMIHelper.getOrgdata();
-	            int number=Integer.parseInt(organization.getlasthallcode(city))+1;
-	            String s=Integer.toString(number);
+	            long number=organization.getlasthallcode(city)+1;
+	            String s=Long.toString(number);
 	            for(int i=0;i<3-s.length();i++){
 	                code+="0";
 	            }

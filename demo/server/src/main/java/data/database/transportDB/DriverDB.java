@@ -137,13 +137,13 @@ public class DriverDB {
 		List<DriversPO> list=new ArrayList<DriversPO>();
 		dbh = new DBHelper();
 		try {
-			sql = "select drivercode,birthtime,identifiercode,cellphone,drivergender,timelimit from DriversPO where drivername like ?";
+			sql = "select drivercode,drivername,birthtime,identifiercode,cellphone,drivergender,timelimit from DriversPO where drivername like ?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, "%"+name+"%");
 			ret = pst.executeQuery();
-			if (ret.next()) {
-				DriversPO po = new DriversPO( ret.getString(1),name, ret.getLong(2), ret.getString(3), ret.getString(4),
-						ret.getString(5), ret.getLong(6));
+			while (ret.next()) {
+				DriversPO po = new DriversPO( ret.getString(1),ret.getString(2), ret.getLong(3), ret.getString(4), ret.getString(5),
+						ret.getString(6), ret.getLong(7));
 				list.add(po);
 			}
 			ret.close();

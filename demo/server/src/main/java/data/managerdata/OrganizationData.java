@@ -70,10 +70,9 @@ public class OrganizationData extends UnicastRemoteObject implements Organizatio
 	}
 
 	@Override
-	public 	String getlasthallcode(String city) throws RemoteException {
+	public 	long getlasthallcode(String city) throws RemoteException {
 		// TODO Auto-generated method stub
-		String hallcode = OrganizationDB.gethallcode(city);
-		return hallcode;
+		return OrganizationDB.gethallcode(city);
 	}
 //	public static void main(String[] args){
 //		try{

@@ -239,8 +239,8 @@ public class OrganizationDB {
 		return po;		//查不到时返回null
 	}
 	
-	public static String gethallcode(String city){
-		String lastcode=null;
+	public static long gethallcode(String city){
+		long lastcode=-1;
 		dbh=new DBHelper();
 		sql="select organizationcode from OrganizationPO where city=? and type=?";
 		pst = dbh.prepare(sql);
@@ -250,7 +250,7 @@ public class OrganizationDB {
 			pst.setBytes(2, typebytes);
 			ret=pst.executeQuery();
 			while(ret.next()){
-				lastcode=ret.getString(1);
+				lastcode++;
 			}
 			ret.close();
 			dbh.close();// 关闭连接
