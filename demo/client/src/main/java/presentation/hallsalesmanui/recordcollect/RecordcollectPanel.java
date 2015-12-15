@@ -233,12 +233,22 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 				String collectionman=manField.getText();
 				String accountcode=accountField.getText();
 				if(collectionman.equals("")){
-					TipDialog Dialog=new TipDialog("请输入姓名！");
+					TipDialog Dialog=new TipDialog("请输入收款人姓名！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else if(accountcode.equals("")){
+					TipDialog Dialog=new TipDialog("请输入收款账号！");
 					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					Dialog.setVisible(true);
 				}
 				else if(list.size()==0){
 					TipDialog Dialog=new TipDialog("请输入订单！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else if(sumField.getText().equals("")){
+					TipDialog Dialog=new TipDialog("请输入金额！");
 					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					Dialog.setVisible(true);
 				}

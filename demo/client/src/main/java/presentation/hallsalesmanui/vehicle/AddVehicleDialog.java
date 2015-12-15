@@ -90,7 +90,7 @@ public class AddVehicleDialog extends JDialog {
 							String card=cardField.getText();
 							long time=Long.parseLong((String)yearSelect.getSelectedItem()+mouthSelect.getSelectedItem()+daySelect.getSelectedItem());
 							if(card.equals("")){
-								TipDialog Dialog=new TipDialog("车牌号不能为空！");
+								TipDialog Dialog=new TipDialog("请输入车牌号！");
 								Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Dialog.setVisible(true);
 							}

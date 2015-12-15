@@ -13,12 +13,14 @@ import javax.swing.JTextField;
 
 import businesslogic.accountbl.AccountPack.AccountController;
 import businesslogicservice.accountblservice.AccountBlService;
+import po.ResultMessage;
+import presentation.tip.NumberField;
 import vo.AccountVO;
 
 public class AccountPanel extends JPanel implements ActionListener{
 	private String orgcode;
-	private JTextField nameToSearch;
-	private JTextField nameField;
+	private NumberField nameToSearch;
+	private NumberField nameField;
 	private JTextField moneyField;
 	
 	private JButton btnSearch;
@@ -45,7 +47,7 @@ public class AccountPanel extends JPanel implements ActionListener{
 		label.setBounds(24, 21, 74, 15);
 		add(label);
 		
-		nameToSearch = new JTextField();
+		nameToSearch = new NumberField(12);
 		nameToSearch.setBounds(108, 18, 204, 21);
 		add(nameToSearch);
 		nameToSearch.setColumns(10);
@@ -66,7 +68,7 @@ public class AccountPanel extends JPanel implements ActionListener{
 		label_2.setBounds(241, 141, 54, 15);
 		add(label_2);
 		
-		nameField = new JTextField();
+		nameField = new NumberField(12);
 		nameField.setBounds(335, 138, 133, 21);
 		add(nameField);
 		nameField.setColumns(10);
@@ -96,9 +98,9 @@ public class AccountPanel extends JPanel implements ActionListener{
 		btnupdate.addActionListener(this);
 		btndelete.addActionListener(this);
 	}
-	public void addAccount(AccountVO vo) {
+	public ResultMessage addAccount(AccountVO vo) {
 		AccountBlService accountBlService=new AccountController();
-		accountBlService.addAccount(vo);
+		return accountBlService.addAccount(vo);
 	}
 	
 	private void delAccount(AccountVO vo) {

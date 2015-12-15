@@ -9,16 +9,19 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import po.ResultMessage;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.AccountVO;
 
 public class AddAccountDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField nameField;
-    private JTextField sumField;
+	private NumberField nameField;
+    private DoubleField sumField;
 	/**
 	 * Create the dialog.
 	 */
@@ -34,7 +37,7 @@ public class AddAccountDialog extends JDialog {
 		JLName.setBounds(25, 36, 40, 20);
 		contentPanel.add(JLName);
 		
-		nameField = new JTextField();
+		nameField = new NumberField(12);
 		nameField.setBounds(120, 36, 155, 20);
 		contentPanel.add(nameField);
 		nameField.setColumns(10);
@@ -43,7 +46,7 @@ public class AddAccountDialog extends JDialog {
 		JLSum.setBounds(25, 96, 40, 20);
 		contentPanel.add(JLSum);
 		
-		sumField = new JTextField();
+		sumField = new DoubleField(12);
 		sumField.setBounds(120, 96, 155, 20);
 		contentPanel.add(sumField);
 		sumField.setColumns(10);
@@ -56,27 +59,45 @@ public class AddAccountDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
-						AccountVO VO=new AccountVO(0, nameField.getText(), Double.parseDouble(sumField.getText()));
-						parent.addAccount(VO);
-						dispose();
+						if(nameField.getText().equals("")){
+							TipDialog Dialog=new TipDialog("请输入账号！");
+							Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							Dialog.setVisible(true);
+						}
+						else if(sumField.getText().equals("")){
+							TipDialog Dialog=new TipDialog("请输入余额！");
+							Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							Dialog.setVisible(true);
+						}
+						else{
+							try {
+								double sum=Double.parseDouble(sumField.getText());
+								AccountVO VO=new AccountVO(0, nameField.getText(), sum);
+								ResultMessage resultMessage=parent.addAccount(VO);
+								if(resultMessage==ResultMessage.failure){
+									TipDialog Dialog=new TipDialog("账号重复！");
+									Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									Dialog.setVisible(true);
+								}
+								else{
+									dispose();
+								}
+								
+							} catch (Exception e2) {
+								// TODO: handle exception
+								TipDialog Dialog=new TipDialog("请输入规范的余额！");
+								Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Dialog.setVisible(true);
+							}
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-                cancelButton.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent e) {
-						
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+
 		}
 	}
 

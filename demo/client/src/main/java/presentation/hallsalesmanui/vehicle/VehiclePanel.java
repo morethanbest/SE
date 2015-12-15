@@ -13,12 +13,13 @@ import javax.swing.JTextField;
 
 import businesslogic.transportbl.VehiclePack.VehicleController;
 import businesslogicservice.transportblservice.VehicleBlService;
+import presentation.tip.NumberField;
 import vo.VehicleVO;
 
 public class VehiclePanel extends JPanel implements ActionListener {
 	private JTextField codeToSearch;
 	private JTextField cardToSearch;
-	private JTextField CodeField;
+	private NumberField CodeField;
 	private JTextField CardField;
     private JComboBox<String> daySelect;
 	private JComboBox<String> yearSelect;
@@ -74,7 +75,7 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		label_2.setBounds(307, 17, 103, 15);
 		add(label_2);
 		
-		CodeField = new JTextField();
+		CodeField = new NumberField(12);
 		CodeField.setBounds(539, 117, 143, 21);
 		CodeField.setEditable(false);
 		add(CodeField);

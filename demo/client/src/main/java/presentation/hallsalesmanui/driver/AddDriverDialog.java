@@ -149,12 +149,17 @@ public class AddDriverDialog extends JDialog {
     						String drivergender=(String)SexSelect.getSelectedItem();
     						long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
     						if(drivername.equals("")){
-    							TipDialog Dialog=new TipDialog("姓名不能为空！");
+    							TipDialog Dialog=new TipDialog("请输入姓名！");
     							Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     							Dialog.setVisible(true);
     						}
     						else if(identifiercode.equals("")){
-    							TipDialog failDialog=new TipDialog("身份证号不能为空！");
+    							TipDialog failDialog=new TipDialog("请输入身份证号！");
+    							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    							failDialog.setVisible(true);
+    						}
+    						else if(cellphone.equals("")){
+    							TipDialog failDialog=new TipDialog("请输入手机号！");
     							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     							failDialog.setVisible(true);
     						}

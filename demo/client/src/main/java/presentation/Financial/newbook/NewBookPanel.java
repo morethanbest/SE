@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import businesslogic.accountbl.NewBookPack.NewBookController;
 import businesslogicservice.accountblservice.NewBookBlService;
 import po.Job;
+import presentation.tip.TipDialog;
 import vo.AccountVO;
 import vo.CommodityVO;
 import vo.DriverVO;
@@ -396,7 +397,7 @@ public class NewBookPanel extends JPanel implements ActionListener{
 			vehicleTable();
 		}else if(e.getSource().equals(btncreate)){
 			create();
-			Success dialog=new Success(this);
+			TipDialog dialog=new TipDialog("期初建账成功");
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}

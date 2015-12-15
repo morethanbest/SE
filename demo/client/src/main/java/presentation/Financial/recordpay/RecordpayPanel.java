@@ -19,13 +19,17 @@ import businesslogic.balancebl.RecordpayPack.RecordpayController;
 import businesslogicservice.balanceblservice.RecordpayBlService;
 import po.Formstate;
 import po.RecordpayList;
+import po.ResultMessage;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.RecordpayVO;
 
 public class RecordpayPanel extends JPanel implements ActionListener {
     private String orgcode;
-    private JTextField sumField;
+    private DoubleField sumField;
     private JTextField manField;
-    private JTextField accountField;
+    private NumberField accountField;
 	private JComboBox<String> yearSelect;
 	private JComboBox<String> monthSelect;
 	private JComboBox<String> daySelect;
@@ -96,7 +100,7 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		yearSelect.addItemListener(startlistener);
 		monthSelect.addItemListener(startlistener);
 		
-		sumField = new JTextField();
+		sumField = new DoubleField(12);
 		sumField.setBounds(387, 116, 172, 21);
 		add(sumField);
 		sumField.setColumns(10);
@@ -106,7 +110,7 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		add(manField);
 		manField.setColumns(10);
 		
-		accountField = new JTextField();
+		accountField = new NumberField(12);
 		accountField.setBounds(387, 210, 172, 21);
 		add(accountField);
 		accountField.setColumns(10);
@@ -182,10 +186,11 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		tipSelect.addItem("人员工资");
 		tipSelect.addItem("奖励");
 	}
-	private void addRecordpay(){
+	private ResultMessage addRecordpay(){
 		RecordpayBlService recordpayBlService=new RecordpayController();
-		recordpayBlService.AddRecordpay(vo);
 		recordpayBlService.updateRecordpay(vo);
+		return recordpayBlService.AddRecordpay(vo);
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -194,7 +199,6 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 			RecordpayBlService recordpayBlService=new RecordpayController();
 			String id=recordpayBlService.getid();
 			long paytime=Long.parseLong((String)yearSelect.getSelectedItem()+monthSelect.getSelectedItem()+daySelect.getSelectedItem());
-			double paysum=Double.parseDouble(sumField.getText());
 			String payman=manField.getText();
 			String payaccount=accountField.getText();
 			RecordpayList entry = null;
@@ -216,11 +220,44 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 			}
 			String remark=textArea.getText();
 			Formstate formstate=Formstate.waiting;
-			vo=new RecordpayVO(id, paytime, paysum, payman, payaccount, entry, remark, formstate);
-			addRecordpay();
-			Success dialog=new Success(this);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			if(sumField.getText().equals("")){
+				TipDialog dialog=new TipDialog("请输入金额！");
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+			else if(manField.getText().equals("")){
+				TipDialog dialog=new TipDialog("请输入付款人姓名！");
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+			else if(accountField.getText().equals("")){
+				TipDialog dialog=new TipDialog("请输入付款账号！");
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+			else{
+				try {
+					double paysum=Double.parseDouble(sumField.getText());
+					vo=new RecordpayVO(id, paytime, paysum, payman, payaccount, entry, remark, formstate);
+					ResultMessage resultMessage=addRecordpay();
+					if(resultMessage==ResultMessage.failure){
+						TipDialog dialog=new TipDialog("提交失败");
+						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						dialog.setVisible(true);
+					}
+					else{
+						TipDialog dialog=new TipDialog("提交成功");
+						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						dialog.setVisible(true);
+					}
+				} catch (Exception e2) {
+					// TODO: handle exception
+					TipDialog dialog=new TipDialog("请输入正确的付款金额！");
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				}
+			}
+			
 		}
 	}
 }

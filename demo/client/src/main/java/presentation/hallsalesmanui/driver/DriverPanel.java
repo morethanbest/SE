@@ -21,12 +21,13 @@ import javax.swing.table.DefaultTableModel;
 
 import businesslogic.transportbl.DriverPack.DriverController;
 import businesslogicservice.transportblservice.DriverBlService;
+import presentation.tip.NumberField;
 import vo.DriverVO;
 
 public class DriverPanel extends JPanel implements ActionListener {
 
 	private JTextField textNameToSearch;
-	private JTextField textCodeToSearch;
+	private NumberField textCodeToSearch;
 	private JTable table;
 	private JTextField textName;
 	private JTextField textCode;
@@ -63,7 +64,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		add(textNameToSearch);
 		textNameToSearch.setColumns(10);
 		
-		textCodeToSearch = new JTextField();
+		textCodeToSearch = new NumberField(12);
 		textCodeToSearch.setColumns(10);
 		textCodeToSearch.setBounds(401, 14, 103, 21);
 		add(textCodeToSearch);
