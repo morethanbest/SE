@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -65,6 +67,13 @@ public class AddVehicleDialog extends JDialog {
 		contentPanel.add(yearSelect);
 		addyearItem(yearSelect);
 		
+		ItemListener listener= new ItemListener(){			//用于判断这个月的天数
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDayItem(daySelect,mouthSelect,yearSelect);
+			}
+		};
+		
 		mouthSelect = new JComboBox<String>();
 		mouthSelect.setBounds(207, 156, 60, 20);
 		contentPanel.add(mouthSelect);
@@ -74,6 +83,9 @@ public class AddVehicleDialog extends JDialog {
 		daySelect.setBounds(275, 156, 60, 20);
 		contentPanel.add(daySelect);
 		addDayItem(daySelect,mouthSelect,yearSelect);
+		
+		yearSelect.addItemListener(listener);
+		mouthSelect.addItemListener(listener);
 		
 		{
 			JPanel buttonPane = new JPanel();

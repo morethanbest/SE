@@ -2,6 +2,8 @@ package presentation.hallsalesmanui.vehicle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -103,6 +105,13 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		add(yearSelect);
 		addyearItem(yearSelect);
 		
+		ItemListener listener= new ItemListener(){			//用于判断这个月的天数
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDayItem(daySelect,mouthSelect,yearSelect);
+			}
+		};
+		
 		mouthSelect = new JComboBox<String>();
 		mouthSelect.setBounds(628, 291, 54, 21);
 		mouthSelect.setEditable(false);
@@ -116,6 +125,9 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		daySelect.setEnabled(false);
 		add(daySelect);
 		addDayItem(daySelect,mouthSelect,yearSelect);
+		
+		yearSelect.addItemListener(listener);
+		mouthSelect.addItemListener(listener);
 		
 		btnupdate = new JButton("修改");
 		btnupdate.setBounds(276, 371, 93, 23);

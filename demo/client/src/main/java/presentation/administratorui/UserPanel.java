@@ -48,7 +48,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		add(separator);
 		
 		JLabel label = new JLabel("用户名搜索：");
-		label.setBounds(37, 20, 72, 15);
+		label.setBounds(37, 20, 93, 15);
 		add(label);
 		
 		nameToSearch = new JTextField();
@@ -275,7 +275,6 @@ public class UserPanel extends JPanel implements ActionListener{
 				nameField.setEditable(true);
 				passwordField.setEditable(true);
 				orgcodeField.setEditable(true);
-				cityField.setEditable(true);
 				jobSelect.setEnabled(true);
 			}
 			else {
@@ -354,7 +353,6 @@ public class UserPanel extends JPanel implements ActionListener{
 					nameField.setEditable(false);
 					passwordField.setEditable(false);
 					orgcodeField.setEditable(false);
-					cityField.setEditable(false);
 					jobSelect.setEnabled(false);
 				}
 				
