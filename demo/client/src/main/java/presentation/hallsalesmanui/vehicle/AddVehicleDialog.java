@@ -86,7 +86,7 @@ public class AddVehicleDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						if(isagain==false){
-							isagain=true;							
+														
 							String card=cardField.getText();
 							long time=Long.parseLong((String)yearSelect.getSelectedItem()+mouthSelect.getSelectedItem()+daySelect.getSelectedItem());
 							if(card.equals("")){
@@ -99,6 +99,7 @@ public class AddVehicleDialog extends JDialog {
 								codeField.setText(code);
 								VehicleVO vo=new VehicleVO(code, card, time);
 								parent.addVehicle(vo);
+								isagain=true;
 							}
 							
 						}

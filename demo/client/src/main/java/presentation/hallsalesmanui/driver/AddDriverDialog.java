@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -92,6 +94,13 @@ public class AddDriverDialog extends JDialog {
 		contentPanel.add(ByearSelect);
 		addyearItem(ByearSelect);
 		
+		ItemListener Blistener= new ItemListener(){			//用于判断这个月的天数
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDayItem(BdaySelect,BmouthSelect,ByearSelect);
+			}
+		};
+		
 		BmouthSelect = new JComboBox<String>();
 		BmouthSelect.setBounds(157, 156, 40, 20);
 		contentPanel.add(BmouthSelect);
@@ -102,6 +111,9 @@ public class AddDriverDialog extends JDialog {
 		contentPanel.add(BdaySelect);
 		addDayItem(BdaySelect,BmouthSelect,ByearSelect);
 		
+		ByearSelect.addItemListener(Blistener);
+		BmouthSelect.addItemListener(Blistener);
+		
 		JLabel JLDriver = new JLabel("行驶期限：");
 		JLDriver.setBounds(260, 156, 70, 20);
 		contentPanel.add(JLDriver);
@@ -110,6 +122,13 @@ public class AddDriverDialog extends JDialog {
 		DyearSelect.setBounds(330, 156, 65, 20);
 		contentPanel.add(DyearSelect);
 		addyearItem(DyearSelect);
+		
+		ItemListener Dlistener= new ItemListener(){			//用于判断这个月的天数
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDayItem(DdaySelect,DmouthSelect,DyearSelect);
+			}
+		};
 		
 		DmouthSelect = new JComboBox<String>();
 		DmouthSelect.setBounds(401, 156, 40, 20);
@@ -120,6 +139,9 @@ public class AddDriverDialog extends JDialog {
 		DdaySelect.setBounds(445, 156, 40, 20);
 		contentPanel.add(DdaySelect);
 		addDayItem(DdaySelect,DmouthSelect,DyearSelect);
+		
+		DyearSelect.addItemListener(Dlistener);
+		DmouthSelect.addItemListener(Dlistener);
 		
 		JLabel JLidentity = new JLabel("身份证号：");
 		JLidentity.setBounds(25, 216, 70, 20);

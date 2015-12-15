@@ -2,6 +2,8 @@ package presentation.hallsalesmanui.driver;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -168,6 +170,13 @@ public class DriverPanel extends JPanel implements ActionListener {
 		addyearItem(ByearSelect);
 		add(ByearSelect);
 		
+		ItemListener Blistener= new ItemListener(){			//用于判断这个月的天数
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDayItem(BdaySelect,BmouthSelect,ByearSelect);
+			}
+		};
+		
 		BmouthSelect = new JComboBox<String>();
 		BmouthSelect.setEditable(false);
 		BmouthSelect.setEnabled(false);
@@ -182,12 +191,22 @@ public class DriverPanel extends JPanel implements ActionListener {
 		addDayItem(BdaySelect,BmouthSelect,ByearSelect);
 		add(BdaySelect);
 		
+		ByearSelect.addItemListener(Blistener);
+		BmouthSelect.addItemListener(Blistener);
+		
 		DyearSelect = new JComboBox<String>();
 		DyearSelect.setEditable(false);
 		DyearSelect.setEnabled(false);
 		DyearSelect.setBounds(681, 241, 76, 21);
 		addyearItem(DyearSelect);
 		add(DyearSelect);
+		
+		ItemListener Dlistener= new ItemListener(){			//用于判断这个月的天数
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDayItem(DdaySelect,DmouthSelect,DyearSelect);
+			}
+		};
 		
 		DmouthSelect = new JComboBox<String>();
 		DmouthSelect.setEditable(false);
@@ -202,6 +221,9 @@ public class DriverPanel extends JPanel implements ActionListener {
 		DdaySelect.setBounds(834, 241, 54, 21);
 		addDayItem(DdaySelect,DmouthSelect,DyearSelect);
 		add(DdaySelect);
+		
+		DyearSelect.addItemListener(Dlistener);
+		DmouthSelect.addItemListener(Dlistener);
 		
 		BTNsearchByName = new JButton("搜索");
 		BTNsearchByName.setBounds(188, 13, 66, 23);
