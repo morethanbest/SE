@@ -10,10 +10,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import businesslogic.managerbl.SalaryPack.SalaryController;
 import businesslogicservice.managerblservice.SalaryBlService;
@@ -30,6 +26,8 @@ public class SalaryPanel extends JPanel implements ActionListener{
 	private JButton delBtn;
 	private JButton revBtn;
 	private JTable table;
+	
+	private JButton refreshBtn;
 	
 	
 	private SalaryVO vo=null;
@@ -88,6 +86,12 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		revBtn.setBounds(500, 380, 150, 40);
 		add(revBtn);
 		revBtn.addActionListener(this);
+		
+		refreshBtn = new JButton();
+		refreshBtn.setText("刷新");
+		refreshBtn.setBounds(800, 250, 150, 40);
+		add(refreshBtn);
+		refreshBtn.addActionListener(this);
 	}
 	
 	public void refreshList(){
@@ -156,6 +160,8 @@ public class SalaryPanel extends JPanel implements ActionListener{
 			AddSalaryDialog dialog=new AddSalaryDialog(this);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			refreshList();
+		}else if(e.getSource().equals(refreshBtn)){
 			refreshList();
 		}
 	}

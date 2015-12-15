@@ -7,12 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import businesslogic.managerbl.SalaryPack.SalaryController;
 import businesslogicservice.managerblservice.SalaryBlService;
 import po.Job;
 import po.SalaryMode;
+import presentation.tip.DoubleField;
 import vo.SalaryVO;
 
 public class AddSalaryDialog extends JDialog {
@@ -21,8 +21,8 @@ public class AddSalaryDialog extends JDialog {
 	JLabel salarymode;
 	JLabel base; 
 	JLabel bonus;
-	JTextField basetext;
-	JTextField bonustext;
+	DoubleField basetext;
+	DoubleField bonustext;
 	
 	JComboBox<String> jobSelect;
 	JComboBox<String> modeSelect;
@@ -67,7 +67,7 @@ public class AddSalaryDialog extends JDialog {
 		base.setBounds(90, 150, 90, 21);
 		add(base);
 		
-		basetext = new JTextField();
+		basetext = new DoubleField(50);
 		basetext.setBounds(180, 150, 180, 21);
 		basetext.setEditable(true);
 		add(basetext);
@@ -77,7 +77,7 @@ public class AddSalaryDialog extends JDialog {
 		bonus.setBounds(90, 200, 90, 21);
 		add(bonus);
 		
-		bonustext = new JTextField();
+		bonustext = new DoubleField(50);
 		bonustext.setBounds(180, 200, 180, 21);
 		bonustext.setEditable(true);
 		add(bonustext);
