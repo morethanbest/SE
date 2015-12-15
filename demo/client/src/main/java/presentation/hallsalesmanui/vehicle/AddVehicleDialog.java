@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import presentation.hallsalesmanui.driver.DriverPanel;
+import presentation.tip.TipDialog;
 import vo.VehicleVO;
 
 public class AddVehicleDialog extends JDialog {
@@ -24,6 +25,7 @@ public class AddVehicleDialog extends JDialog {
 	 private JComboBox<String> daySelect;
 	 private JComboBox<String> yearSelect;
 	 private JComboBox<String> mouthSelect;
+	 private boolean isagain=false;
 	/**
 	 * Create the dialog.
 	 */
@@ -42,12 +44,11 @@ public class AddVehicleDialog extends JDialog {
 		codeField = new JTextField();
 		codeField.setBounds(120, 36, 155, 20);
 		codeField.setEditable(false);
-		codeField.setText(parent.getid());
 		contentPanel.add(codeField);
 		codeField.setColumns(10);
 		
 		JLabel JLcard = new JLabel("车牌号：");
-		JLcard.setBounds(25, 96, 40, 20);
+		JLcard.setBounds(25, 96, 60, 20);
 		contentPanel.add(JLcard);
 		
 		cardField = new JTextField();
@@ -60,17 +61,17 @@ public class AddVehicleDialog extends JDialog {
 		contentPanel.add(JLtime);
 		
 		yearSelect = new JComboBox<String>();
-		yearSelect.setBounds(120, 156, 60, 20);
+		yearSelect.setBounds(120, 156, 80, 20);
 		contentPanel.add(yearSelect);
 		addyearItem(yearSelect);
 		
 		mouthSelect = new JComboBox<String>();
-		mouthSelect.setBounds(187, 156, 40, 20);
+		mouthSelect.setBounds(207, 156, 60, 20);
 		contentPanel.add(mouthSelect);
 		addmonthItem(mouthSelect);
 		
 		daySelect = new JComboBox<String>();
-		daySelect.setBounds(235, 156, 40, 20);
+		daySelect.setBounds(275, 156, 60, 20);
 		contentPanel.add(daySelect);
 		addDayItem(daySelect,mouthSelect,yearSelect);
 		
@@ -84,30 +85,33 @@ public class AddVehicleDialog extends JDialog {
 
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						String code=codeField.getText();
-						String card=cardField.getText();
-						long time=Long.parseLong((String)yearSelect.getSelectedItem()+mouthSelect.getSelectedItem()+daySelect.getSelectedItem());
-					    VehicleVO vo=new VehicleVO(code, card, time);
-						parent.addVehicle(vo);
-						dispose();
+						if(isagain==false){
+							isagain=true;							
+							String card=cardField.getText();
+							long time=Long.parseLong((String)yearSelect.getSelectedItem()+mouthSelect.getSelectedItem()+daySelect.getSelectedItem());
+							if(card.equals("")){
+								TipDialog Dialog=new TipDialog("车牌号不能为空！");
+								Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Dialog.setVisible(true);
+							}
+							else{
+								String code=parent.getid();
+								codeField.setText(code);
+								VehicleVO vo=new VehicleVO(code, card, time);
+								parent.addVehicle(vo);
+							}
+							
+						}
+						else{
+							dispose();
+						}
 					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-
-					public void actionPerformed(ActionEvent e) {
-						
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+			
 		}
 	}
 	private void addyearItem(JComboBox<String> yearselect){

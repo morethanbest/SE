@@ -95,21 +95,21 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		add(label_6);
 		
 		yearSelect = new JComboBox<String>();
-		yearSelect.setBounds(539, 291, 54, 21);
+		yearSelect.setBounds(539, 291, 79, 21);
 		yearSelect.setEditable(false);
 		yearSelect.setEnabled(false);
 		add(yearSelect);
 		addyearItem(yearSelect);
 		
 		mouthSelect = new JComboBox<String>();
-		mouthSelect.setBounds(599, 291, 38, 21);
+		mouthSelect.setBounds(628, 291, 54, 21);
 		mouthSelect.setEditable(false);
 		mouthSelect.setEnabled(false);
 		add(mouthSelect);
 		addmonthItem(mouthSelect);
 		
 		daySelect = new JComboBox<String>();
-		daySelect.setBounds(643, 291, 39, 21);
+		daySelect.setBounds(692, 291, 54, 21);
 		daySelect.setEditable(false);
 		daySelect.setEnabled(false);
 		add(daySelect);

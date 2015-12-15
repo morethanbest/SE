@@ -32,6 +32,7 @@ public class AddDriverDialog extends JDialog {
     private JComboBox<String> DyearSelect;
     private JComboBox<String> DmouthSelect;
     private JComboBox<String> DdaySelect;
+    private boolean isagain=false;
 	/**
 	 * Create the dialog.
 	 */
@@ -138,40 +139,44 @@ public class AddDriverDialog extends JDialog {
 					
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						String drivername=nameField.getText();
-						String drivercode=codeField.getText();
-						long birthtime=Long.parseLong((String)ByearSelect.getSelectedItem()+BmouthSelect.getSelectedItem()+BdaySelect.getSelectedItem());
-						String identifiercode=identityField.getText();
-						String cellphone=phoneField.getText();
-						String drivergender=(String)SexSelect.getSelectedItem();
-						long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
-						if(drivername.equals("")){
-							System.out.println("xm");
-							TipDialog failDialog=new TipDialog("姓名不能为空！");
-							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							failDialog.setVisible(true);
-						}
-						else if(identifiercode.equals("")){
-							System.out.println("sfz");
-							TipDialog failDialog=new TipDialog("身份证号不能为空！");
-							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							failDialog.setVisible(true);
-						}
-						else {
-							parent.addDriver(drivername, drivercode, birthtime, identifiercode, cellphone, drivergender, timelimit);
-							dispose();											
-						}
+                        if(isagain==false){
+                        	isagain=true;
+                        	String drivername=nameField.getText();
+    						
+    						long birthtime=Long.parseLong((String)ByearSelect.getSelectedItem()+BmouthSelect.getSelectedItem()+BdaySelect.getSelectedItem());
+    						String identifiercode=identityField.getText();
+    						String cellphone=phoneField.getText();
+    						String drivergender=(String)SexSelect.getSelectedItem();
+    						long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
+    						if(drivername.equals("")){
+    							TipDialog Dialog=new TipDialog("姓名不能为空！");
+    							Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    							Dialog.setVisible(true);
+    						}
+    						else if(identifiercode.equals("")){
+    							TipDialog failDialog=new TipDialog("身份证号不能为空！");
+    							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    							failDialog.setVisible(true);
+    						}
+    						else {
+    							String drivercode=parent.getcode();
+    							codeField.setText(drivercode);
+    							parent.addDriver(drivername, drivercode, birthtime, identifiercode, cellphone, drivergender, timelimit);
+    															
+    						}
+                        }
+                        else{
+                        	dispose();	
+                        }
+                        
+						
 					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+			
 		}
 	}
 	private void addyearItem(JComboBox<String> yearselect){

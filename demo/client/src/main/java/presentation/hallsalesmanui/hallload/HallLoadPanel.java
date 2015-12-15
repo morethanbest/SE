@@ -13,6 +13,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 
 import po.Formstate;
 import po.Organizationtype;
+import presentation.tip.TipDialog;
 import vo.HallLoadVO;
 import vo.OrganizationVO;
 import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
@@ -159,6 +161,9 @@ public class HallLoadPanel extends JPanel {
 								.getSelectedItem(), carField.getText(),
 						jianField.getText(), yaField.getText(), barcodes,
 						fare, Formstate.waiting));
+				TipDialog Dialog=new TipDialog("装车单提交成功！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
 			}
 		});
 		button.setBounds(427, 366, 113, 27);

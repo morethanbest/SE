@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -15,6 +16,7 @@ import po.Arrivalstate;
 import po.Formstate;
 import po.Organizationtype;
 import presentation.enums.OrganizationType;
+import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.GoodsReceivingVO;
 import vo.OrganizationVO;
@@ -112,6 +114,9 @@ public class GoodRecievingPanel extends JPanel {
 								.getSelectedItem(),
 						getStateType((String) stateBox.getSelectedItem()),
 						Formstate.waiting));
+				TipDialog Dialog=new TipDialog("收件单提交成功！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
 			}
 		});
 		button.setBounds(423, 336, 113, 27);

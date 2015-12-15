@@ -8,10 +8,12 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import po.Formstate;
+import presentation.tip.TipDialog;
 import vo.DeliveryVO;
 import businesslogic.logisticsbl.DeliveryPack.DeliveryController;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
@@ -68,6 +70,9 @@ public class DeliveryPanel extends JPanel {
 				deliveryBlService.Delivery(new DeliveryVO(deliveryBlService
 						.findID(orgCode), date, codeField.getText(),
 						deliveryField.getText(), Formstate.waiting));
+				TipDialog Dialog=new TipDialog("派件单提交成功！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
 			}
 		});
 		button.setBounds(359, 276, 113, 27);

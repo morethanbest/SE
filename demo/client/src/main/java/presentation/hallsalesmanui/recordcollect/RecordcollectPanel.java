@@ -21,18 +21,21 @@ import javax.swing.table.DefaultTableModel;
 import businesslogic.balancebl.RecordcollectPack.RecordcollectController;
 import businesslogicservice.balanceblservice.RecordCollectBlService;
 import po.Formstate;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.RecordcollectVO;
 
 public class RecordcollectPanel extends JPanel implements ActionListener{
 	private String orgcode;
-    private JTextField sumField;
+    private DoubleField sumField;
     private JTextField manField;
-    private JTextField accountField;
+    private NumberField accountField;
 	private JComboBox<String> yearSelect;
 	private JComboBox<String> monthSelect;
 	private JComboBox<String> daySelect;
 	private JScrollPane scrollPane;
-	private JTextField orderField;
+	private NumberField orderField;
 	private JButton btnaddorder;
 	private JButton btnhandin;
 	private JTable table;
@@ -97,7 +100,7 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 		yearSelect.addItemListener(startlistener);
 		monthSelect.addItemListener(startlistener);
 		
-		sumField = new JTextField();
+		sumField = new DoubleField(12);
 		sumField.setBounds(387, 96, 172, 21);
 		add(sumField);
 		sumField.setColumns(10);
@@ -107,7 +110,7 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 		add(manField);
 		manField.setColumns(10);
 		
-		accountField = new JTextField();
+		accountField = new NumberField(12);
 		accountField.setBounds(387, 187, 172, 21);
 		add(accountField);
 		accountField.setColumns(10);
@@ -116,7 +119,7 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 		scrollPane.setBounds(387, 242, 230, 100);
 		add(scrollPane);
 		
-		orderField = new JTextField();
+		orderField = new NumberField(12);
 		orderField.setBounds(387, 352, 172, 21);
 		add(orderField);
 		orderField.setColumns(10);
@@ -225,27 +228,49 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 			RecordCollectBlService recordCollectBlService=new RecordcollectController();
 			String id=recordCollectBlService.getid(orgcode);
 			long collectiontime=Long.parseLong((String)yearSelect.getSelectedItem()+monthSelect.getSelectedItem()+daySelect.getSelectedItem());
-			double collectionsum=Double.parseDouble(sumField.getText());
-			String collectionman=manField.getText();
-			String accountcode=accountField.getText();
-			vo=new RecordcollectVO(id, collectiontime, accountcode, collectionsum, collectionman, list, Formstate.waiting);
-			handin();
-			Success dialog=new Success(this);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			yearSelect.setSelectedIndex(0);
-			monthSelect.setSelectedIndex(0);
-			daySelect.setSelectedIndex(0);
-			sumField.setText("");
-			manField.setText("");
-			accountField.setText("");
-			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-			for(int i=list.size()-1;i>=0;i--){
-				tableModel.removeRow(i);
+			try {
+				double collectionsum=Double.parseDouble(sumField.getText());
+				String collectionman=manField.getText();
+				String accountcode=accountField.getText();
+				if(collectionman.equals("")){
+					TipDialog Dialog=new TipDialog("请输入姓名！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else if(list.size()==0){
+					TipDialog Dialog=new TipDialog("请输入订单！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else{
+					vo=new RecordcollectVO(id, collectiontime, accountcode, collectionsum, collectionman, list, Formstate.waiting);
+					handin();
+					yearSelect.setSelectedIndex(0);
+					monthSelect.setSelectedIndex(0);
+					daySelect.setSelectedIndex(0);
+					sumField.setText("");
+					manField.setText("");
+					accountField.setText("");
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					for(int i=list.size()-1;i>=0;i--){
+						tableModel.removeRow(i);
+					}
+					table.removeAll();
+					list.removeAll(list);
+					vo=null;
+					TipDialog Dialog=new TipDialog("收款单提交成功！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				
+			} catch (Exception e2) {
+				// TODO: handle exception
+				TipDialog Dialog=new TipDialog("金额格式错误！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
 			}
-			table.removeAll();
-			list.removeAll(list);
-			vo=null;
+			
+			
 		}
 	}
 }

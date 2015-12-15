@@ -324,7 +324,6 @@ public class DriverPanel extends JPanel implements ActionListener {
 	}
 	void addDriver(String drivername,String drivercode,long birthtime,String identifiercode,String cellphone,String drivergender,long timelimit){
 		DriverBlService driverBlService=new DriverController();
-		drivercode=getcode();
 		DriverVO vo=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
 		driverBlService.addDriver(vo);
 		System.out.println(vo.getDrivercode());
