@@ -22,7 +22,9 @@ import presentation.managerui.examui.examhallsalesmanui.DeliveryRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.GoodRecievingExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.GoodRecievingRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.HallLoadExamPanel;
+import presentation.managerui.examui.examhallsalesmanui.HallLoadRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.RecordcollectExamPanel;
+import presentation.managerui.examui.examhallsalesmanui.RecordcollectRevisePanel;
 
 
 public class ExamPanel extends JPanel {
@@ -60,14 +62,14 @@ public class ExamPanel extends JPanel {
 		CenterLoadRevisePanel clR = new CenterLoadRevisePanel(this, card);
 		cl = new CenterLoadExamPanel(this, card, clR);
 		//营业厅业务员
-		
-		hl = new HallLoadExamPanel(this, card);
+		HallLoadRevisePanel hlR = new HallLoadRevisePanel(this, card);
+		hl = new HallLoadExamPanel(this, card, hlR);
 		GoodRecievingRevisePanel grR = new GoodRecievingRevisePanel(this, card);
 		gr = new GoodRecievingExamPanel(this, card, grR);
 		DeliveryRevisePanel deliveryR = new DeliveryRevisePanel(this, card);
 		delivery = new DeliveryExamPanel(this, card, deliveryR);
-		
-		collect=new RecordcollectExamPanel(this, card);
+		RecordcollectRevisePanel collectR = new RecordcollectRevisePanel(this, card);
+		collect=new RecordcollectExamPanel(this, card, collectR);
 		//快递员
 		OrderRevisePanel orderR = new OrderRevisePanel(this, card);
 		order = new OrderExamPanel(this, card, orderR);
@@ -77,6 +79,7 @@ public class ExamPanel extends JPanel {
 		StockoutRevisePanel outR = new StockoutRevisePanel(this, card);
 		out = new StockoutExamPanel(this, card, outR);
 		//财务人员
+		
 		pay= new RecordpayExamPanel(this, card);
 		
 		add(select, "select");
@@ -87,15 +90,15 @@ public class ExamPanel extends JPanel {
 		add(transR, "transR");
 		add(cl, "cl");
 		add(clR, "clR");
-		
+
 		add(hl, "hl");
-		
+		add(hlR, "hlR");
 		add(gr, "gr");
 		add(grR, "grR");
 		add(delivery, "delivery");
 		add(deliveryR, "deliveryR");
 		add(collect, "collect");
-		
+		add(collectR, "collectR");
 		
 		add(order, "order");
 		add(orderR, "orderR");
