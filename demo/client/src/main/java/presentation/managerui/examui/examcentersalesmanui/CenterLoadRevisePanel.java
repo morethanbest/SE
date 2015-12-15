@@ -194,6 +194,7 @@ public class CenterLoadRevisePanel extends JPanel {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);
+				parent.getCl().refreshList();
 			}
 		});
 		button_1.setBounds(757, 376, 113, 27);

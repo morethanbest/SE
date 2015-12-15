@@ -15,9 +15,12 @@ import presentation.managerui.examui.examcourierui.OrderRevisePanel;
 import presentation.managerui.examui.examdepotui.StockinExamPanel;
 import presentation.managerui.examui.examdepotui.StockinRevisePanel;
 import presentation.managerui.examui.examdepotui.StockoutExamPanel;
+import presentation.managerui.examui.examdepotui.StockoutRevisePanel;
 import presentation.managerui.examui.examfinancial.RecordpayExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.DeliveryExamPanel;
+import presentation.managerui.examui.examhallsalesmanui.DeliveryRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.GoodRecievingExamPanel;
+import presentation.managerui.examui.examhallsalesmanui.GoodRecievingRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.HallLoadExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.RecordcollectExamPanel;
 
@@ -57,9 +60,13 @@ public class ExamPanel extends JPanel {
 		CenterLoadRevisePanel clR = new CenterLoadRevisePanel(this, card);
 		cl = new CenterLoadExamPanel(this, card, clR);
 		//营业厅业务员
+		
 		hl = new HallLoadExamPanel(this, card);
-		gr = new GoodRecievingExamPanel(this, card);
-		delivery = new DeliveryExamPanel(this, card);
+		GoodRecievingRevisePanel grR = new GoodRecievingRevisePanel(this, card);
+		gr = new GoodRecievingExamPanel(this, card, grR);
+		DeliveryRevisePanel deliveryR = new DeliveryRevisePanel(this, card);
+		delivery = new DeliveryExamPanel(this, card, deliveryR);
+		
 		collect=new RecordcollectExamPanel(this, card);
 		//快递员
 		OrderRevisePanel orderR = new OrderRevisePanel(this, card);
@@ -67,8 +74,8 @@ public class ExamPanel extends JPanel {
 		//仓库管理员
 		StockinRevisePanel inR = new StockinRevisePanel(this, card);
 		in = new StockinExamPanel(this, card, inR);
-		
-		out = new StockoutExamPanel(this, card);
+		StockoutRevisePanel outR = new StockoutRevisePanel(this, card);
+		out = new StockoutExamPanel(this, card, outR);
 		//财务人员
 		pay= new RecordpayExamPanel(this, card);
 		
@@ -82,9 +89,13 @@ public class ExamPanel extends JPanel {
 		add(clR, "clR");
 		
 		add(hl, "hl");
+		
 		add(gr, "gr");
+		add(grR, "grR");
 		add(delivery, "delivery");
+		add(deliveryR, "deliveryR");
 		add(collect, "collect");
+		
 		
 		add(order, "order");
 		add(orderR, "orderR");
@@ -92,6 +103,7 @@ public class ExamPanel extends JPanel {
 		add(in, "in");
 		add(inR, "inR");
 		add(out, "out");
+		add(outR, "outR");
 		
 		add(pay, "pay");
 	}
