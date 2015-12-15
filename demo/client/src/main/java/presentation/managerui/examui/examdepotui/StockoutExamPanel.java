@@ -152,7 +152,7 @@ public class StockoutExamPanel extends JPanel {
 		refreshList();
 	}
 
-	void refreshList() {
+	public void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
 				volist = ea.getStockoutForm(state);

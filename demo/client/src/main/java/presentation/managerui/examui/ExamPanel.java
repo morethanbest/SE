@@ -17,6 +17,7 @@ import presentation.managerui.examui.examdepotui.StockinRevisePanel;
 import presentation.managerui.examui.examdepotui.StockoutExamPanel;
 import presentation.managerui.examui.examdepotui.StockoutRevisePanel;
 import presentation.managerui.examui.examfinancial.RecordpayExamPanel;
+import presentation.managerui.examui.examfinancial.RecordpayRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.DeliveryExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.DeliveryRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.GoodRecievingExamPanel;
@@ -79,8 +80,8 @@ public class ExamPanel extends JPanel {
 		StockoutRevisePanel outR = new StockoutRevisePanel(this, card);
 		out = new StockoutExamPanel(this, card, outR);
 		//财务人员
-		
-		pay= new RecordpayExamPanel(this, card);
+		RecordpayRevisePanel payR = new RecordpayRevisePanel(this, card);
+		pay= new RecordpayExamPanel(this, card, payR);
 		
 		add(select, "select");
 		
@@ -109,6 +110,7 @@ public class ExamPanel extends JPanel {
 		add(outR, "outR");
 		
 		add(pay, "pay");
+		add(payR, "payR");
 	}
 	
 	public ArrivalExamPanel getArrival() {

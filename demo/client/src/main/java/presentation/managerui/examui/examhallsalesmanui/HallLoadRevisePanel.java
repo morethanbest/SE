@@ -258,6 +258,9 @@ public class HallLoadRevisePanel extends JPanel {
 		yaField.setText(vo.getSupercargo());
 		fareField.setText(vo.getfee() + "");
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		for (int i = 0; i < tableModel.getRowCount(); i++) {
+			tableModel.removeRow(i);
+		}
 		List<String> list = vo.getAllbarcode();
 		for (int i = 0; i < list.size(); i++) {
 			tableModel.addRow(new String[]{list.get(i)});

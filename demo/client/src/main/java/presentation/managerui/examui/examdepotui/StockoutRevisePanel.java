@@ -34,7 +34,6 @@ public class StockoutRevisePanel extends JPanel {
 	private JTextField codeField;
 	private JComboBox<String> transportBox;
 	private JComboBox<Long> yearBox;
-	private String city;
 	private JComboBox<Long> dateBox;
 	private JComboBox<Long> monthBox;
 	private JButton update;
@@ -85,11 +84,11 @@ public class StockoutRevisePanel extends JPanel {
 
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
-			Long date = (Long) yearBox.getSelectedItem() * 10000
-					+ (Long) monthBox.getSelectedItem() * 100
-					+ (Long) dateBox.getSelectedItem();
 
 			public void actionPerformed(ActionEvent e) {
+				Long date = (Long) yearBox.getSelectedItem() * 10000
+						+ (Long) monthBox.getSelectedItem() * 100
+						+ (Long) dateBox.getSelectedItem();
 				ea.updateStockoutForm(new StockoutVO(vo.getId(), orderField.getText(), date,
 						vo.getDestination(),
 						(String) transportBox.getSelectedItem(), codeField

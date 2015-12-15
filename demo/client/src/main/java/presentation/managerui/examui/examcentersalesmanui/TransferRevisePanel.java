@@ -292,6 +292,10 @@ public class TransferRevisePanel extends JPanel {
 		departureLabel.setText(vo.getDepartrue());
 		destinBox.setSelectedItem(vo.getDestination());
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		for (int i = 0; i < tableModel.getRowCount(); i++) {
+			tableModel.removeRow(i);
+		}
+		
 		List<String> list = vo.getAllcode();
 		for (int i = 0; i < list.size(); i++) {
 			tableModel.addRow(new String[]{list.get(i)});

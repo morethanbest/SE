@@ -34,7 +34,7 @@ public class RecordpayExamPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public RecordpayExamPanel(ExamPanel parent, CardLayout card) {
+	public RecordpayExamPanel(ExamPanel parent, CardLayout card, RecordpayRevisePanel child) {
 		setLayout(null);
 		ea = new ExamController();
 
@@ -86,6 +86,14 @@ public class RecordpayExamPanel extends JPanel {
 		add(refused);
 		
 		revise = new JButton("查看详细");
+		revise.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+				int index = table.getSelectedRow();
+				if(index >= 0)
+					child.init(volist.get(index));
+			}
+		});
 		revise.setBounds(665, 358, 113, 27);
 		add(revise);
 		
