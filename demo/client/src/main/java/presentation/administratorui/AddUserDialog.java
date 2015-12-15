@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.UserVO;
 
@@ -22,7 +24,7 @@ public class AddUserDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField nameField;
 	private JTextField passwordField;
-	private JTextField orgcodeField;
+	private NumberField orgcodeField;
 	private JTextField orgnameField;
 	private JTextField cityField;
 	private JComboBox<String> jobSelect;
@@ -100,7 +102,7 @@ public class AddUserDialog extends JDialog {
 		JLprgcode.setBounds(25, 396, 80, 20);
 		contentPanel.add(JLprgcode);
 		
-		orgcodeField = new JTextField();
+		orgcodeField = new NumberField(20);
 		orgcodeField.setColumns(10);
 		orgcodeField.setBounds(100, 396, 182, 20);
 		contentPanel.add(orgcodeField);
@@ -156,25 +158,42 @@ public class AddUserDialog extends JDialog {
 								break;
 							}
 							OrganizationVO organizationVO=parent.getOrgByCode(orgcodeField.getText());
-							orgnameField.setText(organizationVO.getName());
-							switch (organizationVO.getType()) {
-							case hall:
-								orgSelect.setSelectedIndex(0);
-								break;
-							case transfercenter:
-								orgSelect.setSelectedIndex(1);
-								break;
-							case headquarters:
-								orgSelect.setSelectedIndex(2);
-								break;
-							default:
-								break;
+							if(organizationVO==null){
+								TipDialog Dialog=new TipDialog("请输入正确的组织编号！");
+								Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Dialog.setVisible(true);
 							}
-							cityField.setText(organizationVO.getCity());
-							UserVO vo=new UserVO(nameField.getText(), passwordField.getText(), newjob, orgnameField.getText(),
-									orgcodeField.getText(),organizationVO.getType(), cityField.getText());
-							parent.addUser(vo);
-							isagain=true;
+							else if(nameField.getText().equals("")){
+								TipDialog Dialog=new TipDialog("请输入用户名！");
+								Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Dialog.setVisible(true);
+							}
+							else if(passwordField.getText().equals("")){
+								TipDialog Dialog=new TipDialog("请输入密码！");
+								Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Dialog.setVisible(true);
+							}
+							else{
+								orgnameField.setText(organizationVO.getName());
+								switch (organizationVO.getType()) {
+								case hall:
+									orgSelect.setSelectedIndex(0);
+									break;
+								case transfercenter:
+									orgSelect.setSelectedIndex(1);
+									break;
+								case headquarters:
+									orgSelect.setSelectedIndex(2);
+									break;
+								default:
+									break;
+								}
+								cityField.setText(organizationVO.getCity());
+								UserVO vo=new UserVO(nameField.getText(), passwordField.getText(), newjob, orgnameField.getText(),
+										orgcodeField.getText(),organizationVO.getType(), cityField.getText());
+								parent.addUser(vo);
+								isagain=true;
+							}
 						}
 						else{
 							dispose();
@@ -185,19 +204,6 @@ public class AddUserDialog extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
 			}
 		}
 	}

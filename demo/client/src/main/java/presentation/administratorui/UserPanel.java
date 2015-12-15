@@ -15,6 +15,8 @@ import businesslogic.userbl.UsersPack.UserController;
 import businesslogicservice.userblservice.UserBlService;
 import po.Job;
 import po.Organizationtype;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.UserVO;
 
@@ -23,7 +25,7 @@ public class UserPanel extends JPanel implements ActionListener{
 	private JTextField nameToSearch;
 	private JTextField nameField;
 	private JTextField passwordField;
-	private JTextField orgcodeField;
+	private NumberField orgcodeField;
 	private JTextField orgnameField;
 	private JButton btnSearch;
 	private JButton btnAdd;
@@ -45,7 +47,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 49, 954, 8);
 		add(separator);
 		
-		JLabel label = new JLabel("账户名搜索：");
+		JLabel label = new JLabel("用户名搜索：");
 		label.setBounds(37, 20, 72, 15);
 		add(label);
 		
@@ -62,7 +64,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		btnAdd.setBounds(677, 16, 93, 23);
 		add(btnAdd);
 		
-		JLabel label_1 = new JLabel("账号：");
+		JLabel label_1 = new JLabel("用户名：");
 		label_1.setBounds(249, 67, 54, 15);
 		add(label_1);
 		
@@ -104,7 +106,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		btndelete.setBounds(469, 387, 93, 23);
 		add(btndelete);
 		
-		orgcodeField = new JTextField();
+		orgcodeField = new NumberField(20);
 		orgcodeField.setColumns(10);
 		orgcodeField.setBounds(341, 341, 182, 21);
 		add(orgcodeField);
@@ -273,21 +275,13 @@ public class UserPanel extends JPanel implements ActionListener{
 				nameField.setEditable(true);
 				passwordField.setEditable(true);
 				orgcodeField.setEditable(true);
-				orgnameField.setEditable(true);
 				cityField.setEditable(true);
 				jobSelect.setEnabled(true);
-				orgSelect.setEnabled(true);
 			}
 			else {
-				isrev=false;
+				
 				btnupdate.setText("修改");
-				nameField.setEditable(false);
-				passwordField.setEditable(false);
-				orgcodeField.setEditable(false);
-				orgnameField.setEditable(false);
-				cityField.setEditable(false);
-				jobSelect.setEnabled(false);
-				orgSelect.setEnabled(false);
+				
 				Job newjob = null;
 				switch (jobSelect.getSelectedIndex()) {
 				case 0:
@@ -320,23 +314,50 @@ public class UserPanel extends JPanel implements ActionListener{
 				default:
 					break;
 				}
-				Organizationtype newtype = null;
-				switch (orgSelect.getSelectedIndex()) {
-				case 0:
-					newtype=Organizationtype.hall;
-					break;
-				case 1:
-					newtype=Organizationtype.transfercenter;
-					break;
-				case 2:
-					newtype=Organizationtype.headquarters;
-					break;
-				default:
-					break;
+
+				OrganizationVO organizationVO=getOrgByCode(orgcodeField.getText());
+				if(organizationVO==null){
+					TipDialog Dialog=new TipDialog("请输入正确的组织编号！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
 				}
-				vo=new UserVO(nameField.getText(), passwordField.getText(), newjob, orgnameField.getText(),
-						orgcodeField.getText(), newtype, cityField.getText());
-				revUser(vo);
+				else if(nameField.getText().equals("")){
+					TipDialog Dialog=new TipDialog("请输入用户名！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else if(passwordField.getText().equals("")){
+					TipDialog Dialog=new TipDialog("请输入密码！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else{
+					isrev=false;
+					orgnameField.setText(organizationVO.getName());
+					switch (organizationVO.getType()) {
+					case hall:
+						orgSelect.setSelectedIndex(0);
+						break;
+					case transfercenter:
+						orgSelect.setSelectedIndex(1);
+						break;
+					case headquarters:
+						orgSelect.setSelectedIndex(2);
+						break;
+					default:
+						break;
+					}
+					cityField.setText(organizationVO.getCity());
+					vo=new UserVO(nameField.getText(), passwordField.getText(), newjob, orgnameField.getText(),
+							orgcodeField.getText(), organizationVO.getType(), cityField.getText());
+					revUser(vo);
+					nameField.setEditable(false);
+					passwordField.setEditable(false);
+					orgcodeField.setEditable(false);
+					cityField.setEditable(false);
+					jobSelect.setEnabled(false);
+				}
+				
 			}
 			
 		}
