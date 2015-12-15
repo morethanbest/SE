@@ -11,7 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import presentation.tip.FailDialog;
+import presentation.tip.TipDialog;
 import presentation.tip.NumberField;
 
 import javax.swing.JLabel;
@@ -147,13 +147,13 @@ public class AddDriverDialog extends JDialog {
 						long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
 						if(drivername.equals("")){
 							System.out.println("xm");
-							FailDialog failDialog=new FailDialog("姓名不能为空！");
+							TipDialog failDialog=new TipDialog("姓名不能为空！");
 							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 							failDialog.setVisible(true);
 						}
 						else if(identifiercode.equals("")){
 							System.out.println("sfz");
-							FailDialog failDialog=new FailDialog("身份证号不能为空！");
+							TipDialog failDialog=new TipDialog("身份证号不能为空！");
 							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 							failDialog.setVisible(true);
 						}

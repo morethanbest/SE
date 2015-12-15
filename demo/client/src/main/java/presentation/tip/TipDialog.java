@@ -12,13 +12,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class FailDialog extends JDialog {
+public class TipDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	/**
 	 * Create the dialog.
 	 */
-	public FailDialog(String s) {
+	public TipDialog(String s) {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 313, 159);
 		getContentPane().setLayout(new BorderLayout());
