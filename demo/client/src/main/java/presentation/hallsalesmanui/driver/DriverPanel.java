@@ -437,16 +437,6 @@ public class DriverPanel extends JPanel implements ActionListener {
 			}
 			else{
 				
-				textName.setEditable(false);
-				textPhone.setEditable(false);
-				textidentity.setEditable(false);
-				SexSelect.setEnabled(false);
-				ByearSelect.setEnabled(false);
-				BmouthSelect.setEnabled(false);
-				BdaySelect.setEnabled(false);
-				DyearSelect.setEnabled(false);
-				DmouthSelect.setEnabled(false);
-				DdaySelect.setEnabled(false);
 				String drivername=textName.getText();
 				String drivercode=textCode.getText();
 				long birthtime=Long.parseLong((String)ByearSelect.getSelectedItem()+BmouthSelect.getSelectedItem()+BdaySelect.getSelectedItem());
@@ -470,6 +460,17 @@ public class DriverPanel extends JPanel implements ActionListener {
 					Dialog.setVisible(true);
 				}
 				else{
+
+					textName.setEditable(false);
+					textPhone.setEditable(false);
+					textidentity.setEditable(false);
+					SexSelect.setEnabled(false);
+					ByearSelect.setEnabled(false);
+					BmouthSelect.setEnabled(false);
+					BdaySelect.setEnabled(false);
+					DyearSelect.setEnabled(false);
+					DmouthSelect.setEnabled(false);
+					DdaySelect.setEnabled(false);
 					isrev=false;
 					DriverVO VO=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
 					vo=VO;

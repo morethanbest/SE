@@ -140,7 +140,7 @@ public class AddDriverDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
                         if(isagain==false){
-                        	isagain=true;
+                        	
                         	String drivername=nameField.getText();
     						
     						long birthtime=Long.parseLong((String)ByearSelect.getSelectedItem()+BmouthSelect.getSelectedItem()+BdaySelect.getSelectedItem());
@@ -158,7 +158,7 @@ public class AddDriverDialog extends JDialog {
     							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     							failDialog.setVisible(true);
     						}
-    						else if(cellphone.equals("")){
+    						else if(phoneField.getText().equals("")){
     							TipDialog failDialog=new TipDialog("请输入手机号！");
     							failDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     							failDialog.setVisible(true);
@@ -167,7 +167,7 @@ public class AddDriverDialog extends JDialog {
     							String drivercode=parent.getcode();
     							codeField.setText(drivercode);
     							parent.addDriver(drivername, drivercode, birthtime, identifiercode, cellphone, drivergender, timelimit);
-    															
+    							isagain=true;								
     						}
                         }
                         else{
