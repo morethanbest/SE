@@ -164,8 +164,11 @@ public class DriverDB {
 			pst.setString(1, "%"+codeget+"%");
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				if(ret.getString(1).startsWith(codeget))
-					lastid++;
+				if(ret.getString(1).startsWith(codeget)){
+					String s=ret.getString(1);
+					String string=s.substring(5, s.length());
+					lastid=Long.parseLong(string);
+				}
 			}
 			ret.close();
 			dbh.close();
