@@ -33,7 +33,7 @@ import java.rmi.RemoteException;
 
 public class RMIHelper {
 
-    private static final String IP = "192.168.1.105"; //Can be read from config file
+    private static final String IP = "172.26.15.52"; //Can be read from config file
 
     private static boolean inited = false;
 

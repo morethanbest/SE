@@ -8,16 +8,22 @@ import vo.VehicleVO;
 import java.rmi.RemoteException;
 
 public class FindVehicle {
-	public boolean wheAt (String vehicleNumber,String orgcode){
-		long orgcodelen=orgcode.length();
-		boolean whe=true;
-		for(int i=0;i<=orgcodelen-1;i++){
-			if(!vehicleNumber.substring(i,i+1).equals(orgcode.substring(i,i+1))){
-				whe=false;
-				break;
+	public boolean wheAt(String vehicleNumber, String orgcode) {
+		try {
+
+			long orgcodelen = orgcode.length();
+			boolean whe = true;
+			for (int i = 0; i <= orgcodelen - 1; i++) {
+				if (!vehicleNumber.substring(i, i + 1).equals(orgcode.substring(i, i + 1))) {
+					whe = false;
+					break;
+				}
 			}
+			return whe;
+
+		} catch (Exception e) {
+			return false;
 		}
-		return whe;
 	}
 
 

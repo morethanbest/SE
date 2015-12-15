@@ -16,15 +16,19 @@ public class FindDriver {
 	用于判断司机是否为所查营业厅的司机
 	 */
 	public boolean wheAt(String driverNumber, String orgcode){
-		long orgcodelen=orgcode.length();
-		boolean whe=true;
-		for(int i=0;i<=orgcodelen-1;i++){
-			if(!driverNumber.substring(i,i+1).equals(orgcode.substring(i,i+1))){
-				whe=false;
-				break;
+		try{
+			long orgcodelen=orgcode.length();
+			boolean whe=true;
+			for(int i=0;i<=orgcodelen-1;i++){
+				if(!driverNumber.substring(i,i+1).equals(orgcode.substring(i,i+1))){
+					whe=false;
+					break;
+				}
 			}
+			return whe;
+		}catch(Exception e){
+			return false;
 		}
-		return whe;
 	}
 
 	
