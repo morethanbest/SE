@@ -15,6 +15,7 @@ import businesslogic.userbl.UsersPack.UserController;
 import businesslogicservice.userblservice.UserBlService;
 import po.Job;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.OrganizationVO;
@@ -172,9 +173,9 @@ public class UserPanel extends JPanel implements ActionListener{
 		OrganizationVO organizationVO=userBlService.findOrgByCode(orgcode);
 		return organizationVO;
 	}
-	public void addUser(UserVO vo){
+	public ResultMessage addUser(UserVO vo){
 		UserBlService userBlService=new UserController();
-		userBlService.addUser(vo);
+		return userBlService.addUser(vo);
 	}
 	private void getUserbyName(String username){
 		UserBlService userBlService=new UserController();

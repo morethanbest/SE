@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
+import po.ResultMessage;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.OrganizationVO;
@@ -118,13 +119,7 @@ public class AddUserDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						if(isagain==false){
-							nameField.setEditable(false);
-							passwordField.setEditable(false);
-							orgcodeField.setEditable(false);
-							orgnameField.setEditable(false);
-							cityField.setEditable(false);
-							jobSelect.setEnabled(false);
-							orgSelect.setEnabled(false);
+							
 							Job newjob = null;
 							switch (jobSelect.getSelectedIndex()) {
 							case 0:
@@ -191,8 +186,23 @@ public class AddUserDialog extends JDialog {
 								cityField.setText(organizationVO.getCity());
 								UserVO vo=new UserVO(nameField.getText(), passwordField.getText(), newjob, orgnameField.getText(),
 										orgcodeField.getText(),organizationVO.getType(), cityField.getText());
-								parent.addUser(vo);
-								isagain=true;
+								ResultMessage resultMessage=parent.addUser(vo);
+								if(resultMessage==ResultMessage.failure){
+									TipDialog Dialog=new TipDialog("用户名重复！");
+									Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									Dialog.setVisible(true);
+								}
+								else {
+									isagain=true;
+									nameField.setEditable(false);
+									passwordField.setEditable(false);
+									orgcodeField.setEditable(false);
+									orgnameField.setEditable(false);
+									cityField.setEditable(false);
+									jobSelect.setEnabled(false);
+									orgSelect.setEnabled(false);
+								}
+								
 							}
 						}
 						else{

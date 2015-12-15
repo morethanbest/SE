@@ -14,7 +14,7 @@ public class FindOrgByCode {
 		try {
 			OrganizationPO po=userDataService.getOrganization(orgcode);
 			vo=new OrganizationVO(po.getName(), po.getOrganizationcode(), po.getType(), po.getCity());
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
