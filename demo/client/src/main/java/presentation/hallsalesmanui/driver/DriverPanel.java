@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import businesslogic.transportbl.DriverPack.DriverController;
 import businesslogicservice.transportblservice.DriverBlService;
 import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.DriverVO;
 
 public class DriverPanel extends JPanel implements ActionListener {
@@ -31,7 +32,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 	private JTable table;
 	private JTextField textName;
 	private JTextField textCode;
-	private JTextField textPhone;
+	private NumberField textPhone;
 	private JTextField textidentity;
 	private JButton BTNsearchByCode;
 	private JButton BTNsearchByName;
@@ -120,7 +121,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		label_5.setBounds(584, 183, 54, 15);
 		add(label_5);
 		
-		textPhone = new JTextField();
+		textPhone = new NumberField(12);
 		textPhone.setBounds(681, 180, 143, 21);
 		add(textPhone);
 		textPhone.setColumns(10);
@@ -360,8 +361,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 	void revDriver(DriverVO VO){
 		DriverBlService driverBlService=new DriverController();
 		driverBlService.revDriver(VO);
-		
-		
+
 	}
 	public String getcode(){
 		DriverBlService driverBlService=new DriverController();
@@ -436,7 +436,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 				BTNupdate.setText("确定");
 			}
 			else{
-				isrev=false;
+				
 				textName.setEditable(false);
 				textPhone.setEditable(false);
 				textidentity.setEditable(false);
@@ -454,12 +454,32 @@ public class DriverPanel extends JPanel implements ActionListener {
 				String cellphone=textPhone.getText();
 				String drivergender=(String)SexSelect.getSelectedItem();
 				long timelimit=Long.parseLong((String)DyearSelect.getSelectedItem()+DmouthSelect.getSelectedItem()+DdaySelect.getSelectedItem());
-				DriverVO VO=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
-				vo=VO;
-				BTNupdate.setText("修改");
-				list.remove(r);
-				list.add(r, vo);
-				revDriver(VO);
+				if(textName.getText().equals("")){
+					TipDialog Dialog=new TipDialog("请输入姓名！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else if(textPhone.getText().equals("")) {
+					TipDialog Dialog=new TipDialog("请输入手机号！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else if(textidentity.getText().equals("")){
+					TipDialog Dialog=new TipDialog("请输入身份证号！");
+					Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					Dialog.setVisible(true);
+				}
+				else{
+					isrev=false;
+					DriverVO VO=new DriverVO(drivercode, drivername, birthtime, identifiercode, cellphone, drivergender, timelimit);
+					vo=VO;
+					BTNupdate.setText("修改");
+					list.remove(r);
+					list.add(r, vo);
+					displayInTable(list);
+					revDriver(VO);
+				}
+				
 			}
 		}
 	}

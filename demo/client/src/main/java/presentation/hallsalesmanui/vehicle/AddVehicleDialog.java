@@ -38,7 +38,7 @@ public class AddVehicleDialog extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel JLcode = new JLabel("车辆代号：");
-		JLcode.setBounds(25, 36, 60, 20);
+		JLcode.setBounds(25, 36, 70, 20);
 		contentPanel.add(JLcode);
 		
 		codeField = new JTextField();

@@ -14,11 +14,12 @@ import javax.swing.JTextField;
 import businesslogic.transportbl.VehiclePack.VehicleController;
 import businesslogicservice.transportblservice.VehicleBlService;
 import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.VehicleVO;
 
 public class VehiclePanel extends JPanel implements ActionListener {
 	private JTextField codeToSearch;
-	private JTextField cardToSearch;
+	private NumberField cardToSearch;
 	private NumberField CodeField;
 	private JTextField CardField;
     private JComboBox<String> daySelect;
@@ -41,7 +42,7 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		separator.setBounds(0, 49, 954, 8);
 		add(separator);
 		
-		cardToSearch = new JTextField();
+		cardToSearch = new NumberField(12);
 		cardToSearch.setBounds(104, 14, 103, 21);
 		add(cardToSearch);
 		cardToSearch.setColumns(10);
@@ -266,14 +267,22 @@ public class VehiclePanel extends JPanel implements ActionListener {
 			        String code=CodeField.getText();
 			        String card=CardField.getText();
 			        long time=Long.parseLong((String)yearSelect.getSelectedItem()+mouthSelect.getSelectedItem()+daySelect.getSelectedItem());
-				    vo=new VehicleVO(code, card, time);
-				    display();
-				    revVehicle(vo);
-				    btnupdate.setText("修改");
-				    CardField.setEditable(false);
-					yearSelect.setEnabled(false);
-					mouthSelect.setEnabled(false);
-					daySelect.setEnabled(false);
+				    if(CardField.getText().equals("")){
+				    	TipDialog Dialog=new TipDialog("请输入车牌号！");
+						Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						Dialog.setVisible(true);
+				    }
+				    else{
+				    	vo=new VehicleVO(code, card, time);
+					    display();
+					    revVehicle(vo);
+					    btnupdate.setText("修改");
+					    CardField.setEditable(false);
+						yearSelect.setEnabled(false);
+						mouthSelect.setEnabled(false);
+						daySelect.setEnabled(false);
+				    }
+			        
 				}
 		}
 	}
