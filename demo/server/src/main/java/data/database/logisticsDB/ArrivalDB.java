@@ -125,7 +125,7 @@ public class ArrivalDB {
 		dbh=new DBHelper();
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
-			sql = "select id,centercode,arrivaltime,transcode,departure,arrivalstate from ArrivalPO where documentstate = ? and id like ?";
+			sql = "select id,centercode,arrivaltime,whefromhall,transcode,departure,arrivalstate from ArrivalPO where documentstate = ? and id like ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			pst.setString(2, "%"+orgcode+"%");

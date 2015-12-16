@@ -317,19 +317,19 @@ public class OrderDB {
 		System.out.println("test");
 
 //		if(getLastId("025")==1){
-			System.out.println(getLastId("025"));
+//			System.out.println(getLastId("025"));
 //		}
 
-		if(update(new OrderPO("025000","孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
-				"56565656","13234567890",1,5,3,"iphone6","快递袋",5,"0000000001",Ordertype.fast,Formstate.waiting))==ResultMessage.success){
-			System.out.println("update success");
-		}
-		if(search("0000000001")!=null){
-			System.out.println("search success");
-		}
-		if(fuzzySearch(Formstate.waiting).size()>0){
-			System.out.println("fuzzysearch success");
-		}
+//		if(update(new OrderPO("025000","孙超","南京市栖霞区南京大学仙林校区","南京大学","57575757","13123456789","孙康","南京市栖霞区南京师范大学","南京师范大学",
+//				"56565656","13234567890",1,5,3,"iphone6","快递袋",5,"0000000001",Ordertype.fast,Formstate.waiting))==ResultMessage.success){
+//			System.out.println("update success");
+//		}
+//		if(search("0000000001")!=null){
+//			System.out.println("search success");
+//		}
+//		if(fuzzySearch(Formstate.waiting).size()>0){
+//			System.out.println("fuzzysearch success");
+//		}
 
 	}
 }

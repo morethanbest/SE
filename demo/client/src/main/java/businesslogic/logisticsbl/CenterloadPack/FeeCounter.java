@@ -43,9 +43,8 @@ public class FeeCounter {
         }
 
 
-
         double fee=weight*singleprice*distance;
-        fee=Long.valueOf(format.format(fee));
+        fee=Double.valueOf(format.format(fee));
         return fee;
     }
 }

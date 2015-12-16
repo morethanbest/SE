@@ -207,7 +207,7 @@ public class StockoutPanel extends JPanel {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
 		List<OrganizationVO> orgList;
-		if (typeBox.getSelectedIndex() == 0) {
+		if (typeBox.getSelectedIndex() == 1) {
 			orgList = organizationBlService
 					.getOrganizationbyType(Organizationtype.transfercenter);
 		} else {

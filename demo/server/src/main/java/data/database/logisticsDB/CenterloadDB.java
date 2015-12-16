@@ -131,7 +131,7 @@ public class CenterloadDB {
 		try {
 			byte[] statebytes = Serialize.Object2Bytes(documentstate);
 			sql = "select loadtime,motorcode,destination,vehiclecode,supervisor,"
-					+ "supercargo,allbarcode,fee from CenterloadPO where documentstate = ? and orgcode like ?";
+					+ "supercargo,allbarcode,fee from CenterloadPO where documentstate = ? and motorcode like ?";
 			pst = dbh.prepare(sql);
 			pst.setBytes(1, statebytes);
 			pst.setString(2, "%"+orgcode+"%");
