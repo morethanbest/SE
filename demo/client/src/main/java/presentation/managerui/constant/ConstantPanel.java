@@ -43,7 +43,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	private ManagerPanel managerPanel;
 	private JButton btnRevise;
 	private JButton btnAdd;
-
 	/**
 	 * Create the panel.
 	 * 
@@ -58,7 +57,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		
 		setLayout(null);
 
-		btnAdd = new JButton("Add");
+		btnAdd = new JButton("增加");
 		btnAdd.addActionListener(this);
 		btnAdd.setBounds(530, 0, 120, 32);
 		add(btnAdd);
@@ -148,37 +147,63 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		select_2.setBounds(316, 0, 120, 32);
 		add(select_2);
 
-		btnDelete = new JButton("Delete");
+		btnDelete = new JButton("删除");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table
 						.getModel();
-				try {
-					String cellValue1 = (String) tableModel.getValueAt(
-							table.getSelectedRow(), 0);
-					double cellValue2 = Double.parseDouble((String) tableModel
-							.getValueAt(table.getSelectedRow(), 1));
-					if(constantsBlService.delConstants(new ConstantsVO(cellValue1,cellValue2))==ResultMessage.failure){
-						TipDialog tipDialog=new TipDialog("该常量不可删除！");
+				if(type.getSelectedItem().equals(
+						ContstantType.City.getName())){
+					try {
+						String cellValue1 = (String) tableModel.getValueAt(
+								table.getSelectedRow(), 0);
+						String cellValue2 = (String) tableModel
+								.getValueAt(table.getSelectedRow(), 1);
+						if(constantsBlService.delCity(new CityVO(cellValue1,cellValue2))==ResultMessage.failure){
+							TipDialog tipDialog=new TipDialog("该常量不可删除！");
+							tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							tipDialog.setVisible(true);	
+						}
+						updateCity();
+						refreshList();
+					} catch (ArrayIndexOutOfBoundsException  e1) {
+						TipDialog tipDialog=new TipDialog("请选择删除项！");
 						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-						tipDialog.setVisible(true);	
+						tipDialog.setVisible(true);		
+					} catch (NullPointerException e1) {
+						TipDialog tipDialog=new TipDialog("请选择删除项！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);		
 					}
-					refreshList();
-				} catch (ArrayIndexOutOfBoundsException  e1) {
-					TipDialog tipDialog=new TipDialog("请选择删除项！");
-					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					tipDialog.setVisible(true);		
-				} catch (NullPointerException e1) {
-					TipDialog tipDialog=new TipDialog("请选择删除项！");
-					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					tipDialog.setVisible(true);		
+				}
+				else{
+					try {
+						String cellValue1 = (String) tableModel.getValueAt(
+								table.getSelectedRow(), 0);
+						double cellValue2 = Double.parseDouble((String) tableModel
+								.getValueAt(table.getSelectedRow(), 1));
+						if(constantsBlService.delConstants(new ConstantsVO(cellValue1,cellValue2))==ResultMessage.failure){
+							TipDialog tipDialog=new TipDialog("该常量不可删除！");
+							tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							tipDialog.setVisible(true);	
+						}
+						refreshList();
+					} catch (ArrayIndexOutOfBoundsException  e1) {
+						TipDialog tipDialog=new TipDialog("请选择删除项！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);		
+					} catch (NullPointerException e1) {
+						TipDialog tipDialog=new TipDialog("请选择删除项！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);		
+					}
 				}
 			}
 		});
 		btnDelete.setBounds(664, 0, 120, 32);
 		add(btnDelete);
 		
-		btnRevise = new JButton("Revise");
+		btnRevise = new JButton("修改");
 		btnRevise.setBounds(798, 0, 113, 32);
 		add(btnRevise);
 		
@@ -211,9 +236,47 @@ public class ConstantPanel extends JPanel implements ActionListener {
 			dialog.setVisible(true);
 		}
 		else if(e.getSource().equals(btnRevise)){
-			RevConstantDialog dialog=new RevConstantDialog(this, cityList);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			DefaultTableModel tableModel = (DefaultTableModel) table
+					.getModel();
+			if(type.getSelectedItem().equals(
+					ContstantType.City.getName())){
+				try {
+					String cellValue1 = (String) tableModel.getValueAt(
+							table.getSelectedRow(), 0);
+					String cellValue2 = (String) tableModel
+							.getValueAt(table.getSelectedRow(), 1);
+					RevConstantDialog revConstantDialog=new RevConstantDialog(this, cellValue1, cellValue2, true);
+					revConstantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					revConstantDialog.setVisible(true);
+				} catch (ArrayIndexOutOfBoundsException  e1) {
+					TipDialog tipDialog=new TipDialog("请选择修改项！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				} catch (NullPointerException e1) {
+					TipDialog tipDialog=new TipDialog("请选择修改项！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}
+			}
+			else{
+				try {
+					String cellValue1 = (String) tableModel.getValueAt(
+							table.getSelectedRow(), 0);
+					String cellValue2 = (String) tableModel
+							.getValueAt(table.getSelectedRow(), 1);
+					RevConstantDialog revConstantDialog=new RevConstantDialog(this, cellValue1, cellValue2, false);
+					revConstantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					revConstantDialog.setVisible(true);
+				} catch (ArrayIndexOutOfBoundsException  e1) {
+					TipDialog tipDialog=new TipDialog("请选择删除项！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				} catch (NullPointerException e1) {
+					TipDialog tipDialog=new TipDialog("请选择删除项！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}
+			}
 		}
 
 	}

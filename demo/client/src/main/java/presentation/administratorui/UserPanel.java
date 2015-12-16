@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import businesslogic.userbl.UsersPack.UserController;
 import businesslogicservice.userblservice.UserBlService;
 import po.Job;
-import po.Organizationtype;
 import po.ResultMessage;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
@@ -269,7 +268,7 @@ public class UserPanel extends JPanel implements ActionListener{
 			delUser(vo);
 			vo=null;
 			display();
-		}else if(e.getSource().equals(btnupdate)){
+		}else if(e.getSource().equals(btnupdate)&&vo!=null){
 			if(isrev==false){
 				btnupdate.setText("确定");
 				isrev=true;

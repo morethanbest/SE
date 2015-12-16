@@ -33,14 +33,12 @@ import java.awt.SystemColor;
 public class RevConstantDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private DoubleField textField;
-	private JComboBox<String> type;
-	private JComboBox<String> select_1;
-	private JComboBox<String> select_2;
+	private DoubleField valueField;
+    private	JTextField nameField;
 	/**
 	 * Create the dialog.
 	 */
-	public RevConstantDialog(final ConstantPanel parent, final List<CityVO> list) {
+	public RevConstantDialog(final ConstantPanel parent,String name, String value, boolean iscity) {
 //		setModal(true);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
@@ -50,64 +48,26 @@ public class RevConstantDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		type = new JComboBox<String>();
-		type.setBounds(14, 37, 187, 32);
-		contentPanel.add(type);
-		addTypeItems();
-		type.addItemListener(new ItemListener() {
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (type.getSelectedItem().equals(
-						ContstantType.Distance.getName())) {
-					select_1.removeAllItems();
-					select_2.removeAllItems();
-					select_1.setVisible(true);
-					select_2.setVisible(true);
-					addDistanceItems(list);
-				} else if (type.getSelectedItem().equals(
-						ContstantType.PackageType.getName())) {
-					select_1.removeAllItems();
-					select_2.removeAllItems();
-					select_1.setVisible(true);
-					select_2.setVisible(false);
-					addPackTypeItems();
-				} else if (type.getSelectedItem().equals(
-						ContstantType.OrderType.getName())) {
-					select_1.removeAllItems();
-					select_2.removeAllItems();
-					select_1.setVisible(true);
-					select_2.setVisible(false);
-					addOrderTypeItems();
-				} else if (type.getSelectedItem().equals(
-						ContstantType.TransportType.getName())) {
-					select_1.removeAllItems();
-					select_2.removeAllItems();
-					select_1.setVisible(true);
-					select_2.setVisible(false);
-					addTransportTypeItems();
-				}
-			}
-		});
-
-		select_1 = new JComboBox<String>();
-		select_1.setBounds(231, 37, 187, 32);
-		contentPanel.add(select_1);
-		
-		select_2 = new JComboBox<String>();
-		select_2.setBounds(14, 142, 187, 32);
-		contentPanel.add(select_2);
-
-		addDistanceItems(list);
-
-		JLabel label = new JLabel("常量值");
-		label.setBounds(292, 97, 73, 32);
+		JLabel label = new JLabel("常量值:");
+		label.setBounds(65, 141, 73, 32);
 		contentPanel.add(label);
 
-		textField = new DoubleField(20);
-		textField.setBounds(231, 142, 187, 32);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		valueField = new DoubleField(20);
+		valueField.setBounds(199, 142, 187, 32);
+		contentPanel.add(valueField);
+		valueField.setColumns(10);
+		valueField.setText(value);
+		
+		JLabel label_1 = new JLabel("常量名:");
+		label_1.setBounds(65, 39, 73, 32);
+		contentPanel.add(label_1);
+		
+		nameField = new JTextField();
+		nameField.setColumns(10);
+		nameField.setBounds(199, 40, 187, 32);
+		contentPanel.add(nameField);
+		nameField.setText(name);
+		nameField.setEditable(false);
 
 		{
 			JPanel buttonPane = new JPanel();
@@ -119,53 +79,44 @@ public class RevConstantDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ConstantsBlService constantsBlService = new ConstantsController();
-						String name = (String) type.getSelectedItem();
-						if(select_1.isVisible()&&select_2.isVisible()){
-							name = name.concat("-").concat(
-									(String) select_1.getSelectedItem());
-							name = name.concat("-").concat(
-								(String) select_2.getSelectedItem());
-							
-							if(textField.getText().equals("")){
+						
+						if(iscity==false){
+							if(valueField.getText().equals("")){
 								TipDialog tipDialog=new TipDialog("请输入常量值！");
 								tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								tipDialog.setVisible(true);		
 							}
 							else {
 								ConstantsVO vo = new ConstantsVO(name, Double
-										.parseDouble(textField.getText()));
+										.parseDouble(valueField.getText()));
 								if(constantsBlService.revConstants(vo) == ResultMessage.failure){									
 									TipDialog tipDialog=new TipDialog("该常量不存在！");
 									tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 									tipDialog.setVisible(true);		
 								}
 								else{
-									parent.refreshList();System.out.println(textField.getText());
+									parent.refreshList();
 									dispose();
 								}
 							}
 							
 						}
 						else{
-							name = name.concat("-").concat(
-									(String) select_1.getSelectedItem());
-							
-							if(textField.getText().equals("")){
+							if(valueField.getText().equals("")){
 								TipDialog tipDialog=new TipDialog("请输入常量值！");
 								tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								tipDialog.setVisible(true);		
 							}
 							else {
-								ConstantsVO vo = new ConstantsVO(name, Double
-										.parseDouble(textField.getText()));
-								if(constantsBlService.revConstants(vo) == ResultMessage.failure){
-									
+								CityVO vo=new CityVO(name, valueField.getText());
+								if(constantsBlService.revCity(vo) == ResultMessage.failure){
 									TipDialog tipDialog=new TipDialog("该常量不存在！");
 									tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 									tipDialog.setVisible(true);		
 								}		
 								else{
 									parent.refreshList();
+									parent.updateCity();
 									dispose();
 								}
 							}
@@ -190,40 +141,4 @@ public class RevConstantDialog extends JDialog {
 		}
 	}
 
-	private void addTypeItems() {
-		for (ContstantType city : ContstantType.values()) {
-			if(!city.getName().equals("城市")){
-				type.addItem(city.getName());
-			}
-			
-		}
-	}
-
-	private void addDistanceItems(List<CityVO> list2) {
-		for(CityVO vo:list2){
-			select_1.addItem(vo.getName());
-			select_2.addItem(vo.getName());
-		}
-	}
-
-	private void addPackTypeItems() {
-		for (PackageTypes city : PackageTypes.values()) {
-			select_1.addItem(city.getName());
-		}
-	}
-
-	private void addOrderTypeItems() {
-		for (OrderTypes city : OrderTypes.values()) {
-			select_1.addItem(city.getName());
-		}
-	}
-
-	private void addTransportTypeItems() {
-		for (TransportTypes city : TransportTypes.values()) {
-			select_1.addItem(city.getName());
-		}
-	}
-	
-
-	
 }
