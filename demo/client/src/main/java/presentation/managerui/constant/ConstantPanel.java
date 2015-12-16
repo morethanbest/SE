@@ -21,10 +21,13 @@ import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.TransportTypes;
 import presentation.managerui.ManagerPanel;
+import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.ConstantsVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
+import po.ResultMessage;
+
 import java.awt.SystemColor;
 import java.awt.Font;
 
@@ -40,8 +43,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	private ManagerPanel managerPanel;
 	private JButton btnRevise;
 	private JButton btnAdd;
-	private JButton btnAddCity;
-	private JButton btnDelCity;
 
 	/**
 	 * Create the panel.
@@ -99,12 +100,10 @@ public class ConstantPanel extends JPanel implements ActionListener {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (type.getSelectedItem().equals(ContstantType.City.getName())) {
-					swapBtn(true);
 					select_2.setVisible(false);
 					addCityItems();
 					displayByCity(cityList);
 				} else {
-					swapBtn(false);
 					if (type.getSelectedItem().equals(
 							ContstantType.Distance.getName())) {
 						select_2.setVisible(true);
@@ -159,13 +158,20 @@ public class ConstantPanel extends JPanel implements ActionListener {
 							table.getSelectedRow(), 0);
 					double cellValue2 = Double.parseDouble((String) tableModel
 							.getValueAt(table.getSelectedRow(), 1));
-					constantsBlService.delConstants(new ConstantsVO(cellValue1,
-							cellValue2));
+					if(constantsBlService.delConstants(new ConstantsVO(cellValue1,cellValue2))==ResultMessage.failure){
+						TipDialog tipDialog=new TipDialog("该常量不可删除！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
 					refreshList();
 				} catch (ArrayIndexOutOfBoundsException  e1) {
-					managerPanel.setHint("系统提示：未选择删除项！");
+					TipDialog tipDialog=new TipDialog("请选择删除项！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
 				} catch (NullPointerException e1) {
-					managerPanel.setHint("系统提示：未选择删除项！");
+					TipDialog tipDialog=new TipDialog("请选择删除项！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
 				}
 			}
 		});
@@ -176,31 +182,6 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		btnRevise.setBounds(798, 0, 113, 32);
 		add(btnRevise);
 		
-		btnAddCity = new JButton("AddCity");
-		btnAddCity.addActionListener(this);
-		btnAddCity.setBounds(594, 0, 120, 32);
-		add(btnAddCity);
-		
-		btnDelCity = new JButton("DelCity");
-		btnDelCity.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel tableModel = (DefaultTableModel) table
-						.getModel();
-				try{
-				String cellValue1 = (String) tableModel.getValueAt(
-						table.getSelectedRow(), 0);
-				String cellValue2 = (String) tableModel.getValueAt(
-						table.getSelectedRow(), 1);
-				constantsBlService.delCity(new CityVO(cellValue1, cellValue2));
-				updateCity();
-			} catch (ArrayIndexOutOfBoundsException | NullPointerException e1) {
-				managerPanel.setHint("系统提示：未选择删除项！");
-			}
-			}
-		});
-		btnDelCity.setBounds(744, 0, 120, 32);
-		add(btnDelCity);
-
 		addDistanceItems();
 
 		ItemListener distanceListener = new ItemListener() {
@@ -216,9 +197,10 @@ public class ConstantPanel extends JPanel implements ActionListener {
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(10);
-		swapBtn(false);
 		refreshList();
-
+        
+		btnDelete.addActionListener(this);
+		btnRevise.addActionListener(this);
 	}
 
 	@Override
@@ -227,11 +209,13 @@ public class ConstantPanel extends JPanel implements ActionListener {
 			AddConstantDailog dialog = new AddConstantDailog(this, cityList);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		}else if(e.getSource().equals(btnAddCity)){
-			AddCityDialog dialog = new AddCityDialog(this);
+		}
+		else if(e.getSource().equals(btnRevise)){
+			RevConstantDialog dialog=new RevConstantDialog(this, cityList);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
+
 	}
 
 	private void addTypeItems() {
@@ -279,8 +263,8 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	}
 
 	private void addTransportTypeItems() {
-		select_1.removeAll();
-		select_2.removeAll();
+		select_1.removeAllItems();
+		select_2.removeAllItems();
 		select_1.addItem("全部");
 		for (TransportTypes transport : TransportTypes.values()) {
 			select_1.addItem(transport.getName());
@@ -416,14 +400,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		managerPanel.setHint(str);
 	}
 
-	private void swapBtn(boolean isCity){
-			btnAdd.setVisible(!isCity);
-			btnDelete.setVisible(!isCity);
-			btnRevise.setVisible(!isCity);
-			btnAddCity.setVisible(isCity);
-			btnDelCity.setVisible(isCity);
-		
-	}
+
 	
 	// 作者测试用，真实使用时可以不注释掉
 	private void testdisplayByVO() {

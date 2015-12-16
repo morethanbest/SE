@@ -21,6 +21,13 @@ public class RevConstants {
 			long id=po.getId();
 			ConstantsPO newpo=new ConstantsPO(id,name,value);
 			ResultMessage result=ResultMessage.success;
+			System.out.println(id+" "+name+" "+value);
+			if(result==ResultMessage.success){
+				System.out.println("success");
+			}
+			else{
+				System.out.println("false");
+			}
 			return result;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

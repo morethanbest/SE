@@ -12,11 +12,12 @@ import javax.swing.JTextField;
 
 import businesslogic.accountbl.AccountPack.AccountController;
 import businesslogicservice.accountblservice.AccountBlService;
+import presentation.tip.NumberField;
 import vo.AccountVO;
 import java.awt.Font;
 
 public class AccountPanel extends JPanel  implements ActionListener{
-	private JTextField nameToSearch;
+	private NumberField nameToSearch;
 	private JTextField nameField;
 	private JTextField moneyField;
 	private AccountVO vo=null;
@@ -37,7 +38,7 @@ public class AccountPanel extends JPanel  implements ActionListener{
 		label.setBounds(24, 21, 74, 15);
 		add(label);
 		
-		nameToSearch = new JTextField();
+		nameToSearch = new NumberField(12);
 		nameToSearch.setBounds(108, 18, 204, 21);
 		add(nameToSearch);
 		nameToSearch.setColumns(10);

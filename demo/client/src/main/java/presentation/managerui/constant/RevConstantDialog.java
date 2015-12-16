@@ -30,18 +30,17 @@ import businesslogicservice.managerblservice.ConstantsBlService;
 import java.awt.SystemColor;
 
 
-public class AddConstantDailog extends JDialog {
+public class RevConstantDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private DoubleField textField;
 	private JComboBox<String> type;
 	private JComboBox<String> select_1;
 	private JComboBox<String> select_2;
-	private JTextField cityField;
 	/**
 	 * Create the dialog.
 	 */
-	public AddConstantDailog(final ConstantPanel parent, final List<CityVO> list) {
+	public RevConstantDialog(final ConstantPanel parent, final List<CityVO> list) {
 //		setModal(true);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
@@ -65,7 +64,6 @@ public class AddConstantDailog extends JDialog {
 					select_2.removeAllItems();
 					select_1.setVisible(true);
 					select_2.setVisible(true);
-					cityField.setVisible(false);
 					addDistanceItems(list);
 				} else if (type.getSelectedItem().equals(
 						ContstantType.PackageType.getName())) {
@@ -73,7 +71,6 @@ public class AddConstantDailog extends JDialog {
 					select_2.removeAllItems();
 					select_1.setVisible(true);
 					select_2.setVisible(false);
-					cityField.setVisible(false);
 					addPackTypeItems();
 				} else if (type.getSelectedItem().equals(
 						ContstantType.OrderType.getName())) {
@@ -81,7 +78,6 @@ public class AddConstantDailog extends JDialog {
 					select_2.removeAllItems();
 					select_1.setVisible(true);
 					select_2.setVisible(false);
-					cityField.setVisible(false);
 					addOrderTypeItems();
 				} else if (type.getSelectedItem().equals(
 						ContstantType.TransportType.getName())) {
@@ -89,16 +85,7 @@ public class AddConstantDailog extends JDialog {
 					select_2.removeAllItems();
 					select_1.setVisible(true);
 					select_2.setVisible(false);
-					cityField.setVisible(false);
 					addTransportTypeItems();
-				} else if (type.getSelectedItem().equals(
-						ContstantType.City.getName())) {
-					select_1.removeAllItems();
-					select_2.removeAllItems();
-					select_1.setVisible(false);
-					select_2.setVisible(false);
-					cityField.setVisible(true);
-					
 				}
 			}
 		});
@@ -106,12 +93,6 @@ public class AddConstantDailog extends JDialog {
 		select_1 = new JComboBox<String>();
 		select_1.setBounds(231, 37, 187, 32);
 		contentPanel.add(select_1);
-		
-		cityField = new JTextField();
-		cityField.setBounds(231, 37, 187, 32);
-		contentPanel.add(cityField);
-		cityField.setColumns(10);
-		cityField.setVisible(false);
 		
 		select_2 = new JComboBox<String>();
 		select_2.setBounds(14, 142, 187, 32);
@@ -153,20 +134,19 @@ public class AddConstantDailog extends JDialog {
 							else {
 								ConstantsVO vo = new ConstantsVO(name, Double
 										.parseDouble(textField.getText()));
-								if(constantsBlService.addConstants(vo) == ResultMessage.failure){
-									
-									TipDialog tipDialog=new TipDialog("该常量已存在！");
+								if(constantsBlService.revConstants(vo) == ResultMessage.failure){									
+									TipDialog tipDialog=new TipDialog("该常量不存在！");
 									tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 									tipDialog.setVisible(true);		
 								}
 								else{
-									parent.refreshList();
+									parent.refreshList();System.out.println(textField.getText());
 									dispose();
 								}
 							}
 							
 						}
-						else if(select_1.isVisible()){
+						else{
 							name = name.concat("-").concat(
 									(String) select_1.getSelectedItem());
 							
@@ -178,9 +158,9 @@ public class AddConstantDailog extends JDialog {
 							else {
 								ConstantsVO vo = new ConstantsVO(name, Double
 										.parseDouble(textField.getText()));
-								if(constantsBlService.addConstants(vo) == ResultMessage.failure){
+								if(constantsBlService.revConstants(vo) == ResultMessage.failure){
 									
-									TipDialog tipDialog=new TipDialog("该常量已存在！");
+									TipDialog tipDialog=new TipDialog("该常量不存在！");
 									tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 									tipDialog.setVisible(true);		
 								}		
@@ -188,32 +168,6 @@ public class AddConstantDailog extends JDialog {
 									parent.refreshList();
 									dispose();
 								}
-							}
-						}
-						else{
-							if(cityField.getText().equals("")){
-								TipDialog tipDialog=new TipDialog("请输入城市！");
-								tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								tipDialog.setVisible(true);		
-							}
-							else if(textField.getText().equals("")){
-								TipDialog tipDialog=new TipDialog("请输入常量值！");
-								tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								tipDialog.setVisible(true);	
-							}
-							else{
-								ResultMessage resultMessage=constantsBlService.addCity(new CityVO(cityField.getText(), textField.getText()));
-								if(resultMessage==ResultMessage.failure){
-									TipDialog tipDialog=new TipDialog("城市已存在！");
-									tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-									tipDialog.setVisible(true);		
-								}
-								else{
-									parent.updateCity();
-									parent.refreshList();
-									dispose();
-								}
-								
 							}
 						}
 
@@ -238,7 +192,10 @@ public class AddConstantDailog extends JDialog {
 
 	private void addTypeItems() {
 		for (ContstantType city : ContstantType.values()) {
-			type.addItem(city.getName());
+			if(!city.getName().equals("城市")){
+				type.addItem(city.getName());
+			}
+			
 		}
 	}
 
