@@ -95,7 +95,7 @@ public class StockinPanel extends JPanel {
 		orgBox.setBounds(143, 185, 220, 24);
 		add(orgBox);
 		addOrganizationItems(orgBox);
-		addBlockItems();
+
 
 		ItemListener listener = new ItemListener() {
 
@@ -147,6 +147,7 @@ public class StockinPanel extends JPanel {
 		quBox = new JComboBox<String>();
 		quBox.setBounds(557, 106, 78, 24);
 		add(quBox);
+		addBlockItems();
 		quBox.addItemListener(new ItemListener() {
 
 			@Override
@@ -159,7 +160,7 @@ public class StockinPanel extends JPanel {
 				fillBox(weiBox, list.get(2));
 			}
 		});
-
+		
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

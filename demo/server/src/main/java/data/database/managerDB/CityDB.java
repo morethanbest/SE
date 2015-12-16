@@ -92,6 +92,9 @@ public class CityDB {
 	
 	public static ResultMessage update(CityPO po){
 		dbh=new DBHelper();
+		if("上海".equals(po.getName())||"南京".equals(po.getName())||"北京".equals(po.getName())||"广州".equals(po.getName())){
+			return ResultMessage.failure;
+		}
 		sql="update CityPO set zone=? where name=?";
 		pst=dbh.prepare(sql);
 		try{

@@ -20,14 +20,7 @@ public class RevConstants {
 			po = constants.findConstants(name);
 			long id=po.getId();
 			ConstantsPO newpo=new ConstantsPO(id,name,value);
-			ResultMessage result=ResultMessage.success;
-			System.out.println(id+" "+name+" "+value);
-			if(result==ResultMessage.success){
-				System.out.println("success");
-			}
-			else{
-				System.out.println("false");
-			}
+			ResultMessage result=constants.updateConstants(newpo);
 			return result;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
