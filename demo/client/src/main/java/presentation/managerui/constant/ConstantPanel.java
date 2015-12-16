@@ -268,11 +268,11 @@ public class ConstantPanel extends JPanel implements ActionListener {
 					revConstantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					revConstantDialog.setVisible(true);
 				} catch (ArrayIndexOutOfBoundsException  e1) {
-					TipDialog tipDialog=new TipDialog("请选择删除项！");
+					TipDialog tipDialog=new TipDialog("请选择修改项！");
 					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					tipDialog.setVisible(true);		
 				} catch (NullPointerException e1) {
-					TipDialog tipDialog=new TipDialog("请选择删除项！");
+					TipDialog tipDialog=new TipDialog("请选择修改项！");
 					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					tipDialog.setVisible(true);		
 				}
