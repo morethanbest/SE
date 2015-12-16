@@ -18,39 +18,44 @@ import po.Arrivalstate;
 import po.Formstate;
 import po.Organizationtype;
 import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.managerui.examui.ExamPanel;
 import vo.ArrivalVO;
 import vo.OrganizationVO;
 import businesslogic.logisticsbl.ArrivalPack.ArrivalController;
+import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.ArrivalBlService;
+import businesslogicservice.managerblservice.ExamArrivals;
 import businesslogicservice.managerblservice.OrganizationBlService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ArrivalPanel extends JPanel {
+public class ArrivalUpdatePanel extends JPanel {
 	private JTextField codeField;
 	private JLabel orgLabel;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
 	private JComboBox<Long> dateBox;
-	private JButton button;
+	private JButton update;
 	private JComboBox<String> departureBox;
 	private JComboBox<String> stateBox;
-	private ArrivalBlService arrivalBlService;
+	private ArrivalBlService controller;
 	private JComboBox<String> typeBox;
 	private JButton button_1;
+	private JButton button_2;
+	private ArrivalVO vo;
 
 	/**
 	 * Create the panel.
 	 */
-	public ArrivalPanel(String orgCode, JPanel parent, CardLayout card) {
-		arrivalBlService = new ArrivalController();
+	public ArrivalUpdatePanel(CenterSalesmanPanel parent, CardLayout card, String orgName) {
+		controller = new ArrivalController();
 
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		orgLabel = new JLabel(orgCode);
+		orgLabel = new JLabel("");
 		orgLabel.setBounds(139, 50, 242, 18);
 		add(orgLabel);
 
@@ -75,21 +80,28 @@ public class ArrivalPanel extends JPanel {
 		add(stateBox);
 		addStateTypeItems();
 
-		button = new JButton("提交");
-		button.addActionListener(new ActionListener() {
+		update = new JButton("提交修改");
+		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				arrivalBlService.addArrival(new ArrivalVO(arrivalBlService
-						.getid(orgCode), orgCode, date,typeBox.getSelectedIndex() == 1 ,codeField.getText(),
-						(String) departureBox.getSelectedItem(),
-						getStateType((String) stateBox.getSelectedItem()),
-						Formstate.waiting));
+				if(typeBox.getSelectedIndex() == 1)
+					controller.updateFromHall(new ArrivalVO(vo.getId(), orgLabel.getText(), date,
+							typeBox.getSelectedIndex() == 1 ,codeField.getText(),
+							(String) departureBox.getSelectedItem(),
+							getStateType((String) stateBox.getSelectedItem()),
+							vo.getFormstate()), orgName);
+				else
+					controller.updateFromCenter(new ArrivalVO(vo.getId(), orgLabel.getText(), date,
+							typeBox.getSelectedIndex() == 1 ,codeField.getText(),
+							(String) departureBox.getSelectedItem(),
+							getStateType((String) stateBox.getSelectedItem()),
+							vo.getFormstate()), orgName);
 			}
 		});
-		button.setBounds(416, 309, 113, 27);
-		add(button);
+		update.setBounds(444, 333, 122, 36);
+		add(update);
 
 		codeField = new JTextField();
 		codeField.setColumns(10);
@@ -111,23 +123,28 @@ public class ArrivalPanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem((long) c.get(Calendar.YEAR));
-		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
-		
 		typeBox = new JComboBox<String>();
 		typeBox.setBounds(139, 213, 242, 24);
 		add(typeBox);
 		
-		button_1 = new JButton("查看已提交单据");
+		button_1 = new JButton("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
+				card.previous(parent.getSwitcher());
+				parent.getArrival().refreshList();
 			}
 		});
-		button_1.setBounds(760, 355, 145, 27);
+		button_1.setBounds(716, 333, 122, 36);
 		add(button_1);
+		
+		button_2 = new JButton("恢复原值");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				init(vo);
+			}
+		});
+		button_2.setBounds(580, 333, 122, 36);
+		add(button_2);
 		addTypeItems();
 	}
 	
@@ -198,5 +215,22 @@ public class ArrivalPanel extends JPanel {
 		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}
+	}
+	
+	public void init(ArrivalVO vo){
+		this.vo = vo;
+		orgLabel.setText(vo.getCentercode());
+		yearBox.setSelectedItem(vo.getArrivaltime() / 10000);
+		monthBox.setSelectedItem((vo.getArrivaltime() % 10000) / 100);
+		dateBox.setSelectedItem(vo.getArrivaltime() % 1000000);
+		if(vo.getwhefromhall())
+			typeBox.setSelectedIndex(1);
+		else
+			typeBox.setSelectedIndex(0);
+		departureBox.setSelectedItem(vo.getDeparture());
+		stateBox.setSelectedItem(vo.getArrivalstate().getName());
+		codeField.setText(vo.getTranscode());
+		
+		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
 	}
 }

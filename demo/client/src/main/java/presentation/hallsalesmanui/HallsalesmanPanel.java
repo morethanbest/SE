@@ -91,7 +91,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		panel.setLayout(card);
 		
 		//card中添加各种功能面板
-		hallLoadPanel = new HallLoadPanel(orgName,orgcode, city);
+		hallLoadPanel = new HallLoadPanel(orgcode, city, orgName);
 		goodRecievingPanel = new GoodRecievingPanel(orgcode, city);
 		deliveryPanel = new DeliveryPanel(orgcode);
 		

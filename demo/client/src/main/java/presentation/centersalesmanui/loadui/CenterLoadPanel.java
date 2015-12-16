@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+import java.awt.CardLayout;
 import java.awt.SystemColor;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -30,7 +31,7 @@ import businesslogicservice.managerblservice.OrganizationBlService;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class LoadPanel extends JPanel {
+public class CenterLoadPanel extends JPanel {
 	private JTextField yaField;
 	private JTextField carField;
 	private JTextField jianField;
@@ -47,11 +48,13 @@ public class LoadPanel extends JPanel {
 	private CenterloadBlService centerloadBlService;
 	private JButton button_2;
 	private JButton button_3;
+	private JButton button_4;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoadPanel(String orgCode, String city) {
+	public CenterLoadPanel(String orgCode, String city, JPanel parent, CardLayout card) {
+		this.city = city;
 		centerloadBlService = new CenterloadController();
 		
 		setBackground(SystemColor.inactiveCaptionBorder);
@@ -197,6 +200,15 @@ public class LoadPanel extends JPanel {
 		});
 		button_3.setBounds(824, 295, 113, 27);
 		add(button_3);
+		
+		button_4 = new JButton("查看已提交单据");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+			}
+		});
+		button_4.setBounds(752, 348, 145, 27);
+		add(button_4);
 	}
 	
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {

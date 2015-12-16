@@ -1,44 +1,36 @@
 package presentation.centersalesmanui.transferui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import po.Formstate;
-import po.Organizationtype;
-import presentation.enums.OrganizationType;
+import presentation.centersalesmanui.CenterSalesmanPanel;
 import presentation.enums.TransportTypes;
-import vo.CenterloadVO;
 import vo.CityVO;
-import vo.OrganizationVO;
 import vo.RecordtransVO;
 import businesslogic.logisticsbl.RecordtransPack.CentertransController;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
 import businesslogicservice.managerblservice.ConstantsBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
 
-import java.awt.CardLayout;
-import java.awt.Component;
-
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-public class TransferPanel extends JPanel {
+public class TransferUpdatePanel extends JPanel {
 	private JTextField classField;
 	private JTextField counterField;
 	private JTextField manageField;
@@ -48,21 +40,22 @@ public class TransferPanel extends JPanel {
 	private JComboBox<Long> dateBox;
 	private JComboBox<String> typeBox;
 	private JComboBox<String> destinBox;
-	private JButton button;
-	private RecordtransBlService recordtransBlService;
+	private JButton update;
 	private JButton button_1;
 	private JButton button_2;
 	private JLabel codeLabel;
 	private JLabel departureLabel;
-	private JLabel fareLabel;
 	private JButton farebutton;
+	private RecordtransVO vo;
+	private JTextField fareField;
+	private JButton button;
 	private JButton button_3;
-
-	/**
+	private RecordtransBlService controller;
+/**
 	 * Create the panel.
 	 */
-	public TransferPanel(String orgCode, String city, JPanel parent, CardLayout card) {
-		recordtransBlService = new CentertransController();
+	public TransferUpdatePanel(CenterSalesmanPanel parent, CardLayout card) {
+		controller = new CentertransController();
 
 		setLayout(null);
 
@@ -70,7 +63,7 @@ public class TransferPanel extends JPanel {
 		codeLabel.setBounds(14, 12, 242, 27);
 		add(codeLabel);
 
-		departureLabel = new JLabel(city);
+		departureLabel = new JLabel("");
 		departureLabel.setBounds(351, 147, 242, 27);
 		add(departureLabel);
 
@@ -117,10 +110,10 @@ public class TransferPanel extends JPanel {
 
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] {
 				typeBox, yearBox, monthBox, dateBox, classField, counterField,
-				button }));
+				update }));
 
-		button = new JButton("提交");
-		button.addActionListener(new ActionListener() {
+		update = new JButton("提交修改");
+		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
@@ -132,39 +125,19 @@ public class TransferPanel extends JPanel {
 				for (int i = 0; i < rowCount; i++) {
 					barcodes.add((String) tableModel.getValueAt(i, 0));
 				}
-				double fare = Double.parseDouble(fareLabel.getText());
-				recordtransBlService.Recordtrans(new RecordtransVO(date,
+				double fare = Double.parseDouble(farebutton.getText());
+				controller.update(new RecordtransVO(date,
 						codeLabel.getText(), (String) typeBox
 								.getSelectedItem(), classField.getText(),
 						departureLabel.getText(), (String) destinBox
 								.getSelectedItem(), counterField.getText(),
 						manageField.getText(), barcodes, fare,
-						Formstate.waiting));
+						vo.getFormstate()));
 			}
 		});
-		button.setBounds(416, 348, 113, 27);
-		add(button);
+		update.setBounds(416, 348, 113, 27);
+		add(update);
 
-		farebutton = new JButton("获取运费");
-		farebutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				List<String> barcodes = new ArrayList<String>();
-				DefaultTableModel tableModel = (DefaultTableModel) table
-						.getModel();
-				int rowCount = tableModel.getRowCount();
-				for (int i = 0; i < rowCount; i++) {
-					barcodes.add((String) tableModel.getValueAt(i, 0));
-				}
-				fareLabel.setText(recordtransBlService.getfee(barcodes,
-						departureLabel.getText(),
-						(String) destinBox.getSelectedItem(),
-						(String) typeBox.getSelectedItem())
-						+ "");
-
-			}
-		});
-		farebutton.setBounds(153, 348, 97, 27);
-		add(farebutton);
 
 		JLabel label = new JLabel("运费合计：");
 		label.setBounds(14, 352, 82, 18);
@@ -203,10 +176,31 @@ public class TransferPanel extends JPanel {
 		});
 		button_2.setBounds(823, 300, 113, 27);
 		add(button_2);
-
-		fareLabel = new JLabel("");
-		fareLabel.setBounds(93, 352, 46, 18);
-		add(fareLabel);
+		
+		fareField = new JTextField();
+		fareField.setText("0");
+		fareField.setBounds(100, 349, 61, 24);
+		add(fareField);
+		fareField.setColumns(10);
+		
+		button = new JButton("恢复原值");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				init(vo);
+			}
+		});
+		button.setBounds(543, 348, 113, 27);
+		add(button);
+		
+		button_3 = new JButton("返回");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.previous(parent.getSwitcher());
+				parent.getTransfer().refreshList();
+			}
+		});
+		button_3.setBounds(670, 348, 113, 27);
+		add(button_3);
 
 		ItemListener listener = new ItemListener() {
 
@@ -218,23 +212,6 @@ public class TransferPanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem((long) c.get(Calendar.YEAR));
-		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
-		Long date = (Long) yearBox.getSelectedItem() * 10000
-				+ (Long) monthBox.getSelectedItem() * 100
-				+ (Long) dateBox.getSelectedItem();
-		codeLabel.setText(recordtransBlService.getid(orgCode, date));
-		
-		button_3 = new JButton("查看已提交单据");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
-			}
-		});
-		button_3.setBounds(728, 348, 149, 27);
-		add(button_3);
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
@@ -289,5 +266,30 @@ public class TransferPanel extends JPanel {
 		for (CityVO city : cityList) {
 			citySelect.addItem(city.getName());
 		}
+	}
+	
+	public void init(RecordtransVO vo){
+		this.vo = vo;
+		codeLabel.setText(vo.getTranscode());
+		yearBox.setSelectedItem(vo.getLoadtime() / 10000);
+		monthBox.setSelectedItem((vo.getLoadtime() % 10000) / 100);
+		dateBox.setSelectedItem(vo.getLoadtime() % 1000000);
+		typeBox.setSelectedItem(vo.getTransportType());
+		classField.setText(vo.getTransportCode());
+		counterField.setText(vo.getCountercode());
+		manageField.setText(vo.getSupervisor());
+		departureLabel.setText(vo.getDepartrue());
+		destinBox.setSelectedItem(vo.getDestination());
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		for (int i = 0; i < tableModel.getRowCount(); i++) {
+			tableModel.removeRow(i);
+		}
+		
+		List<String> list = vo.getAllcode();
+		for (int i = 0; i < list.size(); i++) {
+			tableModel.addRow(new String[]{list.get(i)});
+		}
+		
+		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
 	}
 }
