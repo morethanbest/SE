@@ -29,6 +29,9 @@ import businesslogicservice.managerblservice.OrganizationBlService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+import javax.swing.JLabel;
 
 public class GoodRecievingPanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -41,6 +44,11 @@ public class GoodRecievingPanel extends JPanel {
 	private JTextField codeField;
 	private String city;
 	private JComboBox<String> typeBox;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
 
 	/**
 	 * Create the panel.
@@ -121,6 +129,27 @@ public class GoodRecievingPanel extends JPanel {
 		});
 		button.setBounds(423, 336, 113, 27);
 		add(button);
+		
+		label = new JLabel("入库日期：");
+		label.setBounds(54, 70, 86, 18);
+		add(label);
+		
+		label_1 = new JLabel("单据类型：");
+		label_1.setBounds(54, 149, 82, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("单据编号：");
+		label_2.setBounds(54, 227, 82, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("目的地：");
+		label_3.setBounds(448, 70, 71, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("到达状态：");
+		label_4.setBounds(433, 152, 86, 18);
+		add(label_4);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, typeBox, codeField, destinBox, stateBox}));
 	}
 
 	private void addTypeItems() {

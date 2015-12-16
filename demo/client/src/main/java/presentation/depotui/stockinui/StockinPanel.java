@@ -27,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class StockinPanel extends JPanel {
 	private JTextField codeField;
@@ -44,6 +46,14 @@ public class StockinPanel extends JPanel {
 	private JComboBox<Long> jiaBox;
 	private JComboBox<Long> weiBox;
 	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_7;
+	private JLabel label_8;
+	private JLabel label_6;
 
 	/**
 	 * Create the panel.
@@ -107,15 +117,15 @@ public class StockinPanel extends JPanel {
 		add(label);
 
 		paiBox = new JComboBox<Long>();
-		paiBox.setBounds(557, 185, 65, 24);
+		paiBox.setBounds(699, 106, 78, 24);
 		add(paiBox);
 
 		jiaBox = new JComboBox<Long>();
-		jiaBox.setBounds(636, 185, 65, 24);
+		jiaBox.setBounds(557, 185, 78, 24);
 		add(jiaBox);
 
 		weiBox = new JComboBox<Long>();
-		weiBox.setBounds(712, 185, 65, 24);
+		weiBox.setBounds(699, 185, 78, 24);
 		add(weiBox);
 
 		ItemListener listener2 = new ItemListener() {
@@ -135,7 +145,7 @@ public class StockinPanel extends JPanel {
 		weiBox.addItemListener(listener2);
 
 		quBox = new JComboBox<String>();
-		quBox.setBounds(557, 106, 220, 24);
+		quBox.setBounds(557, 106, 78, 24);
 		add(quBox);
 		quBox.addItemListener(new ItemListener() {
 
@@ -168,6 +178,39 @@ public class StockinPanel extends JPanel {
 		});
 		button.setBounds(416, 312, 113, 27);
 		add(button);
+		
+		label_1 = new JLabel("订单编号：");
+		label_1.setBounds(57, 38, 86, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("运送方向：");
+		label_2.setBounds(57, 109, 86, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("机构名称：");
+		label_3.setBounds(57, 188, 86, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("入库日期：");
+		label_4.setBounds(472, 38, 86, 18);
+		add(label_4);
+		
+		label_5 = new JLabel("库存分区：");
+		label_5.setBounds(472, 109, 86, 18);
+		add(label_5);
+		
+		label_7 = new JLabel("排号：");
+		label_7.setBounds(644, 109, 51, 18);
+		add(label_7);
+		
+		label_8 = new JLabel("位号：");
+		label_8.setBounds(643, 188, 51, 18);
+		add(label_8);
+		
+		label_6 = new JLabel("架号：");
+		label_6.setBounds(505, 188, 51, 18);
+		add(label_6);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{codeField, typeBox, orgBox, yearBox, monthBox, dateBox, quBox, paiBox, jiaBox, weiBox}));
 
 		typeBox.addItemListener(new ItemListener() {
 

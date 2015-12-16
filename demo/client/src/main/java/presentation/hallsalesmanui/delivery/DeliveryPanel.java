@@ -17,6 +17,9 @@ import presentation.tip.TipDialog;
 import vo.DeliveryVO;
 import businesslogic.logisticsbl.DeliveryPack.DeliveryController;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
+import javax.swing.JLabel;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class DeliveryPanel extends JPanel {
 	private JTextField codeField;
@@ -26,6 +29,9 @@ public class DeliveryPanel extends JPanel {
 	private JComboBox<Long> dateBox;
 	private JButton button;
 	private DeliveryBlService deliveryBlService;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
 
 	/**
 	 * Create the panel.
@@ -92,6 +98,19 @@ public class DeliveryPanel extends JPanel {
 		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
 		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
 		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
+		
+		label = new JLabel("派件日期：");
+		label.setBounds(200, 144, 86, 18);
+		add(label);
+		
+		label_1 = new JLabel("订单编号：");
+		label_1.setBounds(200, 85, 86, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("派件员：");
+		label_2.setBounds(212, 207, 74, 18);
+		add(label_2);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{codeField, yearBox, monthBox, dateBox, deliveryField}));
 
 	}
 

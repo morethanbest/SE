@@ -49,6 +49,15 @@ public class HallLoadPanel extends JPanel {
 	private String city;
 	private JComboBox<String> typeBox;
 	private String orgName;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_6;
+	private JLabel label_7;
+	private JLabel label_8;
 	/**
 	 * Create the panel.
 	 */
@@ -59,23 +68,13 @@ public class HallLoadPanel extends JPanel {
 		setLayout(null);
 
 		hallLoadBlService = new HallLoadController();
-
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(302, 0, 2, 357);
-		add(separator);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setBounds(634, 0, 2, 357);
-		add(separator_1);
 		
 		orgLabel = new JLabel(orgCode);
-		orgLabel.setBounds(89, 47, 199, 18);
+		orgLabel.setBounds(108, 44, 199, 18);
 		add(orgLabel);
 		
 		JLabel fareLabel = new JLabel("0");
-		fareLabel.setBounds(421, 281, 82, 27);
+		fareLabel.setBounds(434, 281, 69, 27);
 		add(fareLabel);
 
 		carField = new JTextField();
@@ -84,37 +83,37 @@ public class HallLoadPanel extends JPanel {
 		add(carField);
 		
 		moterLabel = new JLabel("");
-		moterLabel.setBounds(89, 95, 202, 18);
+		moterLabel.setBounds(108, 92, 202, 18);
 		add(moterLabel);
 
 		jianField = new JTextField();
 		jianField.setColumns(10);
-		jianField.setBounds(421, 126, 199, 24);
+		jianField.setBounds(421, 120, 199, 24);
 		add(jianField);
 
 		yaField = new JTextField();
-		yaField.setBounds(421, 214, 199, 24);
+		yaField.setBounds(421, 199, 199, 24);
 		add(yaField);
 		yaField.setColumns(10);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(89, 147, 69, 24);
+		yearBox.setBounds(108, 144, 69, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(172, 147, 51, 24);
+		monthBox.setBounds(191, 144, 51, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(237, 147, 51, 24);
+		dateBox.setBounds(256, 144, 51, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(89, 282, 199, 24);
+		destinBox.setBounds(108, 279, 199, 24);
 		add(destinBox);
 		
 		typeBox = new JComboBox<String>();
@@ -128,7 +127,7 @@ public class HallLoadPanel extends JPanel {
 					addOrganizationItems(Organizationtype.hall);
 			}
 		});
-		typeBox.setBounds(89, 214, 199, 24);
+		typeBox.setBounds(108, 211, 199, 24);
 		add(typeBox);
 		addTypeItems();
 
@@ -224,6 +223,42 @@ public class HallLoadPanel extends JPanel {
 		});
 		getFareButton.setBounds(517, 281, 103, 27);
 		add(getFareButton);
+		
+		label = new JLabel("装车日期：");
+		label.setBounds(25, 150, 85, 18);
+		add(label);
+		
+		label_1 = new JLabel("汽运编号：");
+		label_1.setBounds(25, 92, 85, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("机构编号：");
+		label_2.setBounds(25, 44, 85, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("单据类型：");
+		label_3.setBounds(25, 214, 85, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("车辆代号：");
+		label_4.setBounds(338, 44, 82, 18);
+		add(label_4);
+		
+		label_5 = new JLabel("运费合计：");
+		label_5.setBounds(338, 285, 82, 18);
+		add(label_5);
+		
+		label_6 = new JLabel("监装员：");
+		label_6.setBounds(351, 123, 69, 18);
+		add(label_6);
+		
+		label_7 = new JLabel("出发地：");
+		label_7.setBounds(351, 202, 69, 18);
+		add(label_7);
+		
+		label_8 = new JLabel("出发地：");
+		label_8.setBounds(38, 285, 72, 18);
+		add(label_8);
 	}
 	
 	private void addTypeItems() {

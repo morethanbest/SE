@@ -30,6 +30,8 @@ import businesslogicservice.managerblservice.OrganizationBlService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class CenterLoadPanel extends JPanel {
 	private JTextField yaField;
@@ -49,6 +51,12 @@ public class CenterLoadPanel extends JPanel {
 	private JButton button_2;
 	private JButton button_3;
 	private JButton button_4;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_6;
 
 	/**
 	 * Create the panel.
@@ -61,31 +69,31 @@ public class CenterLoadPanel extends JPanel {
 		setLayout(null);
 		
 		moterLabel = new JLabel("");
-		moterLabel.setBounds(14, 53, 242, 24);
+		moterLabel.setBounds(98, 53, 190, 24);
 		add(moterLabel);
 		
 		fareLabel = new JLabel("0");
-		fareLabel.setBounds(112, 352, 44, 18);
+		fareLabel.setBounds(403, 259, 83, 18);
 		add(fareLabel);
 		
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(14, 118, 74, 24);
+		yearBox.setBounds(98, 118, 58, 24);
 		add(yearBox);
 		
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(112, 118, 61, 24);
+		monthBox.setBounds(170, 118, 52, 24);
 		add(monthBox);
 		
 		addYearItems(yearBox, monthBox);
 		
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(195, 118, 61, 24);
+		dateBox.setBounds(236, 118, 52, 24);
 		add(dateBox);
 		
 		addDateItems(yearBox, monthBox, dateBox);
 		
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(14, 187, 242, 24);
+		destinBox.setBounds(98, 187, 190, 24);
 		add(destinBox);
 		
 		addOrganizationItems(destinBox);
@@ -115,25 +123,25 @@ public class CenterLoadPanel extends JPanel {
 		
 		carField = new JTextField();
 		carField.setColumns(10);
-		carField.setBounds(351, 53, 242, 24);
+		carField.setBounds(403, 53, 190, 24);
 		add(carField);
 		
 		jianField = new JTextField();
 		jianField.setColumns(10);
-		jianField.setBounds(351, 118, 242, 24);
+		jianField.setBounds(403, 118, 190, 24);
 		add(jianField);
 		
 		yaField = new JTextField();
 		yaField.setColumns(10);
-		yaField.setBounds(351, 187, 242, 24);
+		yaField.setBounds(403, 187, 190, 24);
 		add(yaField);
 		
 		JLabel label = new JLabel("运费合计：");
-		label.setBounds(14, 352, 84, 18);
+		label.setBounds(305, 259, 84, 18);
 		add(label);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(661, 53, 284, 229);
+		scrollPane.setBounds(661, 13, 284, 269);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -158,7 +166,7 @@ public class CenterLoadPanel extends JPanel {
 				fareLabel.setText(centerloadBlService.getfee(barcodes, city, city) + "");
 			}
 		});
-		button_1.setBounds(163, 348, 93, 27);
+		button_1.setBounds(500, 255, 93, 27);
 		add(button_1);
 		
 		ItemListener listener = new ItemListener() {
@@ -209,6 +217,31 @@ public class CenterLoadPanel extends JPanel {
 		});
 		button_4.setBounds(752, 348, 145, 27);
 		add(button_4);
+		
+		label_1 = new JLabel("车辆代号：");
+		label_1.setBounds(305, 53, 84, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("监装员：");
+		label_2.setBounds(321, 121, 68, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("押运员：");
+		label_3.setBounds(321, 190, 68, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("汽运编号：");
+		label_4.setBounds(0, 56, 84, 18);
+		add(label_4);
+		
+		label_5 = new JLabel("装车日期：");
+		label_5.setBounds(0, 121, 84, 18);
+		add(label_5);
+		
+		label_6 = new JLabel("目的地：");
+		label_6.setBounds(14, 190, 74, 18);
+		add(label_6);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, destinBox, carField, jianField, yaField}));
 	}
 	
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {

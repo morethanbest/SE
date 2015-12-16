@@ -22,6 +22,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+import javax.swing.JLabel;
 
 public class StockoutPanel extends JPanel {
 	private JTextField orderField;
@@ -35,6 +38,12 @@ public class StockoutPanel extends JPanel {
 	private JComboBox<Long> monthBox;
 	private JButton button;
 	private StockoutBlService stockoutBlService;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
 
 	/**
 	 * Create the panel.
@@ -118,6 +127,31 @@ public class StockoutPanel extends JPanel {
 		yearBox.setSelectedItem((long) c.get(Calendar.YEAR));
 		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
 		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
+		
+		label = new JLabel("订单编号：");
+		label.setBounds(55, 37, 86, 18);
+		add(label);
+		
+		label_1 = new JLabel("运送方向：");
+		label_1.setBounds(55, 108, 86, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("机构名称：");
+		label_2.setBounds(55, 187, 86, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("中转类型：");
+		label_3.setBounds(476, 106, 82, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("单据编号：");
+		label_4.setBounds(476, 184, 82, 18);
+		add(label_4);
+		
+		label_5 = new JLabel("出库日期：");
+		label_5.setBounds(476, 38, 82, 18);
+		add(label_5);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{orderField, typeBox, orgBox, yearBox, monthBox, dateBox, transportBox, codeField}));
 
 		typeBox.addItemListener(new ItemListener() {
 

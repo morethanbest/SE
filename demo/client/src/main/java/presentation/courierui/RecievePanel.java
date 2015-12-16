@@ -19,6 +19,9 @@ import businesslogicservice.orderblservice.ReceptionBlService;
 import java.awt.SystemColor;
 import java.awt.Color;
 import java.util.Calendar;
+import javax.swing.JLabel;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class RecievePanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -29,6 +32,9 @@ public class RecievePanel extends JPanel {
 	private JTextField codeField;
 	private JTextField nameField;
 	private ReceptionBlService receptionBlService;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
 
 	/**
 	 * Create the panel.
@@ -42,7 +48,7 @@ public class RecievePanel extends JPanel {
 		setLayout(null);
 
 		nameField = new JTextField();
-		nameField.setBounds(105, 112, 229, 30);
+		nameField.setBounds(218, 112, 229, 30);
 		add(nameField);
 		nameField.setColumns(10);
 
@@ -60,7 +66,7 @@ public class RecievePanel extends JPanel {
 		add(button);
 
 		codeField = new JTextField();
-		codeField.setBounds(105, 199, 229, 30);
+		codeField.setBounds(218, 199, 229, 30);
 		add(codeField);
 		codeField.setColumns(10);
 
@@ -74,20 +80,20 @@ public class RecievePanel extends JPanel {
 			}
 			
 		});
-		button_1.setBounds(163, 419, 113, 27);
+		button_1.setBounds(293, 416, 113, 27);
 		add(button_1);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(105, 293, 79, 24);
+		yearBox.setBounds(218, 293, 79, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(198, 293, 61, 24);
+		monthBox.setBounds(311, 293, 61, 24);
 		add(monthBox);
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(273, 293, 61, 24);
+		dateBox.setBounds(386, 293, 61, 24);
 		add(dateBox);
 		addDateItems(yearBox, monthBox, dateBox);
 
@@ -105,6 +111,19 @@ public class RecievePanel extends JPanel {
 		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
 		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
 		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
+		
+		label = new JLabel("收件人：");
+		label.setBounds(132, 118, 72, 18);
+		add(label);
+		
+		label_1 = new JLabel("订单编号：");
+		label_1.setBounds(117, 205, 79, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("收件日期：");
+		label_2.setBounds(117, 296, 87, 18);
+		add(label_2);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, codeField, yearBox, monthBox, dateBox}));
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {

@@ -57,6 +57,14 @@ public class TransferPanel extends JPanel {
 	private JLabel fareLabel;
 	private JButton farebutton;
 	private JButton button_3;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_6;
+	private JLabel label_7;
+	private JLabel label_8;
 
 	/**
 	 * Create the panel.
@@ -67,57 +75,53 @@ public class TransferPanel extends JPanel {
 		setLayout(null);
 
 		codeLabel = new JLabel("");
-		codeLabel.setBounds(14, 12, 242, 27);
+		codeLabel.setBounds(84, 42, 200, 27);
 		add(codeLabel);
 
 		departureLabel = new JLabel(city);
-		departureLabel.setBounds(351, 147, 242, 27);
+		departureLabel.setBounds(385, 154, 208, 27);
 		add(departureLabel);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(14, 78, 74, 24);
+		yearBox.setBounds(84, 96, 68, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(112, 78, 61, 24);
+		monthBox.setBounds(166, 96, 52, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(195, 78, 61, 24);
+		dateBox.setBounds(232, 96, 52, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
 		typeBox = new JComboBox<String>();
-		typeBox.setBounds(14, 147, 242, 24);
+		typeBox.setBounds(84, 155, 200, 24);
 		add(typeBox);
 		addTransportTypeItems();
 
 		classField = new JTextField();
 		classField.setColumns(10);
-		classField.setBounds(14, 215, 242, 24);
+		classField.setBounds(84, 215, 200, 24);
 		add(classField);
 
 		counterField = new JTextField();
 		counterField.setColumns(10);
-		counterField.setBounds(351, 13, 242, 24);
+		counterField.setBounds(385, 43, 208, 24);
 		add(counterField);
 
 		manageField = new JTextField();
 		manageField.setColumns(10);
-		manageField.setBounds(351, 78, 242, 24);
+		manageField.setBounds(385, 96, 208, 24);
 		add(manageField);
 
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(351, 215, 242, 24);
+		destinBox.setBounds(385, 215, 208, 24);
 		add(destinBox);
 		addCityItems(destinBox);
-
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] {
-				typeBox, yearBox, monthBox, dateBox, classField, counterField,
-				button }));
 
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
@@ -163,15 +167,15 @@ public class TransferPanel extends JPanel {
 
 			}
 		});
-		farebutton.setBounds(153, 348, 97, 27);
+		farebutton.setBounds(496, 270, 97, 27);
 		add(farebutton);
 
 		JLabel label = new JLabel("运费合计：");
-		label.setBounds(14, 352, 82, 18);
+		label.setBounds(303, 274, 82, 18);
 		add(label);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(660, 13, 285, 274);
+		scrollPane.setBounds(636, 25, 309, 262);
 		add(scrollPane);
 
 		table = new JTable();
@@ -204,8 +208,8 @@ public class TransferPanel extends JPanel {
 		button_2.setBounds(823, 300, 113, 27);
 		add(button_2);
 
-		fareLabel = new JLabel("");
-		fareLabel.setBounds(93, 352, 46, 18);
+		fareLabel = new JLabel("0");
+		fareLabel.setBounds(399, 270, 66, 27);
 		add(fareLabel);
 
 		ItemListener listener = new ItemListener() {
@@ -235,6 +239,39 @@ public class TransferPanel extends JPanel {
 		});
 		button_3.setBounds(728, 348, 149, 27);
 		add(button_3);
+		
+		label_1 = new JLabel("目的地：");
+		label_1.setBounds(317, 218, 68, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("出发地：");
+		label_2.setBounds(317, 158, 68, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("监察员：");
+		label_3.setBounds(317, 99, 68, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("货柜号：");
+		label_4.setBounds(317, 46, 68, 18);
+		add(label_4);
+		
+		label_5 = new JLabel("中转编号：");
+		label_5.setBounds(0, 46, 82, 18);
+		add(label_5);
+		
+		label_6 = new JLabel("中转日期：");
+		label_6.setBounds(0, 99, 82, 18);
+		add(label_6);
+		
+		label_7 = new JLabel("中转类型：");
+		label_7.setBounds(0, 158, 82, 18);
+		add(label_7);
+		
+		label_8 = new JLabel("班次号：");
+		label_8.setBounds(14, 218, 68, 18);
+		add(label_8);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, typeBox, classField, counterField, manageField, destinBox}));
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {

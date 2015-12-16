@@ -27,6 +27,8 @@ import businesslogicservice.managerblservice.OrganizationBlService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class ArrivalPanel extends JPanel {
 	private JTextField codeField;
@@ -40,6 +42,12 @@ public class ArrivalPanel extends JPanel {
 	private ArrivalBlService arrivalBlService;
 	private JComboBox<String> typeBox;
 	private JButton button_1;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
 
 	/**
 	 * Create the panel.
@@ -128,6 +136,31 @@ public class ArrivalPanel extends JPanel {
 		});
 		button_1.setBounds(760, 355, 145, 27);
 		add(button_1);
+		
+		label = new JLabel("机构编号：");
+		label.setBounds(40, 50, 85, 18);
+		add(label);
+		
+		label_1 = new JLabel("到达日期：");
+		label_1.setBounds(40, 135, 85, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("到达类型：");
+		label_2.setBounds(40, 216, 85, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("出发地：");
+		label_3.setBounds(457, 50, 72, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("到达状态：");
+		label_4.setBounds(457, 135, 76, 18);
+		add(label_4);
+		
+		label_5 = new JLabel("单据编号：");
+		label_5.setBounds(457, 216, 76, 18);
+		add(label_5);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, typeBox, departureBox, stateBox, codeField}));
 		addTypeItems();
 	}
 	
