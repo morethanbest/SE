@@ -144,6 +144,7 @@ public class StockDB {
 			sql = "select linenum,shelfnum,locationnum from StockPO where orgcode =? and blocknum=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, orgcode);
+			pst.setLong(2, blocknum);
 			ret = pst.executeQuery();
 			if(ret.next()){
 				list.add(ret.getLong(1));
