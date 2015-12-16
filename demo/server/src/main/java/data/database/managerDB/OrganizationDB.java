@@ -250,7 +250,9 @@ public class OrganizationDB {
 			pst.setBytes(2, typebytes);
 			ret=pst.executeQuery();
 			while(ret.next()){
-				lastcode++;
+				String string=ret.getString(1);
+				lastcode=Long.parseLong(string.substring(3, string.length()));
+				
 			}
 			ret.close();
 			dbh.close();// 关闭连接

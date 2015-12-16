@@ -7,6 +7,7 @@ import java.util.List;
 
 import data.database.DBHelper;
 import data.database.Serialize;
+import data.database.userDB.UserDB;
 import po.Job;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -113,8 +114,7 @@ public class StaffDB {
 	}
 	
 	public static ResultMessage deletebyorganization(String organizationcode){
-//		UserDB.deletebyStaff(organizationcode);
-//		dbh=new DBHelper();
+		dbh=new DBHelper();
 		sql="delete from StaffPO where organizationcode=?";
 		pst=dbh.prepare(sql);
 		try{

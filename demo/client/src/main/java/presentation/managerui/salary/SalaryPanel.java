@@ -63,11 +63,11 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		scrollPane.setViewportView(table);
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnCount(4);
-		tableModel.setRowCount(10);
+		tableModel.setRowCount(0);
 
 		table.setRowHeight(50);
 		
-		refreshList();
+//		refreshList();
 		
 		addBtn = new JButton();
 		addBtn.setText("增加薪水策略");
@@ -88,7 +88,7 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		revBtn.addActionListener(this);
 		
 		refreshBtn = new JButton();
-		refreshBtn.setText("刷新");
+		refreshBtn.setText("查找");
 		refreshBtn.setBounds(800, 250, 150, 40);
 		add(refreshBtn);
 		refreshBtn.addActionListener(this);
@@ -124,37 +124,41 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(delBtn)){
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-			String string=(String)tableModel.getValueAt(table.getSelectedRow(), 0);
-			switch (string) {
-			case "快递员":
-				deleteSalary(Job.Courier);
-				break;
-			case "营业厅业务员":
-				deleteSalary(Job.hallsalesman);
-				break;
-			case "中转中心业务员":
-				deleteSalary(Job.transfercentersalesman);
-				break;
-			case "中转中心库存管理人员":
-				deleteSalary(Job.CenterDepot);
-				break;
-			case "财务人员":
-				deleteSalary(Job.Financial);
-				break;
-			case "高级财务人员":
-				deleteSalary(Job.advanceFinancial);
-				break;
-			case "司机":
-				deleteSalary(Job.drivers);
-				break;
-			case "管理员":
-				deleteSalary(Job.administrator);
-				break;
-			case "总经理":
-				deleteSalary(Job.manager);
-				break;
-			default:
-				break;
+			try{
+				String string=(String)tableModel.getValueAt(table.getSelectedRow(), 0);
+				switch (string) {
+				case "快递员":
+					deleteSalary(Job.Courier);
+					break;
+				case "营业厅业务员":
+					deleteSalary(Job.hallsalesman);
+					break;
+				case "中转中心业务员":
+					deleteSalary(Job.transfercentersalesman);
+					break;
+				case "中转中心库存管理人员":
+					deleteSalary(Job.CenterDepot);
+					break;
+				case "财务人员":
+					deleteSalary(Job.Financial);
+					break;
+				case "高级财务人员":
+					deleteSalary(Job.advanceFinancial);
+					break;
+				case "司机":
+					deleteSalary(Job.drivers);
+					break;
+				case "管理员":
+					deleteSalary(Job.administrator);
+					break;
+				case "总经理":
+					deleteSalary(Job.manager);
+					break;
+				default:
+					break;
+				}
+			}catch(Exception exception){
+				exception.printStackTrace();
 			}
 		}else if(e.getSource().equals(addBtn)){
 			AddSalaryDialog dialog=new AddSalaryDialog(this);
