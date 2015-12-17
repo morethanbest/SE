@@ -41,7 +41,7 @@ public class StaffController implements StaffBlService {
 		// TODO Auto-generated method stub
 		FindStaff find=new FindStaff();
 		Staff s=new Staff(find);
-		List<StaffVO> result=s.findStaffbyOrganization("");
+		List<StaffVO> result=s.getStaffAll();
 		return result;
 	}
 	

@@ -135,4 +135,31 @@ public class FindStaff {
 		
 		return listvo;
 	}
+	public List<StaffVO> getStaffAll(){
+		StaffDataService staff=RMIHelper.getStaffdata();
+		List<StaffPO> listpo;
+		List<StaffVO> listvo;
+		try {
+			listpo = staff.getAll();
+			listvo=new ArrayList<StaffVO>();
+			for(int i=0;i<listpo.size();i++){
+				StaffPO po=listpo.get(i);
+				long id=po.getId();
+				String name=po.getName();
+				Job job=po.getJob();
+				String organizationname=po.getOrganizationname();
+				String organizationcode=po.getOrganizationcode();
+				Organizationtype organizationtype=po.getOrganizationtype();
+				String city=po.getCity();
+				StaffVO vo=new StaffVO(id, name, job, organizationname, organizationcode, organizationtype, city);
+				listvo.add(vo);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			listvo=null;
+			System.out.println("getallstaff fail");
+		}
+		
+		return listvo;
+	}
 }

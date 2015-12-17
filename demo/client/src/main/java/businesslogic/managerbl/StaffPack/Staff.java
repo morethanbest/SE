@@ -70,6 +70,11 @@ public class Staff {
 		return listvo;
 	}
 	
+	public List<StaffVO> getStaffAll(){
+		List<StaffVO> listvo=finds.getStaffAll();
+		return listvo;
+	}
+	
 	public ResultMessage revStaff(StaffVO vo){
 		long id=vo.getId();
 		String name=vo.getName();

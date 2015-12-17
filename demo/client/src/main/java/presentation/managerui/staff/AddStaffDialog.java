@@ -42,7 +42,7 @@ public class AddStaffDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AddStaffDialog(final StaffManagePanel parent) {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 365, 556);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);

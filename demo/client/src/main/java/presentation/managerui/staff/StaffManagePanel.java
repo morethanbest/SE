@@ -58,10 +58,6 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		add(separator);
 		
 		btnAdd = new JButton("增加");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAdd.setBounds(599, 0, 113, 36);
 		add(btnAdd);
 		
@@ -71,12 +67,10 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		addStaffTypeItems();
 		
 		btnRevise = new JButton("修改");
-		btnRevise.addActionListener(this);
 		btnRevise.setBounds(847, 0, 107, 36);
 		add(btnRevise);
 		
 		btnDelete = new JButton("删除");
-		btnDelete.addActionListener(this);
 		btnDelete.setBounds(726, 0, 107, 36);
 		add(btnDelete);
 		
@@ -93,7 +87,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false
+				false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -140,11 +134,14 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		orgSelect.addItemListener(listener2);
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		tableModel.setColumnCount(5);
+		tableModel.setColumnCount(6);
 		tableModel.setRowCount(10);
 
 		
-		list = staffBlService.getStaffAll();
+		refreshList();
+		btnAdd.addActionListener(this);
+		btnDelete.addActionListener(this);
+		btnRevise.addActionListener(this);
 	}
 
 	private void addStaffTypeItems() {
@@ -181,8 +178,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 			staffDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			staffDialog.setVisible(true);
 		}else if(e.getSource().equals(btnDelete)){
-			try {
-				
+			try {				
 				StaffVO vo=list.get(table.getSelectedRow());
 				if(staffBlService.delStaff(vo)==ResultMessage.failure){
 					TipDialog tipDialog=new TipDialog("该员工删除失败！");
@@ -190,11 +186,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 					tipDialog.setVisible(true);	
 				}
 				refreshList();
-		    } catch (ArrayIndexOutOfBoundsException  e1) {
-			    TipDialog tipDialog=new TipDialog("请选择删除项！");
-			    tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			    tipDialog.setVisible(true);		
-		    } catch (NullPointerException e1) {
+		    } catch (Exception  e1) {
 			    TipDialog tipDialog=new TipDialog("请选择删除项！");
 			    tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			    tipDialog.setVisible(true);		
@@ -225,14 +217,15 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 	}
 	
 	void refreshList(){
-		if(staffSelect.getSelectedItem() == null || citySelect.getSelectedItem() == null)
+		if(staffSelect.getSelectedItem() == null || citySelect.getSelectedItem() == null){
 			return;
-		if(staffSelect.getSelectedItem().equals("全部") && citySelect.getSelectedItem().equals("全部"))
+		}			
+		if(staffSelect.getSelectedItem().equals("全部") && citySelect.getSelectedItem().equals("全部")){
 			list = staffBlService.getStaffAll();
+		}			
 		else if(staffSelect.getSelectedItem().equals("全部"))
 			list = staffBlService.getStaffbyOrganization((String) orgSelect.getSelectedItem());
 		else if(citySelect.getSelectedItem().equals("全部")){
-			System.out.println(getJob((String) staffSelect.getSelectedItem()));
 			list = staffBlService.getStaffbyJob(getJob((String) staffSelect.getSelectedItem()));
 		}
 		else
@@ -251,7 +244,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 			row[1] = getJobStr(vo.getJob());
 			row[2] = vo.getCity();
 			row[3] = vo.getOrganizationname();
-			row[4] = vo.getOrganizationtype().name();
+			row[4] = vo.getOrganizationtype().getName();
 			row[5] = vo.getOrganizationcode();
 			tableModel.addRow(row);
 		}
