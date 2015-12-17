@@ -35,7 +35,7 @@ public class OrderCheckPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public OrderCheckPanel(CourierPanel parent, CardLayout card, OrderUpdatePanel child, String orgCode) {
+	public OrderCheckPanel(CourierPanel parent, OrderUpdatePanel child, String orgCode) {
 		this.orgCode = orgCode;
 		controller = new OrderController();
 		
@@ -74,7 +74,7 @@ public class OrderCheckPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				if(index >= 0){
-					card.next(parent);
+					parent.switchPanel("orderu");
 					child.init(volist.get(index));
 				}else{
 					TipDialog dialog=new TipDialog("请选择查看的单据！");
@@ -89,7 +89,7 @@ public class OrderCheckPanel extends JPanel {
 		back = new JButton("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				parent.switchPanel("orderu");
+				parent.switchPanel("order");
 			}
 		});
 		back.setBounds(792, 358, 113, 27);

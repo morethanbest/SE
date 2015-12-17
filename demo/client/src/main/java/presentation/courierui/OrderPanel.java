@@ -403,7 +403,7 @@ public class OrderPanel extends JPanel {
 		button_1 = new JButton("查看已提交订单");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				courierPanel.switchPanel("orderu");
+				courierPanel.switchPanel("orderc");
 			}
 		});
 		button_1.setBounds(793, 511, 143, 27);

@@ -24,7 +24,7 @@ public class CourierPanel extends JPanel {
 		this.orgName = orgName;
 		card = new CardLayout();
 		OrderUpdatePanel orderu = new OrderUpdatePanel(this, card);
-		orderc = new OrderCheckPanel(null, card, orderu, orgCode);
+		orderc = new OrderCheckPanel(this, orderu, orgCode);
 		order = new OrderPanel(this,parent);
 		recieve = new RecievePanel(this,parent);
 		
