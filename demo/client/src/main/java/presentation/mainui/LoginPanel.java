@@ -94,20 +94,20 @@ public class LoginPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(button)) {
 			UserloginBlService userloginBlService = new UserloginController();
-			try {
+//			try {
 				String username = textField.getText();
 				String password = new String(passwordField.getPassword());
 				frame.skipToNext(userloginBlService.login(username, password));
 //				frame.skipToNext(Job.manager);//作者测试用，真实使用时注释掉
-			} catch (NullPointerException e1) {
-				try {
-					WrongDialog dialog = new WrongDialog();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
+//			} catch (NullPointerException e1) {
+//				try {
+//					WrongDialog dialog = new WrongDialog();
+//					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//					dialog.setVisible(true);
+//				} catch (Exception e2) {
+//					e2.printStackTrace();
+//				}
+//			}
 		}else if(e.getSource().equals(button_1)){
 			frame.showLogistics();
 		}

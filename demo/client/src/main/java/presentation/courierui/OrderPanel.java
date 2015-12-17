@@ -79,14 +79,12 @@ public class OrderPanel extends JPanel {
 	private JLabel label_23;
 	private JButton button_1;
 	private JButton button_3;
-    private MainFrame parent;
-	/**
+    /**
 	 * Create the panel.
 	 * 
 	 * @param courierPanel
 	 */
 	public OrderPanel(CourierPanel courierPanel,MainFrame parent) {
-		this.parent=parent;
 		setBackground(new Color(244, 247, 252));
 		orderBlService = new OrderController();
 		setLayout(null);
@@ -308,7 +306,7 @@ public class OrderPanel extends JPanel {
 		btnNewButton = new JButton("收件");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				courierPanel.switchPanel();
+				courierPanel.switchPanel("recieve");
 			}
 		});
 		btnNewButton.setBounds(647, 10, 145, 42);
@@ -405,6 +403,7 @@ public class OrderPanel extends JPanel {
 		button_1 = new JButton("查看已提交订单");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				courierPanel.switchPanel("orderu");
 			}
 		});
 		button_1.setBounds(793, 511, 143, 27);
