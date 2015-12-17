@@ -2,6 +2,7 @@ package businesslogic.managerbl.OrganizationPack;
 
 import java.util.List;
 
+import businesslogic.userbl.UsersPack.FindOrgByCode;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -79,6 +80,13 @@ public class OrganizationController implements OrganizationBlService {
 		Organization o=new Organization(getcode);
 		String code=o.getorganizationcode(type,city);
 		return code;
+	}
+	@Override
+	public OrganizationVO findOrgByCode(String orgcode){
+		// TODO Auto-generated method stub
+		FindOrgByCode findOrgByCode=new FindOrgByCode();
+		OrganizationVO vo=findOrgByCode.findOrgByCode(orgcode);
+		return vo;
 	}
 
 }

@@ -2,12 +2,16 @@ package presentation.depotui;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
+import init.ClientInitException;
+import init.RMIHelper;
 import presentation.depotui.stockexamui.StockExamPanel;
 import presentation.depotui.stockinui.StockinPanel;
 import presentation.depotui.stockoutui.StockoutPanel;
 import presentation.depotui.stocktakingui.StockTakingPanel;
+import presentation.mainui.MainFrame;
 
 import java.awt.CardLayout;
 import java.awt.SystemColor;
@@ -25,6 +29,7 @@ public class DepotPanel extends JPanel implements ActionListener {
 	private StockExamPanel exam;
 	private StockTakingPanel taking;
 	private JPanel panel;
+	private JButton button_4;
 
 	/**
 	 * Create the panel.
@@ -69,6 +74,10 @@ public class DepotPanel extends JPanel implements ActionListener {
 		button_1.addActionListener(this);
 		button_2.addActionListener(this);
 		button_3.addActionListener(this);
+		
+		button_4 = new JButton("注销");
+		button_4.setBounds(838, 13, 113, 27);
+		add(button_4);
 
 	}
 
@@ -82,6 +91,21 @@ public class DepotPanel extends JPanel implements ActionListener {
 			card.show(panel, "exam");
 		else if (e.getSource().equals(button_3))
 			card.show(panel, "taking");
+		else if(e.getSource().equals(button_4)){
+			try {
+		           RMIHelper.init();
+		           MainFrame frame= new MainFrame();
+		           frame.start();
+		        } catch (ClientInitException e1) {
+		            e1.printStackTrace();
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Client boots fail!\nCause: " + e1.getMessage(),
+		                    "Fatal Error",
+		                    JOptionPane.ERROR_MESSAGE
+		            );
+		        }
+		}
 	}
 
 }

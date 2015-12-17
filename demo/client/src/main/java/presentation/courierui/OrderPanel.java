@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -25,10 +26,13 @@ import businesslogic.orderbl.OrderPack.OrderController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.OrderBlService;
+import init.ClientInitException;
+import init.RMIHelper;
 import po.Formstate;
 import po.Ordertype;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
+import presentation.mainui.MainFrame;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
@@ -74,6 +78,7 @@ public class OrderPanel extends JPanel {
 	private JLabel label_22;
 	private JLabel label_23;
 	private JButton button_1;
+	private JButton button_3;
 
 	/**
 	 * Create the panel.
@@ -305,7 +310,7 @@ public class OrderPanel extends JPanel {
 				courierPanel.switchPanel();
 			}
 		});
-		btnNewButton.setBounds(823, 13, 145, 42);
+		btnNewButton.setBounds(647, 10, 145, 42);
 		add(btnNewButton);
 
 		separator_4 = new JSeparator();
@@ -403,6 +408,27 @@ public class OrderPanel extends JPanel {
 		});
 		button_1.setBounds(793, 511, 143, 27);
 		add(button_1);
+		
+		button_3 = new JButton("注销");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+			           RMIHelper.init();
+			           MainFrame frame= new MainFrame();
+			           frame.start();
+			        } catch (ClientInitException e1) {
+			            e1.printStackTrace();
+			            JOptionPane.showMessageDialog(
+			                    null,
+			                    "Client boots fail!\nCause: " + e1.getMessage(),
+			                    "Fatal Error",
+			                    JOptionPane.ERROR_MESSAGE
+			            );
+			        }
+			}
+		});
+		button_3.setBounds(816, 10, 145, 42);
+		add(button_3);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{snameField, scityBox, sareaBox, sdetailField, sjobField, stelField, sphoneField, rnameField, rcityBox, rareaBox, rdetailField, rjobField, rtelField, rphoneField, numberField, weightField, volumeField, nameField, packBox, orderBox, fareField}));
 
 		rcityBox.addItemListener(new ItemListener() {

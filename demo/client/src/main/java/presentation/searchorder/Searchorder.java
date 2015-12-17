@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -16,6 +17,9 @@ import javax.swing.JTextField;
 
 import businesslogic.logisticsbl.LogisticsPack.LogisticsSearchController;
 import businesslogicservice.logisticsblservice.SearchOrderBlService;
+import init.ClientInitException;
+import init.RMIHelper;
+import presentation.mainui.MainFrame;
 import vo.LogisticsVO;
 
 public class Searchorder extends JPanel implements ActionListener{
@@ -23,6 +27,7 @@ public class Searchorder extends JPanel implements ActionListener{
 	private JScrollPane scrollPane;
 	JButton searchBtn;
 	LogisticsVO vo=null;
+	private JButton button;
 	/**
 	 * Create the panel.
 	 */
@@ -46,9 +51,14 @@ public class Searchorder extends JPanel implements ActionListener{
 		searchBtn.addActionListener(this);
 		
 		scrollPane=new JScrollPane();
-		scrollPane.setBounds(450,20,500,500);
+		scrollPane.setBounds(450,78,500,442);
 		scrollPane.setBorder(null);
 		add(scrollPane);
+		
+		button = new JButton("返回");
+		button.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+		button.setBounds(851, 23, 99, 31);
+		add(button);
 		
 		
 	}
@@ -112,6 +122,20 @@ public class Searchorder extends JPanel implements ActionListener{
 			String ordernum=textField.getText();
 			vo=logisticsInfoService.getOrderbyOrderNumber(ordernum);
 			showLogisics();
+		}else if(e.getSource().equals(button)){
+			try {
+		           RMIHelper.init();
+		           MainFrame frame= new MainFrame();
+		           frame.start();
+		        } catch (ClientInitException e1) {
+		            e1.printStackTrace();
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Client boots fail!\nCause: " + e1.getMessage(),
+		                    "Fatal Error",
+		                    JOptionPane.ERROR_MESSAGE
+		            );
+		        }
 		}
 		
 	}

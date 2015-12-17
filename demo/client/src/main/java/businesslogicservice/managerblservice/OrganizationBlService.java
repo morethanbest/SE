@@ -22,4 +22,6 @@ public interface OrganizationBlService {
 	public List<OrganizationVO> getOrganizationAll();
 
 	public String getOrganizationCode(String city, Organizationtype type);
+
+	public OrganizationVO findOrgByCode(String orgcode);
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -16,8 +17,10 @@ import javax.swing.table.DefaultTableModel;
 
 import po.Job;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.enums.OrganizationType;
 import presentation.enums.StaffType;
+import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.OrganizationVO;
 import vo.StaffVO;
@@ -54,7 +57,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 60, 954, 8);
 		add(separator);
 		
-		btnAdd = new JButton("Add");
+		btnAdd = new JButton("增加");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -67,12 +70,12 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		add(staffSelect);
 		addStaffTypeItems();
 		
-		btnRevise = new JButton("Revise");
+		btnRevise = new JButton("修改");
 		btnRevise.addActionListener(this);
 		btnRevise.setBounds(847, 0, 107, 36);
 		add(btnRevise);
 		
-		btnDelete = new JButton("Delete");
+		btnDelete = new JButton("删除");
 		btnDelete.addActionListener(this);
 		btnDelete.setBounds(726, 0, 107, 36);
 		add(btnDelete);
@@ -86,7 +89,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 			new Object[][] {
 			},
 			new String[] {
-				"\u6240\u5728\u57CE\u5E02", "\u6240\u5728\u673A\u6784", "\u59D3\u540D", "\u804C\u4E1A", "\u6240\u5728\u673A\u6784\u7F16\u53F7"
+				"姓名", "职业", "所在城市", "机构名", "机构类别", "机构编号"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
@@ -111,7 +114,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		addOrganizationItems();
 		
 		ItemListener listener = new ItemListener() {
-			
+//////////////////////////////////////////////////////////			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(citySelect.getSelectedItem().equals("全部"))
@@ -123,7 +126,7 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 				refreshList();
 			}
 		};
-		
+////////////////////////////////////////////////////////		
 		ItemListener listener2 = new ItemListener() {
 
 			@Override
@@ -174,9 +177,30 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(btnAdd)){
-			
+			AddStaffDialog staffDialog=new AddStaffDialog(this);
+			staffDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			staffDialog.setVisible(true);
 		}else if(e.getSource().equals(btnDelete)){
-//			staffBlService.delStaff(null);
+			try {
+				
+				StaffVO vo=list.get(table.getSelectedRow());
+				if(staffBlService.delStaff(vo)==ResultMessage.failure){
+					TipDialog tipDialog=new TipDialog("该员工删除失败！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}
+				refreshList();
+		    } catch (ArrayIndexOutOfBoundsException  e1) {
+			    TipDialog tipDialog=new TipDialog("请选择删除项！");
+			    tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			    tipDialog.setVisible(true);		
+		    } catch (NullPointerException e1) {
+			    TipDialog tipDialog=new TipDialog("请选择删除项！");
+			    tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			    tipDialog.setVisible(true);		
+		    }
+		}else if(e.getSource().equals(btnRevise)){
+			
 		}
 		
 	}
@@ -222,13 +246,13 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		tableModel.setRowCount(0);// 清除原有行
 
 		for (StaffVO vo : list) {
-			String[] row = new String[5];
-			row[0] = vo.getCity();
-			row[1] = vo.getOrganizationname();
-			row[2] = vo.getName();
-			row[3] = getJobStr(vo.getJob());
-			row[4] = vo.getOrganizationcode();
-
+			String[] row = new String[6];
+			row[0] = vo.getName();
+			row[1] = getJobStr(vo.getJob());
+			row[2] = vo.getCity();
+			row[3] = vo.getOrganizationname();
+			row[4] = vo.getOrganizationtype().name();
+			row[5] = vo.getOrganizationcode();
 			tableModel.addRow(row);
 		}
 

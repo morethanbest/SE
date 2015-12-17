@@ -11,7 +11,7 @@ public class client {
 
     public static void main(String[] args) {
         try {
-            RMIHelper.init();
+           RMIHelper.init();
            MainFrame frame= new MainFrame();
            frame.start();
         } catch (ClientInitException e) {

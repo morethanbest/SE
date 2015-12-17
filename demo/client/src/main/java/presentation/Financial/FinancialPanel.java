@@ -7,9 +7,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import init.ClientInitException;
+import init.RMIHelper;
 import po.Job;
 import presentation.Financial.account.AccountPanel;
 import presentation.Financial.balance.BalancePanel;
@@ -19,6 +22,7 @@ import presentation.Financial.recordpay.RecordpayPanel;
 import presentation.Financial.statistics.StatisticsPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
+import presentation.mainui.MainFrame;
 
 public class FinancialPanel extends JPanel implements ActionListener{
 	private JPanel panel;
@@ -130,6 +134,20 @@ public class FinancialPanel extends JPanel implements ActionListener{
 			card.show(panel, "debitnote");
 		}else if(e.getSource().equals(btnNewButton_5)){
 			card.show(panel, "newbook");
+		}else if(e.getSource().equals(btnNewButton_6)){
+			try {
+		           RMIHelper.init();
+		           MainFrame frame= new MainFrame();
+		           frame.start();
+		        } catch (ClientInitException e1) {
+		            e1.printStackTrace();
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Client boots fail!\nCause: " + e1.getMessage(),
+		                    "Fatal Error",
+		                    JOptionPane.ERROR_MESSAGE
+		            );
+		        }
 		}
 	}
 

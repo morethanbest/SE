@@ -15,11 +15,16 @@ import javax.swing.JComboBox;
 import vo.ReceptionVO;
 import businesslogic.orderbl.ReceptionPack.ReceptionController;
 import businesslogicservice.orderblservice.ReceptionBlService;
+import init.ClientInitException;
+import init.RMIHelper;
+import presentation.mainui.MainFrame;
 
 import java.awt.SystemColor;
 import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 
@@ -35,6 +40,7 @@ public class RecievePanel extends JPanel {
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
+	private JButton button_2;
 
 	/**
 	 * Create the panel.
@@ -62,7 +68,7 @@ public class RecievePanel extends JPanel {
 				courierPanel.switchPanel();
 			}
 		});
-		button.setBounds(823, 13, 145, 42);
+		button.setBounds(650, 10, 145, 42);
 		add(button);
 
 		codeField = new JTextField();
@@ -123,6 +129,30 @@ public class RecievePanel extends JPanel {
 		label_2 = new JLabel("收件日期：");
 		label_2.setBounds(117, 296, 87, 18);
 		add(label_2);
+		
+		button_2 = new JButton("注销");
+		button_2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+			           RMIHelper.init();
+			           MainFrame frame= new MainFrame();
+			           frame.start();
+			        } catch (ClientInitException e1) {
+			            e1.printStackTrace();
+			            JOptionPane.showMessageDialog(
+			                    null,
+			                    "Client boots fail!\nCause: " + e1.getMessage(),
+			                    "Fatal Error",
+			                    JOptionPane.ERROR_MESSAGE
+			            );
+			        }
+			}
+		});
+		button_2.setBounds(823, 10, 145, 42);
+		add(button_2);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, codeField, yearBox, monthBox, dateBox}));
 	}
 

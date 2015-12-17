@@ -1,7 +1,12 @@
 package presentation.centersalesmanui;
 
 import javax.swing.JPanel;
+
+import init.ClientInitException;
+import init.RMIHelper;
+
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import presentation.centersalesmanui.arrivalui.ArrivalCheckPanel;
 import presentation.centersalesmanui.arrivalui.ArrivalPanel;
@@ -12,6 +17,7 @@ import presentation.centersalesmanui.loadui.CenterLoadUpdatePanel;
 import presentation.centersalesmanui.transferui.TransferCheckPanel;
 import presentation.centersalesmanui.transferui.TransferPanel;
 import presentation.centersalesmanui.transferui.TransferUpdatePanel;
+import presentation.mainui.MainFrame;
 
 import java.awt.CardLayout;
 import java.awt.SystemColor;
@@ -23,6 +29,7 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 	private JButton btnNewButton_2;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
+	private JButton btnZhu;
 	private CardLayout card;
 	
 	private ArrivalPanel arrival;
@@ -87,6 +94,10 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 		switcher.add(cc, "cc");
 		switcher.add(cu, "cu");
 		
+		JButton btnZhu = new JButton("注销");
+		btnZhu.setBounds(815, 13, 113, 27);
+		add(btnZhu);
+		
 	}
 
 	@Override
@@ -97,6 +108,20 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 			card.show(switcher, "transfer");
 		} else if(e.getSource().equals(btnNewButton_2)){
 			card.show(switcher, "load");
+		} else if(e.getSource().equals(btnZhu)){
+			try {
+		           RMIHelper.init();
+		           MainFrame frame= new MainFrame();
+		           frame.start();
+		        } catch (ClientInitException e1) {
+		            e1.printStackTrace();
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Client boots fail!\nCause: " + e1.getMessage(),
+		                    "Fatal Error",
+		                    JOptionPane.ERROR_MESSAGE
+		            );
+		        }
 		}
 	}
 
@@ -115,6 +140,4 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 	public CenterLoadCheckPanel getLoad() {
 		return cc;
 	}
-	
-	
 }

@@ -7,15 +7,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import init.ClientInitException;
+import init.RMIHelper;
 import presentation.hallsalesmanui.delivery.DeliveryPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
 import presentation.hallsalesmanui.goodrecieving.GoodRecievingPanel;
 import presentation.hallsalesmanui.hallload.HallLoadPanel;
 import presentation.hallsalesmanui.recordcollect.RecordcollectPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
+import presentation.mainui.MainFrame;
 
 
 
@@ -127,6 +131,20 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 			card.show(panel, "delivery");
 		} else if(e.getSource().equals(reciptionButton)){
 			card.show(panel, "recordcollect");
+		} else if(e.getSource().equals(logoutButton)){
+			try {
+		           RMIHelper.init();
+		           MainFrame frame= new MainFrame();
+		           frame.start();
+		        } catch (ClientInitException e1) {
+		            e1.printStackTrace();
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Client boots fail!\nCause: " + e1.getMessage(),
+		                    "Fatal Error",
+		                    JOptionPane.ERROR_MESSAGE
+		            );
+		        }
 		}
 	}
 }

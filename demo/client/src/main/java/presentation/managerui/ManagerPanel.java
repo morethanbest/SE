@@ -10,9 +10,13 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import init.ClientInitException;
+import init.RMIHelper;
 import presentation.Financial.balance.BalancePanel;
+import presentation.mainui.MainFrame;
 import presentation.managerui.account.AccountPanel;
 import presentation.managerui.constant.ConstantPanel;
 import presentation.managerui.examui.ExamPanel;
@@ -184,6 +188,20 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			card.show(panel, "salary");
 		}else if(e.getSource().equals(btnNewButton_5)){
 			card.show(panel, "statistics");
+		}else if(e.getSource().equals(btnNewButton_8)){
+			try {
+		           RMIHelper.init();
+		           MainFrame frame= new MainFrame();
+		           frame.start();
+		        } catch (ClientInitException e1) {
+		            e1.printStackTrace();
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Client boots fail!\nCause: " + e1.getMessage(),
+		                    "Fatal Error",
+		                    JOptionPane.ERROR_MESSAGE
+		            );
+		        }
 		}
 
 	}
