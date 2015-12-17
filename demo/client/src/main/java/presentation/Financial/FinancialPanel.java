@@ -18,14 +18,16 @@ import presentation.Financial.account.AccountPanel;
 import presentation.Financial.balance.BalancePanel;
 import presentation.Financial.debitnote.DebitnotePanel;
 import presentation.Financial.newbook.NewBookPanel;
+import presentation.Financial.recordpay.RecordpayCheckPanel;
 import presentation.Financial.recordpay.RecordpayPanel;
+import presentation.Financial.recordpay.RecordpayUpdatePanel;
 import presentation.Financial.statistics.StatisticsPanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 import presentation.mainui.MainFrame;
 
 public class FinancialPanel extends JPanel implements ActionListener{
-	private JPanel panel;
+	private JPanel switcher;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
@@ -39,17 +41,17 @@ public class FinancialPanel extends JPanel implements ActionListener{
 	private StatisticsPanel statisticsPanel;
 	private RecordpayPanel recordpayPanel;
 	private BalancePanel balancePanel;
-    private String orgcode;
     private DebitnotePanel debitnotePanel;
     private NewBookPanel newBookPanel;
     private Job job;
     private MainFrame parent;
+    
+    private RecordpayCheckPanel rc;
 	/**
 	 * Create the panel.
 	 */
 	public FinancialPanel(String orgcode,Job job,MainFrame parent) {
 		this.parent=parent;
-		this.orgcode=orgcode;
 		this.job=job;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
@@ -93,26 +95,30 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 58, 982, 2);
 		add(separator);
 
-		panel = new JPanel();
-		panel.setBackground(SystemColor.controlHighlight);
-		panel.setBounds(14, 75, 954, 450);
-		add(panel);
+		switcher = new JPanel();
+		switcher.setBackground(SystemColor.controlHighlight);
+		switcher.setBounds(14, 75, 954, 450);
+		add(switcher);
 		card = new CardLayout();
-		panel.setLayout(card);
+		switcher.setLayout(card);
 		
 		//card中添加各种功能面板
 		accountPanel=new AccountPanel(orgcode);
-		panel.add(accountPanel, "account");
+		switcher.add(accountPanel, "account");
 		statisticsPanel=new StatisticsPanel(orgcode);
-		panel.add(statisticsPanel, "statistics");
-		recordpayPanel=new RecordpayPanel(orgcode);
-		panel.add(recordpayPanel, "recordpay");
+		switcher.add(statisticsPanel, "statistics");
+		RecordpayUpdatePanel ru = new RecordpayUpdatePanel(this, card);
+		rc = new RecordpayCheckPanel(switcher, card, ru);
+		recordpayPanel=new RecordpayPanel(orgcode, switcher, card);
+		switcher.add(recordpayPanel, "recordpay");
+		switcher.add(rc, "rc");
+		switcher.add(ru, "ru");
 		balancePanel=new BalancePanel();
-		panel.add(balancePanel, "balance");
+		switcher.add(balancePanel, "balance");
 		debitnotePanel=new DebitnotePanel();
-		panel.add(debitnotePanel, "debitnote");
+		switcher.add(debitnotePanel, "debitnote");
 		newBookPanel=new NewBookPanel();
-		panel.add(newBookPanel, "newbook");
+		switcher.add(newBookPanel, "newbook");
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);
 		hint.setVisible(false);
@@ -124,21 +130,27 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(btnNewButton_2)) {
 			if(job==Job.advanceFinancial){
-				card.show(panel, "account");
+				card.show(switcher, "account");
 			}
 		}else if (e.getSource().equals(btnNewButton_4)) {
-			card.show(panel, "statistics");
+			card.show(switcher, "statistics");
 		}else if(e.getSource().equals(btnNewButton_1)){
-			card.show(panel, "recordpay");
+			card.show(switcher, "recordpay");
 		}else if(e.getSource().equals(btnNewButton_3)){
-			card.show(panel, "balance");
+			card.show(switcher, "balance");
 		}else if(e.getSource().equals(btnNewButton)){
-			card.show(panel, "debitnote");
+			card.show(switcher, "debitnote");
 		}else if(e.getSource().equals(btnNewButton_5)){
-			card.show(panel, "newbook");
+			card.show(switcher, "newbook");
 		}else if(e.getSource().equals(btnNewButton_6)){
 			parent.skipToLogin();;
 		}
+	}
+	public JPanel getSwitcher() {
+		return switcher;
+	}
+	public RecordpayCheckPanel getRc() {
+		return rc;
 	}
 
 }

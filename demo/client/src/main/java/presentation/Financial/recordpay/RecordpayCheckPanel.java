@@ -1,4 +1,4 @@
-package presentation.managerui.examui.examfinancial;
+package presentation.Financial.recordpay;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -9,34 +9,32 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.managerblservice.ExamCLForms;
-import businesslogicservice.managerblservice.ExamRecordpays;
 import po.Formstate;
-import presentation.managerui.examui.ExamPanel;
-import vo.CenterloadVO;
+import presentation.tip.TipDialog;
 import vo.RecordpayVO;
+import businesslogic.balancebl.RecordpayPack.RecordpayController;
+import businesslogicservice.balanceblservice.RecordpayBlService;
 
-public class RecordpayExamPanel extends JPanel {
+public class RecordpayCheckPanel extends JPanel {
 	private JTable table;
-	private ExamRecordpays ea;
+	private RecordpayBlService controller;
 	private List<RecordpayVO> volist;
-	private JButton pass;
-	private JButton refused;
 	private JButton back;
 	private JComboBox<String> stateBox;
 	private JButton revise;
+	private JButton act;
 	/**
 	 * Create the panel.
 	 */
-	public RecordpayExamPanel(ExamPanel parent, CardLayout card, RecordpayRevisePanel child) {
+	public RecordpayCheckPanel(JPanel parent, CardLayout card, RecordpayUpdatePanel child) {
 		setLayout(null);
-		ea = new ExamController();
+		controller = new RecordpayController();
 
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -67,31 +65,19 @@ public class RecordpayExamPanel extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
-		pass = new JButton("通过");
-		pass.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				updateVOListState(Formstate.pass);
-			}
-		});
-		pass.setBounds(411, 358, 113, 27);
-		add(pass);
-		
-		refused = new JButton("否决");
-		refused.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				updateVOListState(Formstate.fail);
-			}
-		});
-		refused.setBounds(538, 358, 113, 27);
-		add(refused);
 		
 		revise = new JButton("查看详细");
 		revise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
 				int index = table.getSelectedRow();
-				if(index >= 0)
+				if(index >= 0){
+					card.next(parent);
 					child.init(volist.get(index));
+				}else{
+					TipDialog dialog=new TipDialog("请选择查看的单据！");
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				}
 			}
 		});
 		revise.setBounds(665, 358, 113, 27);
@@ -100,7 +86,7 @@ public class RecordpayExamPanel extends JPanel {
 		back = new JButton("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.show(parent, "select");
+				card.previous(parent);
 			}
 		});
 		back.setBounds(792, 358, 113, 27);
@@ -109,27 +95,25 @@ public class RecordpayExamPanel extends JPanel {
 		stateBox = new JComboBox<String>();
 		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
+		
+		act = new JButton("执行");
+		act.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateVOListState(Formstate.checked);
+			}
+		});
+		act.setBounds(538, 358, 113, 27);
+		add(act);
 		stateBox.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				 refreshList();
-				if (stateBox.getSelectedItem().equals(Formstate.pass.getName())) {
-					pass.setEnabled(false);
-					refused.setEnabled(false);
-				} else if (stateBox.getSelectedItem().equals(
-						Formstate.fail.getName())) {
-					pass.setEnabled(true);
-					refused.setEnabled(false);
-				} else if (stateBox.getSelectedItem().equals(
-						Formstate.checked.getName())) {
-					pass.setEnabled(false);
-					refused.setEnabled(false);
-				} else if (stateBox.getSelectedItem().equals(
-						Formstate.waiting.getName())) {
-					pass.setEnabled(true);
-					refused.setEnabled(true);
-				}
+				 if (stateBox.getSelectedItem().equals(Formstate.pass.getName())) {
+						act.setEnabled(true);
+					} else {
+						act.setEnabled(false);
+					}
 			}
 		});
 		addStateItems();
@@ -148,7 +132,7 @@ public class RecordpayExamPanel extends JPanel {
 			if ((boolean) tableModel.getValueAt(i, 0)) {
 				RecordpayVO vo = volist.get(i);
 			    vo.setFormstate(state);
-				ea.updateRecordpayForm(vo);
+				controller.updateRecordpay(vo);
 			}
 		}
 		refreshList();
@@ -157,7 +141,7 @@ public class RecordpayExamPanel extends JPanel {
 	void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
-				volist = ea.getRecordpayForm(state);
+				volist = controller.findforms(state);
 		}
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
