@@ -5,4 +5,5 @@ import vo.ReceptionVO;
 
 public interface ReceptionBlService {
 	public ResultMessage addReception (ReceptionVO vo);
+	
 }

@@ -1,32 +1,33 @@
 package presentation.courierui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Calendar;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
 
-import vo.ReceptionVO;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import businesslogic.orderbl.CheckExist;
 import businesslogic.orderbl.ReceptionPack.ReceptionController;
+import businesslogicservice.orderblservice.CheckExistBlService;
 import businesslogicservice.orderblservice.ReceptionBlService;
 import init.ClientInitException;
 import init.RMIHelper;
 import presentation.mainui.MainFrame;
-
-import java.awt.SystemColor;
-import java.awt.Color;
-import java.util.Calendar;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
+import presentation.tip.TipDialog;
+import vo.ReceptionVO;
 
 public class RecievePanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -79,10 +80,13 @@ public class RecievePanel extends JPanel {
 		button_1 = new JButton("确认收件");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormate())
+					return ;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
 				receptionBlService.addReception(new ReceptionVO(codeField.getText(), nameField.getText(), date));
+				addSuccessfully();
 			}
 			
 		});
@@ -165,7 +169,38 @@ public class RecievePanel extends JPanel {
 			month.addItem(i);
 		}
 	}
-
+	
+	private boolean checkFormate(){
+		if(nameField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("收件人不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(codeField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("订单号不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else{
+			CheckExistBlService checkExistBlService=new CheckExist();
+			boolean exist=checkExistBlService.checkExist(codeField.getText());
+			if(!exist){
+				TipDialog tipDialog=new TipDialog("此订单号不存在！");
+				tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				tipDialog.setVisible(true);	
+			}
+			return exist;
+		}
+	}
+	
+	private void addSuccessfully(){
+		TipDialog tipDialog=new TipDialog("添加成功！");
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		nameField.setText("");
+		codeField.setText("");	
+	}
+	
 	private void addDateItems(JComboBox<Long> yearBox,
 			JComboBox<Long> monthBox, JComboBox<Long> dateBox) {
 		dateBox.removeAllItems();
