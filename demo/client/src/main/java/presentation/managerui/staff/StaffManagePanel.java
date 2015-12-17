@@ -192,6 +192,18 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 			    tipDialog.setVisible(true);		
 		    }
 		}else if(e.getSource().equals(btnRevise)){
+			try {				
+				StaffVO vo=list.get(table.getSelectedRow());
+				
+				RevStaffDialog staffDialog=new RevStaffDialog(this,vo);
+				staffDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				staffDialog.setVisible(true);
+				refreshList();
+		    } catch (Exception  e1) {
+			    TipDialog tipDialog=new TipDialog("请选择修改项！");
+			    tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			    tipDialog.setVisible(true);		
+		    }
 			
 		}
 		
