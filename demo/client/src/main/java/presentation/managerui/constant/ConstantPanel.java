@@ -377,8 +377,8 @@ public class ConstantPanel extends JPanel implements ActionListener {
 	
 	void updateCity(){
 		cityList = constantsBlService.getAllCity();
-		addCityItems();
-		displayByCity(cityList);
+//		addCityItems();
+//		displayByCity(cityList);
 	}
 
 	public void refreshList() {

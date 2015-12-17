@@ -110,7 +110,7 @@ public class RevConstantDialog extends JDialog {
 							else {
 								CityVO vo=new CityVO(name, valueField.getText());
 								if(constantsBlService.revCity(vo) == ResultMessage.failure){
-									TipDialog tipDialog=new TipDialog("该常量不存在！");
+									TipDialog tipDialog=new TipDialog("该常量不存在或无法修改！");
 									tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 									tipDialog.setVisible(true);		
 								}		
