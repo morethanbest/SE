@@ -6,6 +6,7 @@ import po.GoodsReceivingPO;
 import po.ResultMessage;
 import vo.GoodsReceivingVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public class GoodsReceving {
 
     public List<GoodsReceivingVO> findgoodsform(Formstate state,String orgcode){
         List<GoodsReceivingPO> pos=find.getforms(state,orgcode);
-        List<GoodsReceivingVO> list=null;
+        List<GoodsReceivingVO> list=new ArrayList<GoodsReceivingVO>();
         int len=pos.size();
         for(int i=0;i<=len-1;i++){
             GoodsReceivingPO po=pos.get(i);

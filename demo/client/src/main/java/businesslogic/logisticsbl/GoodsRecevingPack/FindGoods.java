@@ -18,7 +18,7 @@ public class FindGoods {
     public List<GoodsReceivingPO> getforms(Formstate state,String orgcode) {
         GoodsReceivingFormDataService dataserv = RMIHelper.getGoodsreceiving();
 
-        List<GoodsReceivingPO> pos = null;
+        List<GoodsReceivingPO> pos = new ArrayList<GoodsReceivingPO>();
         try {
             pos = dataserv.getGoodsReceivingForm(state,orgcode);
         } catch (RemoteException e) {
