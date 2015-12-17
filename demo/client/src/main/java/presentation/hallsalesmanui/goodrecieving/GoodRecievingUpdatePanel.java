@@ -1,4 +1,4 @@
-package presentation.managerui.examui.examhallsalesmanui;
+package presentation.hallsalesmanui.goodrecieving;
 
 import java.awt.CardLayout;
 import java.awt.SystemColor;
@@ -16,30 +16,31 @@ import javax.swing.JTextField;
 
 import po.Arrivalstate;
 import po.Formstate;
-import presentation.managerui.examui.ExamPanel;
+import presentation.hallsalesmanui.HallsalesmanPanel;
 import vo.GoodsReceivingVO;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.managerblservice.ExamGoodsRecevings;
+import businesslogic.logisticsbl.GoodsRecevingPack.GoodsRecevingController;
+import businesslogicservice.logisticsblservice.GoodsRecevingBlService;
 
-public class GoodRecievingRevisePanel extends JPanel {
+public class GoodRecievingUpdatePanel extends JPanel {
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
 	private JComboBox<Long> dateBox;
 	private JComboBox<String> stateBox;
 	private JButton update;
-	private ExamGoodsRecevings ea;
+	private GoodsRecevingBlService controller;
 	private GoodsReceivingVO vo;
 	private JTextField codeField;
 	private JComboBox<String> typeBox;
 	private JLabel depatLabel;
 	private JButton button_1;
 	private JButton button_2;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public GoodRecievingRevisePanel(ExamPanel parent, CardLayout card) {
-		ea = new ExamController();
+	public GoodRecievingUpdatePanel(HallsalesmanPanel parent, CardLayout card,String orgName) {
+		controller = new GoodsRecevingController();
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
@@ -94,11 +95,22 @@ public class GoodRecievingRevisePanel extends JPanel {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				ea.updateGoodsReceivingForm(new GoodsReceivingVO(
-						vo.getid(), date,typeBox.getSelectedIndex() == 1 ,codeField
-								.getText(),vo.getDeparture(),
-						getStateType((String) stateBox.getSelectedItem()),
-						vo.getFormstate()));
+				if(typeBox.getSelectedIndex() == 1)
+					controller.updateFromHall(
+							new GoodsReceivingVO(vo.getid(), date, typeBox
+									.getSelectedIndex() == 1, codeField
+									.getText(), vo.getDeparture(),
+									getStateType((String) stateBox
+											.getSelectedItem()), vo
+											.getFormstate()), orgName);
+				else
+					controller.updateFromCenter(
+							new GoodsReceivingVO(vo.getid(), date, typeBox
+									.getSelectedIndex() == 1, codeField
+									.getText(), vo.getDeparture(),
+									getStateType((String) stateBox
+											.getSelectedItem()), vo
+											.getFormstate()), orgName);
 			}
 		});
 		update.setBounds(423, 336, 113, 27);
@@ -116,8 +128,8 @@ public class GoodRecievingRevisePanel extends JPanel {
 		button_2 = new JButton("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.previous(parent);
-				parent.getGr().refreshList();
+				card.previous(parent.getSwitcher());
+				parent.getGc().refreshList();
 			}
 		});
 		button_2.setBounds(677, 336, 113, 27);

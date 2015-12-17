@@ -1,5 +1,6 @@
 package presentation.hallsalesmanui.goodrecieving;
 
+import java.awt.CardLayout;
 import java.awt.SystemColor;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -29,8 +30,11 @@ import businesslogicservice.managerblservice.OrganizationBlService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import java.awt.Component;
+
 import javax.swing.JLabel;
 
 public class GoodRecievingPanel extends JPanel {
@@ -49,11 +53,12 @@ public class GoodRecievingPanel extends JPanel {
 	private JLabel label_2;
 	private JLabel label_3;
 	private JLabel label_4;
+	private JButton button_1;
 
 	/**
 	 * Create the panel.
 	 */
-	public GoodRecievingPanel(String orgCode, String city) {
+	public GoodRecievingPanel(String orgCode, String city, JPanel parent, CardLayout card) {
 		this.city = city;
 		goodsRecevingBlService = new GoodsRecevingController();
 		setBackground(SystemColor.inactiveCaptionBorder);
@@ -149,6 +154,16 @@ public class GoodRecievingPanel extends JPanel {
 		label_4 = new JLabel("到达状态：");
 		label_4.setBounds(433, 152, 86, 18);
 		add(label_4);
+		
+		button_1 = new JButton("查看已提交单据");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+				
+			}
+		});
+		button_1.setBounds(756, 336, 113, 27);
+		add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, typeBox, codeField, destinBox, stateBox}));
 	}
 
