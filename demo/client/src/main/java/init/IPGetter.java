@@ -8,7 +8,7 @@ public class IPGetter {
 	public static String getIP(){
 		String ip="localhost";
 		try{
-			FileReader f=new FileReader(new File("/demo/ip.txt"));
+			FileReader f=new FileReader(new File("ip.txt"));
 			BufferedReader bufferedReader=new BufferedReader(f);
 			ip=bufferedReader.readLine();
 			bufferedReader.close();

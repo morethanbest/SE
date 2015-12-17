@@ -458,7 +458,10 @@ public class OrderPanel extends JPanel {
 
 		return null;
 	}
-
+	
+	private boolean checkFormat(){
+		return true;
+	}
 	private void addPackTypeItems() {
 		for (PackageTypes packages : PackageTypes.values()) {
 			packBox.addItem(packages.getName());
