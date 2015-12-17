@@ -1,5 +1,8 @@
 package presentation.hallsalesmanui;
 
+import init.ClientInitException;
+import init.RMIHelper;
+
 import java.awt.CardLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -11,12 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-<<<<<<< HEAD
-import init.ClientInitException;
-import init.RMIHelper;
-=======
 import presentation.hallsalesmanui.delivery.DeliveryCheckPanel;
->>>>>>> origin/master
 import presentation.hallsalesmanui.delivery.DeliveryPanel;
 import presentation.hallsalesmanui.delivery.DeliveryUpdatePanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
@@ -112,15 +110,15 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		//card中添加各种功能面板
 		HallLoadUpdatePanel hu = new HallLoadUpdatePanel(this, card);
 		hc = new HallLoadCheckPanel(switcher, card, hu, orgcode);
-		hallLoadPanel = new HallLoadPanel(orgcode, city, orgName);
+		hallLoadPanel = new HallLoadPanel(orgcode, city, orgName, switcher, card);
 		
 		GoodRecievingUpdatePanel gu = new GoodRecievingUpdatePanel(this, card, orgName);
 		gc = new GoodRecievingCheckPanel(switcher, card, gu, orgcode, orgName);
-		goodRecievingPanel = new GoodRecievingPanel(orgcode, city);
+		goodRecievingPanel = new GoodRecievingPanel(orgcode, city, switcher, card);
 		
 		DeliveryUpdatePanel du = new DeliveryUpdatePanel(this, card);
 		dc = new DeliveryCheckPanel(switcher, card, du, orgcode);
-		deliveryPanel = new DeliveryPanel(orgcode);
+		deliveryPanel = new DeliveryPanel(orgcode, switcher, card);
 		
 		driverPanel=new DriverPanel(orgcode);
 		vehiclePanel=new VehiclePanel(orgcode);
@@ -162,8 +160,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(deliveryButton)) {
 			card.show(switcher, "delivery");
 		} else if(e.getSource().equals(reciptionButton)){
-<<<<<<< HEAD
-			card.show(panel, "recordcollect");
+			card.show(switcher, "recordcollect");
 		} else if(e.getSource().equals(logoutButton)){
 			try {
 		           RMIHelper.init();
@@ -178,9 +175,8 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		                    JOptionPane.ERROR_MESSAGE
 		            );
 		        }
-=======
 			card.show(switcher, "recordcollect");
->>>>>>> origin/master
+
 		}
 	}
 	public JPanel getSwitcher() {
