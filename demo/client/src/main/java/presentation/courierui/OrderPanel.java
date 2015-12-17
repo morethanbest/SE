@@ -1,5 +1,7 @@
 package presentation.courierui;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -8,54 +10,52 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import po.Formstate;
-import po.Job;
-import po.Ordertype;
-import presentation.enums.OrderTypes;
-import presentation.enums.PackageTypes;
-import presentation.enums.StaffType;
-import vo.CityVO;
-import vo.OrderFareVO;
-import vo.OrderVO;
-import vo.OrganizationVO;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.orderbl.OrderPack.OrderController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.OrderBlService;
-
-import javax.swing.ImageIcon;
-
-import java.awt.Color;
-import java.awt.SystemColor;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
+import po.Formstate;
+import po.Ordertype;
+import presentation.enums.OrderTypes;
+import presentation.enums.PackageTypes;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
+import vo.CityVO;
+import vo.OrderFareVO;
+import vo.OrderVO;
+import vo.OrganizationVO;
 
 public class OrderPanel extends JPanel {
 	private JTextField snameField;
 	private JTextField sdetailField;
 	private JTextField sjobField;
 	private JTextField stelField;
-	private JTextField sphoneField;
+	private NumberField sphoneField;
 	private JTextField rnameField;
 	private JTextField rdetailField;
+	private JTextField rjobField;
 	private JTextField rtelField;
-	private JTextField rphoneField;
+	private NumberField rphoneField;
 	private JComboBox<String> packBox;
-	private JTextField numberField;
-	private JTextField weightField;
-	private JTextField volumeField;
+	private DoubleField numberField;
+	private DoubleField weightField;
+	private DoubleField volumeField;
 	private JTextField nameField;
 	private JLabel label_2;
 	private JSeparator separator_3;
-	private JTextField fareField;
+	private DoubleField fareField;
 	private JButton button;
 	private JButton button_2;
 	private JButton btnNewButton;
@@ -65,7 +65,6 @@ public class OrderPanel extends JPanel {
 	private JComboBox<String> rcityBox;
 	private JComboBox<String> rareaBox;
 	private JComboBox<String> orderBox;
-	private JTextField rjobField;
 	private OrderBlService orderBlService;
 	private JLabel label_17;
 	private JLabel label_18;
@@ -123,13 +122,13 @@ public class OrderPanel extends JPanel {
 		add(sjobField);
 		sjobField.setColumns(10);
 
-		stelField = new JTextField();
+		stelField = new NumberField(50);
 		stelField.setText("911");
 		stelField.setBounds(466, 148, 159, 24);
 		add(stelField);
 		stelField.setColumns(10);
 
-		sphoneField = new JTextField();
+		sphoneField = new NumberField(50);
 		sphoneField.setText("911");
 		sphoneField.setBounds(712, 148, 194, 24);
 		add(sphoneField);
@@ -171,13 +170,13 @@ public class OrderPanel extends JPanel {
 		rjobField.setBounds(158, 287, 247, 24);
 		add(rjobField);
 
-		rtelField = new JTextField();
+		rtelField = new NumberField(50);
 		rtelField.setText("110");
 		rtelField.setColumns(10);
 		rtelField.setBounds(466, 287, 159, 24);
 		add(rtelField);
 
-		rphoneField = new JTextField();
+		rphoneField = new NumberField(50);
 		rphoneField.setText("110");
 		rphoneField.setColumns(10);
 		rphoneField.setBounds(712, 287, 194, 24);
@@ -187,19 +186,19 @@ public class OrderPanel extends JPanel {
 		separator_2.setBounds(114, 336, 854, 2);
 		add(separator_2);
 
-		numberField = new JTextField();
+		numberField = new DoubleField(50);
 		numberField.setText("1");
 		numberField.setBounds(189, 361, 86, 24);
 		add(numberField);
 		numberField.setColumns(10);
 
-		weightField = new JTextField();
+		weightField = new DoubleField(50);
 		weightField.setText("1");
 		weightField.setBounds(360, 361, 86, 24);
 		add(weightField);
 		weightField.setColumns(10);
 
-		volumeField = new JTextField();
+		volumeField = new DoubleField(50);
 		volumeField.setText("1");
 		volumeField.setBounds(536, 361, 86, 24);
 		add(volumeField);
@@ -229,7 +228,7 @@ public class OrderPanel extends JPanel {
 		separator_3.setBounds(114, 463, 854, 2);
 		add(separator_3);
 
-		fareField = new JTextField();
+		fareField = new DoubleField(50);
 		fareField.setText("0");
 		fareField.setBounds(750, 418, 68, 24);
 		add(fareField);
@@ -259,6 +258,8 @@ public class OrderPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// 添加订单
 				try {
+					if(!checkFormat())
+						return;
 					String saddress = (String) scityBox.getSelectedItem();
 					saddress = saddress.concat("-").concat(
 							(String) sareaBox.getSelectedItem());
@@ -287,6 +288,7 @@ public class OrderPanel extends JPanel {
 									getOrderType((String) orderBox
 											.getSelectedItem()), fare, Formstate.waiting),
 							courierPanel.getOrgCode());
+					addSuccessfully();
 					// System.out.println(orderBlService.getOrdercode(courierPanel.getOrgCode()));
 				} catch (NumberFormatException e1) {
 					System.out.println("wronginput");
@@ -460,8 +462,106 @@ public class OrderPanel extends JPanel {
 	}
 	
 	private boolean checkFormat(){
+		if(snameField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("寄件人姓名不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(sdetailField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("寄件人具体地址不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(sjobField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("寄件人单位不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(stelField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("寄件人电话不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(sphoneField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("寄件人手机不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(rnameField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("收件人姓名不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(rdetailField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("收件人具体地址不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(rjobField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("收件人单位不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(rtelField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("收件人电话不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(rphoneField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("收件人手机不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(numberField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("原件数不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(weightField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("重量不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(volumeField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("体积不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(nameField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("货物名称不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}else if(fareField.getText().equals("")){
+			TipDialog tipDialog=new TipDialog("运费不能为空！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);	
+			return false;
+		}
 		return true;
 	}
+	
+	private void addSuccessfully(){
+		TipDialog tipDialog=new TipDialog("添加成功！");
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		snameField.setText("");
+		sdetailField.setText("");
+		sjobField.setText("");
+		stelField.setText("");
+		sphoneField.setText("");
+		rnameField.setText("");
+		rdetailField.setText("");
+		rjobField.setText("");
+		rtelField.setText("");
+		rphoneField.setText("");
+		numberField.setText("");
+		weightField.setText("");
+		volumeField.setText("");
+		nameField.setText("");
+		fareField.setText("");	
+	}
+	
 	private void addPackTypeItems() {
 		for (PackageTypes packages : PackageTypes.values()) {
 			packBox.addItem(packages.getName());
