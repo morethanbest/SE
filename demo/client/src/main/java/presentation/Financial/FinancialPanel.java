@@ -43,10 +43,12 @@ public class FinancialPanel extends JPanel implements ActionListener{
     private DebitnotePanel debitnotePanel;
     private NewBookPanel newBookPanel;
     private Job job;
+    private MainFrame parent;
 	/**
 	 * Create the panel.
 	 */
-	public FinancialPanel(String orgcode,Job job) {
+	public FinancialPanel(String orgcode,Job job,MainFrame parent) {
+		this.parent=parent;
 		this.orgcode=orgcode;
 		this.job=job;
 		setLayout(null);
@@ -135,19 +137,7 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		}else if(e.getSource().equals(btnNewButton_5)){
 			card.show(panel, "newbook");
 		}else if(e.getSource().equals(btnNewButton_6)){
-			try {
-		           RMIHelper.init();
-		           MainFrame frame= new MainFrame();
-		           frame.start();
-		        } catch (ClientInitException e1) {
-		            e1.printStackTrace();
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Client boots fail!\nCause: " + e1.getMessage(),
-		                    "Fatal Error",
-		                    JOptionPane.ERROR_MESSAGE
-		            );
-		        }
+			parent.skipToLogin();;
 		}
 	}
 

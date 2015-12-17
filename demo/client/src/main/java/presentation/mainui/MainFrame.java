@@ -55,38 +55,40 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(card);
 		LoginPanel login = new LoginPanel(this);
 		contentPane.add(login, "login");
-		searchorder=new Searchorder();
+		searchorder=new Searchorder(this);
 		contentPane.add(searchorder, "searchorder");
 	
 	}
 
 	public void skipToNext(LoginVO vo) {
 		if (vo.getJob() == Job.manager) {
-			JPanel temp = new ManagerPanel();
+			JPanel temp = new ManagerPanel(this);
 			contentPane.add(temp, "manager");
 			card.show(contentPane, "manager");
 		} else if (vo.getJob() == Job.Courier) {
-			JPanel temp = new CourierPanel(vo.getOrganizationcode(), vo.getOrganizationname());
+			JPanel temp = new CourierPanel(vo.getOrganizationcode(), vo.getOrganizationname(),this);
 			contentPane.add(temp, "courier");
 			card.show(contentPane, "courier");
 		} else if(vo.getJob() == Job.hallsalesman){
-			JPanel temp=new HallsalesmanPanel(vo.getOrganizationname(), vo.getOrganizationcode(), vo.getCity());
+			System.out.println("aaa");
+			JPanel temp=new HallsalesmanPanel(vo.getOrganizationname(), vo.getOrganizationcode(), vo.getCity(),this);
+			System.out.println("sss");
 			contentPane.add(temp, "hallsalesman");
 			card.show(contentPane, "hallsalesman");
 		} else if(vo.getJob() == Job.administrator){
-			JPanel temp=new AdministratorPanel(vo.getOrganizationcode());
+			JPanel temp=new AdministratorPanel(vo.getOrganizationcode(),this);
 			contentPane.add(temp, "administrator");
 			card.show(contentPane, "administrator");
 		} else if(vo.getJob() == Job.Financial||vo.getJob() == Job.advanceFinancial){
-			JPanel temp=new FinancialPanel(vo.getOrganizationcode(),vo.getJob());
+			JPanel temp=new FinancialPanel(vo.getOrganizationcode(),vo.getJob(),this);
 			contentPane.add(temp, "financial");
 			card.show(contentPane, "financial");
 		} else if(vo.getJob() == Job.transfercentersalesman){
-			JPanel temp=new CenterSalesmanPanel(vo.getOrganizationname(), vo.getOrganizationcode(), vo.getCity());
+			JPanel temp=new CenterSalesmanPanel(vo.getOrganizationname(), vo.getOrganizationcode(), vo.getCity(),this);
 			contentPane.add(temp, "centersalesman");
 			card.show(contentPane, "centersalesman");
 		} else if(vo.getJob() == Job.CenterDepot){
-			JPanel temp=new DepotPanel(vo.getOrganizationcode(), vo.getCity());
+			JPanel temp=new DepotPanel(vo.getOrganizationcode(), vo.getCity(),this);
 			contentPane.add(temp, "centerdepot");
 			card.show(contentPane, "centerdepot");
 		}
@@ -94,6 +96,10 @@ public class MainFrame extends JFrame {
 	public void showLogistics(){
 		card.show(contentPane, "searchorder");
 	}
-
+    public void skipToLogin(){
+    	LoginPanel login = new LoginPanel(this);
+		contentPane.add(login, "login");
+		card.show(contentPane, "login");
+    }
 
 }

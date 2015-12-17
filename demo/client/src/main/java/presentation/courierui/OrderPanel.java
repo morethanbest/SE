@@ -79,13 +79,14 @@ public class OrderPanel extends JPanel {
 	private JLabel label_23;
 	private JButton button_1;
 	private JButton button_3;
-
+    private MainFrame parent;
 	/**
 	 * Create the panel.
 	 * 
 	 * @param courierPanel
 	 */
-	public OrderPanel(CourierPanel courierPanel) {
+	public OrderPanel(CourierPanel courierPanel,MainFrame parent) {
+		this.parent=parent;
 		setBackground(new Color(244, 247, 252));
 		orderBlService = new OrderController();
 		setLayout(null);
@@ -412,19 +413,7 @@ public class OrderPanel extends JPanel {
 		button_3 = new JButton("注销");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-			           RMIHelper.init();
-			           MainFrame frame= new MainFrame();
-			           frame.start();
-			        } catch (ClientInitException e1) {
-			            e1.printStackTrace();
-			            JOptionPane.showMessageDialog(
-			                    null,
-			                    "Client boots fail!\nCause: " + e1.getMessage(),
-			                    "Fatal Error",
-			                    JOptionPane.ERROR_MESSAGE
-			            );
-			        }
+				parent.skipToLogin();
 			}
 		});
 		button_3.setBounds(816, 10, 145, 42);

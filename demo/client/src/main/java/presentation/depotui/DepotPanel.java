@@ -37,11 +37,13 @@ public class DepotPanel extends JPanel implements ActionListener {
 	
 	private StockinCheckPanel inc;
 	private StockoutCheckPanel outc;
+	private MainFrame parent;
 
 	/**
 	 * Create the panel.
 	 */
-	public DepotPanel(String orgCode, String city) {
+	public DepotPanel(String orgCode, String city,MainFrame parent) {
+		this.parent=parent;
 		card = new CardLayout();
 		
 		
@@ -91,14 +93,16 @@ public class DepotPanel extends JPanel implements ActionListener {
 		switcher.add(exam, "exam");
 		switcher.add(taking, "taking");
 		
+		button_4 = new JButton("注销");
+		button_4.setBounds(838, 13, 113, 27);
+		add(button_4);
+		
 		button.addActionListener(this);
 		button_1.addActionListener(this);
 		button_2.addActionListener(this);
 		button_3.addActionListener(this);
+		button_4.addActionListener(this);
 		
-		button_4 = new JButton("注销");
-		button_4.setBounds(838, 13, 113, 27);
-		add(button_4);
 
 	}
 
@@ -113,19 +117,7 @@ public class DepotPanel extends JPanel implements ActionListener {
 		else if (e.getSource().equals(button_3))
 			card.show(switcher, "taking");
 		else if(e.getSource().equals(button_4)){
-			try {
-		           RMIHelper.init();
-		           MainFrame frame= new MainFrame();
-		           frame.start();
-		        } catch (ClientInitException e1) {
-		            e1.printStackTrace();
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Client boots fail!\nCause: " + e1.getMessage(),
-		                    "Fatal Error",
-		                    JOptionPane.ERROR_MESSAGE
-		            );
-		        }
+			parent.skipToLogin();
 		}
 	}
 

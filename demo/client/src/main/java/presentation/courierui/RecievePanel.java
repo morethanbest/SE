@@ -42,13 +42,13 @@ public class RecievePanel extends JPanel {
 	private JLabel label_1;
 	private JLabel label_2;
 	private JButton button_2;
-
+    private MainFrame parent;
 	/**
 	 * Create the panel.
 	 * 
 	 * @param courierPanel
 	 */
-	public RecievePanel(CourierPanel courierPanel) {
+	public RecievePanel(CourierPanel courierPanel,MainFrame parent) {
 		setBackground(new Color(244, 247, 252));
 		receptionBlService = new ReceptionController();
 
@@ -140,19 +140,7 @@ public class RecievePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				try {
-			           RMIHelper.init();
-			           MainFrame frame= new MainFrame();
-			           frame.start();
-			        } catch (ClientInitException e1) {
-			            e1.printStackTrace();
-			            JOptionPane.showMessageDialog(
-			                    null,
-			                    "Client boots fail!\nCause: " + e1.getMessage(),
-			                    "Fatal Error",
-			                    JOptionPane.ERROR_MESSAGE
-			            );
-			        }
+                parent.skipToLogin();
 			}
 		});
 		button_2.setBounds(823, 10, 145, 42);

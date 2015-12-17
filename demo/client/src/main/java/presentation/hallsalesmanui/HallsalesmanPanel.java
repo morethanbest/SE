@@ -53,11 +53,12 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	private GoodRecievingCheckPanel gc;
 	private HallLoadCheckPanel hc;
 	private RecordcollectCheckPanel rc;
-
+    private MainFrame parent;
 	/**
 	 * Create the panel.
 	 */
-	public HallsalesmanPanel(String orgName,String orgcode, String city) {
+	public HallsalesmanPanel(String orgName,String orgcode, String city,MainFrame parent) {
+		this.parent=parent;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
@@ -162,19 +163,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		} else if(e.getSource().equals(reciptionButton)){
 			card.show(switcher, "recordcollect");
 		} else if(e.getSource().equals(logoutButton)){
-			try {
-		           RMIHelper.init();
-		           MainFrame frame= new MainFrame();
-		           frame.start();
-		        } catch (ClientInitException e1) {
-		            e1.printStackTrace();
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Client boots fail!\nCause: " + e1.getMessage(),
-		                    "Fatal Error",
-		                    JOptionPane.ERROR_MESSAGE
-		            );
-		        }
+			parent.skipToLogin();
 
 		}
 	}

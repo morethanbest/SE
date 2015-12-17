@@ -46,10 +46,12 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private BalancePanel balancePanel;
 	private ExamPanel examPanel;
 	private ManagerStatisticsPanel managerStatisticsPanel;
+	private MainFrame parent;
 	/**
 	 * Create the panel.
 	 */
-	public ManagerPanel() {
+	public ManagerPanel(MainFrame parent) {
+		this.parent=parent;
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
@@ -189,19 +191,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		}else if(e.getSource().equals(btnNewButton_5)){
 			card.show(panel, "statistics");
 		}else if(e.getSource().equals(btnNewButton_8)){
-			try {
-		           RMIHelper.init();
-		           MainFrame frame= new MainFrame();
-		           frame.start();
-		        } catch (ClientInitException e1) {
-		            e1.printStackTrace();
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Client boots fail!\nCause: " + e1.getMessage(),
-		                    "Fatal Error",
-		                    JOptionPane.ERROR_MESSAGE
-		            );
-		        }
+			parent.skipToLogin();
 		}
 
 	}

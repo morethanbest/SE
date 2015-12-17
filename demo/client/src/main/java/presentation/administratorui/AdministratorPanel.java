@@ -23,10 +23,12 @@ public class AdministratorPanel extends JPanel implements ActionListener {
 	private JLabel hint;
 	private CardLayout card;
 	private UserPanel userPanel;
+	private MainFrame parent;
     /**
 	 * Create the panel.
 	 */
-	public AdministratorPanel(String orgcode) {
+	public AdministratorPanel(String orgcode,MainFrame parent) {
+		this.parent=parent;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
@@ -64,19 +66,7 @@ public class AdministratorPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(btnNewButton1)) {
-			try {
-		           RMIHelper.init();
-		           MainFrame frame= new MainFrame();
-		           frame.start();
-		        } catch (ClientInitException e1) {
-		            e1.printStackTrace();
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Client boots fail!\nCause: " + e1.getMessage(),
-		                    "Fatal Error",
-		                    JOptionPane.ERROR_MESSAGE
-		            );
-		        }
+			parent.skipToLogin();
 		}
 
 	}

@@ -43,10 +43,12 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 	private ArrivalUpdatePanel au;
 	private CenterLoadUpdatePanel cu;
 	private TransferUpdatePanel tu;
+	private MainFrame parent;
 	/**
 	 * Create the panel.
 	 */
-	public CenterSalesmanPanel(String orgName, String orgCode, String city) {
+	public CenterSalesmanPanel(String orgName, String orgCode, String city,MainFrame parent) {
+		this.parent=parent;
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
@@ -94,9 +96,10 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 		switcher.add(cc, "cc");
 		switcher.add(cu, "cu");
 		
-		JButton btnZhu = new JButton("注销");
+		btnZhu = new JButton("注销");
 		btnZhu.setBounds(815, 13, 113, 27);
 		add(btnZhu);
+		btnZhu.addActionListener(this);
 		
 	}
 
@@ -109,19 +112,7 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 		} else if(e.getSource().equals(btnNewButton_2)){
 			card.show(switcher, "load");
 		} else if(e.getSource().equals(btnZhu)){
-			try {
-		           RMIHelper.init();
-		           MainFrame frame= new MainFrame();
-		           frame.start();
-		        } catch (ClientInitException e1) {
-		            e1.printStackTrace();
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Client boots fail!\nCause: " + e1.getMessage(),
-		                    "Fatal Error",
-		                    JOptionPane.ERROR_MESSAGE
-		            );
-		        }
+			parent.skipToLogin();
 		}
 	}
 

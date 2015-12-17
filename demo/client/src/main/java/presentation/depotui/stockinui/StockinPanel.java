@@ -274,9 +274,15 @@ public class StockinPanel extends JPanel {
 		List<Long> list = inboundBlService.getEachBlockLimit(
 				getBlockIndex((String) quBox.getSelectedItem()),
 				orgcode);
-		fillBox(paiBox, list.get(0));
-		fillBox(jiaBox, list.get(1));
-		fillBox(weiBox, list.get(2));
+		try {
+			fillBox(paiBox, list.get(0));
+			fillBox(jiaBox, list.get(1));
+			fillBox(weiBox, list.get(2));
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("addpaijiawei");
+		}
+		
 	}
 	
 	private void checkAvailable(){

@@ -28,10 +28,12 @@ public class Searchorder extends JPanel implements ActionListener{
 	JButton searchBtn;
 	LogisticsVO vo=null;
 	private JButton button;
+	private MainFrame parent;
 	/**
 	 * Create the panel.
 	 */
-	public Searchorder() {
+	public Searchorder(MainFrame parent) {
+		this.parent=parent;
 		setLayout(null);
 		
 		JLabel label = new JLabel("输入订单号查询订单");
@@ -59,7 +61,7 @@ public class Searchorder extends JPanel implements ActionListener{
 		button.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		button.setBounds(851, 23, 99, 31);
 		add(button);
-		
+		button.addActionListener(this);
 		
 	}
 	
@@ -123,19 +125,7 @@ public class Searchorder extends JPanel implements ActionListener{
 			vo=logisticsInfoService.getOrderbyOrderNumber(ordernum);
 			showLogisics();
 		}else if(e.getSource().equals(button)){
-			try {
-		           RMIHelper.init();
-		           MainFrame frame= new MainFrame();
-		           frame.start();
-		        } catch (ClientInitException e1) {
-		            e1.printStackTrace();
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Client boots fail!\nCause: " + e1.getMessage(),
-		                    "Fatal Error",
-		                    JOptionPane.ERROR_MESSAGE
-		            );
-		        }
+			parent.skipToLogin();
 		}
 		
 	}

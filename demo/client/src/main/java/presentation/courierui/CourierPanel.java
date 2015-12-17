@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
+import presentation.mainui.MainFrame;
+
 public class CourierPanel extends JPanel {
 	
 	private CardLayout card;
@@ -11,18 +13,19 @@ public class CourierPanel extends JPanel {
 	private RecievePanel recieve;
 	private String orgCode;
 	private String orgName;
-	
+	private MainFrame parent;
 	/**
 	 * Create the panel.
 	 * @param orgName 机构名
 	 * @param orgCode 机构编号
 	 */
-	public CourierPanel(String orgCode, String orgName) {
+	public CourierPanel(String orgCode, String orgName,MainFrame parent) {
+		this.parent=parent;
 		this.orgCode = orgCode;
 		this.orgName = orgName;
 		card = new CardLayout();
-		order = new OrderPanel(this);
-		recieve = new RecievePanel(this);
+		order = new OrderPanel(this,parent);
+		recieve = new RecievePanel(this,parent);
 		
 		setLayout(card);
 		add(order, "order");
