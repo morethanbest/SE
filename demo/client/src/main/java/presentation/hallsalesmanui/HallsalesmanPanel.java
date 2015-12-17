@@ -10,17 +10,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import presentation.hallsalesmanui.delivery.DeliveryCheckPanel;
 import presentation.hallsalesmanui.delivery.DeliveryPanel;
+import presentation.hallsalesmanui.delivery.DeliveryUpdatePanel;
 import presentation.hallsalesmanui.driver.DriverPanel;
+import presentation.hallsalesmanui.goodrecieving.GoodRecievingCheckPanel;
 import presentation.hallsalesmanui.goodrecieving.GoodRecievingPanel;
+import presentation.hallsalesmanui.goodrecieving.GoodRecievingUpdatePanel;
+import presentation.hallsalesmanui.hallload.HallLoadCheckPanel;
 import presentation.hallsalesmanui.hallload.HallLoadPanel;
+import presentation.hallsalesmanui.hallload.HallLoadUpdatePanel;
+import presentation.hallsalesmanui.recordcollect.RecordcollectCheckPanel;
 import presentation.hallsalesmanui.recordcollect.RecordcollectPanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 
 
 
 public class HallsalesmanPanel extends JPanel implements ActionListener {
-	private JPanel panel;
+	private JPanel switcher;
 	private JButton loadButton;
 	private JButton goodrecevingButton;
 	private JButton deliveryButton;
@@ -36,6 +43,11 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	private DriverPanel driverPanel;
 	private VehiclePanel vehiclePanel;
 	private RecordcollectPanel recordcollectPanel;
+	
+	private DeliveryCheckPanel dc;
+	private GoodRecievingCheckPanel gc;
+	private HallLoadCheckPanel hc;
+	private RecordcollectCheckPanel rc;
 
 	/**
 	 * Create the panel.
@@ -83,28 +95,45 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		separator.setBounds(0, 58, 982, 2);
 		add(separator);
 
-		panel = new JPanel();
-		panel.setBackground(SystemColor.controlHighlight);
-		panel.setBounds(14, 75, 954, 450);
-		add(panel);
+		switcher = new JPanel();
+		switcher.setBackground(SystemColor.controlHighlight);
+		switcher.setBounds(14, 75, 954, 450);
+		add(switcher);
 		card = new CardLayout();
-		panel.setLayout(card);
+		switcher.setLayout(card);
 		
 		//card中添加各种功能面板
+		HallLoadUpdatePanel hu = new HallLoadUpdatePanel(this, card);
+		hc = new HallLoadCheckPanel(switcher, card, hu, orgcode);
 		hallLoadPanel = new HallLoadPanel(orgcode, city, orgName);
+		
+		GoodRecievingUpdatePanel gu = new GoodRecievingUpdatePanel(this, card, orgName);
+		gc = new GoodRecievingCheckPanel(switcher, card, gu, orgcode, orgName);
 		goodRecievingPanel = new GoodRecievingPanel(orgcode, city);
+		
+		DeliveryUpdatePanel du = new DeliveryUpdatePanel(this, card);
+		dc = new DeliveryCheckPanel(switcher, card, du, orgcode);
 		deliveryPanel = new DeliveryPanel(orgcode);
 		
 		driverPanel=new DriverPanel(orgcode);
 		vehiclePanel=new VehiclePanel(orgcode);
+		
 		recordcollectPanel=new RecordcollectPanel(orgcode);
 		
-		panel.add(hallLoadPanel, "hallLoad");
-		panel.add(goodRecievingPanel, "goodRecieving");
-		panel.add(deliveryPanel, "delivery");
-		panel.add(driverPanel, "driver");
-		panel.add(vehiclePanel, "vehicle");
-		panel.add(recordcollectPanel, "recordcollect");
+		switcher.add(hallLoadPanel, "hallLoad");
+		switcher.add(hc, "hc");
+		switcher.add(hu, "hu");
+		switcher.add(goodRecievingPanel, "goodRecieving");
+		switcher.add(gc, "gc");
+		switcher.add(gu, "gu");
+		switcher.add(deliveryPanel, "delivery");
+		switcher.add(dc, "dc");
+		switcher.add(du, "du");
+
+		switcher.add(driverPanel, "driver");
+		switcher.add(vehiclePanel, "vehicle");
+		
+		switcher.add(recordcollectPanel, "recordcollect");
 		
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);
@@ -116,17 +145,34 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(vehicleButton)) {
-			card.show(panel, "vehicle");
+			card.show(switcher, "vehicle");
 		} else if (e.getSource().equals(driverButton)) {
-			card.show(panel, "driver");
+			card.show(switcher, "driver");
 		} else if (e.getSource().equals(loadButton)) {
-			card.show(panel, "hallLoad");
+			card.show(switcher, "hallLoad");
 		} else if (e.getSource().equals(goodrecevingButton)) {
-			card.show(panel, "goodRecieving");
+			card.show(switcher, "goodRecieving");
 		} else if (e.getSource().equals(deliveryButton)) {
-			card.show(panel, "delivery");
+			card.show(switcher, "delivery");
 		} else if(e.getSource().equals(reciptionButton)){
-			card.show(panel, "recordcollect");
+			card.show(switcher, "recordcollect");
 		}
 	}
+	public JPanel getSwitcher() {
+		return switcher;
+	}
+	public DeliveryCheckPanel getDc() {
+		return dc;
+	}
+	public GoodRecievingCheckPanel getGc() {
+		return gc;
+	}
+	public HallLoadCheckPanel getHc() {
+		return hc;
+	}
+	public RecordcollectCheckPanel getRc() {
+		return rc;
+	}
+	
+	
 }

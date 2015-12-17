@@ -1,5 +1,6 @@
 package presentation.hallsalesmanui.delivery;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -8,43 +9,37 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import po.Formstate;
-import presentation.tip.TipDialog;
+import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.managerui.examui.ExamPanel;
 import vo.DeliveryVO;
+import vo.GoodsReceivingVO;
 import businesslogic.logisticsbl.DeliveryPack.DeliveryController;
+import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
+import businesslogicservice.managerblservice.ExamDeliverys;
+import businesslogicservice.managerblservice.ExamGoodsRecevings;
 
-import javax.swing.JLabel;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import java.awt.CardLayout;
-import java.awt.Component;
-
-public class DeliveryPanel extends JPanel {
+public class DeliveryUpdatePanel extends JPanel {
 	private JTextField codeField;
 	private JTextField deliveryField;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
 	private JComboBox<Long> dateBox;
-	private JButton button;
-	private DeliveryBlService deliveryBlService;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JButton button_1;
+	private JButton update;
+	private DeliveryBlService controller;
+	private DeliveryVO vo;
 
 	/**
 	 * Create the panel.
 	 */
-	public DeliveryPanel(String orgCode, JPanel parent, CardLayout card) {
+	public DeliveryUpdatePanel(HallsalesmanPanel parent, CardLayout card) {
 		setLayout(null);
 
-		deliveryBlService = new DeliveryController();
+		controller = new DeliveryController();
 
 		codeField = new JTextField();
 		codeField.setColumns(10);
@@ -72,22 +67,37 @@ public class DeliveryPanel extends JPanel {
 		deliveryField.setBounds(286, 204, 242, 24);
 		add(deliveryField);
 
-		button = new JButton("提交");
-		button.addActionListener(new ActionListener() {
+		update = new JButton("提交");
+		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				deliveryBlService.Delivery(new DeliveryVO(deliveryBlService
-						.findID(orgCode), date, codeField.getText(),
-						deliveryField.getText(), Formstate.waiting));
-				TipDialog Dialog=new TipDialog("派件单提交成功！");
-				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				Dialog.setVisible(true);
+				controller.update(new DeliveryVO(vo.getid(), date, codeField.getText(),
+						deliveryField.getText(), vo.getDocumentstate()));
 			}
 		});
-		button.setBounds(359, 276, 113, 27);
-		add(button);
+		update.setBounds(359, 276, 113, 27);
+		add(update);
+		
+		JButton button_1 = new JButton("恢复原值");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				init(vo);
+			}
+		});
+		button_1.setBounds(486, 276, 113, 27);
+		add(button_1);
+		
+		JButton button_2 = new JButton("返回");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.previous(parent.getSwitcher());
+				parent.getDc().refreshList();
+			}
+		});
+		button_2.setBounds(613, 276, 113, 27);
+		add(button_2);
 
 		ItemListener listener = new ItemListener() {
 
@@ -99,32 +109,6 @@ public class DeliveryPanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem((long)c.get(Calendar.YEAR));
-		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
-		
-		label = new JLabel("派件日期：");
-		label.setBounds(200, 144, 86, 18);
-		add(label);
-		
-		label_1 = new JLabel("订单编号：");
-		label_1.setBounds(200, 85, 86, 18);
-		add(label_1);
-		
-		label_2 = new JLabel("派件员：");
-		label_2.setBounds(212, 207, 74, 18);
-		add(label_2);
-		
-		button_1 = new JButton("查看已提交单据");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
-			}
-		});
-		button_1.setBounds(737, 343, 113, 27);
-		add(button_1);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{codeField, yearBox, monthBox, dateBox, deliveryField}));
 
 	}
 
@@ -167,4 +151,13 @@ public class DeliveryPanel extends JPanel {
 		}
 	}
 
+		public void init(DeliveryVO vo){
+			this.vo = vo;
+			codeField.setText(vo.getBarcode());
+			yearBox.setSelectedItem(vo.getArrivaltime() / 10000);
+			monthBox.setSelectedItem((vo.getArrivaltime() % 10000) / 100);
+			dateBox.setSelectedItem(vo.getArrivaltime() % 1000000);
+			deliveryField.setText(vo.getDelivorinfo());
+			update.setEnabled(vo.getDocumentstate() == Formstate.waiting || vo.getDocumentstate() == Formstate.fail);
+		}
 }
