@@ -1,16 +1,22 @@
 package presentation.depotui.stockinui;
 
-import javax.swing.JPanel;
-
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import po.Block;
 import po.CommodityLocation;
@@ -22,13 +28,6 @@ import businesslogic.commoditybl.InboundPack.InboundController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.commodityblservice.InboundBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JLabel;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
 
 public class StockinPanel extends JPanel {
 	private JTextField codeField;
@@ -55,11 +54,12 @@ public class StockinPanel extends JPanel {
 	private JLabel label_7;
 	private JLabel label_8;
 	private JLabel label_6;
+	private JButton button_1;
 
 	/**
 	 * Create the panel.
 	 */
-	public StockinPanel(String orgCode, String city) {
+	public StockinPanel(String orgCode, String city, JPanel parent, CardLayout card) {
 		inboundBlService = new InboundController();
 		this.city = city;
 		this.orgcode=orgCode;
@@ -209,6 +209,15 @@ public class StockinPanel extends JPanel {
 		label_6 = new JLabel("架号：");
 		label_6.setBounds(505, 188, 51, 18);
 		add(label_6);
+		
+		button_1 = new JButton("查看已提交单据");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+			}
+		});
+		button_1.setBounds(807, 312, 113, 27);
+		add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{codeField, typeBox, orgBox, yearBox, monthBox, dateBox, quBox, paiBox, jiaBox, weiBox}));
 
 		typeBox.addItemListener(new ItemListener() {

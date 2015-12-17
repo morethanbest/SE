@@ -1,59 +1,54 @@
 package presentation.depotui.stockoutui;
 
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+
+import po.Formstate;
+import po.Organizationtype;
+import presentation.depotui.DepotPanel;
+import presentation.enums.TransportTypes;
+import presentation.managerui.examui.ExamPanel;
+import vo.OrganizationVO;
+import vo.StockoutVO;
+import businesslogic.commoditybl.StockoutPack.StockoutController;
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.commodityblservice.StockoutBlService;
+import businesslogicservice.managerblservice.ExamStockouts;
+import businesslogicservice.managerblservice.OrganizationBlService;
+
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import po.Formstate;
-import po.Organizationtype;
-import presentation.enums.TransportTypes;
-import vo.OrganizationVO;
-import vo.StockoutVO;
-import businesslogic.commoditybl.StockoutPack.StockoutController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.commodityblservice.StockoutBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
-
-public class StockoutPanel extends JPanel {
+public class StockoutUpdatePanel extends JPanel {
 	private JTextField orderField;
 	private JTextField codeField;
-	private JComboBox<String> typeBox;
-	private JComboBox<String> orgBox;
 	private JComboBox<String> transportBox;
 	private JComboBox<Long> yearBox;
-	private String city;
 	private JComboBox<Long> dateBox;
 	private JComboBox<Long> monthBox;
-	private JButton button;
-	private StockoutBlService stockoutBlService;
+	private JButton update;
+	private ExamStockouts ea;
+	private StockoutVO vo;
 	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
-	private JLabel label_5;
+	private JButton button;
 	private JButton button_1;
 
 	/**
 	 * Create the panel.
 	 */
-	public StockoutPanel(String orgCode, String city, JPanel parent, CardLayout card) {
-		this.city = city;
-		stockoutBlService = new StockoutController();
+	public StockoutUpdatePanel(DepotPanel parent, CardLayout card) {
+		ea = new ExamController();
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
@@ -78,12 +73,6 @@ public class StockoutPanel extends JPanel {
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		typeBox = new JComboBox<String>();
-		typeBox.setBounds(141, 106, 220, 24);
-		add(typeBox);
-		typeBox.addItem("运往市内");
-		typeBox.addItem("运往市外");
-
 		transportBox = new JComboBox<String>();
 		transportBox.setBounds(555, 106, 220, 24);
 		add(transportBox);
@@ -94,27 +83,21 @@ public class StockoutPanel extends JPanel {
 		codeField.setBounds(555, 181, 220, 24);
 		add(codeField);
 
-		orgBox = new JComboBox<String>();
-		orgBox.setBounds(141, 181, 220, 24);
-		add(orgBox);
-		addOrganizationItems(orgBox);
-
-		button = new JButton("提交");
-		button.addActionListener(new ActionListener() {
-			Long date = (Long) yearBox.getSelectedItem() * 10000
-					+ (Long) monthBox.getSelectedItem() * 100
-					+ (Long) dateBox.getSelectedItem();
+		update = new JButton("提交修改");
+		update.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				stockoutBlService.Stockout(new StockoutVO(stockoutBlService
-						.getid(orgCode), orderField.getText(), date,
-						(String) orgBox.getSelectedItem(),
+				Long date = (Long) yearBox.getSelectedItem() * 10000
+						+ (Long) monthBox.getSelectedItem() * 100
+						+ (Long) dateBox.getSelectedItem();
+				ea.updateStockoutForm(new StockoutVO(vo.getId(), orderField.getText(), date,
+						vo.getDestination(),
 						(String) transportBox.getSelectedItem(), codeField
-								.getText(), Formstate.waiting));
+								.getText(), vo.getFormstate()));
 			}
 		});
-		button.setBounds(397, 302, 113, 27);
-		add(button);
+		update.setBounds(397, 302, 113, 27);
+		add(update);
 
 		ItemListener listener = new ItemListener() {
 
@@ -125,54 +108,29 @@ public class StockoutPanel extends JPanel {
 		};
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
-
-		Calendar c = Calendar.getInstance();
-		yearBox.setSelectedItem((long) c.get(Calendar.YEAR));
-		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
-		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
 		
-		label = new JLabel("订单编号：");
-		label.setBounds(55, 37, 86, 18);
+		label = new JLabel("");
+		label.setBounds(141, 106, 220, 24);
 		add(label);
 		
-		label_1 = new JLabel("运送方向：");
-		label_1.setBounds(55, 108, 86, 18);
-		add(label_1);
+		button = new JButton("恢复原值");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				init(vo);
+			}
+		});
+		button.setBounds(524, 302, 113, 27);
+		add(button);
 		
-		label_2 = new JLabel("机构名称：");
-		label_2.setBounds(55, 187, 86, 18);
-		add(label_2);
-		
-		label_3 = new JLabel("中转类型：");
-		label_3.setBounds(476, 106, 82, 18);
-		add(label_3);
-		
-		label_4 = new JLabel("单据编号：");
-		label_4.setBounds(476, 184, 82, 18);
-		add(label_4);
-		
-		label_5 = new JLabel("出库日期：");
-		label_5.setBounds(476, 38, 82, 18);
-		add(label_5);
-		
-		button_1 = new JButton("查看已提交单据");
+		button_1 = new JButton("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
+				card.previous(parent);
+//				parent.getOut().refreshList();
 			}
 		});
-		button_1.setBounds(710, 283, 113, 27);
+		button_1.setBounds(651, 302, 113, 27);
 		add(button_1);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{orderField, typeBox, orgBox, yearBox, monthBox, dateBox, transportBox, codeField}));
-
-		typeBox.addItemListener(new ItemListener() {
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				addOrganizationItems(orgBox);
-
-			}
-		});
 
 	}
 
@@ -214,25 +172,21 @@ public class StockoutPanel extends JPanel {
 				dateBox.addItem((long) 29);
 		}
 	}
-
-	public void addOrganizationItems(JComboBox<String> orgSelect) {
-		orgSelect.removeAllItems();
-		OrganizationBlService organizationBlService = new OrganizationController();
-		List<OrganizationVO> orgList;
-		if (typeBox.getSelectedIndex() == 1) {
-			orgList = organizationBlService
-					.getOrganizationbyType(Organizationtype.transfercenter);
-		} else {
-			orgList = organizationBlService.getOrganizationbyCity(city);
-		}
-		for (OrganizationVO org : orgList) {
-			orgSelect.addItem(org.getName());
-		}
-	}
-
 	private void addTransportTypeItems() {
 		for (TransportTypes transport : TransportTypes.values()) {
 			transportBox.addItem(transport.getName());
 		}
+	}
+	
+	public void init(StockoutVO vo){
+		orderField.setText(vo.getOrdercode());
+		label.setText("目的地：" + vo.getDestination());
+		yearBox.setSelectedItem(vo.getOuttime() / 10000);
+		monthBox.setSelectedItem((vo.getOuttime() % 10000) / 100);
+		dateBox.setSelectedItem(vo.getOuttime() % 1000000);
+		transportBox.setSelectedItem(vo.getTransportType());
+		codeField.setText(vo.getTranscode());
+		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+		
 	}
 }

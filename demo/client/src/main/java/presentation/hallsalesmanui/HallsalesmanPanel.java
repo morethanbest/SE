@@ -175,7 +175,6 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		                    JOptionPane.ERROR_MESSAGE
 		            );
 		        }
-			card.show(switcher, "recordcollect");
 
 		}
 	}
