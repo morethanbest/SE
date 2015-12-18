@@ -1,5 +1,6 @@
 package presentation.hallsalesmanui.recordcollect;
 
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,10 +42,11 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 	private JTable table;
 	private RecordcollectVO vo=null;
 	private List<String> list=new ArrayList<String>();
+	private JButton button;
 	/**
 	 * Create the panel.
 	 */
-	public RecordcollectPanel(String orgcode) {
+	public RecordcollectPanel(String orgcode, JPanel parent, CardLayout card) {
 		this.orgcode=orgcode;
 		setLayout(null);
 		
@@ -155,6 +157,15 @@ public class RecordcollectPanel extends JPanel implements ActionListener{
 		scrollPane.setViewportView(table);
 		btnaddorder.addActionListener(this);
 		btnhandin.addActionListener(this);
+		
+		button = new JButton("查看已提交单据");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+			}
+		});
+		button.setBounds(701, 402, 113, 27);
+		add(button);
 	}
 	private void addyearItem(JComboBox<String> yearselect){
 		for(int i=2000;i<2100;i++){

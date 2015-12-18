@@ -1,5 +1,6 @@
 package presentation.Financial.recordpay;
 
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,11 +38,14 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 	private JButton button;
 	private RecordpayVO vo=null;
 	private JTextArea textArea;
+	private RecordpayBlService controller;
+	private JButton button_1;
 	/**
 	 * Create the panel.
 	 */
-	public RecordpayPanel(String orgcode) {
+	public RecordpayPanel(String orgcode, JPanel parent, CardLayout card) {
 		this.orgcode=orgcode;
+		controller = new RecordpayController();
 		setLayout(null);
 		
 		JLabel label = new JLabel("付款信息：");
@@ -131,6 +135,15 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		button.addActionListener(this);
+		
+		button_1 = new JButton("查看已提交单据");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.next(parent);
+			}
+		});
+		button_1.setBounds(672, 415, 113, 27);
+		add(button_1);
 	}
 	private void addyearItem(JComboBox<String> yearselect){
 		for(int i=2000;i<2100;i++){
@@ -196,8 +209,7 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(button)){
-			RecordpayBlService recordpayBlService=new RecordpayController();
-			String id=recordpayBlService.getid();
+			String id = controller.getid();
 			long paytime=Long.parseLong((String)yearSelect.getSelectedItem()+monthSelect.getSelectedItem()+daySelect.getSelectedItem());
 			String payman=manField.getText();
 			String payaccount=accountField.getText();

@@ -1,8 +1,5 @@
 package presentation.hallsalesmanui;
 
-import init.ClientInitException;
-import init.RMIHelper;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -10,7 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
@@ -26,6 +22,7 @@ import presentation.hallsalesmanui.hallload.HallLoadPanel;
 import presentation.hallsalesmanui.hallload.HallLoadUpdatePanel;
 import presentation.hallsalesmanui.recordcollect.RecordcollectCheckPanel;
 import presentation.hallsalesmanui.recordcollect.RecordcollectPanel;
+import presentation.hallsalesmanui.recordcollect.RecordcollectUpdatePanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 import presentation.mainui.MainFrame;
 
@@ -124,7 +121,9 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		driverPanel=new DriverPanel(orgcode);
 		vehiclePanel=new VehiclePanel(orgcode);
 		
-		recordcollectPanel=new RecordcollectPanel(orgcode);
+		RecordcollectUpdatePanel ru = new RecordcollectUpdatePanel(this, card);
+		rc= new RecordcollectCheckPanel(switcher, card, ru, orgcode);
+		recordcollectPanel=new RecordcollectPanel(orgcode, switcher, card);
 		
 		switcher.add(hallLoadPanel, "hallLoad");
 		switcher.add(hc, "hc");
@@ -140,6 +139,8 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		switcher.add(vehiclePanel, "vehicle");
 		
 		switcher.add(recordcollectPanel, "recordcollect");
+		switcher.add(rc, "rc");
+		switcher.add(ru, "ru");
 		
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);

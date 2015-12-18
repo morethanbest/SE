@@ -16,7 +16,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.enums.OrganizationType;
+import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.ConstantsVO;
 import vo.OrganizationVO;
@@ -93,22 +95,24 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		citySelect.addItemListener(listener);
 		orgSelect.addItemListener(listener);
 
-		btnAdd = new JButton("Add");
+		btnAdd = new JButton("增加");
 		btnAdd.addActionListener(this);
 		btnAdd.setBounds(587, 0, 113, 31);
 		add(btnAdd);
 
-		btnDelete = new JButton("Delete");
+		btnDelete = new JButton("删除");
 		btnDelete.addActionListener(this);
 		btnDelete.setBounds(714, 0, 113, 31);
 		add(btnDelete);
 
-		btnRevise = new JButton("Revise");
+		btnRevise = new JButton("修改");
 		btnRevise.setBounds(841, 0, 113, 31);
 		add(btnRevise);
+		btnRevise.addActionListener(this);
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(10);
+		refreshList();
 	}
 
 	public void addCityItems() {
@@ -194,9 +198,17 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		return null;
 	}
 
-	void addOrganization(String name, String org, String city){
+	public ResultMessage addOrganization(String name, String org, String city){
 		String code = organizationBlService.getOrganizationCode(city, getOrganizationType(org));
-		organizationBlService.addOrganization(new OrganizationVO(name, code, getOrganizationType(org), city));
+		ResultMessage resultMessage=organizationBlService.addOrganization(new OrganizationVO(name, code, getOrganizationType(org), city));
+		refreshList();
+		return resultMessage;
+	}
+	
+	public ResultMessage revOrganization(OrganizationVO vo){
+		ResultMessage resultMessage=organizationBlService.revOrganization(vo);
+		refreshList();
+		return resultMessage;
 	}
 	
 	@Override
@@ -209,20 +221,33 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 			DefaultTableModel tableModel = (DefaultTableModel) table
 					.getModel();
 			try {
-				String cellValue1 = (String) tableModel.getValueAt(
-						table.getSelectedRow(), 0);
-				String cellValue2 = (String) tableModel.getValueAt(
-						table.getSelectedRow(), 1);
-				String cellValue3 = (String) tableModel.getValueAt(
-						table.getSelectedRow(), 2);
-				String cellValue4 = (String) tableModel.getValueAt(
-						table.getSelectedRow(), 3);
-				organizationBlService.delOrganization(new OrganizationVO(cellValue2, cellValue1, getOrganizationType(cellValue4), cellValue3));
+				organizationBlService.delOrganization(list.get(table.getSelectedRow()));
 				refreshList();
 			} catch (ArrayIndexOutOfBoundsException e1) {
-//				managerPanel.setHint("系统提示：未选择删除项！");
+				TipDialog Dialog=new TipDialog("请选择删除项！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
 			} catch (NullPointerException e1) {
-//				managerPanel.setHint("系统提示：未选择删除项！");
+				TipDialog Dialog=new TipDialog("请选择删除项！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
+			}
+		}else if(e.getSource().equals(btnRevise)){
+			DefaultTableModel tableModel = (DefaultTableModel) table
+					.getModel();
+			try {
+                OrganizationVO organizationVO=list.get(table.getSelectedRow());
+                RevOrganizationDialog revOrganizationDialog=new RevOrganizationDialog(this,organizationVO);
+                revOrganizationDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                revOrganizationDialog.setVisible(true);
+			} catch (ArrayIndexOutOfBoundsException e1) {
+				TipDialog Dialog=new TipDialog("请选择修改项！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
+			} catch (NullPointerException e1) {
+				TipDialog Dialog=new TipDialog("请选择修改项！");
+				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				Dialog.setVisible(true);
 			}
 		}
 

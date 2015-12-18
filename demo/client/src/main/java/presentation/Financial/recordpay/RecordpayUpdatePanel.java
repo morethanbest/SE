@@ -1,4 +1,4 @@
-package presentation.managerui.examui.examfinancial;
+package presentation.Financial.recordpay;
 
 import java.awt.CardLayout;
 import java.awt.Font;
@@ -16,20 +16,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import businesslogic.balancebl.RecordpayPack.RecordpayController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.balanceblservice.RecordpayBlService;
-import businesslogicservice.managerblservice.ExamRecordpays;
 import po.Formstate;
 import po.RecordpayList;
 import po.ResultMessage;
-import presentation.managerui.examui.ExamPanel;
+import presentation.Financial.FinancialPanel;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.RecordpayVO;
+import businesslogic.balancebl.RecordpayPack.RecordpayController;
+import businesslogicservice.balanceblservice.RecordpayBlService;
 
-public class RecordpayRevisePanel extends JPanel implements ActionListener {
+public class RecordpayUpdatePanel extends JPanel implements ActionListener {
     private DoubleField sumField;
     private JTextField manField;
     private NumberField accountField;
@@ -38,7 +36,7 @@ public class RecordpayRevisePanel extends JPanel implements ActionListener {
 	private JComboBox<Long> dateBox;
 	private JComboBox<String> tipSelect;
 	private JButton update;
-	private ExamRecordpays ea;
+	private RecordpayBlService controller;
 	private RecordpayVO vo;
 	private JTextArea textArea;
 	private JButton button_1;
@@ -46,8 +44,8 @@ public class RecordpayRevisePanel extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public RecordpayRevisePanel(ExamPanel parent, CardLayout card) {
-		ea = new ExamController();
+	public RecordpayUpdatePanel(FinancialPanel parent, CardLayout card) {
+		controller = new RecordpayController();
 		
 		setLayout(null);
 		
@@ -153,8 +151,8 @@ public class RecordpayRevisePanel extends JPanel implements ActionListener {
 		button_2 = new JButton("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.previous(parent);
-				parent.getPay().refreshList();
+				card.previous(parent.getSwitcher());
+				parent.getRc().refreshList();
 			}
 		});
 		button_2.setBounds(726, 353, 113, 27);
@@ -255,7 +253,7 @@ public class RecordpayRevisePanel extends JPanel implements ActionListener {
 				try {
 					double paysum=Double.parseDouble(sumField.getText());
 					RecordpayVO temp = new RecordpayVO(vo.getId(), date, paysum, payman, payaccount, entry, remark, formstate);
-					ResultMessage resultMessage=ea.updateRecordpayForm(temp);
+					ResultMessage resultMessage=controller.updateRecordpay(temp);
 					if(resultMessage==ResultMessage.failure){
 						TipDialog dialog=new TipDialog("提交失败");
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -154,7 +154,7 @@ public class RecordpayExamPanel extends JPanel {
 		refreshList();
 	}
 
-	private void refreshList() {
+	void refreshList() {
 		for (Formstate state : Formstate.values()) {
 			if (stateBox.getSelectedItem().equals(state.getName()))
 				volist = ea.getRecordpayForm(state);

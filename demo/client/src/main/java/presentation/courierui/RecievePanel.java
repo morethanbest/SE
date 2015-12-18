@@ -66,7 +66,7 @@ public class RecievePanel extends JPanel {
 		button = new JButton("订单");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				courierPanel.switchPanel();
+				courierPanel.switchPanel("order");
 			}
 		});
 		button.setBounds(650, 10, 145, 42);
