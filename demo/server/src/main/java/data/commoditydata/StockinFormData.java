@@ -9,6 +9,7 @@ import data.database.commodityDB.StockDB;
 import data.database.commodityDB.StockinDB;
 import dataservice.commoditydataservice.StockinFormDataService;
 import po.CommodityLocation;
+import po.CommodityPO;
 import po.Formstate;
 import po.ResultMessage;
 import po.StockinPO;
@@ -22,8 +23,12 @@ public class StockinFormData extends UnicastRemoteObject implements StockinFormD
 
 	@Override
 	public ResultMessage addStockinForm(StockinPO po) throws RemoteException {
-		if(po!=null)
+		if(po!=null){
+			CommodityPO commodityPO=new CommodityPO(po.getId(),po.getOrdercode(), po.getIntime(), -1, po.getDestination(), po.getLocation());
+			CommodityDB.write(commodityPO);
 			return StockinDB.write(po);
+		}
+		
 		else 
 			return ResultMessage.failure;
 		

@@ -31,7 +31,7 @@ public class StockinId {
 
         for(int i=0;i<=7-len-1;i++)
             result="0"+result;
-        result=orgcode=result;
+        result=orgcode+result;
         return result;
 
     }

@@ -163,15 +163,16 @@ public class StockinDB {
 	}
 
 	public static void main(String[] args) {
+		System.out.println(fuzzySearch(Formstate.waiting,"0250").size());
 		initialize();
-		StockinPO po=new StockinPO("0250001","a",1,new CommodityLocation(1,1,1,1),"c",Formstate.waiting);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(fuzzySearch(Formstate.waiting,"025").size()>0)
-			System.out.println("fuzzysearch success");
-		System.out.println(getLastId("025"));
+//		StockinPO po=new StockinPO("0250001","a",1,new CommodityLocation(1,1,1,1),"c",Formstate.waiting);
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(fuzzySearch(Formstate.waiting,"025").size()>0)
+//			System.out.println("fuzzysearch success");
+//		System.out.println(getLastId("025"));
 					
 	}
 }

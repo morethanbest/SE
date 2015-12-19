@@ -205,9 +205,6 @@ public class OrderDB {
 			pst.setString(2, orgcode);
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				if(!ret.getString(18).startsWith(orgcode)){
-					continue;
-				}
 				Ordertype type = (Ordertype) Serialize.Bytes2Object(ret.getBytes(19));
 				Formstate documentstate = (Formstate) Serialize.Bytes2Object(ret.getBytes(23));
 				po = new OrderPO(ret.getString(3), ret.getString(2), ret.getString(3), ret.getString(4), ret.getString(5),
@@ -313,9 +310,8 @@ public class OrderDB {
 		return lastId;
 	}
 	public static void main(String[] args) {
-		initialize();
-		System.out.println("test");
-
+//		initialize();
+//		System.out.println(fuzzySearch(Formstate.waiting,"025000").size());
 //		if(getLastId("025")==1){
 //			System.out.println(getLastId("025"));
 //		}
