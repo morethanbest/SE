@@ -7,6 +7,7 @@ import java.util.List;
 
 import data.database.DBHelper;
 import data.database.Serialize;
+import data.database.userDB.UserDB;
 import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -79,8 +80,10 @@ public class OrganizationDB {
 	public static ResultMessage delete(OrganizationPO po){
 		String organizationcode=po.getOrganizationcode();
 		OrganizationPO organization=search(organizationcode);
-		if(organization!=null)
+		if(organization!=null){
 			StaffDB.deletebyorganization(organizationcode);
+			UserDB.deletebyOrg(organizationcode);
+		}
 		dbh=new DBHelper();
 		sql="delete from OrganizationPO where organizationcode=?";
 		pst=dbh.prepare(sql);
@@ -100,6 +103,12 @@ public class OrganizationDB {
 	}
 	
 	public static ResultMessage update(OrganizationPO po){
+		String organizationcode=po.getOrganizationcode();
+		OrganizationPO organization=search(organizationcode);
+		if(organization!=null){
+			StaffDB.updatebyOrg(po.getOrganizationcode(), po.getName());
+			UserDB.updatebyOrg(po.getOrganizationcode(), po.getName());
+		}
 		try{
 			byte[] typebytes = Serialize.Object2Bytes(po.getType());
 			dbh = new DBHelper();
@@ -265,7 +274,7 @@ public class OrganizationDB {
 	public static void main(String[] args) {
 //		initialize();
 //		System.out.println("test");
-		write(new OrganizationPO("总部","025",Organizationtype.headquarters,"南京"));
+//		write(new OrganizationPO("总部","025",Organizationtype.headquarters,"南京"));
 //		if(getAll().size()>0){
 //			System.out.println("getall success");
 //		}

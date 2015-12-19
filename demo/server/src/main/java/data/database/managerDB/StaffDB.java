@@ -159,6 +159,25 @@ public class StaffDB {
 		return ResultMessage.failure;
 	}
 	
+	public static ResultMessage updatebyOrg(String organizationcode,String organizationname){
+		try{
+			dbh = new DBHelper();
+			sql = "update StaffPO set organizationname=? where organizationcode=?";
+			pst = dbh.prepare(sql);
+			pst.setString(1, organizationname);
+			pst.setString(2, organizationcode);
+			int result;
+			result = pst.executeUpdate();
+			if (result != 0) {
+				dbh.close();
+				return ResultMessage.success;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		dbh.close();
+		return ResultMessage.failure;
+	}
 //	public static List<StaffPO> fuzzySearch(String name){
 //		List<StaffPO> list=new ArrayList<StaffPO>();
 //		StaffPO po;
@@ -336,12 +355,12 @@ public class StaffDB {
 		}
 		return lastId;
 	}
-	public static void main(String[] args) {
-		initialize();
-		if((fuzzySearchbyorganizationname("上海中转中心").size()>0))
-		System.out.println(getLastId());
-		if(search(1)!=null){
-			System.out.println("search success");
-		}
-	}
+//	public static void main(String[] args) {
+//		initialize();
+//		if((fuzzySearchbyorganizationname("上海中转中心").size()>0))
+//		System.out.println(getLastId());
+//		if(search(1)!=null){
+//			System.out.println("search success");
+//		}
+//	}
 }

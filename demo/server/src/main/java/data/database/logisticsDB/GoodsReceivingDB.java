@@ -122,7 +122,7 @@ public static List<GoodsReceivingPO> fuzzySearch(Formstate documentstate,String 
 	dbh=new DBHelper();
 	try {
 		byte[] statebytes = Serialize.Object2Bytes(documentstate);
-		sql = "select id,arrivaltime,transcode,departure,arrivalstate from GoodsReceivingPO where documentstate = ? and id like ?";
+		sql = "select id,arrivaltime,whefromhall,transcode,departure,arrivalstate from GoodsReceivingPO where documentstate = ? and id like ?";
 		pst = dbh.prepare(sql);
 		pst.setBytes(1, statebytes);
 		pst.setString(2, "%"+orgcode+"%");

@@ -74,21 +74,21 @@ public class UserDB {
 
 	}
 	
-//	public static ResultMessage deletebyStaff(String organizationcode){
-//		dbh=new DBHelper();
-//		sql="delete from UserPO where organizationcode=?";
-//		pst=dbh.prepare(sql);
-//		try{
-//			pst.setString(1, organizationcode);
-//			int result=pst.executeUpdate();
-//			if(result!=0){
-//				return ResultMessage.success;
-//			}
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//		return ResultMessage.failure;
-//	}
+	public static ResultMessage deletebyOrg(String organizationcode){
+		dbh=new DBHelper();
+		sql="delete from UserPO where organizationcode=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setString(1, organizationcode);
+			int result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;
+	}
 	public static ResultMessage deletebyCity(String city){
 		dbh=new DBHelper();
 		sql="delete from UserPO where city=?";
@@ -178,6 +178,26 @@ public class UserDB {
 		return ResultMessage.failure;		
 	}
 	
+	public static ResultMessage updatebyOrg(String organizationcode,String organizationname){
+		dbh=new DBHelper();
+		sql="update UserPO set organizationname=? where organizationcode=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setString(1, organizationname);
+			pst.setString(2, organizationcode);
+			int result;
+			result=pst.executeUpdate();
+			if(result!=0){
+				return ResultMessage.success;
+			}
+			ret.close();
+			dbh.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ResultMessage.failure;		
+	}
+	
 	public static UserPO check(String username, String password) {
 		UserPO po=null;
 		dbh = new DBHelper();
@@ -209,7 +229,7 @@ public class UserDB {
 	}
 
 	public static void main(String[] args) {
-		initialize();
+//		initialize();
 //		update(new UserPO("sunchao","234",Job.transfercentersalesman,"上海中转中心","025000",Organizationtype.transfercenter,"上海"));
 		if(check("1","123")!=null){
 			System.out.println("login");
