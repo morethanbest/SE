@@ -167,6 +167,49 @@ public class SalaryPanel extends JPanel implements ActionListener{
 			refreshList();
 		}else if(e.getSource().equals(refreshBtn)){
 			refreshList();
+		}else if(e.getSource().equals(revBtn)){
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			try{
+				String string=(String)tableModel.getValueAt(table.getSelectedRow(), 0);
+				Job job=null;
+				switch (string) {
+				case "快递员":
+					job=Job.Courier;
+					break;
+				case "营业厅业务员":
+					job=Job.hallsalesman;
+					break;
+				case "中转中心业务员":
+					job=Job.transfercentersalesman;
+					break;
+				case "中转中心库存管理人员":
+					job=Job.CenterDepot;
+					break;
+				case "财务人员":
+					job=Job.Financial;
+					break;
+				case "高级财务人员":
+					job=Job.advanceFinancial;
+					break;
+				case "司机":
+					job=Job.drivers;
+					break;
+				case "管理员":
+					job=Job.administrator;
+					break;
+				case "总经理":
+					job=Job.manager;
+					break;
+				default:
+					break;
+				}
+				RevSalaryDialog revSalaryDialog=new RevSalaryDialog(this, job);
+				revSalaryDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				revSalaryDialog.setVisible(true);
+			}catch(Exception exception){
+				exception.printStackTrace();
+			}
+			refreshList();
 		}
 	}
 

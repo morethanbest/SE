@@ -142,7 +142,7 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 				card.next(parent);
 			}
 		});
-		button_1.setBounds(672, 415, 113, 27);
+		button_1.setBounds(672, 415, 143, 27);
 		add(button_1);
 	}
 	private void addyearItem(JComboBox<String> yearselect){

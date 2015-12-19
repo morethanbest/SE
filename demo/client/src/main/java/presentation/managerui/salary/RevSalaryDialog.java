@@ -17,9 +17,9 @@ import presentation.tip.DoubleField;
 import presentation.tip.TipDialog;
 import vo.SalaryVO;
 
-public class AddSalaryDialog extends JDialog {
+public class RevSalaryDialog extends JDialog {
 	
-	JLabel job;
+	JLabel joblabel;
 	JLabel salarymode;
 	JLabel base; 
 	JLabel bonus;
@@ -31,25 +31,28 @@ public class AddSalaryDialog extends JDialog {
 	
 	JButton addBtn;
 	JButton cancelBtn;
-	public AddSalaryDialog(SalaryPanel parent) {
+	
+	private SalaryVO vo;
+	public RevSalaryDialog(SalaryPanel parent,Job job) {
 		// TODO Auto-generated constructor stub
+		SalaryBlService salaryBlService=new SalaryController();
+		vo=salaryBlService.getSalary(job);
+		
 		setBounds(100, 100, 450, 350);
 		getContentPane().setLayout(null);
 		
-		job =new JLabel();
-		job.setText("职业");
-		job.setBounds(90, 50, 90, 21);
-		add(job);
-		
-		
-		
+		joblabel =new JLabel();
+		joblabel.setText("职业");
+		joblabel.setBounds(90, 50, 90, 21);
+		add(joblabel);
 		
 		jobSelect = new JComboBox<String>();
 		jobSelect.setBounds(180, 50, 180, 21);
 		jobSelect.setEditable(false);
-		jobSelect.setEnabled(true);
 		add(jobSelect);
 		addjobItem();
+		jobSelect.setSelectedItem(job.getName());
+		jobSelect.setEnabled(false);
 		
 		salarymode = new JLabel();
 		salarymode.setText("薪水策略");
@@ -59,11 +62,10 @@ public class AddSalaryDialog extends JDialog {
 		modeSelect = new JComboBox<String>();
 		modeSelect.setBounds(180, 100, 180, 21);
 		modeSelect.setEditable(false);
-		modeSelect.setEnabled(true);
 		add(modeSelect);
 		addmodeItem();
-		modeSelect.addActionListener(new ActionListener() {
-			
+		modeSelect.setSelectedItem(vo.getSalarymode().getName());
+        modeSelect.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -73,7 +75,7 @@ public class AddSalaryDialog extends JDialog {
 				}
 			}
 		});
-		
+
 		base =new JLabel();
 		base.setText("底薪");
 		base.setBounds(90, 150, 90, 21);
@@ -83,6 +85,7 @@ public class AddSalaryDialog extends JDialog {
 		basetext.setBounds(180, 150, 180, 21);
 		basetext.setEditable(true);
 		add(basetext);
+		basetext.setText(Double.toString(vo.getBase()));
 		
 		bonus =new JLabel();
 		bonus.setText("提成（计次）");
@@ -93,6 +96,10 @@ public class AddSalaryDialog extends JDialog {
 		bonustext.setBounds(180, 200, 180, 21);
 		bonustext.setEditable(true);
 		add(bonustext);
+		bonustext.setText(Double.toString(vo.getBonus()));
+		if(modeSelect.getSelectedIndex()!=0){
+			bonustext.setEditable(false);
+		}
 		
 		addBtn = new JButton();
 		addBtn.setText("确定");
@@ -114,9 +121,9 @@ public class AddSalaryDialog extends JDialog {
 				}else{
 					SalaryBlService salaryBlService=new SalaryController();
 					SalaryVO vo =new SalaryVO(getjobSelect(), getmodeSelect(), Double.parseDouble(basetext.getText()), Double.parseDouble(bonustext.getText()));
-					ResultMessage resultMessage=salaryBlService.addSalary(vo);
+					ResultMessage resultMessage=salaryBlService.revSalary(vo);
 					if(resultMessage==ResultMessage.failure){
-						TipDialog dialog=new TipDialog("该薪水策略已存在!");
+						TipDialog dialog=new TipDialog("该薪水策略修改失败!");
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
 					}
@@ -126,7 +133,6 @@ public class AddSalaryDialog extends JDialog {
 					parent.refreshList();
 					
 				}
-				
 			}
 		});
 		

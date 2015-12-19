@@ -103,6 +103,8 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		switcher.setLayout(card);
 		
 		//card中添加各种功能面板
+		debitnotePanel=new DebitnotePanel();
+		switcher.add(debitnotePanel, "debitnote");
 		accountPanel=new AccountPanel(orgcode);
 		switcher.add(accountPanel, "account");
 		statisticsPanel=new StatisticsPanel(orgcode);
@@ -115,8 +117,6 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		switcher.add(ru, "ru");
 		balancePanel=new BalancePanel();
 		switcher.add(balancePanel, "balance");
-		debitnotePanel=new DebitnotePanel();
-		switcher.add(debitnotePanel, "debitnote");
 		newBookPanel=new NewBookPanel();
 		switcher.add(newBookPanel, "newbook");
 		hint = new JLabel("");
