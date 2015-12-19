@@ -71,7 +71,7 @@ public class StockinPanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		codeField = new OrderField(10);
+		codeField = new OrderField();
 		codeField.setBounds(143, 35, 220, 24);
 		add(codeField);
 		codeField.setColumns(10);
@@ -359,6 +359,7 @@ public class StockinPanel extends JPanel {
 	private void addSucess(){
 		createTip("添加成功！");
 		codeField.setText("");
+		setAvailableTip(false);
 	}
 	
 	private boolean createTip(String str){

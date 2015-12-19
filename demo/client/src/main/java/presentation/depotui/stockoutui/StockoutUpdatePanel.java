@@ -1,38 +1,30 @@
 package presentation.depotui.stockoutui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-
-import po.Formstate;
-import po.Organizationtype;
-import presentation.depotui.DepotPanel;
-import presentation.enums.TransportTypes;
-import presentation.managerui.examui.ExamPanel;
-import vo.OrganizationVO;
-import vo.StockoutVO;
-import businesslogic.commoditybl.StockoutPack.StockoutController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.commodityblservice.StockoutBlService;
-import businesslogicservice.managerblservice.ExamStockouts;
-import businesslogicservice.managerblservice.OrganizationBlService;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
-import java.util.List;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import po.Formstate;
+import presentation.depotui.DepotPanel;
+import presentation.enums.TransportTypes;
+import presentation.tip.NumberField;
+import presentation.tip.OrderField;
+import vo.StockoutVO;
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogicservice.managerblservice.ExamStockouts;
 
 public class StockoutUpdatePanel extends JPanel {
-	private JTextField orderField;
-	private JTextField codeField;
+	private OrderField orderField;
+	private NumberField codeField;
 	private JComboBox<String> transportBox;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> dateBox;
@@ -40,9 +32,13 @@ public class StockoutUpdatePanel extends JPanel {
 	private JButton update;
 	private ExamStockouts ea;
 	private StockoutVO vo;
-	private JLabel label;
+	private JLabel destinLabel;
 	private JButton button;
 	private JButton button_1;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
 
 	/**
 	 * Create the panel.
@@ -52,7 +48,7 @@ public class StockoutUpdatePanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		orderField = new JTextField();
+		orderField = new OrderField();
 		orderField.setColumns(10);
 		orderField.setBounds(141, 35, 220, 24);
 		add(orderField);
@@ -78,7 +74,7 @@ public class StockoutUpdatePanel extends JPanel {
 		add(transportBox);
 		addTransportTypeItems();
 
-		codeField = new JTextField();
+		codeField = new NumberField(19);
 		codeField.setColumns(10);
 		codeField.setBounds(555, 181, 220, 24);
 		add(codeField);
@@ -109,9 +105,9 @@ public class StockoutUpdatePanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 		
-		label = new JLabel("");
-		label.setBounds(141, 106, 220, 24);
-		add(label);
+		destinLabel = new JLabel("");
+		destinLabel.setBounds(78, 106, 283, 24);
+		add(destinLabel);
 		
 		button = new JButton("恢复原值");
 		button.addActionListener(new ActionListener() {
@@ -125,12 +121,28 @@ public class StockoutUpdatePanel extends JPanel {
 		button_1 = new JButton("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.previous(parent);
-//				parent.getOut().refreshList();
+				card.previous(parent.getSwitcher());
+				parent.getOutc().refreshList();
 			}
 		});
 		button_1.setBounds(651, 302, 113, 27);
 		add(button_1);
+		
+		label = new JLabel("订单编号：");
+		label.setBounds(57, 38, 86, 18);
+		add(label);
+		
+		label_1 = new JLabel("中转类型：");
+		label_1.setBounds(474, 109, 82, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("单据编号：");
+		label_2.setBounds(474, 184, 82, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("出库日期：");
+		label_3.setBounds(474, 38, 82, 18);
+		add(label_3);
 
 	}
 
@@ -180,7 +192,7 @@ public class StockoutUpdatePanel extends JPanel {
 	
 	public void init(StockoutVO vo){
 		orderField.setText(vo.getOrdercode());
-		label.setText("目的地：" + vo.getDestination());
+		destinLabel.setText("目的地：" + vo.getDestination());
 		yearBox.setSelectedItem(vo.getOuttime() / 10000);
 		monthBox.setSelectedItem((vo.getOuttime() % 10000) / 100);
 		dateBox.setSelectedItem(vo.getOuttime() % 1000000);
