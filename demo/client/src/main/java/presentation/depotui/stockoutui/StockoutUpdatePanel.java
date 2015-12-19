@@ -195,7 +195,7 @@ public class StockoutUpdatePanel extends JPanel {
 		destinLabel.setText("目的地：" + vo.getDestination());
 		yearBox.setSelectedItem(vo.getOuttime() / 10000);
 		monthBox.setSelectedItem((vo.getOuttime() % 10000) / 100);
-		dateBox.setSelectedItem(vo.getOuttime() % 1000000);
+		dateBox.setSelectedItem(vo.getOuttime() % 100);
 		transportBox.setSelectedItem(vo.getTransportType());
 		codeField.setText(vo.getTranscode());
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);

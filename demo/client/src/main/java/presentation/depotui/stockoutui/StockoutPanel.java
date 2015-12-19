@@ -15,7 +15,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
@@ -30,9 +29,11 @@ import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.StockoutVO;
 import businesslogic.commoditybl.StockoutPack.StockoutController;
+import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.commodityblservice.StockoutBlService;
+import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
 
@@ -109,11 +110,12 @@ public class StockoutPanel extends JPanel {
 
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
-			Long date = (Long) yearBox.getSelectedItem() * 10000
-					+ (Long) monthBox.getSelectedItem() * 100
-					+ (Long) dateBox.getSelectedItem();
+			
 
 			public void actionPerformed(ActionEvent e) {
+				Long date = (Long) yearBox.getSelectedItem() * 10000
+					+ (Long) monthBox.getSelectedItem() * 100
+					+ (Long) dateBox.getSelectedItem();
 				if(checkFormat()){
 				if(stockoutBlService.Stockout(new StockoutVO(stockoutBlService
 						.getid(orgCode), orderField.getText(), date,
@@ -252,14 +254,19 @@ public class StockoutPanel extends JPanel {
 	
 	private boolean checkFormat(){
 		CheckExistBlService check = new CheckExist();
+		CheckForExistBlService check2 = new CheckForExistBl();
 		if(orderField.getText().length() != 10){
 			return createTip("订单编号必须为10位！");
 		} else if(!check.checkExist(orderField.getText())){
 			return createTip("订单:" + codeField.getText() + " 不存在！");
 		}
-//		else if(!check.checkExist(codeField.getText())){
-//			return createTip("订单:" + codeField.getText() + " 不存在！");
-//		}
+		else if(typeBox.getSelectedIndex() == 0){
+			if(!check2.checkCenterLoad(codeField.getText()))
+				return createTip("汽运编号:" + codeField.getText() + " 不存在！");
+		}else if(typeBox.getSelectedIndex() == 1){
+			if(!check2.checkTrans(codeField.getText()))
+				return createTip("中转单编号:" + codeField.getText() + " 不存在！");
+		}
 		return true;
 	}
 	

@@ -179,7 +179,7 @@ public class StockinUpdatePanel extends JPanel {
 		codeField.setText(vo.getOrdercode());
 		yearBox.setSelectedItem(vo.getIntime() / 10000);
 		monthBox.setSelectedItem((vo.getIntime() % 10000) / 100);
-		dateBox.setSelectedItem(vo.getIntime() % 1000000);
+		dateBox.setSelectedItem(vo.getIntime() % 100);
 		label.setText("目的地：" + vo.getDestination());
 		CommodityLocation l = vo.getLocation();
 		label_1.setText("区号：" + l.getBlocknum() + " 排号：" + l.getLinenum() + " 架号：" + l.getShelfnum() + " 位号：" + l.getLocationnum());
