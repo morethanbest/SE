@@ -12,9 +12,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
@@ -22,15 +22,20 @@ import po.Block;
 import po.CommodityLocation;
 import po.Formstate;
 import po.Organizationtype;
+import presentation.depotui.DepotPanel;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.StockinVO;
 import businesslogic.commoditybl.InboundPack.InboundController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.commodityblservice.InboundBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class StockinPanel extends JPanel {
-	private JTextField codeField;
+	private OrderField codeField;
 	private JComboBox<String> typeBox;
 	private JComboBox<String> orgBox;
 	private JButton button;
@@ -59,14 +64,14 @@ public class StockinPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public StockinPanel(String orgCode, String city, JPanel parent, CardLayout card) {
+	public StockinPanel(String orgCode, String city,DepotPanel parent, CardLayout card) {
 		inboundBlService = new InboundController();
 		this.city = city;
 		this.orgcode=orgCode;
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		codeField = new JTextField();
+		codeField = new OrderField(10);
 		codeField.setBounds(143, 35, 220, 24);
 		add(codeField);
 		codeField.setColumns(10);
@@ -164,13 +169,16 @@ public class StockinPanel extends JPanel {
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
 				location = new CommodityLocation(
-						(Long) quBox.getSelectedItem(),
+						getBlockIndex((String) quBox.getSelectedItem()),
 						(Long) paiBox.getSelectedItem(),
 						(Long) jiaBox.getSelectedItem(),
 						(Long) weiBox.getSelectedItem());
-				inboundBlService.Inbound(new StockinVO(inboundBlService
-						.getid(orgCode), codeField.getText(), date, location,
-						(String) orgBox.getSelectedItem(), Formstate.waiting));
+				if(checkFormat()){
+					inboundBlService.Inbound(new StockinVO(inboundBlService
+							.getid(orgCode), codeField.getText(), date, location,
+							(String) orgBox.getSelectedItem(), Formstate.waiting));
+					addSucess();
+				}
 			}
 		});
 		button.setBounds(416, 312, 113, 27);
@@ -213,7 +221,8 @@ public class StockinPanel extends JPanel {
 		button_1 = new JButton("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
+				card.next(parent.getSwitcher());
+				parent.getInc().refreshList();
 			}
 		});
 		button_1.setBounds(807, 312, 113, 27);
@@ -286,15 +295,10 @@ public class StockinPanel extends JPanel {
 	}
 	
 	private void checkAvailable(){
-		try {
 			location = new CommodityLocation(getBlockIndex((String) quBox.getSelectedItem()),
 					(Long) paiBox.getSelectedItem(), (Long) jiaBox.getSelectedItem(),
 					(Long) weiBox.getSelectedItem());
 			setAvailableTip(inboundBlService.wheConflict(orgcode, location));
-
-		} catch (Exception exception) {
-
-		}
 	}
 	
 	public void addOrganizationItems(JComboBox<String> orgSelect) {
@@ -340,5 +344,27 @@ public class StockinPanel extends JPanel {
 			label.setText("可用");
 		else
 			label.setText("不可用");
+	}
+	
+	private boolean checkFormat(){
+		CheckExistBlService check = new CheckExist();
+		if(codeField.getText().length() != 10){
+			return createTip("订单编号必须为10位！");
+		} else if(!check.checkExist(codeField.getText())){
+			return createTip("订单:" + codeField.getText() + " 不存在！");
+		}	
+		return true;
+	}
+	
+	private void addSucess(){
+		createTip("添加成功！");
+		codeField.setText("");
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }

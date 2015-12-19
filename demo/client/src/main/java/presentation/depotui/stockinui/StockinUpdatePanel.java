@@ -60,17 +60,17 @@ public class StockinUpdatePanel extends JPanel {
 		codeField.setColumns(10);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(557, 35, 78, 24);
+		yearBox.setBounds(143, 136, 78, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(643, 35, 65, 24);
+		monthBox.setBounds(229, 136, 65, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(712, 35, 65, 24);
+		dateBox.setBounds(298, 136, 65, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
@@ -118,12 +118,20 @@ public class StockinUpdatePanel extends JPanel {
 		add(button_2);
 		
 		label = new JLabel("");
-		label.setBounds(143, 136, 220, 24);
+		label.setBounds(543, 35, 220, 24);
 		add(label);
 		
 		label_1 = new JLabel("");
-		label_1.setBounds(557, 136, 320, 24);
+		label_1.setBounds(543, 136, 320, 24);
 		add(label_1);
+		
+		JLabel label_2 = new JLabel("订单编号：");
+		label_2.setBounds(58, 38, 86, 18);
+		add(label_2);
+		
+		JLabel label_3 = new JLabel("入库日期：");
+		label_3.setBounds(58, 139, 86, 18);
+		add(label_3);
 
 	}
 
@@ -186,5 +194,4 @@ public class StockinUpdatePanel extends JPanel {
 		label_1.setText("区号：" + l.getBlocknum() + " 排号：" + l.getLinenum() + " 架号：" + l.getShelfnum() + " 位号：" + l.getLocationnum());
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
 	}
-
 }

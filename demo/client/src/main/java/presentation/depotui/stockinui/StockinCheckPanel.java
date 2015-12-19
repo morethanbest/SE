@@ -7,26 +7,19 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
-
-import vo.ArrivalVO;
-import vo.StockinVO;
-import businesslogic.commoditybl.InboundPack.InboundController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.commodityblservice.InboundBlService;
-import businesslogicservice.managerblservice.ExamArrivals;
-import businesslogicservice.managerblservice.ExamInbounds;
-
 import javax.swing.table.DefaultTableModel;
 
 import po.Formstate;
-import presentation.managerui.examui.ExamPanel;
 import presentation.tip.TipDialog;
+import vo.StockinVO;
+import businesslogic.commoditybl.InboundPack.InboundController;
+import businesslogicservice.commodityblservice.InboundBlService;
 
 public class StockinCheckPanel extends JPanel {
 	private JButton revise;
