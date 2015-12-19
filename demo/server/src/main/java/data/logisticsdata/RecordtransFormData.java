@@ -19,7 +19,9 @@ public class RecordtransFormData extends UnicastRemoteObject implements Recordtr
 		// TODO Auto-generated constructor stub
 		super();
 	}
-
+	
+	
+	
 	@Override
 	public List<RecordtransPO> getRecordtransForm(Formstate state,String orgcode) throws RemoteException {
 		return RecordtransDB.fuzzySearch(state,orgcode);
@@ -82,5 +84,19 @@ public class RecordtransFormData extends UnicastRemoteObject implements Recordtr
 		// TODO Auto-generated method stub
 		return OrderDB.getWeight(ordernum);
 	}
+
+
+
+	@Override
+	public boolean checkTrans(String transcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(RecordtransDB.getpoBytranscode(transcode)!=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	
 
 }

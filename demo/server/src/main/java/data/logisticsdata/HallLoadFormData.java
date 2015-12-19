@@ -82,6 +82,15 @@ public class HallLoadFormData extends UnicastRemoteObject implements HallLoadFor
 		return OrderDB.getWeight(ordernum);
 	}
 
+	@Override
+	public boolean checkHallLoad(String motorcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(HallLoadDB.getpoBymotorcode(motorcode)!=null){
+			return true;
+		}else
+			return false;
+	}
+
 
 
 	

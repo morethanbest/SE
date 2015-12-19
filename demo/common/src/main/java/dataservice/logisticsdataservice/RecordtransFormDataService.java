@@ -23,5 +23,5 @@ public interface RecordtransFormDataService extends Remote {
 
 	public double getweight(String ordernum)throws RemoteException;
 	
-
+	public boolean checkTrans(String transcode)throws RemoteException;
 }

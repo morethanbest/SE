@@ -23,4 +23,6 @@ public interface HallLoadFormDataService extends Remote {
 	
 	public double getweight(String ordernum)throws RemoteException;
 	
+	public boolean checkHallLoad (String motorcode)throws RemoteException;
+	
 }

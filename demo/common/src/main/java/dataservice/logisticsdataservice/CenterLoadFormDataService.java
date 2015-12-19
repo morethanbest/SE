@@ -20,7 +20,7 @@ public interface CenterLoadFormDataService extends Remote {
 
 
 
-
+	public boolean checkCenterLoad(String motorcode)throws RemoteException;
 
 
 

@@ -83,6 +83,16 @@ public class CenterLoadFormData extends UnicastRemoteObject implements CenterLoa
 		return OrderDB.getWeight(ordernum);
 	}
 
+	@Override
+	public boolean checkCenterLoad(String motorcode) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(CenterloadDB.getpoBymotorcode(motorcode)!=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 //	
 //	public static void main(String[] args){
 //		try{
