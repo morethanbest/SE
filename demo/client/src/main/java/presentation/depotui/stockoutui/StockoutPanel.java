@@ -120,9 +120,10 @@ public class StockoutPanel extends JPanel {
 						(String) orgBox.getSelectedItem(),
 						(String) transportBox.getSelectedItem(), codeField
 								.getText(), Formstate.waiting)) == ResultMessage.success)
-					addSucess();}
+					addSucess();
 				else
-					createTip("添加失败，请检查该订单是否在仓库中...");
+					createTip("添加失败！\n请检查该订单是否在仓库中...");
+				}
 			}
 		});
 		button.setBounds(397, 302, 113, 27);

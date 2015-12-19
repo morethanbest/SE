@@ -22,6 +22,7 @@ import po.Block;
 import po.CommodityLocation;
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.depotui.DepotPanel;
 import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
@@ -174,10 +175,12 @@ public class StockinPanel extends JPanel {
 						(Long) jiaBox.getSelectedItem(),
 						(Long) weiBox.getSelectedItem());
 				if(checkFormat()){
-					inboundBlService.Inbound(new StockinVO(inboundBlService
+					if(inboundBlService.Inbound(new StockinVO(inboundBlService
 							.getid(orgCode), codeField.getText(), date, location,
-							(String) orgBox.getSelectedItem(), Formstate.waiting));
+							(String) orgBox.getSelectedItem(), Formstate.waiting)) == ResultMessage.success)
 					addSucess();
+					else
+						createTip("添加失败！");
 				}
 			}
 		});
