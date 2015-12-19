@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,17 +21,24 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
+import presentation.depotui.DepotPanel;
 import presentation.enums.TransportTypes;
+import presentation.tip.NumberField;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.StockoutVO;
 import businesslogic.commoditybl.StockoutPack.StockoutController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.commodityblservice.StockoutBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class StockoutPanel extends JPanel {
-	private JTextField orderField;
-	private JTextField codeField;
+	private OrderField orderField;
+	private NumberField codeField;
 	private JComboBox<String> typeBox;
 	private JComboBox<String> orgBox;
 	private JComboBox<String> transportBox;
@@ -51,13 +59,13 @@ public class StockoutPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public StockoutPanel(String orgCode, String city, JPanel parent, CardLayout card) {
+	public StockoutPanel(String orgCode, String city, DepotPanel parent, CardLayout card) {
 		this.city = city;
 		stockoutBlService = new StockoutController();
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		orderField = new JTextField();
+		orderField = new OrderField();
 		orderField.setColumns(10);
 		orderField.setBounds(141, 35, 220, 24);
 		add(orderField);
@@ -89,7 +97,7 @@ public class StockoutPanel extends JPanel {
 		add(transportBox);
 		addTransportTypeItems();
 
-		codeField = new JTextField();
+		codeField = new NumberField(19);
 		codeField.setColumns(10);
 		codeField.setBounds(555, 181, 220, 24);
 		add(codeField);
@@ -106,11 +114,15 @@ public class StockoutPanel extends JPanel {
 					+ (Long) dateBox.getSelectedItem();
 
 			public void actionPerformed(ActionEvent e) {
-				stockoutBlService.Stockout(new StockoutVO(stockoutBlService
+				if(checkFormat()){
+				if(stockoutBlService.Stockout(new StockoutVO(stockoutBlService
 						.getid(orgCode), orderField.getText(), date,
 						(String) orgBox.getSelectedItem(),
 						(String) transportBox.getSelectedItem(), codeField
-								.getText(), Formstate.waiting));
+								.getText(), Formstate.waiting)) == ResultMessage.success)
+					addSucess();}
+				else
+					createTip("添加失败，请检查该订单是否在仓库中...");
 			}
 		});
 		button.setBounds(397, 302, 113, 27);
@@ -158,7 +170,8 @@ public class StockoutPanel extends JPanel {
 		button_1 = new JButton("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
+				card.next(parent.getSwitcher());
+				parent.getOutc().refreshList();
 			}
 		});
 		button_1.setBounds(710, 283, 113, 27);
@@ -234,5 +247,31 @@ public class StockoutPanel extends JPanel {
 		for (TransportTypes transport : TransportTypes.values()) {
 			transportBox.addItem(transport.getName());
 		}
+	}
+	
+	private boolean checkFormat(){
+		CheckExistBlService check = new CheckExist();
+		if(orderField.getText().length() != 10){
+			return createTip("订单编号必须为10位！");
+		} else if(!check.checkExist(orderField.getText())){
+			return createTip("订单:" + codeField.getText() + " 不存在！");
+		}
+//		else if(!check.checkExist(codeField.getText())){
+//			return createTip("订单:" + codeField.getText() + " 不存在！");
+//		}
+		return true;
+	}
+	
+	private void addSucess(){
+		createTip("添加成功！");
+		orderField.setText("");
+		codeField.setText("");
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }

@@ -1,40 +1,31 @@
 package presentation.depotui.stockinui;
 
-import javax.swing.JPanel;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import po.Block;
 import po.CommodityLocation;
 import po.Formstate;
-import po.Organizationtype;
 import presentation.depotui.DepotPanel;
-import presentation.managerui.examui.ExamPanel;
+import presentation.tip.OrderField;
 import vo.OrganizationVO;
 import vo.StockinVO;
 import businesslogic.commoditybl.InboundPack.InboundController;
-import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.commodityblservice.InboundBlService;
-import businesslogicservice.managerblservice.ExamInbounds;
 import businesslogicservice.managerblservice.OrganizationBlService;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JLabel;
-
 public class StockinUpdatePanel extends JPanel {
-	private JTextField codeField;
+	private OrderField codeField;
 	private JButton update;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
@@ -54,7 +45,7 @@ public class StockinUpdatePanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		codeField = new JTextField();
+		codeField = new OrderField();
 		codeField.setBounds(143, 35, 220, 24);
 		add(codeField);
 		codeField.setColumns(10);

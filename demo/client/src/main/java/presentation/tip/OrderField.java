@@ -8,8 +8,8 @@ import javax.swing.text.PlainDocument;
 
 public class OrderField extends JTextField {
 
-	public OrderField(int cols) {
-		super(cols);
+	public OrderField() {
+		super();
 	}
 
 	protected Document createDefaultModel() {

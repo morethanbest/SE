@@ -78,7 +78,7 @@ public class DepotPanel extends JPanel implements ActionListener {
 		
 		StockoutUpdatePanel outu = new StockoutUpdatePanel(this, card);
 		outc = new StockoutCheckPanel(switcher, card, outu, orgCode);
-		out = new StockoutPanel(orgCode, city, switcher, card);
+		out = new StockoutPanel(orgCode, city, this, card);
 		
 		exam = new StockExamPanel(orgCode);
 		
