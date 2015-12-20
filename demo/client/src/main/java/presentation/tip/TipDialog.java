@@ -25,7 +25,8 @@ public class TipDialog extends JDialog {
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);	
 		JLabel label = new JLabel(s);
 		label.setFont(new Font("宋体", Font.PLAIN, 18));
 		label.setBounds(80, 20, 50, 30);

@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -20,16 +19,9 @@ import javax.swing.SwingConstants;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogic.orderbl.OrderPack.OrderController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
-import businesslogicservice.orderblservice.OrderBlService;
-import init.ClientInitException;
-import init.RMIHelper;
 import po.Formstate;
 import po.Ordertype;
+import po.ResultMessage;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.mainui.MainFrame;
@@ -40,6 +32,12 @@ import vo.CityVO;
 import vo.OrderFareVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.OrderPack.OrderController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.OrderBlService;
 
 public class OrderPanel extends JPanel {
 	private JTextField snameField;
@@ -261,7 +259,6 @@ public class OrderPanel extends JPanel {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 添加订单
-				try {
 					if(!checkFormat())
 						return;
 					String saddress = (String) scityBox.getSelectedItem();
@@ -278,7 +275,7 @@ public class OrderPanel extends JPanel {
 					double weight = Double.parseDouble(weightField.getText());
 					double volume = Double.parseDouble(volumeField.getText());
 					double fare = Double.parseDouble(fareField.getText());
-					orderBlService.addOrder(
+					if(orderBlService.addOrder(
 							new OrderVO(snameField.getText(), saddress,
 									sjobField.getText(), stelField.getText(),
 									sphoneField.getText(),
@@ -291,13 +288,15 @@ public class OrderPanel extends JPanel {
 											.getOrgCode()),
 									getOrderType((String) orderBox
 											.getSelectedItem()), fare, Formstate.waiting),
-							courierPanel.getOrgCode());
-					addSuccessfully();
-					// System.out.println(orderBlService.getOrdercode(courierPanel.getOrgCode()));
-				} catch (NumberFormatException e1) {
-					System.out.println("wronginput");
-				}
-
+							courierPanel.getOrgCode()) == ResultMessage.success)
+					{
+						addSuccessfully();
+					}else{
+						TipDialog tipDialog=new TipDialog("添加失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
+					
 			}
 		});
 		button_2.setBounds(434, 489, 133, 47);
@@ -404,6 +403,7 @@ public class OrderPanel extends JPanel {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				courierPanel.switchPanel("orderc");
+				courierPanel.getOrderc().refreshList();
 			}
 		});
 		button_1.setBounds(793, 511, 143, 27);

@@ -25,6 +25,7 @@ import businesslogicservice.orderblservice.CheckExistBlService;
 import businesslogicservice.orderblservice.ReceptionBlService;
 import init.ClientInitException;
 import init.RMIHelper;
+import po.ResultMessage;
 import presentation.mainui.MainFrame;
 import presentation.tip.TipDialog;
 import vo.ReceptionVO;
@@ -85,8 +86,14 @@ public class RecievePanel extends JPanel {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				receptionBlService.addReception(new ReceptionVO(codeField.getText(), nameField.getText(), date));
-				addSuccessfully();
+				if(receptionBlService.addReception(new ReceptionVO(codeField.getText(), nameField.getText(), date)) == ResultMessage.success)
+					addSuccessfully();
+				else
+				{
+					TipDialog tipDialog = new TipDialog("添加失败！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}
 			}
 			
 		});
