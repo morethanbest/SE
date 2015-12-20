@@ -37,7 +37,7 @@ public class HallFeeCount {
 
         double fee=weight*distance*singleprice;
         DecimalFormat format=new DecimalFormat("0.00");
-        fee=Long.valueOf(format.format(fee));
+        fee=Double.valueOf(format.format(fee));
         return fee;
     }
 }

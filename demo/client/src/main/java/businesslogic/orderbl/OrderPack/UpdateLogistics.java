@@ -17,7 +17,7 @@ public class UpdateLogistics {
 		LogisticsDataService logisticsDataService=RMIHelper.getLogisticsdata();
 		OrderFormDataService orderFormDataService=RMIHelper.getOrderformdata();
 		ResultMessage resultMessage=ResultMessage.failure;
-		if(vo.getFormstate()==Formstate.pass){
+		if(vo.getFormstate()==Formstate.checked){
 			try {
 				OrderPO po=orderFormDataService.getOrderForm(vo.getOrdercode());
 				OrderPO newpo=new OrderPO(po.getOrgcode(), vo.getSendername(), vo.getSenderaddress(), vo.getSenderunit(), vo.getSenderphone(), 
@@ -25,7 +25,7 @@ public class UpdateLogistics {
 						vo.getReceiverphone(), vo.getReceivercellphone(), vo.getNumbers(), vo.getWeight(), 
 						vo.getVolume(), vo.getProductname(), vo.getPackagetype(), vo.getTotalfee(), vo.getOrdercode(), vo.getOrdertype(), 
 						po.getCodeofreceiving(), po.getReceiver(), po.getReceivingtime(), Formstate.checked);
-				orderFormDataService.updateOrderForm(po);
+				orderFormDataService.updateOrderForm(newpo);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
