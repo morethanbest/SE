@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import po.Formstate;
 import po.Organizationtype;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.DoubleField;
 import vo.HallLoadVO;
 import vo.OrganizationVO;
 import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
@@ -50,7 +51,7 @@ public class HallLoadRevisePanel extends JPanel {
 	private JLabel moterLabel;
 	private JLabel orgLabel;
 	private JLabel destinLabel;
-	private JTextField fareField;
+	private DoubleField fareField;
 	/**
 	 * Create the panel.
 	 */
@@ -124,6 +125,7 @@ public class HallLoadRevisePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
@@ -179,7 +181,7 @@ public class HallLoadRevisePanel extends JPanel {
 		destinLabel.setBounds(22, 290, 266, 18);
 		add(destinLabel);
 		
-		fareField = new JTextField();
+		fareField = new DoubleField(20);
 		fareField.setText("0");
 		fareField.setBounds(421, 290, 86, 24);
 		add(fareField);

@@ -259,7 +259,7 @@ public class HallLoadPanel extends JPanel {
 		label_7.setBounds(351, 202, 69, 18);
 		add(label_7);
 		
-		label_8 = new JLabel("出发地：");
+		label_8 = new JLabel("目的地：");
 		label_8.setBounds(38, 285, 72, 18);
 		add(label_8);
 		

@@ -10,13 +10,16 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import po.Arrivalstate;
 import po.Formstate;
+import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.TipDialog;
 import vo.GoodsReceivingVO;
 import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogicservice.managerblservice.ExamGoodsRecevings;
@@ -94,11 +97,28 @@ public class GoodRecievingRevisePanel extends JPanel {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				ea.updateGoodsReceivingForm(new GoodsReceivingVO(
-						vo.getid(), date,typeBox.getSelectedIndex() == 1 ,codeField
-								.getText(),vo.getDeparture(),
-						getStateType((String) stateBox.getSelectedItem()),
-						vo.getFormstate()));
+				if(codeField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入订单号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}
+				else{
+					ResultMessage resultMessage=ea.updateGoodsReceivingForm(new GoodsReceivingVO(
+							vo.getid(), date,typeBox.getSelectedIndex() == 1 ,codeField
+							.getText(),vo.getDeparture(),
+					getStateType((String) stateBox.getSelectedItem()),
+					vo.getFormstate()));
+					if(resultMessage==ResultMessage.success){
+						TipDialog tipDialog=new TipDialog("修改成功！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}else {
+						TipDialog tipDialog=new TipDialog("修改失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
+				}
+				
 			}
 		});
 		update.setBounds(423, 336, 113, 27);

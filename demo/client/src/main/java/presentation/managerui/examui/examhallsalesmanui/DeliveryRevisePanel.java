@@ -9,11 +9,14 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import po.Formstate;
+import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.TipDialog;
 import vo.DeliveryVO;
 import vo.GoodsReceivingVO;
 import businesslogic.logisticsbl.DeliveryPack.DeliveryController;
@@ -69,11 +72,31 @@ public class DeliveryRevisePanel extends JPanel {
 		update = new JButton("提交");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Long date = (Long) yearBox.getSelectedItem() * 10000
-						+ (Long) monthBox.getSelectedItem() * 100
-						+ (Long) dateBox.getSelectedItem();
-				ea.updateDeliveryForm(new DeliveryVO(vo.getid(), date, codeField.getText(),
-						deliveryField.getText(), vo.getDocumentstate()));
+				if(codeField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入订单号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}else if(deliveryField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入派件员！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else {
+					Long date = (Long) yearBox.getSelectedItem() * 10000
+							+ (Long) monthBox.getSelectedItem() * 100
+							+ (Long) dateBox.getSelectedItem();
+					ResultMessage resultMessage=ea.updateDeliveryForm(new DeliveryVO(vo.getid(), date, codeField.getText(),
+							deliveryField.getText(), vo.getDocumentstate()));
+					if(resultMessage==ResultMessage.success){
+						TipDialog tipDialog=new TipDialog("修改成功！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}else {
+						TipDialog tipDialog=new TipDialog("修改失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
+				}
+				
 			}
 		});
 		update.setBounds(359, 276, 113, 27);
