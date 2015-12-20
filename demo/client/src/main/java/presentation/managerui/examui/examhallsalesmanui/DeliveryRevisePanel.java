@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import po.Formstate;
 import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.DeliveryVO;
 import vo.GoodsReceivingVO;
@@ -24,9 +25,10 @@ import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
 import businesslogicservice.managerblservice.ExamDeliverys;
 import businesslogicservice.managerblservice.ExamGoodsRecevings;
+import javax.swing.JLabel;
 
 public class DeliveryRevisePanel extends JPanel {
-	private JTextField codeField;
+	private NumberField codeField;
 	private JTextField deliveryField;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
@@ -43,7 +45,7 @@ public class DeliveryRevisePanel extends JPanel {
 
 		ea = new ExamController();
 
-		codeField = new JTextField();
+		codeField = new NumberField(20);
 		codeField.setColumns(10);
 		codeField.setBounds(286, 82, 242, 24);
 		add(codeField);
@@ -120,6 +122,18 @@ public class DeliveryRevisePanel extends JPanel {
 		});
 		button_2.setBounds(613, 276, 113, 27);
 		add(button_2);
+		
+		JLabel label = new JLabel("订单编号：");
+		label.setBounds(177, 86, 74, 15);
+		add(label);
+		
+		JLabel label_1 = new JLabel("派件日期：");
+		label_1.setBounds(177, 146, 74, 15);
+		add(label_1);
+		
+		JLabel label_2 = new JLabel("派件员：");
+		label_2.setBounds(177, 208, 54, 15);
+		add(label_2);
 
 		ItemListener listener = new ItemListener() {
 

@@ -19,6 +19,7 @@ import po.Arrivalstate;
 import po.Formstate;
 import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.GoodsReceivingVO;
 import businesslogic.managerbl.ExamPack.ExamController;
@@ -32,11 +33,15 @@ public class GoodRecievingRevisePanel extends JPanel {
 	private JButton update;
 	private ExamGoodsRecevings ea;
 	private GoodsReceivingVO vo;
-	private JTextField codeField;
+	private NumberField codeField;
 	private JComboBox<String> typeBox;
 	private JLabel depatLabel;
 	private JButton button_1;
 	private JButton button_2;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
 
 	/**
 	 * Create the panel.
@@ -46,7 +51,7 @@ public class GoodRecievingRevisePanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		codeField = new JTextField();
+		codeField = new NumberField(20);
 		codeField.setBounds(140, 230, 242, 24);
 		add(codeField);
 		codeField.setColumns(10);
@@ -98,7 +103,7 @@ public class GoodRecievingRevisePanel extends JPanel {
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
 				if(codeField.getText().equals("")){
-					TipDialog tipDialog=new TipDialog("请输入订单号！");
+					TipDialog tipDialog=new TipDialog("请输入单据编号！");
 					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					tipDialog.setVisible(true);		
 				}
@@ -142,6 +147,22 @@ public class GoodRecievingRevisePanel extends JPanel {
 		});
 		button_2.setBounds(677, 336, 113, 27);
 		add(button_2);
+		
+		label = new JLabel("入库日期：");
+		label.setBounds(46, 70, 66, 15);
+		add(label);
+		
+		label_1 = new JLabel("单据类型：");
+		label_1.setBounds(46, 154, 66, 15);
+		add(label_1);
+		
+		label_2 = new JLabel("单据编号：");
+		label_2.setBounds(46, 234, 66, 15);
+		add(label_2);
+		
+		label_3 = new JLabel("到达状态：");
+		label_3.setBounds(423, 154, 74, 15);
+		add(label_3);
 	}
 
 	private void addTypeItems() {

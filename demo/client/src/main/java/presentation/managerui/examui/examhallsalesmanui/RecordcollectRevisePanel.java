@@ -24,25 +24,30 @@ import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogicservice.balanceblservice.RecordCollectBlService;
 import businesslogicservice.managerblservice.ExamRecordcollects;
 import po.Formstate;
+import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.RecordcollectVO;
 
 public class RecordcollectRevisePanel extends JPanel implements ActionListener{
 	private String orgcode;
-    private JTextField sumField;
+    private DoubleField sumField;
     private JTextField manField;
-    private JTextField accountField;
+    private NumberField accountField;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
 	private JComboBox<Long> dayBox;
 	private JScrollPane scrollPane;
-	private JTextField orderField;
+	private NumberField orderField;
 	private JButton btnaddorder;
 	private JButton update;
 	private JTable table;
 	private RecordcollectVO vo;
 	private JButton button;
 	private JButton button_1;
+	private JButton button_2;
 	private ExamRecordcollects ea;
 	
 	/**
@@ -106,7 +111,7 @@ public class RecordcollectRevisePanel extends JPanel implements ActionListener{
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 		
-		sumField = new JTextField();
+		sumField = new DoubleField(20);
 		sumField.setBounds(186, 144, 230, 21);
 		add(sumField);
 		sumField.setColumns(10);
@@ -116,7 +121,7 @@ public class RecordcollectRevisePanel extends JPanel implements ActionListener{
 		add(manField);
 		manField.setColumns(10);
 		
-		accountField = new JTextField();
+		accountField = new NumberField(20);
 		accountField.setBounds(186, 235, 230, 21);
 		add(accountField);
 		accountField.setColumns(10);
@@ -125,7 +130,7 @@ public class RecordcollectRevisePanel extends JPanel implements ActionListener{
 		scrollPane.setBounds(611, 66, 304, 265);
 		add(scrollPane);
 		
-		orderField = new JTextField();
+		orderField = new NumberField(20);
 		orderField.setBounds(611, 344, 189, 21);
 		add(orderField);
 		orderField.setColumns(10);
@@ -180,6 +185,11 @@ public class RecordcollectRevisePanel extends JPanel implements ActionListener{
 		});
 		button_1.setBounds(611, 402, 113, 27);
 		add(button_1);
+		
+	    button_2 = new JButton("删除订单");
+		button_2.setBounds(810, 377, 93, 23);
+		add(button_2);
+		button_2.addActionListener(this);
 	}
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
 		for (long i = 2000; i <= 2050; i++) {
@@ -225,33 +235,77 @@ public class RecordcollectRevisePanel extends JPanel implements ActionListener{
 		orderstring[0]=orderField.getText();
 		tableModel.addRow(orderstring);
 	}
-
+	private void DeleteOrder(){
+		try {
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			int index=table.getSelectedRow();
+			tableModel.removeRow(index);
+			table.remove(index);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(btnaddorder)){
-			if(orderField.getText()!=""){
+			if(!orderField.getText().equals("")){
 				AddOrder();
 				orderField.setText("");
 			}
 		}else if(e.getSource().equals(update)){
-			RecordCollectBlService recordCollectBlService=new RecordcollectController();
-			String id=recordCollectBlService.getid(orgcode);
-			Long date = (Long) yearBox.getSelectedItem() * 10000
-					+ (Long) monthBox.getSelectedItem() * 100
-					+ (Long) dayBox.getSelectedItem();
-			double collectionsum=Double.parseDouble(sumField.getText());
-			String collectionman=manField.getText();
-			String accountcode=accountField.getText();
-			List<String> barcodes = new ArrayList<String>();
-			DefaultTableModel tableModel = (DefaultTableModel) table
-					.getModel();
-			int rowCount = tableModel.getRowCount();
-			for (int i = 0; i < rowCount; i++) {
-				barcodes.add((String) tableModel.getValueAt(i, 0));
+			if(sumField.getText().equals("")){
+				TipDialog tipDialog=new TipDialog("请输入金额！");
+				tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				tipDialog.setVisible(true);		
+			}else if(manField.getText().equals("")){
+				TipDialog tipDialog=new TipDialog("请输入收款人！");
+				tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				tipDialog.setVisible(true);		
+			}else if(accountField.getText().equals("")){
+				TipDialog tipDialog=new TipDialog("请输入收款账号！");
+				tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				tipDialog.setVisible(true);		
+			}else if(table.getRowCount()==0){
+				TipDialog tipDialog=new TipDialog("请输入订单！");
+				tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				tipDialog.setVisible(true);		
+			}else{
+				RecordCollectBlService recordCollectBlService=new RecordcollectController();
+				String id=recordCollectBlService.getid(orgcode);
+				Long date = (Long) yearBox.getSelectedItem() * 10000
+						+ (Long) monthBox.getSelectedItem() * 100
+						+ (Long) dayBox.getSelectedItem();
+				double collectionsum=Double.parseDouble(sumField.getText());
+				String collectionman=manField.getText();
+				String accountcode=accountField.getText();
+				List<String> barcodes = new ArrayList<String>();
+				DefaultTableModel tableModel = (DefaultTableModel) table
+						.getModel();
+				int rowCount = tableModel.getRowCount();
+				for (int i = 0; i < rowCount; i++) {
+					barcodes.add((String) tableModel.getValueAt(i, 0));
+					System.out.println("a"+(String) tableModel.getValueAt(i, 0));
+				}
+				RecordcollectVO temp = new RecordcollectVO(id, date, accountcode, collectionsum, collectionman, barcodes, vo.getFormstate());
+				for(int i=0;i<temp.getAllordercode().size();i++){
+					System.out.println("b"+temp.getAllordercode().get(i));
+				}
+				ResultMessage resultMessage=ea.updateRecordcollectForm(temp);
+				if(resultMessage==ResultMessage.success){
+					TipDialog tipDialog=new TipDialog("修改成功！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else {
+					TipDialog tipDialog=new TipDialog("修改失败！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}
 			}
-			RecordcollectVO temp = new RecordcollectVO(id, date, accountcode, collectionsum, collectionman, barcodes, vo.getFormstate());
-			ea.updateRecordcollectForm(temp);
+			
+		}else if(e.getSource().equals(button_2)){
+			DeleteOrder();
 		}
 	}
 	
@@ -265,11 +319,14 @@ public class RecordcollectRevisePanel extends JPanel implements ActionListener{
 		accountField.setText(vo.getAccountcode());
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		for (int i = 0; i < tableModel.getRowCount(); i++) {
+			tableModel.removeRow(i);
+		}
 		List<String> list = vo.getAllordercode();
+		System.out.println(list.size());
 		for (int i = 0; i < list.size(); i++) {
 			tableModel.addRow(new String[]{list.get(i)});
 		}
-		
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
 	}
 }

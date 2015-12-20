@@ -14,6 +14,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -21,8 +22,11 @@ import javax.swing.JButton;
 
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
 import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.HallLoadVO;
 import vo.OrganizationVO;
 import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
@@ -38,7 +42,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 public class HallLoadRevisePanel extends JPanel {
-	private JTextField carField;
+	private NumberField carField;
 	private JTextField jianField;
 	private JTextField yaField;
 	private JTable table;
@@ -52,6 +56,11 @@ public class HallLoadRevisePanel extends JPanel {
 	private JLabel orgLabel;
 	private JLabel destinLabel;
 	private DoubleField fareField;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
 	/**
 	 * Create the panel.
 	 */
@@ -75,7 +84,7 @@ public class HallLoadRevisePanel extends JPanel {
 		orgLabel.setBounds(86, 44, 202, 18);
 		add(orgLabel);
 
-		carField = new JTextField();
+		carField = new NumberField(20);
 		carField.setColumns(10);
 		carField.setBounds(421, 44, 199, 24);
 		add(carField);
@@ -125,21 +134,48 @@ public class HallLoadRevisePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Long date = (Long) yearBox.getSelectedItem() * 10000
-						+ (Long) monthBox.getSelectedItem() * 100
-						+ (Long) dateBox.getSelectedItem();
-				List<String> barcodes = new ArrayList<String>();
-				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				int rowCount=tableModel.getRowCount();
-				for (int i = 0; i < rowCount; i++) {
-					barcodes.add((String) tableModel.getValueAt(i, 0));
+				if(carField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入车辆编号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}else if(jianField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入监装员！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}else if(yaField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入出发地！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}else if(fareField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入运费合计！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);		
+				}else{
+					Long date = (Long) yearBox.getSelectedItem() * 10000
+							+ (Long) monthBox.getSelectedItem() * 100
+							+ (Long) dateBox.getSelectedItem();
+					List<String> barcodes = new ArrayList<String>();
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					int rowCount=tableModel.getRowCount();
+					for (int i = 0; i < rowCount; i++) {
+						barcodes.add((String) tableModel.getValueAt(i, 0));
+					}
+					double fare = Double.parseDouble(fareField.getText());
+					ResultMessage resultMessage=ea.updateLoadForm(new HallLoadVO(date, vo.getStringcode(),
+							moterLabel.getText(), vo.getDestination(), carField.getText(),
+							jianField.getText(), yaField.getText(), barcodes,
+							fare, vo.getDocumentstate()));
+					if(resultMessage==ResultMessage.success){
+						TipDialog tipDialog=new TipDialog("修改成功！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}else {
+						TipDialog tipDialog=new TipDialog("修改失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
 				}
-				double fare = Double.parseDouble(fareField.getText());
-				ea.updateLoadForm(new HallLoadVO(date, vo.getStringcode(),
-						moterLabel.getText(), vo.getDestination(), carField.getText(),
-						jianField.getText(), yaField.getText(), barcodes,
-						fare, vo.getDocumentstate()));
+				
 			}
 		});
 		update.setBounds(433, 375, 113, 27);
@@ -205,6 +241,26 @@ public class HallLoadRevisePanel extends JPanel {
 		});
 		button_3.setBounds(684, 375, 113, 27);
 		add(button_3);
+		
+		label = new JLabel("装车日期：");
+		label.setBounds(22, 218, 69, 15);
+		add(label);
+		
+		label_1 = new JLabel("车辆代号：");
+		label_1.setBounds(327, 47, 69, 15);
+		add(label_1);
+		
+		label_2 = new JLabel("监装员：");
+		label_2.setBounds(327, 132, 69, 15);
+		add(label_2);
+		
+		label_3 = new JLabel("出发地：");
+		label_3.setBounds(327, 218, 69, 15);
+		add(label_3);
+		
+		label_4 = new JLabel("运费合计：");
+		label_4.setBounds(327, 293, 69, 15);
+		add(label_4);
 		
 	}
 	
