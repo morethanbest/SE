@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,8 +22,10 @@ import javax.swing.table.DefaultTableModel;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import po.Formstate;
+import po.ResultMessage;
 import presentation.centersalesmanui.CenterSalesmanPanel;
 import presentation.enums.TransportTypes;
+import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.RecordtransVO;
 import businesslogic.logisticsbl.RecordtransPack.CentertransController;
@@ -115,6 +118,8 @@ public class TransferUpdatePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
@@ -126,13 +131,17 @@ public class TransferUpdatePanel extends JPanel {
 					barcodes.add((String) tableModel.getValueAt(i, 0));
 				}
 				double fare = Double.parseDouble(farebutton.getText());
-				controller.update(new RecordtransVO(date,
+				ResultMessage r = controller.update(new RecordtransVO(date,
 						codeLabel.getText(), (String) typeBox
 								.getSelectedItem(), classField.getText(),
 						departureLabel.getText(), (String) destinBox
 								.getSelectedItem(), counterField.getText(),
 						manageField.getText(), barcodes, fare,
 						vo.getFormstate()));
+				if(r == ResultMessage.success)
+					createTip("修改成功！");
+				else
+					createTip("修改失败！");
 			}
 		});
 		update.setBounds(416, 348, 113, 27);
@@ -291,5 +300,22 @@ public class TransferUpdatePanel extends JPanel {
 		}
 		
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+	}
+	
+	private boolean checkFormat(){
+		if(classField.getText().equals(""))
+			return createTip("班次号不能为空！");
+		else if(counterField.getText().equals(""))
+			return createTip("货柜号不能为空！");
+		else if(manageField.getText().equals(""))
+			return createTip("监察员不能为空！");
+		return true;
+	}
+
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }

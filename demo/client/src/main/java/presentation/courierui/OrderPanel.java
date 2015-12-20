@@ -55,7 +55,6 @@ public class OrderPanel extends JPanel {
 	private DoubleField weightField;
 	private DoubleField volumeField;
 	private JTextField nameField;
-	private JLabel label_2;
 	private JSeparator separator_3;
 	private DoubleField fareField;
 	private JButton button;
@@ -68,13 +67,6 @@ public class OrderPanel extends JPanel {
 	private JComboBox<String> rareaBox;
 	private JComboBox<String> orderBox;
 	private OrderBlService orderBlService;
-	private JLabel label_17;
-	private JLabel label_18;
-	private JLabel label_19;
-	private JLabel label_20;
-	private JLabel label_21;
-	private JLabel label_22;
-	private JLabel label_23;
 	private JButton button_1;
 	private JButton button_3;
     /**
@@ -222,7 +214,7 @@ public class OrderPanel extends JPanel {
 		add(orderBox);
 		addOrderTypeItems();
 
-		label_2 = new JLabel("托运货物信息");
+		JLabel label_2 = new JLabel("托运货物信息");
 		label_2.setBounds(4, 364, 96, 18);
 		add(label_2);
 
@@ -275,6 +267,8 @@ public class OrderPanel extends JPanel {
 					double weight = Double.parseDouble(weightField.getText());
 					double volume = Double.parseDouble(volumeField.getText());
 					double fare = Double.parseDouble(fareField.getText());
+					String code = orderBlService.getOrdercode(courierPanel
+							.getOrgCode());
 					if(orderBlService.addOrder(
 							new OrderVO(snameField.getText(), saddress,
 									sjobField.getText(), stelField.getText(),
@@ -284,13 +278,11 @@ public class OrderPanel extends JPanel {
 									rphoneField.getText(), number, weight,
 									volume, nameField.getText(),
 									(String) packBox.getSelectedItem(),
-									orderBlService.getOrdercode(courierPanel
-											.getOrgCode()),
-									getOrderType((String) orderBox
-											.getSelectedItem()), fare, Formstate.waiting),
+									code,getOrderType((String) orderBox
+									.getSelectedItem()), fare, Formstate.waiting),
 							courierPanel.getOrgCode()) == ResultMessage.success)
 					{
-						addSuccessfully();
+						addSuccessfully(code);
 					}else{
 						TipDialog tipDialog=new TipDialog("添加失败！");
 						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -371,31 +363,31 @@ public class OrderPanel extends JPanel {
 		label_16.setBounds(647, 290, 53, 18);
 		add(label_16);
 		
-		label_17 = new JLabel("原件数：");
+		JLabel label_17 = new JLabel("原件数：");
 		label_17.setBounds(113, 364, 72, 18);
 		add(label_17);
 		
-		label_18 = new JLabel("重量：");
+		JLabel label_18 = new JLabel("重量：");
 		label_18.setBounds(296, 364, 58, 18);
 		add(label_18);
 		
-		label_19 = new JLabel("体积：");
+		JLabel label_19 = new JLabel("体积：");
 		label_19.setBounds(481, 364, 58, 18);
 		add(label_19);
 		
-		label_20 = new JLabel("货物名称：");
+		JLabel label_20 = new JLabel("货物名称：");
 		label_20.setBounds(636, 364, 75, 18);
 		add(label_20);
 		
-		label_21 = new JLabel("运费：");
+		JLabel label_21 = new JLabel("运费：");
 		label_21.setBounds(678, 420, 58, 18);
 		add(label_21);
 		
-		label_22 = new JLabel("订单类型：");
+		JLabel label_22 = new JLabel("订单类型：");
 		label_22.setBounds(389, 420, 82, 18);
 		add(label_22);
 		
-		label_23 = new JLabel("包装类型：");
+		JLabel label_23 = new JLabel("包装类型：");
 		label_23.setBounds(112, 420, 86, 18);
 		add(label_23);
 		
@@ -555,8 +547,8 @@ public class OrderPanel extends JPanel {
 		return true;
 	}
 	
-	private void addSuccessfully(){
-		TipDialog tipDialog=new TipDialog("添加成功！");
+	private void addSuccessfully(String code){
+		TipDialog tipDialog=new TipDialog("添加成功！订单编号为" + code);
 		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		tipDialog.setVisible(true);	
 		snameField.setText("");

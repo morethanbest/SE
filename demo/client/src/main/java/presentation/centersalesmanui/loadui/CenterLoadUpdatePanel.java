@@ -1,43 +1,40 @@
 package presentation.centersalesmanui.loadui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.centersalesmanui.CenterSalesmanPanel;
-import presentation.managerui.examui.ExamPanel;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.CenterloadVO;
-import vo.HallLoadVO;
 import vo.OrganizationVO;
 import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
-import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.CenterloadBlService;
-import businesslogicservice.managerblservice.ExamCLForms;
 import businesslogicservice.managerblservice.OrganizationBlService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class CenterLoadUpdatePanel extends JPanel {
 	private JTextField yaField;
-	private JTextField carField;
+	private NumberField carField;
 	private JTextField jianField;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
@@ -97,6 +94,8 @@ public class CenterLoadUpdatePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
@@ -107,17 +106,21 @@ public class CenterLoadUpdatePanel extends JPanel {
 					barcodes.add((String) tableModel.getValueAt(i, 0));
 				}
 				double fare = Double.parseDouble(fareField.getText());
-				controller.addCenterLoadForm(new CenterloadVO(date,
+				ResultMessage r = controller.addCenterLoadForm(new CenterloadVO(date,
 						moterLabel.getText(), (String) destinBox
 								.getSelectedItem(), carField.getText(),
 						jianField.getText(), yaField.getText(), barcodes,
 						fare, vo.getFormstate()));
+				if(r == ResultMessage.success)
+					createTip("修改成功！");
+				else
+					createTip("修改失败！");
 			}
 		});
 		update.setBounds(503, 376, 113, 27);
 		add(update);
 		
-		carField = new JTextField();
+		carField = new NumberField(20);
 		carField.setColumns(10);
 		carField.setBounds(351, 53, 242, 24);
 		add(carField);
@@ -256,7 +259,7 @@ public class CenterLoadUpdatePanel extends JPanel {
 		moterLabel.setText(vo.getMotorcode());
 		yearBox.setSelectedItem(vo.getLoadtime() / 10000);
 		monthBox.setSelectedItem((vo.getLoadtime() % 10000) / 100);
-		dateBox.setSelectedItem(vo.getLoadtime() % 1000000);
+		dateBox.setSelectedItem(vo.getLoadtime() % 100);
 		destinBox.setSelectedItem(vo.getDestination());
 		carField.setText(vo.getVehiclecode());
 		jianField.setText(vo.getSupervisor());
@@ -264,5 +267,22 @@ public class CenterLoadUpdatePanel extends JPanel {
 		fareField.setText(vo.getfee() + "");
 		
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+	}
+	
+	private boolean checkFormat(){
+		if(carField.getText().equals(""))
+			return createTip("车辆代号不能为空！");
+		else if(jianField.getText().equals(""))
+			return createTip("监装员不能为空！");
+		else if(yaField.getText().equals(""))
+			return createTip("押运员不能为空！");
+		return true;
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }

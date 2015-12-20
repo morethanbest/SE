@@ -1,12 +1,12 @@
 package presentation.centersalesmanui;
 
-import javax.swing.JPanel;
-
-import init.ClientInitException;
-import init.RMIHelper;
+import java.awt.CardLayout;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import presentation.centersalesmanui.arrivalui.ArrivalCheckPanel;
 import presentation.centersalesmanui.arrivalui.ArrivalPanel;
@@ -18,11 +18,6 @@ import presentation.centersalesmanui.transferui.TransferCheckPanel;
 import presentation.centersalesmanui.transferui.TransferPanel;
 import presentation.centersalesmanui.transferui.TransferUpdatePanel;
 import presentation.mainui.MainFrame;
-
-import java.awt.CardLayout;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CenterSalesmanPanel extends JPanel implements ActionListener{
 	private JPanel switcher;
@@ -80,11 +75,11 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 		
 		tu = new TransferUpdatePanel(this, card);
 		tc = new TransferCheckPanel(switcher, card, tu, orgCode);
-		transfer = new TransferPanel(orgCode, city, switcher, card);
+		transfer = new TransferPanel(orgCode, city, this, card);
 		
 		cu = new CenterLoadUpdatePanel(this, card);
 		cc = new CenterLoadCheckPanel(switcher, card, cu, orgCode);
-		load = new CenterLoadPanel(orgCode, city, switcher, card);
+		load = new CenterLoadPanel(orgCode, city, this, card);
 		
 		switcher.add(arrival, "arrival");
 		switcher.add(ac, "ac");

@@ -1,5 +1,6 @@
 package presentation.centersalesmanui.loadui;
 
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -20,17 +21,24 @@ import javax.swing.table.DefaultTableModel;
 
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
+import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.tip.TipDialog;
 import vo.CenterloadVO;
 import vo.HallLoadVO;
 import vo.OrganizationVO;
+import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.CenterloadBlService;
+import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import java.awt.Component;
 
 public class CenterLoadPanel extends JPanel {
@@ -46,7 +54,6 @@ public class CenterLoadPanel extends JPanel {
 	private JTable table;
 	private JComboBox<String> destinBox;
 	private JLabel moterLabel;
-	private String city;
 	private CenterloadBlService centerloadBlService;
 	private JButton button_2;
 	private JButton button_3;
@@ -57,12 +64,16 @@ public class CenterLoadPanel extends JPanel {
 	private JLabel label_4;
 	private JLabel label_5;
 	private JLabel label_6;
+	
+	private String city;
+	private String orgCode;
 
 	/**
 	 * Create the panel.
 	 */
-	public CenterLoadPanel(String orgCode, String city, JPanel parent, CardLayout card) {
+	public CenterLoadPanel(String orgCode, String city, CenterSalesmanPanel parent, CardLayout card) {
 		this.city = city;
+		this.orgCode = orgCode;
 		centerloadBlService = new CenterloadController();
 		
 		setBackground(SystemColor.inactiveCaptionBorder);
@@ -101,6 +112,8 @@ public class CenterLoadPanel extends JPanel {
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
@@ -111,11 +124,15 @@ public class CenterLoadPanel extends JPanel {
 					barcodes.add((String) tableModel.getValueAt(i, 0));
 				}
 				double fare = Double.parseDouble(fareLabel.getText());
-				centerloadBlService.addCenterLoadForm(new CenterloadVO(date,
+				ResultMessage r = centerloadBlService.addCenterLoadForm(new CenterloadVO(date,
 						moterLabel.getText(), (String) destinBox
 								.getSelectedItem(), carField.getText(),
 						jianField.getText(), yaField.getText(), barcodes,
 						fare, Formstate.waiting));
+				if(r == ResultMessage.success)
+					addSucess();
+				else
+					createTip("添加失败！");
 			}
 		});
 		button.setBounds(416, 348, 113, 27);
@@ -157,6 +174,8 @@ public class CenterLoadPanel extends JPanel {
 		button_1 = new JButton("获取运费");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				List<String> barcodes = new ArrayList<String>();
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 				int rowCount=tableModel.getRowCount();
@@ -212,7 +231,8 @@ public class CenterLoadPanel extends JPanel {
 		button_4 = new JButton("查看已提交单据");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
+				card.next(parent.getSwitcher());
+				parent.getLoad().refreshList();
 			}
 		});
 		button_4.setBounds(752, 348, 145, 27);
@@ -291,5 +311,33 @@ public class CenterLoadPanel extends JPanel {
 		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}
+	}
+	
+	private boolean checkFormat(){
+		if(carField.getText().equals(""))
+			return createTip("车辆代号不能为空！");
+		else if(jianField.getText().equals(""))
+			return createTip("监装员不能为空！");
+		else if(yaField.getText().equals(""))
+			return createTip("押运员不能为空！");
+		return true;
+	}
+	
+	private void addSucess(){
+		createTip("添加成功！");
+		carField.setText("");
+		jianField.setText("");
+		yaField.setText("");
+		Long date = (Long) yearBox.getSelectedItem() * 10000
+				+ (Long) monthBox.getSelectedItem() * 100
+				+ (Long) dateBox.getSelectedItem();
+		moterLabel.setText(centerloadBlService.getid(orgCode, date));
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }
