@@ -100,6 +100,11 @@ public class OrderCheckPanel extends JPanel {
 		add(stateBox);
 		
 		act = new JButton("执行");
+		act.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateVOListState(Formstate.checked);
+			}
+		});
 		act.setBounds(538, 358, 113, 27);
 		add(act);
 		stateBox.addItemListener(new ItemListener() {
@@ -116,6 +121,18 @@ public class OrderCheckPanel extends JPanel {
 		});
 		addStateItems();
 
+	}
+	
+	private void updateVOListState(Formstate state) {
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		for (int i = 0; i < volist.size(); i++) {
+			if ((boolean) tableModel.getValueAt(i, 0)) {
+				OrderVO vo = volist.get(i);
+				vo.setDocumentstate(state);
+				controller.updateLogistics(vo);
+			}
+		}
+		refreshList();
 	}
 	
 	private void addStateItems() {
