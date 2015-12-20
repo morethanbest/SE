@@ -76,7 +76,7 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 
 		au = new ArrivalUpdatePanel(this, card, orgName);
 		ac = new ArrivalCheckPanel(switcher, card, au, orgCode, city);
-		arrival = new ArrivalPanel(orgCode, switcher, card);
+		arrival = new ArrivalPanel(orgCode, this, card);
 		
 		tu = new TransferUpdatePanel(this, card);
 		tc = new TransferCheckPanel(switcher, card, tu, orgCode);

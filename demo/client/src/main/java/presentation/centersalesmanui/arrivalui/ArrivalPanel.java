@@ -1,37 +1,42 @@
 package presentation.centersalesmanui.arrivalui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import po.Arrivalstate;
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.ArrivalVO;
 import vo.OrganizationVO;
+import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.ArrivalPack.ArrivalController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.ArrivalBlService;
+import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
-
 public class ArrivalPanel extends JPanel {
-	private JTextField codeField;
+	private NumberField codeField;
 	private JLabel orgLabel;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
@@ -52,7 +57,7 @@ public class ArrivalPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ArrivalPanel(String orgCode, JPanel parent, CardLayout card) {
+	public ArrivalPanel(String orgCode, CenterSalesmanPanel parent, CardLayout card) {
 		arrivalBlService = new ArrivalController();
 
 		setBackground(SystemColor.inactiveCaptionBorder);
@@ -86,20 +91,24 @@ public class ArrivalPanel extends JPanel {
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				arrivalBlService.addArrival(new ArrivalVO(arrivalBlService
+				if(arrivalBlService.addArrival(new ArrivalVO(arrivalBlService
 						.getid(orgCode), orgCode, date,typeBox.getSelectedIndex() == 1 ,codeField.getText(),
 						(String) departureBox.getSelectedItem(),
 						getStateType((String) stateBox.getSelectedItem()),
-						Formstate.waiting));
+						Formstate.waiting)) == ResultMessage.success)
+					addSucess();
+				else createTip("添加失败！");
 			}
 		});
 		button.setBounds(416, 309, 113, 27);
 		add(button);
 
-		codeField = new JTextField();
+		codeField = new NumberField(20);
 		codeField.setColumns(10);
 		codeField.setBounds(547, 213, 242, 24);
 		add(codeField);
@@ -131,7 +140,8 @@ public class ArrivalPanel extends JPanel {
 		button_1 = new JButton("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
+				card.next(parent.getSwitcher());
+				parent.getArrival().refreshList();
 			}
 		});
 		button_1.setBounds(760, 355, 145, 27);
@@ -231,5 +241,29 @@ public class ArrivalPanel extends JPanel {
 		for (OrganizationVO org : orgList) {
 			orgSelect.addItem(org.getName());
 		}
+	}
+	
+	private boolean checkFormat(){
+		CheckForExistBlService check2 = new CheckForExistBl();
+		if(typeBox.getSelectedIndex() == 1){
+			if(!check2.checkHallLoad(codeField.getText()))
+				return createTip("汽运编号:" + codeField.getText() + " 不存在！");
+		}else if(typeBox.getSelectedIndex() == 0){
+			if(!check2.checkTrans(codeField.getText()))
+				return createTip("中转单编号:" + codeField.getText() + " 不存在！");
+		}
+		return true;
+	}
+	
+	private void addSucess(){
+		createTip("添加成功！");
+		codeField.setText("");
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }

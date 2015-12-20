@@ -1,38 +1,38 @@
 package presentation.centersalesmanui.arrivalui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import po.Arrivalstate;
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.centersalesmanui.CenterSalesmanPanel;
-import presentation.managerui.examui.ExamPanel;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
 import vo.ArrivalVO;
 import vo.OrganizationVO;
+import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.ArrivalPack.ArrivalController;
-import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.ArrivalBlService;
-import businesslogicservice.managerblservice.ExamArrivals;
+import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class ArrivalUpdatePanel extends JPanel {
-	private JTextField codeField;
+	private NumberField codeField;
 	private JLabel orgLabel;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
@@ -45,6 +45,12 @@ public class ArrivalUpdatePanel extends JPanel {
 	private JButton button_1;
 	private JButton button_2;
 	private ArrivalVO vo;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
 
 	/**
 	 * Create the panel.
@@ -83,27 +89,34 @@ public class ArrivalUpdatePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
+				ResultMessage r;
 				if(typeBox.getSelectedIndex() == 1)
-					controller.updateFromHall(new ArrivalVO(vo.getId(), orgLabel.getText(), date,
+					r = controller.updateFromHall(new ArrivalVO(vo.getId(), orgLabel.getText(), date,
 							typeBox.getSelectedIndex() == 1 ,codeField.getText(),
 							(String) departureBox.getSelectedItem(),
 							getStateType((String) stateBox.getSelectedItem()),
 							vo.getFormstate()), orgName);
 				else
-					controller.updateFromCenter(new ArrivalVO(vo.getId(), orgLabel.getText(), date,
+					r = controller.updateFromCenter(new ArrivalVO(vo.getId(), orgLabel.getText(), date,
 							typeBox.getSelectedIndex() == 1 ,codeField.getText(),
 							(String) departureBox.getSelectedItem(),
 							getStateType((String) stateBox.getSelectedItem()),
 							vo.getFormstate()), orgName);
+				if(r == ResultMessage.success)
+						createTip("修改成功！");
+					else
+						createTip("修改失败！");
 			}
 		});
 		update.setBounds(444, 333, 122, 36);
 		add(update);
 
-		codeField = new JTextField();
+		codeField = new NumberField(20);
 		codeField.setColumns(10);
 		codeField.setBounds(547, 213, 242, 24);
 		add(codeField);
@@ -145,6 +158,30 @@ public class ArrivalUpdatePanel extends JPanel {
 		});
 		button_2.setBounds(580, 333, 122, 36);
 		add(button_2);
+		
+		label = new JLabel("机构编号：");
+		label.setBounds(49, 50, 85, 18);
+		add(label);
+		
+		label_1 = new JLabel("到达日期：");
+		label_1.setBounds(49, 135, 85, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("到达类型：");
+		label_2.setBounds(49, 216, 85, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("出发地：");
+		label_3.setBounds(457, 50, 72, 18);
+		add(label_3);
+		
+		label_4 = new JLabel("到达状态：");
+		label_4.setBounds(457, 135, 76, 18);
+		add(label_4);
+		
+		label_5 = new JLabel("单据编号：");
+		label_5.setBounds(457, 216, 76, 18);
+		add(label_5);
 		addTypeItems();
 	}
 	
@@ -232,5 +269,25 @@ public class ArrivalUpdatePanel extends JPanel {
 		codeField.setText(vo.getTranscode());
 		
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+	}
+	
+	private boolean checkFormat(){
+		CheckForExistBlService check2 = new CheckForExistBl();
+		if(typeBox.getSelectedIndex() == 1){
+			if(!check2.checkHallLoad(codeField.getText()))
+				return createTip("汽运编号:" + codeField.getText() + " 不存在！");
+		}else if(typeBox.getSelectedIndex() == 0){
+			if(!check2.checkTrans(codeField.getText()))
+				return createTip("中转单编号:" + codeField.getText() + " 不存在！");
+		}
+		return true;
+	}
+	
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }
