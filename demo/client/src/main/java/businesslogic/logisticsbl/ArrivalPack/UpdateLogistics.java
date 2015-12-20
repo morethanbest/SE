@@ -18,7 +18,7 @@ public class UpdateLogistics {
     public ResultMessage updatebyhall(ArrivalVO vo,String orgcode){///////////////////根据营业厅装车单编号  得到营业厅装车单  从而得到这批货的所有条形码号  然后修改历史轨迹
 
 
-        if(vo.getFormstate()!= Formstate.pass){
+        if(vo.getFormstate()!= Formstate.checked){
             return ResultMessage.failure;
         }
         ArrivalFormDataService dataserv= RMIHelper.getArrivalform();

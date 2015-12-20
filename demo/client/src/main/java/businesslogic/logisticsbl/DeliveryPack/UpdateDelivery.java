@@ -34,14 +34,13 @@ public class UpdateDelivery {
 
     public ResultMessage passupdate(){
 
-        if(this.documentstate==Formstate.pass){
-            this.documentstate=Formstate.checked;
+        if(this.documentstate==Formstate.checked){
 
             LogisticsInfoService log=RMIHelper.getLogisticsinfo();
             LogisticsPO po=null;
             try {
                 po=log.findLogisticsInfo(barcode);
-                po.setState("ÅÉ¼þÖÐ");
+                po.setState("ï¿½É¼ï¿½ï¿½ï¿½");
                 log.update(po);
             } catch (RemoteException e) {
                 System.out.println("delivery update logistics state failed!!!");

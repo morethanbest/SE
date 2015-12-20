@@ -202,6 +202,7 @@ public class HallLoadDB {
 
 	public static void main(String[] args) {
 		initialize();
+//		System.out.println(getLastId("025000"));
 //		List<String> list=new ArrayList<String>();
 //		list.add("001");
 //		HallLoadPO po=new HallLoadPO(1,"025000","02500000","1","b","c","d",list,10,Formstate.waiting);

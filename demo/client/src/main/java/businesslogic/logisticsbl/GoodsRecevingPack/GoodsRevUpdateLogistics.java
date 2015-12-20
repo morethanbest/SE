@@ -17,7 +17,7 @@ import java.util.List;
 public class GoodsRevUpdateLogistics {
 
     public ResultMessage updatabyhall(GoodsReceivingVO vo,String orgname){//如果这次的货物是由营业厅来的
-        if(vo.getFormstate()!= Formstate.pass){
+        if(vo.getFormstate()!= Formstate.checked){
             return ResultMessage.failure;
         }
         GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();

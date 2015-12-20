@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class HallloadUpdateLogistics {
     public ResultMessage updatehistory(HallLoadVO vo){
-        if(vo.getstate()!= Formstate.pass){
+        if(vo.getstate()!= Formstate.checked ){
             return ResultMessage.failure;
         }
         ResultMessage result=ResultMessage.success;
@@ -39,7 +39,7 @@ public class HallloadUpdateLogistics {
                     result=ResultMessage.failure;
                 }
 
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 System.out.println("hall load update history find logistics info failed!!!");
                 e.printStackTrace();
             }
