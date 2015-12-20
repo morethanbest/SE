@@ -10,15 +10,20 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import po.Arrivalstate;
 import po.Formstate;
+import po.ResultMessage;
 import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.tip.TipDialog;
 import vo.GoodsReceivingVO;
+import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.GoodsRecevingPack.GoodsRecevingController;
+import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.logisticsblservice.GoodsRecevingBlService;
 
 public class GoodRecievingUpdatePanel extends JPanel {
@@ -92,11 +97,14 @@ public class GoodRecievingUpdatePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
+				ResultMessage r;
 				if(typeBox.getSelectedIndex() == 1)
-					controller.updateFromHall(
+					r = controller.updateFromHall(
 							new GoodsReceivingVO(vo.getid(), date, typeBox
 									.getSelectedIndex() == 1, codeField
 									.getText(), vo.getDeparture(),
@@ -104,13 +112,17 @@ public class GoodRecievingUpdatePanel extends JPanel {
 											.getSelectedItem()), vo
 											.getFormstate()), orgName);
 				else
-					controller.updateFromCenter(
+					r = controller.updateFromCenter(
 							new GoodsReceivingVO(vo.getid(), date, typeBox
 									.getSelectedIndex() == 1, codeField
 									.getText(), vo.getDeparture(),
 									getStateType((String) stateBox
 											.getSelectedItem()), vo
 											.getFormstate()), orgName);
+				if(r == ResultMessage.success)
+					createTip("修改成功！");
+				else
+					createTip("修改失败！");
 			}
 		});
 		update.setBounds(423, 336, 113, 27);
@@ -134,6 +146,26 @@ public class GoodRecievingUpdatePanel extends JPanel {
 		});
 		button_2.setBounds(677, 336, 113, 27);
 		add(button_2);
+		
+		JLabel label = new JLabel("单据编号：");
+		label.setBounds(54, 233, 82, 18);
+		add(label);
+		
+		JLabel label_1 = new JLabel("收货日期：");
+		label_1.setBounds(54, 70, 86, 18);
+		add(label_1);
+		
+		JLabel label_2 = new JLabel("单据类型：");
+		label_2.setBounds(54, 149, 82, 18);
+		add(label_2);
+		
+		JLabel label_3 = new JLabel("目的地：");
+		label_3.setBounds(448, 70, 71, 18);
+		add(label_3);
+		
+		JLabel label_4 = new JLabel("到达状态：");
+		label_4.setBounds(433, 152, 86, 18);
+		add(label_4);
 	}
 
 	private void addTypeItems() {
@@ -204,10 +236,28 @@ public class GoodRecievingUpdatePanel extends JPanel {
 		else
 			typeBox.setSelectedIndex(0);
 		codeField.setText(vo.getTranscode());
-		depatLabel.setText("出发地：" + vo.getDeparture());
+		depatLabel.setText(vo.getDeparture());
 		stateBox.setSelectedItem(vo.getArrivalstate());
 		
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
 	}
 
+	private boolean checkFormat(){
+		CheckForExistBlService check2 = new CheckForExistBl();
+		if(typeBox.getSelectedIndex() == 0){
+			if(!check2.checkHallLoad(codeField.getText()))
+				return createTip("汽运编号:" + codeField.getText() + " 不存在！");
+		}else if(typeBox.getSelectedIndex() == 1){
+			if(!check2.checkTrans(codeField.getText()))
+				return createTip("中转单编号:" + codeField.getText() + " 不存在！");
+		}
+		return true;
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
+	}
 }

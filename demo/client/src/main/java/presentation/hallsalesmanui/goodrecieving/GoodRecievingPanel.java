@@ -1,7 +1,10 @@
 package presentation.hallsalesmanui.goodrecieving;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
@@ -10,32 +13,26 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import po.Arrivalstate;
 import po.Formstate;
 import po.Organizationtype;
-import presentation.enums.OrganizationType;
+import po.ResultMessage;
+import presentation.hallsalesmanui.HallsalesmanPanel;
 import presentation.tip.TipDialog;
-import vo.CityVO;
 import vo.GoodsReceivingVO;
 import vo.OrganizationVO;
+import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.GoodsRecevingPack.GoodsRecevingController;
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.logisticsblservice.GoodsRecevingBlService;
-import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import java.awt.Component;
-
-import javax.swing.JLabel;
 
 public class GoodRecievingPanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -48,17 +45,12 @@ public class GoodRecievingPanel extends JPanel {
 	private JTextField codeField;
 	private String city;
 	private JComboBox<String> typeBox;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
 	private JButton button_1;
 
 	/**
 	 * Create the panel.
 	 */
-	public GoodRecievingPanel(String orgCode, String city, JPanel parent, CardLayout card) {
+	public GoodRecievingPanel(String orgCode, String city, HallsalesmanPanel parent, CardLayout card) {
 		this.city = city;
 		goodsRecevingBlService = new GoodsRecevingController();
 		setBackground(SystemColor.inactiveCaptionBorder);
@@ -118,48 +110,51 @@ public class GoodRecievingPanel extends JPanel {
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				goodsRecevingBlService.GoodsReceving(new GoodsReceivingVO(
+				ResultMessage r = goodsRecevingBlService.GoodsReceving(new GoodsReceivingVO(
 						goodsRecevingBlService.getid(orgCode), date,typeBox.getSelectedIndex() == 1 ,codeField
 								.getText(), (String) destinBox
 								.getSelectedItem(),
 						getStateType((String) stateBox.getSelectedItem()),
 						Formstate.waiting));
-				TipDialog Dialog=new TipDialog("收件单提交成功！");
-				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				Dialog.setVisible(true);
+				if(r == ResultMessage.success)
+					addSucess();
+				else
+					createTip("添加失败！");
 			}
 		});
 		button.setBounds(423, 336, 113, 27);
 		add(button);
 		
-		label = new JLabel("入库日期：");
+		JLabel label = new JLabel("收货日期：");
 		label.setBounds(54, 70, 86, 18);
 		add(label);
 		
-		label_1 = new JLabel("单据类型：");
+		JLabel label_1 = new JLabel("单据类型：");
 		label_1.setBounds(54, 149, 82, 18);
 		add(label_1);
 		
-		label_2 = new JLabel("单据编号：");
-		label_2.setBounds(54, 227, 82, 18);
+		JLabel label_2 = new JLabel("单据编号：");
+		label_2.setBounds(54, 233, 82, 18);
 		add(label_2);
 		
-		label_3 = new JLabel("目的地：");
+		JLabel label_3 = new JLabel("目的地：");
 		label_3.setBounds(448, 70, 71, 18);
 		add(label_3);
 		
-		label_4 = new JLabel("到达状态：");
+		JLabel label_4 = new JLabel("到达状态：");
 		label_4.setBounds(433, 152, 86, 18);
 		add(label_4);
 		
 		button_1 = new JButton("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
-				
+				card.next(parent.getSwitcher());
+				parent.getGc().refreshList();
 			}
 		});
 		button_1.setBounds(756, 336, 136, 27);
@@ -236,4 +231,29 @@ public class GoodRecievingPanel extends JPanel {
 		}
 	}
 
+	
+	private boolean checkFormat(){
+		CheckForExistBlService check2 = new CheckForExistBl();
+		if(typeBox.getSelectedIndex() == 0){
+			if(!check2.checkHallLoad(codeField.getText()))
+				return createTip("汽运编号:" + codeField.getText() + " 不存在！");
+		}else if(typeBox.getSelectedIndex() == 1){
+			if(!check2.checkTrans(codeField.getText()))
+				return createTip("中转单编号:" + codeField.getText() + " 不存在！");
+		}
+		return true;
+	}
+	
+	private void addSucess(){
+		createTip("添加成功！");
+		codeField.setText("");
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
+	}
+	
 }

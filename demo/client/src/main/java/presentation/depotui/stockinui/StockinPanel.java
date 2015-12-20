@@ -166,6 +166,8 @@ public class StockinPanel extends JPanel {
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
@@ -174,14 +176,12 @@ public class StockinPanel extends JPanel {
 						(Long) paiBox.getSelectedItem(),
 						(Long) jiaBox.getSelectedItem(),
 						(Long) weiBox.getSelectedItem());
-				if(checkFormat()){
 					if(inboundBlService.Inbound(new StockinVO(inboundBlService
 							.getid(orgCode), codeField.getText(), date, location,
 							(String) orgBox.getSelectedItem(), Formstate.waiting)) == ResultMessage.success)
-					addSucess();
+						addSucess();
 					else
 						createTip("添加失败！");
-				}
 			}
 		});
 		button.setBounds(416, 312, 113, 27);

@@ -112,11 +112,11 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		
 		GoodRecievingUpdatePanel gu = new GoodRecievingUpdatePanel(this, card, orgName);
 		gc = new GoodRecievingCheckPanel(switcher, card, gu, orgcode, orgName);
-		goodRecievingPanel = new GoodRecievingPanel(orgcode, city, switcher, card);
+		goodRecievingPanel = new GoodRecievingPanel(orgcode, city, this, card);
 		
 		DeliveryUpdatePanel du = new DeliveryUpdatePanel(this, card);
 		dc = new DeliveryCheckPanel(switcher, card, du, orgcode);
-		deliveryPanel = new DeliveryPanel(orgcode, switcher, card);
+		deliveryPanel = new DeliveryPanel(orgcode, this, card);
 		
 		driverPanel=new DriverPanel(orgcode);
 		vehiclePanel=new VehiclePanel(orgcode);

@@ -1,5 +1,7 @@
 package presentation.hallsalesmanui.delivery;
 
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -9,44 +11,42 @@ import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import po.Formstate;
+import po.ResultMessage;
+import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.DeliveryVO;
 import businesslogic.logisticsbl.DeliveryPack.DeliveryController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
-
-import javax.swing.JLabel;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import java.awt.CardLayout;
-import java.awt.Component;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class DeliveryPanel extends JPanel {
-	private JTextField codeField;
+	private OrderField codeField;
 	private JTextField deliveryField;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
 	private JComboBox<Long> dateBox;
 	private JButton button;
 	private DeliveryBlService deliveryBlService;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
 	private JButton button_1;
 
 	/**
 	 * Create the panel.
 	 */
-	public DeliveryPanel(String orgCode, JPanel parent, CardLayout card) {
+	public DeliveryPanel(String orgCode, HallsalesmanPanel parent, CardLayout card) {
 		setLayout(null);
 
 		deliveryBlService = new DeliveryController();
 
-		codeField = new JTextField();
+		codeField = new OrderField();
 		codeField.setColumns(10);
 		codeField.setBounds(286, 82, 242, 24);
 		add(codeField);
@@ -75,15 +75,18 @@ public class DeliveryPanel extends JPanel {
 		button = new JButton("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				deliveryBlService.Delivery(new DeliveryVO(deliveryBlService
+				ResultMessage r = deliveryBlService.Delivery(new DeliveryVO(deliveryBlService
 						.findID(orgCode), date, codeField.getText(),
 						deliveryField.getText(), Formstate.waiting));
-				TipDialog Dialog=new TipDialog("派件单提交成功！");
-				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				Dialog.setVisible(true);
+				if(r == ResultMessage.success)
+					addSucess();
+				else
+					createTip("添加失败！");
 			}
 		});
 		button.setBounds(359, 276, 113, 27);
@@ -104,22 +107,23 @@ public class DeliveryPanel extends JPanel {
 		monthBox.setSelectedItem((long)c.get(Calendar.MONTH) + 1);
 		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
 		
-		label = new JLabel("派件日期：");
+		JLabel label = new JLabel("派件日期：");
 		label.setBounds(200, 144, 86, 18);
 		add(label);
 		
-		label_1 = new JLabel("订单编号：");
+		JLabel label_1 = new JLabel("订单编号：");
 		label_1.setBounds(200, 85, 86, 18);
 		add(label_1);
 		
-		label_2 = new JLabel("派件员：");
+		JLabel label_2 = new JLabel("派件员：");
 		label_2.setBounds(212, 207, 74, 18);
 		add(label_2);
 		
 		button_1 = new JButton("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent);
+				card.next(parent.getSwitcher());
+				parent.getDc().refreshList();
 			}
 		});
 		button_1.setBounds(737, 343, 144, 27);
@@ -166,5 +170,29 @@ public class DeliveryPanel extends JPanel {
 				dateBox.addItem((long) 29);
 		}
 	}
-
+	private boolean checkFormat(){
+		CheckExistBlService check = new CheckExist();
+		if(codeField.getText().length() != 10){
+			return createTip("订单编号必须为10位！");
+		} else if(!check.checkExist(codeField.getText())){
+			return createTip("订单:" + codeField.getText() + " 不存在！");
+		} else if(deliveryField.getText().equals("")){
+			return createTip("派件员不能为空！");
+		}	
+		return true;
+	}
+	
+	private void addSucess(){
+		createTip("添加成功！");
+		codeField.setText("");
+		deliveryField.setText("");
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
+	}
+	
 }

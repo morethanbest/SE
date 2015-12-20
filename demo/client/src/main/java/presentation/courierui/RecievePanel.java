@@ -12,23 +12,21 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import po.ResultMessage;
+import presentation.mainui.MainFrame;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.ReceptionVO;
 import businesslogic.orderbl.CheckExist;
 import businesslogic.orderbl.ReceptionPack.ReceptionController;
 import businesslogicservice.orderblservice.CheckExistBlService;
 import businesslogicservice.orderblservice.ReceptionBlService;
-import init.ClientInitException;
-import init.RMIHelper;
-import po.ResultMessage;
-import presentation.mainui.MainFrame;
-import presentation.tip.TipDialog;
-import vo.ReceptionVO;
 
 public class RecievePanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -36,7 +34,7 @@ public class RecievePanel extends JPanel {
 	private JComboBox<Long> dateBox;
 	private JButton button_1;
 	private JButton button;
-	private JTextField codeField;
+	private OrderField codeField;
 	private JTextField nameField;
 	private ReceptionBlService receptionBlService;
 	private JLabel label;
@@ -73,7 +71,7 @@ public class RecievePanel extends JPanel {
 		button.setBounds(650, 10, 145, 42);
 		add(button);
 
-		codeField = new JTextField();
+		codeField = new OrderField();
 		codeField.setBounds(218, 199, 229, 30);
 		add(codeField);
 		codeField.setColumns(10);
@@ -171,8 +169,8 @@ public class RecievePanel extends JPanel {
 			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			tipDialog.setVisible(true);	
 			return false;
-		}else if(codeField.getText().equals("")){
-			TipDialog tipDialog=new TipDialog("订单号不能为空！");
+		}else if(codeField.getText().length() != 10){
+			TipDialog tipDialog=new TipDialog("订单号必须为10位！");
 			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			tipDialog.setVisible(true);	
 			return false;
@@ -180,7 +178,7 @@ public class RecievePanel extends JPanel {
 			CheckExistBlService checkExistBlService=new CheckExist();
 			boolean exist=checkExistBlService.checkExist(codeField.getText());
 			if(!exist){
-				TipDialog tipDialog=new TipDialog("此订单号不存在！");
+				TipDialog tipDialog=new TipDialog("订单号:" + codeField.getText() + "不存在！");
 				tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				tipDialog.setVisible(true);	
 			}
@@ -193,7 +191,7 @@ public class RecievePanel extends JPanel {
 		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		tipDialog.setVisible(true);	
 		nameField.setText("");
-		codeField.setText("");	
+		codeField.setText("");
 	}
 	
 	private void addDateItems(JComboBox<Long> yearBox,
