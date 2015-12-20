@@ -141,14 +141,14 @@ public class StockoutDB {
 	}
 
 	public static long getLastId(String orgcode){
-		long lastId=0;
+		long lastId=-1;
 		dbh=new DBHelper();
 		sql="select id from StockoutPO where id like ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					lastId++;
 			}
@@ -163,14 +163,14 @@ public class StockoutDB {
 
 	public static void main(String[] args) {
 		initialize();
-		StockoutPO po=new StockoutPO("0250001","a",1,"b","c","d",Formstate.waiting);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(fuzzySearch(Formstate.waiting,"025").size()>0)
-			System.out.println("fuzzysearch success");
-		System.out.println(getLastId("025"));
+//		StockoutPO po=new StockoutPO("0250001","a",1,"b","c","d",Formstate.waiting);
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(fuzzySearch(Formstate.waiting,"025").size()>0)
+//			System.out.println("fuzzysearch success");
+//		System.out.println(getLastId("025"));
 					
 	}
 }

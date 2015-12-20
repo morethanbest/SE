@@ -23,12 +23,8 @@ public class StockinFormData extends UnicastRemoteObject implements StockinFormD
 
 	@Override
 	public ResultMessage addStockinForm(StockinPO po) throws RemoteException {
-		if(po!=null){
-			CommodityPO commodityPO=new CommodityPO(po.getId(),po.getOrdercode(), po.getIntime(), -1, po.getDestination(), po.getLocation());
-			CommodityDB.write(commodityPO);
+		if(po!=null)
 			return StockinDB.write(po);
-		}
-		
 		else 
 			return ResultMessage.failure;
 		

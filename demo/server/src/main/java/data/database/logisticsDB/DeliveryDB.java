@@ -135,14 +135,14 @@ public class DeliveryDB {
 	}
 
 	public static long getLastId(String orgcode){
-		long lastId=0;
+		long lastId=-1;
 		dbh=new DBHelper();
 		sql="select id from DeliveryPO where id like ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					lastId++;
 			}
@@ -156,15 +156,15 @@ public class DeliveryDB {
 	}
 
 	public static void main(String[] args) {
-		initialize();
-		DeliveryPO po=new DeliveryPO("0250001",1,"b","c",Formstate.waiting);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(fuzzySearch(Formstate.waiting).size()>0)
-			System.out.println("fuzzysearch success");
-		System.out.println(getLastId("025"));
+//		initialize();
+//		DeliveryPO po=new DeliveryPO("0250001",1,"b","c",Formstate.waiting);
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(fuzzySearch(Formstate.waiting).size()>0)
+//			System.out.println("fuzzysearch success");
+//		System.out.println(getLastId("025"));
 					
 	}
 }

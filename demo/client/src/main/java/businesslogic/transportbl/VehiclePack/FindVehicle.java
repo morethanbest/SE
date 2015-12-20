@@ -42,7 +42,7 @@ public class FindVehicle {
 			long extendtime=po.getExtendtime();
 			vo=new VehicleVO(vehiclecode,vehiclenum,extendtime);
 
-			} catch (RemoteException e) {
+			} catch (Exception e) {
 			System.out.println("Find Vehicle By VehicleNumber Failed!!!");
 			e.printStackTrace();
 		}
@@ -61,7 +61,7 @@ public class FindVehicle {
 			if(wheAt(vehiclecode,orgcode)==true) {
 				vo = new VehicleVO(vehiclecode, vehiclenum, extendtime);
 			}
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			System.out.println("Find Vehicle By PlateNumber Failed!!!");
 			e.printStackTrace();
 		}

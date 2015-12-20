@@ -338,22 +338,22 @@ public class CommodityDB {
 
 	public static void main(String[] args) {
 		initialize();
-		CommodityPO po=new CommodityPO("0250001","a",20150422,-1,"b",new CommodityLocation(1,1,1,1));
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(getAll("025").size()>0)
-			System.out.println("getall success");
-		if(getbetween("025",20150422,20150422).size()>0){
-			System.out.println("getbetween success");
-		}
-		if(getbyblock("025",1).size()>0){
-			System.out.println("getbyblock success");
-		}
-		if(getAll().size()>0){
-			System.out.println("getAll success");
-		}
+//		CommodityPO po=new CommodityPO("0250001","a",20150422,-1,"b",new CommodityLocation(1,1,1,1));
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(getAll("025").size()>0)
+//			System.out.println("getall success");
+//		if(getbetween("025",20150422,20150422).size()>0){
+//			System.out.println("getbetween success");
+//		}
+//		if(getbyblock("025",1).size()>0){
+//			System.out.println("getbyblock success");
+//		}
+//		if(getAll().size()>0){
+//			System.out.println("getAll success");
+//		}
 					
 	}
 }

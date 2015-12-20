@@ -145,14 +145,14 @@ public static List<GoodsReceivingPO> fuzzySearch(Formstate documentstate,String 
 }
 
 public static long getLastId(String orgcode){
-	long lastId=0;
+	long lastId=-1;
 	dbh=new DBHelper();
 	sql="select id from GoodsReceivingPO where id like ?";
 	pst = dbh.prepare(sql);
 	try {
 		pst.setString(1, "%"+orgcode+"%");
 		ret=pst.executeQuery();
-		if(ret.next()){
+		while(ret.next()){
 			if(ret.getString(1).startsWith(orgcode))
 				lastId++;
 		}
@@ -167,14 +167,14 @@ public static long getLastId(String orgcode){
 
 public static void main(String[] args) {
 	initialize();
-	GoodsReceivingPO po=new GoodsReceivingPO("0250001",1,true,"b","c",Arrivalstate.lost,Formstate.waiting);
-	if(write(po)==ResultMessage.success)
-		System.out.println("write success");
-	if(update(po)==ResultMessage.success)
-		System.out.println("update success");
-	if(fuzzySearch(Formstate.waiting).size()>0)
-		System.out.println("fuzzysearch success");
-	System.out.println(getLastId("025"));
+//	GoodsReceivingPO po=new GoodsReceivingPO("0250001",1,true,"b","c",Arrivalstate.lost,Formstate.waiting);
+//	if(write(po)==ResultMessage.success)
+//		System.out.println("write success");
+//	if(update(po)==ResultMessage.success)
+//		System.out.println("update success");
+//	if(fuzzySearch(Formstate.waiting).size()>0)
+//		System.out.println("fuzzysearch success");
+//	System.out.println(getLastId("025"));
 				
 }
 }

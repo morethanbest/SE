@@ -24,12 +24,6 @@ public class VehicleDB {
 			sql = "create table VehiclesPO(vehiclecode text,vehiclenum text,extendtime bigint)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			VehiclesPO po = new VehiclesPO("02500000", "苏A00000", 19930430);
-			ResultMessage result;
-			result = write(po);
-			if (result == ResultMessage.success) {
-				System.out.println("add Successfully");
-			}
 			dbh.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -188,12 +182,6 @@ public class VehicleDB {
 	}
 	public static void main(String[] args) {
 		initialize();
-		if(searchbycode("02500000")!=null){
-			System.out.println("search success");
-		}
-		if(searchbynum("苏A00000")!=null){
-			System.out.println("fuzzysearch success");
-		}
-		System.out.println(getlastcode("025000"));
+
 	}
 }

@@ -109,20 +109,20 @@ public class LogisticsDB {
 
 	public static void main(String[] args) {
 		initialize();
-		List<String> list=new ArrayList<String>();
-		list.add("a");
-		list.add("b");
-		list.add("c");
-		list.add("a");
-		list.add("b");
-		list.add("c");
-
-		if (write(new LogisticsPO("a", list, "123")) == ResultMessage.success) {
-			System.out.println("write success");
-		}
-		if (find("123") != null) {
-			System.out.println("find success");
-		}
+//		List<String> list=new ArrayList<String>();
+//		list.add("a");
+//		list.add("b");
+//		list.add("c");
+//		list.add("a");
+//		list.add("b");
+//		list.add("c");
+//
+//		if (write(new LogisticsPO("a", list, "123")) == ResultMessage.success) {
+//			System.out.println("write success");
+//		}
+//		if (find("123") != null) {
+//			System.out.println("find success");
+//		}
 //		if (update(new LogisticsPO( "b", new ArrayList<String>(), "123")) == ResultMessage.success) {
 //			System.out.println("update success");
 //		}

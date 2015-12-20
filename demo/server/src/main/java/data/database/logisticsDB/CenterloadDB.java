@@ -154,14 +154,14 @@ public class CenterloadDB {
 	}
 
 	public static long getLastId(String orgcode){
-		long lastId=0;
+		long lastId=-1;
 		dbh=new DBHelper();
 		sql="select motorcode from CenterloadPO where motorcode like ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					lastId++;
 			}
@@ -200,16 +200,16 @@ public class CenterloadDB {
 
 	public static void main(String[] args) {
 		initialize();
-		List<String> list=new ArrayList<String>();
-		list.add("001");
-		CenterloadPO po=new CenterloadPO(1,"0250002","1","b","c","d",list,10,Formstate.waiting);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(fuzzySearch(Formstate.waiting).size()>0)
-			System.out.println("fuzzysearch success");
-		System.out.println(getLastId("0250"));
+//		List<String> list=new ArrayList<String>();
+//		list.add("001");
+//		CenterloadPO po=new CenterloadPO(1,"0250002","1","b","c","d",list,10,Formstate.waiting);
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(fuzzySearch(Formstate.waiting).size()>0)
+//			System.out.println("fuzzysearch success");
+//		System.out.println(getLastId("0250"));
 					
 	}
 }

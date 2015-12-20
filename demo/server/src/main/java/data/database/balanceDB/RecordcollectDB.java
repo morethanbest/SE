@@ -232,7 +232,7 @@ public class RecordcollectDB {
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					lastId++;
 			}
@@ -247,16 +247,16 @@ public class RecordcollectDB {
 
 	public static void main(String[] args) {
 		initialize();
-		List<String >list=new ArrayList<String>();
-		list.add("123");
-		RecordcollectPO po=new RecordcollectPO("0250001",20150522,"123",2,"sunchao",list,Formstate.checked);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(getbydate(20150522).size()>0)
-			System.out.println("fuzzysearch success");
-		System.out.println(getLastId("025"));
+//		List<String >list=new ArrayList<String>();
+//		list.add("123");
+//		RecordcollectPO po=new RecordcollectPO("0250001",20150522,"123",2,"sunchao",list,Formstate.checked);
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(getbydate(20150522).size()>0)
+//			System.out.println("fuzzysearch success");
+//		System.out.println(getLastId("025"));
 					
 	}
 }

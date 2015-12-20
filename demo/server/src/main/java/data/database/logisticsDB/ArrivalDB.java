@@ -148,14 +148,14 @@ public class ArrivalDB {
 	}
 
 	public static long getLastId(String orgcode){
-		long lastId=0;
+		long lastId=-1;
 		dbh=new DBHelper();
 		sql="select id from ArrivalPO where id like ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					lastId++;
 			}
@@ -170,14 +170,14 @@ public class ArrivalDB {
 
 	public static void main(String[] args) {
 		initialize();
-		ArrivalPO po=new ArrivalPO("0250001","a",1,true,"b","c",Arrivalstate.lost,Formstate.waiting);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(fuzzySearch(Formstate.waiting).size()>0)
-			System.out.println("fuzzysearch success");
-		System.out.println(getLastId("025"));
+//		ArrivalPO po=new ArrivalPO("0250001","a",1,true,"b","c",Arrivalstate.lost,Formstate.waiting);
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(fuzzySearch(Formstate.waiting).size()>0)
+//			System.out.println("fuzzysearch success");
+//		System.out.println(getLastId("025"));
 					
 	}
 }

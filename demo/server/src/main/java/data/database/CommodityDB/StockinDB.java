@@ -142,14 +142,14 @@ public class StockinDB {
 	}
 
 	public static long getLastId(String orgcode){
-		long lastId=0;
+		long lastId=-1;
 		dbh=new DBHelper();
 		sql="select id from StockinPO where id like ?";
 		pst = dbh.prepare(sql);
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					lastId++;
 			}
@@ -163,7 +163,7 @@ public class StockinDB {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(fuzzySearch(Formstate.waiting,"0250").size());
+//		System.out.println(fuzzySearch(Formstate.waiting,"0250").size());
 		initialize();
 //		StockinPO po=new StockinPO("0250001","a",1,new CommodityLocation(1,1,1,1),"c",Formstate.waiting);
 //		if(write(po)==ResultMessage.success)

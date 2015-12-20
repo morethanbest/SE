@@ -21,7 +21,7 @@ public class Search {
 			String state = po.getState();
 			List<String> history = po.getHistory();
 			vo = new LogisticsVO(state, history, ordernum);
-        } catch (RemoteException e) {
+        } catch (Exception e) {
         	System.out.println("search logistics by num failed!!!");
         	e.printStackTrace();
         }

@@ -164,7 +164,7 @@ public class RecordtransDB {
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					lastId++;
 			}
@@ -203,16 +203,16 @@ public class RecordtransDB {
 
 	public static void main(String[] args) {
 		initialize();
-		List<String> list=new ArrayList<String>();
-		list.add("001");
-		RecordtransPO po=new RecordtransPO(1,"025000","02500000","1","b","c","d","e",list,10,Formstate.waiting);
-		if(write(po)==ResultMessage.success)
-			System.out.println("write success");
-		if(update(po)==ResultMessage.success)
-			System.out.println("update success");
-		if(fuzzySearch(Formstate.waiting).size()>0)
-			System.out.println("fuzzysearch success");
-		System.out.println(getLastId("0250"));
+//		List<String> list=new ArrayList<String>();
+//		list.add("001");
+//		RecordtransPO po=new RecordtransPO(1,"025000","02500000","1","b","c","d","e",list,10,Formstate.waiting);
+//		if(write(po)==ResultMessage.success)
+//			System.out.println("write success");
+//		if(update(po)==ResultMessage.success)
+//			System.out.println("update success");
+//		if(fuzzySearch(Formstate.waiting).size()>0)
+//			System.out.println("fuzzysearch success");
+//		System.out.println(getLastId("0250"));
 					
 	}
 }
