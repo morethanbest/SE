@@ -1,5 +1,6 @@
 package businesslogic.orderbl.OrderPack;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
@@ -47,13 +48,15 @@ public class GetPrice {
 				name+="标准快递";
 				break;
 			case fast:
-				name+="次晨特快";
+				name+="特快";
 				break;
 		}
 		List<ConstantsVO> listvo2=constants.getConstants(name);
 		ConstantsVO vo2=listvo2.get(0);
 		double ot=vo2.getValue();
 		double price=distance/1000*ot*w+packagefee;
+		DecimalFormat df=new DecimalFormat("0.00");  
+		price=new Double(df.format(price).toString());
 		return price;
 	}
 
