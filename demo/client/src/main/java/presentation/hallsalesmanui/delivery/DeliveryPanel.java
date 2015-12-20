@@ -122,7 +122,7 @@ public class DeliveryPanel extends JPanel {
 				card.next(parent);
 			}
 		});
-		button_1.setBounds(737, 343, 113, 27);
+		button_1.setBounds(737, 343, 144, 27);
 		add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{codeField, yearBox, monthBox, dateBox, deliveryField}));
 

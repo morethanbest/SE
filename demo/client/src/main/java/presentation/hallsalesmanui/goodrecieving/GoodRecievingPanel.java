@@ -162,7 +162,7 @@ public class GoodRecievingPanel extends JPanel {
 				
 			}
 		});
-		button_1.setBounds(756, 336, 113, 27);
+		button_1.setBounds(756, 336, 136, 27);
 		add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, typeBox, codeField, destinBox, stateBox}));
 	}

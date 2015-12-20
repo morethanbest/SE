@@ -269,7 +269,7 @@ public class HallLoadPanel extends JPanel {
 				card.next(parent);
 			}
 		});
-		button_3.setBounds(786, 380, 113, 27);
+		button_3.setBounds(786, 380, 154, 27);
 		add(button_3);
 	}
 	
