@@ -35,7 +35,7 @@ public class Updatecollect {
 
     public ResultMessage passupdate(){
         RecordcollectFormDataService data= RMIHelper.getRecordcollect();
-        if(this.documentstate==Formstate.pass){
+        if(this.documentstate==Formstate.checked){
             this.documentstate=Formstate.checked;
             try {
                 data.addmoney(accountcode,collectionsum);

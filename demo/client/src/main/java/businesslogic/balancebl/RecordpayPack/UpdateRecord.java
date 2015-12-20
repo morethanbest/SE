@@ -38,7 +38,7 @@ public class UpdateRecord {
 
     public ResultMessage passupdate(){
         RecordpayFormDataService data= RMIHelper.getRecordpay();
-        if(this.formstate==Formstate.pass){
+        if(this.formstate==Formstate.checked){
             this.formstate=Formstate.checked;
             try {
                 data.removeTheCost(payaccount,paysum);

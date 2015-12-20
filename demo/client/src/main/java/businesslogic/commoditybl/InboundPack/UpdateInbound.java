@@ -34,7 +34,7 @@ public class UpdateInbound {
     }
 
     public ResultMessage passupdate(){
-        if(this.formstate==Formstate.pass){
+        if(this.formstate==Formstate.checked){
 
             formstate=Formstate.checked;
 

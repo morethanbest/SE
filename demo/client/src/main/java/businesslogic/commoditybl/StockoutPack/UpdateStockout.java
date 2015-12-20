@@ -38,7 +38,7 @@ public class UpdateStockout {
     public ResultMessage passupdate(){
         String orgcode=id.substring(0,id.length()-7);//////////////////////////get orgcode   may run wrong
 
-        if(formstate==Formstate.pass){
+        if(formstate==Formstate.checked){
             this.formstate=Formstate.checked;
             CommodityDataService data2=RMIHelper.getCommoditydata();
             CommodityPO po=null;
