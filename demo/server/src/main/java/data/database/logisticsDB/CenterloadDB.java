@@ -199,7 +199,8 @@ public class CenterloadDB {
 	}
 
 	public static void main(String[] args) {
-		initialize();
+//		System.out.println(getLastId("0250"));
+//		initialize();
 //		List<String> list=new ArrayList<String>();
 //		list.add("001");
 //		CenterloadPO po=new CenterloadPO(1,"0250002","1","b","c","d",list,10,Formstate.waiting);

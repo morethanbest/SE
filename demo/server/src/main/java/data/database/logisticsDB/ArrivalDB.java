@@ -43,8 +43,8 @@ public class ArrivalDB {
 			pst = dbh.prepare(sql);
 			pst.setString(1, po.getId());
 			pst.setString(2, po.getCentercode());
-			pst.setBoolean(3, po.isWhefromhall());
-			pst.setLong(4, po.getArrivaltime());
+			pst.setLong(3, po.getArrivaltime());
+			pst.setBoolean(4, po.isWhefromhall());
 			pst.setString(5, po.getTranscode());
 			pst.setString(6, po.getDeparture());
 			pst.setBytes(7, statebytes);

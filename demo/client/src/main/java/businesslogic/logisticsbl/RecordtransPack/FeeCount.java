@@ -45,7 +45,7 @@ public class FeeCount {
 
         double fee=weight*singleprice*distance;
         DecimalFormat format=new DecimalFormat("0.00");
-        fee=Long.valueOf(format.format(fee));
+        fee=Double.valueOf(format.format(fee));
         return fee;
 
 
