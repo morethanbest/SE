@@ -10,19 +10,24 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import po.CommodityLocation;
 import po.Formstate;
+import po.ResultMessage;
 import presentation.depotui.DepotPanel;
 import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.StockinVO;
 import businesslogic.commoditybl.InboundPack.InboundController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.commodityblservice.InboundBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class StockinUpdatePanel extends JPanel {
 	private OrderField codeField;
@@ -36,7 +41,7 @@ public class StockinUpdatePanel extends JPanel {
 	private StockinVO vo;
 	private JLabel label;
 	private JLabel label_1;
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -82,13 +87,19 @@ public class StockinUpdatePanel extends JPanel {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				controller.update(new StockinVO(vo.getId(), codeField.getText(), date, vo.getLocation(),
-						vo.getDestination(), vo.getFormstate()));
+				if (checkFormat()) {
+					if (controller.update(new StockinVO(vo.getId(), codeField
+							.getText(), date, vo.getLocation(), vo
+							.getDestination(), vo.getFormstate())) == ResultMessage.success)
+						createTip("修改成功！");
+					else
+						createTip("修改失败！");
+				}
 			}
 		});
 		update.setBounds(416, 312, 113, 27);
 		add(update);
-		
+
 		button_1 = new JButton("恢复原值");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,7 +108,7 @@ public class StockinUpdatePanel extends JPanel {
 		});
 		button_1.setBounds(543, 312, 113, 27);
 		add(button_1);
-		
+
 		button_2 = new JButton("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,19 +118,19 @@ public class StockinUpdatePanel extends JPanel {
 		});
 		button_2.setBounds(670, 312, 113, 27);
 		add(button_2);
-		
+
 		label = new JLabel("");
 		label.setBounds(543, 35, 220, 24);
 		add(label);
-		
+
 		label_1 = new JLabel("");
 		label_1.setBounds(543, 136, 320, 24);
 		add(label_1);
-		
+
 		JLabel label_2 = new JLabel("订单编号：");
 		label_2.setBounds(58, 38, 86, 18);
 		add(label_2);
-		
+
 		JLabel label_3 = new JLabel("入库日期：");
 		label_3.setBounds(58, 139, 86, 18);
 		add(label_3);
@@ -173,7 +184,7 @@ public class StockinUpdatePanel extends JPanel {
 			orgSelect.addItem(org.getName());
 		}
 	}
-	
+
 	public void init(StockinVO vo) {
 		this.vo = vo;
 		codeField.setText(vo.getOrdercode());
@@ -182,7 +193,26 @@ public class StockinUpdatePanel extends JPanel {
 		dateBox.setSelectedItem(vo.getIntime() % 100);
 		label.setText("目的地：" + vo.getDestination());
 		CommodityLocation l = vo.getLocation();
-		label_1.setText("区号：" + l.getBlocknum() + " 排号：" + l.getLinenum() + " 架号：" + l.getShelfnum() + " 位号：" + l.getLocationnum());
-		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+		label_1.setText("区号：" + l.getBlocknum() + " 排号：" + l.getLinenum()
+				+ " 架号：" + l.getShelfnum() + " 位号：" + l.getLocationnum());
+		update.setEnabled(vo.getFormstate() == Formstate.waiting
+				|| vo.getFormstate() == Formstate.fail);
+	}
+
+	private boolean checkFormat() {
+		CheckExistBlService check = new CheckExist();
+		if (codeField.getText().length() != 10) {
+			return createTip("订单编号必须为10位！");
+		} else if (!check.checkExist(codeField.getText())) {
+			return createTip("订单:" + codeField.getText() + " 不存在！");
+		}
+		return true;
+	}
+
+	private boolean createTip(String str) {
+		TipDialog tipDialog = new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);
+		return false;
 	}
 }

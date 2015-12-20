@@ -258,7 +258,7 @@ public class StockoutPanel extends JPanel {
 		if(orderField.getText().length() != 10){
 			return createTip("订单编号必须为10位！");
 		} else if(!check.checkExist(orderField.getText())){
-			return createTip("订单:" + codeField.getText() + " 不存在！");
+			return createTip("订单:" + orderField.getText() + " 不存在！");
 		}
 		else if(typeBox.getSelectedIndex() == 0){
 			if(!check2.checkCenterLoad(codeField.getText()))
