@@ -314,7 +314,6 @@ public class NewBookPanel extends JPanel implements ActionListener{
     }
     private void Search(){
     	long time=Long.parseLong((String)yearSelect.getSelectedItem()+monthSelect.getSelectedItem()+daySelect.getSelectedItem());
-        System.out.println(time);
     	NewBookBlService newBookBlService=new NewBookController();
         vo=newBookBlService.find(time);
         table = new JTable();
@@ -323,9 +322,7 @@ public class NewBookPanel extends JPanel implements ActionListener{
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnCount(0);
 		tableModel.setRowCount(0);
-		if(vo.getCommodity().size()==0){
-			System.out.println("然并卵");
-		}
+		accountTable();
     }
     private void create(){
     	NewBookBlService newBookBlService=new NewBookController();

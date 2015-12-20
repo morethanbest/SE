@@ -42,7 +42,7 @@ public class FindNewbook {
 
             vo=new NewbookVO(po.getId(),avo,cvo,ovo,svo,vvo);
 
-        } catch (RemoteException e) {
+        } catch (Exception e) {
             System.out.println(" find new book fialed!!!");
             e.printStackTrace();
         }
