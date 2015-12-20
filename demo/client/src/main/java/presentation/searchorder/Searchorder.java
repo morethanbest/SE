@@ -74,14 +74,20 @@ public class Searchorder extends JPanel implements ActionListener{
 				JLabel labels[]=new JLabel[history.size()];
 				JSeparator separator[]=new JSeparator[history.size()];
 				if(history.size()>1){
-					radioButtons[0]=new JRadioButton(history.get(0),false);
+					radioButtons[0]=new JRadioButton("",false);
 					radioButtons[0].setBounds(200, 50, 50, 21);
 					radioButtons[0].setEnabled(false);
+					labels[0]=new JLabel(history.get(0));
+					labels[0].setBounds(250,50,200,21);
+					scrollPane.add(labels[0]);
 					scrollPane.add(radioButtons[0]);
 				}else{
-					radioButtons[0]=new JRadioButton(history.get(0),true);
+					radioButtons[0]=new JRadioButton("",true);
 					radioButtons[0].setBounds(200, 50, 50, 21);
 					radioButtons[0].setEnabled(false);
+					labels[0]=new JLabel(history.get(0));
+					labels[0].setBounds(250,50,200,21);
+					scrollPane.add(labels[0]);
 					scrollPane.add(radioButtons[0]);
 				}
 				for(int i=1;i<history.size();i++){
@@ -89,18 +95,24 @@ public class Searchorder extends JPanel implements ActionListener{
 						separator[i]=new JSeparator(separator[i].VERTICAL);
 						separator[i].setBounds(210, 50*i+20, 8, 30);
 						scrollPane.add(separator[i]);
-						radioButtons[i]=new JRadioButton(history.get(i),false);
+						radioButtons[i]=new JRadioButton("",false);
 						radioButtons[i].setBounds(200, 50*(i+1), 50, 21);
 						radioButtons[i].setEnabled(false);
+						labels[i]=new JLabel(history.get(i));
+						labels[i].setBounds(250,50*(i+1),200,21);
+						scrollPane.add(labels[i]);
 						scrollPane.add(radioButtons[i]);
 
 					}else{
 						separator[i]=new JSeparator(separator[i].VERTICAL);
 						separator[i].setBounds(210, 50*i+20, 8, 30);
 						scrollPane.add(separator[i]);
-						radioButtons[i]=new JRadioButton(history.get(i),true);
+						radioButtons[i]=new JRadioButton("",true);
 						radioButtons[i].setBounds(200, 50*(i+1), 50, 21);
 						radioButtons[i].setEnabled(false);
+						labels[i]=new JLabel(history.get(i));
+						labels[i].setBounds(250,50*(i+1),200,21);
+						scrollPane.add(labels[i]);
 						scrollPane.add(radioButtons[i]);
 
 					}

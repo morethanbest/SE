@@ -72,6 +72,8 @@ public class RevSalaryDialog extends JDialog {
 				if(modeSelect.getSelectedIndex()!=0){
 					bonustext.setEditable(false);
 					bonustext.setText("0");
+				}else{
+					bonustext.setEditable(true);
 				}
 			}
 		});
@@ -99,6 +101,8 @@ public class RevSalaryDialog extends JDialog {
 		bonustext.setText(Double.toString(vo.getBonus()));
 		if(modeSelect.getSelectedIndex()!=0){
 			bonustext.setEditable(false);
+		}else{
+			bonustext.setEditable(true);
 		}
 		
 		addBtn = new JButton();

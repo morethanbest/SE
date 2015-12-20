@@ -70,6 +70,8 @@ public class AddSalaryDialog extends JDialog {
 				if(modeSelect.getSelectedIndex()!=0){
 					bonustext.setEditable(false);
 					bonustext.setText("0");
+				}else{
+					bonustext.setEditable(true);
 				}
 			}
 		});
