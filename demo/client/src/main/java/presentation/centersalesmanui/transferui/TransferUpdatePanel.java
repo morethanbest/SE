@@ -30,8 +30,11 @@ import vo.CityVO;
 import vo.RecordtransVO;
 import businesslogic.logisticsbl.RecordtransPack.CentertransController;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
 import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
+import presentation.tip.OrderField;
 
 public class TransferUpdatePanel extends JPanel {
 	private JTextField classField;
@@ -54,7 +57,9 @@ public class TransferUpdatePanel extends JPanel {
 	private JButton button;
 	private JButton button_3;
 	private RecordtransBlService controller;
-/**
+	private OrderField orderField;
+
+	/**
 	 * Create the panel.
 	 */
 	public TransferUpdatePanel(CenterSalesmanPanel parent, CardLayout card) {
@@ -63,51 +68,51 @@ public class TransferUpdatePanel extends JPanel {
 		setLayout(null);
 
 		codeLabel = new JLabel("");
-		codeLabel.setBounds(14, 12, 242, 27);
+		codeLabel.setBounds(84, 42, 200, 27);
 		add(codeLabel);
 
 		departureLabel = new JLabel("");
-		departureLabel.setBounds(351, 147, 242, 27);
+		departureLabel.setBounds(385, 154, 208, 27);
 		add(departureLabel);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(14, 78, 74, 24);
+		yearBox.setBounds(84, 96, 68, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(112, 78, 61, 24);
+		monthBox.setBounds(166, 96, 52, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(195, 78, 61, 24);
+		dateBox.setBounds(232, 96, 52, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
 		typeBox = new JComboBox<String>();
-		typeBox.setBounds(14, 147, 242, 24);
+		typeBox.setBounds(84, 155, 200, 24);
 		add(typeBox);
 		addTransportTypeItems();
 
 		classField = new JTextField();
 		classField.setColumns(10);
-		classField.setBounds(14, 215, 242, 24);
+		classField.setBounds(84, 215, 200, 24);
 		add(classField);
 
 		counterField = new JTextField();
 		counterField.setColumns(10);
-		counterField.setBounds(351, 13, 242, 24);
+		counterField.setBounds(385, 43, 208, 24);
 		add(counterField);
 
 		manageField = new JTextField();
 		manageField.setColumns(10);
-		manageField.setBounds(351, 78, 242, 24);
+		manageField.setBounds(385, 96, 208, 24);
 		add(manageField);
 
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(351, 215, 242, 24);
+		destinBox.setBounds(385, 215, 208, 24);
 		add(destinBox);
 		addCityItems(destinBox);
 
@@ -118,7 +123,7 @@ public class TransferUpdatePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!checkFormat())
+				if (!checkFormat())
 					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
@@ -132,13 +137,13 @@ public class TransferUpdatePanel extends JPanel {
 				}
 				double fare = Double.parseDouble(farebutton.getText());
 				ResultMessage r = controller.update(new RecordtransVO(date,
-						codeLabel.getText(), (String) typeBox
-								.getSelectedItem(), classField.getText(),
-						departureLabel.getText(), (String) destinBox
-								.getSelectedItem(), counterField.getText(),
-						manageField.getText(), barcodes, fare,
-						vo.getFormstate()));
-				if(r == ResultMessage.success)
+						codeLabel.getText(),
+						(String) typeBox.getSelectedItem(), classField
+								.getText(), departureLabel.getText(),
+						(String) destinBox.getSelectedItem(), counterField
+								.getText(), manageField.getText(), barcodes,
+						fare, vo.getFormstate()));
+				if (r == ResultMessage.success)
 					createTip("修改成功！");
 				else
 					createTip("修改失败！");
@@ -147,31 +152,44 @@ public class TransferUpdatePanel extends JPanel {
 		update.setBounds(416, 348, 113, 27);
 		add(update);
 
-
 		JLabel label = new JLabel("运费合计：");
-		label.setBounds(14, 352, 82, 18);
+		label.setBounds(303, 274, 82, 18);
 		add(label);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(660, 13, 285, 274);
+		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 				new Object[][] {},
-				new String[] { "\u672C\u6B21\u88C5\u7BB1\u6240\u6709\u6258\u8FD0\u5355\u53F7" }));
+				new String[] { "\u672C\u6B21\u88C5\u7BB1\u6240\u6709\u6258\u8FD0\u5355\u53F7" }) {
+			boolean[] columnEditables = new boolean[] { false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
 
 		button_1 = new JButton("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CheckExistBlService check = new CheckExist();
+				if (orderField.getText().length() != 10) {
+					createTip("订单编号必须为10位！");
+					return;
+				} else if (!check.checkExist(orderField.getText())) {
+					createTip("订单:" + orderField.getText() + " 不存在！");
+					return;
+				}
 				DefaultTableModel tableModel = (DefaultTableModel) table
 						.getModel();
-				tableModel.addRow(new String[] { "" });
+				tableModel.addRow(new String[] { orderField.getText() });
 			}
 		});
-		button_1.setBounds(670, 300, 113, 27);
+		button_1.setBounds(851, 252, 61, 27);
 		add(button_1);
 
 		button_2 = new JButton("删除该条");
@@ -183,15 +201,15 @@ public class TransferUpdatePanel extends JPanel {
 				tableModel.removeRow(rownum);
 			}
 		});
-		button_2.setBounds(823, 300, 113, 27);
+		button_2.setBounds(636, 286, 276, 27);
 		add(button_2);
-		
+
 		fareField = new JTextField();
 		fareField.setText("0");
-		fareField.setBounds(100, 349, 61, 24);
+		fareField.setBounds(399, 270, 66, 27);
 		add(fareField);
 		fareField.setColumns(10);
-		
+
 		button = new JButton("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -200,7 +218,7 @@ public class TransferUpdatePanel extends JPanel {
 		});
 		button.setBounds(543, 348, 113, 27);
 		add(button);
-		
+
 		button_3 = new JButton("返回");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -210,6 +228,47 @@ public class TransferUpdatePanel extends JPanel {
 		});
 		button_3.setBounds(670, 348, 113, 27);
 		add(button_3);
+
+		orderField = new OrderField();
+		orderField.setColumns(10);
+		orderField.setBounds(636, 253, 199, 24);
+		add(orderField);
+		
+		JLabel label_1 = new JLabel("中转编号：");
+		label_1.setBounds(0, 46, 82, 18);
+		add(label_1);
+		
+		JLabel label_2 = new JLabel("中转日期：");
+		label_2.setBounds(0, 99, 82, 18);
+		add(label_2);
+		
+		JLabel label_3 = new JLabel("中转类型：");
+		label_3.setBounds(0, 158, 82, 18);
+		add(label_3);
+		
+		JLabel label_4 = new JLabel("班次号：");
+		label_4.setBounds(14, 218, 68, 18);
+		add(label_4);
+		
+		JLabel label_5 = new JLabel("运费合计：");
+		label_5.setBounds(303, 274, 82, 18);
+		add(label_5);
+		
+		JLabel label_6 = new JLabel("目的地：");
+		label_6.setBounds(317, 218, 68, 18);
+		add(label_6);
+		
+		JLabel label_7 = new JLabel("出发地：");
+		label_7.setBounds(317, 158, 68, 18);
+		add(label_7);
+		
+		JLabel label_8 = new JLabel("监察员：");
+		label_8.setBounds(317, 99, 68, 18);
+		add(label_8);
+		
+		JLabel label_9 = new JLabel("货柜号：");
+		label_9.setBounds(317, 46, 68, 18);
+		add(label_9);
 
 		ItemListener listener = new ItemListener() {
 
@@ -276,8 +335,8 @@ public class TransferUpdatePanel extends JPanel {
 			citySelect.addItem(city.getName());
 		}
 	}
-	
-	public void init(RecordtransVO vo){
+
+	public void init(RecordtransVO vo) {
 		this.vo = vo;
 		codeLabel.setText(vo.getTranscode());
 		yearBox.setSelectedItem(vo.getLoadtime() / 10000);
@@ -293,29 +352,30 @@ public class TransferUpdatePanel extends JPanel {
 		for (int i = 0; i < tableModel.getRowCount(); i++) {
 			tableModel.removeRow(i);
 		}
-		
+
 		List<String> list = vo.getAllcode();
 		for (int i = 0; i < list.size(); i++) {
-			tableModel.addRow(new String[]{list.get(i)});
+			tableModel.addRow(new String[] { list.get(i) });
 		}
-		
-		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+
+		update.setEnabled(vo.getFormstate() == Formstate.waiting
+				|| vo.getFormstate() == Formstate.fail);
 	}
-	
-	private boolean checkFormat(){
-		if(classField.getText().equals(""))
+
+	private boolean checkFormat() {
+		if (classField.getText().equals(""))
 			return createTip("班次号不能为空！");
-		else if(counterField.getText().equals(""))
+		else if (counterField.getText().equals(""))
 			return createTip("货柜号不能为空！");
-		else if(manageField.getText().equals(""))
+		else if (manageField.getText().equals(""))
 			return createTip("监察员不能为空！");
 		return true;
 	}
 
-	private boolean createTip(String str){
-		TipDialog tipDialog=new TipDialog(str);
+	private boolean createTip(String str) {
+		TipDialog tipDialog = new TipDialog(str);
 		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		tipDialog.setVisible(true);	
+		tipDialog.setVisible(true);
 		return false;
 	}
 }
