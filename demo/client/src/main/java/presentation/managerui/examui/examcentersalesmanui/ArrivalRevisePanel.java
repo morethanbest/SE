@@ -3,6 +3,7 @@ package presentation.managerui.examui.examcentersalesmanui;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 
 import java.awt.CardLayout;
@@ -17,7 +18,9 @@ import javax.swing.JLabel;
 import po.Arrivalstate;
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.TipDialog;
 import vo.ArrivalVO;
 import vo.OrganizationVO;
 import businesslogic.logisticsbl.ArrivalPack.ArrivalController;
@@ -85,10 +88,26 @@ public class ArrivalRevisePanel extends JPanel {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
-				ea.updateArrivalForm(new ArrivalVO(vo.getId(), orgLabel.getText(), date,typeBox.getSelectedIndex() == 1 ,codeField.getText(),
-						(String) departureBox.getSelectedItem(),
-						getStateType((String) stateBox.getSelectedItem()),
-						vo.getFormstate()));
+				if(codeField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入单据编号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else{
+					ResultMessage resultMessage=ea.updateArrivalForm(new ArrivalVO(vo.getId(), orgLabel.getText(), date,typeBox.getSelectedIndex() == 1 ,codeField.getText(),
+							(String) departureBox.getSelectedItem(),
+							getStateType((String) stateBox.getSelectedItem()),
+							vo.getFormstate()));
+					if(resultMessage==ResultMessage.success){
+						TipDialog tipDialog=new TipDialog("修改成功！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}else {
+						TipDialog tipDialog=new TipDialog("修改失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
+				}
+				
 			}
 		});
 		update.setBounds(444, 333, 122, 36);
@@ -136,6 +155,26 @@ public class ArrivalRevisePanel extends JPanel {
 		});
 		button_2.setBounds(580, 333, 122, 36);
 		add(button_2);
+		
+		JLabel label = new JLabel("到达日期：");
+		label.setBounds(38, 137, 74, 15);
+		add(label);
+		
+		JLabel label_1 = new JLabel("到达类型：");
+		label_1.setBounds(38, 217, 91, 15);
+		add(label_1);
+		
+		JLabel label_2 = new JLabel("出发地：");
+		label_2.setBounds(447, 55, 54, 15);
+		add(label_2);
+		
+		JLabel label_3 = new JLabel("到达状态：");
+		label_3.setBounds(444, 137, 67, 15);
+		add(label_3);
+		
+		JLabel label_4 = new JLabel("单据编号：");
+		label_4.setBounds(444, 217, 67, 15);
+		add(label_4);
 		addTypeItems();
 	}
 	

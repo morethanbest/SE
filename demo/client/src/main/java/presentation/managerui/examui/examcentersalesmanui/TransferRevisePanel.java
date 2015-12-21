@@ -3,15 +3,18 @@ package presentation.managerui.examui.examcentersalesmanui;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.enums.OrganizationType;
 import presentation.enums.TransportTypes;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.TipDialog;
 import vo.CenterloadVO;
 import vo.CityVO;
 import vo.OrganizationVO;
@@ -62,6 +65,12 @@ public class TransferRevisePanel extends JPanel {
 	private JTextField fareField;
 	private JButton button;
 	private JButton button_3;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_6;
 	/**
 	 * Create the panel.
 	 */
@@ -79,43 +88,43 @@ public class TransferRevisePanel extends JPanel {
 		add(departureLabel);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(14, 78, 74, 24);
+		yearBox.setBounds(99, 78, 74, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(112, 78, 61, 24);
+		monthBox.setBounds(183, 78, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(195, 78, 61, 24);
+		dateBox.setBounds(254, 78, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
 		typeBox = new JComboBox<String>();
-		typeBox.setBounds(14, 147, 242, 24);
+		typeBox.setBounds(99, 150, 216, 24);
 		add(typeBox);
 		addTransportTypeItems();
 
 		classField = new JTextField();
 		classField.setColumns(10);
-		classField.setBounds(14, 215, 242, 24);
+		classField.setBounds(99, 215, 216, 24);
 		add(classField);
 
 		counterField = new JTextField();
 		counterField.setColumns(10);
-		counterField.setBounds(351, 13, 242, 24);
+		counterField.setBounds(409, 12, 200, 24);
 		add(counterField);
 
 		manageField = new JTextField();
 		manageField.setColumns(10);
-		manageField.setBounds(351, 78, 242, 24);
+		manageField.setBounds(409, 79, 200, 24);
 		add(manageField);
 
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(351, 215, 242, 24);
+		destinBox.setBounds(409, 214, 200, 24);
 		add(destinBox);
 		addCityItems(destinBox);
 
@@ -126,24 +135,57 @@ public class TransferRevisePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Long date = (Long) yearBox.getSelectedItem() * 10000
-						+ (Long) monthBox.getSelectedItem() * 100
-						+ (Long) dateBox.getSelectedItem();
-				List<String> barcodes = new ArrayList<String>();
 				DefaultTableModel tableModel = (DefaultTableModel) table
 						.getModel();
-				int rowCount = tableModel.getRowCount();
-				for (int i = 0; i < rowCount; i++) {
-					barcodes.add((String) tableModel.getValueAt(i, 0));
+				if(classField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入班次号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(counterField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入货柜号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(manageField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入监装员！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(fareField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入运费合计！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(tableModel.getRowCount()==0){
+					TipDialog tipDialog=new TipDialog("请输入托运单号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else{
+					Long date = (Long) yearBox.getSelectedItem() * 10000
+							+ (Long) monthBox.getSelectedItem() * 100
+							+ (Long) dateBox.getSelectedItem();
+					List<String> barcodes = new ArrayList<String>();
+					
+					int rowCount = tableModel.getRowCount();
+					for (int i = 0; i < rowCount; i++) {
+						barcodes.add((String) tableModel.getValueAt(i, 0));
+					}
+					double fare = Double.parseDouble(farebutton.getText());
+					ResultMessage resultMessage=ea.updateRecordtransForm(new RecordtransVO(date,
+							codeLabel.getText(), (String) typeBox
+									.getSelectedItem(), classField.getText(),
+							departureLabel.getText(), (String) destinBox
+									.getSelectedItem(), counterField.getText(),
+							manageField.getText(), barcodes, fare,
+							vo.getFormstate()));
+					if(resultMessage==ResultMessage.success){
+						TipDialog tipDialog=new TipDialog("修改成功！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}else {
+						TipDialog tipDialog=new TipDialog("修改失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
 				}
-				double fare = Double.parseDouble(farebutton.getText());
-				ea.updateRecordtransForm(new RecordtransVO(date,
-						codeLabel.getText(), (String) typeBox
-								.getSelectedItem(), classField.getText(),
-						departureLabel.getText(), (String) destinBox
-								.getSelectedItem(), counterField.getText(),
-						manageField.getText(), barcodes, fare,
-						vo.getFormstate()));
+				
 			}
 		});
 		update.setBounds(416, 348, 113, 27);
@@ -212,6 +254,30 @@ public class TransferRevisePanel extends JPanel {
 		});
 		button_3.setBounds(670, 348, 113, 27);
 		add(button_3);
+		
+		label_1 = new JLabel("中转日期：");
+		label_1.setBounds(14, 83, 75, 15);
+		add(label_1);
+		
+		label_2 = new JLabel("中转类型：");
+		label_2.setBounds(14, 159, 75, 15);
+		add(label_2);
+		
+		label_3 = new JLabel("班次号：");
+		label_3.setBounds(14, 219, 54, 15);
+		add(label_3);
+		
+		label_4 = new JLabel("货柜号：");
+		label_4.setBounds(331, 16, 54, 15);
+		add(label_4);
+		
+		label_5 = new JLabel("监察员：");
+		label_5.setBounds(331, 83, 54, 15);
+		add(label_5);
+		
+		label_6 = new JLabel("目的地：");
+		label_6.setBounds(331, 219, 54, 15);
+		add(label_6);
 
 		ItemListener listener = new ItemListener() {
 
@@ -291,6 +357,7 @@ public class TransferRevisePanel extends JPanel {
 		manageField.setText(vo.getSupervisor());
 		departureLabel.setText(vo.getDepartrue());
 		destinBox.setSelectedItem(vo.getDestination());
+		fareField.setText("0");
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		for (int i = 0; i < tableModel.getRowCount(); i++) {
 			tableModel.removeRow(i);

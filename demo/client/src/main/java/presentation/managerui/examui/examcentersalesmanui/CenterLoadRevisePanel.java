@@ -3,6 +3,7 @@ package presentation.managerui.examui.examcentersalesmanui;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -20,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
 
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.tip.TipDialog;
 import vo.CenterloadVO;
 import vo.HallLoadVO;
 import vo.OrganizationVO;
@@ -51,6 +54,11 @@ public class CenterLoadRevisePanel extends JPanel {
 	private JButton button_3;
 	private CenterloadVO vo;
 	private JTextField fareField;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
 
 	/**
 	 * Create the panel.
@@ -67,28 +75,28 @@ public class CenterLoadRevisePanel extends JPanel {
 		
 		fareField = new JTextField();
 		fareField.setText("0");
-		fareField.setBounds(122, 351, 61, 24);
+		fareField.setBounds(195, 302, 61, 24);
 		add(fareField);
 		fareField.setColumns(10);
 		
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(14, 118, 74, 24);
+		yearBox.setBounds(84, 118, 74, 24);
 		add(yearBox);
 		
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(112, 118, 61, 24);
+		monthBox.setBounds(168, 118, 61, 24);
 		add(monthBox);
 		
 		addYearItems(yearBox, monthBox);
 		
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(195, 118, 61, 24);
+		dateBox.setBounds(239, 118, 61, 24);
 		add(dateBox);
 		
 		addDateItems(yearBox, monthBox, dateBox);
 		
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(14, 187, 242, 24);
+		destinBox.setBounds(84, 186, 216, 24);
 		add(destinBox);
 		
 		addOrganizationItems(destinBox);
@@ -96,21 +104,53 @@ public class CenterLoadRevisePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Long date = (Long) yearBox.getSelectedItem() * 10000
-						+ (Long) monthBox.getSelectedItem() * 100
-						+ (Long) dateBox.getSelectedItem();
-				List<String> barcodes = new ArrayList<String>();
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				int rowCount=tableModel.getRowCount();
-				for (int i = 0; i < rowCount; i++) {
-					barcodes.add((String) tableModel.getValueAt(i, 0));
+				if(carField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入车辆代号！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(jianField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入监装员！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(yaField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入押运员！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(fareField.getText().equals("")){
+					TipDialog tipDialog=new TipDialog("请输入运费合计！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else if(tableModel.getRowCount()==0){
+					TipDialog tipDialog=new TipDialog("请输入装车条形码！");
+					tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					tipDialog.setVisible(true);	
+				}else{
+					Long date = (Long) yearBox.getSelectedItem() * 10000
+							+ (Long) monthBox.getSelectedItem() * 100
+							+ (Long) dateBox.getSelectedItem();
+					List<String> barcodes = new ArrayList<String>();
+					int rowCount=tableModel.getRowCount();
+					for (int i = 0; i < rowCount; i++) {
+						barcodes.add((String) tableModel.getValueAt(i, 0));
+					}
+					double fare = Double.parseDouble(fareField.getText());
+					ResultMessage resultMessage=ea.updateCenterLoadForm(new CenterloadVO(date,
+							moterLabel.getText(), (String) destinBox
+									.getSelectedItem(), carField.getText(),
+							jianField.getText(), yaField.getText(), barcodes,
+							fare, vo.getFormstate()));
+					if(resultMessage==ResultMessage.success){
+						TipDialog tipDialog=new TipDialog("修改成功！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}else {
+						TipDialog tipDialog=new TipDialog("修改失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
 				}
-				double fare = Double.parseDouble(fareField.getText());
-				ea.updateCenterLoadForm(new CenterloadVO(date,
-						moterLabel.getText(), (String) destinBox
-								.getSelectedItem(), carField.getText(),
-						jianField.getText(), yaField.getText(), barcodes,
-						fare, vo.getFormstate()));
+				
 			}
 		});
 		update.setBounds(503, 376, 113, 27);
@@ -118,21 +158,21 @@ public class CenterLoadRevisePanel extends JPanel {
 		
 		carField = new JTextField();
 		carField.setColumns(10);
-		carField.setBounds(351, 53, 242, 24);
+		carField.setBounds(400, 53, 193, 24);
 		add(carField);
 		
 		jianField = new JTextField();
 		jianField.setColumns(10);
-		jianField.setBounds(351, 118, 242, 24);
+		jianField.setBounds(400, 118, 193, 24);
 		add(jianField);
 		
 		yaField = new JTextField();
 		yaField.setColumns(10);
-		yaField.setBounds(351, 187, 242, 24);
+		yaField.setBounds(400, 187, 193, 24);
 		add(yaField);
 		
 		JLabel label = new JLabel("运费合计：");
-		label.setBounds(14, 354, 84, 18);
+		label.setBounds(14, 304, 84, 18);
 		add(label);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -199,6 +239,26 @@ public class CenterLoadRevisePanel extends JPanel {
 		});
 		button_1.setBounds(757, 376, 113, 27);
 		add(button_1);
+		
+		label_1 = new JLabel("装车日期：");
+		label_1.setBounds(14, 123, 74, 15);
+		add(label_1);
+		
+		label_2 = new JLabel("目的地：");
+		label_2.setBounds(14, 191, 54, 15);
+		add(label_2);
+		
+		label_3 = new JLabel("车辆代号：");
+		label_3.setBounds(315, 57, 75, 15);
+		add(label_3);
+		
+		label_4 = new JLabel("监装员：");
+		label_4.setBounds(315, 123, 54, 15);
+		add(label_4);
+		
+		label_5 = new JLabel("押运员：");
+		label_5.setBounds(315, 191, 54, 15);
+		add(label_5);
 	}
 	
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
