@@ -187,6 +187,7 @@ public class TransferUpdatePanel extends JPanel {
 				DefaultTableModel tableModel = (DefaultTableModel) table
 						.getModel();
 				tableModel.addRow(new String[] { orderField.getText() });
+				orderField.setText("");
 			}
 		});
 		button_1.setBounds(851, 252, 61, 27);

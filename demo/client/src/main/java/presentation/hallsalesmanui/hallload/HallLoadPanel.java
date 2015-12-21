@@ -1,42 +1,43 @@
 package presentation.hallsalesmanui.hallload;
 
-import javax.swing.JPanel;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
 
 import po.Formstate;
 import po.Organizationtype;
+import po.ResultMessage;
+import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.tip.NumberField;
+import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.HallLoadVO;
 import vo.OrganizationVO;
 import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.HallLoadBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JLabel;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class HallLoadPanel extends JPanel {
-	private JTextField carField;
+	private NumberField carField;
 	private JTextField jianField;
 	private JTextField yaField;
 	private JTable table;
@@ -51,72 +52,66 @@ public class HallLoadPanel extends JPanel {
 	private String city;
 	private JComboBox<String> typeBox;
 	private String orgName;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
-	private JLabel label_5;
-	private JLabel label_6;
-	private JLabel label_7;
-	private JLabel label_8;
 	private JButton button_3;
+	private OrderField orderField;
+	private String orgCode;
 	/**
 	 * Create the panel.
 	 */
-	public HallLoadPanel(String orgCode, String city, String orgName, JPanel parent, CardLayout card) {
+	public HallLoadPanel(String orgCode, String city, String orgName, HallsalesmanPanel parent, CardLayout card) {
 		this.city = city;
 		this.orgName = orgName;
+		this.orgCode = orgCode;
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
 		hallLoadBlService = new HallLoadController();
 		
 		orgLabel = new JLabel(orgCode);
-		orgLabel.setBounds(108, 44, 199, 18);
+		orgLabel.setBounds(97, 28, 199, 18);
 		add(orgLabel);
 		
 		JLabel fareLabel = new JLabel("0");
-		fareLabel.setBounds(434, 281, 69, 27);
+		fareLabel.setBounds(423, 265, 69, 27);
 		add(fareLabel);
 
-		carField = new JTextField();
+		carField = new NumberField(20);
 		carField.setColumns(10);
-		carField.setBounds(421, 44, 199, 24);
+		carField.setBounds(410, 28, 199, 24);
 		add(carField);
 		
 		moterLabel = new JLabel("");
-		moterLabel.setBounds(108, 92, 202, 18);
+		moterLabel.setBounds(97, 76, 202, 18);
 		add(moterLabel);
 
 		jianField = new JTextField();
 		jianField.setColumns(10);
-		jianField.setBounds(421, 120, 199, 24);
+		jianField.setBounds(410, 104, 199, 24);
 		add(jianField);
 
 		yaField = new JTextField();
-		yaField.setBounds(421, 199, 199, 24);
+		yaField.setBounds(410, 183, 199, 24);
 		add(yaField);
 		yaField.setColumns(10);
 
 		yearBox = new JComboBox<Long>();
-		yearBox.setBounds(108, 144, 69, 24);
+		yearBox.setBounds(97, 128, 69, 24);
 		add(yearBox);
 
 		monthBox = new JComboBox<Long>();
-		monthBox.setBounds(191, 144, 51, 24);
+		monthBox.setBounds(180, 128, 51, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new JComboBox<Long>();
-		dateBox.setBounds(256, 144, 51, 24);
+		dateBox.setBounds(245, 128, 51, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
 		destinBox = new JComboBox<String>();
-		destinBox.setBounds(108, 279, 199, 24);
+		destinBox.setBounds(97, 263, 199, 24);
 		add(destinBox);
 		
 		typeBox = new JComboBox<String>();
@@ -130,24 +125,37 @@ public class HallLoadPanel extends JPanel {
 					addOrganizationItems(Organizationtype.hall);
 			}
 		});
-		typeBox.setBounds(108, 211, 199, 24);
+		typeBox.setBounds(97, 195, 199, 24);
 		add(typeBox);
 		addTypeItems();
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(674, 44, 266, 283);
+		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-				new Object[][] {},
-				new String[] { "\u672C\u6B21\u88C5\u8F66\u6240\u6709\u6761\u5F62\u7801" }));
+			new Object[][] {
+			},
+			new String[] {
+				"\u672C\u6B21\u88C5\u8F66\u6240\u6709\u6761\u5F62\u7801"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
 
 		button = new JButton("提交装车单");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
@@ -158,17 +166,18 @@ public class HallLoadPanel extends JPanel {
 					barcodes.add((String) tableModel.getValueAt(i, 0));
 				}
 				double fare = Double.parseDouble(fareLabel.getText());
-				hallLoadBlService.addHallLoadForm(new HallLoadVO(date, orgCode,
+				ResultMessage r = hallLoadBlService.addHallLoadForm(new HallLoadVO(date, orgCode,
 						moterLabel.getText(), (String) destinBox
 								.getSelectedItem(), carField.getText(),
 						jianField.getText(), yaField.getText(), barcodes,
 						fare, Formstate.waiting));
-				TipDialog Dialog=new TipDialog("装车单提交成功！");
-				Dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				Dialog.setVisible(true);
+				if (r == ResultMessage.success)
+					addSucess();
+				else
+					createTip("添加失败！");
 			}
 		});
-		button.setBounds(427, 366, 113, 27);
+		button.setBounds(416, 350, 113, 27);
 		add(button);
 
 		ItemListener listener = new ItemListener() {
@@ -194,13 +203,27 @@ public class HallLoadPanel extends JPanel {
 		JButton button_1 = new JButton("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CheckExistBlService check = new CheckExist();
+				if (orderField.getText().length() != 10) {
+					createTip("订单编号必须为10位！");
+					return;
+				} else if (!check.checkExist(orderField.getText())) {
+					createTip("订单:" + orderField.getText() + " 不存在！");
+					return;
+				}
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{""});
+				tableModel.addRow(new String[]{orderField.getText()});
+				orderField.setText("");
 			}
 		});
-		button_1.setBounds(674, 340, 113, 27);
+		button_1.setBounds(851, 252, 61, 27);
 		add(button_1);
 
+		orderField = new OrderField();
+		orderField.setColumns(10);
+		orderField.setBounds(636, 253, 199, 24);
+		add(orderField);
+		
 		JButton button_2 = new JButton("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -209,7 +232,7 @@ public class HallLoadPanel extends JPanel {
 				tableModel.removeRow(rownum);
 			}
 		});
-		button_2.setBounds(827, 340, 113, 27);
+		button_2.setBounds(636, 286, 276, 27);
 		add(button_2);
 		
 		JButton getFareButton = new JButton("获取运费");
@@ -224,43 +247,43 @@ public class HallLoadPanel extends JPanel {
 				fareLabel.setText(hallLoadBlService.computeHallLoadFare(barcodes, city, city) + "");
 			}
 		});
-		getFareButton.setBounds(517, 281, 103, 27);
+		getFareButton.setBounds(506, 265, 103, 27);
 		add(getFareButton);
 		
-		label = new JLabel("装车日期：");
-		label.setBounds(25, 150, 85, 18);
+		JLabel label = new JLabel("装车日期：");
+		label.setBounds(14, 134, 85, 18);
 		add(label);
 		
-		label_1 = new JLabel("汽运编号：");
-		label_1.setBounds(25, 92, 85, 18);
+		JLabel label_1 = new JLabel("汽运编号：");
+		label_1.setBounds(14, 76, 85, 18);
 		add(label_1);
 		
-		label_2 = new JLabel("机构编号：");
-		label_2.setBounds(25, 44, 85, 18);
+		JLabel label_2 = new JLabel("机构编号：");
+		label_2.setBounds(14, 28, 85, 18);
 		add(label_2);
 		
-		label_3 = new JLabel("单据类型：");
-		label_3.setBounds(25, 214, 85, 18);
+		JLabel label_3 = new JLabel("单据类型：");
+		label_3.setBounds(14, 198, 85, 18);
 		add(label_3);
 		
-		label_4 = new JLabel("车辆代号：");
-		label_4.setBounds(338, 44, 82, 18);
+		JLabel label_4 = new JLabel("车辆代号：");
+		label_4.setBounds(327, 31, 82, 18);
 		add(label_4);
 		
-		label_5 = new JLabel("运费合计：");
-		label_5.setBounds(338, 285, 82, 18);
+		JLabel label_5 = new JLabel("运费合计：");
+		label_5.setBounds(327, 269, 82, 18);
 		add(label_5);
 		
-		label_6 = new JLabel("监装员：");
-		label_6.setBounds(351, 123, 69, 18);
+		JLabel label_6 = new JLabel("监装员：");
+		label_6.setBounds(340, 107, 69, 18);
 		add(label_6);
 		
-		label_7 = new JLabel("出发地：");
-		label_7.setBounds(351, 202, 69, 18);
+		JLabel label_7 = new JLabel("押运员：");
+		label_7.setBounds(340, 186, 69, 18);
 		add(label_7);
 		
-		label_8 = new JLabel("目的地：");
-		label_8.setBounds(38, 285, 72, 18);
+		JLabel label_8 = new JLabel("目的地：");
+		label_8.setBounds(27, 269, 72, 18);
 		add(label_8);
 		
 		button_3 = new JButton("查看已提交单据");
@@ -269,7 +292,7 @@ public class HallLoadPanel extends JPanel {
 				card.next(parent);
 			}
 		});
-		button_3.setBounds(786, 380, 154, 27);
+		button_3.setBounds(786, 364, 154, 27);
 		add(button_3);
 	}
 	
@@ -326,5 +349,33 @@ public class HallLoadPanel extends JPanel {
 			if(!org.getName().equals(orgName))
 				destinBox.addItem(org.getName());
 		}
+	}
+	
+	private boolean checkFormat() {
+		if (carField.getText().equals(""))
+			return createTip("车辆代号不能为空！");
+		else if (jianField.getText().equals(""))
+			return createTip("监装员不能为空！");
+		else if (yaField.getText().equals(""))
+			return createTip("押运员不能为空！");
+		return true;
+	}
+
+	private void addSucess() {
+		createTip("添加成功！");
+		carField.setText("");
+		jianField.setText("");
+		yaField.setText("");
+		Long date = (Long) yearBox.getSelectedItem() * 10000
+				+ (Long) monthBox.getSelectedItem() * 100
+				+ (Long) dateBox.getSelectedItem();
+		moterLabel.setText(hallLoadBlService.getid(orgCode, date));
+	}
+
+	private boolean createTip(String str) {
+		TipDialog tipDialog = new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);
+		return false;
 	}
 }

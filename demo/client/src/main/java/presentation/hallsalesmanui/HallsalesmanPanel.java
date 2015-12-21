@@ -108,7 +108,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		//card中添加各种功能面板
 		HallLoadUpdatePanel hu = new HallLoadUpdatePanel(this, card);
 		hc = new HallLoadCheckPanel(switcher, card, hu, orgcode);
-		hallLoadPanel = new HallLoadPanel(orgcode, city, orgName, switcher, card);
+		hallLoadPanel = new HallLoadPanel(orgcode, city, orgName, this, card);
 		
 		GoodRecievingUpdatePanel gu = new GoodRecievingUpdatePanel(this, card, orgName);
 		gc = new GoodRecievingCheckPanel(switcher, card, gu, orgcode, orgName);
@@ -123,7 +123,7 @@ public class HallsalesmanPanel extends JPanel implements ActionListener {
 		
 		RecordcollectUpdatePanel ru = new RecordcollectUpdatePanel(this, card);
 		rc= new RecordcollectCheckPanel(switcher, card, ru, orgcode);
-		recordcollectPanel=new RecordcollectPanel(orgcode, switcher, card);
+		recordcollectPanel=new RecordcollectPanel(orgcode, this, card);
 		
 		switcher.add(hallLoadPanel, "hallLoad");
 		switcher.add(hc, "hc");

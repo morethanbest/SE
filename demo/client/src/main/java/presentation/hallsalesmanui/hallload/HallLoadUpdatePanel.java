@@ -1,44 +1,39 @@
 package presentation.hallsalesmanui.hallload;
 
-import javax.swing.JPanel;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
 
 import po.Formstate;
-import po.Organizationtype;
+import po.ResultMessage;
 import presentation.hallsalesmanui.HallsalesmanPanel;
-import presentation.managerui.examui.ExamPanel;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
 import vo.HallLoadVO;
-import vo.OrganizationVO;
 import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.HallLoadBlService;
-import businesslogicservice.managerblservice.ExamHLForms;
-import businesslogicservice.managerblservice.OrganizationBlService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JLabel;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class HallLoadUpdatePanel extends JPanel {
-	private JTextField carField;
+	private NumberField carField;
 	private JTextField jianField;
 	private JTextField yaField;
 	private JTable table;
@@ -51,7 +46,8 @@ public class HallLoadUpdatePanel extends JPanel {
 	private JLabel moterLabel;
 	private JLabel orgLabel;
 	private JLabel destinLabel;
-	private JTextField fareField;
+	private DoubleField fareField;
+	private OrderField orderField;
 	/**
 	 * Create the panel.
 	 */
@@ -60,37 +56,31 @@ public class HallLoadUpdatePanel extends JPanel {
 		setLayout(null);
 
 		controller = new HallLoadController();
-
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(302, 0, 2, 357);
-		add(separator);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setBounds(634, 0, 2, 357);
-		add(separator_1);
 		
 		orgLabel = new JLabel("");
-		orgLabel.setBounds(86, 44, 202, 18);
+		orgLabel.setBounds(89, 44, 202, 24);
 		add(orgLabel);
 
-		carField = new JTextField();
+		carField = new NumberField(20);
 		carField.setColumns(10);
-		carField.setBounds(421, 44, 199, 24);
+		carField.setBounds(407, 44, 199, 24);
 		add(carField);
 		
 		moterLabel = new JLabel("");
-		moterLabel.setBounds(86, 132, 202, 18);
+		moterLabel.setBounds(89, 126, 199, 24);
 		add(moterLabel);
+		
+		destinLabel = new JLabel("");
+		destinLabel.setBounds(89, 290, 199, 24);
+		add(destinLabel);
 
 		jianField = new JTextField();
 		jianField.setColumns(10);
-		jianField.setBounds(421, 126, 199, 24);
+		jianField.setBounds(407, 126, 199, 24);
 		add(jianField);
 
 		yaField = new JTextField();
-		yaField.setBounds(421, 214, 199, 24);
+		yaField.setBounds(407, 214, 199, 24);
 		add(yaField);
 		yaField.setColumns(10);
 
@@ -112,7 +102,7 @@ public class HallLoadUpdatePanel extends JPanel {
 		
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(671, 13, 266, 283);
+		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 
 		table = new JTable();
@@ -125,6 +115,8 @@ public class HallLoadUpdatePanel extends JPanel {
 		update = new JButton("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (!checkFormat())
+					return;
 				Long date = (Long) yearBox.getSelectedItem() * 10000
 						+ (Long) monthBox.getSelectedItem() * 100
 						+ (Long) dateBox.getSelectedItem();
@@ -135,10 +127,14 @@ public class HallLoadUpdatePanel extends JPanel {
 					barcodes.add((String) tableModel.getValueAt(i, 0));
 				}
 				double fare = Double.parseDouble(fareField.getText());
-				controller.update(new HallLoadVO(date, vo.getStringcode(),
+				ResultMessage r = controller.update(new HallLoadVO(date, vo.getStringcode(),
 						moterLabel.getText(), vo.getDestination(), carField.getText(),
 						jianField.getText(), yaField.getText(), barcodes,
 						fare, vo.getDocumentstate()));
+				if (r == ResultMessage.success)
+					createTip("修改成功！");
+				else
+					createTip("修改失败！");
 			}
 		});
 		update.setBounds(433, 375, 113, 27);
@@ -158,11 +154,20 @@ public class HallLoadUpdatePanel extends JPanel {
 		JButton button_1 = new JButton("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CheckExistBlService check = new CheckExist();
+				if (orderField.getText().length() != 10) {
+					createTip("订单编号必须为10位！");
+					return;
+				} else if (!check.checkExist(orderField.getText())) {
+					createTip("订单:" + orderField.getText() + " 不存在！");
+					return;
+				}
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{""});
+				tableModel.addRow(new String[]{orderField.getText()});
+				orderField.setText("");
 			}
 		});
-		button_1.setBounds(671, 309, 113, 27);
+		button_1.setBounds(851, 252, 61, 27);
 		add(button_1);
 
 		JButton button_2 = new JButton("删除该条");
@@ -173,16 +178,12 @@ public class HallLoadUpdatePanel extends JPanel {
 				tableModel.removeRow(rownum);
 			}
 		});
-		button_2.setBounds(824, 309, 113, 27);
+		button_2.setBounds(636, 286, 276, 27);
 		add(button_2);
 		
-		destinLabel = new JLabel("");
-		destinLabel.setBounds(22, 290, 266, 18);
-		add(destinLabel);
-		
-		fareField = new JTextField();
+		fareField = new DoubleField(20);
 		fareField.setText("0");
-		fareField.setBounds(421, 290, 86, 24);
+		fareField.setBounds(407, 290, 86, 24);
 		add(fareField);
 		fareField.setColumns(10);
 		
@@ -204,6 +205,43 @@ public class HallLoadUpdatePanel extends JPanel {
 		});
 		button_3.setBounds(684, 375, 113, 27);
 		add(button_3);
+		
+		JLabel label = new JLabel("机构编号：");
+		label.setBounds(14, 44, 85, 18);
+		add(label);
+		
+		JLabel label_1 = new JLabel("汽运编号：");
+		label_1.setBounds(14, 126, 85, 18);
+		add(label_1);
+		
+		JLabel label_2 = new JLabel("装车日期：");
+		label_2.setBounds(14, 217, 85, 18);
+		add(label_2);
+		
+		JLabel label_3 = new JLabel("目的地：");
+		label_3.setBounds(14, 290, 72, 18);
+		add(label_3);
+		
+		JLabel label_4 = new JLabel("车辆代号：");
+		label_4.setBounds(324, 47, 82, 18);
+		add(label_4);
+		
+		JLabel label_5 = new JLabel("监装员：");
+		label_5.setBounds(337, 126, 69, 18);
+		add(label_5);
+		
+		JLabel label_6 = new JLabel("押运员：");
+		label_6.setBounds(337, 217, 69, 18);
+		add(label_6);
+		
+		JLabel label_7 = new JLabel("运费合计：");
+		label_7.setBounds(324, 290, 82, 18);
+		add(label_7);
+		
+		orderField = new OrderField();
+		orderField.setColumns(10);
+		orderField.setBounds(636, 253, 199, 24);
+		add(orderField);
 		
 	}
 	
@@ -253,7 +291,7 @@ public class HallLoadUpdatePanel extends JPanel {
 		yearBox.setSelectedItem(vo.getLoadtime() / 10000);
 		monthBox.setSelectedItem((vo.getLoadtime() % 10000) / 100);
 		dateBox.setSelectedItem(vo.getLoadtime() % 1000000);
-		destinLabel.setText("目的地：" + vo.getDestination());
+		destinLabel.setText(vo.getDestination());
 		carField.setText(vo.getVehicldecode());
 		jianField.setText(vo.getSupervisor());
 		yaField.setText(vo.getSupercargo());
@@ -268,5 +306,22 @@ public class HallLoadUpdatePanel extends JPanel {
 		}
 		
 		update.setEnabled(vo.getDocumentstate() == Formstate.waiting || vo.getDocumentstate() == Formstate.fail);
+	}
+	
+	private boolean checkFormat() {
+		if (carField.getText().equals(""))
+			return createTip("车辆代号不能为空！");
+		else if (jianField.getText().equals(""))
+			return createTip("监装员不能为空！");
+		else if (yaField.getText().equals(""))
+			return createTip("押运员不能为空！");
+		return true;
+	}
+
+	private boolean createTip(String str) {
+		TipDialog tipDialog = new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);
+		return false;
 	}
 }

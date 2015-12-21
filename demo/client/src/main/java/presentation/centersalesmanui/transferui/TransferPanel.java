@@ -209,6 +209,7 @@ public class TransferPanel extends JPanel {
 				DefaultTableModel tableModel = (DefaultTableModel) table
 						.getModel();
 				tableModel.addRow(new String[] { orderField.getText() });
+				orderField.setText("");
 			}
 		});
 
@@ -361,14 +362,6 @@ public class TransferPanel extends JPanel {
 			return createTip("货柜号不能为空！");
 		else if (manageField.getText().equals(""))
 			return createTip("监察员不能为空！");
-		else {
-			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-			int rowCount = tableModel.getRowCount();
-			for (int i = 0; i < rowCount; i++) {
-				if ((String) tableModel.getValueAt(i, 0) == "")
-					;
-			}
-		}
 		return true;
 	}
 

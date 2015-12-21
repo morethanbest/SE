@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,21 +20,26 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import po.Formstate;
+import po.ResultMessage;
 import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
 import vo.RecordcollectVO;
 import businesslogic.balancebl.RecordcollectPack.RecordcollectController;
 import businesslogicservice.balanceblservice.RecordCollectBlService;
 
 public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 	private String orgcode;
-	private JTextField sumField;
+	private DoubleField sumField;
 	private JTextField manField;
-	private JTextField accountField;
+	private NumberField accountField;
 	private JComboBox<Long> yearBox;
 	private JComboBox<Long> monthBox;
 	private JComboBox<Long> dayBox;
 	private JScrollPane scrollPane;
-	private JTextField orderField;
+	private OrderField orderField;
 	private JButton btnaddorder;
 	private JButton update;
 	private JTable table;
@@ -70,10 +76,6 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		label_4.setBounds(42, 238, 80, 15);
 		add(label_4);
 
-		JLabel label_5 = new JLabel("订单号：");
-		label_5.setBounds(611, 38, 65, 15);
-		add(label_5);
-
 		yearBox = new JComboBox<Long>();
 		yearBox.setBounds(186, 96, 80, 21);
 		yearBox.setEditable(false);
@@ -103,7 +105,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		sumField = new JTextField();
+		sumField = new DoubleField(10);
 		sumField.setBounds(186, 144, 230, 21);
 		add(sumField);
 		sumField.setColumns(10);
@@ -113,22 +115,22 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		add(manField);
 		manField.setColumns(10);
 
-		accountField = new JTextField();
+		accountField = new NumberField(10);
 		accountField.setBounds(186, 235, 230, 21);
 		add(accountField);
 		accountField.setColumns(10);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(611, 66, 304, 265);
+		scrollPane.setBounds(611, 38, 304, 252);
 		add(scrollPane);
 
-		orderField = new JTextField();
-		orderField.setBounds(611, 344, 189, 21);
+		orderField = new OrderField();
+		orderField.setBounds(611, 302, 199, 25);
 		add(orderField);
 		orderField.setColumns(10);
 
 		btnaddorder = new JButton("增加订单");
-		btnaddorder.setBounds(810, 344, 93, 23);
+		btnaddorder.setBounds(822, 301, 93, 27);
 		add(btnaddorder);
 
 		update = new JButton("提交修改");
@@ -136,10 +138,16 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		add(update);
 
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] { { null }, },
-				new String[] { "订单号" }) {
-			boolean[] columnEditables = new boolean[] { false };
-
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"\u8BA2\u5355\u53F7"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false
+			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -170,6 +178,17 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		});
 		button_1.setBounds(611, 402, 113, 27);
 		add(button_1);
+		
+		JButton button_2 = new JButton("删除该条");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				int rownum = table.getSelectedRow();
+				tableModel.removeRow(rownum);
+			}
+		});
+		button_2.setBounds(611, 337, 304, 27);
+		add(button_2);
 	}
 
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
@@ -227,6 +246,8 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 				orderField.setText("");
 			}
 		} else if (e.getSource().equals(update)) {
+			if (!checkFormat())
+				return;
 			String id = controller.getid(orgcode);
 			Long date = (Long) yearBox.getSelectedItem() * 10000
 					+ (Long) monthBox.getSelectedItem() * 100
@@ -242,7 +263,11 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 			}
 			RecordcollectVO temp = new RecordcollectVO(id, date, accountcode,
 					collectionsum, collectionman, barcodes, vo.getFormstate());
-			controller.updateCollect(temp);
+			ResultMessage r = controller.updateCollect(temp);
+			if (r == ResultMessage.success)
+				createTip("修改成功！");
+			else
+				createTip("修改失败！");
 		}
 	}
 
@@ -263,5 +288,22 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 
 		update.setEnabled(vo.getFormstate() == Formstate.waiting
 				|| vo.getFormstate() == Formstate.fail);
+	}
+	
+	private boolean checkFormat() {
+		if (sumField.getText().equals(""))
+			return createTip("收款金额不能为空！");
+		else if (manField.getText().equals(""))
+			return createTip("收款人不能为空！");
+		else if (accountField.getText().equals(""))
+			return createTip("收款账号不能为空！");
+		return true;
+	}
+
+	private boolean createTip(String str) {
+		TipDialog tipDialog = new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);
+		return false;
 	}
 }
