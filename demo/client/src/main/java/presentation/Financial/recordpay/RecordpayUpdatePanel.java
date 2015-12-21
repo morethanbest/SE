@@ -55,27 +55,27 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		add(label);
 		
 		JLabel label_1 = new JLabel("付款日期：");
-		label_1.setBounds(25, 85, 70, 15);
+		label_1.setBounds(61, 85, 94, 18);
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("付款金额：");
-		label_2.setBounds(25, 137, 70, 15);
+		label_2.setBounds(61, 137, 94, 18);
 		add(label_2);
 		
 		JLabel label_3 = new JLabel("付款人：");
-		label_3.setBounds(25, 184, 54, 15);
+		label_3.setBounds(61, 184, 94, 18);
 		add(label_3);
 		
 		JLabel label_4 = new JLabel("付款账号：");
-		label_4.setBounds(25, 231, 70, 15);
+		label_4.setBounds(61, 231, 94, 18);
 		add(label_4);
 		
 		JLabel label_5 = new JLabel("条目：");
-		label_5.setBounds(25, 276, 54, 15);
+		label_5.setBounds(61, 276, 94, 18);
 		add(label_5);
 		
 		JLabel label_6 = new JLabel("备注：");
-		label_6.setBounds(495, 57, 54, 15);
+		label_6.setBounds(472, 85, 54, 18);
 		add(label_6);
 		
 		yearBox = new JComboBox<Long>();
@@ -132,7 +132,7 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		add(update);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(532, 85, 280, 142);
+		scrollPane.setBounds(532, 85, 307, 206);
 		add(scrollPane);
 		
 		textArea = new JTextArea();
@@ -207,8 +207,9 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource().equals(update)){
+			if (!checkFormat())
+				return;
 			Long date = (Long) yearBox.getSelectedItem() * 10000
 					+ (Long) monthBox.getSelectedItem() * 100
 					+ (Long) dateBox.getSelectedItem();
@@ -234,44 +235,13 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 			}
 			String remark=textArea.getText();
 			Formstate formstate = vo.getFormstate();
-			if(sumField.getText().equals("")){
-				TipDialog dialog=new TipDialog("请输入金额！");
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
-			}
-			else if(manField.getText().equals("")){
-				TipDialog dialog=new TipDialog("请输入付款人姓名！");
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
-			}
-			else if(accountField.getText().equals("")){
-				TipDialog dialog=new TipDialog("请输入付款账号！");
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
-			}
-			else{
-				try {
-					double paysum=Double.parseDouble(sumField.getText());
-					RecordpayVO temp = new RecordpayVO(vo.getId(), date, paysum, payman, payaccount, entry, remark, formstate);
-					ResultMessage resultMessage=controller.updateRecordpay(temp);
-					if(resultMessage==ResultMessage.failure){
-						TipDialog dialog=new TipDialog("提交失败");
-						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-						dialog.setVisible(true);
-					}
-					else{
-						TipDialog dialog=new TipDialog("提交成功");
-						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-						dialog.setVisible(true);
-					}
-				} catch (Exception e2) {
-					// TODO: handle exception
-					TipDialog dialog=new TipDialog("请输入正确的付款金额！");
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				}
-			}
-			
+			double paysum=Double.parseDouble(sumField.getText());
+			RecordpayVO temp = new RecordpayVO(vo.getId(), date, paysum, payman, payaccount, entry, remark, formstate);
+			ResultMessage r = controller.updateRecordpay(temp);
+			if (r == ResultMessage.success)
+				createTip("修改成功！");
+			else
+				createTip("修改失败！");
 		}
 	}
 	
@@ -279,7 +249,7 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		this.vo = vo;
 		yearBox.setSelectedItem(vo.getPaytime() / 10000);
 		monthBox.setSelectedItem((vo.getPaytime() % 10000) / 100);
-		dateBox.setSelectedItem(vo.getPaytime() % 1000000);
+		dateBox.setSelectedItem(vo.getPaytime() % 100);
 		sumField.setText(vo.getPaysum() + "");
 		manField.setText(vo.getPayman() + "");
 		accountField.setText(vo.getPayaccount());
@@ -291,7 +261,22 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 			i++;
 		}
 		textArea.setText(vo.getRemark());
-		
-		
+	}
+	
+	private boolean checkFormat() {
+		if (sumField.getText().equals(""))
+			return createTip("付款金额不能为空！");
+		else if (manField.getText().equals(""))
+			return createTip("付款人不能为空！");
+		else if (accountField.getText().equals(""))
+			return createTip("付款账号不能为空！");
+		return true;
+	}
+
+	private boolean createTip(String str) {
+		TipDialog tipDialog = new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);
+		return false;
 	}
 }

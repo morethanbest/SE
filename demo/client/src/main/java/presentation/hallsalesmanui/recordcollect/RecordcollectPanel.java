@@ -28,7 +28,9 @@ import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.RecordcollectVO;
 import businesslogic.balancebl.RecordcollectPack.RecordcollectController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.balanceblservice.RecordCollectBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class RecordcollectPanel extends JPanel implements ActionListener {
 	private String orgcode;
@@ -233,14 +235,6 @@ public class RecordcollectPanel extends JPanel implements ActionListener {
 		return day[month - 1];
 	}
 
-	private void AddOrder() {
-		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		String[] orderstring = new String[1];
-		orderstring[0] = orderField.getText();
-		tableModel.addRow(orderstring);
-		list.add(orderField.getText());
-	}
-
 	private ResultMessage handin() {
 		RecordCollectBlService recordCollectBlService = new RecordcollectController();
 		return recordCollectBlService.Recordcollect(vo);
@@ -250,10 +244,18 @@ public class RecordcollectPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(btnaddorder)) {
-			if (orderField.getText() != "") {
-				AddOrder();
-				orderField.setText("");
+			CheckExistBlService check = new CheckExist();
+			if (orderField.getText().length() != 10) {
+				createTip("订单编号必须为10位！");
+				return;
+			} else if (!check.checkExist(orderField.getText())) {
+				createTip("订单:" + orderField.getText() + " 不存在！");
+				return;
 			}
+			DefaultTableModel tableModel = (DefaultTableModel) table
+					.getModel();
+			tableModel.addRow(new String[] { orderField.getText() });
+			orderField.setText("");
 		} else if (e.getSource().equals(btnhandin)) {
 			if (!checkFormat())
 				return;

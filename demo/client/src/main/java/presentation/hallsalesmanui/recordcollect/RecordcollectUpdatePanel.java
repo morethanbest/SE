@@ -28,7 +28,9 @@ import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.RecordcollectVO;
 import businesslogic.balancebl.RecordcollectPack.RecordcollectController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.balanceblservice.RecordCollectBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 	private String orgcode;
@@ -138,16 +140,10 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		add(update);
 
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"\u8BA2\u5355\u53F7"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false
-			};
+		table.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "\u8BA2\u5355\u53F7" }) {
+			boolean[] columnEditables = new boolean[] { false };
+
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -178,11 +174,12 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		});
 		button_1.setBounds(611, 402, 113, 27);
 		add(button_1);
-		
+
 		JButton button_2 = new JButton("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				DefaultTableModel tableModel = (DefaultTableModel) table
+						.getModel();
 				int rownum = table.getSelectedRow();
 				tableModel.removeRow(rownum);
 			}
@@ -230,21 +227,22 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		}
 	}
 
-	private void AddOrder() {
-		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		String[] orderstring = new String[1];
-		orderstring[0] = orderField.getText();
-		tableModel.addRow(orderstring);
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(btnaddorder)) {
-			if (orderField.getText() != "") {
-				AddOrder();
-				orderField.setText("");
+			CheckExistBlService check = new CheckExist();
+			if (orderField.getText().length() != 10) {
+				createTip("订单编号必须为10位！");
+				return;
+			} else if (!check.checkExist(orderField.getText())) {
+				createTip("订单:" + orderField.getText() + " 不存在！");
+				return;
 			}
+			DefaultTableModel tableModel = (DefaultTableModel) table
+					.getModel();
+			tableModel.addRow(new String[] { orderField.getText() });
+			orderField.setText("");
 		} else if (e.getSource().equals(update)) {
 			if (!checkFormat())
 				return;
@@ -275,7 +273,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		this.vo = vo;
 		yearBox.setSelectedItem(vo.getCollectiontime() / 10000);
 		monthBox.setSelectedItem((vo.getCollectiontime() % 10000) / 100);
-		dayBox.setSelectedItem(vo.getCollectiontime() % 1000000);
+		dayBox.setSelectedItem(vo.getCollectiontime() % 100);
 		sumField.setText(vo.getCollectionsum() + "");
 		manField.setText(vo.getCollectionman());
 		accountField.setText(vo.getAccountcode());
@@ -289,7 +287,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		update.setEnabled(vo.getFormstate() == Formstate.waiting
 				|| vo.getFormstate() == Formstate.fail);
 	}
-	
+
 	private boolean checkFormat() {
 		if (sumField.getText().equals(""))
 			return createTip("收款金额不能为空！");
