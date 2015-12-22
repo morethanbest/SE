@@ -111,7 +111,7 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		switcher.add(statisticsPanel, "statistics");
 		RecordpayUpdatePanel ru = new RecordpayUpdatePanel(this, card);
 		rc = new RecordpayCheckPanel(switcher, card, ru);
-		recordpayPanel=new RecordpayPanel(orgcode, switcher, card);
+		recordpayPanel=new RecordpayPanel(orgcode, this, card);
 		switcher.add(recordpayPanel, "recordpay");
 		switcher.add(rc, "rc");
 		switcher.add(ru, "ru");
