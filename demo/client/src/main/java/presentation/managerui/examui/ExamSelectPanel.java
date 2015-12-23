@@ -1,16 +1,15 @@
 package presentation.managerui.examui;
 
-import javax.swing.JPanel;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 
-public class ExamSelectPanel extends JPanel {
+import presentation.mycomp.WorkPanel;
+
+public class ExamSelectPanel extends WorkPanel {
 	private JButton button_4;
 	private JButton button;
 	private JButton button_1;
@@ -130,11 +129,6 @@ public class ExamSelectPanel extends JPanel {
 		});
 		button_11.setBounds(293, 222, 113, 27);
 		add(button_11);
-		
-		JLabel label = new JLabel("快递员");
-		label.setBackground(SystemColor.activeCaption);
-		label.setBounds(0, 0, 301, 200);
-		add(label);
 
 	}
 }
