@@ -1,18 +1,18 @@
 package presentation.Financial;
 
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-import init.ClientInitException;
-import init.RMIHelper;
 import po.Job;
 import presentation.Financial.account.AccountPanel;
 import presentation.Financial.balance.BalancePanel;
@@ -22,8 +22,6 @@ import presentation.Financial.recordpay.RecordpayCheckPanel;
 import presentation.Financial.recordpay.RecordpayPanel;
 import presentation.Financial.recordpay.RecordpayUpdatePanel;
 import presentation.Financial.statistics.StatisticsPanel;
-import presentation.hallsalesmanui.driver.DriverPanel;
-import presentation.hallsalesmanui.vehicle.VehiclePanel;
 import presentation.mainui.MainFrame;
 
 public class FinancialPanel extends JPanel implements ActionListener{
@@ -55,40 +53,69 @@ public class FinancialPanel extends JPanel implements ActionListener{
 		this.job=job;
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
+		setBackground(SystemColor.inactiveCaptionBorder);
 
 		btnNewButton = new JButton("结算");
-		btnNewButton.setBounds(14, 13, 113, 27);
+		btnNewButton.setBounds(0, 0, 96, 40);
 		btnNewButton.addActionListener(this);
+		btnNewButton.setForeground(SystemColor.windowBorder);
+		btnNewButton.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton);
 		add(btnNewButton);
 
 		btnNewButton_1 = new JButton("付款");
-		btnNewButton_1.setBounds(141, 13, 113, 27);
+		btnNewButton_1.setBounds(97, 0, 96, 40);
 		btnNewButton_1.addActionListener(this);
+		btnNewButton_1.setForeground(SystemColor.windowBorder);
+		btnNewButton_1.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton_1.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton_1);
 		add(btnNewButton_1);
 
 		btnNewButton_2 = new JButton("账户");
-		btnNewButton_2.setBounds(268, 13, 113, 27);
+		btnNewButton_2.setBounds(194, 0, 96, 40);
 		btnNewButton_2.addActionListener(this);
+		btnNewButton_2.setForeground(SystemColor.windowBorder);
+		btnNewButton_2.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton_2.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton_2);
 		add(btnNewButton_2);
 
 		btnNewButton_3 = new JButton("成本收益");
-		btnNewButton_3.setBounds(395, 13, 113, 27);
+		btnNewButton_3.setBounds(291, 0, 96, 40);
 		btnNewButton_3.addActionListener(this);
+		btnNewButton_3.setForeground(SystemColor.windowBorder);
+		btnNewButton_3.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton_3.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton_3);
 		add(btnNewButton_3);
 
 		btnNewButton_4 = new JButton("经营情况");
-		btnNewButton_4.setBounds(522, 13, 113, 27);
+		btnNewButton_4.setBounds(389, 0, 96, 40);
 		btnNewButton_4.addActionListener(this);
+		btnNewButton_4.setForeground(SystemColor.windowBorder);
+		btnNewButton_4.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton_4.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton_4);
 		add(btnNewButton_4);
 
 		btnNewButton_5 = new JButton("期初建账");
-		btnNewButton_5.setBounds(649, 13, 113, 27);
+		btnNewButton_5.setBounds(485, 0, 96, 40);
 		btnNewButton_5.addActionListener(this);
+		btnNewButton_5.setForeground(SystemColor.windowBorder);
+		btnNewButton_5.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton_5.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton_5);
 		add(btnNewButton_5);
          
 		btnNewButton_6 = new JButton("注销");
-		btnNewButton_6.setBounds(855, 13, 113, 27);
+		btnNewButton_6.setBounds(879, 0, 103, 40);
 		btnNewButton_6.addActionListener(this);
+		btnNewButton_6.setForeground(SystemColor.windowBorder);
+		btnNewButton_6.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton_6.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton_6);
 		add(btnNewButton_6);
 		
 		JSeparator separator = new JSeparator();
@@ -128,6 +155,8 @@ public class FinancialPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		JButton button = (JButton) e.getSource();
+		setSelectButton(button);
 		if (e.getSource().equals(btnNewButton_2)) {
 			if(job==Job.advanceFinancial){
 				card.show(switcher, "account");
@@ -144,6 +173,30 @@ public class FinancialPanel extends JPanel implements ActionListener{
 			card.show(switcher, "newbook");
 		}else if(e.getSource().equals(btnNewButton_6)){
 			parent.skipToLogin();;
+		}
+	}
+	private void setNoneBorder(JButton button){
+		button.setBorderPainted(false);
+		button.setFocusPainted(false);
+	}
+	
+	private void setSelectButton(JButton button){
+		List<JButton> list= new ArrayList<JButton>();
+		list.add(btnNewButton);
+		list.add(btnNewButton_1);
+		list.add(btnNewButton_2);
+		list.add(btnNewButton_3);
+		list.add(btnNewButton_4);
+		list.add(btnNewButton_5);
+		list.add(btnNewButton_6);
+		for(JButton b:list){
+			if(b.equals(button)){
+				b.setForeground(SystemColor.text);
+				b.setBackground(SystemColor.textHighlight);
+			}else{
+				b.setForeground(SystemColor.windowBorder);
+				b.setBackground(SystemColor.inactiveCaptionBorder);
+			}
 		}
 	}
 	public JPanel getSwitcher() {

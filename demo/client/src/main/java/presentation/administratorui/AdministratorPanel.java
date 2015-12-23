@@ -1,9 +1,12 @@
 package presentation.administratorui;
 
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,15 +32,24 @@ public class AdministratorPanel extends JPanel implements ActionListener {
 	 */
 	public AdministratorPanel(String orgcode,MainFrame parent) {
 		this.parent=parent;
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 
 		btnNewButton = new JButton("用户管理");
-		btnNewButton.setBounds(14, 13, 113, 27);
+		btnNewButton.setForeground(SystemColor.windowBorder);
+		btnNewButton.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton.setBackground(SystemColor.inactiveCaptionBorder);
+		btnNewButton.setBounds(0, 0, 96, 40);
+		setNoneBorder(btnNewButton);
 		add(btnNewButton);
      
 		btnNewButton1 = new JButton("注销");
-		btnNewButton1.setBounds(855, 13, 113, 27);
+		btnNewButton1.setBounds(879, 0, 103, 40);
+		btnNewButton1.setForeground(SystemColor.windowBorder);
+		btnNewButton1.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton1.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton1);
 		btnNewButton1.addActionListener(this);
 		add(btnNewButton1);
 		
@@ -61,14 +73,34 @@ public class AdministratorPanel extends JPanel implements ActionListener {
 		hint.setVisible(false);
 		add(hint);
 
-}
+    }
+	private void setNoneBorder(JButton button){
+		button.setBorderPainted(false);
+		button.setFocusPainted(false);
+	};
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		JButton button = (JButton) e.getSource();
+		setSelectButton(button);
 		if (e.getSource().equals(btnNewButton1)) {
 			parent.skipToLogin();
 		}
 
 	}
+	private void setSelectButton(JButton button){
+		List<JButton> list= new ArrayList<JButton>();
+		list.add(btnNewButton);
+		list.add(btnNewButton1);
+		for(JButton b:list){
+			if(b.equals(button)){
+				b.setForeground(SystemColor.text);
+				b.setBackground(SystemColor.textHighlight);
+			}else{
+				b.setForeground(SystemColor.windowBorder);
+				b.setBackground(SystemColor.inactiveCaptionBorder);
+			}
+		}
+	};
 
 }

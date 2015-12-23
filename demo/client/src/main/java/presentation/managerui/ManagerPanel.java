@@ -198,7 +198,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private void setNoneBorder(JButton button){
 		button.setBorderPainted(false);
 		button.setFocusPainted(false);
-	};
+	}
 	
 	private void setSelectButton(JButton button){
 		List<JButton> list= new ArrayList<JButton>();
@@ -219,7 +219,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 				b.setBackground(SystemColor.inactiveCaptionBorder);
 			}
 		}
-	};
+	}
 	public void setHint(String str){
 		hint.setText(str);
 //		Thread thr = new Thread(new Runnable() {

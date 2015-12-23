@@ -2,6 +2,8 @@ package presentation.courierui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -76,6 +78,7 @@ public class OrderPanel extends JPanel {
 	 */
 	public OrderPanel(CourierPanel courierPanel,MainFrame parent) {
 		setBackground(new Color(244, 247, 252));
+		setBackground(SystemColor.inactiveCaptionBorder);
 		orderBlService = new OrderController();
 		setLayout(null);
 
@@ -300,7 +303,11 @@ public class OrderPanel extends JPanel {
 				courierPanel.switchPanel("recieve");
 			}
 		});
-		btnNewButton.setBounds(647, 10, 145, 42);
+		btnNewButton.setBounds(722, 11, 96, 40);
+		btnNewButton.setForeground(SystemColor.windowBorder);
+		btnNewButton.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		btnNewButton.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(btnNewButton);
 		add(btnNewButton);
 
 		separator_4 = new JSeparator();
@@ -407,7 +414,11 @@ public class OrderPanel extends JPanel {
 				parent.skipToLogin();
 			}
 		});
-		button_3.setBounds(816, 10, 145, 42);
+		button_3.setBounds(872, 11, 96, 40);
+		button_3.setForeground(SystemColor.windowBorder);
+		button_3.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		button_3.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(button_3);
 		add(button_3);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{snameField, scityBox, sareaBox, sdetailField, sjobField, stelField, sphoneField, rnameField, rcityBox, rareaBox, rdetailField, rjobField, rtelField, rphoneField, numberField, weightField, volumeField, nameField, packBox, orderBox, fareField}));
 
@@ -546,7 +557,10 @@ public class OrderPanel extends JPanel {
 		}
 		return true;
 	}
-	
+	private void setNoneBorder(JButton button){
+		button.setBorderPainted(false);
+		button.setFocusPainted(false);
+	}
 	private void addSuccessfully(String code){
 		TipDialog tipDialog=new TipDialog("添加成功！订单编号为" + code);
 		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -2,6 +2,8 @@ package presentation.courierui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -18,15 +20,15 @@ import javax.swing.JTextField;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import businesslogic.orderbl.CheckExist;
+import businesslogic.orderbl.ReceptionPack.ReceptionController;
+import businesslogicservice.orderblservice.CheckExistBlService;
+import businesslogicservice.orderblservice.ReceptionBlService;
 import po.ResultMessage;
 import presentation.mainui.MainFrame;
 import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.ReceptionVO;
-import businesslogic.orderbl.CheckExist;
-import businesslogic.orderbl.ReceptionPack.ReceptionController;
-import businesslogicservice.orderblservice.CheckExistBlService;
-import businesslogicservice.orderblservice.ReceptionBlService;
 
 public class RecievePanel extends JPanel {
 	private JComboBox<Long> yearBox;
@@ -50,7 +52,7 @@ public class RecievePanel extends JPanel {
 	public RecievePanel(CourierPanel courierPanel,MainFrame parent) {
 		setBackground(new Color(244, 247, 252));
 		receptionBlService = new ReceptionController();
-
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
 		nameField = new JTextField();
@@ -68,7 +70,11 @@ public class RecievePanel extends JPanel {
 				courierPanel.switchPanel("order");
 			}
 		});
-		button.setBounds(650, 10, 145, 42);
+		button.setBounds(710, 10, 96, 40);
+		button.setForeground(SystemColor.windowBorder);
+		button.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		button.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(button);
 		add(button);
 
 		codeField = new OrderField();
@@ -148,11 +154,18 @@ public class RecievePanel extends JPanel {
                 parent.skipToLogin();
 			}
 		});
-		button_2.setBounds(823, 10, 145, 42);
+		button_2.setBounds(858, 10, 96, 40);
+		button_2.setForeground(SystemColor.windowBorder);
+		button_2.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
+		button_2.setBackground(SystemColor.inactiveCaptionBorder);
+		setNoneBorder(button_2);
 		add(button_2);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, codeField, yearBox, monthBox, dateBox}));
 	}
-
+	private void setNoneBorder(JButton button){
+		button.setBorderPainted(false);
+		button.setFocusPainted(false);
+	}
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
 		for (long i = 2000; i <= 2050; i++) {
 			year.addItem(i);
