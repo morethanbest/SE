@@ -53,39 +53,32 @@ public class LoginPanel extends JPanel implements ActionListener {
 		passwordField.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(passwordField);
 
-		JLabel label = new JLabel(
-				"\u5FEB\u9012\u516C\u53F8\u7BA1\u7406\u7CFB\u7EDF");
-		label.setForeground(Color.BLACK);
-		label.setFont(new Font("华文琥珀", Font.BOLD, 49));
-		label.setBounds(282, 94, 424, 64);
-		add(label);
-
 		button = new JButton("\u767B\u5F55");
 		button.addActionListener(this);
-		button.setFont(new Font("����", Font.BOLD, 18));
+		button.setFont(new Font("微软雅黑", Font.BOLD, 18));
 		button.setBounds(433, 381, 141, 43);
 		add(button);
 
 		button_1 = new JButton("\u67E5\u8BE2\u7269\u6D41\u4FE1\u606F");
 		button_1.addActionListener(this);
-		button_1.setFont(new Font("����", Font.BOLD, 18));
+		button_1.setFont(new Font("微软雅黑", Font.BOLD, 18));
 		button_1.setBounds(759, 473, 158, 43);
 		add(button_1);
 
 		JLabel label_3 = new JLabel(new ImageIcon(
-				"G:\\GitHub\\SE\\Clientproject\\\u7528\u6237.png"));
+				"img/\u7528\u6237.png"));
 		label_3.setBounds(358, 203, 280, 45);
 		add(label_3);
 
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(
-				"G:\\GitHub\\SE\\Clientproject\\\u5BC6\u7801.png"));
+				"img/\u5BC6\u7801.png"));
 		label_1.setBounds(358, 286, 280, 45);
 		add(label_1);
 
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(
-				"G:\\GitHub\\SE\\Clientproject\\\u4E34\u65F6\u80CC\u666F.png"));
+				"img/登录.png"));
 		label_2.setBounds(0, 0, 982, 553);
 		add(label_2);
 	}
