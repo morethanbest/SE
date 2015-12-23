@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.SystemColor;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
@@ -23,8 +24,8 @@ public class IComboBoxUI extends BasicComboBoxUI {
 
 	private JButton arrow;
 	private boolean boundsLight = false;
-	private static final int ARCWIDTH = 15;
-	private static final int ARCHEIGHT = 15;
+	private static final int ARCWIDTH = 5;
+	private static final int ARCHEIGHT = 5;
 
 	public IComboBoxUI() {
 		super();
@@ -32,9 +33,10 @@ public class IComboBoxUI extends BasicComboBoxUI {
 //下箭头按钮
 	protected JButton createArrowButton() {
 		arrow = new JButton();
-		arrow.setIcon(XUtil.defaultComboBoxArrowIcon);
+		ImageIcon increase = new ImageIcon("img/DarkDownArrow.png");
+//		arrow.setIcon(increase);
 		arrow.setRolloverEnabled(true);
-		arrow.setRolloverIcon(XUtil.defaultComboBoxArrowIcon_Into);
+		arrow.setRolloverIcon(increase);
 		arrow.setBorder(null);
 		arrow.setBackground(SystemColor.inactiveCaptionBorder);
 		arrow.setOpaque(false);
@@ -56,21 +58,22 @@ public class IComboBoxUI extends BasicComboBoxUI {
 
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		int width = (int) this.getPreferredSize(c).getWidth()
-				+ arrow.getWidth() - 2;
+		int width = c.getWidth()
+				 - 2;
 		int height = 0;
 		int heightOffset = 0;
+		ImageIcon increase = new ImageIcon("img/DarkDownArrow.png");
 		if (comboBox.isPopupVisible()) {
 			heightOffset = 5;
-			height = (int) this.getPreferredSize(c).getHeight();
-			arrow.setIcon(XUtil.defaultComboBoxArrowIcon_Into);
+			height = c.getHeight();
+			arrow.setIcon(increase);
 		} else {
 			heightOffset = 0;
-			height = (int) this.getPreferredSize(c).getHeight() - 1;
-			arrow.setIcon(XUtil.defaultComboBoxArrowIcon);
+			height = c.getHeight() - 1;
+			arrow.setIcon(increase);
 		}
 		if (comboBox.isFocusable()) {
-			g2.setColor(new Color(150, 207, 254));
+			g2.setColor(Color.BLACK);
 		}
 		g2.drawRoundRect(0, 0, width, height + heightOffset, ARCWIDTH,
 				ARCHEIGHT);
@@ -78,7 +81,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 
 	public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
 		Font oldFont = comboBox.getFont();
-		comboBox.setFont(XUtil.defaultComboBoxFont);
+		comboBox.setFont(new Font("宋体", Font.BOLD, 15));
 
 		super.paintCurrentValue(g, bounds, hasFocus);
 		comboBox.setFont(oldFont);

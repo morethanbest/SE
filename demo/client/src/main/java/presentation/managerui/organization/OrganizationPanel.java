@@ -1,5 +1,6 @@
 package presentation.managerui.organization;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -10,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,19 +18,19 @@ import javax.swing.table.DefaultTableModel;
 import po.Organizationtype;
 import po.ResultMessage;
 import presentation.enums.OrganizationType;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.CityVO;
-import vo.ConstantsVO;
 import vo.OrganizationVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
-import java.awt.SystemColor;
 
 public class OrganizationPanel extends JPanel implements ActionListener {
 	private JTable table;
-	private JComboBox<String> orgSelect;
+	private MyComboBox<String> orgSelect;
 	private JComboBox<String> citySelect;
 	private JButton btnAdd;
 	private JButton btnDelete;
@@ -51,7 +51,7 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		separator.setBounds(0, 58, 954, 10);
 		add(separator);
 
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(10, 81, 930, 326);
 		add(scrollPane);
 
@@ -74,7 +74,7 @@ public class OrganizationPanel extends JPanel implements ActionListener {
 		table.setRowHeight(30);
 		scrollPane.setViewportView(table);
 
-		orgSelect = new JComboBox<String>();
+		orgSelect = new MyComboBox<String>();
 		orgSelect.setBounds(0, 0, 174, 31);
 		add(orgSelect);
 		addOrgTypeItems();

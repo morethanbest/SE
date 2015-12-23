@@ -26,10 +26,10 @@ public class IScrollBarUI extends BasicScrollBarUI {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2.translate(thumbBounds.x, thumbBounds.y);
-		g2.setColor(Color.WHITE);
-		g2.drawRoundRect(1, 1, width - 2, height - 2, 5, 5);
+		g2.setColor(Color.BLACK);
+		g2.drawRoundRect(1, 1, width - 3, height - 3, 5, 5);
 
-		g2.setColor(Color.ORANGE);
+		g2.setColor(Color.BLACK);
 		g2.drawLine(3, height / 2, width - 4, height / 2);
 		g2.drawLine(3, height / 2 + 3, width - 4, height / 2 + 3);
 		g2.translate(-thumbBounds.x, -thumbBounds.y);
@@ -64,11 +64,11 @@ public class IScrollBarUI extends BasicScrollBarUI {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
-				g2.setColor(Color.WHITE);
+				g2.setColor(Color.BLACK);
 				g2.drawLine(0, 0, 0, getHeight());
 				g2.drawLine(0, 0, getWidth(), 0 - 1);
-				g2.drawImage(((ImageIcon) XUtil.defaultComboBoxArrowIcon_Into)
-						.getImage(), -1, 0, null);
+				ImageIcon increase = new ImageIcon("img/Increase.png");
+				g2.drawImage(increase.getImage(), 0, 0, null);
 			}
 		};
 		button.setOpaque(false);
@@ -82,11 +82,11 @@ public class IScrollBarUI extends BasicScrollBarUI {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
-				g2.setColor(XUtil.defaultComboBoxBoundsColor);
+				g2.setColor(Color.BLACK);
 				g2.drawLine(0, 0, 0, getHeight());
 				g2.drawLine(0, getHeight() - 1, getWidth(), getHeight());
-				g2.drawImage(((ImageIcon) XUtil.defaultComboBoxArrowIcon_Into)
-						.getImage(), -1, 0, null);
+				ImageIcon decrease = new ImageIcon("img/Decrease.png");
+				g2.drawImage(decrease.getImage(), 0, 0, null);
 			}
 		};
 		button.setOpaque(false);
