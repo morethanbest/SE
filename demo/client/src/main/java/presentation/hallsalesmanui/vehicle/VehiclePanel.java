@@ -1,5 +1,6 @@
 package presentation.hallsalesmanui.vehicle;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -39,6 +40,7 @@ public class VehiclePanel extends JPanel implements ActionListener {
 	public VehiclePanel(String orgcode) {
 		this.orgcode=orgcode;
 		setLayout(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 49, 954, 8);

@@ -2,6 +2,7 @@ package presentation.hallsalesmanui.recordcollect;
 
 import java.awt.CardLayout;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -62,7 +63,8 @@ public class RecordcollectPanel extends JPanel implements ActionListener {
 			CardLayout card) {
 		this.orgcode = orgcode;
 		setLayout(null);
-
+		setBackground(SystemColor.inactiveCaptionBorder);
+		
 		yearSelect = new JComboBox<String>();
 		yearSelect.setBounds(186, 96, 80, 21);
 		yearSelect.setEditable(false);

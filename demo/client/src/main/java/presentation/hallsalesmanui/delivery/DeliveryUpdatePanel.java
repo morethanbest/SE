@@ -1,6 +1,7 @@
 package presentation.hallsalesmanui.delivery;
 
 import java.awt.CardLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -41,7 +42,7 @@ public class DeliveryUpdatePanel extends JPanel {
 	 */
 	public DeliveryUpdatePanel(HallsalesmanPanel parent, CardLayout card) {
 		setLayout(null);
-
+		setBackground(SystemColor.inactiveCaptionBorder);
 		controller = new DeliveryController();
 
 		codeField = new JTextField();
