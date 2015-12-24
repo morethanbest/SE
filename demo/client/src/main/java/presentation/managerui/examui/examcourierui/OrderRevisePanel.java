@@ -81,7 +81,8 @@ public class OrderRevisePanel extends JPanel {
 		setBackground(new Color(244, 247, 252));
 		ea = new ExamController();
 		setLayout(null);
-
+		setBackground(SystemColor.inactiveCaptionBorder);
+		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(98, 43, 2, 466);

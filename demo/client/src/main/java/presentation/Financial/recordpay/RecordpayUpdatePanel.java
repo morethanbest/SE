@@ -2,6 +2,7 @@ package presentation.Financial.recordpay;
 
 import java.awt.CardLayout;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -46,7 +47,7 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 	 */
 	public RecordpayUpdatePanel(FinancialPanel parent, CardLayout card) {
 		controller = new RecordpayController();
-		
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
 		JLabel label = new JLabel("付款信息：");

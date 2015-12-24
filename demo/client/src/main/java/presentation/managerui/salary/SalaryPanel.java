@@ -1,5 +1,6 @@
 package presentation.managerui.salary;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,6 +39,7 @@ public class SalaryPanel extends JPanel implements ActionListener{
 	public SalaryPanel() {
 		// TODO Auto-generated constructor stub
 		setLayout(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		separator = new JSeparator();
 		separator.setBounds(0, 0, 954, 8);
 		add(separator);

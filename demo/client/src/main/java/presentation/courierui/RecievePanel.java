@@ -51,6 +51,7 @@ public class RecievePanel extends JPanel {
 	 */
 	public RecievePanel(CourierPanel courierPanel,MainFrame parent) {
 		setBackground(new Color(244, 247, 252));
+		setBackground(SystemColor.inactiveCaptionBorder);
 		receptionBlService = new ReceptionController();
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);

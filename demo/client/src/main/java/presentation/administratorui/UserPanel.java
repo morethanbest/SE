@@ -1,5 +1,6 @@
 package presentation.administratorui;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,6 +42,7 @@ public class UserPanel extends JPanel implements ActionListener{
 	 */
 	public UserPanel(String orgcode) {
 		this.orgcode=orgcode;
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
 		JSeparator separator = new JSeparator();

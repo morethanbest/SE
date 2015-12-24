@@ -2,6 +2,7 @@ package presentation.administratorui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,6 +37,7 @@ public class AddUserDialog extends JDialog {
 	 */
 	public AddUserDialog(final UserPanel parent) {
 		setBounds(100, 100, 450, 519);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

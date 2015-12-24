@@ -1,6 +1,7 @@
 package presentation.managerui.examui.examhallsalesmanui;
 
 import java.awt.CardLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -42,7 +43,7 @@ public class DeliveryRevisePanel extends JPanel {
 	 */
 	public DeliveryRevisePanel(ExamPanel parent, CardLayout card) {
 		setLayout(null);
-
+		setBackground(SystemColor.inactiveCaptionBorder);
 		ea = new ExamController();
 
 		codeField = new NumberField(20);

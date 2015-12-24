@@ -2,6 +2,7 @@ package presentation.Financial.account;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,6 +28,7 @@ public class AddAccountDialog extends JDialog {
 	 */
 	public AddAccountDialog(final AccountPanel parent) {
 		setBounds(100, 100, 371, 277);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

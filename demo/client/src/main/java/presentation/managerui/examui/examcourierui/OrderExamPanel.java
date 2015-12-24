@@ -1,6 +1,7 @@
 package presentation.managerui.examui.examcourierui;
 
 import java.awt.CardLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -38,7 +39,7 @@ public class OrderExamPanel extends JPanel {
 	 */
 	public OrderExamPanel(ExamPanel parent, CardLayout card, OrderRevisePanel child) {
 		ea = new ExamController();
-		
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

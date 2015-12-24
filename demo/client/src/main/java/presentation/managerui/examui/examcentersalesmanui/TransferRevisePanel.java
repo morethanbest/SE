@@ -30,6 +30,7 @@ import businesslogicservice.managerblservice.OrganizationBlService;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.SystemColor;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -76,7 +77,7 @@ public class TransferRevisePanel extends JPanel {
 	 */
 	public TransferRevisePanel(ExamPanel parent, CardLayout card) {
 		ea = new ExamController();
-
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
 		codeLabel = new JLabel("");

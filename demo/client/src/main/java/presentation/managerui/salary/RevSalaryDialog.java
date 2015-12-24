@@ -1,5 +1,6 @@
 package presentation.managerui.salary;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +41,7 @@ public class RevSalaryDialog extends JDialog {
 		
 		setBounds(100, 100, 450, 350);
 		getContentPane().setLayout(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		
 		joblabel =new JLabel();
 		joblabel.setText("职业");

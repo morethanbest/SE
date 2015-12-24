@@ -1,6 +1,7 @@
 package presentation.Financial.recordpay;
 
 import java.awt.CardLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -34,6 +35,7 @@ public class RecordpayCheckPanel extends JPanel {
 	 */
 	public RecordpayCheckPanel(JPanel parent, CardLayout card, RecordpayUpdatePanel child) {
 		setLayout(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		controller = new RecordpayController();
 
 		

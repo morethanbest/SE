@@ -2,6 +2,7 @@ package presentation.centersalesmanui.transferui;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -69,7 +70,8 @@ public class TransferPanel extends JPanel {
 		recordtransBlService = new CentertransController();
 
 		setLayout(null);
-
+		setBackground(SystemColor.inactiveCaptionBorder);
+		
 		codeLabel = new JLabel("");
 		codeLabel.setBounds(84, 42, 200, 27);
 		add(codeLabel);

@@ -1,5 +1,6 @@
 package presentation.managerui.salary;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,7 +36,7 @@ public class AddSalaryDialog extends JDialog {
 		// TODO Auto-generated constructor stub
 		setBounds(100, 100, 450, 350);
 		getContentPane().setLayout(null);
-		
+		setBackground(SystemColor.inactiveCaptionBorder);
 		job =new JLabel();
 		job.setText("职业");
 		job.setBounds(90, 50, 90, 21);

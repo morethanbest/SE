@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.SystemColor;
 
 public class TipDialog extends JDialog {
 
@@ -20,6 +21,7 @@ public class TipDialog extends JDialog {
 	 */
 	public TipDialog(String s) {
 		getContentPane().setLayout(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setBounds(100, 100, 313, 159);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

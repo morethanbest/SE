@@ -1,5 +1,6 @@
 package presentation.depotui.stockexamui;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -40,6 +41,7 @@ public class StockExamPanel extends JPanel {
 	 */
 	public StockExamPanel(String orgCode) {
 		setLayout(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		
 		startLabel = new JLabel("开始日期：");
 		startLabel.setBounds(28, 240, 160, 18);

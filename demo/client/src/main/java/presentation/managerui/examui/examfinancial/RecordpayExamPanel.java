@@ -1,6 +1,7 @@
 package presentation.managerui.examui.examfinancial;
 
 import java.awt.CardLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -37,7 +38,7 @@ public class RecordpayExamPanel extends JPanel {
 	public RecordpayExamPanel(ExamPanel parent, CardLayout card, RecordpayRevisePanel child) {
 		setLayout(null);
 		ea = new ExamController();
-
+		setBackground(SystemColor.inactiveCaptionBorder);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(14, 13, 917, 335);

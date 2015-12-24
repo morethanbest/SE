@@ -15,6 +15,7 @@ import po.Block;
 import vo.CommodityTakingVO;
 
 import java.awt.event.ActionListener;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -39,6 +40,7 @@ public class StockTakingPanel extends JPanel {
 		
 		stocktakingBlService = new StocktakingController();
 		setLayout(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
 		
 		blockBox = new JComboBox<String>();
 		blockBox.setBounds(250, 0, 174, 24);

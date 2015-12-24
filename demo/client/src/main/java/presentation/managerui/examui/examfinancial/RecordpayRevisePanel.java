@@ -2,6 +2,7 @@ package presentation.managerui.examui.examfinancial;
 
 import java.awt.CardLayout;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -48,7 +49,7 @@ public class RecordpayRevisePanel extends JPanel implements ActionListener {
 	 */
 	public RecordpayRevisePanel(ExamPanel parent, CardLayout card) {
 		ea = new ExamController();
-		
+		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 		
 		JLabel label = new JLabel("付款信息：");

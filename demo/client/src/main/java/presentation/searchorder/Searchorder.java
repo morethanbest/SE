@@ -2,11 +2,13 @@ package presentation.searchorder;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,6 +22,7 @@ import businesslogicservice.logisticsblservice.SearchOrderBlService;
 import init.ClientInitException;
 import init.RMIHelper;
 import presentation.mainui.MainFrame;
+import presentation.tip.TipDialog;
 import vo.LogisticsVO;
 
 public class Searchorder extends JPanel implements ActionListener{
@@ -35,7 +38,7 @@ public class Searchorder extends JPanel implements ActionListener{
 	public Searchorder(MainFrame parent) {
 		this.parent=parent;
 		setLayout(null);
-		
+		setBackground(SystemColor.inactiveCaptionBorder);
 		JLabel label = new JLabel("输入订单号查询订单");
 		label.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		label.setBounds(176, 78, 165, 41);
@@ -118,12 +121,14 @@ public class Searchorder extends JPanel implements ActionListener{
 					}
 				}
 
-				
-
 				scrollPane.repaint();
 				
 
 				
+			}else{
+				TipDialog dialog=new TipDialog("该订单不存在！");
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);		
 			}
 		}
 	}

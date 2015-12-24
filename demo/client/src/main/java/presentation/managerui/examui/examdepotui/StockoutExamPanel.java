@@ -1,6 +1,7 @@
 package presentation.managerui.examui.examdepotui;
 
 import java.awt.CardLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -36,7 +37,7 @@ public class StockoutExamPanel extends JPanel {
 	public StockoutExamPanel(ExamPanel parent, CardLayout card, StockoutRevisePanel child) {
 		ea = new ExamController();
 		setLayout(null);
-		
+		setBackground(SystemColor.inactiveCaptionBorder);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(14, 13, 917, 335);
 		add(scrollPane);
