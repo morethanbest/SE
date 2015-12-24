@@ -28,7 +28,7 @@ public class HallloadTotalWeight {
             totalweight=totalweight+weight;
         }
 
-        return totalweight;
+        return totalweight/1000;
 
     }
 }

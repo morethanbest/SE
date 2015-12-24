@@ -28,7 +28,7 @@ public class TotalWeight {
             totalweight=totalweight+weight;
         }
 
-        return totalweight;
+        return totalweight/1000;
 
     }
 }
