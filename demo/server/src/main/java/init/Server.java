@@ -12,6 +12,8 @@ public class Server {
             Logger.info("Try start server...");
             ServerRMIHelper.init();
             Logger.info("Server is now running!");
+            Serverui serverui=new Serverui();
+    		serverui.start();
         } catch (ServerInitException e) {
             Logger.error("Server starts fail!");
             Logger.error(e);
