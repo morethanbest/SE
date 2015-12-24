@@ -53,7 +53,7 @@ public class ExamPanel extends JPanel {
 	public ExamPanel() {
 		card = new CardLayout();
 		setLayout(card);
-		
+		setOpaque(false);
 		ExamSelectPanel select = new ExamSelectPanel(this, card);
 		//中转中心业务员
 		ArrivalRevisePanel arrivalR = new ArrivalRevisePanel(this, card);

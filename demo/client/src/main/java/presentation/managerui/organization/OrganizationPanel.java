@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import po.Organizationtype;
 import po.ResultMessage;
 import presentation.enums.OrganizationType;
+import presentation.mycomp.WorkPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
@@ -28,7 +28,7 @@ import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 
-public class OrganizationPanel extends JPanel implements ActionListener {
+public class OrganizationPanel extends WorkPanel implements ActionListener {
 	private JTable table;
 	private MyComboBox<String> orgSelect;
 	private JComboBox<String> citySelect;

@@ -10,11 +10,8 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import init.ClientInitException;
-import init.RMIHelper;
 import presentation.Financial.balance.BalancePanel;
 import presentation.mainui.MainFrame;
 import presentation.managerui.account.AccountPanel;
@@ -24,8 +21,9 @@ import presentation.managerui.organization.OrganizationPanel;
 import presentation.managerui.salary.SalaryPanel;
 import presentation.managerui.staff.StaffManagePanel;
 import presentation.managerui.statistics.ManagerStatisticsPanel;
+import presentation.mycomp.PersonPanel;
 
-public class ManagerPanel extends JPanel implements ActionListener {
+public class ManagerPanel extends PersonPanel implements ActionListener {
 	private JPanel panel;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
@@ -51,6 +49,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public ManagerPanel(MainFrame parent) {
+		super();
 		this.parent=parent;
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
@@ -136,6 +135,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		add(btnNewButton_8);
 
 		panel = new JPanel();
+		panel.setOpaque(false);
 		panel.setBackground(SystemColor.controlHighlight);
 		panel.setBounds(14, 75, 954, 420);
 		add(panel);

@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import presentation.mycomp.MyButton_0;
+
 public class test extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -49,7 +51,7 @@ public class test extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				MyButton_0 cancelButton = new MyButton_0("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
