@@ -182,6 +182,11 @@ public class UserPanel extends JPanel implements ActionListener{
 		UserBlService userBlService=new UserController();
 		UserVO VO=userBlService.getUserbyName(username);
 		vo=VO;
+		if(vo==null){
+			TipDialog tipDialog = new TipDialog("该用户不存在！");
+			tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			tipDialog.setVisible(true);
+		}
 	}
 	private void delUser(UserVO vo){
 		UserBlService userBlService=new UserController();
