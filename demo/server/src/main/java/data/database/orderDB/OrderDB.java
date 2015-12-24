@@ -230,10 +230,12 @@ public class OrderDB {
 		dbh=new DBHelper();
 		sql="select orgcode,sendername,senderaddress,senderunit,senderphone,sendercellphone,receivername,receiveraddress,receiverunit,receiverphone,"
 				+ "receivercellphone,numbers,weight,volume,productname,packagetype,totalfee,ordercode,ordertype,codeofreceiving,"
-				+ "receiver,receivingtime,documentstate from OrderPO where ordercode = ?";
+				+ "receiver,receivingtime,documentstate from OrderPO where ordercode = ? and documentstate = ?";
 		pst = dbh.prepare(sql);
 		try {
+			byte[] statebytes=Serialize.Object2Bytes(Formstate.checked);
 			pst.setString(1,ordernum);	
+			pst.setBytes(2, statebytes);
 			ret=pst.executeQuery();
 			if(ret.next()){
 				String sendername=ret.getString(2);
@@ -274,10 +276,12 @@ public class OrderDB {
 	public static double getWeight(String ordernum){
 		double weight=0;
 		dbh=new DBHelper();
-		sql="select weight from OrderPO where ordercode = ?";
+		sql="select weight from OrderPO where ordercode = ? and documentstate=?";
 		pst = dbh.prepare(sql);
 		try {
+			byte[] statebytes=Serialize.Object2Bytes(Formstate.checked);
 			pst.setString(1,ordernum);	
+			pst.setBytes(2, statebytes);
 			ret=pst.executeQuery();
 			if(ret.next()){
 				weight=ret.getDouble(1);

@@ -181,10 +181,12 @@ public class RecordtransDB {
 		RecordtransPO po=null;
 		dbh=new DBHelper();
 		try {
-			sql = "select loadtime,transport,transportcode,"
-					+ "departrue,destination,countercode,supervisor,allcode,fee,documentstate from RecordtransPO where transcode = ?";
+			byte[] statebytes=Serialize.Object2Bytes(Formstate.checked);
+			sql = "select loadtime,transport,transportcode,departrue,destination,countercode,"
+					+ "supervisor,allcode,fee,documentstate from RecordtransPO where transcode = ? and documentstate=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, transcode);
+			pst.setBytes(2, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(8)) ;

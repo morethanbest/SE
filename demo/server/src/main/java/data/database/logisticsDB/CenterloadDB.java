@@ -178,10 +178,12 @@ public class CenterloadDB {
 		CenterloadPO po=null;
 		dbh=new DBHelper();
 		try {
+			byte[] statebytes=Serialize.Object2Bytes(Formstate.checked);
 			sql = "select loadtime,destination,vehiclecode,supervisor,"
-					+ "supercargo,allbarcode,fee,documentstate from CenterloadPO where motorcode = ?";
+					+ "supercargo,allbarcode,fee,documentstate from CenterloadPO where motorcode = ? and documentstate=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, motorcode);
+			pst.setBytes(2, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(6)) ;

@@ -177,9 +177,12 @@ public class RecordcollectDB {
 		RecordcollectPO po;
 		dbh=new DBHelper();
 		try {
-			sql = "select id,collectiontime,accountcode,collectionsum,collectionman,allordercode,documentstate from RecordcollectPO where id like ?";
+			byte[] statebytes=Serialize.Object2Bytes(Formstate.checked);
+			sql = "select id,collectiontime,accountcode,collectionsum,collectionman,allordercode,documentstate from RecordcollectPO where id like ? "
+					+ "and documentstate=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, "%"+orgcode+"%");
+			pst.setBytes(2, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				if(!ret.getString(1).startsWith(orgcode))
@@ -204,9 +207,12 @@ public class RecordcollectDB {
 		RecordcollectPO po;
 		dbh=new DBHelper();
 		try {
-			sql = "select id,collectiontime,accountcode,collectionsum,collectionman,allordercode,documentstate from RecordcollectPO where collectiontime = ?";
+			byte[] statebytes=Serialize.Object2Bytes(Formstate.checked);
+			sql = "select id,collectiontime,accountcode,collectionsum,collectionman,allordercode,documentstate from RecordcollectPO "
+					+ "where collectiontime = ? and documentstate=?";
 			pst = dbh.prepare(sql);
 			pst.setLong(1,date);
+			pst.setBytes(2, statebytes);
 			ret = pst.executeQuery();
 			while (ret.next()) {
 				List<String> allordercode=(List<String>)Serialize.Bytes2Object(ret.getBytes(6));
