@@ -55,4 +55,10 @@ public class UsersData extends UnicastRemoteObject implements UserDataService{
 		// TODO Auto-generated method stub
 		return OrganizationDB.search(organizationcode);
 	}
+
+	@Override
+	public ResultMessage testline(UserPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return ResultMessage.success;
+	}
 }

@@ -17,4 +17,6 @@ public interface UserDataService extends Remote {
 	public ResultMessage update (UserPO po)throws RemoteException;
 	
 	public OrganizationPO getOrganization(String organizationcode)throws RemoteException;
+	
+	public ResultMessage testline(UserPO po)throws RemoteException;
 }

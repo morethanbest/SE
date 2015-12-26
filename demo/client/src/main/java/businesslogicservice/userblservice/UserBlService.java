@@ -16,5 +16,7 @@ public interface UserBlService {
 	public UserVO getUserbyName(String username);
 	
 	public OrganizationVO findOrgByCode(String orgcode);
+	
+
 
 }
