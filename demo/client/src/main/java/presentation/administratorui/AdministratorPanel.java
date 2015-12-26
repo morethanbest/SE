@@ -10,16 +10,13 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-import init.ClientInitException;
-import init.RMIHelper;
-import presentation.mainui.LoginPanel;
 import presentation.mainui.MainFrame;
+import presentation.mycomp.PersonPanel;
 
-public class AdministratorPanel extends JPanel implements ActionListener {
+public class AdministratorPanel extends PersonPanel implements ActionListener {
 	private JPanel panel;
 	private JButton btnNewButton;
 	private JButton btnNewButton1;

@@ -8,42 +8,42 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import po.Arrivalstate;
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.centersalesmanui.CenterSalesmanPanel;
-import presentation.tip.NumberField;
-import presentation.tip.TipDialog;
-import vo.ArrivalVO;
-import vo.OrganizationVO;
 import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.ArrivalPack.ArrivalController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.ArrivalBlService;
 import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import po.Arrivalstate;
+import po.Formstate;
+import po.Organizationtype;
+import po.ResultMessage;
+import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
+import vo.ArrivalVO;
+import vo.OrganizationVO;
 
-public class ArrivalUpdatePanel extends JPanel {
+public class ArrivalUpdatePanel extends WorkPanel {
 	private NumberField codeField;
 	private JLabel orgLabel;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton update;
-	private JComboBox<String> departureBox;
-	private JComboBox<String> stateBox;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue update;
+	private MyComboBox<String> departureBox;
+	private MyComboBox<String> stateBox;
 	private ArrivalBlService controller;
-	private JComboBox<String> typeBox;
-	private JButton button_1;
-	private JButton button_2;
+	private MyComboBox<String> typeBox;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	private ArrivalVO vo;
 	private JLabel label;
 	private JLabel label_1;
@@ -65,28 +65,28 @@ public class ArrivalUpdatePanel extends JPanel {
 		orgLabel.setBounds(139, 50, 242, 18);
 		add(orgLabel);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(139, 132, 74, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(237, 132, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(320, 132, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(547, 131, 242, 24);
 		add(stateBox);
 		addStateTypeItems();
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormat())
@@ -121,7 +121,7 @@ public class ArrivalUpdatePanel extends JPanel {
 		codeField.setBounds(547, 213, 242, 24);
 		add(codeField);
 
-		departureBox = new JComboBox<String>();
+		departureBox = new MyComboBox<String>();
 		departureBox.setBounds(547, 50, 242, 24);
 		add(departureBox);
 		addOrganizationItems(departureBox);
@@ -136,11 +136,11 @@ public class ArrivalUpdatePanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(139, 213, 242, 24);
 		add(typeBox);
 		
-		button_1 = new JButton("返回");
+		button_1 = new MyButton_LightBlue("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());
@@ -150,7 +150,7 @@ public class ArrivalUpdatePanel extends JPanel {
 		button_1.setBounds(716, 333, 122, 36);
 		add(button_1);
 		
-		button_2 = new JButton("恢复原值");
+		button_2 = new MyButton_LightBlue("恢复原值");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);

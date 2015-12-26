@@ -14,19 +14,27 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.OrderPack.OrderController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.OrderBlService;
 import po.Formstate;
 import po.Ordertype;
 import po.ResultMessage;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.mainui.MainFrame;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
@@ -34,43 +42,37 @@ import vo.CityVO;
 import vo.OrderFareVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogic.orderbl.OrderPack.OrderController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
-import businesslogicservice.orderblservice.OrderBlService;
 
-public class OrderPanel extends JPanel {
-	private JTextField snameField;
-	private JTextField sdetailField;
-	private JTextField sjobField;
-	private JTextField stelField;
+public class OrderPanel extends WorkPanel {
+	private MyTextField snameField;
+	private MyTextField sdetailField;
+	private MyTextField sjobField;
+	private MyTextField stelField;
 	private NumberField sphoneField;
-	private JTextField rnameField;
-	private JTextField rdetailField;
-	private JTextField rjobField;
-	private JTextField rtelField;
+	private MyTextField rnameField;
+	private MyTextField rdetailField;
+	private MyTextField rjobField;
+	private MyTextField rtelField;
 	private NumberField rphoneField;
-	private JComboBox<String> packBox;
+	private MyComboBox<String> packBox;
 	private DoubleField numberField;
 	private DoubleField weightField;
 	private DoubleField volumeField;
-	private JTextField nameField;
+	private MyTextField nameField;
 	private JSeparator separator_3;
 	private DoubleField fareField;
-	private JButton button;
-	private JButton button_2;
-	private JButton btnNewButton;
+	private MyButton_LightBlue button;
+	private MyButton_LightBlue button_2;
+	private MyButton_LightBlue btnNewButton;
 	private JSeparator separator_4;
-	private JComboBox<String> scityBox;
-	private JComboBox<String> sareaBox;
-	private JComboBox<String> rcityBox;
-	private JComboBox<String> rareaBox;
-	private JComboBox<String> orderBox;
+	private MyComboBox<String> scityBox;
+	private MyComboBox<String> sareaBox;
+	private MyComboBox<String> rcityBox;
+	private MyComboBox<String> rareaBox;
+	private MyComboBox<String> orderBox;
 	private OrderBlService orderBlService;
-	private JButton button_1;
-	private JButton button_3;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_3;
     /**
 	 * Create the panel.
 	 * 
@@ -91,29 +93,29 @@ public class OrderPanel extends JPanel {
 		label.setBounds(14, 88, 75, 18);
 		add(label);
 
-		snameField = new JTextField();
+		snameField = new MyTextField();
 		snameField.setText("奥巴马");
 		snameField.setBounds(158, 85, 96, 24);
 		add(snameField);
 		snameField.setColumns(10);
 
-		scityBox = new JComboBox<String>();
+		scityBox = new MyComboBox<String>();
 		scityBox.setBounds(319, 85, 86, 24);
 		add(scityBox);
 		addCityItems(scityBox);
 
-		sareaBox = new JComboBox<String>();
+		sareaBox = new MyComboBox<String>();
 		sareaBox.setBounds(466, 85, 143, 24);
 		add(sareaBox);
 		addOrganizationItems(scityBox, sareaBox);
 
-		sdetailField = new JTextField();
+		sdetailField = new MyTextField();
 		sdetailField.setText("白宫");
 		sdetailField.setBounds(712, 85, 256, 24);
 		add(sdetailField);
 		sdetailField.setColumns(10);
 
-		sjobField = new JTextField();
+		sjobField = new MyTextField();
 		sjobField.setText("美国总统");
 		sjobField.setBounds(158, 148, 247, 24);
 		add(sjobField);
@@ -139,29 +141,29 @@ public class OrderPanel extends JPanel {
 		label_1.setBounds(14, 228, 75, 18);
 		add(label_1);
 
-		rnameField = new JTextField();
+		rnameField = new MyTextField();
 		rnameField.setText("习近平");
 		rnameField.setColumns(10);
 		rnameField.setBounds(158, 225, 96, 24);
 		add(rnameField);
 
-		rcityBox = new JComboBox<String>();
+		rcityBox = new MyComboBox<String>();
 		rcityBox.setBounds(319, 225, 86, 24);
 		add(rcityBox);
 		addCityItems(rcityBox);
 
-		rareaBox = new JComboBox<String>();
+		rareaBox = new MyComboBox<String>();
 		rareaBox.setBounds(466, 225, 143, 24);
 		add(rareaBox);
 		addOrganizationItems(rcityBox, rareaBox);
 
-		rdetailField = new JTextField();
+		rdetailField = new MyTextField();
 		rdetailField.setText("中南海");
 		rdetailField.setColumns(10);
 		rdetailField.setBounds(712, 225, 256, 24);
 		add(rdetailField);
 
-		rjobField = new JTextField();
+		rjobField = new MyTextField();
 		rjobField.setText("中国主席");
 		rjobField.setColumns(10);
 		rjobField.setBounds(158, 287, 247, 24);
@@ -201,18 +203,18 @@ public class OrderPanel extends JPanel {
 		add(volumeField);
 		volumeField.setColumns(10);
 
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setText("核弹");
 		nameField.setBounds(725, 361, 203, 24);
 		add(nameField);
 		nameField.setColumns(10);
 
-		packBox = new JComboBox<String>();
+		packBox = new MyComboBox<String>();
 		packBox.setBounds(198, 417, 172, 24);
 		add(packBox);
 		addPackTypeItems();
 
-		orderBox = new JComboBox<String>();
+		orderBox = new MyComboBox<String>();
 		orderBox.setBounds(480, 417, 172, 24);
 		add(orderBox);
 		addOrderTypeItems();
@@ -231,7 +233,7 @@ public class OrderPanel extends JPanel {
 		add(fareField);
 		fareField.setColumns(10);
 
-		button = new JButton("获取运费");
+		button = new MyButton_LightBlue("获取运费");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String saddress = (String) scityBox.getSelectedItem();
@@ -250,7 +252,7 @@ public class OrderPanel extends JPanel {
 		button.setBounds(832, 417, 96, 27);
 		add(button);
 
-		button_2 = new JButton("提交订单");
+		button_2 = new MyButton_LightBlue("提交订单");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 添加订单
@@ -297,7 +299,7 @@ public class OrderPanel extends JPanel {
 		button_2.setBounds(434, 489, 133, 47);
 		add(button_2);
 
-		btnNewButton = new JButton("收件");
+		btnNewButton = new MyButton_LightBlue("收件");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				courierPanel.switchPanel("recieve");
@@ -398,7 +400,7 @@ public class OrderPanel extends JPanel {
 		label_23.setBounds(112, 420, 86, 18);
 		add(label_23);
 		
-		button_1 = new JButton("查看已提交订单");
+		button_1 = new MyButton_LightBlue("查看已提交订单");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				courierPanel.switchPanel("orderc");
@@ -408,7 +410,7 @@ public class OrderPanel extends JPanel {
 		button_1.setBounds(793, 511, 143, 27);
 		add(button_1);
 		
-		button_3 = new JButton("注销");
+		button_3 = new MyButton_LightBlue("注销");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parent.skipToLogin();

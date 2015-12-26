@@ -11,52 +11,53 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import po.Formstate;
-import po.ResultMessage;
-import presentation.centersalesmanui.CenterSalesmanPanel;
-import presentation.enums.TransportTypes;
-import presentation.tip.TipDialog;
-import vo.CityVO;
-import vo.RecordtransVO;
 import businesslogic.logisticsbl.RecordtransPack.CentertransController;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
+import po.Formstate;
+import po.ResultMessage;
+import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.enums.TransportTypes;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.CityVO;
+import vo.RecordtransVO;
 
-public class TransferPanel extends JPanel {
-	private JTextField classField;
-	private JTextField counterField;
-	private JTextField manageField;
+public class TransferPanel extends WorkPanel {
+	private MyTextField classField;
+	private MyTextField counterField;
+	private MyTextField manageField;
 	private JTable table;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<String> typeBox;
-	private JComboBox<String> destinBox;
-	private JButton button;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<String> typeBox;
+	private MyComboBox<String> destinBox;
+	private MyButton_LightBlue button;
 	private RecordtransBlService recordtransBlService;
-	private JButton button_1;
-	private JButton button_2;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	private JLabel codeLabel;
 	private JLabel departureLabel;
 	private JLabel fareLabel;
-	private JButton farebutton;
-	private JButton button_3;
+	private MyButton_LightBlue farebutton;
+	private MyButton_LightBlue button_3;
 
 	private String orgCode;
 	private OrderField orderField;
@@ -80,48 +81,48 @@ public class TransferPanel extends JPanel {
 		departureLabel.setBounds(385, 154, 208, 27);
 		add(departureLabel);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(84, 96, 68, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(166, 96, 52, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(232, 96, 52, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(84, 155, 200, 24);
 		add(typeBox);
 		addTransportTypeItems();
 
-		classField = new JTextField();
+		classField = new MyTextField();
 		classField.setColumns(10);
 		classField.setBounds(84, 215, 200, 24);
 		add(classField);
 
-		counterField = new JTextField();
+		counterField = new MyTextField();
 		counterField.setColumns(10);
 		counterField.setBounds(385, 43, 208, 24);
 		add(counterField);
 
-		manageField = new JTextField();
+		manageField = new MyTextField();
 		manageField.setColumns(10);
 		manageField.setBounds(385, 96, 208, 24);
 		add(manageField);
 
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(385, 215, 208, 24);
 		add(destinBox);
 		addCityItems(destinBox);
 
-		button = new JButton("提交");
+		button = new MyButton_LightBlue("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!checkFormat())
@@ -153,7 +154,7 @@ public class TransferPanel extends JPanel {
 		button.setBounds(416, 348, 113, 27);
 		add(button);
 
-		farebutton = new JButton("获取运费");
+		farebutton = new MyButton_LightBlue("获取运费");
 		farebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!checkFormat())
@@ -180,7 +181,7 @@ public class TransferPanel extends JPanel {
 		label.setBounds(303, 274, 82, 18);
 		add(label);
 
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 
@@ -197,7 +198,7 @@ public class TransferPanel extends JPanel {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
 
-		button_1 = new JButton("增加一条");
+		button_1 = new MyButton_LightBlue("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CheckExistBlService check = new CheckExist();
@@ -222,7 +223,7 @@ public class TransferPanel extends JPanel {
 		button_1.setBounds(851, 252, 61, 27);
 		add(button_1);
 
-		button_2 = new JButton("删除该条");
+		button_2 = new MyButton_LightBlue("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table
@@ -257,7 +258,7 @@ public class TransferPanel extends JPanel {
 				+ (Long) dateBox.getSelectedItem();
 		codeLabel.setText(recordtransBlService.getid(orgCode, date));
 
-		button_3 = new JButton("查看已提交单据");
+		button_3 = new MyButton_LightBlue("查看已提交单据");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent.getSwitcher());

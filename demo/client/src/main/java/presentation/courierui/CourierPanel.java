@@ -2,11 +2,10 @@ package presentation.courierui;
 
 import java.awt.CardLayout;
 
-import javax.swing.JPanel;
-
 import presentation.mainui.MainFrame;
+import presentation.mycomp.PersonPanel;
 
-public class CourierPanel extends JPanel {
+public class CourierPanel extends PersonPanel {
 	
 	private CardLayout card;
 	private OrderPanel order;

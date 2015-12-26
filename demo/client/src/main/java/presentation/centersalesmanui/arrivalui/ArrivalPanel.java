@@ -10,43 +10,43 @@ import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import po.Arrivalstate;
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.centersalesmanui.CenterSalesmanPanel;
-import presentation.tip.NumberField;
-import presentation.tip.TipDialog;
-import vo.ArrivalVO;
-import vo.OrganizationVO;
 import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.ArrivalPack.ArrivalController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.ArrivalBlService;
 import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import po.Arrivalstate;
+import po.Formstate;
+import po.Organizationtype;
+import po.ResultMessage;
+import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
+import vo.ArrivalVO;
+import vo.OrganizationVO;
 
-public class ArrivalPanel extends JPanel {
+public class ArrivalPanel extends WorkPanel {
 	private NumberField codeField;
 	private JLabel orgLabel;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton button;
-	private JComboBox<String> departureBox;
-	private JComboBox<String> stateBox;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue button;
+	private MyComboBox<String> departureBox;
+	private MyComboBox<String> stateBox;
 	private ArrivalBlService arrivalBlService;
-	private JComboBox<String> typeBox;
-	private JButton button_1;
+	private MyComboBox<String> typeBox;
+	private MyButton_LightBlue button_1;
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
@@ -67,28 +67,28 @@ public class ArrivalPanel extends JPanel {
 		orgLabel.setBounds(139, 50, 242, 18);
 		add(orgLabel);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(139, 132, 74, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(237, 132, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(320, 132, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(547, 131, 242, 24);
 		add(stateBox);
 		addStateTypeItems();
 
-		button = new JButton("提交");
+		button = new MyButton_LightBlue("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormat())
@@ -113,7 +113,7 @@ public class ArrivalPanel extends JPanel {
 		codeField.setBounds(547, 213, 242, 24);
 		add(codeField);
 
-		departureBox = new JComboBox<String>();
+		departureBox = new MyComboBox<String>();
 		departureBox.setBounds(547, 50, 242, 24);
 		add(departureBox);
 		addOrganizationItems(departureBox);
@@ -133,11 +133,11 @@ public class ArrivalPanel extends JPanel {
 		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
 		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
 		
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(139, 213, 242, 24);
 		add(typeBox);
 		
-		button_1 = new JButton("查看已提交单据");
+		button_1 = new MyButton_LightBlue("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent.getSwitcher());

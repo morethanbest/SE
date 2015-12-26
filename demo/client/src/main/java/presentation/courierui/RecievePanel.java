@@ -14,9 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
@@ -26,23 +24,27 @@ import businesslogicservice.orderblservice.CheckExistBlService;
 import businesslogicservice.orderblservice.ReceptionBlService;
 import po.ResultMessage;
 import presentation.mainui.MainFrame;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.ReceptionVO;
 
-public class RecievePanel extends JPanel {
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton button_1;
-	private JButton button;
+public class RecievePanel extends WorkPanel {
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button;
 	private OrderField codeField;
-	private JTextField nameField;
+	private MyTextField nameField;
 	private ReceptionBlService receptionBlService;
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
-	private JButton button_2;
+	private MyButton_LightBlue button_2;
     private MainFrame parent;
 	/**
 	 * Create the panel.
@@ -56,7 +58,7 @@ public class RecievePanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setBounds(218, 112, 229, 30);
 		add(nameField);
 		nameField.setColumns(10);
@@ -65,7 +67,7 @@ public class RecievePanel extends JPanel {
 		separator.setBounds(14, 68, 954, 7);
 		add(separator);
 
-		button = new JButton("订单");
+		button = new MyButton_LightBlue("订单");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				courierPanel.switchPanel("order");
@@ -83,7 +85,7 @@ public class RecievePanel extends JPanel {
 		add(codeField);
 		codeField.setColumns(10);
 
-		button_1 = new JButton("确认收件");
+		button_1 = new MyButton_LightBlue("确认收件");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormate())
@@ -105,16 +107,16 @@ public class RecievePanel extends JPanel {
 		button_1.setBounds(293, 416, 113, 27);
 		add(button_1);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(218, 293, 79, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(311, 293, 61, 24);
 		add(monthBox);
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(386, 293, 61, 24);
 		add(dateBox);
 		addDateItems(yearBox, monthBox, dateBox);
@@ -146,7 +148,7 @@ public class RecievePanel extends JPanel {
 		label_2.setBounds(117, 296, 87, 18);
 		add(label_2);
 		
-		button_2 = new JButton("注销");
+		button_2 = new MyButton_LightBlue("注销");
 		button_2.addActionListener(new ActionListener() {
 			
 			@Override

@@ -8,29 +8,28 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
+import businesslogicservice.logisticsblservice.CenterloadBlService;
 import po.Formstate;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.CenterloadVO;
-import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.logisticsblservice.CenterloadBlService;
-import businesslogicservice.managerblservice.ExamCLForms;
 
-public class CenterLoadCheckPanel extends JPanel {
+public class CenterLoadCheckPanel extends WorkPanel {
 	private JTable table;
 	private CenterloadBlService controller;
 	private List<CenterloadVO> volist;
-	private JButton back;
-	private JComboBox<String> stateBox;
-	private JButton revise;
+	private MyButton_LightBlue back;
+	private MyComboBox<String> stateBox;
+	private MyButton_LightBlue revise;
 	private String orgCode;
 	/**
 	 * Create the panel.
@@ -43,7 +42,7 @@ public class CenterLoadCheckPanel extends JPanel {
 		controller = new CenterloadController();
 
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(14, 13, 917, 335);
 		add(scrollPane);
 		
@@ -71,7 +70,7 @@ public class CenterLoadCheckPanel extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
-		revise = new JButton("查看详细");
+		revise = new MyButton_LightBlue("查看详细");
 		revise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
@@ -88,7 +87,7 @@ public class CenterLoadCheckPanel extends JPanel {
 		revise.setBounds(665, 358, 113, 27);
 		add(revise);
 		
-		back = new JButton("返回");
+		back = new MyButton_LightBlue("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);
@@ -97,11 +96,11 @@ public class CenterLoadCheckPanel extends JPanel {
 		back.setBounds(792, 358, 113, 27);
 		add(back);
 		
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
 		
-		JButton act = new JButton("执行");
+		MyButton_LightBlue act = new MyButton_LightBlue("执行");
 		act.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.checked);

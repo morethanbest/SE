@@ -9,32 +9,27 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import po.Formstate;
-import presentation.managerui.examui.ExamPanel;
-import vo.ArrivalVO;
-import vo.RecordtransVO;
 import businesslogic.logisticsbl.RecordtransPack.CentertransController;
-import businesslogic.logisticsbl.RecordtransPack.Recordtrans;
-import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
-import businesslogicservice.managerblservice.ExamArrivals;
-import businesslogicservice.managerblservice.ExamRecordtrans;
+import po.Formstate;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import vo.RecordtransVO;
 
-public class TransferCheckPanel extends JPanel {
+public class TransferCheckPanel extends WorkPanel {
 	private JTable table;
 	private RecordtransBlService controller;
 	private List<RecordtransVO> volist;
-	private JComboBox<String> stateBox;
-	private JButton revise;
-	private JButton back;
+	private MyComboBox<String> stateBox;
+	private MyButton_LightBlue revise;
+	private MyButton_LightBlue back;
 	private String orgCode;
-	private JButton act;
+	private MyButton_LightBlue act;
 
 	/**
 	 * Create the panel.
@@ -46,7 +41,7 @@ public class TransferCheckPanel extends JPanel {
 		
 		controller = new CentertransController();
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(14, 13, 917, 335);
 		add(scrollPane);
 		
@@ -74,7 +69,7 @@ public class TransferCheckPanel extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
-		revise = new JButton("查看详细");
+		revise = new MyButton_LightBlue("查看详细");
 		revise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent);
@@ -86,7 +81,7 @@ public class TransferCheckPanel extends JPanel {
 		revise.setBounds(665, 358, 113, 27);
 		add(revise);
 		
-		back = new JButton("返回");
+		back = new MyButton_LightBlue("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);
@@ -95,11 +90,11 @@ public class TransferCheckPanel extends JPanel {
 		back.setBounds(792, 358, 113, 27);
 		add(back);
 		
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
 		
-		act = new JButton("执行");
+		act = new MyButton_LightBlue("执行");
 		act.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.checked);

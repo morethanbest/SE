@@ -1,63 +1,58 @@
 package presentation.centersalesmanui.loadui;
 
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.logisticsblservice.CenterloadBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
 import po.Formstate;
 import po.Organizationtype;
 import po.ResultMessage;
 import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.TipDialog;
 import vo.CenterloadVO;
-import vo.HallLoadVO;
 import vo.OrganizationVO;
-import businesslogic.logisticsbl.CheckForExistBl;
-import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.logisticsblservice.CenterloadBlService;
-import businesslogicservice.logisticsblservice.CheckForExistBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import java.awt.Component;
-
-public class CenterLoadPanel extends JPanel {
-	private JTextField yaField;
-	private JTextField carField;
-	private JTextField jianField;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton button;
-	private JButton button_1;
+public class CenterLoadPanel extends WorkPanel {
+	private MyTextField yaField;
+	private MyTextField carField;
+	private MyTextField jianField;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue button;
+	private MyButton_LightBlue button_1;
 	private JLabel fareLabel;
 	private JTable table;
-	private JComboBox<String> destinBox;
+	private MyComboBox<String> destinBox;
 	private JLabel moterLabel;
 	private CenterloadBlService centerloadBlService;
-	private JButton button_2;
-	private JButton button_3;
-	private JButton button_4;
+	private MyButton_LightBlue button_2;
+	private MyButton_LightBlue button_3;
+	private MyButton_LightBlue button_4;
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel label_3;
@@ -87,29 +82,29 @@ public class CenterLoadPanel extends JPanel {
 		fareLabel.setBounds(403, 259, 83, 18);
 		add(fareLabel);
 		
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(98, 118, 58, 24);
 		add(yearBox);
 		
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(170, 118, 52, 24);
 		add(monthBox);
 		
 		addYearItems(yearBox, monthBox);
 		
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(236, 118, 52, 24);
 		add(dateBox);
 		
 		addDateItems(yearBox, monthBox, dateBox);
 		
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(98, 187, 190, 24);
 		add(destinBox);
 		
 		addOrganizationItems(destinBox);
 		
-		button = new JButton("提交");
+		button = new MyButton_LightBlue("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormat())
@@ -138,17 +133,17 @@ public class CenterLoadPanel extends JPanel {
 		button.setBounds(416, 348, 113, 27);
 		add(button);
 		
-		carField = new JTextField();
+		carField = new MyTextField();
 		carField.setColumns(10);
 		carField.setBounds(403, 53, 190, 24);
 		add(carField);
 		
-		jianField = new JTextField();
+		jianField = new MyTextField();
 		jianField.setColumns(10);
 		jianField.setBounds(403, 118, 190, 24);
 		add(jianField);
 		
-		yaField = new JTextField();
+		yaField = new MyTextField();
 		yaField.setColumns(10);
 		yaField.setBounds(403, 187, 190, 24);
 		add(yaField);
@@ -171,7 +166,7 @@ public class CenterLoadPanel extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		button_1 = new JButton("获取运费");
+		button_1 = new MyButton_LightBlue("获取运费");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormat())
@@ -207,7 +202,7 @@ public class CenterLoadPanel extends JPanel {
 				+ (Long) dateBox.getSelectedItem();
 		moterLabel.setText(centerloadBlService.getid(orgCode, date));
 		
-		button_2 = new JButton("增加一条");
+		button_2 = new MyButton_LightBlue("增加一条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -217,7 +212,7 @@ public class CenterLoadPanel extends JPanel {
 		button_2.setBounds(671, 295, 113, 27);
 		add(button_2);
 		
-		button_3 = new JButton("删除该条");
+		button_3 = new MyButton_LightBlue("删除该条");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -228,7 +223,7 @@ public class CenterLoadPanel extends JPanel {
 		button_3.setBounds(824, 295, 113, 27);
 		add(button_3);
 		
-		button_4 = new JButton("查看已提交单据");
+		button_4 = new MyButton_LightBlue("查看已提交单据");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent.getSwitcher());

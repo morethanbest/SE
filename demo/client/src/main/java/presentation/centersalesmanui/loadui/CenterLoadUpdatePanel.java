@@ -13,42 +13,44 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.centersalesmanui.CenterSalesmanPanel;
-import presentation.tip.NumberField;
-import presentation.tip.TipDialog;
-import vo.CenterloadVO;
-import vo.OrganizationVO;
 import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.CenterloadBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import po.Formstate;
+import po.Organizationtype;
+import po.ResultMessage;
+import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
+import vo.CenterloadVO;
+import vo.OrganizationVO;
 
-public class CenterLoadUpdatePanel extends JPanel {
-	private JTextField yaField;
+public class CenterLoadUpdatePanel extends WorkPanel {
+	private MyTextField yaField;
 	private NumberField carField;
-	private JTextField jianField;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton update;
+	private MyTextField jianField;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue update;
 	private JTable table;
-	private JComboBox<String> destinBox;
+	private MyComboBox<String> destinBox;
 	private JLabel moterLabel;
 	private String city;
 	private CenterloadBlService controller;
-	private JButton button_2;
-	private JButton button_3;
+	private MyButton_LightBlue button_2;
+	private MyButton_LightBlue button_3;
 	private CenterloadVO vo;
-	private JTextField fareField;
+	private MyTextField fareField;
 
 	/**
 	 * Create the panel.
@@ -63,35 +65,35 @@ public class CenterLoadUpdatePanel extends JPanel {
 		moterLabel.setBounds(14, 53, 242, 24);
 		add(moterLabel);
 		
-		fareField = new JTextField();
+		fareField = new MyTextField();
 		fareField.setText("0");
 		fareField.setBounds(122, 351, 61, 24);
 		add(fareField);
 		fareField.setColumns(10);
 		
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(14, 118, 74, 24);
 		add(yearBox);
 		
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(112, 118, 61, 24);
 		add(monthBox);
 		
 		addYearItems(yearBox, monthBox);
 		
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(195, 118, 61, 24);
 		add(dateBox);
 		
 		addDateItems(yearBox, monthBox, dateBox);
 		
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(14, 187, 242, 24);
 		add(destinBox);
 		
 		addOrganizationItems(destinBox);
 		
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormat())
@@ -125,12 +127,12 @@ public class CenterLoadUpdatePanel extends JPanel {
 		carField.setBounds(351, 53, 242, 24);
 		add(carField);
 		
-		jianField = new JTextField();
+		jianField = new MyTextField();
 		jianField.setColumns(10);
 		jianField.setBounds(351, 118, 242, 24);
 		add(jianField);
 		
-		yaField = new JTextField();
+		yaField = new MyTextField();
 		yaField.setColumns(10);
 		yaField.setBounds(351, 187, 242, 24);
 		add(yaField);
@@ -139,7 +141,7 @@ public class CenterLoadUpdatePanel extends JPanel {
 		label.setBounds(14, 354, 84, 18);
 		add(label);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(661, 53, 284, 229);
 		add(scrollPane);
 		
@@ -164,7 +166,7 @@ public class CenterLoadUpdatePanel extends JPanel {
 		monthBox.addItemListener(listener);
 
 		
-		button_2 = new JButton("增加一条");
+		button_2 = new MyButton_LightBlue("增加一条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -174,7 +176,7 @@ public class CenterLoadUpdatePanel extends JPanel {
 		button_2.setBounds(671, 295, 113, 27);
 		add(button_2);
 		
-		button_3 = new JButton("删除该条");
+		button_3 = new MyButton_LightBlue("删除该条");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();

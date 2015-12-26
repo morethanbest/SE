@@ -4,39 +4,39 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import businesslogic.userbl.UsersPack.UserController;
 import businesslogicservice.userblservice.UserBlService;
 import po.Job;
 import po.ResultMessage;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.UserVO;
 
-public class UserPanel extends JPanel implements ActionListener{
+public class UserPanel extends WorkPanel implements ActionListener{
 	private String orgcode;
-	private JTextField nameToSearch;
-	private JTextField nameField;
-	private JTextField passwordField;
+	private MyTextField nameToSearch;
+	private MyTextField nameField;
+	private MyTextField passwordField;
 	private NumberField orgcodeField;
-	private JTextField orgnameField;
-	private JButton btnSearch;
-	private JButton btnAdd;
-	private JButton btnupdate;
-	private JButton btndelete;
-	private JComboBox<String> jobSelect;
-	private JComboBox<String> orgSelect;
+	private MyTextField orgnameField;
+	private MyButton_LightBlue btnSearch;
+	private MyButton_LightBlue btnAdd;
+	private MyButton_LightBlue btnupdate;
+	private MyButton_LightBlue btndelete;
+	private MyComboBox<String> jobSelect;
+	private MyComboBox<String> orgSelect;
 	private UserVO vo=null;
 	boolean isrev=false;
-	private JTextField cityField;
+	private MyTextField cityField;
 	/**
 	 * Create the panel.
 	 */
@@ -53,16 +53,16 @@ public class UserPanel extends JPanel implements ActionListener{
 		label.setBounds(37, 20, 93, 15);
 		add(label);
 		
-		nameToSearch = new JTextField();
+		nameToSearch = new MyTextField();
 		nameToSearch.setBounds(119, 17, 107, 21);
 		add(nameToSearch);
 		nameToSearch.setColumns(10);
 		
-		btnSearch = new JButton("搜索");
+		btnSearch = new MyButton_LightBlue("搜索");
 		btnSearch.setBounds(264, 16, 93, 23);
 		add(btnSearch);
 		
-		btnAdd = new JButton("增加账号");
+		btnAdd = new MyButton_LightBlue("增加账号");
 		btnAdd.setBounds(677, 16, 93, 23);
 		add(btnAdd);
 		
@@ -70,7 +70,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		label_1.setBounds(249, 67, 54, 15);
 		add(label_1);
 		
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setBounds(341, 67, 182, 21);
 		add(nameField);
 		nameField.setColumns(10);
@@ -79,7 +79,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		label_2.setBounds(249, 115, 54, 15);
 		add(label_2);
 		
-		passwordField = new JTextField();
+		passwordField = new MyTextField();
 		passwordField.setBounds(341, 112, 182, 21);
 		add(passwordField);
 		passwordField.setColumns(10);
@@ -100,11 +100,11 @@ public class UserPanel extends JPanel implements ActionListener{
 		label_6.setBounds(249, 344, 108, 15);
 		add(label_6);
 		
-		btnupdate = new JButton("修改");
+		btnupdate = new MyButton_LightBlue("修改");
 		btnupdate.setBounds(249, 387, 93, 23);
 		add(btnupdate);
 		
-		btndelete = new JButton("删除");
+		btndelete = new MyButton_LightBlue("删除");
 		btndelete.setBounds(469, 387, 93, 23);
 		add(btndelete);
 		
@@ -113,17 +113,17 @@ public class UserPanel extends JPanel implements ActionListener{
 		orgcodeField.setBounds(341, 341, 182, 21);
 		add(orgcodeField);
 		
-		orgnameField = new JTextField();
+		orgnameField = new MyTextField();
 		orgnameField.setColumns(10);
 		orgnameField.setBounds(341, 245, 182, 21);
 		add(orgnameField);
 		
-		jobSelect = new JComboBox<String >();
+		jobSelect = new MyComboBox<String >();
 		jobSelect.setBounds(341, 152, 182, 21);
 		addJobItem();
 		add(jobSelect);
 		
-		orgSelect = new JComboBox<String>();
+		orgSelect = new MyComboBox<String>();
 		orgSelect.setBounds(341, 295, 182, 21);
 		addOrgItem();
 		add(orgSelect);
@@ -131,7 +131,7 @@ public class UserPanel extends JPanel implements ActionListener{
 		label_7.setBounds(249, 200, 54, 15);
 		add(label_7);
 		
-		cityField = new JTextField();
+		cityField = new MyTextField();
 		cityField.setColumns(10);
 		cityField.setBounds(341, 197, 182, 21);
 		add(cityField);

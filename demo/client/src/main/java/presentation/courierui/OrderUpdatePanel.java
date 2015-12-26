@@ -9,62 +9,63 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import po.Formstate;
-import po.Ordertype;
-import po.ResultMessage;
-import presentation.enums.OrderTypes;
-import presentation.enums.PackageTypes;
-import presentation.tip.DoubleField;
-import presentation.tip.NumberField;
-import presentation.tip.TipDialog;
-import vo.CityVO;
-import vo.OrderVO;
-import vo.OrganizationVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.orderbl.OrderPack.OrderController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.OrderBlService;
+import po.Formstate;
+import po.Ordertype;
+import po.ResultMessage;
+import presentation.enums.OrderTypes;
+import presentation.enums.PackageTypes;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.DoubleField;
+import presentation.tip.NumberField;
+import presentation.tip.TipDialog;
+import vo.CityVO;
+import vo.OrderVO;
+import vo.OrganizationVO;
 
-public class OrderUpdatePanel extends JPanel {
-	private JTextField snameField;
-	private JTextField sdetailField;
-	private JTextField sjobField;
-	private JTextField stelField;
+public class OrderUpdatePanel extends WorkPanel {
+	private MyTextField snameField;
+	private MyTextField sdetailField;
+	private MyTextField sjobField;
+	private MyTextField stelField;
 	private NumberField sphoneField;
-	private JTextField rnameField;
-	private JTextField rdetailField;
-	private JTextField rtelField;
+	private MyTextField rnameField;
+	private MyTextField rdetailField;
+	private MyTextField rtelField;
 	private NumberField rphoneField;
-	private JComboBox<String> packBox;
+	private MyComboBox<String> packBox;
 	private DoubleField numberField;
 	private DoubleField weightField;
 	private DoubleField volumeField;
-	private JTextField nameField;
+	private MyTextField nameField;
 	private JLabel label_2;
 	private JSeparator separator_3;
 	private DoubleField fareField;
-	private JButton update;
+	private MyButton_LightBlue update;
 	private JSeparator separator_4;
-	private JComboBox<String> scityBox;
-	private JComboBox<String> sareaBox;
-	private JComboBox<String> rcityBox;
-	private JComboBox<String> rareaBox;
-	private JComboBox<String> orderBox;
-	private JTextField rjobField;
+	private MyComboBox<String> scityBox;
+	private MyComboBox<String> sareaBox;
+	private MyComboBox<String> rcityBox;
+	private MyComboBox<String> rareaBox;
+	private MyComboBox<String> orderBox;
+	private MyTextField rjobField;
 //换成exam开头的方法
 	private OrderBlService controller;
-	private JButton back;
+	private MyButton_LightBlue back;
 	private JLabel orderCode;
 	private OrderVO temp;
 	private JLabel label_3;
@@ -109,35 +110,35 @@ public class OrderUpdatePanel extends JPanel {
 		label.setBounds(14, 88, 75, 18);
 		add(label);
 
-		snameField = new JTextField();
+		snameField = new MyTextField();
 		snameField.setText("奥巴马");
 		snameField.setBounds(158, 85, 96, 24);
 		add(snameField);
 		snameField.setColumns(10);
 
-		scityBox = new JComboBox<String>();
+		scityBox = new MyComboBox<String>();
 		scityBox.setBounds(319, 85, 86, 24);
 		add(scityBox);
 		addCityItems(scityBox);
 
-		sareaBox = new JComboBox<String>();
+		sareaBox = new MyComboBox<String>();
 		sareaBox.setBounds(466, 85, 143, 24);
 		add(sareaBox);
 		addOrganizationItems(scityBox, sareaBox);
 
-		sdetailField = new JTextField();
+		sdetailField = new MyTextField();
 		sdetailField.setText("白宫");
 		sdetailField.setBounds(712, 85, 256, 24);
 		add(sdetailField);
 		sdetailField.setColumns(10);
 
-		sjobField = new JTextField();
+		sjobField = new MyTextField();
 		sjobField.setText("美国总统");
 		sjobField.setBounds(158, 148, 247, 24);
 		add(sjobField);
 		sjobField.setColumns(10);
 
-		stelField = new JTextField();
+		stelField = new MyTextField();
 		stelField.setText("911");
 		stelField.setBounds(466, 148, 159, 24);
 		add(stelField);
@@ -157,35 +158,35 @@ public class OrderUpdatePanel extends JPanel {
 		label_1.setBounds(14, 228, 75, 18);
 		add(label_1);
 
-		rnameField = new JTextField();
+		rnameField = new MyTextField();
 		rnameField.setText("习近平");
 		rnameField.setColumns(10);
 		rnameField.setBounds(158, 225, 96, 24);
 		add(rnameField);
 
-		rcityBox = new JComboBox<String>();
+		rcityBox = new MyComboBox<String>();
 		rcityBox.setBounds(319, 225, 86, 24);
 		add(rcityBox);
 		addCityItems(rcityBox);
 
-		rareaBox = new JComboBox<String>();
+		rareaBox = new MyComboBox<String>();
 		rareaBox.setBounds(466, 225, 143, 24);
 		add(rareaBox);
 		addOrganizationItems(rcityBox, rareaBox);
 
-		rdetailField = new JTextField();
+		rdetailField = new MyTextField();
 		rdetailField.setText("中南海");
 		rdetailField.setColumns(10);
 		rdetailField.setBounds(712, 225, 256, 24);
 		add(rdetailField);
 
-		rjobField = new JTextField();
+		rjobField = new MyTextField();
 		rjobField.setText("中国主席");
 		rjobField.setColumns(10);
 		rjobField.setBounds(158, 287, 247, 24);
 		add(rjobField);
 
-		rtelField = new JTextField();
+		rtelField = new MyTextField();
 		rtelField.setText("110");
 		rtelField.setColumns(10);
 		rtelField.setBounds(466, 287, 159, 24);
@@ -219,18 +220,18 @@ public class OrderUpdatePanel extends JPanel {
 		add(volumeField);
 		volumeField.setColumns(10);
 
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setText("核弹");
 		nameField.setBounds(725, 361, 203, 24);
 		add(nameField);
 		nameField.setColumns(10);
 
-		packBox = new JComboBox<String>();
+		packBox = new MyComboBox<String>();
 		packBox.setBounds(198, 417, 172, 24);
 		add(packBox);
 		addPackTypeItems();
 
-		orderBox = new JComboBox<String>();
+		orderBox = new MyComboBox<String>();
 		orderBox.setBounds(480, 417, 172, 24);
 		add(orderBox);
 		addOrderTypeItems();
@@ -250,7 +251,7 @@ public class OrderUpdatePanel extends JPanel {
 		fareField.setColumns(10);
 //所有运费删掉
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					if(checkFormat()){
@@ -305,7 +306,7 @@ public class OrderUpdatePanel extends JPanel {
 		orderCode.setBounds(107, 37, 314, 18);
 		add(orderCode);
 		
-		back = new JButton("返回");
+		back = new MyButton_LightBlue("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parent.switchPanel("orderc");
@@ -315,7 +316,7 @@ public class OrderUpdatePanel extends JPanel {
 		back.setBounds(734, 473, 122, 36);
 		add(back);
 		
-		JButton undo = new JButton("恢复原值");
+		MyButton_LightBlue undo = new MyButton_LightBlue("恢复原值");
 		undo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(temp);

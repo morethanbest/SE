@@ -9,53 +9,54 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import po.Formstate;
-import po.ResultMessage;
-import presentation.centersalesmanui.CenterSalesmanPanel;
-import presentation.enums.TransportTypes;
-import presentation.tip.TipDialog;
-import vo.CityVO;
-import vo.RecordtransVO;
 import businesslogic.logisticsbl.RecordtransPack.CentertransController;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.RecordtransBlService;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
+import po.Formstate;
+import po.ResultMessage;
+import presentation.centersalesmanui.CenterSalesmanPanel;
+import presentation.enums.TransportTypes;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.CityVO;
+import vo.RecordtransVO;
 
-public class TransferUpdatePanel extends JPanel {
-	private JTextField classField;
-	private JTextField counterField;
-	private JTextField manageField;
+public class TransferUpdatePanel extends WorkPanel {
+	private MyTextField classField;
+	private MyTextField counterField;
+	private MyTextField manageField;
 	private JTable table;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<String> typeBox;
-	private JComboBox<String> destinBox;
-	private JButton update;
-	private JButton button_1;
-	private JButton button_2;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<String> typeBox;
+	private MyComboBox<String> destinBox;
+	private MyButton_LightBlue update;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	private JLabel codeLabel;
 	private JLabel departureLabel;
-	private JButton farebutton;
+	private MyButton_LightBlue farebutton;
 	private RecordtransVO vo;
-	private JTextField fareField;
-	private JButton button;
-	private JButton button_3;
+	private MyTextField fareField;
+	private MyButton_LightBlue button;
+	private MyButton_LightBlue button_3;
 	private RecordtransBlService controller;
 	private OrderField orderField;
 
@@ -75,43 +76,43 @@ public class TransferUpdatePanel extends JPanel {
 		departureLabel.setBounds(385, 154, 208, 27);
 		add(departureLabel);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(84, 96, 68, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(166, 96, 52, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(232, 96, 52, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(84, 155, 200, 24);
 		add(typeBox);
 		addTransportTypeItems();
 
-		classField = new JTextField();
+		classField = new MyTextField();
 		classField.setColumns(10);
 		classField.setBounds(84, 215, 200, 24);
 		add(classField);
 
-		counterField = new JTextField();
+		counterField = new MyTextField();
 		counterField.setColumns(10);
 		counterField.setBounds(385, 43, 208, 24);
 		add(counterField);
 
-		manageField = new JTextField();
+		manageField = new MyTextField();
 		manageField.setColumns(10);
 		manageField.setBounds(385, 96, 208, 24);
 		add(manageField);
 
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(385, 215, 208, 24);
 		add(destinBox);
 		addCityItems(destinBox);
@@ -120,7 +121,7 @@ public class TransferUpdatePanel extends JPanel {
 				typeBox, yearBox, monthBox, dateBox, classField, counterField,
 				update }));
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!checkFormat())
@@ -156,7 +157,7 @@ public class TransferUpdatePanel extends JPanel {
 		label.setBounds(303, 274, 82, 18);
 		add(label);
 
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 
@@ -173,7 +174,7 @@ public class TransferUpdatePanel extends JPanel {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
 
-		button_1 = new JButton("增加一条");
+		button_1 = new MyButton_LightBlue("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CheckExistBlService check = new CheckExist();
@@ -193,7 +194,7 @@ public class TransferUpdatePanel extends JPanel {
 		button_1.setBounds(851, 252, 61, 27);
 		add(button_1);
 
-		button_2 = new JButton("删除该条");
+		button_2 = new MyButton_LightBlue("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table
@@ -205,13 +206,13 @@ public class TransferUpdatePanel extends JPanel {
 		button_2.setBounds(636, 286, 276, 27);
 		add(button_2);
 
-		fareField = new JTextField();
+		fareField = new MyTextField();
 		fareField.setText("0");
 		fareField.setBounds(399, 270, 66, 27);
 		add(fareField);
 		fareField.setColumns(10);
 
-		button = new JButton("恢复原值");
+		button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -220,7 +221,7 @@ public class TransferUpdatePanel extends JPanel {
 		button.setBounds(543, 348, 113, 27);
 		add(button);
 
-		button_3 = new JButton("返回");
+		button_3 = new MyButton_LightBlue("返回");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());
