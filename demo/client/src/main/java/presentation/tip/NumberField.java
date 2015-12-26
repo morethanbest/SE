@@ -1,11 +1,12 @@
 package presentation.tip;
-import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
+
+import presentation.mycomp.MyTextField;
  
-public class NumberField extends JTextField {
+public class NumberField extends MyTextField {
   
      public NumberField(int cols) {
          super(cols);

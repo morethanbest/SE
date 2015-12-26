@@ -31,7 +31,7 @@ public class MyComboBox<E> extends JComboBox {
 
 	private void init() {
 		setOpaque(false);
-		setUI(new IComboBoxUI());
+		setUI(new IComboBoxUI(this));
 		setRenderer(new IComboBoxRenderer<E>());
 		setBackground(SystemColor.inactiveCaptionBorder);
 	}

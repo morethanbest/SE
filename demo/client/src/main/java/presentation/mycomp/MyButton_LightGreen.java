@@ -14,16 +14,16 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JButton;
 
-public class MyButton_0 extends JButton {
+public class MyButton_LightGreen extends JButton {
 	private static final long serialVersionUID = 39082560987930759L;
-//	public static final Color BUTTON_COLOR1 = new Color(203, 232, 205);
-//	public static final Color BUTTON_COLOR2 = new Color(51, 154, 47);
-	public static final Color BUTTON_COLOR1 = new Color(50, 150, 200);
-	public static final Color BUTTON_COLOR2 = new Color(60, 190, 250);
+	public static final Color BUTTON_COLOR1 = new Color(203, 232, 205);
+	public static final Color BUTTON_COLOR2 = new Color(51, 154, 47);
+//	public static final Color BUTTON_COLOR1 = new Color(50, 150, 200);
+//	public static final Color BUTTON_COLOR2 = new Color(60, 190, 250);
 	public static final Color BUTTON_FOREGROUND_COLOR = Color.WHITE;
 	private boolean hover;
 
-	public MyButton_0(String s) {
+	public MyButton_LightGreen(String s) {
 		super(s);
 		setFont(new Font("system", Font.PLAIN, 12));
 		setBorderPainted(false);

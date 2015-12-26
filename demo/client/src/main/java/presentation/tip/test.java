@@ -8,7 +8,10 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import presentation.mycomp.MyButton_0;
+import presentation.mycomp.MyButton_LightGreen;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.MyTextLabel;
+import presentation.mycomp.mycombobox.MyComboBox;
 
 public class test extends JDialog {
 
@@ -33,13 +36,28 @@ public class test extends JDialog {
 	public test() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
+		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		DoubleField doubleField=new DoubleField(12);
-		doubleField.setBounds(330, 96, 155, 20);
+		MyTextField doubleField = new MyTextField();
+		doubleField.setBounds(200, 96, 155, 30);
 		contentPanel.add(doubleField);
 		doubleField.setColumns(10);
+		MyComboBox<String> a = new MyComboBox<String>();
+		a.addItem("1231");
+		a.addItem("营业厅");
+		a.addItem("1231");
+		a.addItem("营业厅");
+		a.addItem("1231");
+		a.addItem("营业厅");
+		a.addItem("1231");
+		// a.addItem("营业厅");
+		// a.addItem("1231");
+		// a.addItem("营业厅");
+		// a.addItem("1231");
+		// a.addItem("营业厅");
+		a.setBounds(1, 1, 200, 27);
+		contentPanel.add(a);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -51,7 +69,8 @@ public class test extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				MyButton_0 cancelButton = new MyButton_0("Cancel");
+				MyButton_LightGreen cancelButton = new MyButton_LightGreen(
+						"Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

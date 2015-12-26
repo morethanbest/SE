@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.SystemColor;
@@ -26,67 +27,58 @@ public class IComboBoxUI extends BasicComboBoxUI {
 	private boolean boundsLight = false;
 	private static final int ARCWIDTH = 5;
 	private static final int ARCHEIGHT = 5;
+	MyComboBox myComboBox;
 
-	public IComboBoxUI() {
+	public IComboBoxUI(MyComboBox myComboBox) {
 		super();
+		this.myComboBox = myComboBox;
+		
 	}
-//下箭头按钮
+
+	//下箭头按钮
+	@Override
 	protected JButton createArrowButton() {
-		arrow = new JButton();
-		ImageIcon increase = new ImageIcon("img/DarkDownArrow.png");
+		arrow = new JButton("");
+//		ImageIcon increase = new ImageIcon("img/DarkDownArrow.png");
 //		arrow.setIcon(increase);
 		arrow.setRolloverEnabled(true);
-		arrow.setRolloverIcon(increase);
+//		arrow.setRolloverIcon(increase);
 		arrow.setBorder(null);
 		arrow.setBackground(SystemColor.inactiveCaptionBorder);
 		arrow.setOpaque(false);
 		arrow.setContentAreaFilled(false);
 		return arrow;
 	}
-
+	@Override
 	public void paint(Graphics g, JComponent c) {
 		hasFocus = comboBox.hasFocus();
 		Graphics2D g2 = (Graphics2D) g;
-		if (!comboBox.isEditable()) {
-			Rectangle r = rectangleForCurrentValue();
-			// 重点:JComboBox的textfield 的绘制 并不是靠Renderer来控制 这点让我很吃惊.
-			// 它会通过paintCurrentValueBackground来绘制背景
-			// 然后通过paintCurrentValue();去绘制JComboBox里显示的值
-			paintCurrentValueBackground(g2, r, hasFocus);
-			paintCurrentValue(g2, r, hasFocus);
-		}
 
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		int width = c.getWidth()
-				 - 2;
-		int height = 0;
-		int heightOffset = 0;
-		ImageIcon increase = new ImageIcon("img/DarkDownArrow.png");
-		if (comboBox.isPopupVisible()) {
-			heightOffset = 5;
-			height = c.getHeight();
-			arrow.setIcon(increase);
-		} else {
-			heightOffset = 0;
-			height = c.getHeight() - 1;
-			arrow.setIcon(increase);
+		int w = c.getWidth();
+		int h = c.getHeight();
+		Image increase = new ImageIcon("img/comboboxback.png").getImage();
+		g2.drawImage(increase, 0, 0, 7, h, 0, 0, 7, 27, null);
+		g2.drawImage(increase, 7, 0, w - 21, h, 7, 0, 97, 27, null);
+		g2.drawImage(increase, w - 21, 0, w, h, 97, 0, 118, 27, null);
+		if (!comboBox.isEditable()) {
+			int x = (int) myComboBox.getLocation().getX();
+			int y = (int) myComboBox.getLocation().getY();
+			g2.setFont(new Font("黑体", Font.PLAIN, 15));
+			g2.drawString((String)myComboBox.getSelectedItem(), x + 5, y + 18);
 		}
-		if (comboBox.isFocusable()) {
-			g2.setColor(Color.BLACK);
-		}
-		g2.drawRoundRect(0, 0, width, height + heightOffset, ARCWIDTH,
-				ARCHEIGHT);
-	}
 
+
+	}
+	@Override
 	public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
 		Font oldFont = comboBox.getFont();
 		comboBox.setFont(new Font("宋体", Font.BOLD, 15));
-
 		super.paintCurrentValue(g, bounds, hasFocus);
 		comboBox.setFont(oldFont);
 	}
-
+	@Override
 	public Dimension getPreferredSize(JComponent c) {
 		return super.getPreferredSize(c);
 	}
@@ -98,7 +90,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 	public void setBoundsLight(boolean boundsLight) {
 		this.boundsLight = boundsLight;
 	}
-
+	@Override
 	protected ComboPopup createPopup() {
 		ComboPopup popup = new BasicComboPopup(comboBox) {
 			protected JScrollPane createScroller() {
@@ -114,7 +106,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
-				g2.setColor(new Color(150, 207, 254));
+				g2.setColor(Color.BLACK);
 				g2.drawRoundRect(0, -arrow.getHeight(), getWidth() - 1,
 						getHeight() + arrow.getHeight() - 1, 0, 0);
 			}
