@@ -9,23 +9,25 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import po.Formstate;
-import presentation.tip.TipDialog;
-import vo.StockinVO;
 import businesslogic.commoditybl.InboundPack.InboundController;
 import businesslogicservice.commodityblservice.InboundBlService;
+import po.Formstate;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.TipDialog;
+import vo.StockinVO;
 
-public class StockinCheckPanel extends JPanel {
-	private JButton revise;
-	private JButton back;
-	private JComboBox<String> stateBox;
+public class StockinCheckPanel extends WorkPanel {
+	private MyButton_LightBlue revise;
+	private MyButton_LightBlue back;
+	private MyComboBox<String> stateBox;
 	private JTable table;
 	private InboundBlService controller;
 	private List<StockinVO> volist;
@@ -67,7 +69,7 @@ public class StockinCheckPanel extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
-		revise = new JButton("查看详细");
+		revise = new MyButton_LightBlue("查看详细");
 		revise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
@@ -84,7 +86,7 @@ public class StockinCheckPanel extends JPanel {
 		revise.setBounds(665, 358, 113, 27);
 		add(revise);
 		
-		back = new JButton("返回");
+		back = new MyButton_LightBlue("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);
@@ -93,7 +95,7 @@ public class StockinCheckPanel extends JPanel {
 		back.setBounds(792, 358, 113, 27);
 		add(back);
 		
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
 		

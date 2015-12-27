@@ -1,5 +1,7 @@
 package presentation.managerui.constant;
 
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -7,42 +9,39 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+import po.ResultMessage;
 import presentation.enums.ContstantType;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.TransportTypes;
 import presentation.managerui.ManagerPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.ConstantsVO;
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import po.ResultMessage;
 
-import java.awt.SystemColor;
-import java.awt.Font;
-
-public class ConstantPanel extends JPanel implements ActionListener {
+public class ConstantPanel extends WorkPanel implements ActionListener {
 	private JTable table;
-	private JComboBox<String> type;
-	private JComboBox<String> select_1;
-	private JComboBox<String> select_2;
+	private MyComboBox<String> type;
+	private MyComboBox<String> select_1;
+	private MyComboBox<String> select_2;
 	private ConstantsBlService constantsBlService;
 	private List<ConstantsVO> list1;
 	private List<CityVO> cityList;
-	private JButton btnDelete;
+	private MyButton_LightBlue btnDelete;
 	private ManagerPanel managerPanel;
-	private JButton btnRevise;
-	private JButton btnAdd;
+	private MyButton_LightBlue btnRevise;
+	private MyButton_LightBlue btnAdd;
 	/**
 	 * Create the panel.
 	 * 
@@ -57,7 +56,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		
 		setLayout(null);
 
-		btnAdd = new JButton("增加");
+		btnAdd = new MyButton_LightBlue("增加");
 		btnAdd.addActionListener(this);
 		btnAdd.setBounds(530, 0, 120, 32);
 		add(btnAdd);
@@ -66,7 +65,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		separator.setBounds(0, 54, 954, 2);
 		add(separator);
 
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(32, 79, 894, 317);
 		add(scrollPane);
 
@@ -90,7 +89,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		scrollPane.setViewportView(table);
 		table.setRowHeight(30);
 
-		type = new JComboBox<String>();
+		type = new MyComboBox<String>();
 		type.setBounds(48, 0, 120, 32);
 		add(type);
 		addTypeItems();
@@ -139,15 +138,15 @@ public class ConstantPanel extends JPanel implements ActionListener {
 			}
 		});
 
-		select_1 = new JComboBox<String>();
+		select_1 = new MyComboBox<String>();
 		select_1.setBounds(182, 0, 120, 32);
 		add(select_1);
 
-		select_2 = new JComboBox<String>();
+		select_2 = new MyComboBox<String>();
 		select_2.setBounds(316, 0, 120, 32);
 		add(select_2);
 
-		btnDelete = new JButton("删除");
+		btnDelete = new MyButton_LightBlue("删除");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table
@@ -203,7 +202,7 @@ public class ConstantPanel extends JPanel implements ActionListener {
 		btnDelete.setBounds(664, 0, 120, 32);
 		add(btnDelete);
 		
-		btnRevise = new JButton("修改");
+		btnRevise = new MyButton_LightBlue("修改");
 		btnRevise.setBounds(798, 0, 113, 32);
 		add(btnRevise);
 		

@@ -8,40 +8,41 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
+import businesslogic.balancebl.RecordpayPack.RecordpayController;
+import businesslogicservice.balanceblservice.RecordpayBlService;
 import po.Formstate;
 import po.RecordpayList;
 import po.ResultMessage;
 import presentation.Financial.FinancialPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.RecordpayVO;
-import businesslogic.balancebl.RecordpayPack.RecordpayController;
-import businesslogicservice.balanceblservice.RecordpayBlService;
 
-public class RecordpayUpdatePanel extends JPanel implements ActionListener {
+public class RecordpayUpdatePanel extends WorkPanel implements ActionListener {
     private DoubleField sumField;
-    private JTextField manField;
+    private MyTextField manField;
     private NumberField accountField;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<String> tipSelect;
-	private JButton update;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<String> tipSelect;
+	private MyButton_LightBlue update;
 	private RecordpayBlService controller;
 	private RecordpayVO vo;
 	private JTextArea textArea;
-	private JButton button_1;
-	private JButton button_2;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	/**
 	 * Create the panel.
 	 */
@@ -79,19 +80,19 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		label_6.setBounds(472, 85, 54, 18);
 		add(label_6);
 		
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(169, 82, 80, 21);
 		yearBox.setEditable(false);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(259, 82, 65, 21);
 		monthBox.setEditable(false);
 		add(monthBox);
 		
 		addYearItems(yearBox, monthBox);
 		
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(334, 82, 65, 21);
 		dateBox.setEditable(false);
 		add(dateBox);
@@ -113,7 +114,7 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		add(sumField);
 		sumField.setColumns(10);
 		
-		manField = new JTextField();
+		manField = new MyTextField();
 		manField.setBounds(169, 181, 230, 21);
 		add(manField);
 		manField.setColumns(10);
@@ -123,12 +124,12 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		add(accountField);
 		accountField.setColumns(10);
 		
-		tipSelect = new JComboBox<String>();
+		tipSelect = new MyComboBox<String>();
 		tipSelect.setBounds(169, 273, 230, 21);
 		addtipItem(tipSelect);
 		add(tipSelect);
 		
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.setBounds(472, 354, 113, 25);
 		add(update);
 		
@@ -140,7 +141,7 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		scrollPane.setViewportView(textArea);
 		update.addActionListener(this);
 		
-		button_1 = new JButton("恢复原值");
+		button_1 = new MyButton_LightBlue("恢复原值");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -149,7 +150,7 @@ public class RecordpayUpdatePanel extends JPanel implements ActionListener {
 		button_1.setBounds(599, 353, 113, 27);
 		add(button_1);
 		
-		button_2 = new JButton("返回");
+		button_2 = new MyButton_LightBlue("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());

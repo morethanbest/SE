@@ -1,25 +1,24 @@
 package presentation.managerui.balance;
 
+import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
 
 import businesslogic.balancebl.BalancePack.BalanceviewController;
 import businesslogicservice.balanceblservice.BalanceviewBlService;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
 import vo.BalanceviewVO;
 
-import javax.swing.JButton;
-
-public class BalancePanel extends JPanel implements ActionListener{
-	private JTextField inField;
-	private JTextField outField;
-	private JTextField interestField;
-	private JButton button;
+public class BalancePanel extends WorkPanel implements ActionListener{
+	private MyTextField inField;
+	private MyTextField outField;
+	private MyTextField interestField;
+	private MyButton_LightBlue button;
     private BalanceviewVO vo=null;
 	/**
 	 * Create the panel.
@@ -48,22 +47,22 @@ public class BalancePanel extends JPanel implements ActionListener{
 		label_3.setBounds(227, 225, 68, 27);
 		add(label_3);
 		
-		inField = new JTextField();
+		inField = new MyTextField();
 		inField.setBounds(374, 84, 145, 32);
 		add(inField);
 		inField.setColumns(10);
 		
-		outField = new JTextField();
+		outField = new MyTextField();
 		outField.setColumns(10);
 		outField.setBounds(374, 154, 145, 32);
 		add(outField);
 		
-		interestField = new JTextField();
+		interestField = new MyTextField();
 		interestField.setColumns(10);
 		interestField.setBounds(374, 220, 145, 32);
 		add(interestField);
 		
-		button = new JButton("生成");
+		button = new MyButton_LightBlue("生成");
 		button.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		button.setBounds(318, 353, 117, 38);
 		add(button);

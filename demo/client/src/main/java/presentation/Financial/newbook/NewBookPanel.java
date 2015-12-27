@@ -8,42 +8,40 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import businesslogic.accountbl.NewBookPack.NewBookController;
 import businesslogicservice.accountblservice.NewBookBlService;
-import po.Job;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.AccountVO;
 import vo.CommodityVO;
-import vo.DriverVO;
 import vo.NewbookVO;
 import vo.OrganizationVO;
-import vo.RecordcollectVO;
 import vo.StaffVO;
 import vo.VehicleVO;
 
-public class NewBookPanel extends JPanel implements ActionListener{
-	private JComboBox<String> yearSelect;
-	private JComboBox<String> monthSelect;
-	private JComboBox<String> daySelect;
-	private JButton btnSearch;
-	private JButton btnaccount;
-	private JButton btnorg;
-	private JButton btnstaff;
-	private JButton btncommodity;
-	private JButton btnvehicle;
-	private JButton btncreate;
+public class NewBookPanel extends WorkPanel implements ActionListener{
+	private MyComboBox<String> yearSelect;
+	private MyComboBox<String> monthSelect;
+	private MyComboBox<String> daySelect;
+	private MyButton_LightBlue btnSearch;
+	private MyButton_LightBlue btnaccount;
+	private MyButton_LightBlue btnorg;
+	private MyButton_LightBlue btnstaff;
+	private MyButton_LightBlue btncommodity;
+	private MyButton_LightBlue btnvehicle;
+	private MyButton_LightBlue btncreate;
 	private JTable table;
-	private JScrollPane scrollPane;
+	private MyScrollPane scrollPane;
     private NewbookVO vo=null;
 	/**
 	 * Create the panel.
@@ -56,7 +54,7 @@ public class NewBookPanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 58, 954, 10);
 		add(separator);
 		
-		yearSelect = new JComboBox<String>();
+		yearSelect = new MyComboBox<String>();
 		yearSelect.setBounds(113, 11, 74, 31);
 		yearSelect.setEditable(false);
 		add(yearSelect);
@@ -68,13 +66,13 @@ public class NewBookPanel extends JPanel implements ActionListener{
 				addDayItem(daySelect,monthSelect,yearSelect);
 			}
 		};
-		monthSelect = new JComboBox<String>();
+		monthSelect = new MyComboBox<String>();
 		monthSelect.setBounds(197, 11, 65, 31);
 		monthSelect.setEditable(false);
 		add(monthSelect);
 		addmonthItem(monthSelect);
 		
-		daySelect = new JComboBox<String>();
+		daySelect = new MyComboBox<String>();
 		daySelect.setBounds(272, 10, 65, 32);
 		daySelect.setEditable(false);
 		add(daySelect);
@@ -85,35 +83,35 @@ public class NewBookPanel extends JPanel implements ActionListener{
 		label.setBounds(10, 10, 93, 31);
 		add(label);
 		
-		btnSearch = new JButton("搜索");
+		btnSearch = new MyButton_LightBlue("搜索");
 		btnSearch.setBounds(392, 10, 93, 33);
 		add(btnSearch);
 		
-		scrollPane = new JScrollPane();
+		scrollPane = new MyScrollPane();
 		scrollPane.setBounds(207, 78, 673, 313);
 		add(scrollPane);
 		
-		btnaccount = new JButton("账户");
+		btnaccount = new MyButton_LightBlue("账户");
 		btnaccount.setBounds(33, 78, 107, 38);
 		add(btnaccount);
 		
-		btnorg = new JButton("机构");
+		btnorg = new MyButton_LightBlue("机构");
 		btnorg.setBounds(33, 146, 107, 40);
 		add(btnorg);
 		
-		btnstaff = new JButton("人员");
+		btnstaff = new MyButton_LightBlue("人员");
 		btnstaff.setBounds(33, 214, 107, 39);
 		add(btnstaff);
 		
-		btncommodity = new JButton("库存");
+		btncommodity = new MyButton_LightBlue("库存");
 		btncommodity.setBounds(33, 282, 107, 39);
 		add(btncommodity);
 		
-		btnvehicle = new JButton("车辆");
+		btnvehicle = new MyButton_LightBlue("车辆");
 		btnvehicle.setBounds(33, 352, 107, 39);
 		add(btnvehicle);
 		
-		btncreate = new JButton("期初建账");
+		btncreate = new MyButton_LightBlue("期初建账");
 		btncreate.setBounds(641, 7, 93, 31);
 		add(btncreate);
 		

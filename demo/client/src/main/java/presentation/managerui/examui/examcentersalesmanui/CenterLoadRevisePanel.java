@@ -1,59 +1,54 @@
 package presentation.managerui.examui.examcentersalesmanui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.managerblservice.ExamCLForms;
+import businesslogicservice.managerblservice.OrganizationBlService;
 import po.Formstate;
 import po.Organizationtype;
 import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.CenterloadVO;
-import vo.HallLoadVO;
 import vo.OrganizationVO;
-import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.logisticsblservice.CenterloadBlService;
-import businesslogicservice.managerblservice.ExamCLForms;
-import businesslogicservice.managerblservice.OrganizationBlService;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-public class CenterLoadRevisePanel extends JPanel {
-	private JTextField yaField;
-	private JTextField carField;
-	private JTextField jianField;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton update;
+public class CenterLoadRevisePanel extends WorkPanel {
+	private MyTextField yaField;
+	private MyTextField carField;
+	private MyTextField jianField;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue update;
 	private JTable table;
-	private JComboBox<String> destinBox;
+	private MyComboBox<String> destinBox;
 	private JLabel moterLabel;
 	private String city;
 	private ExamCLForms ea;
-	private JButton button_2;
-	private JButton button_3;
+	private MyButton_LightBlue button_2;
+	private MyButton_LightBlue button_3;
 	private CenterloadVO vo;
-	private JTextField fareField;
+	private MyTextField fareField;
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel label_3;
@@ -73,35 +68,35 @@ public class CenterLoadRevisePanel extends JPanel {
 		moterLabel.setBounds(14, 53, 242, 24);
 		add(moterLabel);
 		
-		fareField = new JTextField();
+		fareField = new MyTextField();
 		fareField.setText("0");
 		fareField.setBounds(195, 302, 61, 24);
 		add(fareField);
 		fareField.setColumns(10);
 		
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(84, 118, 74, 24);
 		add(yearBox);
 		
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(168, 118, 61, 24);
 		add(monthBox);
 		
 		addYearItems(yearBox, monthBox);
 		
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(239, 118, 61, 24);
 		add(dateBox);
 		
 		addDateItems(yearBox, monthBox, dateBox);
 		
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(84, 186, 216, 24);
 		add(destinBox);
 		
 		addOrganizationItems(destinBox);
 		
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -156,17 +151,17 @@ public class CenterLoadRevisePanel extends JPanel {
 		update.setBounds(503, 376, 113, 27);
 		add(update);
 		
-		carField = new JTextField();
+		carField = new MyTextField();
 		carField.setColumns(10);
 		carField.setBounds(400, 53, 193, 24);
 		add(carField);
 		
-		jianField = new JTextField();
+		jianField = new MyTextField();
 		jianField.setColumns(10);
 		jianField.setBounds(400, 118, 193, 24);
 		add(jianField);
 		
-		yaField = new JTextField();
+		yaField = new MyTextField();
 		yaField.setColumns(10);
 		yaField.setBounds(400, 187, 193, 24);
 		add(yaField);
@@ -175,7 +170,7 @@ public class CenterLoadRevisePanel extends JPanel {
 		label.setBounds(14, 304, 84, 18);
 		add(label);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(661, 53, 284, 229);
 		add(scrollPane);
 		
@@ -200,7 +195,7 @@ public class CenterLoadRevisePanel extends JPanel {
 		monthBox.addItemListener(listener);
 
 		
-		button_2 = new JButton("增加一条");
+		button_2 = new MyButton_LightBlue("增加一条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -210,7 +205,7 @@ public class CenterLoadRevisePanel extends JPanel {
 		button_2.setBounds(671, 295, 113, 27);
 		add(button_2);
 		
-		button_3 = new JButton("删除该条");
+		button_3 = new MyButton_LightBlue("删除该条");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -221,7 +216,7 @@ public class CenterLoadRevisePanel extends JPanel {
 		button_3.setBounds(824, 295, 113, 27);
 		add(button_3);
 		
-		JButton button = new JButton("恢复原值");
+		MyButton_LightBlue button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -230,7 +225,7 @@ public class CenterLoadRevisePanel extends JPanel {
 		button.setBounds(630, 376, 113, 27);
 		add(button);
 		
-		JButton button_1 = new JButton("返回");
+		MyButton_LightBlue button_1 = new MyButton_LightBlue("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);

@@ -10,42 +10,43 @@ import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import po.Arrivalstate;
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.hallsalesmanui.HallsalesmanPanel;
-import presentation.tip.TipDialog;
-import vo.GoodsReceivingVO;
-import vo.OrganizationVO;
 import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.logisticsbl.GoodsRecevingPack.GoodsRecevingController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.logisticsblservice.GoodsRecevingBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import po.Arrivalstate;
+import po.Formstate;
+import po.Organizationtype;
+import po.ResultMessage;
+import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.TipDialog;
+import vo.GoodsReceivingVO;
+import vo.OrganizationVO;
 
-public class GoodRecievingPanel extends JPanel {
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<String> destinBox;
-	private JComboBox<String> stateBox;
-	private JButton button;
+public class GoodRecievingPanel extends WorkPanel {
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<String> destinBox;
+	private MyComboBox<String> stateBox;
+	private MyButton_LightBlue button;
 	private GoodsRecevingBlService goodsRecevingBlService;
-	private JTextField codeField;
+	private MyTextField codeField;
 	private String city;
-	private JComboBox<String> typeBox;
-	private JButton button_1;
+	private MyComboBox<String> typeBox;
+	private MyButton_LightBlue button_1;
 
 	/**
 	 * Create the panel.
@@ -56,33 +57,33 @@ public class GoodRecievingPanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		codeField = new JTextField();
+		codeField = new MyTextField();
 		codeField.setBounds(140, 230, 242, 24);
 		add(codeField);
 		codeField.setColumns(10);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(140, 67, 74, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(238, 67, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(321, 67, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(518, 67, 242, 24);
 		add(destinBox);
 		addOrganizationItems(destinBox);
 
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(518, 149, 242, 24);
 		add(stateBox);
 		addStateTypeItems();
@@ -102,12 +103,12 @@ public class GoodRecievingPanel extends JPanel {
 		monthBox.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
 		dateBox.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(140, 149, 242, 24);
 		add(typeBox);
 		addTypeItems();
 
-		button = new JButton("提交");
+		button = new MyButton_LightBlue("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormat())
@@ -150,7 +151,7 @@ public class GoodRecievingPanel extends JPanel {
 		label_4.setBounds(433, 152, 86, 18);
 		add(label_4);
 		
-		button_1 = new JButton("查看已提交单据");
+		button_1 = new MyButton_LightBlue("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent.getSwitcher());

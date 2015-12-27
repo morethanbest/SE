@@ -7,36 +7,37 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import po.Formstate;
-import po.ResultMessage;
-import presentation.depotui.DepotPanel;
-import presentation.enums.TransportTypes;
-import presentation.tip.OrderField;
-import presentation.tip.TipDialog;
-import vo.StockoutVO;
 import businesslogic.commoditybl.StockoutPack.StockoutController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.commodityblservice.StockoutBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
+import po.Formstate;
+import po.ResultMessage;
+import presentation.depotui.DepotPanel;
+import presentation.enums.TransportTypes;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.StockoutVO;
 
-public class StockoutUpdatePanel extends JPanel {
+public class StockoutUpdatePanel extends WorkPanel {
 	private OrderField orderField;
-	private JComboBox<String> transportBox;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<Long> monthBox;
-	private JButton update;
+	private MyComboBox<String> transportBox;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<Long> monthBox;
+	private MyButton_LightBlue update;
 	private StockoutBlService controller;
 	private StockoutVO vo;
 	private JLabel destinLabel;
-	private JButton button;
-	private JButton button_1;
+	private MyButton_LightBlue button;
+	private MyButton_LightBlue button_1;
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
@@ -57,28 +58,28 @@ public class StockoutUpdatePanel extends JPanel {
 		orderField.setBounds(141, 35, 220, 24);
 		add(orderField);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(555, 35, 78, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(641, 35, 65, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(710, 35, 65, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		transportBox = new JComboBox<String>();
+		transportBox = new MyComboBox<String>();
 		transportBox.setBounds(555, 106, 220, 24);
 		add(transportBox);
 		addTransportTypeItems();
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -112,7 +113,7 @@ public class StockoutUpdatePanel extends JPanel {
 		destinLabel.setBounds(141, 106, 220, 24);
 		add(destinLabel);
 
-		button = new JButton("恢复原值");
+		button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -125,7 +126,7 @@ public class StockoutUpdatePanel extends JPanel {
 		button.setBounds(524, 302, 113, 27);
 		add(button);
 
-		button_1 = new JButton("返回");
+		button_1 = new MyButton_LightBlue("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());

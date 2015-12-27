@@ -10,24 +10,12 @@ import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.depotui.DepotPanel;
-import presentation.enums.TransportTypes;
-import presentation.tip.NumberField;
-import presentation.tip.OrderField;
-import presentation.tip.TipDialog;
-import vo.OrganizationVO;
-import vo.StockoutVO;
 import businesslogic.commoditybl.StockoutPack.StockoutController;
 import businesslogic.logisticsbl.CheckForExistBl;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
@@ -36,18 +24,31 @@ import businesslogicservice.commodityblservice.StockoutBlService;
 import businesslogicservice.logisticsblservice.CheckForExistBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
+import po.Formstate;
+import po.Organizationtype;
+import po.ResultMessage;
+import presentation.depotui.DepotPanel;
+import presentation.enums.TransportTypes;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.NumberField;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.OrganizationVO;
+import vo.StockoutVO;
 
-public class StockoutPanel extends JPanel {
+public class StockoutPanel extends WorkPanel {
 	private OrderField orderField;
 	private NumberField codeField;
-	private JComboBox<String> typeBox;
-	private JComboBox<String> orgBox;
-	private JComboBox<String> transportBox;
-	private JComboBox<Long> yearBox;
+	private MyComboBox<String> typeBox;
+	private MyComboBox<String> orgBox;
+	private MyComboBox<String> transportBox;
+	private MyComboBox<Long> yearBox;
 	private String city;
-	private JComboBox<Long> dateBox;
-	private JComboBox<Long> monthBox;
-	private JButton button;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<Long> monthBox;
+	private MyButton_LightBlue button;
 	private StockoutBlService stockoutBlService;
 	private JLabel label;
 	private JLabel label_1;
@@ -55,7 +56,7 @@ public class StockoutPanel extends JPanel {
 	private JLabel label_3;
 	private JLabel label_4;
 	private JLabel label_5;
-	private JButton button_1;
+	private MyButton_LightBlue button_1;
 
 	/**
 	 * Create the panel.
@@ -71,29 +72,29 @@ public class StockoutPanel extends JPanel {
 		orderField.setBounds(141, 35, 220, 24);
 		add(orderField);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(555, 35, 78, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(641, 35, 65, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(710, 35, 65, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(141, 106, 220, 24);
 		add(typeBox);
 		typeBox.addItem("运往市内");
 		typeBox.addItem("运往市外");
 
-		transportBox = new JComboBox<String>();
+		transportBox = new MyComboBox<String>();
 		transportBox.setBounds(555, 106, 220, 24);
 		add(transportBox);
 		addTransportTypeItems();
@@ -103,12 +104,12 @@ public class StockoutPanel extends JPanel {
 		codeField.setBounds(555, 181, 220, 24);
 		add(codeField);
 
-		orgBox = new JComboBox<String>();
+		orgBox = new MyComboBox<String>();
 		orgBox.setBounds(141, 181, 220, 24);
 		add(orgBox);
 		addOrganizationItems(orgBox);
 
-		button = new JButton("提交");
+		button = new MyButton_LightBlue("提交");
 		button.addActionListener(new ActionListener() {
 			
 
@@ -170,7 +171,7 @@ public class StockoutPanel extends JPanel {
 		label_5.setBounds(476, 38, 82, 18);
 		add(label_5);
 		
-		button_1 = new JButton("查看已提交单据");
+		button_1 = new MyButton_LightBlue("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent.getSwitcher());

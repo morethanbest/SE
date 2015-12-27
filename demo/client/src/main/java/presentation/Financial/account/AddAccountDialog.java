@@ -6,13 +6,13 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import po.ResultMessage;
+import presentation.mycomp.MyButton_LightBlue;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
@@ -57,7 +57,7 @@ public class AddAccountDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				MyButton_LightBlue okButton = new MyButton_LightBlue("OK");
 				okButton.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {

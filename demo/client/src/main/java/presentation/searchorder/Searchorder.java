@@ -1,36 +1,32 @@
 package presentation.searchorder;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import businesslogic.logisticsbl.LogisticsPack.LogisticsSearchController;
 import businesslogicservice.logisticsblservice.SearchOrderBlService;
-import init.ClientInitException;
-import init.RMIHelper;
 import presentation.mainui.MainFrame;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.LogisticsVO;
 
-public class Searchorder extends JPanel implements ActionListener{
-	private JTextField textField;
-	private JScrollPane scrollPane;
-	JButton searchBtn;
+public class Searchorder extends WorkPanel implements ActionListener{
+	private MyTextField textField;
+	private MyScrollPane scrollPane;
+	MyButton_LightBlue searchBtn;
 	LogisticsVO vo=null;
-	private JButton button;
+	private MyButton_LightBlue button;
 	private MainFrame parent;
 	/**
 	 * Create the panel.
@@ -44,23 +40,23 @@ public class Searchorder extends JPanel implements ActionListener{
 		label.setBounds(176, 78, 165, 41);
 		add(label);
 		
-		textField = new JTextField();
+		textField = new MyTextField();
 		textField.setBounds(124, 199, 274, 47);
 		add(textField);
 		textField.setColumns(10);
 		
-		searchBtn= new JButton("查询");
+		searchBtn= new MyButton_LightBlue("查询");
 		searchBtn.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		searchBtn.setBounds(216, 326, 99, 31);
 		add(searchBtn);
 		searchBtn.addActionListener(this);
 		
-		scrollPane=new JScrollPane();
+		scrollPane=new MyScrollPane();
 		scrollPane.setBounds(450,78,500,442);
 		scrollPane.setBorder(null);
 		add(scrollPane);
 		
-		button = new JButton("返回");
+		button = new MyButton_LightBlue("返回");
 		button.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		button.setBounds(851, 23, 99, 31);
 		add(button);

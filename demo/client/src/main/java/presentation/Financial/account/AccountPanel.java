@@ -4,29 +4,29 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import businesslogic.accountbl.AccountPack.AccountController;
 import businesslogicservice.accountblservice.AccountBlService;
 import po.ResultMessage;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
 import presentation.tip.NumberField;
 import vo.AccountVO;
 
-public class AccountPanel extends JPanel implements ActionListener{
+public class AccountPanel extends WorkPanel implements ActionListener{
 	private String orgcode;
 	private NumberField nameToSearch;
 	private NumberField nameField;
-	private JTextField moneyField;
+	private MyTextField moneyField;
 	
-	private JButton btnSearch;
-	private JButton btnadd;
-	private JButton btnupdate;
-	private JButton btndelete;
+	private MyButton_LightBlue btnSearch;
+	private MyButton_LightBlue btnadd;
+	private MyButton_LightBlue btnupdate;
+	private MyButton_LightBlue btndelete;
 	
 	private AccountVO vo=null;
 	
@@ -52,11 +52,11 @@ public class AccountPanel extends JPanel implements ActionListener{
 		add(nameToSearch);
 		nameToSearch.setColumns(10);
 		
-		btnSearch = new JButton("搜索");
+		btnSearch = new MyButton_LightBlue("搜索");
 		btnSearch.setBounds(375, 16, 93, 23);
 		add(btnSearch);
 		
-		btnadd = new JButton("增加账户");
+		btnadd = new MyButton_LightBlue("增加账户");
 		btnadd.setBounds(632, 17, 93, 23);
 		add(btnadd);
 		
@@ -77,16 +77,16 @@ public class AccountPanel extends JPanel implements ActionListener{
 		label_3.setBounds(241, 220, 54, 15);
 		add(label_3);
 		
-		moneyField = new JTextField();
+		moneyField = new MyTextField();
 		moneyField.setColumns(10);
 		moneyField.setBounds(335, 217, 133, 21);
 		add(moneyField);
 		
-		btnupdate = new JButton("修改");
+		btnupdate = new MyButton_LightBlue("修改");
 		btnupdate.setBounds(202, 356, 93, 23);
 		add(btnupdate);
 		
-		btndelete = new JButton("删除");
+		btndelete = new MyButton_LightBlue("删除");
 		btndelete.setBounds(460, 356, 93, 23);
 		add(btndelete);
 		

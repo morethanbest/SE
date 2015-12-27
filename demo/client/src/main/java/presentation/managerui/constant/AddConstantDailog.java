@@ -2,6 +2,7 @@ package presentation.managerui.constant;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -9,35 +10,35 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogicservice.managerblservice.ConstantsBlService;
 import po.ResultMessage;
 import presentation.enums.ContstantType;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.enums.TransportTypes;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.DoubleField;
 import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.ConstantsVO;
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import java.awt.SystemColor;
 
 
 public class AddConstantDailog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private DoubleField textField;
-	private JComboBox<String> type;
-	private JComboBox<String> select_1;
-	private JComboBox<String> select_2;
-	private JTextField cityField;
+	private MyComboBox<String> type;
+	private MyComboBox<String> select_1;
+	private MyComboBox<String> select_2;
+	private MyTextField cityField;
 	/**
 	 * Create the dialog.
 	 */
@@ -51,7 +52,7 @@ public class AddConstantDailog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		type = new JComboBox<String>();
+		type = new MyComboBox<String>();
 		type.setBounds(14, 37, 187, 32);
 		contentPanel.add(type);
 		addTypeItems();
@@ -103,17 +104,17 @@ public class AddConstantDailog extends JDialog {
 			}
 		});
 
-		select_1 = new JComboBox<String>();
+		select_1 = new MyComboBox<String>();
 		select_1.setBounds(231, 37, 187, 32);
 		contentPanel.add(select_1);
 		
-		cityField = new JTextField();
+		cityField = new MyTextField();
 		cityField.setBounds(231, 37, 187, 32);
 		contentPanel.add(cityField);
 		cityField.setColumns(10);
 		cityField.setVisible(false);
 		
-		select_2 = new JComboBox<String>();
+		select_2 = new MyComboBox<String>();
 		select_2.setBounds(14, 142, 187, 32);
 		contentPanel.add(select_2);
 
@@ -134,7 +135,7 @@ public class AddConstantDailog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
-				JButton okButton = new JButton("确定");
+				MyButton_LightBlue okButton = new MyButton_LightBlue("确定");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ConstantsBlService constantsBlService = new ConstantsController();

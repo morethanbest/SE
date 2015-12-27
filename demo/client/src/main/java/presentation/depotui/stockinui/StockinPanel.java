@@ -10,47 +10,48 @@ import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import po.Block;
-import po.CommodityLocation;
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.depotui.DepotPanel;
-import presentation.tip.OrderField;
-import presentation.tip.TipDialog;
-import vo.OrganizationVO;
-import vo.StockinVO;
 import businesslogic.commoditybl.InboundPack.InboundController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.commodityblservice.InboundBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
+import po.Block;
+import po.CommodityLocation;
+import po.Formstate;
+import po.Organizationtype;
+import po.ResultMessage;
+import presentation.depotui.DepotPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.OrganizationVO;
+import vo.StockinVO;
 
-public class StockinPanel extends JPanel {
+public class StockinPanel extends WorkPanel {
 	private OrderField codeField;
-	private JComboBox<String> typeBox;
-	private JComboBox<String> orgBox;
-	private JButton button;
-	private JComboBox<String> quBox;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
+	private MyComboBox<String> typeBox;
+	private MyComboBox<String> orgBox;
+	private MyButton_LightBlue button;
+	private MyComboBox<String> quBox;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
 	private String city;
 	private String orgcode;
 	private CommodityLocation location;
 	private InboundBlService inboundBlService;
-	private JComboBox<Long> paiBox;
-	private JComboBox<Long> jiaBox;
-	private JComboBox<Long> weiBox;
+	private MyComboBox<Long> paiBox;
+	private MyComboBox<Long> jiaBox;
+	private MyComboBox<Long> weiBox;
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
@@ -60,7 +61,7 @@ public class StockinPanel extends JPanel {
 	private JLabel label_7;
 	private JLabel label_8;
 	private JLabel label_6;
-	private JButton button_1;
+	private MyButton_LightBlue button_1;
 
 	/**
 	 * Create the panel.
@@ -77,29 +78,29 @@ public class StockinPanel extends JPanel {
 		add(codeField);
 		codeField.setColumns(10);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(557, 35, 78, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(643, 35, 65, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(712, 35, 65, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(143, 106, 220, 24);
 		add(typeBox);
 		typeBox.addItem("运往市内");
 		typeBox.addItem("运往市外");
 
-		orgBox = new JComboBox<String>();
+		orgBox = new MyComboBox<String>();
 		orgBox.setBounds(143, 185, 220, 24);
 		add(orgBox);
 		addOrganizationItems(orgBox);
@@ -124,21 +125,21 @@ public class StockinPanel extends JPanel {
 		label.setBounds(823, 188, 72, 18);
 		add(label);
 
-		paiBox = new JComboBox<Long>();
+		paiBox = new MyComboBox<Long>();
 		paiBox.setBounds(699, 106, 78, 24);
 		add(paiBox);
 
-		jiaBox = new JComboBox<Long>();
+		jiaBox = new MyComboBox<Long>();
 		jiaBox.setBounds(557, 185, 78, 24);
 		add(jiaBox);
 
-		weiBox = new JComboBox<Long>();
+		weiBox = new MyComboBox<Long>();
 		weiBox.setBounds(699, 185, 78, 24);
 		add(weiBox);
 
 		
 
-		quBox = new JComboBox<String>();
+		quBox = new MyComboBox<String>();
 		quBox.setBounds(557, 106, 78, 24);
 		add(quBox);
 		addBlockItems();
@@ -163,7 +164,7 @@ public class StockinPanel extends JPanel {
 		weiBox.addItemListener(listener2);
 
 		
-		button = new JButton("提交");
+		button = new MyButton_LightBlue("提交");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!checkFormat())
@@ -221,7 +222,7 @@ public class StockinPanel extends JPanel {
 		label_6.setBounds(505, 188, 51, 18);
 		add(label_6);
 		
-		button_1 = new JButton("查看已提交单据");
+		button_1 = new MyButton_LightBlue("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent.getSwitcher());

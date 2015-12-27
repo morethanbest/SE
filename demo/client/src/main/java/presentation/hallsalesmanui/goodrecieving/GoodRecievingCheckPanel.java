@@ -8,34 +8,31 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.logisticsbl.GoodsRecevingPack.GoodsRecevingController;
+import businesslogicservice.logisticsblservice.GoodsRecevingBlService;
 import po.Formstate;
-import presentation.hallsalesmanui.HallsalesmanPanel;
-import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.GoodsReceivingVO;
-import businesslogic.logisticsbl.GoodsRecevingPack.GoodsRecevingController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.logisticsblservice.GoodsRecevingBlService;
-import businesslogicservice.managerblservice.ExamGoodsRecevings;
 
-public class GoodRecievingCheckPanel extends JPanel {
-	private JButton revise;
-	private JButton back;
-	private JComboBox<String> stateBox;
+public class GoodRecievingCheckPanel extends WorkPanel {
+	private MyButton_LightBlue revise;
+	private MyButton_LightBlue back;
+	private MyComboBox<String> stateBox;
 	private GoodsRecevingBlService controller;
 	private List<GoodsReceivingVO> volist;
 	private JTable table;
 	private String orgCode;
 	private String orgName;
-	private JButton act;
+	private MyButton_LightBlue act;
 	/**
 	 * Create the panel.
 	 */
@@ -46,7 +43,7 @@ public class GoodRecievingCheckPanel extends JPanel {
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(14, 13, 917, 335);
 		add(scrollPane);
 		
@@ -74,7 +71,7 @@ public class GoodRecievingCheckPanel extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
-		revise = new JButton("查看详细");
+		revise = new MyButton_LightBlue("查看详细");
 		revise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
@@ -91,7 +88,7 @@ public class GoodRecievingCheckPanel extends JPanel {
 		revise.setBounds(665, 358, 113, 27);
 		add(revise);
 		
-		back = new JButton("返回");
+		back = new MyButton_LightBlue("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);
@@ -100,11 +97,11 @@ public class GoodRecievingCheckPanel extends JPanel {
 		back.setBounds(792, 358, 113, 27);
 		add(back);
 		
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
 		
-		act = new JButton("执行");
+		act = new MyButton_LightBlue("执行");
 		act.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.checked);

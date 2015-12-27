@@ -1,31 +1,30 @@
 package presentation.depotui.stocktakingui;
 
-import javax.swing.JPanel;
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JButton;
-import javax.swing.table.DefaultTableModel;
-
-import businesslogic.commoditybl.StocktakingPack.StocktakingController;
-import businesslogicservice.commodityblservice.StockExaminationBlService;
-import businesslogicservice.commodityblservice.StocktakingBlService;
-import po.Block;
-import vo.CommodityTakingVO;
-
-import java.awt.event.ActionListener;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
 import java.util.List;
 
-public class StockTakingPanel extends JPanel {
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import businesslogic.commoditybl.StocktakingPack.StocktakingController;
+import businesslogicservice.commodityblservice.StocktakingBlService;
+import po.Block;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import vo.CommodityTakingVO;
+
+public class StockTakingPanel extends WorkPanel {
 	private JTable table;
-	private JComboBox<String> blockBox;
-	private JButton button;
+	private MyComboBox<String> blockBox;
+	private MyButton_LightBlue button;
 	private JLabel label;
 	private List<CommodityTakingVO> list1;
 	private List<CommodityTakingVO> list2;
@@ -42,7 +41,7 @@ public class StockTakingPanel extends JPanel {
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		
-		blockBox = new JComboBox<String>();
+		blockBox = new MyComboBox<String>();
 		blockBox.setBounds(250, 0, 174, 24);
 		blockBox.addItemListener(new ItemListener() {
 			
@@ -54,7 +53,7 @@ public class StockTakingPanel extends JPanel {
 		add(blockBox);
 		addBlockItems();
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(14, 38, 917, 369);
 		add(scrollPane);
 		
@@ -80,7 +79,7 @@ public class StockTakingPanel extends JPanel {
 		label.setBounds(14, 3, 105, 18);
 		add(label);
 		
-		button = new JButton("开始盘点");
+		button = new MyButton_LightBlue("开始盘点");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Calendar c = Calendar.getInstance();

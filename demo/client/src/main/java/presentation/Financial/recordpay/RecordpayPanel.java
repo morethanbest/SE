@@ -8,39 +8,40 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
+import businesslogic.balancebl.RecordpayPack.RecordpayController;
+import businesslogicservice.balanceblservice.RecordpayBlService;
 import po.Formstate;
 import po.RecordpayList;
 import po.ResultMessage;
 import presentation.Financial.FinancialPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.RecordpayVO;
-import businesslogic.balancebl.RecordpayPack.RecordpayController;
-import businesslogicservice.balanceblservice.RecordpayBlService;
 
-public class RecordpayPanel extends JPanel implements ActionListener {
+public class RecordpayPanel extends WorkPanel implements ActionListener {
 	private DoubleField sumField;
-	private JTextField manField;
+	private MyTextField manField;
 	private NumberField accountField;
-	private JComboBox<String> yearSelect;
-	private JComboBox<String> monthSelect;
-	private JComboBox<String> daySelect;
-	private JComboBox<String> tipSelect;
-	private JButton button;
+	private MyComboBox<String> yearSelect;
+	private MyComboBox<String> monthSelect;
+	private MyComboBox<String> daySelect;
+	private MyComboBox<String> tipSelect;
+	private MyButton_LightBlue button;
 	private RecordpayVO vo = null;
 	private JTextArea textArea;
 	private RecordpayBlService controller;
-	private JButton button_1;
+	private MyButton_LightBlue button_1;
 
 	/**
 	 * Create the panel.
@@ -50,7 +51,7 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 
-		yearSelect = new JComboBox<String>();
+		yearSelect = new MyComboBox<String>();
 		yearSelect.setBounds(169, 82, 80, 21);
 		yearSelect.setEditable(false);
 		add(yearSelect);
@@ -62,13 +63,13 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 				addDayItem(daySelect, monthSelect, yearSelect);
 			}
 		};
-		monthSelect = new JComboBox<String>();
+		monthSelect = new MyComboBox<String>();
 		monthSelect.setBounds(259, 82, 65, 21);
 		monthSelect.setEditable(false);
 		add(monthSelect);
 		addmonthItem(monthSelect);
 
-		daySelect = new JComboBox<String>();
+		daySelect = new MyComboBox<String>();
 		daySelect.setBounds(334, 82, 65, 21);
 		daySelect.setEditable(false);
 		add(daySelect);
@@ -82,7 +83,7 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		add(sumField);
 		sumField.setColumns(10);
 
-		manField = new JTextField();
+		manField = new MyTextField();
 		manField.setBounds(169, 181, 230, 21);
 		add(manField);
 		manField.setColumns(10);
@@ -92,12 +93,12 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		add(accountField);
 		accountField.setColumns(10);
 
-		tipSelect = new JComboBox<String>();
+		tipSelect = new MyComboBox<String>();
 		tipSelect.setBounds(169, 273, 230, 21);
 		addtipItem(tipSelect);
 		add(tipSelect);
 
-		button = new JButton("提交");
+		button = new MyButton_LightBlue("提交");
 		button.setBounds(387, 417, 93, 23);
 		add(button);
 
@@ -109,7 +110,7 @@ public class RecordpayPanel extends JPanel implements ActionListener {
 		scrollPane.setViewportView(textArea);
 		button.addActionListener(this);
 
-		button_1 = new JButton("查看已提交单据");
+		button_1 = new MyButton_LightBlue("查看已提交单据");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent.getSwitcher());

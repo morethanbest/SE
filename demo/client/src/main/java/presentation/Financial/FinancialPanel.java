@@ -23,8 +23,9 @@ import presentation.Financial.recordpay.RecordpayPanel;
 import presentation.Financial.recordpay.RecordpayUpdatePanel;
 import presentation.Financial.statistics.StatisticsPanel;
 import presentation.mainui.MainFrame;
+import presentation.mycomp.PersonPanel;
 
-public class FinancialPanel extends JPanel implements ActionListener{
+public class FinancialPanel extends PersonPanel implements ActionListener{
 	private JPanel switcher;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;

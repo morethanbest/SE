@@ -2,39 +2,31 @@ package presentation.managerui.constant;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogicservice.managerblservice.ConstantsBlService;
 import po.ResultMessage;
-import presentation.enums.ContstantType;
-import presentation.enums.OrderTypes;
-import presentation.enums.PackageTypes;
-import presentation.enums.TransportTypes;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
 import presentation.tip.DoubleField;
 import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.ConstantsVO;
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import java.awt.SystemColor;
 
 
 public class RevConstantDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private DoubleField valueField;
-    private	JTextField nameField;
+    private	MyTextField nameField;
 	/**
 	 * Create the dialog.
 	 */
@@ -62,7 +54,7 @@ public class RevConstantDialog extends JDialog {
 		label_1.setBounds(65, 39, 73, 32);
 		contentPanel.add(label_1);
 		
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setColumns(10);
 		nameField.setBounds(199, 40, 187, 32);
 		contentPanel.add(nameField);
@@ -75,7 +67,7 @@ public class RevConstantDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
-				JButton okButton = new JButton("确定");
+				MyButton_LightBlue okButton = new MyButton_LightBlue("确定");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ConstantsBlService constantsBlService = new ConstantsController();
@@ -129,7 +121,7 @@ public class RevConstantDialog extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("取消");
+				MyButton_LightBlue cancelButton = new MyButton_LightBlue("取消");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

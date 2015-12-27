@@ -1,8 +1,5 @@
 package presentation.depotui;
 
-import init.ClientInitException;
-import init.RMIHelper;
-
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -12,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import presentation.depotui.stockexamui.StockExamPanel;
@@ -24,8 +20,9 @@ import presentation.depotui.stockoutui.StockoutPanel;
 import presentation.depotui.stockoutui.StockoutUpdatePanel;
 import presentation.depotui.stocktakingui.StockTakingPanel;
 import presentation.mainui.MainFrame;
+import presentation.mycomp.PersonPanel;
 
-public class DepotPanel extends JPanel implements ActionListener {
+public class DepotPanel extends PersonPanel implements ActionListener {
 	private JButton button;
 	private JButton button_1;
 	private JButton button_2;

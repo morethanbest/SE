@@ -8,45 +8,46 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import businesslogic.balancebl.DebitnotePack.DebitnoteController;
 import businesslogicservice.balanceblservice.DebitnoteBlService;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import vo.CityVO;
 import vo.DebitnoteVO;
 import vo.OrganizationVO;
 import vo.RecordcollectVO;
-import javax.swing.JLabel;
 
-public class DebitnotePanel extends JPanel implements ActionListener{
+public class DebitnotePanel extends WorkPanel implements ActionListener{
 	private JTable table;
 	private JTable ordertable;
-	private JComboBox<String> orgSelect;
-	private JComboBox<String> citySelect;
+	private MyComboBox<String> orgSelect;
+	private MyComboBox<String> citySelect;
 	private List<OrganizationVO> orglist;
     private DebitnoteVO vo;
-    private JButton btnSearchByOrg;
-	private JComboBox<String> yearSelect;
-	private JComboBox<String> monthSelect;
-	private JComboBox<String> daySelect;
-	private JButton btnSearchByDay;
-	private JTextField sumField;
-    private JTextField manField;
-	private JTextField accountField;
-	private JTextField yearField;
-	private JTextField monthField;
-	private JTextField dayField;
-	private JScrollPane scrollPane;
-	private JScrollPane orderscrollPane;
+    private MyButton_LightBlue btnSearchByOrg;
+	private MyComboBox<String> yearSelect;
+	private MyComboBox<String> monthSelect;
+	private MyComboBox<String> daySelect;
+	private MyButton_LightBlue btnSearchByDay;
+	private MyTextField sumField;
+    private MyTextField manField;
+	private MyTextField accountField;
+	private MyTextField yearField;
+	private MyTextField monthField;
+	private MyTextField dayField;
+	private MyScrollPane scrollPane;
+	private MyScrollPane orderscrollPane;
 	/**
 	 * Create the panel.
 	 */
@@ -58,11 +59,11 @@ public class DebitnotePanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 58, 954, 10);
 		add(separator);
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new MyScrollPane();
 		scrollPane.setBounds(10, 81, 304, 326);
 		add(scrollPane);
 
-		yearSelect = new JComboBox<String>();
+		yearSelect = new MyComboBox<String>();
 		yearSelect.setBounds(552, 0, 74, 31);
 		yearSelect.setEditable(false);
 		add(yearSelect);
@@ -74,13 +75,13 @@ public class DebitnotePanel extends JPanel implements ActionListener{
 				addDayItem(daySelect,monthSelect,yearSelect);
 			}
 		};
-		monthSelect = new JComboBox<String>();
+		monthSelect = new MyComboBox<String>();
 		monthSelect.setBounds(636, 0, 65, 31);
 		monthSelect.setEditable(false);
 		add(monthSelect);
 		addmonthItem(monthSelect);
 		
-		daySelect = new JComboBox<String>();
+		daySelect = new MyComboBox<String>();
 		daySelect.setBounds(711, 0, 65, 32);
 		daySelect.setEditable(false);
 		add(daySelect);
@@ -111,7 +112,7 @@ public class DebitnotePanel extends JPanel implements ActionListener{
 		tableModel.setColumnCount(3);
 		tableModel.setRowCount(0);
 
-		citySelect = new JComboBox<String>();
+		citySelect = new MyComboBox<String>();
 		citySelect.setBounds(0, 0, 174, 31);
 		add(citySelect);
 		addCityItems(citySelect);
@@ -124,16 +125,16 @@ public class DebitnotePanel extends JPanel implements ActionListener{
 			}
 		};
 		
-		orgSelect = new JComboBox<String>();
+		orgSelect = new MyComboBox<String>();
 		orgSelect.setBounds(199, 0, 174, 31);
 		add(orgSelect);
 		addOrgItems(citySelect,orgSelect);
 		
-		btnSearchByOrg = new JButton("搜索");
+		btnSearchByOrg = new MyButton_LightBlue("搜索");
 		btnSearchByOrg.setBounds(414, 0, 100, 31);
 		add(btnSearchByOrg);
 		
-		btnSearchByDay = new JButton("搜索");
+		btnSearchByDay = new MyButton_LightBlue("搜索");
 		btnSearchByDay.setBounds(819, 0, 100, 31);
 		add(btnSearchByDay);
 		
@@ -162,37 +163,37 @@ public class DebitnotePanel extends JPanel implements ActionListener{
 		label_5.setBounds(440, 291, 54, 15);
 		add(label_5);
 		
-		yearField = new JTextField();
+		yearField = new MyTextField();
 		yearField.setBounds(564, 117, 80, 21);
 		add(yearField);
 		yearField.setColumns(10);
 		
-		monthField = new JTextField();
+		monthField = new MyTextField();
 		monthField.setBounds(654, 117, 65, 21);
 		add(monthField);
 		monthField.setColumns(10);
 		
-		dayField = new JTextField();
+		dayField = new MyTextField();
 		dayField.setBounds(729, 117, 65, 21);
 		add(dayField);
 		dayField.setColumns(10);
 		
-		sumField = new JTextField();
+		sumField = new MyTextField();
 		sumField.setBounds(564, 155, 172, 21);
 		add(sumField);
 		sumField.setColumns(10);
 		
-		manField = new JTextField();
+		manField = new MyTextField();
 		manField.setBounds(564, 200, 172, 21);
 		add(manField);
 		manField.setColumns(10);
 		
-		accountField = new JTextField();
+		accountField = new MyTextField();
 		accountField.setBounds(564, 241, 172, 21);
 		add(accountField);
 		accountField.setColumns(10);
 		
-		orderscrollPane = new JScrollPane();
+		orderscrollPane = new MyScrollPane();
 		orderscrollPane.setBounds(564, 291, 230, 100);
 		add(orderscrollPane);
 		

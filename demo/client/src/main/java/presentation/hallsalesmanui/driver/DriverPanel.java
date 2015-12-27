@@ -5,50 +5,50 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import businesslogic.transportbl.DriverPack.DriverController;
 import businesslogicservice.transportblservice.DriverBlService;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.DriverVO;
 
-public class DriverPanel extends JPanel implements ActionListener {
+public class DriverPanel extends WorkPanel implements ActionListener {
 
-	private JTextField textNameToSearch;
+	private MyTextField textNameToSearch;
 	private NumberField textCodeToSearch;
 	private JTable table;
-	private JTextField textName;
-	private JTextField textCode;
+	private MyTextField textName;
+	private MyTextField textCode;
 	private NumberField textPhone;
-	private JTextField textidentity;
-	private JButton BTNsearchByCode;
-	private JButton BTNsearchByName;
-	private JButton BTNadd;
-	private JButton BTNdelete;
-	private JButton BTNupdate;
-	private JComboBox<String> SexSelect;
-	private JComboBox<String> ByearSelect;
-	private JComboBox<String> BmouthSelect;
-	private JComboBox<String> BdaySelect;
-	private JComboBox<String> DyearSelect;
-	private JComboBox<String> DmouthSelect;
-	private JComboBox<String> DdaySelect;
+	private MyTextField textidentity;
+	private MyButton_LightBlue BTNsearchByCode;
+	private MyButton_LightBlue BTNsearchByName;
+	private MyButton_LightBlue BTNadd;
+	private MyButton_LightBlue BTNdelete;
+	private MyButton_LightBlue BTNupdate;
+	private MyComboBox<String> SexSelect;
+	private MyComboBox<String> ByearSelect;
+	private MyComboBox<String> BmouthSelect;
+	private MyComboBox<String> BdaySelect;
+	private MyComboBox<String> DyearSelect;
+	private MyComboBox<String> DmouthSelect;
+	private MyComboBox<String> DdaySelect;
 	private List<DriverVO> list;
 	private DriverVO vo=null;
 	private int r;
@@ -64,7 +64,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		separator.setBounds(0, 49, 954, 8);
 		add(separator);
 		
-		textNameToSearch = new JTextField();
+		textNameToSearch = new MyTextField();
 		textNameToSearch.setBounds(90, 14, 66, 21);
 		add(textNameToSearch);
 		textNameToSearch.setColumns(10);
@@ -74,15 +74,15 @@ public class DriverPanel extends JPanel implements ActionListener {
 		textCodeToSearch.setBounds(401, 14, 103, 21);
 		add(textCodeToSearch);
 		
-		BTNsearchByCode = new JButton("搜索");
+		BTNsearchByCode = new MyButton_LightBlue("搜索");
 		BTNsearchByCode.setBounds(538, 13, 66, 23);
 		add(BTNsearchByCode);
 		
-		BTNadd = new JButton("增加司机信息");
+		BTNadd = new MyButton_LightBlue("增加司机信息");
 		BTNadd.setBounds(681, 13, 121, 23);
 		add(BTNadd);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(24, 77, 172, 334);
 		add(scrollPane);
 		
@@ -101,7 +101,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		label_2.setBounds(292, 17, 99, 15);
 		add(label_2);
 		
-		textName = new JTextField();
+		textName = new MyTextField();
 		textName.setBounds(330, 117, 143, 21);
 		add(textName);
 		textName.setColumns(10);
@@ -115,7 +115,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		label_4.setBounds(266, 183, 54, 15);
 		add(label_4);
 		
-		textCode = new JTextField();
+		textCode = new MyTextField();
 		textCode.setBounds(330, 180, 143, 21);
 		add(textCode);
 		textCode.setColumns(10);
@@ -143,21 +143,21 @@ public class DriverPanel extends JPanel implements ActionListener {
 		lblNewLabel.setBounds(266, 310, 66, 15);
 		add(lblNewLabel);
 		
-		textidentity = new JTextField();
+		textidentity = new MyTextField();
 		textidentity.setBounds(330, 307, 143, 21);
 		add(textidentity);
 		textidentity.setColumns(10);
 		textidentity.setEditable(false);
 		
-		BTNdelete = new JButton("删除");
+		BTNdelete = new MyButton_LightBlue("删除");
 		BTNdelete.setBounds(383, 388, 76, 23);
 		add(BTNdelete);
 		
-		BTNupdate = new JButton("修改");
+		BTNupdate = new MyButton_LightBlue("修改");
 		BTNupdate.setBounds(606, 388, 76, 23);
 		add(BTNupdate);
 		
-		SexSelect = new JComboBox<String>();
+		SexSelect = new MyComboBox<String>();
 		SexSelect.setEditable(false);
 		SexSelect.setEnabled(false);
 		SexSelect.setBounds(681, 117, 143, 21);
@@ -165,7 +165,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		SexSelect.addItem("女");
 		add(SexSelect);
 		
-		ByearSelect = new JComboBox<String>();
+		ByearSelect = new MyComboBox<String>();
 		ByearSelect.setEditable(false);
 		ByearSelect.setEnabled(false);
 		ByearSelect.setBounds(330, 241, 76, 21);
@@ -179,14 +179,14 @@ public class DriverPanel extends JPanel implements ActionListener {
 			}
 		};
 		
-		BmouthSelect = new JComboBox<String>();
+		BmouthSelect = new MyComboBox<String>();
 		BmouthSelect.setEditable(false);
 		BmouthSelect.setEnabled(false);
 		BmouthSelect.setBounds(416, 241, 57, 21);
 		addmonthItem(BmouthSelect);
 		add(BmouthSelect);
 		
-		BdaySelect = new JComboBox<String>();
+		BdaySelect = new MyComboBox<String>();
 		BdaySelect.setEditable(false);
 		BdaySelect.setEnabled(false);
 		BdaySelect.setBounds(483, 241, 57, 21);
@@ -196,7 +196,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		ByearSelect.addItemListener(Blistener);
 		BmouthSelect.addItemListener(Blistener);
 		
-		DyearSelect = new JComboBox<String>();
+		DyearSelect = new MyComboBox<String>();
 		DyearSelect.setEditable(false);
 		DyearSelect.setEnabled(false);
 		DyearSelect.setBounds(681, 241, 76, 21);
@@ -210,14 +210,14 @@ public class DriverPanel extends JPanel implements ActionListener {
 			}
 		};
 		
-		DmouthSelect = new JComboBox<String>();
+		DmouthSelect = new MyComboBox<String>();
 		DmouthSelect.setEditable(false);
 		DmouthSelect.setEnabled(false);
 		DmouthSelect.setBounds(767, 241, 57, 21);
 		addmonthItem(DmouthSelect);
 		add(DmouthSelect);
 		
-		DdaySelect = new JComboBox<String>();
+		DdaySelect = new MyComboBox<String>();
 		DdaySelect.setEditable(false);
 		DdaySelect.setEnabled(false);
 		DdaySelect.setBounds(834, 241, 54, 21);
@@ -227,7 +227,7 @@ public class DriverPanel extends JPanel implements ActionListener {
 		DyearSelect.addItemListener(Dlistener);
 		DmouthSelect.addItemListener(Dlistener);
 		
-		BTNsearchByName = new JButton("搜索");
+		BTNsearchByName = new MyButton_LightBlue("搜索");
 		BTNsearchByName.setBounds(188, 13, 66, 23);
 		add(BTNsearchByName);
 		

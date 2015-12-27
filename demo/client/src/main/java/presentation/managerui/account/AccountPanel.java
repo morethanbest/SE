@@ -1,27 +1,27 @@
 package presentation.managerui.account;
 
+import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import businesslogic.accountbl.AccountPack.AccountController;
 import businesslogicservice.accountblservice.AccountBlService;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
 import presentation.tip.NumberField;
 import vo.AccountVO;
-import java.awt.Font;
 
-public class AccountPanel extends JPanel  implements ActionListener{
+public class AccountPanel extends WorkPanel  implements ActionListener{
 	private NumberField nameToSearch;
-	private JTextField nameField;
-	private JTextField moneyField;
+	private MyTextField nameField;
+	private MyTextField moneyField;
 	private AccountVO vo=null;
-	private JButton btnSearch;
+	private MyButton_LightBlue btnSearch;
 	/**
 	 * Create the panel.
 	 */
@@ -43,7 +43,7 @@ public class AccountPanel extends JPanel  implements ActionListener{
 		add(nameToSearch);
 		nameToSearch.setColumns(10);
 		
-		btnSearch = new JButton("搜索");
+		btnSearch = new MyButton_LightBlue("搜索");
 		btnSearch.setBounds(375, 10, 120, 29);
 		add(btnSearch);
 		
@@ -57,7 +57,7 @@ public class AccountPanel extends JPanel  implements ActionListener{
 		label_2.setBounds(241, 141, 54, 29);
 		add(label_2);
 		
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setBounds(335, 146, 133, 21);
 		add(nameField);
 		nameField.setColumns(10);
@@ -67,7 +67,7 @@ public class AccountPanel extends JPanel  implements ActionListener{
 		label_3.setBounds(241, 220, 54, 18);
 		add(label_3);
 		
-		moneyField = new JTextField();
+		moneyField = new MyTextField();
 		moneyField.setColumns(10);
 		moneyField.setBounds(335, 220, 133, 21);
 		add(moneyField);

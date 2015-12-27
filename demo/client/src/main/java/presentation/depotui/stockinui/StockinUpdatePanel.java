@@ -8,35 +8,36 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import po.CommodityLocation;
-import po.Formstate;
-import po.ResultMessage;
-import presentation.depotui.DepotPanel;
-import presentation.tip.OrderField;
-import presentation.tip.TipDialog;
-import vo.OrganizationVO;
-import vo.StockinVO;
 import businesslogic.commoditybl.InboundPack.InboundController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.commodityblservice.InboundBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
+import po.CommodityLocation;
+import po.Formstate;
+import po.ResultMessage;
+import presentation.depotui.DepotPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.OrganizationVO;
+import vo.StockinVO;
 
-public class StockinUpdatePanel extends JPanel {
+public class StockinUpdatePanel extends WorkPanel {
 	private OrderField codeField;
-	private JButton update;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton button_1;
-	private JButton button_2;
+	private MyButton_LightBlue update;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	private InboundBlService controller;
 	private StockinVO vo;
 	private JLabel label;
@@ -55,17 +56,17 @@ public class StockinUpdatePanel extends JPanel {
 		add(codeField);
 		codeField.setColumns(10);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(143, 136, 78, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(229, 136, 65, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(298, 136, 65, 24);
 		add(dateBox);
 
@@ -81,7 +82,7 @@ public class StockinUpdatePanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
@@ -100,7 +101,7 @@ public class StockinUpdatePanel extends JPanel {
 		update.setBounds(416, 312, 113, 27);
 		add(update);
 
-		button_1 = new JButton("恢复原值");
+		button_1 = new MyButton_LightBlue("恢复原值");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -109,7 +110,7 @@ public class StockinUpdatePanel extends JPanel {
 		button_1.setBounds(543, 312, 113, 27);
 		add(button_1);
 
-		button_2 = new JButton("返回");
+		button_2 = new MyButton_LightBlue("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());

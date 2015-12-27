@@ -8,26 +8,26 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import presentation.hallsalesmanui.driver.DriverPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.TipDialog;
 import vo.VehicleVO;
 
 public class AddVehicleDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	 private JTextField codeField;
-	 private JTextField cardField;
-	 private JComboBox<String> daySelect;
-	 private JComboBox<String> yearSelect;
-	 private JComboBox<String> mouthSelect;
+	 private MyTextField codeField;
+	 private MyTextField cardField;
+	 private MyComboBox<String> daySelect;
+	 private MyComboBox<String> yearSelect;
+	 private MyComboBox<String> mouthSelect;
 	 private boolean isagain=false;
 	/**
 	 * Create the dialog.
@@ -45,7 +45,7 @@ public class AddVehicleDialog extends JDialog {
 		JLcode.setBounds(25, 36, 70, 20);
 		contentPanel.add(JLcode);
 		
-		codeField = new JTextField();
+		codeField = new MyTextField();
 		codeField.setBounds(120, 36, 155, 20);
 		codeField.setEditable(false);
 		contentPanel.add(codeField);
@@ -55,7 +55,7 @@ public class AddVehicleDialog extends JDialog {
 		JLcard.setBounds(25, 96, 60, 20);
 		contentPanel.add(JLcard);
 		
-		cardField = new JTextField();
+		cardField = new MyTextField();
 		cardField.setBounds(120, 96, 155, 20);
 		contentPanel.add(cardField);
 		cardField.setColumns(10);
@@ -64,7 +64,7 @@ public class AddVehicleDialog extends JDialog {
 		JLtime.setBounds(25, 156, 70, 20);
 		contentPanel.add(JLtime);
 		
-		yearSelect = new JComboBox<String>();
+		yearSelect = new MyComboBox<String>();
 		yearSelect.setBounds(120, 156, 80, 20);
 		contentPanel.add(yearSelect);
 		addyearItem(yearSelect);
@@ -76,12 +76,12 @@ public class AddVehicleDialog extends JDialog {
 			}
 		};
 		
-		mouthSelect = new JComboBox<String>();
+		mouthSelect = new MyComboBox<String>();
 		mouthSelect.setBounds(207, 156, 60, 20);
 		contentPanel.add(mouthSelect);
 		addmonthItem(mouthSelect);
 		
-		daySelect = new JComboBox<String>();
+		daySelect = new MyComboBox<String>();
 		daySelect.setBounds(275, 156, 60, 20);
 		contentPanel.add(daySelect);
 		addDayItem(daySelect,mouthSelect,yearSelect);
@@ -94,7 +94,7 @@ public class AddVehicleDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				MyButton_LightBlue okButton = new MyButton_LightBlue("OK");
 				okButton.addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent e) {

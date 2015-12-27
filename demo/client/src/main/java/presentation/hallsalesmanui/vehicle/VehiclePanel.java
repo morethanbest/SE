@@ -6,33 +6,34 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import businesslogic.transportbl.VehiclePack.VehicleController;
 import businesslogicservice.transportblservice.VehicleBlService;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.VehicleVO;
 
-public class VehiclePanel extends JPanel implements ActionListener {
-	private JTextField codeToSearch;
+public class VehiclePanel extends WorkPanel implements ActionListener {
+	private MyTextField codeToSearch;
 	private NumberField cardToSearch;
 	private NumberField CodeField;
-	private JTextField CardField;
-    private JComboBox<String> daySelect;
-	private JComboBox<String> yearSelect;
-	private JComboBox<String> mouthSelect;
-	private JButton btnSearchByCode;
-	private JButton btnSearchByCard;
-	private JButton btnAddVehicle;
-	private JButton btnupdate;
-	private JButton btndelete;
+	private MyTextField CardField;
+    private MyComboBox<String> daySelect;
+	private MyComboBox<String> yearSelect;
+	private MyComboBox<String> mouthSelect;
+	private MyButton_LightBlue btnSearchByCode;
+	private MyButton_LightBlue btnSearchByCard;
+	private MyButton_LightBlue btnAddVehicle;
+	private MyButton_LightBlue btnupdate;
+	private MyButton_LightBlue btndelete;
 	private String orgcode;
 	private VehicleVO vo;
 	boolean isrev=false;
@@ -51,20 +52,20 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		add(cardToSearch);
 		cardToSearch.setColumns(10);
 		
-		btnSearchByCard = new JButton("搜索");
+		btnSearchByCard = new MyButton_LightBlue("搜索");
 		btnSearchByCard.setBounds(217, 13, 66, 23);
 		add(btnSearchByCard);
 		
-		codeToSearch = new JTextField();
+		codeToSearch = new MyTextField();
 		codeToSearch.setColumns(10);
 		codeToSearch.setBounds(402, 14, 103, 21);
 		add(codeToSearch);
 		
-		btnSearchByCode = new JButton("搜索");
+		btnSearchByCode = new MyButton_LightBlue("搜索");
 		btnSearchByCode.setBounds(515, 13, 66, 23);
 		add(btnSearchByCode);
 		
-		btnAddVehicle = new JButton("增加车辆信息");
+		btnAddVehicle = new MyButton_LightBlue("增加车辆信息");
 		btnAddVehicle.setBounds(681, 13, 121, 23);
 		add(btnAddVehicle);
 		
@@ -90,7 +91,7 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		label_4.setBounds(286, 203, 54, 15);
 		add(label_4);
 		
-		CardField = new JTextField();
+		CardField = new MyTextField();
 		CardField.setBounds(539, 200, 143, 21);
 		CardField.setEditable(false);
 		add(CardField);
@@ -100,7 +101,7 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		label_6.setBounds(287, 291, 66, 15);
 		add(label_6);
 		
-		yearSelect = new JComboBox<String>();
+		yearSelect = new MyComboBox<String>();
 		yearSelect.setBounds(539, 291, 79, 21);
 		yearSelect.setEditable(false);
 		yearSelect.setEnabled(false);
@@ -114,14 +115,14 @@ public class VehiclePanel extends JPanel implements ActionListener {
 			}
 		};
 		
-		mouthSelect = new JComboBox<String>();
+		mouthSelect = new MyComboBox<String>();
 		mouthSelect.setBounds(628, 291, 54, 21);
 		mouthSelect.setEditable(false);
 		mouthSelect.setEnabled(false);
 		add(mouthSelect);
 		addmonthItem(mouthSelect);
 		
-		daySelect = new JComboBox<String>();
+		daySelect = new MyComboBox<String>();
 		daySelect.setBounds(692, 291, 54, 21);
 		daySelect.setEditable(false);
 		daySelect.setEnabled(false);
@@ -131,11 +132,11 @@ public class VehiclePanel extends JPanel implements ActionListener {
 		yearSelect.addItemListener(listener);
 		mouthSelect.addItemListener(listener);
 		
-		btnupdate = new JButton("修改");
+		btnupdate = new MyButton_LightBlue("修改");
 		btnupdate.setBounds(276, 371, 93, 23);
 		add(btnupdate);
 		
-		btndelete = new JButton("删除");
+		btndelete = new MyButton_LightBlue("删除");
 		btndelete.setBounds(561, 371, 93, 23);
 		add(btndelete);
 		

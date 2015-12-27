@@ -10,45 +10,46 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.balancebl.RecordcollectPack.RecordcollectController;
+import businesslogic.orderbl.CheckExist;
+import businesslogicservice.balanceblservice.RecordCollectBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 import po.Formstate;
 import po.ResultMessage;
 import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.RecordcollectVO;
-import businesslogic.balancebl.RecordcollectPack.RecordcollectController;
-import businesslogic.orderbl.CheckExist;
-import businesslogicservice.balanceblservice.RecordCollectBlService;
-import businesslogicservice.orderblservice.CheckExistBlService;
 
-public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
+public class RecordcollectUpdatePanel extends WorkPanel implements ActionListener {
 	private String orgcode;
 	private DoubleField sumField;
-	private JTextField manField;
+	private MyTextField manField;
 	private NumberField accountField;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dayBox;
-	private JScrollPane scrollPane;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dayBox;
+	private MyScrollPane scrollPane;
 	private OrderField orderField;
-	private JButton btnaddorder;
-	private JButton update;
+	private MyButton_LightBlue btnaddorder;
+	private MyButton_LightBlue update;
 	private JTable table;
 	private RecordcollectVO vo;
-	private JButton button;
-	private JButton button_1;
+	private MyButton_LightBlue button;
+	private MyButton_LightBlue button_1;
 	private RecordCollectBlService controller;
 
 	/**
@@ -80,19 +81,19 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		label_4.setBounds(42, 238, 80, 15);
 		add(label_4);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(186, 96, 80, 21);
 		yearBox.setEditable(false);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(276, 96, 65, 21);
 		monthBox.setEditable(false);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dayBox = new JComboBox<Long>();
+		dayBox = new MyComboBox<Long>();
 		dayBox.setBounds(351, 96, 65, 21);
 		dayBox.setEditable(false);
 		add(dayBox);
@@ -114,7 +115,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		add(sumField);
 		sumField.setColumns(10);
 
-		manField = new JTextField();
+		manField = new MyTextField();
 		manField.setBounds(186, 187, 230, 21);
 		add(manField);
 		manField.setColumns(10);
@@ -124,7 +125,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		add(accountField);
 		accountField.setColumns(10);
 
-		scrollPane = new JScrollPane();
+		scrollPane = new MyScrollPane();
 		scrollPane.setBounds(611, 38, 304, 252);
 		add(scrollPane);
 
@@ -133,11 +134,11 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		add(orderField);
 		orderField.setColumns(10);
 
-		btnaddorder = new JButton("增加订单");
+		btnaddorder = new MyButton_LightBlue("增加订单");
 		btnaddorder.setBounds(822, 301, 93, 27);
 		add(btnaddorder);
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.setBounds(351, 403, 112, 25);
 		add(update);
 
@@ -158,7 +159,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		btnaddorder.addActionListener(this);
 		update.addActionListener(this);
 
-		button = new JButton("恢复原值");
+		button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -167,7 +168,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		button.setBounds(477, 402, 113, 27);
 		add(button);
 
-		button_1 = new JButton("返回");
+		button_1 = new MyButton_LightBlue("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());
@@ -177,7 +178,7 @@ public class RecordcollectUpdatePanel extends JPanel implements ActionListener {
 		button_1.setBounds(611, 402, 113, 27);
 		add(button_1);
 
-		JButton button_2 = new JButton("删除该条");
+		MyButton_LightBlue button_2 = new MyButton_LightBlue("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table

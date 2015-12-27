@@ -28,10 +28,11 @@ import presentation.hallsalesmanui.recordcollect.RecordcollectPanel;
 import presentation.hallsalesmanui.recordcollect.RecordcollectUpdatePanel;
 import presentation.hallsalesmanui.vehicle.VehiclePanel;
 import presentation.mainui.MainFrame;
+import presentation.mycomp.PersonPanel;
 
 
 
-public class HallsalesmanPanel extends JPanel implements ActionListener {
+public class HallsalesmanPanel extends PersonPanel implements ActionListener {
 	private JPanel switcher;
 	private JButton loadButton;
 	private JButton goodrecevingButton;

@@ -11,25 +11,26 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import po.CommodityLocation;
-import vo.CommodityExamVO;
-import vo.StockExaminationVO;
 import businesslogic.commoditybl.StockExaminationPack.StockExaminationController;
 import businesslogicservice.commodityblservice.StockExaminationBlService;
+import po.CommodityLocation;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import vo.CommodityExamVO;
+import vo.StockExaminationVO;
 
-public class StockExamPanel extends JPanel {
+public class StockExamPanel extends WorkPanel {
 	private JTable table;
-	private JComboBox<Long> syearBox;
-	private JComboBox<Long> smonthBox;
-	private JComboBox<Long> sdateBox;
-	private JComboBox<Long> eyearBox;
-	private JComboBox<Long> emonthBox;
-	private JComboBox<Long> edateBox;
+	private MyComboBox<Long> syearBox;
+	private MyComboBox<Long> smonthBox;
+	private MyComboBox<Long> sdateBox;
+	private MyComboBox<Long> eyearBox;
+	private MyComboBox<Long> emonthBox;
+	private MyComboBox<Long> edateBox;
 	private JLabel allLabel;
 	private JLabel outLabel;
 	private JLabel inLabel;
@@ -63,7 +64,7 @@ public class StockExamPanel extends JPanel {
 		allLabel.setBounds(28, 359, 160, 18);
 		add(allLabel);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(224, 15, 705, 383);
 		add(scrollPane);
 		
@@ -77,33 +78,33 @@ public class StockExamPanel extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		syearBox = new JComboBox<Long>();
+		syearBox = new MyComboBox<Long>();
 		syearBox.setBounds(14, 43, 67, 24);
 		add(syearBox);
 		
-		smonthBox = new JComboBox<Long>();
+		smonthBox = new MyComboBox<Long>();
 		smonthBox.setBounds(95, 43, 47, 24);
 		add(smonthBox);
 		
 		addYearItems(syearBox, smonthBox);
 		
-		sdateBox = new JComboBox<Long>();
+		sdateBox = new MyComboBox<Long>();
 		sdateBox.setBounds(156, 43, 47, 24);
 		add(sdateBox);
 		
 		addDateItems(syearBox, smonthBox, sdateBox);
 		
-		eyearBox = new JComboBox<Long>();
+		eyearBox = new MyComboBox<Long>();
 		eyearBox.setBounds(14, 121, 67, 24);
 		add(eyearBox);
 		
-		emonthBox = new JComboBox<Long>();
+		emonthBox = new MyComboBox<Long>();
 		emonthBox.setBounds(95, 121, 47, 24);
 		add(emonthBox);
 		
 		addYearItems(eyearBox, emonthBox);
 		
-		edateBox = new JComboBox<Long>();
+		edateBox = new MyComboBox<Long>();
 		edateBox.setBounds(156, 121, 47, 24);
 		add(edateBox);
 		

@@ -11,30 +11,29 @@ import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import presentation.tip.TipDialog;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.NumberField;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import presentation.tip.TipDialog;
 
 public class AddDriverDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-    private JTextField nameField;
-    private JTextField codeField;
+    private MyTextField nameField;
+    private MyTextField codeField;
     private NumberField phoneField;
-    private JTextField identityField;
-    private JComboBox<String> SexSelect;
-    private JComboBox<String> ByearSelect;
-    private JComboBox<String> BmouthSelect;
-    private JComboBox<String> BdaySelect;
-    private JComboBox<String> DyearSelect;
-    private JComboBox<String> DmouthSelect;
-    private JComboBox<String> DdaySelect;
+    private MyTextField identityField;
+    private MyComboBox<String> SexSelect;
+    private MyComboBox<String> ByearSelect;
+    private MyComboBox<String> BmouthSelect;
+    private MyComboBox<String> BdaySelect;
+    private MyComboBox<String> DyearSelect;
+    private MyComboBox<String> DmouthSelect;
+    private MyComboBox<String> DdaySelect;
     private boolean isagain=false;
 	/**
 	 * Create the dialog.
@@ -52,7 +51,7 @@ public class AddDriverDialog extends JDialog {
 		JLName.setBounds(25, 36, 40, 20);
 		contentPanel.add(JLName);
 		
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setBounds(90, 36, 155, 20);
 		contentPanel.add(nameField);
 		nameField.setColumns(10);
@@ -61,7 +60,7 @@ public class AddDriverDialog extends JDialog {
 		JLSex.setBounds(260, 36, 40, 20);
 		contentPanel.add(JLSex);
 		
-		SexSelect = new JComboBox<String>();
+		SexSelect = new MyComboBox<String>();
 		SexSelect.setBounds(330, 36, 155, 20);
 		SexSelect.addItem("男");
 		SexSelect.addItem("女");
@@ -71,7 +70,7 @@ public class AddDriverDialog extends JDialog {
 		JLCode.setBounds(25, 96, 40, 20);
 		contentPanel.add(JLCode);
 		
-		codeField = new JTextField();
+		codeField = new MyTextField();
 		codeField.setBounds(90, 96, 155, 20);
 		codeField.setEditable(false);
 		contentPanel.add(codeField);
@@ -91,7 +90,7 @@ public class AddDriverDialog extends JDialog {
 		JLBirth.setBounds(25, 156, 70, 20);
 		contentPanel.add(JLBirth);
 		
-		ByearSelect = new JComboBox<String>();
+		ByearSelect = new MyComboBox<String>();
 		ByearSelect.setBounds(90, 156, 60, 20);
 		contentPanel.add(ByearSelect);
 		addyearItem(ByearSelect);
@@ -103,12 +102,12 @@ public class AddDriverDialog extends JDialog {
 			}
 		};
 		
-		BmouthSelect = new JComboBox<String>();
+		BmouthSelect = new MyComboBox<String>();
 		BmouthSelect.setBounds(157, 156, 40, 20);
 		contentPanel.add(BmouthSelect);
 		addmonthItem(BmouthSelect);
 		
-		BdaySelect = new JComboBox<String>();
+		BdaySelect = new MyComboBox<String>();
 		BdaySelect.setBounds(205, 156, 40, 20);
 		contentPanel.add(BdaySelect);
 		addDayItem(BdaySelect,BmouthSelect,ByearSelect);
@@ -120,7 +119,7 @@ public class AddDriverDialog extends JDialog {
 		JLDriver.setBounds(260, 156, 70, 20);
 		contentPanel.add(JLDriver);
 		
-		DyearSelect = new JComboBox<String>();
+		DyearSelect = new MyComboBox<String>();
 		DyearSelect.setBounds(330, 156, 65, 20);
 		contentPanel.add(DyearSelect);
 		addyearItem(DyearSelect);
@@ -132,12 +131,12 @@ public class AddDriverDialog extends JDialog {
 			}
 		};
 		
-		DmouthSelect = new JComboBox<String>();
+		DmouthSelect = new MyComboBox<String>();
 		DmouthSelect.setBounds(401, 156, 40, 20);
 		contentPanel.add(DmouthSelect);
 		addmonthItem(DmouthSelect);
 		
-		DdaySelect = new JComboBox<String>();
+		DdaySelect = new MyComboBox<String>();
 		DdaySelect.setBounds(445, 156, 40, 20);
 		contentPanel.add(DdaySelect);
 		addDayItem(DdaySelect,DmouthSelect,DyearSelect);
@@ -149,7 +148,7 @@ public class AddDriverDialog extends JDialog {
 		JLidentity.setBounds(25, 216, 70, 20);
 		contentPanel.add(JLidentity);
 		
-		identityField = new JTextField();
+		identityField = new MyTextField();
 		identityField.setBounds(90, 216, 155, 20);
 		contentPanel.add(identityField);
 		identityField.setColumns(10);

@@ -10,49 +10,50 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.hallsalesmanui.HallsalesmanPanel;
-import presentation.tip.NumberField;
-import presentation.tip.OrderField;
-import presentation.tip.TipDialog;
-import vo.HallLoadVO;
-import vo.OrganizationVO;
 import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.HallLoadBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
+import po.Formstate;
+import po.Organizationtype;
+import po.ResultMessage;
+import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import presentation.tip.NumberField;
+import presentation.tip.OrderField;
+import presentation.tip.TipDialog;
+import vo.HallLoadVO;
+import vo.OrganizationVO;
 
-public class HallLoadPanel extends JPanel {
+public class HallLoadPanel extends WorkPanel {
 	private NumberField carField;
-	private JTextField jianField;
-	private JTextField yaField;
+	private MyTextField jianField;
+	private MyTextField yaField;
 	private JTable table;
-	private JComboBox<String> destinBox;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton button;
+	private MyComboBox<String> destinBox;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue button;
 	private HallLoadBlService hallLoadBlService;
 	private JLabel moterLabel;
 	private JLabel orgLabel;
 	private String city;
-	private JComboBox<String> typeBox;
+	private MyComboBox<String> typeBox;
 	private String orgName;
-	private JButton button_3;
+	private MyButton_LightBlue button_3;
 	private OrderField orderField;
 	private String orgCode;
 	/**
@@ -84,37 +85,37 @@ public class HallLoadPanel extends JPanel {
 		moterLabel.setBounds(97, 76, 202, 18);
 		add(moterLabel);
 
-		jianField = new JTextField();
+		jianField = new MyTextField();
 		jianField.setColumns(10);
 		jianField.setBounds(410, 104, 199, 24);
 		add(jianField);
 
-		yaField = new JTextField();
+		yaField = new MyTextField();
 		yaField.setBounds(410, 183, 199, 24);
 		add(yaField);
 		yaField.setColumns(10);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(97, 128, 69, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(180, 128, 51, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(245, 128, 51, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(97, 263, 199, 24);
 		add(destinBox);
 		
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.addItemListener(new ItemListener() {
 			
 			@Override
@@ -129,7 +130,7 @@ public class HallLoadPanel extends JPanel {
 		add(typeBox);
 		addTypeItems();
 
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 
@@ -151,7 +152,7 @@ public class HallLoadPanel extends JPanel {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
 
-		button = new JButton("提交装车单");
+		button = new MyButton_LightBlue("提交装车单");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!checkFormat())
@@ -200,7 +201,7 @@ public class HallLoadPanel extends JPanel {
 		moterLabel.setText(hallLoadBlService.getid(orgCode, date));
 		
 		
-		JButton button_1 = new JButton("增加一条");
+		MyButton_LightBlue button_1 = new MyButton_LightBlue("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CheckExistBlService check = new CheckExist();
@@ -224,7 +225,7 @@ public class HallLoadPanel extends JPanel {
 		orderField.setBounds(636, 253, 199, 24);
 		add(orderField);
 		
-		JButton button_2 = new JButton("删除该条");
+		MyButton_LightBlue button_2 = new MyButton_LightBlue("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -235,7 +236,7 @@ public class HallLoadPanel extends JPanel {
 		button_2.setBounds(636, 286, 276, 27);
 		add(button_2);
 		
-		JButton getFareButton = new JButton("获取运费");
+		MyButton_LightBlue getFareButton = new MyButton_LightBlue("获取运费");
 		getFareButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<String> barcodes = new ArrayList<String>();
@@ -286,7 +287,7 @@ public class HallLoadPanel extends JPanel {
 		label_8.setBounds(27, 269, 72, 18);
 		add(label_8);
 		
-		button_3 = new JButton("查看已提交单据");
+		button_3 = new MyButton_LightBlue("查看已提交单据");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent);

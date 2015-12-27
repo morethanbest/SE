@@ -10,27 +10,29 @@ import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JLabel;
 
-import po.Formstate;
-import po.ResultMessage;
-import presentation.hallsalesmanui.HallsalesmanPanel;
-import presentation.tip.TipDialog;
-import vo.DeliveryVO;
 import businesslogic.logisticsbl.DeliveryPack.DeliveryController;
 import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.DeliveryBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
-import javax.swing.JLabel;
+import po.Formstate;
+import po.ResultMessage;
+import presentation.hallsalesmanui.HallsalesmanPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.TipDialog;
+import vo.DeliveryVO;
 
-public class DeliveryUpdatePanel extends JPanel {
-	private JTextField codeField;
-	private JTextField deliveryField;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton update;
+public class DeliveryUpdatePanel extends WorkPanel {
+	private MyTextField codeField;
+	private MyTextField deliveryField;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue update;
 	private DeliveryBlService controller;
 	private DeliveryVO vo;
 	private JLabel label;
@@ -45,33 +47,33 @@ public class DeliveryUpdatePanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		controller = new DeliveryController();
 
-		codeField = new JTextField();
+		codeField = new MyTextField();
 		codeField.setColumns(10);
 		codeField.setBounds(286, 82, 242, 24);
 		add(codeField);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(286, 141, 74, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(384, 141, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(467, 141, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		deliveryField = new JTextField();
+		deliveryField = new MyTextField();
 		deliveryField.setColumns(10);
 		deliveryField.setBounds(286, 204, 242, 24);
 		add(deliveryField);
 
-		update = new JButton("提交");
+		update = new MyButton_LightBlue("提交");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!checkFormat())
