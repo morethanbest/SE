@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import presentation.mainui.MainFrame;
+
 
 public class Serverui extends JFrame {
 	private JPanel contentPane;
