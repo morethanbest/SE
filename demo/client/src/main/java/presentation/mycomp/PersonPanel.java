@@ -22,7 +22,7 @@ public class PersonPanel extends JPanel {
 		netLabel = new JLabel("");
 		netLabel.setBounds(804, 516, 164, 24);
 		add(netLabel);
-		
+
 		checkNet();
 	}
 
@@ -35,19 +35,22 @@ public class PersonPanel extends JPanel {
 	private void checkNet() {
 		Inline test = new Inlinetest();
 		Thread check = new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				try {
-					test.addNew();
-					netLabel.setText("网络连接良好");
-				} catch (RemoteException e) {
-					netLabel.setText("网络连接断开");
-				}
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				while (true) {
+					try {
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						test.addNew();
+						netLabel.setText("网络连接良好");
+					} catch (RemoteException e) {
+						System.out.println("hjgk");
+						netLabel.setText("网络连接断开");
+					}
 				}
 			}
 		});

@@ -66,7 +66,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 			int x = (int) myComboBox.getLocation().getX();
 			int y = (int) myComboBox.getLocation().getY();
 			g2.setFont(new Font("黑体", Font.PLAIN, 15));
-			g2.drawString((String)myComboBox.getSelectedItem(), x + 5, y + 18);
+			g2.drawString(myComboBox.getSelectedItem() + "", x + 5, y + 18);
 		}
 
 
