@@ -1,12 +1,8 @@
 package businesslogic.logisticsbl.HallLoadPack;
 
-import dataservice.logisticsdataservice.HallLoadFormDataService;
-import init.RMIHelper;
-import po.TransportType;
-import vo.HallLoadVO;
+import businesslogic.logisticsbl.StategyPack.FeeInterface;
+import businesslogic.logisticsbl.StategyPack.FeeStategyByTruck;
 
-import java.rmi.RemoteException;
-import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -14,30 +10,8 @@ import java.util.List;
  */
 public class HallFeeCount {
     public double countfee(List<String> allbarcode, String City1, String City2){
-        HallloadTotalWeight wei=new HallloadTotalWeight();
-        String transporttype= TransportType.truck.getName();
-        double weight=wei.getweight(allbarcode);
-        HallLoadFormDataService data= RMIHelper.getHallloadform();
-        double distance=0;
-        try {
-            distance=data.getdistance(City1,City2);
-        } catch (RemoteException e) {
-            System.out.println("hall load count fee get distance failed");
-            e.printStackTrace();
-        }
-
-        double singleprice=0;
-        try {
-            singleprice=data.getunitprice(transporttype);
-        } catch (RemoteException e) {
-            System.out.println("hall load count fee get single price failed");
-            e.printStackTrace();
-        }
-
-
-        double fee=weight*distance*singleprice;
-        DecimalFormat format=new DecimalFormat("0.00");
-        fee=Double.valueOf(format.format(fee));
-        return fee;
+        FeeInterface feegetter=new FeeStategyByTruck();
+        double result=feegetter.getfee(allbarcode, City1, City2);
+        return result;
     }
 }

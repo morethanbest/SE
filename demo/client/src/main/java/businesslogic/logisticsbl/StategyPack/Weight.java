@@ -1,17 +1,15 @@
-package businesslogic.logisticsbl.CenterloadPack;
+package businesslogic.logisticsbl.StategyPack;
 
 import dataservice.logisticsdataservice.CenterLoadFormDataService;
 import init.RMIHelper;
-import vo.CenterloadVO;
 
 import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/11/28.
+ * Created by Administrator on 2015/12/27.
  */
-public class TotalWeight {
-
+public class Weight {
     public double getweight(List<String> barcode){
         CenterLoadFormDataService dataserv= RMIHelper.getCenterloaddata();
 

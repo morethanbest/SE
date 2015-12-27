@@ -1,5 +1,9 @@
 package businesslogic.logisticsbl.RecordtransPack;
 
+import businesslogic.logisticsbl.StategyPack.FeeInterface;
+import businesslogic.logisticsbl.StategyPack.FeeStategyByPlane;
+import businesslogic.logisticsbl.StategyPack.FeeStategyByTrain;
+import businesslogic.logisticsbl.StategyPack.FeeStategyByTruck;
 import dataservice.logisticsdataservice.RecordtransFormDataService;
 import init.RMIHelper;
 import vo.CenterloadVO;
@@ -17,35 +21,19 @@ public class FeeCount {
     public double getfee(List<String> allbarcode, String city1, String city2,String transporttype){
 
 
-        TotalWeight getweight=new TotalWeight();
-
-        double weight=getweight.getweight(allbarcode);
-
-
-        RecordtransFormDataService data= RMIHelper.getRecordtrans();
-
-        double singleprice=-1;
-        try {
-            singleprice=data.getunitprice(transporttype);
-        } catch (RemoteException e) {
-            System.out.println("get single price failed!!!");
-            e.printStackTrace();
+      double fee=0;
+        if(transporttype.equals("train")){
+            FeeInterface feeget=new FeeStategyByTrain();
+            fee=feeget.getfee(allbarcode,city1,city2);
         }
-
-
-        double distance=-1;
-        try {
-            distance=data.getdistance(city1,city2);
-        } catch (RemoteException e) {
-            System.out.println("get distance failed!!!");
-            e.printStackTrace();
+        else if(transporttype.equals("plane")){
+            FeeInterface feeget=new FeeStategyByPlane();
+            fee=feeget.getfee(allbarcode,city1,city2);
         }
-
-
-
-        double fee=weight*singleprice*distance;
-        DecimalFormat format=new DecimalFormat("0.00");
-        fee=Double.valueOf(format.format(fee));
+        else if(transporttype.equals("truck")){
+            FeeInterface feeget=new FeeStategyByTruck();
+            fee=feeget.getfee(allbarcode,city1,city2);
+        }
         return fee;
 
 
