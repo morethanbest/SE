@@ -7,34 +7,33 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
 import po.Organizationtype;
 import po.ResultMessage;
 import presentation.enums.OrganizationType;
+import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.WorkPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.OrganizationVO;
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
 
 public class OrganizationPanel extends WorkPanel implements ActionListener {
 	private JTable table;
 	private MyComboBox<String> orgSelect;
-	private JComboBox<String> citySelect;
-	private JButton btnAdd;
-	private JButton btnDelete;
-	private JButton btnRevise;
+	private MyComboBox<String> citySelect;
+	private MyButton_LightBlue btnAdd;
+	private MyButton_LightBlue btnDelete;
+	private MyButton_LightBlue btnRevise;
 	private List<OrganizationVO> list;
 	private OrganizationBlService organizationBlService;
 
@@ -79,7 +78,7 @@ public class OrganizationPanel extends WorkPanel implements ActionListener {
 		add(orgSelect);
 		addOrgTypeItems();
 
-		citySelect = new JComboBox<String>();
+		citySelect = new MyComboBox<String>();
 		citySelect.setBounds(199, 0, 174, 31);
 		add(citySelect);
 		addCityItems();
@@ -95,17 +94,17 @@ public class OrganizationPanel extends WorkPanel implements ActionListener {
 		citySelect.addItemListener(listener);
 		orgSelect.addItemListener(listener);
 
-		btnAdd = new JButton("增加");
+		btnAdd = new MyButton_LightBlue("增加");
 		btnAdd.addActionListener(this);
 		btnAdd.setBounds(587, 0, 113, 31);
 		add(btnAdd);
 
-		btnDelete = new JButton("删除");
+		btnDelete = new MyButton_LightBlue("删除");
 		btnDelete.addActionListener(this);
 		btnDelete.setBounds(714, 0, 113, 31);
 		add(btnDelete);
 
-		btnRevise = new JButton("修改");
+		btnRevise = new MyButton_LightBlue("修改");
 		btnRevise.setBounds(841, 0, 113, 31);
 		add(btnRevise);
 		btnRevise.addActionListener(this);

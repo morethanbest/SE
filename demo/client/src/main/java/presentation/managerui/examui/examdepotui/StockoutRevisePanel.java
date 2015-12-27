@@ -1,47 +1,39 @@
 package presentation.managerui.examui.examdepotui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-
-import po.Formstate;
-import po.Organizationtype;
-import presentation.enums.TransportTypes;
-import presentation.managerui.examui.ExamPanel;
-import vo.OrganizationVO;
-import vo.StockoutVO;
-import businesslogic.commoditybl.StockoutPack.StockoutController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.commodityblservice.StockoutBlService;
-import businesslogicservice.managerblservice.ExamStockouts;
-import businesslogicservice.managerblservice.OrganizationBlService;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
-import java.util.List;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-public class StockoutRevisePanel extends JPanel {
-	private JTextField orderField;
-	private JTextField codeField;
-	private JComboBox<String> transportBox;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<Long> monthBox;
-	private JButton update;
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogicservice.managerblservice.ExamStockouts;
+import po.Formstate;
+import presentation.enums.TransportTypes;
+import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import vo.StockoutVO;
+
+public class StockoutRevisePanel extends WorkPanel {
+	private MyTextField orderField;
+	private MyTextField codeField;
+	private MyComboBox<String> transportBox;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<Long> monthBox;
+	private MyButton_LightBlue update;
 	private ExamStockouts ea;
 	private StockoutVO vo;
 	private JLabel label;
-	private JButton button;
-	private JButton button_1;
+	private MyButton_LightBlue button;
+	private MyButton_LightBlue button_1;
 
 	/**
 	 * Create the panel.
@@ -51,38 +43,38 @@ public class StockoutRevisePanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		orderField = new JTextField();
+		orderField = new MyTextField();
 		orderField.setColumns(10);
 		orderField.setBounds(141, 35, 220, 24);
 		add(orderField);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(555, 35, 78, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(641, 35, 65, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(710, 35, 65, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		transportBox = new JComboBox<String>();
+		transportBox = new MyComboBox<String>();
 		transportBox.setBounds(555, 106, 220, 24);
 		add(transportBox);
 		addTransportTypeItems();
 
-		codeField = new JTextField();
+		codeField = new MyTextField();
 		codeField.setColumns(10);
 		codeField.setBounds(555, 181, 220, 24);
 		add(codeField);
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -112,7 +104,7 @@ public class StockoutRevisePanel extends JPanel {
 		label.setBounds(141, 106, 220, 24);
 		add(label);
 		
-		button = new JButton("恢复原值");
+		button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -121,7 +113,7 @@ public class StockoutRevisePanel extends JPanel {
 		button.setBounds(524, 302, 113, 27);
 		add(button);
 		
-		button_1 = new JButton("返回");
+		button_1 = new MyButton_LightBlue("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);

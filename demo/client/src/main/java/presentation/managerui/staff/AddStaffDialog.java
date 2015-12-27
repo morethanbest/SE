@@ -6,37 +6,34 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogic.managerbl.StaffPack.Staff;
 import businesslogic.managerbl.StaffPack.StaffController;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.managerblservice.StaffBlService;
 import po.Job;
 import po.ResultMessage;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.OrganizationVO;
 import vo.StaffVO;
-import vo.UserVO;
-
-import javax.swing.JLabel;
 
 public class AddStaffDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField nameField;
+	private MyTextField nameField;
 	private NumberField orgcodeField;
-	private JTextField orgnameField;
-	private JTextField cityField;
-	private JComboBox<String> jobSelect;
-	private JComboBox<String> orgSelect;
+	private MyTextField orgnameField;
+	private MyTextField cityField;
+	private MyComboBox<String> jobSelect;
+	private MyComboBox<String> orgSelect;
 	private boolean isagain=false;	
 	/**
 	 * Create the dialog.
@@ -54,7 +51,7 @@ public class AddStaffDialog extends JDialog {
 		JLname.setBounds(25, 36, 60, 20);
 		contentPanel.add(JLname);
 		
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setBounds(100, 36, 182, 20);
 		contentPanel.add(nameField);
 		nameField.setColumns(10);
@@ -63,7 +60,7 @@ public class AddStaffDialog extends JDialog {
 		JLjob.setBounds(25, 156, 60, 20);
 		contentPanel.add(JLjob);
 		
-		jobSelect = new JComboBox<String >();
+		jobSelect = new MyComboBox<String >();
 		jobSelect.setBounds(100, 156, 182, 20);
 		addJobItem();
 		contentPanel.add(jobSelect);
@@ -72,7 +69,7 @@ public class AddStaffDialog extends JDialog {
 		JLcity.setBounds(25, 216, 60, 20);
 		contentPanel.add(JLcity);
 		
-		cityField = new JTextField();
+		cityField = new MyTextField();
 		cityField.setEditable(false);
 		cityField.setColumns(10);
 		cityField.setBounds(100, 216, 182, 20);
@@ -82,7 +79,7 @@ public class AddStaffDialog extends JDialog {
 		JLorgname.setBounds(25, 276, 60, 20);
 		contentPanel.add(JLorgname);
 		
-		orgnameField = new JTextField();
+		orgnameField = new MyTextField();
 		orgnameField.setEditable(false);
 		orgnameField.setColumns(10);
 		orgnameField.setBounds(100, 276, 182, 20);
@@ -92,7 +89,7 @@ public class AddStaffDialog extends JDialog {
 		JLorgtype.setBounds(25, 336, 80, 20);
 		contentPanel.add(JLorgtype);
 		
-		orgSelect = new JComboBox<String >();
+		orgSelect = new MyComboBox<String >();
 		orgSelect.setBounds(100, 336, 182, 20);
 		addOrgItem();
 		orgSelect.setEnabled(false);
@@ -111,7 +108,7 @@ public class AddStaffDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				MyButton_LightBlue okButton = new MyButton_LightBlue("OK");
 				okButton.addActionListener(new ActionListener() {
 					
 					@Override

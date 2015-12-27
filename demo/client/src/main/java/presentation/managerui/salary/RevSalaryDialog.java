@@ -4,8 +4,6 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
@@ -14,6 +12,8 @@ import businesslogicservice.managerblservice.SalaryBlService;
 import po.Job;
 import po.ResultMessage;
 import po.SalaryMode;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.DoubleField;
 import presentation.tip.TipDialog;
 import vo.SalaryVO;
@@ -27,11 +27,11 @@ public class RevSalaryDialog extends JDialog {
 	DoubleField basetext;
 	DoubleField bonustext;
 	
-	JComboBox<String> jobSelect;
-	JComboBox<String> modeSelect;
+	MyComboBox<String> jobSelect;
+	MyComboBox<String> modeSelect;
 	
-	JButton addBtn;
-	JButton cancelBtn;
+	MyButton_LightBlue addBtn;
+	MyButton_LightBlue cancelBtn;
 	
 	private SalaryVO vo;
 	public RevSalaryDialog(SalaryPanel parent,Job job) {
@@ -48,7 +48,7 @@ public class RevSalaryDialog extends JDialog {
 		joblabel.setBounds(90, 50, 90, 21);
 		add(joblabel);
 		
-		jobSelect = new JComboBox<String>();
+		jobSelect = new MyComboBox<String>();
 		jobSelect.setBounds(180, 50, 180, 21);
 		jobSelect.setEditable(false);
 		add(jobSelect);
@@ -61,7 +61,7 @@ public class RevSalaryDialog extends JDialog {
 		salarymode.setBounds(90, 100, 90, 21);
 		add(salarymode);
 	
-		modeSelect = new JComboBox<String>();
+		modeSelect = new MyComboBox<String>();
 		modeSelect.setBounds(180, 100, 180, 21);
 		modeSelect.setEditable(false);
 		add(modeSelect);
@@ -107,7 +107,7 @@ public class RevSalaryDialog extends JDialog {
 			bonustext.setEditable(true);
 		}
 		
-		addBtn = new JButton();
+		addBtn = new MyButton_LightBlue("");
 		addBtn.setText("确定");
 		addBtn.setBounds(100, 250, 100, 21);
 		add(addBtn);
@@ -142,7 +142,7 @@ public class RevSalaryDialog extends JDialog {
 			}
 		});
 		
-		cancelBtn = new JButton();
+		cancelBtn = new MyButton_LightBlue("");
 		cancelBtn.setText("取消");
 		cancelBtn.setBounds(250, 250, 100, 21);
 		add(cancelBtn);

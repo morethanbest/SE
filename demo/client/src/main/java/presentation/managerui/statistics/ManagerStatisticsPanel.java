@@ -7,26 +7,27 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import businesslogic.balancebl.StatisticsPack.StatisticsController;
 import businesslogicservice.balanceblservice.StatisticsBlService;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import vo.RecordcollectVO;
 import vo.RecordpayVO;
 import vo.StatisticsVO;
 
-public class ManagerStatisticsPanel extends JPanel implements ActionListener {
+public class ManagerStatisticsPanel extends WorkPanel implements ActionListener {
 	
 	private JTable table;
 	
@@ -34,21 +35,21 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 	
 	private JLabel startLabel;
 	private JLabel endLabel;
-	private JButton btnsearch;
+	private MyButton_LightBlue btnsearch;
 	
-	private JComboBox<String> yearSelectstart;
-	private JComboBox<String> monthSelectstart;
-	private JComboBox<String> daySelectstart;
+	private MyComboBox<String> yearSelectstart;
+	private MyComboBox<String> monthSelectstart;
+	private MyComboBox<String> daySelectstart;
 	
-	private JComboBox<String> yearSelectend;
-	private JComboBox<String> monthSelectend;
-	private JComboBox<String> daySelectend;
+	private MyComboBox<String> yearSelectend;
+	private MyComboBox<String> monthSelectend;
+	private MyComboBox<String> daySelectend;
 	
 	private StatisticsVO vo=null;
 	
-	JScrollPane paypanel;
+	MyScrollPane paypanel;
 	
-	JScrollPane collectpanel;
+	MyScrollPane collectpanel;
 	
 	public  ManagerStatisticsPanel(){
 		setLayout(null);
@@ -64,7 +65,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		startLabel.setText("开始时间点");
 		add(startLabel);
 		
-		yearSelectstart = new JComboBox<String>();
+		yearSelectstart = new MyComboBox<String>();
 		yearSelectstart.setBounds(110, 20, 100, 21);
 		yearSelectstart.setEditable(false);
 		yearSelectstart.setEnabled(true);
@@ -77,14 +78,14 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 				addDayItem(daySelectstart,monthSelectstart,yearSelectstart);
 			}
 		};
-		monthSelectstart = new JComboBox<String>();
+		monthSelectstart = new MyComboBox<String>();
 		monthSelectstart.setBounds(225, 20, 65, 21);
 		monthSelectstart.setEditable(false);
 		monthSelectstart.setEnabled(true);
 		add(monthSelectstart);
 		addmonthItem(monthSelectstart);
 		
-		daySelectstart = new JComboBox<String>();
+		daySelectstart = new MyComboBox<String>();
 		daySelectstart.setBounds(305, 20, 65, 21);
 		daySelectstart.setEditable(false);
 		daySelectstart.setEnabled(true);
@@ -102,7 +103,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		add(endLabel);
 		
 		
-		yearSelectend = new JComboBox<String>();
+		yearSelectend = new MyComboBox<String>();
 		yearSelectend.setBounds(515, 20, 100, 21);
 		yearSelectend.setEditable(false);
 		yearSelectend.setEnabled(true);
@@ -115,14 +116,14 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 				addDayItem(daySelectend,monthSelectend,yearSelectend);
 			}
 		};
-		monthSelectend = new JComboBox<String>();
+		monthSelectend = new MyComboBox<String>();
 		monthSelectend.setBounds(630, 20, 65, 21);
 		monthSelectend.setEditable(false);
 		monthSelectend.setEnabled(true);
 		add(monthSelectend);
 		addmonthItem(monthSelectend);
 		
-		daySelectend = new JComboBox<String>();
+		daySelectend = new MyComboBox<String>();
 		daySelectend.setBounds(710, 20, 65, 21);
 		daySelectend.setEditable(false);
 		daySelectend.setEnabled(true);
@@ -133,14 +134,14 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		monthSelectend.addItemListener(endlistener);
 		
 		//加入搜索按钮
-		btnsearch=new JButton();
+		btnsearch=new MyButton_LightBlue("");
 		btnsearch.setBounds(810, 19, 76, 23);
 		btnsearch.setText("生成");
 		btnsearch.addActionListener(this);
 		add(btnsearch);
 		
 		//加入表格
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(20, 60, 300, 350);
 		add(scrollPane);
 		
@@ -160,7 +161,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		
 		
 		//付款详情
-		paypanel = new JScrollPane();
+		paypanel = new MyScrollPane();
 		paypanel.setBounds(320, 60, 734, 400);
 		paypanel.setBorder(null);
 		paypanel.setLayout(null);
@@ -172,7 +173,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		paysum.setBounds(120, 60, 100, 21);
 		paypanel.add(paysum);
 		
-		JTextField sumField = new JTextField();
+		MyTextField sumField = new MyTextField();
 		sumField.setBounds(250, 60, 172, 21);
 		sumField.setEditable(false);
 		paypanel.add(sumField);
@@ -183,7 +184,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		payman.setBounds(120, 120, 100, 21);
 		paypanel.add(payman);
 		
-		JTextField manField = new JTextField();
+		MyTextField manField = new MyTextField();
 		manField.setBounds(250, 120, 172, 21);
 		manField.setEditable(false);
 		paypanel.add(manField);
@@ -194,7 +195,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		payaccount.setBounds(120, 180, 100, 21);
 		paypanel.add(payaccount);
 		
-		JTextField accountField = new JTextField();
+		MyTextField accountField = new MyTextField();
 		accountField.setBounds(250, 180, 172, 21);
 		accountField.setEditable(false);
 		paypanel.add(accountField);
@@ -205,7 +206,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		tip.setBounds(120, 240, 100, 21);
 		paypanel.add(tip);
 		
-		JComboBox<String> tipSelect = new JComboBox<String>();
+		MyComboBox<String> tipSelect = new MyComboBox<String>();
 		tipSelect.setBounds(250, 240, 172, 21);
 		tipSelect.setEditable(false);
 		tipSelect.setEnabled(false);
@@ -223,7 +224,7 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		paypanel.add(textArea);
 		
 		//收款详情
-		collectpanel = new JScrollPane();
+		collectpanel = new MyScrollPane();
 		collectpanel.setBounds(320, 60, 734, 400);
 		collectpanel.setBorder(null);
 		collectpanel.setLayout(null);
@@ -247,26 +248,26 @@ public class ManagerStatisticsPanel extends JPanel implements ActionListener {
 		label_5.setBounds(120, 240, 54, 15);
 		collectpanel.add(label_5);
 		
-		JTextField collectsum = new JTextField();
+		MyTextField collectsum = new MyTextField();
 		collectsum.setBounds(250, 60, 172, 21);
 		collectsum.setEditable(false);
 		collectpanel.add(collectsum);
 		collectsum.setColumns(10);
 		
-		JTextField collectman = new JTextField();
+		MyTextField collectman = new MyTextField();
 		collectman.setBounds(250, 120, 172, 21);
 		collectman.setEditable(false);
 		collectpanel.add(collectman);
 		collectman.setColumns(10);
 		
-		JTextField collectaccount = new JTextField();
+		MyTextField collectaccount = new MyTextField();
 		collectaccount.setBounds(250, 180, 172, 21);
 		collectaccount.setEditable(false);
 		collectpanel.add(collectaccount);
 		collectaccount.setColumns(10);
 		
 		
-		JScrollPane orderpanel = new JScrollPane();
+		MyScrollPane orderpanel = new MyScrollPane();
 		orderpanel.setBounds(250,240,172,100);
 		collectpanel.add(orderpanel);
 		

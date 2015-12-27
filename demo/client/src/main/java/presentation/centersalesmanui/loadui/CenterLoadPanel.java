@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -259,7 +258,7 @@ public class CenterLoadPanel extends WorkPanel {
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, destinBox, carField, jianField, yaField}));
 	}
 	
-	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
+	private void addYearItems(MyComboBox<Long> year, MyComboBox<Long> month) {
 		for (long i = 2000; i <= 2050; i++) {
 			year.addItem(i);
 		}
@@ -269,8 +268,8 @@ public class CenterLoadPanel extends WorkPanel {
 		}
 	}
 
-	private void addDateItems(JComboBox<Long> yearBox,
-			JComboBox<Long> monthBox, JComboBox<Long> dateBox) {
+	private void addDateItems(MyComboBox<Long> yearBox,
+			MyComboBox<Long> monthBox, MyComboBox<Long> dateBox) {
 		dateBox.removeAllItems();
 		if ((Long) monthBox.getSelectedItem() == 1
 				|| (Long) monthBox.getSelectedItem() == 3
@@ -298,7 +297,7 @@ public class CenterLoadPanel extends WorkPanel {
 		}
 	}
 	
-	public void addOrganizationItems(JComboBox<String> orgSelect) {
+	public void addOrganizationItems(MyComboBox<String> orgSelect) {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
 		List<OrganizationVO> orgList = organizationBlService

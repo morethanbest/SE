@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -304,7 +303,7 @@ public class TransferPanel extends WorkPanel {
 				manageField, destinBox }));
 	}
 
-	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
+	private void addYearItems(MyComboBox<Long> year, MyComboBox<Long> month) {
 		for (long i = 2000; i <= 2050; i++) {
 			year.addItem(i);
 		}
@@ -314,8 +313,8 @@ public class TransferPanel extends WorkPanel {
 		}
 	}
 
-	private void addDateItems(JComboBox<Long> yearBox,
-			JComboBox<Long> monthBox, JComboBox<Long> dateBox) {
+	private void addDateItems(MyComboBox<Long> yearBox,
+			MyComboBox<Long> monthBox, MyComboBox<Long> dateBox) {
 		dateBox.removeAllItems();
 		if ((Long) monthBox.getSelectedItem() == 1
 				|| (Long) monthBox.getSelectedItem() == 3
@@ -349,7 +348,7 @@ public class TransferPanel extends WorkPanel {
 		}
 	}
 
-	public void addCityItems(JComboBox<String> citySelect) {
+	public void addCityItems(MyComboBox<String> citySelect) {
 		citySelect.removeAllItems();
 		ConstantsBlService constantsBlService = new ConstantsController();
 		List<CityVO> cityList = constantsBlService.getAllCity();

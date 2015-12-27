@@ -6,38 +6,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogicservice.managerblservice.ExamGoodsRecevings;
 import po.Arrivalstate;
 import po.Formstate;
 import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.GoodsReceivingVO;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.managerblservice.ExamGoodsRecevings;
 
-public class GoodRecievingRevisePanel extends JPanel {
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<String> stateBox;
-	private JButton update;
+public class GoodRecievingRevisePanel extends WorkPanel {
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<String> stateBox;
+	private MyButton_LightBlue update;
 	private ExamGoodsRecevings ea;
 	private GoodsReceivingVO vo;
 	private NumberField codeField;
-	private JComboBox<String> typeBox;
+	private MyComboBox<String> typeBox;
 	private JLabel depatLabel;
-	private JButton button_1;
-	private JButton button_2;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
@@ -60,23 +59,23 @@ public class GoodRecievingRevisePanel extends JPanel {
 		depatLabel.setBounds(518, 70, 242, 18);
 		add(depatLabel);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(140, 67, 74, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(238, 67, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(321, 67, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(518, 149, 242, 24);
 		add(stateBox);
 		addStateTypeItems();
@@ -91,12 +90,12 @@ public class GoodRecievingRevisePanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(140, 149, 242, 24);
 		add(typeBox);
 		addTypeItems();
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
@@ -129,7 +128,7 @@ public class GoodRecievingRevisePanel extends JPanel {
 		update.setBounds(423, 336, 113, 27);
 		add(update);
 		
-		button_1 = new JButton("恢复原值");
+		button_1 = new MyButton_LightBlue("恢复原值");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -138,7 +137,7 @@ public class GoodRecievingRevisePanel extends JPanel {
 		button_1.setBounds(550, 336, 113, 27);
 		add(button_1);
 		
-		button_2 = new JButton("返回");
+		button_2 = new MyButton_LightBlue("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);

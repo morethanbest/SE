@@ -8,28 +8,28 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import po.Formstate;
-import presentation.managerui.examui.ExamPanel;
-import vo.StockoutVO;
 import businesslogic.managerbl.ExamPack.ExamController;
 import businesslogicservice.managerblservice.ExamStockouts;
+import po.Formstate;
+import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import vo.StockoutVO;
 
-public class StockoutExamPanel extends JPanel {
+public class StockoutExamPanel extends WorkPanel {
 	private JTable table;
 	private ExamStockouts ea;
 	private List<StockoutVO> volist;
-	private JComboBox<String> stateBox;
-	private JButton pass;
-	private JButton refused;
-	private JButton revise;
-	private JButton back;
+	private MyComboBox<String> stateBox;
+	private MyButton_LightBlue pass;
+	private MyButton_LightBlue refused;
+	private MyButton_LightBlue revise;
+	private MyButton_LightBlue back;
 
 	/**
 	 * Create the panel.
@@ -38,7 +38,7 @@ public class StockoutExamPanel extends JPanel {
 		ea = new ExamController();
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(14, 13, 917, 335);
 		add(scrollPane);
 		
@@ -66,7 +66,7 @@ public class StockoutExamPanel extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
-		pass = new JButton("通过");
+		pass = new MyButton_LightBlue("通过");
 		pass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.pass);
@@ -75,7 +75,7 @@ public class StockoutExamPanel extends JPanel {
 		pass.setBounds(411, 358, 113, 27);
 		add(pass);
 		
-		refused = new JButton("否决");
+		refused = new MyButton_LightBlue("否决");
 		refused.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.fail);
@@ -84,7 +84,7 @@ public class StockoutExamPanel extends JPanel {
 		refused.setBounds(538, 358, 113, 27);
 		add(refused);
 		
-		revise = new JButton("查看详细");
+		revise = new MyButton_LightBlue("查看详细");
 		revise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.next(parent);
@@ -96,7 +96,7 @@ public class StockoutExamPanel extends JPanel {
 		revise.setBounds(665, 358, 113, 27);
 		add(revise);
 		
-		back = new JButton("返回");
+		back = new MyButton_LightBlue("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.show(parent, "select");
@@ -105,7 +105,7 @@ public class StockoutExamPanel extends JPanel {
 		back.setBounds(792, 358, 113, 27);
 		add(back);
 		
-		stateBox = new JComboBox<String>();
+		stateBox = new MyComboBox<String>();
 		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
 		stateBox.addItemListener(new ItemListener() {

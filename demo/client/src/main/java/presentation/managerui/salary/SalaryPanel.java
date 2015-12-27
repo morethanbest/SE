@@ -4,10 +4,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,20 +12,23 @@ import javax.swing.table.DefaultTableModel;
 import businesslogic.managerbl.SalaryPack.SalaryController;
 import businesslogicservice.managerblservice.SalaryBlService;
 import po.Job;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import vo.SalaryVO;
 
-public class SalaryPanel extends JPanel implements ActionListener{
+public class SalaryPanel extends WorkPanel implements ActionListener{
 	
 	private JSeparator separator;
 	
-	private JScrollPane scrollPane;
+	private MyScrollPane scrollPane;
 	
-	private JButton addBtn;
-	private JButton delBtn;
-	private JButton revBtn;
+	private MyButton_LightBlue addBtn;
+	private MyButton_LightBlue delBtn;
+	private MyButton_LightBlue revBtn;
 	private JTable table;
 	
-	private JButton refreshBtn;
+	private MyButton_LightBlue refreshBtn;
 	
 	
 	private SalaryVO vo=null;
@@ -43,7 +43,7 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		separator = new JSeparator();
 		separator.setBounds(0, 0, 954, 8);
 		add(separator);
-		scrollPane=new JScrollPane();
+		scrollPane=new MyScrollPane();
 		scrollPane.setBounds(40, 20, 700, 330);
 		add(scrollPane);
 		table=new JTable();
@@ -71,25 +71,25 @@ public class SalaryPanel extends JPanel implements ActionListener{
 		
 //		refreshList();
 		
-		addBtn = new JButton();
+		addBtn = new MyButton_LightBlue("");
 		addBtn.setText("增加薪水策略");
 		addBtn.setBounds(800, 20, 150, 40);
 		add(addBtn);
 		addBtn.addActionListener(this);
 		
-		delBtn = new JButton();
+		delBtn = new MyButton_LightBlue("");
 		delBtn.setText("删除选中项");
 		delBtn.setBounds(200, 380, 150, 40);
 		add(delBtn);
 		delBtn.addActionListener(this);
 		
-		revBtn = new JButton();
+		revBtn = new MyButton_LightBlue("");
 		revBtn.setText("修改选中项");
 		revBtn.setBounds(500, 380, 150, 40);
 		add(revBtn);
 		revBtn.addActionListener(this);
 		
-		refreshBtn = new JButton();
+		refreshBtn = new MyButton_LightBlue("");
 		refreshBtn.setText("查找");
 		refreshBtn.setBounds(800, 250, 150, 40);
 		add(refreshBtn);

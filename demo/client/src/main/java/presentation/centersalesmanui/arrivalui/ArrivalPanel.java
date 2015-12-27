@@ -179,7 +179,7 @@ public class ArrivalPanel extends WorkPanel {
 		typeBox.addItem("营业厅-汽运编号");
 	}
 
-	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
+	private void addYearItems(MyComboBox<Long> year, MyComboBox<Long> month) {
 		for (long i = 2000; i <= 2050; i++) {
 			year.addItem(i);
 		}
@@ -189,8 +189,8 @@ public class ArrivalPanel extends WorkPanel {
 		}
 	}
 
-	private void addDateItems(JComboBox<Long> yearBox,
-			JComboBox<Long> monthBox, JComboBox<Long> dateBox) {
+	private void addDateItems(MyComboBox<Long> yearBox,
+			MyComboBox<Long> monthBox, MyComboBox<Long> dateBox) {
 		dateBox.removeAllItems();
 		if ((Long) monthBox.getSelectedItem() == 1
 				|| (Long) monthBox.getSelectedItem() == 3
@@ -233,7 +233,7 @@ public class ArrivalPanel extends WorkPanel {
 		return null;
 	}
 
-	public void addOrganizationItems(JComboBox<String> orgSelect) {
+	public void addOrganizationItems(MyComboBox<String> orgSelect) {
 		orgSelect.removeAllItems();
 		OrganizationBlService organizationBlService = new OrganizationController();
 		List<OrganizationVO> orgList = organizationBlService

@@ -2,8 +2,6 @@ package presentation.managerui.examui;
 
 import java.awt.CardLayout;
 
-import javax.swing.JPanel;
-
 import presentation.managerui.examui.examcentersalesmanui.ArrivalExamPanel;
 import presentation.managerui.examui.examcentersalesmanui.ArrivalRevisePanel;
 import presentation.managerui.examui.examcentersalesmanui.CenterLoadExamPanel;
@@ -26,9 +24,10 @@ import presentation.managerui.examui.examhallsalesmanui.HallLoadExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.HallLoadRevisePanel;
 import presentation.managerui.examui.examhallsalesmanui.RecordcollectExamPanel;
 import presentation.managerui.examui.examhallsalesmanui.RecordcollectRevisePanel;
+import presentation.mycomp.WorkPanel;
 
 
-public class ExamPanel extends JPanel {
+public class ExamPanel extends WorkPanel {
 
 	private CardLayout card;
 	

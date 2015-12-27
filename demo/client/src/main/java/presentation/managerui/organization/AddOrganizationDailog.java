@@ -2,33 +2,31 @@ package presentation.managerui.organization;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
-import presentation.enums.OrganizationType;
-import presentation.tip.NumberField;
-import presentation.tip.TipDialog;
-import vo.CityVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import po.ResultMessage;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
+import presentation.enums.OrganizationType;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.TipDialog;
+import vo.CityVO;
 
 public class AddOrganizationDailog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JComboBox<String> citySelect;
-	private JComboBox<String> orgSelect;
-	private JTextField nameField;
+	private MyComboBox<String> citySelect;
+	private MyComboBox<String> orgSelect;
+	private MyTextField nameField;
 
 
 	/**
@@ -43,17 +41,17 @@ public class AddOrganizationDailog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		citySelect = new JComboBox<String>();
+		citySelect = new MyComboBox<String>();
 		citySelect.setBounds(65, 31, 172, 31);
 		contentPanel.add(citySelect);
 		addCityItems();
 		
-		orgSelect = new JComboBox<String>();
+		orgSelect = new MyComboBox<String>();
 		orgSelect.setBounds(65, 114, 172, 31);
 		contentPanel.add(orgSelect);
 		addOrgTypeItems();
 		
-		nameField = new JTextField();
+		nameField = new MyTextField();
 		nameField.setBounds(65, 187, 172, 31);
 		contentPanel.add(nameField);
 		nameField.setColumns(10);

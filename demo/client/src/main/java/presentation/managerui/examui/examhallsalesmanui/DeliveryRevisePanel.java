@@ -6,35 +6,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JLabel;
 
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogicservice.managerblservice.ExamDeliverys;
 import po.Formstate;
 import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.DeliveryVO;
-import vo.GoodsReceivingVO;
-import businesslogic.logisticsbl.DeliveryPack.DeliveryController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogicservice.logisticsblservice.DeliveryBlService;
-import businesslogicservice.managerblservice.ExamDeliverys;
-import businesslogicservice.managerblservice.ExamGoodsRecevings;
-import javax.swing.JLabel;
 
-public class DeliveryRevisePanel extends JPanel {
+public class DeliveryRevisePanel extends WorkPanel {
 	private NumberField codeField;
-	private JTextField deliveryField;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton update;
+	private MyTextField deliveryField;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue update;
 	private ExamDeliverys ea;
 	private DeliveryVO vo;
 
@@ -51,28 +47,28 @@ public class DeliveryRevisePanel extends JPanel {
 		codeField.setBounds(286, 82, 242, 24);
 		add(codeField);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(286, 141, 74, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(384, 141, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(467, 141, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		deliveryField = new JTextField();
+		deliveryField = new MyTextField();
 		deliveryField.setColumns(10);
 		deliveryField.setBounds(286, 204, 242, 24);
 		add(deliveryField);
 
-		update = new JButton("提交");
+		update = new MyButton_LightBlue("提交");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(codeField.getText().equals("")){
@@ -105,7 +101,7 @@ public class DeliveryRevisePanel extends JPanel {
 		update.setBounds(359, 276, 113, 27);
 		add(update);
 		
-		JButton button_1 = new JButton("恢复原值");
+		MyButton_LightBlue button_1 = new MyButton_LightBlue("恢复原值");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -114,7 +110,7 @@ public class DeliveryRevisePanel extends JPanel {
 		button_1.setBounds(486, 276, 113, 27);
 		add(button_1);
 		
-		JButton button_2 = new JButton("返回");
+		MyButton_LightBlue button_2 = new MyButton_LightBlue("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);

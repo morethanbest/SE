@@ -1,47 +1,45 @@
 package presentation.managerui.staff;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import po.Job;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.enums.OrganizationType;
-import presentation.enums.StaffType;
-import presentation.tip.TipDialog;
-import vo.CityVO;
-import vo.OrganizationVO;
-import vo.StaffVO;
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
 import businesslogic.managerbl.StaffPack.StaffController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import businesslogicservice.managerblservice.StaffBlService;
-import java.awt.SystemColor;
+import po.Job;
+import po.ResultMessage;
+import presentation.enums.StaffType;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import presentation.tip.TipDialog;
+import vo.CityVO;
+import vo.OrganizationVO;
+import vo.StaffVO;
 
-public class StaffManagePanel extends JPanel implements ActionListener{
+public class StaffManagePanel extends WorkPanel implements ActionListener{
 	private JTable table;
-	JButton btnAdd;
-	JComboBox<String> staffSelect;
-	JButton btnRevise;
-	JButton btnDelete;
+	MyButton_LightBlue btnAdd;
+	MyComboBox<String> staffSelect;
+	MyButton_LightBlue btnRevise;
+	MyButton_LightBlue btnDelete;
 	private List<StaffVO> list;
 	private StaffBlService staffBlService;
-	private JComboBox<String> citySelect;
-	private JComboBox<String> orgSelect;
+	private MyComboBox<String> citySelect;
+	private MyComboBox<String> orgSelect;
 	
 	
 	/**
@@ -57,24 +55,24 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		separator.setBounds(0, 60, 954, 8);
 		add(separator);
 		
-		btnAdd = new JButton("增加");
+		btnAdd = new MyButton_LightBlue("增加");
 		btnAdd.setBounds(599, 0, 113, 36);
 		add(btnAdd);
 		
-		staffSelect = new JComboBox<String>();
+		staffSelect = new MyComboBox<String>();
 		staffSelect.setBounds(0, 0, 131, 35);
 		add(staffSelect);
 		addStaffTypeItems();
 		
-		btnRevise = new JButton("修改");
+		btnRevise = new MyButton_LightBlue("修改");
 		btnRevise.setBounds(847, 0, 107, 36);
 		add(btnRevise);
 		
-		btnDelete = new JButton("删除");
+		btnDelete = new MyButton_LightBlue("删除");
 		btnDelete.setBounds(726, 0, 107, 36);
 		add(btnDelete);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(14, 84, 926, 323);
 		add(scrollPane);
 		
@@ -96,12 +94,12 @@ public class StaffManagePanel extends JPanel implements ActionListener{
 		table.setRowHeight(30);
 		scrollPane.setViewportView(table);
 		
-		citySelect = new JComboBox<String>();
+		citySelect = new MyComboBox<String>();
 		citySelect.setBounds(137, 0, 131, 35);
 		add(citySelect);
 		addCityItems();
 		
-		orgSelect = new JComboBox<String>();
+		orgSelect = new MyComboBox<String>();
 		orgSelect.setBounds(274, 0, 131, 35);
 		add(orgSelect);
 		orgSelect.setVisible(false);

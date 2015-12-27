@@ -1,55 +1,46 @@
 package presentation.managerui.examui.examhallsalesmanui;
 
-import javax.swing.JPanel;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
 
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogicservice.managerblservice.ExamHLForms;
 import po.Formstate;
-import po.Organizationtype;
 import po.ResultMessage;
 import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
 import presentation.tip.TipDialog;
 import vo.HallLoadVO;
-import vo.OrganizationVO;
-import businesslogic.logisticsbl.HallLoadPack.HallLoadController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.logisticsblservice.HallLoadBlService;
-import businesslogicservice.managerblservice.ExamHLForms;
-import businesslogicservice.managerblservice.OrganizationBlService;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JLabel;
-
-public class HallLoadRevisePanel extends JPanel {
+public class HallLoadRevisePanel extends WorkPanel {
 	private NumberField carField;
-	private JTextField jianField;
-	private JTextField yaField;
+	private MyTextField jianField;
+	private MyTextField yaField;
 	private JTable table;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton update;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue update;
 	private ExamHLForms ea;
 	private HallLoadVO vo;
 	private JLabel moterLabel;
@@ -93,34 +84,34 @@ public class HallLoadRevisePanel extends JPanel {
 		moterLabel.setBounds(86, 132, 202, 18);
 		add(moterLabel);
 
-		jianField = new JTextField();
+		jianField = new MyTextField();
 		jianField.setColumns(10);
 		jianField.setBounds(421, 126, 199, 24);
 		add(jianField);
 
-		yaField = new JTextField();
+		yaField = new MyTextField();
 		yaField.setBounds(421, 214, 199, 24);
 		add(yaField);
 		yaField.setColumns(10);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(89, 214, 69, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(172, 214, 51, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(237, 214, 51, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 		
 
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(671, 13, 266, 283);
 		add(scrollPane);
 
@@ -131,7 +122,7 @@ public class HallLoadRevisePanel extends JPanel {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(carField.getText().equals("")){
@@ -192,7 +183,7 @@ public class HallLoadRevisePanel extends JPanel {
 		monthBox.addItemListener(listener);
 		
 		
-		JButton button_1 = new JButton("增加一条");
+		MyButton_LightBlue button_1 = new MyButton_LightBlue("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -202,7 +193,7 @@ public class HallLoadRevisePanel extends JPanel {
 		button_1.setBounds(671, 309, 113, 27);
 		add(button_1);
 
-		JButton button_2 = new JButton("删除该条");
+		MyButton_LightBlue button_2 = new MyButton_LightBlue("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -223,7 +214,7 @@ public class HallLoadRevisePanel extends JPanel {
 		add(fareField);
 		fareField.setColumns(10);
 		
-		JButton button = new JButton("恢复原值");
+		MyButton_LightBlue button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -232,7 +223,7 @@ public class HallLoadRevisePanel extends JPanel {
 		button.setBounds(560, 375, 113, 27);
 		add(button);
 		
-		JButton button_3 = new JButton("返回");
+		MyButton_LightBlue button_3 = new MyButton_LightBlue("返回");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);

@@ -1,45 +1,38 @@
 package presentation.managerui.examui.examdepotui;
 
-import javax.swing.JPanel;
-
 import java.awt.CardLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.JButton;
-
-import po.Block;
-import po.CommodityLocation;
-import po.Formstate;
-import po.Organizationtype;
-import presentation.managerui.examui.ExamPanel;
-import vo.OrganizationVO;
-import vo.StockinVO;
-import businesslogic.commoditybl.InboundPack.InboundController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.commodityblservice.InboundBlService;
-import businesslogicservice.managerblservice.ExamInbounds;
-import businesslogicservice.managerblservice.OrganizationBlService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 import javax.swing.JLabel;
 
-public class StockinRevisePanel extends JPanel {
-	private JTextField codeField;
-	private JButton update;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JButton button_1;
-	private JButton button_2;
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogicservice.managerblservice.ExamInbounds;
+import businesslogicservice.managerblservice.OrganizationBlService;
+import po.CommodityLocation;
+import po.Formstate;
+import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import vo.OrganizationVO;
+import vo.StockinVO;
+
+public class StockinRevisePanel extends WorkPanel {
+	private MyTextField codeField;
+	private MyButton_LightBlue update;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	private ExamInbounds ea;
 	private StockinVO vo;
 	private JLabel label;
@@ -53,22 +46,22 @@ public class StockinRevisePanel extends JPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
-		codeField = new JTextField();
+		codeField = new MyTextField();
 		codeField.setBounds(143, 35, 220, 24);
 		add(codeField);
 		codeField.setColumns(10);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(557, 35, 78, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(643, 35, 65, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(712, 35, 65, 24);
 		add(dateBox);
 
@@ -84,7 +77,7 @@ public class StockinRevisePanel extends JPanel {
 		yearBox.addItemListener(listener);
 		monthBox.addItemListener(listener);
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long date = (Long) yearBox.getSelectedItem() * 10000
@@ -97,7 +90,7 @@ public class StockinRevisePanel extends JPanel {
 		update.setBounds(416, 312, 113, 27);
 		add(update);
 		
-		button_1 = new JButton("恢复原值");
+		button_1 = new MyButton_LightBlue("恢复原值");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -106,7 +99,7 @@ public class StockinRevisePanel extends JPanel {
 		button_1.setBounds(543, 312, 113, 27);
 		add(button_1);
 		
-		button_2 = new JButton("返回");
+		button_2 = new MyButton_LightBlue("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);

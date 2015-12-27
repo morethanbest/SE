@@ -21,15 +21,13 @@ import presentation.centersalesmanui.transferui.TransferCheckPanel;
 import presentation.centersalesmanui.transferui.TransferPanel;
 import presentation.centersalesmanui.transferui.TransferUpdatePanel;
 import presentation.mainui.MainFrame;
-import presentation.mycomp.MyButton_LightBlue;
-import presentation.mycomp.PersonPanel;
 
-public class CenterSalesmanPanel extends PersonPanel implements ActionListener{
+public class CenterSalesmanPanel extends JPanel implements ActionListener{
 	private JPanel switcher;
-	private MyButton_LightBlue btnNewButton_2;
-	private MyButton_LightBlue btnNewButton;
-	private MyButton_LightBlue btnNewButton_1;
-	private MyButton_LightBlue btnZhu;
+	private JButton btnNewButton_2;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnZhu;
 	private CardLayout card;
 	
 	private ArrivalPanel arrival;
@@ -53,7 +51,7 @@ public class CenterSalesmanPanel extends PersonPanel implements ActionListener{
 		setLayout(null);
 		setBounds(0, 0, 982, 553);
 		
-		btnNewButton = new MyButton_LightBlue("到达单");
+		btnNewButton = new JButton("到达单");
 		btnNewButton.setBounds(0, 0, 96, 40);
 		btnNewButton.setForeground(SystemColor.windowBorder);
 		btnNewButton.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
@@ -61,7 +59,7 @@ public class CenterSalesmanPanel extends PersonPanel implements ActionListener{
 		setNoneBorder(btnNewButton);
 		add(btnNewButton);
 		
-		btnNewButton_1 = new MyButton_LightBlue("中转单");
+		btnNewButton_1 = new JButton("中转单");
 		btnNewButton_1.setBounds(97, 0, 96, 40);
 		btnNewButton_1.setForeground(SystemColor.windowBorder);
 		btnNewButton_1.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
@@ -69,7 +67,7 @@ public class CenterSalesmanPanel extends PersonPanel implements ActionListener{
 		setNoneBorder(btnNewButton_1);
 		add(btnNewButton_1);
 		
-		btnNewButton_2 = new MyButton_LightBlue("装车单");
+		btnNewButton_2 = new JButton("装车单");
 		btnNewButton_2.setBounds(194, 0, 96, 40);
 		btnNewButton_2.setForeground(SystemColor.windowBorder);
 		btnNewButton_2.setFont(new Font("微软雅黑 Light", Font.BOLD, 13));
@@ -109,7 +107,7 @@ public class CenterSalesmanPanel extends PersonPanel implements ActionListener{
 		switcher.add(cc, "cc");
 		switcher.add(cu, "cu");
 		
-		btnZhu = new MyButton_LightBlue("注销");
+		btnZhu = new JButton("注销");
 		btnZhu.setBounds(815, 13, 113, 27);
 		add(btnZhu);
 		btnZhu.setBackground(SystemColor.inactiveCaptionBorder);

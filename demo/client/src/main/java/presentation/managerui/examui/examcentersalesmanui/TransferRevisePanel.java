@@ -1,71 +1,61 @@
 package presentation.managerui.examui.examcentersalesmanui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JButton;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import po.Formstate;
-import po.Organizationtype;
-import po.ResultMessage;
-import presentation.enums.OrganizationType;
-import presentation.enums.TransportTypes;
-import presentation.managerui.examui.ExamPanel;
-import presentation.tip.TipDialog;
-import vo.CenterloadVO;
-import vo.CityVO;
-import vo.OrganizationVO;
-import vo.RecordtransVO;
-import businesslogic.logisticsbl.RecordtransPack.CentertransController;
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogic.managerbl.ExamPack.ExamController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.logisticsblservice.RecordtransBlService;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import businesslogicservice.managerblservice.ExamRecordtrans;
-import businesslogicservice.managerblservice.OrganizationBlService;
-
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.SystemColor;
-
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-public class TransferRevisePanel extends JPanel {
-	private JTextField classField;
-	private JTextField counterField;
-	private JTextField manageField;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.ExamRecordtrans;
+import po.Formstate;
+import po.ResultMessage;
+import presentation.enums.TransportTypes;
+import presentation.managerui.examui.ExamPanel;
+import presentation.mycomp.MyButton_LightBlue;
+import presentation.mycomp.MyTextField;
+import presentation.mycomp.WorkPanel;
+import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import presentation.tip.TipDialog;
+import vo.CityVO;
+import vo.RecordtransVO;
+
+public class TransferRevisePanel extends WorkPanel {
+	private MyTextField classField;
+	private MyTextField counterField;
+	private MyTextField manageField;
 	private JTable table;
-	private JComboBox<Long> yearBox;
-	private JComboBox<Long> monthBox;
-	private JComboBox<Long> dateBox;
-	private JComboBox<String> typeBox;
-	private JComboBox<String> destinBox;
-	private JButton update;
-	private JButton button_1;
-	private JButton button_2;
+	private MyComboBox<Long> yearBox;
+	private MyComboBox<Long> monthBox;
+	private MyComboBox<Long> dateBox;
+	private MyComboBox<String> typeBox;
+	private MyComboBox<String> destinBox;
+	private MyButton_LightBlue update;
+	private MyButton_LightBlue button_1;
+	private MyButton_LightBlue button_2;
 	private JLabel codeLabel;
 	private JLabel departureLabel;
-	private JButton farebutton;
+	private MyButton_LightBlue farebutton;
 	private ExamRecordtrans ea;
 	private RecordtransVO vo;
-	private JTextField fareField;
-	private JButton button;
-	private JButton button_3;
+	private MyTextField fareField;
+	private MyButton_LightBlue button;
+	private MyButton_LightBlue button_3;
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel label_3;
@@ -88,43 +78,43 @@ public class TransferRevisePanel extends JPanel {
 		departureLabel.setBounds(351, 147, 242, 27);
 		add(departureLabel);
 
-		yearBox = new JComboBox<Long>();
+		yearBox = new MyComboBox<Long>();
 		yearBox.setBounds(99, 78, 74, 24);
 		add(yearBox);
 
-		monthBox = new JComboBox<Long>();
+		monthBox = new MyComboBox<Long>();
 		monthBox.setBounds(183, 78, 61, 24);
 		add(monthBox);
 
 		addYearItems(yearBox, monthBox);
 
-		dateBox = new JComboBox<Long>();
+		dateBox = new MyComboBox<Long>();
 		dateBox.setBounds(254, 78, 61, 24);
 		add(dateBox);
 
 		addDateItems(yearBox, monthBox, dateBox);
 
-		typeBox = new JComboBox<String>();
+		typeBox = new MyComboBox<String>();
 		typeBox.setBounds(99, 150, 216, 24);
 		add(typeBox);
 		addTransportTypeItems();
 
-		classField = new JTextField();
+		classField = new MyTextField();
 		classField.setColumns(10);
 		classField.setBounds(99, 215, 216, 24);
 		add(classField);
 
-		counterField = new JTextField();
+		counterField = new MyTextField();
 		counterField.setColumns(10);
 		counterField.setBounds(409, 12, 200, 24);
 		add(counterField);
 
-		manageField = new JTextField();
+		manageField = new MyTextField();
 		manageField.setColumns(10);
 		manageField.setBounds(409, 79, 200, 24);
 		add(manageField);
 
-		destinBox = new JComboBox<String>();
+		destinBox = new MyComboBox<String>();
 		destinBox.setBounds(409, 214, 200, 24);
 		add(destinBox);
 		addCityItems(destinBox);
@@ -133,7 +123,7 @@ public class TransferRevisePanel extends JPanel {
 				typeBox, yearBox, monthBox, dateBox, classField, counterField,
 				update }));
 
-		update = new JButton("提交修改");
+		update = new MyButton_LightBlue("提交修改");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table
@@ -197,7 +187,7 @@ public class TransferRevisePanel extends JPanel {
 		label.setBounds(14, 352, 82, 18);
 		add(label);
 
-		JScrollPane scrollPane = new JScrollPane();
+		MyScrollPane scrollPane = new MyScrollPane();
 		scrollPane.setBounds(660, 13, 285, 274);
 		add(scrollPane);
 
@@ -208,7 +198,7 @@ public class TransferRevisePanel extends JPanel {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		scrollPane.setViewportView(table);
 
-		button_1 = new JButton("增加一条");
+		button_1 = new MyButton_LightBlue("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table
@@ -219,7 +209,7 @@ public class TransferRevisePanel extends JPanel {
 		button_1.setBounds(670, 300, 113, 27);
 		add(button_1);
 
-		button_2 = new JButton("删除该条");
+		button_2 = new MyButton_LightBlue("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tableModel = (DefaultTableModel) table
@@ -231,13 +221,13 @@ public class TransferRevisePanel extends JPanel {
 		button_2.setBounds(823, 300, 113, 27);
 		add(button_2);
 		
-		fareField = new JTextField();
+		fareField = new MyTextField();
 		fareField.setText("0");
 		fareField.setBounds(100, 349, 61, 24);
 		add(fareField);
 		fareField.setColumns(10);
 		
-		button = new JButton("恢复原值");
+		button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -246,7 +236,7 @@ public class TransferRevisePanel extends JPanel {
 		button.setBounds(543, 348, 113, 27);
 		add(button);
 		
-		button_3 = new JButton("返回");
+		button_3 = new MyButton_LightBlue("返回");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent);
