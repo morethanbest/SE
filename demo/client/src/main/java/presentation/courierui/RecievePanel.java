@@ -1,6 +1,5 @@
 package presentation.courierui;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -18,21 +17,21 @@ import javax.swing.JSeparator;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import businesslogic.orderbl.CheckExist;
-import businesslogic.orderbl.ReceptionPack.ReceptionController;
-import businesslogicservice.orderblservice.CheckExistBlService;
-import businesslogicservice.orderblservice.ReceptionBlService;
 import po.ResultMessage;
 import presentation.mainui.MainFrame;
 import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.MyTextField;
-import presentation.mycomp.WorkPanel;
+import presentation.mycomp.PersonPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.ReceptionVO;
+import businesslogic.orderbl.CheckExist;
+import businesslogic.orderbl.ReceptionPack.ReceptionController;
+import businesslogicservice.orderblservice.CheckExistBlService;
+import businesslogicservice.orderblservice.ReceptionBlService;
 
-public class RecievePanel extends WorkPanel {
+public class RecievePanel extends PersonPanel {
 	private MyComboBox<Long> yearBox;
 	private MyComboBox<Long> monthBox;
 	private MyComboBox<Long> dateBox;
@@ -52,10 +51,8 @@ public class RecievePanel extends WorkPanel {
 	 * @param courierPanel
 	 */
 	public RecievePanel(CourierPanel courierPanel,MainFrame parent) {
-		setBackground(new Color(244, 247, 252));
 		setBackground(SystemColor.inactiveCaptionBorder);
 		receptionBlService = new ReceptionController();
-		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
 		nameField = new MyTextField();

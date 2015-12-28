@@ -11,17 +11,17 @@ import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import businesslogic.orderbl.OrderPack.OrderController;
-import businesslogicservice.orderblservice.OrderBlService;
 import po.Formstate;
 import presentation.mycomp.MyButton_LightBlue;
-import presentation.mycomp.WorkPanel;
+import presentation.mycomp.PersonPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.TipDialog;
 import vo.OrderVO;
+import businesslogic.orderbl.OrderPack.OrderController;
+import businesslogicservice.orderblservice.OrderBlService;
 
-public class OrderCheckPanel extends WorkPanel {
+public class OrderCheckPanel extends PersonPanel {
 	private JTable table;
 	private OrderBlService controller;
 	private List<OrderVO> volist;

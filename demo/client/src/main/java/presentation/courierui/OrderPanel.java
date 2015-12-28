@@ -19,12 +19,6 @@ import javax.swing.SwingConstants;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogic.orderbl.OrderPack.OrderController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
-import businesslogicservice.orderblservice.OrderBlService;
 import po.Formstate;
 import po.Ordertype;
 import po.ResultMessage;
@@ -33,7 +27,7 @@ import presentation.enums.PackageTypes;
 import presentation.mainui.MainFrame;
 import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.MyTextField;
-import presentation.mycomp.WorkPanel;
+import presentation.mycomp.PersonPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
@@ -42,8 +36,14 @@ import vo.CityVO;
 import vo.OrderFareVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.OrderPack.OrderController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.OrderBlService;
 
-public class OrderPanel extends WorkPanel {
+public class OrderPanel extends PersonPanel {
 	private MyTextField snameField;
 	private MyTextField sdetailField;
 	private MyTextField sjobField;

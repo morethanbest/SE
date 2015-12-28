@@ -15,12 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-import businesslogic.managerbl.ConstantsPack.ConstantsController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogic.orderbl.OrderPack.OrderController;
-import businesslogicservice.managerblservice.ConstantsBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
-import businesslogicservice.orderblservice.OrderBlService;
 import po.Formstate;
 import po.Ordertype;
 import po.ResultMessage;
@@ -28,7 +22,7 @@ import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.MyTextField;
-import presentation.mycomp.WorkPanel;
+import presentation.mycomp.PersonPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.DoubleField;
 import presentation.tip.NumberField;
@@ -36,8 +30,14 @@ import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
+import businesslogic.managerbl.ConstantsPack.ConstantsController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.OrderPack.OrderController;
+import businesslogicservice.managerblservice.ConstantsBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.OrderBlService;
 
-public class OrderUpdatePanel extends WorkPanel {
+public class OrderUpdatePanel extends PersonPanel {
 	private MyTextField snameField;
 	private MyTextField sdetailField;
 	private MyTextField sjobField;
