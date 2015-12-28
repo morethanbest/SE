@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -19,7 +20,7 @@ public class MyButton_LightBlue extends JButton {
 //	public static final Color BUTTON_COLOR1 = new Color(203, 232, 205);
 //	public static final Color BUTTON_COLOR2 = new Color(51, 154, 47);
 	public static final Color BUTTON_COLOR1 = new Color(50, 150, 200);
-	public static final Color BUTTON_COLOR2 = new Color(60, 190, 250);
+	public static final Color BUTTON_COLOR2 = SystemColor.windowBorder;
 	public static final Color BUTTON_FOREGROUND_COLOR = Color.WHITE;
 	private boolean hover;
 
