@@ -17,5 +17,5 @@ public interface HallLoadBlService {
 	public List<HallLoadVO> findforms(Formstate state,String orgcode);
 	public String getid(String orgcode, long date) ;
 
-
+	
 }
