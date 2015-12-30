@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class ClientConfig {
 	public static String getIP(){
-		String ip="localhost";
+		String ip="127.0.0.1";
 		try{
 			Properties properties=new Properties();
 			String path=System.getProperty("user.dir")+"\\ip.properties";

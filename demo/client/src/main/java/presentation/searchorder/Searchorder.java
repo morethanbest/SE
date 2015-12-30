@@ -52,9 +52,11 @@ public class Searchorder extends WorkPanel implements ActionListener{
 		searchBtn.addActionListener(this);
 		
 		scrollPane=new MyScrollPane();
-		scrollPane.setBounds(450,78,500,442);
+		scrollPane.setBounds(450,78,500,350);
 		scrollPane.setBorder(null);
 		add(scrollPane);
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
 		
 		button = new MyButton_LightBlue("返回");
 		button.setFont(new Font("微软雅黑", Font.PLAIN, 16));
@@ -76,6 +78,7 @@ public class Searchorder extends WorkPanel implements ActionListener{
 					radioButtons[0]=new JRadioButton("",false);
 					radioButtons[0].setBounds(200, 50, 50, 21);
 					radioButtons[0].setEnabled(false);
+					radioButtons[0].setOpaque(false);
 					labels[0]=new JLabel(history.get(0));
 					labels[0].setBounds(250,50,200,21);
 					scrollPane.add(labels[0]);
@@ -84,6 +87,7 @@ public class Searchorder extends WorkPanel implements ActionListener{
 					radioButtons[0]=new JRadioButton("",true);
 					radioButtons[0].setBounds(200, 50, 50, 21);
 					radioButtons[0].setEnabled(false);
+					radioButtons[0].setOpaque(false);
 					labels[0]=new JLabel(history.get(0));
 					labels[0].setBounds(250,50,200,21);
 					scrollPane.add(labels[0]);
@@ -97,6 +101,7 @@ public class Searchorder extends WorkPanel implements ActionListener{
 						radioButtons[i]=new JRadioButton("",false);
 						radioButtons[i].setBounds(200, 50*(i+1), 50, 21);
 						radioButtons[i].setEnabled(false);
+						radioButtons[i].setOpaque(false);
 						labels[i]=new JLabel(history.get(i));
 						labels[i].setBounds(250,50*(i+1),200,21);
 						scrollPane.add(labels[i]);
@@ -109,6 +114,7 @@ public class Searchorder extends WorkPanel implements ActionListener{
 						radioButtons[i]=new JRadioButton("",true);
 						radioButtons[i].setBounds(200, 50*(i+1), 50, 21);
 						radioButtons[i].setEnabled(false);
+						radioButtons[i].setOpaque(false);
 						labels[i]=new JLabel(history.get(i));
 						labels[i].setBounds(250,50*(i+1),200,21);
 						scrollPane.add(labels[i]);
