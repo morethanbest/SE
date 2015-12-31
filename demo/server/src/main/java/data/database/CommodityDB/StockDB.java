@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.database.DBHelper;
+import data.database.managerDB.StaffDB;
+import data.database.userDB.UserDB;
+import po.OrganizationPO;
 import po.ResultMessage;
 import po.StockPO;
 
@@ -25,11 +28,25 @@ public class StockDB {
 					+ "totalnum bigint,warningvalue double)";
 			pst = dbh.prepare(sql);
 			pst.executeUpdate();
-			write(new StockPO("0250","航运区",1,200,50,200,200000,0.9));
-			write(new StockPO("0250","铁运区",2,400,50,200,400000,0.9));
-			write(new StockPO("0250","汽运区",3,300,50,200,300000,0.9));
-			write(new StockPO("0250","机动区",4,100,50,200,100000,0.9));
-			
+//			write(new StockPO("0250","航运区",1,200,50,200,200000,0.9));
+//			write(new StockPO("0250","铁运区",2,400,50,200,400000,0.9));
+//			write(new StockPO("0250","汽运区",3,300,50,200,300000,0.9));
+//			write(new StockPO("0250","机动区",4,100,50,200,100000,0.9));
+//			
+//			write(new StockPO("0100","航运区",1,200,50,200,200000,0.9));
+//			write(new StockPO("0100","铁运区",2,400,50,200,400000,0.9));
+//			write(new StockPO("0100","汽运区",3,300,50,200,300000,0.9));
+//			write(new StockPO("0100","机动区",4,100,50,200,100000,0.9));
+//			
+//			write(new StockPO("0210","航运区",1,200,50,200,200000,0.9));
+//			write(new StockPO("0210","铁运区",2,400,50,200,400000,0.9));
+//			write(new StockPO("0210","汽运区",3,300,50,200,300000,0.9));
+//			write(new StockPO("0210","机动区",4,100,50,200,100000,0.9));
+//			
+//			write(new StockPO("0200","航运区",1,200,50,200,200000,0.9));
+//			write(new StockPO("0200","铁运区",2,400,50,200,400000,0.9));
+//			write(new StockPO("0200","汽运区",3,300,50,200,300000,0.9));
+//			write(new StockPO("0200","机动区",4,100,50,200,100000,0.9));
 			dbh.close();// 关闭连接
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,6 +106,25 @@ public class StockDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return ResultMessage.failure;
+	}
+	
+	public static ResultMessage deletebyOrg(String orgcode){
+		dbh=new DBHelper();
+		sql="delete from StockPO where orgcode=?";
+		pst=dbh.prepare(sql);
+		try{
+			pst.setString(1,orgcode);
+			int result;
+			result=pst.executeUpdate();
+			if(result!=0){
+				dbh.close();
+				return ResultMessage.success;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		dbh.close();
 		return ResultMessage.failure;
 	}
 	

@@ -7,10 +7,12 @@ import java.util.List;
 
 import data.database.DBHelper;
 import data.database.Serialize;
+import data.database.commodityDB.StockDB;
 import data.database.userDB.UserDB;
 import po.OrganizationPO;
 import po.Organizationtype;
 import po.ResultMessage;
+import po.StockPO;
 
 public class OrganizationDB {
 	static String sql = null;
@@ -35,6 +37,12 @@ public class OrganizationDB {
 	}
 
 	public static ResultMessage write(OrganizationPO po) {
+		if(po.getType()==Organizationtype.transfercenter){
+			StockDB.write(new StockPO(po.getOrganizationcode(),"航运区",1,200,50,200,200000,0.9));
+			StockDB.write(new StockPO(po.getOrganizationcode(),"铁运区",2,400,50,200,400000,0.9));
+			StockDB.write(new StockPO(po.getOrganizationcode(),"汽运区",3,300,50,200,300000,0.9));
+			StockDB.write(new StockPO(po.getOrganizationcode(),"机动区",4,100,50,200,100000,0.9));
+		}
 		try {
 			byte[] typebytes = Serialize.Object2Bytes(po.getType());
 			dbh = new DBHelper();
@@ -83,6 +91,7 @@ public class OrganizationDB {
 		if(organization!=null){
 			StaffDB.deletebyorganization(organizationcode);
 			UserDB.deletebyOrg(organizationcode);
+			StockDB.deletebyOrg(organizationcode);
 		}
 		dbh=new DBHelper();
 		sql="delete from OrganizationPO where organizationcode=?";
