@@ -36,33 +36,28 @@ public class Searchorder extends WorkPanel implements ActionListener{
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		JLabel label = new JLabel("输入订单号查询订单");
+		label.setBounds(195, 83, 274, 47);
 		label.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		label.setBounds(176, 78, 165, 41);
 		add(label);
 		
 		textField = new MyTextField();
-		textField.setBounds(124, 199, 274, 47);
+		textField.setBounds(124, 159, 274, 47);
 		add(textField);
 		textField.setColumns(10);
 		
 		searchBtn= new MyButton_LightBlue("查询");
 		searchBtn.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-		searchBtn.setBounds(216, 326, 99, 31);
+		searchBtn.setBounds(216, 286, 99, 31);
 		add(searchBtn);
 		searchBtn.addActionListener(this);
 		
 		scrollPane=new MyScrollPane();
-		scrollPane.setBounds(450,78,500,350);
+		scrollPane.setBounds(450,38,500,350);
 		scrollPane.setBorder(null);
 		add(scrollPane);
 		scrollPane.setOpaque(false);
 		scrollPane.getViewport().setOpaque(false);
 		
-		button = new MyButton_LightBlue("返回");
-		button.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-		button.setBounds(851, 23, 99, 31);
-		add(button);
-		button.addActionListener(this);
 		
 	}
 	
@@ -143,10 +138,7 @@ public class Searchorder extends WorkPanel implements ActionListener{
 			String ordernum=textField.getText();
 			vo=logisticsInfoService.getOrderbyOrderNumber(ordernum);
 			showLogisics();
-		}else if(e.getSource().equals(button)){
-			parent.skipToLogin();
 		}
-		
 	}
 
 }

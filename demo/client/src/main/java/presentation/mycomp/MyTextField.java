@@ -1,6 +1,7 @@
 package presentation.mycomp;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 
 import javax.swing.JPanel;
@@ -8,7 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
-import javax.swing.text.Caret;
 
 public class MyTextField extends JTextField {
 	
@@ -52,7 +52,7 @@ public class MyTextField extends JTextField {
 			@Override
 			public void ancestorAdded(AncestorEvent event) {
 				System.out.println(a);
-				JPanel p = (JPanel) getParent();
+				Container p =  getParent();
 				p.add(new MyTextLabel(a, b, c, d));
 			}
 		});

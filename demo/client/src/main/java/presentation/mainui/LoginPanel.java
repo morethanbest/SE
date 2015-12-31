@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
+import presentation.mycomp.MyButton_LightGreen;
 import presentation.searchorder.Searchorder;
 import businesslogic.userbl.UsersloginPack.UserloginController;
 import businesslogicservice.userblservice.UserloginBlService;
@@ -24,8 +25,8 @@ public class LoginPanel extends JPanel implements ActionListener {
 
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JButton button;
-	private JButton button_1;
+	private MyButton_LightGreen button;
+	private MyButton_LightGreen button_1;
 	private MainFrame frame;
 
 	/**
@@ -53,13 +54,13 @@ public class LoginPanel extends JPanel implements ActionListener {
 		passwordField.setBorder(new EmptyBorder(0, 0, 0, 0));
 		add(passwordField);
 
-		button = new JButton("\u767B\u5F55");
+		button = new MyButton_LightGreen("\u767B\u5F55");
 		button.addActionListener(this);
 		button.setFont(new Font("微软雅黑", Font.BOLD, 18));
 		button.setBounds(433, 381, 141, 43);
 		add(button);
 
-		button_1 = new JButton("\u67E5\u8BE2\u7269\u6D41\u4FE1\u606F");
+		button_1 = new MyButton_LightGreen("\u67E5\u8BE2\u7269\u6D41\u4FE1\u606F");
 		button_1.addActionListener(this);
 		button_1.setFont(new Font("微软雅黑", Font.BOLD, 18));
 		button_1.setBounds(759, 473, 158, 43);

@@ -6,8 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import po.Job;
@@ -18,6 +16,7 @@ import presentation.courierui.CourierPanel;
 import presentation.depotui.DepotPanel;
 import presentation.hallsalesmanui.HallsalesmanPanel;
 import presentation.managerui.ManagerPanel;
+import presentation.searchorder.SearchPanel;
 import presentation.searchorder.Searchorder;
 import presentation.tip.TipDialog;
 import vo.LoginVO;
@@ -26,7 +25,7 @@ public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private CardLayout card;
-	private Searchorder searchorder;
+	private SearchPanel searchorder;
 	/**
 	 * Launch the application.
 	 */
@@ -57,7 +56,7 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(card);
 		LoginPanel login = new LoginPanel(this);
 		contentPane.add(login, "login");
-		searchorder=new Searchorder(this);
+		searchorder=new SearchPanel(this);
 		contentPane.add(searchorder, "searchorder");
 	
 	}

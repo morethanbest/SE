@@ -167,47 +167,49 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 		paypanel.setLayout(null);
 		add(paypanel);
 		paypanel.setVisible(false);
+		paypanel.setOpaque(false);
+		paypanel.getViewport().setOpaque(false);
 		
 		JLabel paysum=new JLabel();
 		paysum.setText("付款金额：");
-		paysum.setBounds(120, 60, 100, 21);
+		paysum.setBounds(120, 20, 100, 21);
 		paypanel.add(paysum);
 		
 		MyTextField sumField = new MyTextField();
-		sumField.setBounds(250, 60, 172, 21);
+		sumField.setBounds(250, 20, 172, 21);
 		sumField.setEditable(false);
 		paypanel.add(sumField);
 		sumField.setColumns(10);
 		
 		JLabel payman=new JLabel();
 		payman.setText("付款人：");
-		payman.setBounds(120, 120, 100, 21);
+		payman.setBounds(120, 80, 100, 21);
 		paypanel.add(payman);
 		
 		MyTextField manField = new MyTextField();
-		manField.setBounds(250, 120, 172, 21);
+		manField.setBounds(250, 80, 172, 21);
 		manField.setEditable(false);
 		paypanel.add(manField);
 		manField.setColumns(10);
 		
 		JLabel payaccount=new JLabel();
 		payaccount.setText("付款账号：");
-		payaccount.setBounds(120, 180, 100, 21);
+		payaccount.setBounds(120, 140, 100, 21);
 		paypanel.add(payaccount);
 		
 		MyTextField accountField = new MyTextField();
-		accountField.setBounds(250, 180, 172, 21);
+		accountField.setBounds(250, 140, 172, 21);
 		accountField.setEditable(false);
 		paypanel.add(accountField);
 		accountField.setColumns(10);
 		
 		JLabel tip=new JLabel();
 		tip.setText("条目：");
-		tip.setBounds(120, 240, 100, 21);
+		tip.setBounds(120, 200, 100, 21);
 		paypanel.add(tip);
 		
 		MyComboBox<String> tipSelect = new MyComboBox<String>();
-		tipSelect.setBounds(250, 240, 172, 21);
+		tipSelect.setBounds(250, 200, 172, 21);
 		tipSelect.setEditable(false);
 		tipSelect.setEnabled(false);
 		addtipItem(tipSelect);
@@ -215,11 +217,11 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 		
 		JLabel text=new JLabel();
 		text.setText("备注：");
-		text.setBounds(120, 300, 100, 21);
+		text.setBounds(120, 260, 100, 21);
 		paypanel.add(text);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(250,300, 172, 120);
+		textArea.setBounds(250,260, 172, 80);
 		textArea.setEditable(false);
 		paypanel.add(textArea);
 		
@@ -230,45 +232,45 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 		collectpanel.setLayout(null);
 		add(collectpanel);
 		collectpanel.setVisible(false);
-		
+		collectpanel.setOpaque(false);
+		collectpanel.getViewport().setOpaque(false);
 		
 		JLabel label_2 = new JLabel("收款金额：");
-		label_2.setBounds(120, 60, 70, 15);
+		label_2.setBounds(120, 20, 70, 15);
 		collectpanel.add(label_2);
 		
 		JLabel label_3 = new JLabel("收款人：");
-		label_3.setBounds(120, 120, 54, 15);
+		label_3.setBounds(120, 80, 54, 15);
 		collectpanel.add(label_3);
 		
 		JLabel label_4 = new JLabel("收款账号：");
-		label_4.setBounds(120, 180, 70, 15);
+		label_4.setBounds(120, 140, 70, 15);
 		collectpanel.add(label_4);
 		
 		JLabel label_5 = new JLabel("订单号：");
-		label_5.setBounds(120, 240, 54, 15);
+		label_5.setBounds(120, 200, 54, 15);
 		collectpanel.add(label_5);
 		
 		MyTextField collectsum = new MyTextField();
-		collectsum.setBounds(250, 60, 172, 21);
+		collectsum.setBounds(250, 20, 172, 21);
 		collectsum.setEditable(false);
 		collectpanel.add(collectsum);
 		collectsum.setColumns(10);
 		
 		MyTextField collectman = new MyTextField();
-		collectman.setBounds(250, 120, 172, 21);
+		collectman.setBounds(250, 80, 172, 21);
 		collectman.setEditable(false);
 		collectpanel.add(collectman);
 		collectman.setColumns(10);
 		
 		MyTextField collectaccount = new MyTextField();
-		collectaccount.setBounds(250, 180, 172, 21);
+		collectaccount.setBounds(250, 140, 172, 21);
 		collectaccount.setEditable(false);
 		collectpanel.add(collectaccount);
 		collectaccount.setColumns(10);
 		
-		
 		MyScrollPane orderpanel = new MyScrollPane();
-		orderpanel.setBounds(250,240,172,100);
+		orderpanel.setBounds(250,200,172,100);
 		collectpanel.add(orderpanel);
 		
 		JTable ordertable = new JTable();
