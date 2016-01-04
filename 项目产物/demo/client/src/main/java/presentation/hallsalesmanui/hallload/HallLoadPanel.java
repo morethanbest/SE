@@ -290,8 +290,7 @@ public class HallLoadPanel extends WorkPanel {
 		button_3 = new MyButton_LightBlue("查看已提交单据");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(parent.getSwitcher());
-				parent.getHc().refreshList();
+				card.next(parent);
 			}
 		});
 		button_3.setBounds(786, 364, 154, 27);
