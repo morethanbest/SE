@@ -99,7 +99,7 @@ public class StockinCheckPanel extends WorkPanel {
 		stateBox.setBounds(67, 359, 169, 24);
 		add(stateBox);
 		
-		JButton act = new JButton("执行");
+		MyButton_LightBlue act = new MyButton_LightBlue("执行");
 		act.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateVOListState(Formstate.checked);

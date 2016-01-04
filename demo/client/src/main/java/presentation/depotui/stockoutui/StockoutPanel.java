@@ -178,7 +178,7 @@ public class StockoutPanel extends WorkPanel {
 				parent.getOutc().refreshList();
 			}
 		});
-		button_1.setBounds(710, 283, 113, 27);
+		button_1.setBounds(680, 302, 135, 27);
 		add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{orderField, typeBox, orgBox, yearBox, monthBox, dateBox, transportBox, codeField}));
 

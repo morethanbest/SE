@@ -217,9 +217,9 @@ public class TransferPanel extends WorkPanel {
 
 		orderField = new OrderField();
 		orderField.setColumns(10);
-		orderField.setBounds(636, 253, 199, 24);
+		orderField.setBounds(636, 253, 183, 24);
 		add(orderField);
-		button_1.setBounds(851, 252, 61, 27);
+		button_1.setBounds(829, 252, 83, 27);
 		add(button_1);
 
 		button_2 = new MyButton_LightBlue("删除该条");

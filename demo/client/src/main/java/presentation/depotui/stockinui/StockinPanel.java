@@ -229,7 +229,7 @@ public class StockinPanel extends WorkPanel {
 				parent.getInc().refreshList();
 			}
 		});
-		button_1.setBounds(807, 312, 113, 27);
+		button_1.setBounds(787, 312, 133, 27);
 		add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{codeField, typeBox, orgBox, yearBox, monthBox, dateBox, quBox, paiBox, jiaBox, weiBox}));
 

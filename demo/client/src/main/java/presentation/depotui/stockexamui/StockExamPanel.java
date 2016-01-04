@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import businesslogic.commoditybl.StockExaminationPack.StockExaminationController;
 import businesslogicservice.commodityblservice.StockExaminationBlService;
 import po.CommodityLocation;
+import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.WorkPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.mycomp.myscrollpane.MyScrollPane;
@@ -110,7 +111,7 @@ public class StockExamPanel extends WorkPanel {
 		
 		addDateItems(eyearBox, emonthBox, edateBox);
 		
-		JButton button = new JButton("开始盘点");
+		MyButton_LightBlue button = new MyButton_LightBlue("开始盘点");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long sdate = (Long) syearBox.getSelectedItem() * 10000
