@@ -147,6 +147,7 @@ public class StockinPanel extends WorkPanel {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
+				
 				addpaijiawei();
 			}
 		});
@@ -287,22 +288,23 @@ public class StockinPanel extends WorkPanel {
 		List<Long> list = inboundBlService.getEachBlockLimit(
 				getBlockIndex((String) quBox.getSelectedItem()),
 				orgcode);
-		try {
+//		System.out.println(list.get(1));
 			fillBox(paiBox, list.get(0));
 			fillBox(jiaBox, list.get(1));
 			fillBox(weiBox, list.get(2));
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("addpaijiawei");
-		}
+			paiBox.setSelectedIndex(0);
+			jiaBox.setSelectedIndex(0);
+			weiBox.setSelectedIndex(0);
 		
 	}
 	
 	private void checkAvailable(){
+		if(quBox.getSelectedItem() != null && paiBox.getSelectedItem() != null && jiaBox.getSelectedItem() != null && weiBox.getSelectedItem() != null){
 			location = new CommodityLocation(getBlockIndex((String) quBox.getSelectedItem()),
 					(Long) paiBox.getSelectedItem(), (Long) jiaBox.getSelectedItem(),
 					(Long) weiBox.getSelectedItem());
 			setAvailableTip(inboundBlService.wheConflict(orgcode, location));
+		}
 	}
 	
 	public void addOrganizationItems(JComboBox<String> orgSelect) {
