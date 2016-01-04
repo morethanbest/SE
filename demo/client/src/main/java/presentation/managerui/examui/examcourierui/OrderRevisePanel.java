@@ -88,6 +88,90 @@ public class OrderRevisePanel extends WorkPanel {
 		label.setBounds(0, 54, 75, 18);
 		add(label);
 
+		JLabel label_3 = new JLabel("姓名：");
+		label_3.setBounds(114, 54, 58, 18);
+		add(label_3);
+		
+		JLabel label_4 = new JLabel("姓名：");
+		label_4.setBounds(114, 160, 58, 18);
+		add(label_4);
+		
+		JLabel label_5 = new JLabel("城市：");
+		label_5.setBounds(255, 54, 52, 18);
+		add(label_5);
+		
+		JLabel label_6 = new JLabel("城市：");
+		label_6.setBounds(255, 160, 52, 18);
+		add(label_6);
+		
+		JLabel label_7 = new JLabel("地区：");
+		label_7.setBounds(401, 54, 52, 18);
+		add(label_7);
+		
+		JLabel label_8 = new JLabel("地区：");
+		label_8.setBounds(401, 160, 52, 18);
+		add(label_8);
+		
+		JLabel label_9 = new JLabel("具体地址：");
+		label_9.setBounds(605, 54, 75, 18);
+		add(label_9);
+		
+		JLabel label_10 = new JLabel("具体地址：");
+		label_10.setBounds(605, 160, 75, 18);
+		add(label_10);
+		
+		JLabel label_11 = new JLabel("单位：");
+		label_11.setBounds(114, 108, 58, 18);
+		add(label_11);
+		
+		JLabel label_12 = new JLabel("单位：");
+		label_12.setBounds(114, 210, 58, 18);
+		add(label_12);
+		
+		JLabel label_13 = new JLabel("电话：");
+		label_13.setBounds(401, 108, 54, 18);
+		add(label_13);
+		
+		JLabel label_14 = new JLabel("电话：");
+		label_14.setBounds(401, 210, 54, 18);
+		add(label_14);
+		
+		JLabel label_15 = new JLabel("手机：");
+		label_15.setBounds(605, 108, 52, 18);
+		add(label_15);
+		
+		JLabel label_16 = new JLabel("手机：");
+		label_16.setBounds(605, 210, 53, 18);
+		add(label_16);
+		
+		JLabel label_17 = new JLabel("原件数：");
+		label_17.setBounds(110, 262, 72, 18);
+		add(label_17);
+		
+		JLabel label_18 = new JLabel("重量：");
+		label_18.setBounds(255, 262, 58, 18);
+		add(label_18);
+		
+		JLabel label_19 = new JLabel("体积：");
+		label_19.setBounds(401, 262, 58, 18);
+		add(label_19);
+		
+		JLabel label_20 = new JLabel("货物名称：");
+		label_20.setBounds(605, 262, 75, 18);
+		add(label_20);
+		
+		JLabel label_21 = new JLabel("运费：");
+		label_21.setBounds(491, 3, 58, 18);
+		add(label_21);
+		
+		JLabel label_22 = new JLabel("订单类型：");
+		label_22.setBounds(401, 318, 82, 18);
+		add(label_22);
+		
+		JLabel label_23 = new JLabel("包装类型：");
+		label_23.setBounds(110, 318, 86, 18);
+		add(label_23);
+		
 		snameField = new MyTextField();
 		snameField.setText("奥巴马");
 		snameField.setBounds(151, 51, 96, 24);
@@ -106,7 +190,7 @@ public class OrderRevisePanel extends WorkPanel {
 
 		sdetailField = new MyTextField();
 		sdetailField.setText("白宫");
-		sdetailField.setBounds(599, 51, 270, 24);
+		sdetailField.setBounds(677, 51, 188, 24);
 		add(sdetailField);
 		sdetailField.setColumns(10);
 
@@ -118,13 +202,13 @@ public class OrderRevisePanel extends WorkPanel {
 
 		stelField = new MyTextField();
 		stelField.setText("911");
-		stelField.setBounds(458, 105, 159, 24);
+		stelField.setBounds(449, 105, 138, 24);
 		add(stelField);
 		stelField.setColumns(10);
 
 		sphoneField = new MyTextField();
 		sphoneField.setText("911");
-		sphoneField.setBounds(710, 105, 196, 24);
+		sphoneField.setBounds(677, 105, 188, 24);
 		add(sphoneField);
 		sphoneField.setColumns(10);
 
@@ -155,7 +239,7 @@ public class OrderRevisePanel extends WorkPanel {
 		rdetailField = new MyTextField();
 		rdetailField.setText("中南海");
 		rdetailField.setColumns(10);
-		rdetailField.setBounds(599, 157, 270, 24);
+		rdetailField.setBounds(677, 157, 188, 24);
 		add(rdetailField);
 
 		rjobField = new MyTextField();
@@ -167,13 +251,13 @@ public class OrderRevisePanel extends WorkPanel {
 		rtelField = new MyTextField();
 		rtelField.setText("110");
 		rtelField.setColumns(10);
-		rtelField.setBounds(458, 208, 159, 24);
+		rtelField.setBounds(455, 208, 132, 24);
 		add(rtelField);
 
 		rphoneField = new MyTextField();
 		rphoneField.setText("110");
 		rphoneField.setColumns(10);
-		rphoneField.setBounds(710, 207, 196, 24);
+		rphoneField.setBounds(677, 207, 188, 24);
 		add(rphoneField);
 
 		JSeparator separator_2 = new JSeparator();
@@ -182,35 +266,35 @@ public class OrderRevisePanel extends WorkPanel {
 
 		numberField = new MyTextField();
 		numberField.setText("1");
-		numberField.setBounds(151, 259, 86, 24);
+		numberField.setBounds(175, 259, 58, 24);
 		add(numberField);
 		numberField.setColumns(10);
 
 		weightField = new MyTextField();
 		weightField.setText("1");
-		weightField.setBounds(333, 259, 86, 24);
+		weightField.setBounds(305, 259, 86, 24);
 		add(weightField);
 		weightField.setColumns(10);
 
 		volumeField = new MyTextField();
 		volumeField.setText("1");
-		volumeField.setBounds(532, 259, 86, 24);
+		volumeField.setBounds(455, 259, 132, 24);
 		add(volumeField);
 		volumeField.setColumns(10);
 
 		nameField = new MyTextField();
 		nameField.setText("核弹");
-		nameField.setBounds(711, 259, 196, 24);
+		nameField.setBounds(677, 259, 188, 24);
 		add(nameField);
 		nameField.setColumns(10);
 
 		packBox = new MyComboBox<String>();
-		packBox.setBounds(151, 315, 159, 24);
+		packBox.setBounds(175, 315, 159, 24);
 		add(packBox);
 		addPackTypeItems();
 
 		orderBox = new MyComboBox<String>();
-		orderBox.setBounds(459, 315, 159, 24);
+		orderBox.setBounds(478, 315, 159, 24);
 		add(orderBox);
 		addOrderTypeItems();
 
@@ -284,7 +368,7 @@ public class OrderRevisePanel extends WorkPanel {
 		add(separator_4);
 
 		orderCode = new JLabel("");
-		orderCode.setBounds(98, 0, 314, 18);
+		orderCode.setBounds(194, 0, 218, 18);
 		add(orderCode);
 		
 		back = new MyButton_LightBlue("返回");
@@ -305,6 +389,10 @@ public class OrderRevisePanel extends WorkPanel {
 		});
 		undo.setBounds(581, 362, 122, 36);
 		add(undo);
+		
+		JLabel label_24 = new JLabel("订单号：");
+		label_24.setBounds(79, 3, 54, 15);
+		add(label_24);
 
 		rcityBox.addItemListener(new ItemListener() {
 

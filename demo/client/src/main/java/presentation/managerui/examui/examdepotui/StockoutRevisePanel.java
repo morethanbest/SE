@@ -34,6 +34,10 @@ public class StockoutRevisePanel extends WorkPanel {
 	private JLabel label;
 	private MyButton_LightBlue button;
 	private MyButton_LightBlue button_1;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
 
 	/**
 	 * Create the panel.
@@ -101,7 +105,7 @@ public class StockoutRevisePanel extends WorkPanel {
 		monthBox.addItemListener(listener);
 		
 		label = new JLabel("");
-		label.setBounds(141, 106, 220, 24);
+		label.setBounds(34, 106, 252, 24);
 		add(label);
 		
 		button = new MyButton_LightBlue("恢复原值");
@@ -122,6 +126,22 @@ public class StockoutRevisePanel extends WorkPanel {
 		});
 		button_1.setBounds(651, 302, 113, 27);
 		add(button_1);
+		
+		label_1 = new JLabel("订单编号：");
+		label_1.setBounds(34, 35, 86, 18);
+		add(label_1);
+		
+		label_2 = new JLabel("出库日期：");
+		label_2.setBounds(428, 40, 82, 18);
+		add(label_2);
+		
+		label_3 = new JLabel("中转类型：");
+		label_3.setBounds(428, 106, 82, 24);
+		add(label_3);
+		
+		label_4 = new JLabel("单据编号：");
+		label_4.setBounds(428, 181, 82, 24);
+		add(label_4);
 
 	}
 

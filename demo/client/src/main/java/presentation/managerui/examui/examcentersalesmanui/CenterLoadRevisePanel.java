@@ -58,6 +58,7 @@ public class CenterLoadRevisePanel extends WorkPanel {
 	private JLabel label_4;
 	private JLabel label_5;
 	private OrderField orderField;
+	private JLabel label_6;
 
 	/**
 	 * Create the panel.
@@ -69,7 +70,7 @@ public class CenterLoadRevisePanel extends WorkPanel {
 		setLayout(null);
 		
 		moterLabel = new JLabel("");
-		moterLabel.setBounds(14, 53, 242, 24);
+		moterLabel.setBounds(84, 53, 216, 24);
 		add(moterLabel);
 		
 		fareField = new MyTextField();
@@ -274,6 +275,10 @@ public class CenterLoadRevisePanel extends WorkPanel {
 		label_5 = new JLabel("押运员：");
 		label_5.setBounds(315, 191, 54, 15);
 		add(label_5);
+		
+		label_6 = new JLabel("汽运编号：");
+		label_6.setBounds(14, 58, 74, 15);
+		add(label_6);
 	}
 	
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {

@@ -56,7 +56,7 @@ public class GoodRecievingRevisePanel extends WorkPanel {
 		codeField.setColumns(10);
 		
 		depatLabel = new JLabel("");
-		depatLabel.setBounds(518, 70, 242, 18);
+		depatLabel.setBounds(423, 70, 337, 18);
 		add(depatLabel);
 
 		yearBox = new MyComboBox<Long>();

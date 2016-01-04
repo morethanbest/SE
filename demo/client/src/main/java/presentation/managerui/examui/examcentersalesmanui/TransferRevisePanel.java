@@ -66,6 +66,8 @@ public class TransferRevisePanel extends WorkPanel {
 	private JLabel label_5;
 	private JLabel label_6;
 	private OrderField orderField;
+	private JLabel label_7;
+	private JLabel label_8;
 	/**
 	 * Create the panel.
 	 */
@@ -75,11 +77,11 @@ public class TransferRevisePanel extends WorkPanel {
 		setLayout(null);
 
 		codeLabel = new JLabel("");
-		codeLabel.setBounds(14, 12, 242, 27);
+		codeLabel.setBounds(99, 12, 216, 27);
 		add(codeLabel);
 
 		departureLabel = new JLabel("");
-		departureLabel.setBounds(351, 147, 242, 27);
+		departureLabel.setBounds(409, 147, 184, 27);
 		add(departureLabel);
 
 		yearBox = new MyComboBox<Long>();
@@ -287,6 +289,14 @@ public class TransferRevisePanel extends WorkPanel {
 		label_6 = new JLabel("目的地：");
 		label_6.setBounds(331, 219, 54, 15);
 		add(label_6);
+		
+		label_7 = new JLabel("中转编号：");
+		label_7.setBounds(14, 12, 75, 27);
+		add(label_7);
+		
+		label_8 = new JLabel("出发地：");
+		label_8.setBounds(331, 147, 53, 27);
+		add(label_8);
 
 		ItemListener listener = new ItemListener() {
 

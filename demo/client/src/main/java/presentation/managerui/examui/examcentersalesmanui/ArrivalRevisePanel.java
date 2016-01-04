@@ -43,6 +43,7 @@ public class ArrivalRevisePanel extends WorkPanel {
 	private MyButton_LightBlue button_1;
 	private MyButton_LightBlue button_2;
 	private ArrivalVO vo;
+	private JLabel label_5;
 
 	/**
 	 * Create the panel.
@@ -171,6 +172,10 @@ public class ArrivalRevisePanel extends WorkPanel {
 		JLabel label_4 = new JLabel("单据编号：");
 		label_4.setBounds(444, 217, 67, 15);
 		add(label_4);
+		
+		label_5 = new JLabel("机构编号：");
+		label_5.setBounds(38, 53, 74, 15);
+		add(label_5);
 		addTypeItems();
 	}
 	

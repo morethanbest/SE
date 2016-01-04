@@ -37,6 +37,8 @@ public class StockinRevisePanel extends WorkPanel {
 	private StockinVO vo;
 	private JLabel label;
 	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
 	
 	/**
 	 * Create the panel.
@@ -110,12 +112,20 @@ public class StockinRevisePanel extends WorkPanel {
 		add(button_2);
 		
 		label = new JLabel("");
-		label.setBounds(143, 136, 220, 24);
+		label.setBounds(25, 136, 248, 24);
 		add(label);
 		
 		label_1 = new JLabel("");
-		label_1.setBounds(557, 136, 320, 24);
+		label_1.setBounds(443, 136, 334, 24);
 		add(label_1);
+		
+		label_2 = new JLabel("订单编号：");
+		label_2.setBounds(25, 35, 86, 23);
+		add(label_2);
+		
+		label_3 = new JLabel("入库日期：");
+		label_3.setBounds(443, 35, 86, 23);
+		add(label_3);
 
 	}
 

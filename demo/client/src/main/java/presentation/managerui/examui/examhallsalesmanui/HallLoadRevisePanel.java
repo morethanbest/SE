@@ -52,6 +52,8 @@ public class HallLoadRevisePanel extends WorkPanel {
 	private JLabel label_2;
 	private JLabel label_3;
 	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_6;
 	/**
 	 * Create the panel.
 	 */
@@ -252,6 +254,14 @@ public class HallLoadRevisePanel extends WorkPanel {
 		label_4 = new JLabel("运费合计：");
 		label_4.setBounds(327, 293, 69, 15);
 		add(label_4);
+		
+		label_5 = new JLabel("机构编号：");
+		label_5.setBounds(22, 44, 69, 15);
+		add(label_5);
+		
+		label_6 = new JLabel("汽运编号：");
+		label_6.setBounds(22, 132, 69, 15);
+		add(label_6);
 		
 	}
 	
