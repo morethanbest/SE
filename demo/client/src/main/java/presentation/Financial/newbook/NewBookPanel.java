@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -58,26 +59,34 @@ public class NewBookPanel extends WorkPanel implements ActionListener{
 		yearSelect.setBounds(113, 11, 74, 31);
 		yearSelect.setEditable(false);
 		add(yearSelect);
-		addyearItem(yearSelect);
 
-		ItemListener listener= new ItemListener(){			//用于判断这个月的天数
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				addDayItem(daySelect,monthSelect,yearSelect);
-			}
-		};
 		monthSelect = new MyComboBox<String>();
 		monthSelect.setBounds(197, 11, 65, 31);
 		monthSelect.setEditable(false);
 		add(monthSelect);
-		addmonthItem(monthSelect);
+		addYearItems(yearSelect, monthSelect);
 		
 		daySelect = new MyComboBox<String>();
 		daySelect.setBounds(272, 10, 65, 32);
 		daySelect.setEditable(false);
 		add(daySelect);
-		addDayItem(daySelect,monthSelect,yearSelect);
+		addDateItems(yearSelect, monthSelect, daySelect);
 		
+		ItemListener listener = new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				addDateItems(yearSelect, monthSelect, daySelect);
+			}
+		};
+		yearSelect.addItemListener(listener);
+		monthSelect.addItemListener(listener);
+		
+		Calendar c = Calendar.getInstance();
+		yearSelect.setSelectedItem((long) c.get(Calendar.YEAR));
+		monthSelect.setSelectedItem((long) c.get(Calendar.MONTH) + 1);
+		daySelect.setSelectedItem((long) c.get(Calendar.DAY_OF_MONTH));
+
 		JLabel label = new JLabel("建账时间：");
 		label.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		label.setBounds(10, 10, 93, 31);
@@ -115,8 +124,6 @@ public class NewBookPanel extends WorkPanel implements ActionListener{
 		btncreate.setBounds(641, 7, 107, 31);
 		add(btncreate);
 		
-		yearSelect.addItemListener(listener);
-		monthSelect.addItemListener(listener);
 		btnSearch.addActionListener(this);
 		btnaccount.addActionListener(this);
 		btnorg.addActionListener(this);
@@ -327,53 +334,43 @@ public class NewBookPanel extends WorkPanel implements ActionListener{
     	long id=newBookBlService.getid();
     	newBookBlService.NewBook(id);
     }
-	private void addyearItem(JComboBox<String> yearselect){
-		for(int i=2000;i<2100;i++){
-			yearselect.addItem(Integer.toString(i));
+    private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
+		for (long i = 2000; i <= 2050; i++) {
+			year.addItem(i);
+		}
+
+		for (long i = 1; i <= 12; i++) {
+			month.addItem(i);
 		}
 	}
-	
-	private void addmonthItem(JComboBox<String> monthselect){
-		for(int i=1;i<=9;i++){
-			monthselect.addItem("0"+Integer.toString(i));
+
+	private void addDateItems(JComboBox<Long> yearBox,
+			JComboBox<Long> monthBox, JComboBox<Long> dateBox) {
+		dateBox.removeAllItems();
+		if ((Long) monthBox.getSelectedItem() == 1
+				|| (Long) monthBox.getSelectedItem() == 3
+				|| (Long) monthBox.getSelectedItem() == 5
+				|| (Long) monthBox.getSelectedItem() == 7
+				|| (Long) monthBox.getSelectedItem() == 8
+				|| (Long) monthBox.getSelectedItem() == 10
+				|| (Long) monthBox.getSelectedItem() == 12) {
+			for (long i = 1; i <= 31; i++) {
+				dateBox.addItem(i);
+			}
+		} else if ((Long) monthBox.getSelectedItem() == 4
+				|| (Long) monthBox.getSelectedItem() == 6
+				|| (Long) monthBox.getSelectedItem() == 9
+				|| (Long) monthBox.getSelectedItem() == 11) {
+			for (long i = 1; i <= 30; i++) {
+				dateBox.addItem(i);
+			}
+		} else {
+			for (long i = 1; i <= 28; i++) {
+				dateBox.addItem(i);
+			}
+			if ((Long) yearBox.getSelectedItem() % 4 == 0)
+				dateBox.addItem((long) 29);
 		}
-		for(int i=10;i<=12;i++){
-			monthselect.addItem(Integer.toString(i));
-		}
-	}
-	
-	private void addDayItem(JComboBox<String> dayselect,JComboBox<String> monthselect,JComboBox<String> yearselect){
-		dayselect.removeAllItems();
-		
-		//得到这个月的天数
-		int days=getDays(Integer.parseInt((String)yearselect.getSelectedItem()),Integer.parseInt((String)monthselect.getSelectedItem()));
-			
-		for(int i=1;i<=9;i++){
-			dayselect.addItem("0"+Integer.toString(i));
-		}
-		for(int i=10;i<=days;i++){
-			dayselect.addItem(Integer.toString(i));
-		}
-	}
-	
-	public boolean isleap(Integer year){
-		if(year%400==0){
-			return true;
-		}else if(year%100==0){
-			return false;
-		}else if(year%4==0){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	public int getDays(Integer year,Integer month){				//得到这个月的天数
-		int day[]={31,28,31,30,31,30,31,31,30,31,30,31};
-		if(month==2&&isleap(year)){
-			return 29;
-		}
-		return day[month-1];
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
