@@ -51,7 +51,6 @@ public class MyTextField extends JTextField {
 			
 			@Override
 			public void ancestorAdded(AncestorEvent event) {
-				System.out.println(a);
 				Container p =  getParent();
 				p.add(new MyTextLabel(a, b, c, d));
 				p.repaint();
