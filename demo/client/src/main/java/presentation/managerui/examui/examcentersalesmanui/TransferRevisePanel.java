@@ -20,8 +20,10 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogic.managerbl.ExamPack.ExamController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import businesslogicservice.managerblservice.ExamRecordtrans;
+import businesslogicservice.orderblservice.CheckExistBlService;
 import po.Formstate;
 import po.ResultMessage;
 import presentation.enums.TransportTypes;
@@ -31,6 +33,7 @@ import presentation.mycomp.MyTextField;
 import presentation.mycomp.WorkPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.mycomp.myscrollpane.MyScrollPane;
+import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.RecordtransVO;
@@ -62,6 +65,7 @@ public class TransferRevisePanel extends WorkPanel {
 	private JLabel label_4;
 	private JLabel label_5;
 	private JLabel label_6;
+	private OrderField orderField;
 	/**
 	 * Create the panel.
 	 */
@@ -188,7 +192,7 @@ public class TransferRevisePanel extends WorkPanel {
 		add(label);
 
 		MyScrollPane scrollPane = new MyScrollPane();
-		scrollPane.setBounds(660, 13, 285, 274);
+		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 
 		table = new JTable();
@@ -201,14 +205,28 @@ public class TransferRevisePanel extends WorkPanel {
 		button_1 = new MyButton_LightBlue("增加一条");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CheckExistBlService check = new CheckExist();
+				if (orderField.getText().length() != 10) {
+					createTip("订单编号必须为10位！");
+					return;
+				} else if (!check.checkExist(orderField.getText())) {
+					createTip("订单:" + orderField.getText() + " 不存在！");
+					return;
+				}
 				DefaultTableModel tableModel = (DefaultTableModel) table
 						.getModel();
-				tableModel.addRow(new String[] { "" });
+				tableModel.addRow(new String[] { orderField.getText() });
+				orderField.setText("");
 			}
 		});
-		button_1.setBounds(670, 300, 113, 27);
+		button_1.setBounds(809, 252, 103, 27);
 		add(button_1);
 
+		orderField = new OrderField();
+		orderField.setColumns(10);
+		orderField.setBounds(642, 253, 159, 24);
+		add(orderField);
+		
 		button_2 = new MyButton_LightBlue("删除该条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -218,7 +236,7 @@ public class TransferRevisePanel extends WorkPanel {
 				tableModel.removeRow(rownum);
 			}
 		});
-		button_2.setBounds(823, 300, 113, 27);
+		button_2.setBounds(636, 286, 276, 27);
 		add(button_2);
 		
 		fareField = new MyTextField();
@@ -360,5 +378,12 @@ public class TransferRevisePanel extends WorkPanel {
 		}
 		
 		update.setEnabled(vo.getFormstate() == Formstate.waiting || vo.getFormstate() == Formstate.fail);
+	}
+	
+	private boolean createTip(String str){
+		TipDialog tipDialog=new TipDialog(str);
+		tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		tipDialog.setVisible(true);	
+		return false;
 	}
 }

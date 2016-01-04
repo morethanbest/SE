@@ -68,4 +68,5 @@ public class MyTextField extends JTextField {
 		setCaretColor(Color.GRAY);
 		
 	}
+	
 }

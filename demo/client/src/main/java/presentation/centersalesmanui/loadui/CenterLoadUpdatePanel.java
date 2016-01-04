@@ -18,8 +18,10 @@ import javax.swing.table.DefaultTableModel;
 
 import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
 import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.CheckExist;
 import businesslogicservice.logisticsblservice.CenterloadBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 import po.Formstate;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -30,6 +32,7 @@ import presentation.mycomp.WorkPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.mycomp.myscrollpane.MyScrollPane;
 import presentation.tip.NumberField;
+import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.CenterloadVO;
 import vo.OrganizationVO;
@@ -56,6 +59,7 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 	private JLabel label_3;
 	private JLabel label_4;
 	private JLabel label_5;
+	private OrderField orderField;
 
 	/**
 	 * Create the panel.
@@ -148,7 +152,7 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 		add(label);
 		
 		MyScrollPane scrollPane = new MyScrollPane();
-		scrollPane.setBounds(661, 53, 284, 229);
+		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -175,12 +179,27 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 		button_2 = new MyButton_LightBlue("增加一条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{""});
+				CheckExistBlService check = new CheckExist();
+				if (orderField.getText().length() != 10) {
+					createTip("订单编号必须为10位！");
+					return;
+				} else if (!check.checkExist(orderField.getText())) {
+					createTip("订单:" + orderField.getText() + " 不存在！");
+					return;
+				}
+				DefaultTableModel tableModel = (DefaultTableModel) table
+						.getModel();
+				tableModel.addRow(new String[] { orderField.getText() });
+				orderField.setText("");
 			}
 		});
-		button_2.setBounds(671, 295, 113, 27);
+		button_2.setBounds(809, 252, 103, 27);
 		add(button_2);
+		
+		orderField = new OrderField();
+		orderField.setColumns(10);
+		orderField.setBounds(642, 253, 159, 24);
+		add(orderField);
 		
 		button_3 = new MyButton_LightBlue("删除该条");
 		button_3.addActionListener(new ActionListener() {
@@ -190,7 +209,7 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 				tableModel.removeRow(rownum);
 			}
 		});
-		button_3.setBounds(824, 295, 113, 27);
+		button_3.setBounds(636, 286, 276, 27);
 		add(button_3);
 		
 		MyButton_LightBlue button = new MyButton_LightBlue("恢复原值");

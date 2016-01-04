@@ -61,6 +61,10 @@ public class IComboBoxUI extends BasicComboBoxUI {
 		g2.drawImage(increase, w - 21, 0, w, h, 97, 0, 118, 27, null);
 		if (!comboBox.isEditable()) {
 			g2.setFont(new Font("黑体", Font.PLAIN, 15));
+			if(comboBox.isEnabled())
+				g2.setColor(Color.BLACK);
+			else
+				g2.setColor(Color.GRAY);
 			g2.drawString(myComboBox.getSelectedItem() + "", 5, h / 2 + 5);
 		}
 

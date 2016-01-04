@@ -13,16 +13,11 @@ import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
-import businesslogic.managerbl.OrganizationPack.OrganizationController;
-import businesslogicservice.logisticsblservice.CenterloadBlService;
-import businesslogicservice.managerblservice.OrganizationBlService;
 import po.Formstate;
 import po.Organizationtype;
 import po.ResultMessage;
@@ -31,9 +26,17 @@ import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.MyTextField;
 import presentation.mycomp.WorkPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.mycomp.myscrollpane.MyScrollPane;
+import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.CenterloadVO;
 import vo.OrganizationVO;
+import businesslogic.logisticsbl.CenterloadPack.CenterloadController;
+import businesslogic.managerbl.OrganizationPack.OrganizationController;
+import businesslogic.orderbl.CheckExist;
+import businesslogicservice.logisticsblservice.CenterloadBlService;
+import businesslogicservice.managerblservice.OrganizationBlService;
+import businesslogicservice.orderblservice.CheckExistBlService;
 
 public class CenterLoadPanel extends WorkPanel {
 	private MyTextField yaField;
@@ -61,6 +64,7 @@ public class CenterLoadPanel extends WorkPanel {
 	
 	private String city;
 	private String orgCode;
+	private OrderField orderField;
 
 	/**
 	 * Create the panel.
@@ -151,8 +155,8 @@ public class CenterLoadPanel extends WorkPanel {
 		label.setBounds(305, 259, 84, 18);
 		add(label);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(661, 13, 284, 269);
+		MyScrollPane scrollPane = new MyScrollPane();
+		scrollPane.setBounds(636, 25, 276, 222);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -204,12 +208,27 @@ public class CenterLoadPanel extends WorkPanel {
 		button_2 = new MyButton_LightBlue("增加一条");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.addRow(new String[]{""});
+				CheckExistBlService check = new CheckExist();
+				if (orderField.getText().length() != 10) {
+					createTip("订单编号必须为10位！");
+					return;
+				} else if (!check.checkExist(orderField.getText())) {
+					createTip("订单:" + orderField.getText() + " 不存在！");
+					return;
+				}
+				DefaultTableModel tableModel = (DefaultTableModel) table
+						.getModel();
+				tableModel.addRow(new String[] { orderField.getText() });
+				orderField.setText("");
 			}
 		});
-		button_2.setBounds(671, 295, 113, 27);
+		button_2.setBounds(809, 252, 103, 27);
 		add(button_2);
+		
+		orderField = new OrderField();
+		orderField.setColumns(10);
+		orderField.setBounds(642, 253, 159, 24);
+		add(orderField);
 		
 		button_3 = new MyButton_LightBlue("删除该条");
 		button_3.addActionListener(new ActionListener() {
@@ -219,7 +238,7 @@ public class CenterLoadPanel extends WorkPanel {
 				tableModel.removeRow(rownum);
 			}
 		});
-		button_3.setBounds(824, 295, 113, 27);
+		button_3.setBounds(636, 286, 276, 27);
 		add(button_3);
 		
 		button_4 = new MyButton_LightBlue("查看已提交单据");
