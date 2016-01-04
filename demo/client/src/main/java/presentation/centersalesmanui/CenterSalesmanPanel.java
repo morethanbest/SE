@@ -94,7 +94,7 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 		tc = new TransferCheckPanel(switcher, card, tu, orgCode);
 		transfer = new TransferPanel(orgCode, city, this, card);
 		
-		cu = new CenterLoadUpdatePanel(this, card);
+		cu = new CenterLoadUpdatePanel(this, card,city);
 		cc = new CenterLoadCheckPanel(switcher, card, cu, orgCode);
 		load = new CenterLoadPanel(orgCode, city, this, card);
 		

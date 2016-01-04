@@ -94,7 +94,7 @@ public class OrderPanel extends PersonPanel {
 		add(label);
 
 		snameField = new MyTextField();
-		snameField.setText("奥巴马");
+		snameField.setText("张三");
 		snameField.setBounds(158, 85, 96, 24);
 		add(snameField);
 		snameField.setColumns(10);
@@ -110,25 +110,25 @@ public class OrderPanel extends PersonPanel {
 		addOrganizationItems(scityBox, sareaBox);
 
 		sdetailField = new MyTextField();
-		sdetailField.setText("白宫");
+		sdetailField.setText("泗阳");
 		sdetailField.setBounds(712, 85, 256, 24);
 		add(sdetailField);
 		sdetailField.setColumns(10);
 
 		sjobField = new MyTextField();
-		sjobField.setText("美国总统");
+		sjobField.setText("个体户");
 		sjobField.setBounds(158, 148, 247, 24);
 		add(sjobField);
 		sjobField.setColumns(10);
 
 		stelField = new NumberField(50);
-		stelField.setText("911");
+		stelField.setText("18260038801");
 		stelField.setBounds(466, 148, 159, 24);
 		add(stelField);
 		stelField.setColumns(10);
 
 		sphoneField = new NumberField(50);
-		sphoneField.setText("911");
+		sphoneField.setText("18260038801");
 		sphoneField.setBounds(712, 148, 194, 24);
 		add(sphoneField);
 		sphoneField.setColumns(10);
@@ -142,7 +142,7 @@ public class OrderPanel extends PersonPanel {
 		add(label_1);
 
 		rnameField = new MyTextField();
-		rnameField.setText("习近平");
+		rnameField.setText("李四");
 		rnameField.setColumns(10);
 		rnameField.setBounds(158, 225, 96, 24);
 		add(rnameField);
@@ -158,25 +158,25 @@ public class OrderPanel extends PersonPanel {
 		addOrganizationItems(rcityBox, rareaBox);
 
 		rdetailField = new MyTextField();
-		rdetailField.setText("中南海");
+		rdetailField.setText("临河");
 		rdetailField.setColumns(10);
 		rdetailField.setBounds(712, 225, 256, 24);
 		add(rdetailField);
 
 		rjobField = new MyTextField();
-		rjobField.setText("中国主席");
+		rjobField.setText("教师");
 		rjobField.setColumns(10);
 		rjobField.setBounds(158, 287, 247, 24);
 		add(rjobField);
 
 		rtelField = new NumberField(50);
-		rtelField.setText("110");
+		rtelField.setText("18017227740");
 		rtelField.setColumns(10);
 		rtelField.setBounds(466, 287, 159, 24);
 		add(rtelField);
 
 		rphoneField = new NumberField(50);
-		rphoneField.setText("110");
+		rphoneField.setText("18017227740");
 		rphoneField.setColumns(10);
 		rphoneField.setBounds(712, 287, 194, 24);
 		add(rphoneField);
@@ -204,7 +204,7 @@ public class OrderPanel extends PersonPanel {
 		volumeField.setColumns(10);
 
 		nameField = new MyTextField();
-		nameField.setText("核弹");
+		nameField.setText("玉米");
 		nameField.setBounds(725, 361, 203, 24);
 		add(nameField);
 		nameField.setColumns(10);

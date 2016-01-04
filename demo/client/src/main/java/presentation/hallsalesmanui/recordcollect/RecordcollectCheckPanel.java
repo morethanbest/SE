@@ -59,6 +59,12 @@ public class RecordcollectCheckPanel extends WorkPanel {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+					true, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
 		scrollPane.setViewportView(table);
 		

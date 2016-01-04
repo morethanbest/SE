@@ -51,11 +51,17 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 	private MyButton_LightBlue button_3;
 	private CenterloadVO vo;
 	private MyTextField fareField;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
 
 	/**
 	 * Create the panel.
 	 */
-	public CenterLoadUpdatePanel(CenterSalesmanPanel parent, CardLayout card) {
+	public CenterLoadUpdatePanel(CenterSalesmanPanel parent, CardLayout card,String city) {
+		this.city=city;
 		controller = new CenterloadController();
 		
 		setBackground(SystemColor.inactiveCaptionBorder);
@@ -67,28 +73,28 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 		
 		fareField = new MyTextField();
 		fareField.setText("0");
-		fareField.setBounds(122, 351, 61, 24);
+		fareField.setBounds(195, 302, 61, 24);
 		add(fareField);
 		fareField.setColumns(10);
 		
 		yearBox = new MyComboBox<Long>();
-		yearBox.setBounds(14, 118, 74, 24);
+		yearBox.setBounds(84, 118, 74, 24);
 		add(yearBox);
 		
 		monthBox = new MyComboBox<Long>();
-		monthBox.setBounds(112, 118, 61, 24);
+		monthBox.setBounds(168, 118, 61, 24);
 		add(monthBox);
 		
 		addYearItems(yearBox, monthBox);
 		
 		dateBox = new MyComboBox<Long>();
-		dateBox.setBounds(195, 118, 61, 24);
+		dateBox.setBounds(239, 118, 61, 24);
 		add(dateBox);
 		
 		addDateItems(yearBox, monthBox, dateBox);
 		
 		destinBox = new MyComboBox<String>();
-		destinBox.setBounds(14, 187, 242, 24);
+		destinBox.setBounds(84, 186, 216, 24);
 		add(destinBox);
 		
 		addOrganizationItems(destinBox);
@@ -124,21 +130,21 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 		
 		carField = new NumberField(20);
 		carField.setColumns(10);
-		carField.setBounds(351, 53, 242, 24);
+		carField.setBounds(400, 53, 193, 24);
 		add(carField);
 		
 		jianField = new MyTextField();
 		jianField.setColumns(10);
-		jianField.setBounds(351, 118, 242, 24);
+		jianField.setBounds(400, 118, 193, 24);
 		add(jianField);
 		
 		yaField = new MyTextField();
 		yaField.setColumns(10);
-		yaField.setBounds(351, 187, 242, 24);
+		yaField.setBounds(400, 187, 193, 24);
 		add(yaField);
 		
 		JLabel label = new JLabel("运费合计：");
-		label.setBounds(14, 354, 84, 18);
+		label.setBounds(14, 305, 84, 18);
 		add(label);
 		
 		MyScrollPane scrollPane = new MyScrollPane();
@@ -187,7 +193,7 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 		button_3.setBounds(824, 295, 113, 27);
 		add(button_3);
 		
-		JButton button = new JButton("恢复原值");
+		MyButton_LightBlue button = new MyButton_LightBlue("恢复原值");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -196,7 +202,7 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 		button.setBounds(630, 376, 113, 27);
 		add(button);
 		
-		JButton button_1 = new JButton("返回");
+		MyButton_LightBlue button_1 = new MyButton_LightBlue("返回");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());
@@ -205,6 +211,25 @@ public class CenterLoadUpdatePanel extends WorkPanel {
 		});
 		button_1.setBounds(757, 376, 113, 27);
 		add(button_1);
+		label_1 = new JLabel("装车日期：");
+		label_1.setBounds(14, 123, 74, 15);
+		add(label_1);
+		
+		label_2 = new JLabel("目的地：");
+		label_2.setBounds(14, 191, 54, 15);
+		add(label_2);
+		
+		label_3 = new JLabel("车辆代号：");
+		label_3.setBounds(315, 57, 75, 15);
+		add(label_3);
+		
+		label_4 = new JLabel("监装员：");
+		label_4.setBounds(315, 123, 54, 15);
+		add(label_4);
+		
+		label_5 = new JLabel("押运员：");
+		label_5.setBounds(315, 191, 54, 15);
+		add(label_5);
 	}
 	
 	private void addYearItems(JComboBox<Long> year, JComboBox<Long> month) {
