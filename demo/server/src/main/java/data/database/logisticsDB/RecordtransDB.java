@@ -140,7 +140,7 @@ public class RecordtransDB {
 			pst.setString(2, "%"+orgcode+"%");
 			ret = pst.executeQuery();
 			while (ret.next()) {
-				if(!ret.getString(3).startsWith(orgcode))
+				if(!ret.getString(2).startsWith(orgcode))
 					continue;
 				List<String> allbarcode=(List<String>)Serialize.Bytes2Object(ret.getBytes(9));
 				po = new RecordtransPO(ret.getLong(1), ret.getString(2), ret.getString(3), ret.getString(4),
@@ -205,6 +205,7 @@ public class RecordtransDB {
 
 	public static void main(String[] args) {
 		initialize();
+//		System.out.println(fuzzySearch(Formstate.waiting,"0250").size());
 //		List<String> list=new ArrayList<String>();
 //		list.add("001");
 //		RecordtransPO po=new RecordtransPO(1,"025000","02500000","1","b","c","d","e",list,10,Formstate.waiting);

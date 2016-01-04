@@ -235,10 +235,10 @@ public class GoodRecievingPanel extends WorkPanel {
 	
 	private boolean checkFormat(){
 		CheckForExistBlService check2 = new CheckForExistBl();
-		if(typeBox.getSelectedIndex() == 0){
+		if(typeBox.getSelectedIndex() == 1){
 			if(!check2.checkHallLoad(codeField.getText()))
 				return createTip("汽运编号:" + codeField.getText() + " 不存在！");
-		}else if(typeBox.getSelectedIndex() == 1){
+		}else if(typeBox.getSelectedIndex() == 0){
 			if(!check2.checkTrans(codeField.getText()))
 				return createTip("中转单编号:" + codeField.getText() + " 不存在！");
 		}

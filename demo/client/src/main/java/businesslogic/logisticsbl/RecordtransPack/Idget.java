@@ -33,7 +33,7 @@ public class Idget {
 
         }
 
-        for(int i=0;i<=len-1;i++)
+        for(int i=0;i<=7-len-1;i++)
             result="0"+result;
         result=orgcode+Long.toString(date)+result;
         return result;

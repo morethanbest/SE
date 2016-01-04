@@ -40,7 +40,9 @@ public class UpdateDelivery {
             LogisticsPO po=null;
             try {
                 po=log.findLogisticsInfo(barcode);
-                po.setState("�ɼ���");
+                String State="派件员"+delivorinfo+"已出发";
+                po.getHistory().add(State);
+                po.setState(State);
                 log.update(po);
             } catch (RemoteException e) {
                 System.out.println("delivery update logistics state failed!!!");

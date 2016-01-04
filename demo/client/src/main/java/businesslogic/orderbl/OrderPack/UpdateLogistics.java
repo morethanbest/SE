@@ -32,8 +32,8 @@ public class UpdateLogistics {
 				resultMessage=ResultMessage.failure;
 			}
 			ArrayList<String> history=new ArrayList<String>();
-			history.add("揽件");
-			LogisticsPO po1=new LogisticsPO("揽件", history, vo.getOrdercode());
+			history.add("已揽件");
+			LogisticsPO po1=new LogisticsPO("已揽件", history, vo.getOrdercode());
 			
 			try {
 				resultMessage = logisticsDataService.addLogistics(po1);

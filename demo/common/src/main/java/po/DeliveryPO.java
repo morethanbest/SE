@@ -14,7 +14,7 @@ public class DeliveryPO  implements Serializable{
 		this.arrivaltime=arrivaltime;
 		this.barcode=barcode;
 		this.delivorinfo=delivorinfo;
-		this.documentstate=Formstate.waiting;
+		this.documentstate=documentstate;
 	}
 	public void seID(String id){this.id=id;}
 	public void setDocumentstate(Formstate documentstate) {

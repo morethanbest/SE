@@ -22,15 +22,15 @@ public class FeeCount {
 
 
       double fee=0;
-        if(transporttype.equals("train")){
+        if(transporttype.equals("火车")){
             FeeInterface feeget=new FeeStategyByTrain();
             fee=feeget.getfee(allbarcode,city1,city2);
         }
-        else if(transporttype.equals("plane")){
+        else if(transporttype.equals("飞机")){
             FeeInterface feeget=new FeeStategyByPlane();
             fee=feeget.getfee(allbarcode,city1,city2);
         }
-        else if(transporttype.equals("truck")){
+        else if(transporttype.equals("汽车")){
             FeeInterface feeget=new FeeStategyByTruck();
             fee=feeget.getfee(allbarcode,city1,city2);
         }
