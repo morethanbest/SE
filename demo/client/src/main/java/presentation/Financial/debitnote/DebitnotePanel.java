@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 
 import businesslogic.balancebl.DebitnotePack.DebitnoteController;
 import businesslogicservice.balanceblservice.DebitnoteBlService;
+import po.Organizationtype;
+import presentation.enums.OrganizationType;
 import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.MyTextField;
 import presentation.mycomp.WorkPanel;
@@ -28,6 +31,7 @@ import vo.CityVO;
 import vo.DebitnoteVO;
 import vo.OrganizationVO;
 import vo.RecordcollectVO;
+import javax.swing.JTextField;
 
 public class DebitnotePanel extends WorkPanel implements ActionListener{
 	private JTable table;
@@ -35,6 +39,7 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 	private MyComboBox<String> orgSelect;
 	private MyComboBox<String> citySelect;
 	private List<OrganizationVO> orglist;
+	private List<OrganizationVO> neworglist;
     private DebitnoteVO vo;
     private MyButton_LightBlue btnSearchByOrg;
 	private MyComboBox<Long> yearSelect;
@@ -49,6 +54,7 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 	private MyTextField dayField;
 	private MyScrollPane scrollPane;
 	private MyScrollPane orderscrollPane;
+	private MyTextField textField;
 	/**
 	 * Create the panel.
 	 */
@@ -61,7 +67,7 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 		add(separator);
 
 		scrollPane = new MyScrollPane();
-		scrollPane.setBounds(10, 81, 304, 326);
+		scrollPane.setBounds(10, 81, 304, 297);
 		add(scrollPane);
 
 		yearSelect = new MyComboBox<Long>();
@@ -270,6 +276,16 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
     	yearField.setEditable(false);
     	monthField.setEditable(false);
     	dayField.setEditable(false);
+    	
+    	JLabel label_6 = new JLabel("合计：");
+    	label_6.setBounds(184, 398, 54, 21);
+    	add(label_6);
+    	
+    	textField = new MyTextField();
+    	textField.setBounds(248, 398, 66, 21);
+    	add(textField);
+    	textField.setEditable(false);
+    	textField.setColumns(10);
 	}
 	private void displayInOrderTable(List<String> orderlist){
 		DefaultTableModel ordertableModel = (DefaultTableModel) ordertable.getModel();
@@ -331,8 +347,13 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 		DebitnoteBlService debitnoteBlService=new DebitnoteController();
 		orglist=debitnoteBlService.getAllOrganization((String)citySelect.getSelectedItem());
 		if(orglist.size()!=0){
+			neworglist=new ArrayList<OrganizationVO>();
 			for (OrganizationVO org : orglist) {
-				orgSelect.addItem(org.getName());
+				if(org.getType()==Organizationtype.hall){
+					orgSelect.addItem(org.getName());
+					neworglist.add(org);
+				}
+				
 			}
 		}
 
@@ -342,7 +363,8 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 				|| orgSelect.getSelectedItem() == null)
 			return;
 		DebitnoteBlService debitnoteBlService=new DebitnoteController();
-		vo=debitnoteBlService.getRecordcollectbyhall(orglist.get(orgSelect.getSelectedIndex()).getOrganizationcode());
+		vo=debitnoteBlService.getRecordcollectbyhall(neworglist.get(orgSelect.getSelectedIndex()).getOrganizationcode());
+		
 		displayInTable();
 	}
 	private void refreshListByday(){
@@ -355,13 +377,16 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 		List<RecordcollectVO> collectlist=vo.getList();
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);
+		double sum=0;
 		for(RecordcollectVO Vo:collectlist){
 			String[] rowString =new String[4];
 			rowString[0]=Vo.getAccountcode();
 			rowString[1]=Double.toString(Vo.getCollectionsum());
 			rowString[2]=Long.toString(Vo.getCollectiontime());
 			tableModel.addRow(rowString);
+			sum+=Vo.getCollectionsum();
 		}
+		textField.setText(Double.toString(sum));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
