@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import businesslogic.accountbl.AccountPack.AccountController;
 import businesslogic.balancebl.RecordpayPack.RecordpayController;
+import businesslogicservice.accountblservice.AccountBlService;
 import businesslogicservice.balanceblservice.RecordpayBlService;
 import po.Formstate;
 import po.RecordpayList;
@@ -248,13 +250,20 @@ public class RecordpayPanel extends WorkPanel implements ActionListener {
 			Formstate formstate = Formstate.waiting;
 
 			double paysum = Double.parseDouble(sumField.getText());
-			vo = new RecordpayVO(id, paytime, paysum, payman, payaccount,
-					entry, remark, formstate);
-			ResultMessage r = addRecordpay();
-			if (r == ResultMessage.success)
-				addSucess();
-			else
-				createTip("添加失败！");
+			AccountBlService accountBlService=new AccountController();
+            if(accountBlService.getAccountbyName(payaccount)==null){
+            	createTip("该账户不存在！");
+            }
+            else{
+            	vo = new RecordpayVO(id, paytime, paysum, payman, payaccount,
+    					entry, remark, formstate);
+    			ResultMessage r = addRecordpay();
+    			if (r == ResultMessage.success)
+    				addSucess();
+    			else
+    				createTip("添加失败！");
+            }
+			
 		}
 	}
 

@@ -16,8 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.accountbl.AccountPack.AccountController;
 import businesslogic.balancebl.RecordcollectPack.RecordcollectController;
 import businesslogic.orderbl.CheckExist;
+import businesslogicservice.accountblservice.AccountBlService;
 import businesslogicservice.balanceblservice.RecordCollectBlService;
 import businesslogicservice.orderblservice.CheckExistBlService;
 import po.Formstate;
@@ -271,14 +273,20 @@ public class RecordcollectPanel extends WorkPanel implements ActionListener {
 			double collectionsum = Double.parseDouble(sumField.getText());
 			String collectionman = manField.getText();
 			String accountcode = accountField.getText();
-
-			vo = new RecordcollectVO(id, collectiontime, accountcode,
-					collectionsum, collectionman, list, Formstate.waiting);
-			ResultMessage r = handin();
-			if (r == ResultMessage.success)
-				addSucess();
-			else
-				createTip("添加失败！");
+            AccountBlService accountBlService=new AccountController();
+            if(accountBlService.getAccountbyName(accountcode)==null){
+            	createTip("该账户不存在！");
+            }
+            else{
+            	vo = new RecordcollectVO(id, collectiontime, accountcode,
+    					collectionsum, collectionman, list, Formstate.waiting);
+    			ResultMessage r = handin();
+    			if (r == ResultMessage.success)
+    				addSucess();
+    			else
+    				createTip("添加失败！");
+            }
+			
 		}
 
 	}
