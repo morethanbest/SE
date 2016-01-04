@@ -124,6 +124,7 @@ public class FinancialPanel extends PersonPanel implements ActionListener{
 		add(separator);
 
 		switcher = new JPanel();
+		switcher.setOpaque(false);
 		switcher.setBackground(SystemColor.controlHighlight);
 		switcher.setBounds(14, 75, 954, 450);
 		add(switcher);

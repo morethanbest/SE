@@ -76,6 +76,7 @@ public class CenterSalesmanPanel extends JPanel implements ActionListener{
 		add(btnNewButton_2);
 		
 		switcher = new JPanel();
+		switcher.setOpaque(false);
 		switcher.setBounds(18, 75, 945, 418);
 		add(switcher);
 		card = new CardLayout();

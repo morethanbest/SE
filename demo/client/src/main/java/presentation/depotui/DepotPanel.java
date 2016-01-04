@@ -81,6 +81,7 @@ public class DepotPanel extends PersonPanel implements ActionListener {
 		add(button_3);
 
 		switcher = new JPanel();
+		switcher.setOpaque(false);
 		switcher.setLayout(card);
 		switcher.setBounds(20, 71, 945, 420);
 		add(switcher);

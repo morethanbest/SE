@@ -26,7 +26,7 @@ public class MyButton_LightBlue extends JButton {
 
 	public MyButton_LightBlue(String s) {
 		super(s);
-		setFont(new Font("system", Font.PLAIN, 12));
+		setFont(new Font("黑体", Font.PLAIN, 15));
 		setBorderPainted(false);
 		setForeground(BUTTON_COLOR2);
 		setFocusPainted(false);
@@ -35,7 +35,8 @@ public class MyButton_LightBlue extends JButton {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				setForeground(BUTTON_FOREGROUND_COLOR);
-				hover = true;
+				if(isEnabled())
+					hover = true;
 				repaint();
 			}
 
@@ -55,7 +56,7 @@ public class MyButton_LightBlue extends JButton {
 		int w = getWidth();
 		float tran = 1F;
 		if (!hover) {
-			tran = 0.3F;
+			tran = 0.55F;
 		}
 
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

@@ -60,10 +60,10 @@ public class HallLoadPanel extends WorkPanel {
 	 * Create the panel.
 	 */
 	public HallLoadPanel(String orgCode, String city, String orgName, HallsalesmanPanel parent, CardLayout card) {
+		super();
 		this.city = city;
 		this.orgName = orgName;
 		this.orgCode = orgCode;
-		setBackground(SystemColor.inactiveCaptionBorder);
 		setLayout(null);
 
 		hallLoadBlService = new HallLoadController();

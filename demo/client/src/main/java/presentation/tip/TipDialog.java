@@ -21,9 +21,11 @@ public class TipDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public TipDialog(String s) {
+		
 		getContentPane().setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setBounds(100, 100, 313, 159);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

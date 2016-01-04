@@ -296,7 +296,7 @@ public class OrderPanel extends PersonPanel {
 					
 			}
 		});
-		button_2.setBounds(434, 489, 133, 47);
+		button_2.setBounds(319, 478, 151, 47);
 		add(button_2);
 
 		btnNewButton = new MyButton_LightBlue("收件");
@@ -407,7 +407,7 @@ public class OrderPanel extends PersonPanel {
 				courierPanel.getOrderc().refreshList();
 			}
 		});
-		button_1.setBounds(793, 511, 143, 27);
+		button_1.setBounds(783, 474, 143, 27);
 		add(button_1);
 		
 		button_3 = new MyButton_LightBlue("注销");

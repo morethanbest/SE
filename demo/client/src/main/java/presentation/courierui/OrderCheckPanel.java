@@ -42,7 +42,7 @@ public class OrderCheckPanel extends PersonPanel {
 		setBackground(SystemColor.inactiveCaptionBorder);
 		
 		MyScrollPane scrollPane = new MyScrollPane();
-		scrollPane.setBounds(79, 41, 958, 422);
+		scrollPane.setBounds(27, 41, 931, 422);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -83,7 +83,7 @@ public class OrderCheckPanel extends PersonPanel {
 				}
 			}
 		});
-		revise.setBounds(719, 476, 113, 27);
+		revise.setBounds(677, 476, 113, 27);
 		add(revise);
 		
 		back = new MyButton_LightBlue("返回");
@@ -92,7 +92,7 @@ public class OrderCheckPanel extends PersonPanel {
 				parent.switchPanel("order");
 			}
 		});
-		back.setBounds(846, 476, 113, 27);
+		back.setBounds(804, 476, 113, 27);
 		add(back);
 		
 		stateBox = new MyComboBox<String>();
@@ -105,7 +105,7 @@ public class OrderCheckPanel extends PersonPanel {
 				updateVOListState(Formstate.checked);
 			}
 		});
-		act.setBounds(592, 476, 113, 27);
+		act.setBounds(550, 476, 113, 27);
 		add(act);
 		stateBox.addItemListener(new ItemListener() {
 

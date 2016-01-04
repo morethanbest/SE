@@ -56,7 +56,7 @@ public class RecievePanel extends PersonPanel {
 		setLayout(null);
 
 		nameField = new MyTextField();
-		nameField.setBounds(218, 112, 229, 30);
+		nameField.setBounds(454, 111, 229, 30);
 		add(nameField);
 		nameField.setColumns(10);
 
@@ -78,7 +78,7 @@ public class RecievePanel extends PersonPanel {
 		add(button);
 
 		codeField = new OrderField();
-		codeField.setBounds(218, 199, 229, 30);
+		codeField.setBounds(454, 198, 229, 30);
 		add(codeField);
 		codeField.setColumns(10);
 
@@ -101,20 +101,20 @@ public class RecievePanel extends PersonPanel {
 			}
 			
 		});
-		button_1.setBounds(293, 416, 113, 27);
+		button_1.setBounds(489, 375, 113, 27);
 		add(button_1);
 
 		yearBox = new MyComboBox<Long>();
-		yearBox.setBounds(218, 293, 79, 24);
+		yearBox.setBounds(448, 292, 79, 24);
 		add(yearBox);
 
 		monthBox = new MyComboBox<Long>();
-		monthBox.setBounds(311, 293, 61, 24);
+		monthBox.setBounds(541, 292, 61, 24);
 		add(monthBox);
 		addYearItems(yearBox, monthBox);
 
 		dateBox = new MyComboBox<Long>();
-		dateBox.setBounds(386, 293, 61, 24);
+		dateBox.setBounds(616, 292, 61, 24);
 		add(dateBox);
 		addDateItems(yearBox, monthBox, dateBox);
 
@@ -134,15 +134,15 @@ public class RecievePanel extends PersonPanel {
 		dateBox.setSelectedItem((long)c.get(Calendar.DAY_OF_MONTH));
 		
 		label = new JLabel("收件人：");
-		label.setBounds(132, 118, 72, 18);
+		label.setBounds(362, 117, 72, 18);
 		add(label);
 		
 		label_1 = new JLabel("订单编号：");
-		label_1.setBounds(117, 205, 79, 18);
+		label_1.setBounds(347, 204, 79, 18);
 		add(label_1);
 		
 		label_2 = new JLabel("收件日期：");
-		label_2.setBounds(117, 296, 87, 18);
+		label_2.setBounds(347, 295, 87, 18);
 		add(label_2);
 		
 		button_2 = new MyButton_LightBlue("注销");

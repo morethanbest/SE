@@ -11,10 +11,6 @@ public class WorkPanel extends JPanel {
 		super();
 		setOpaque(false);
 	}
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Image image = new ImageIcon("img/workback.png").getImage();
-		g.drawImage(image, 0, 0, this);
-	}
+
 
 }

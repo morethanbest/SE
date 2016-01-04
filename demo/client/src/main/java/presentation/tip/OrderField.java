@@ -1,12 +1,13 @@
 package presentation.tip;
 
-import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
-public class OrderField extends JTextField {
+import presentation.mycomp.MyTextField;
+
+public class OrderField extends MyTextField {
 
 	public OrderField() {
 		super();

@@ -55,6 +55,7 @@ public class AdministratorPanel extends PersonPanel implements ActionListener {
 		add(separator);
 
 		panel = new JPanel();
+		panel.setOpaque(false);
 		panel.setBackground(SystemColor.controlHighlight);
 		panel.setBounds(14, 75, 954, 420);
 		add(panel);

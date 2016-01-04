@@ -54,6 +54,7 @@ public class MyTextField extends JTextField {
 				System.out.println(a);
 				Container p =  getParent();
 				p.add(new MyTextLabel(a, b, c, d));
+				p.repaint();
 			}
 		});
 		x += CORNER + 2; width -= 2 * CORNER;

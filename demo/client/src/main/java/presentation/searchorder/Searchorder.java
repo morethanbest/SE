@@ -11,18 +11,18 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 
-import businesslogic.logisticsbl.LogisticsPack.LogisticsSearchController;
-import businesslogicservice.logisticsblservice.SearchOrderBlService;
 import presentation.mainui.MainFrame;
 import presentation.mycomp.MyButton_LightBlue;
-import presentation.mycomp.MyTextField;
 import presentation.mycomp.WorkPanel;
 import presentation.mycomp.myscrollpane.MyScrollPane;
+import presentation.tip.OrderField;
 import presentation.tip.TipDialog;
 import vo.LogisticsVO;
+import businesslogic.logisticsbl.LogisticsPack.LogisticsSearchController;
+import businesslogicservice.logisticsblservice.SearchOrderBlService;
 
 public class Searchorder extends WorkPanel implements ActionListener{
-	private MyTextField textField;
+	private OrderField textField;
 	private MyScrollPane scrollPane;
 	MyButton_LightBlue searchBtn;
 	LogisticsVO vo=null;
@@ -36,18 +36,18 @@ public class Searchorder extends WorkPanel implements ActionListener{
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		JLabel label = new JLabel("输入订单号查询订单");
-		label.setBounds(195, 83, 274, 47);
+		label.setBounds(176, 90, 178, 47);
 		label.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		add(label);
 		
-		textField = new MyTextField();
-		textField.setBounds(124, 159, 274, 47);
+		textField = new OrderField();
+		textField.setBounds(124, 187, 250, 31);
 		add(textField);
 		textField.setColumns(10);
 		
 		searchBtn= new MyButton_LightBlue("查询");
 		searchBtn.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-		searchBtn.setBounds(216, 286, 99, 31);
+		searchBtn.setBounds(199, 281, 99, 31);
 		add(searchBtn);
 		searchBtn.addActionListener(this);
 		

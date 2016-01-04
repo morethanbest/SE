@@ -62,6 +62,7 @@ public class SearchPanel extends PersonPanel implements ActionListener{
 		
 		//card中添加各种功能面板
 		searchorder=new Searchorder(parent);
+		switcher.setOpaque(false);
 		switcher.add(searchorder, "search");
 		hint = new JLabel("");
 		hint.setBounds(585, 508, 383, 32);

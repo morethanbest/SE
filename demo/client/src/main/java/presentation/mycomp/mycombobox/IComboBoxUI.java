@@ -39,10 +39,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 	@Override
 	protected JButton createArrowButton() {
 		arrow = new JButton("");
-//		ImageIcon increase = new ImageIcon("img/DarkDownArrow.png");
-//		arrow.setIcon(increase);
 		arrow.setRolloverEnabled(true);
-//		arrow.setRolloverIcon(increase);
 		arrow.setBorder(null);
 		arrow.setBackground(SystemColor.inactiveCaptionBorder);
 		arrow.setOpaque(false);
@@ -63,10 +60,8 @@ public class IComboBoxUI extends BasicComboBoxUI {
 		g2.drawImage(increase, 7, 0, w - 21, h, 7, 0, 97, 27, null);
 		g2.drawImage(increase, w - 21, 0, w, h, 97, 0, 118, 27, null);
 		if (!comboBox.isEditable()) {
-			int x = (int) myComboBox.getLocation().getX();
-			int y = (int) myComboBox.getLocation().getY();
 			g2.setFont(new Font("黑体", Font.PLAIN, 15));
-			g2.drawString(myComboBox.getSelectedItem() + "", 5, 18);
+			g2.drawString(myComboBox.getSelectedItem() + "", 5, h / 2 + 5);
 		}
 
 

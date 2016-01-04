@@ -54,7 +54,7 @@ public class MyButton_LightGreen extends JButton {
 		int w = getWidth();
 		float tran = 1F;
 		if (!hover) {
-			tran = 0.3F;
+			tran = 0.9F;
 		}
 
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
