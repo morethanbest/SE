@@ -51,6 +51,7 @@ public class RecordcollectUpdatePanel extends WorkPanel implements ActionListene
 	private MyButton_LightBlue button;
 	private MyButton_LightBlue button_1;
 	private RecordCollectBlService controller;
+	private List<String> list;
 
 	/**
 	 * Create the panel.
@@ -245,6 +246,7 @@ public class RecordcollectUpdatePanel extends WorkPanel implements ActionListene
 			DefaultTableModel tableModel = (DefaultTableModel) table
 					.getModel();
 			tableModel.addRow(new String[] { orderField.getText() });
+			list.add(orderField.getText());
 			orderField.setText("");
 		} else if (e.getSource().equals(update)) {
 			if (!checkFormat())
@@ -282,7 +284,10 @@ public class RecordcollectUpdatePanel extends WorkPanel implements ActionListene
 		accountField.setText(vo.getAccountcode());
 
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		List<String> list = vo.getAllordercode();
+		for (int i = 0; i < tableModel.getRowCount(); i++) {
+			tableModel.removeRow(i);
+		}
+		list = vo.getAllordercode();
 		for (int i = 0; i < list.size(); i++) {
 			tableModel.addRow(new String[] { list.get(i) });
 		}

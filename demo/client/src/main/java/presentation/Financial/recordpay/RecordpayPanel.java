@@ -36,9 +36,9 @@ public class RecordpayPanel extends WorkPanel implements ActionListener {
 	private DoubleField sumField;
 	private MyTextField manField;
 	private NumberField accountField;
-	private MyComboBox<String> yearSelect;
-	private MyComboBox<String> monthSelect;
-	private MyComboBox<String> daySelect;
+	private MyComboBox<Long> yearSelect;
+	private MyComboBox<Long> monthSelect;
+	private MyComboBox<Long> daySelect;
 	private MyComboBox<String> tipSelect;
 	private MyButton_LightBlue button;
 	private RecordpayVO vo = null;
@@ -54,19 +54,19 @@ public class RecordpayPanel extends WorkPanel implements ActionListener {
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 
-		yearSelect = new MyComboBox<String>();
+		yearSelect = new MyComboBox<Long>();
 		yearSelect.setBounds(169, 82, 80, 21);
 		yearSelect.setEditable(false);
 		add(yearSelect);
 
-		monthSelect = new MyComboBox<String>();
+		monthSelect = new MyComboBox<Long>();
 		monthSelect.setBounds(259, 82, 65, 21);
 		monthSelect.setEditable(false);
 		add(monthSelect);
 
 		addYearItems(yearSelect, monthSelect);
 		
-		daySelect = new MyComboBox<String>();
+		daySelect = new MyComboBox<Long>();
 		daySelect.setBounds(334, 82, 65, 21);
 		daySelect.setEditable(false);
 		add(daySelect);
@@ -217,9 +217,7 @@ public class RecordpayPanel extends WorkPanel implements ActionListener {
 			if (!checkFormat())
 				return;
 			String id = controller.getid();
-			long paytime = Long.parseLong((String) yearSelect.getSelectedItem()
-					+ monthSelect.getSelectedItem()
-					+ daySelect.getSelectedItem());
+			long paytime = (long)yearSelect.getSelectedItem()*10000+(long)monthSelect.getSelectedItem()*100+(long)daySelect.getSelectedItem();
 			String payman = manField.getText();
 			String payaccount = accountField.getText();
 			RecordpayList entry = null;

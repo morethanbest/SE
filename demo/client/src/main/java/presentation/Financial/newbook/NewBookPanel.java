@@ -31,9 +31,9 @@ import vo.StaffVO;
 import vo.VehicleVO;
 
 public class NewBookPanel extends WorkPanel implements ActionListener{
-	private MyComboBox<String> yearSelect;
-	private MyComboBox<String> monthSelect;
-	private MyComboBox<String> daySelect;
+	private MyComboBox<Long> yearSelect;
+	private MyComboBox<Long> monthSelect;
+	private MyComboBox<Long> daySelect;
 	private MyButton_LightBlue btnSearch;
 	private MyButton_LightBlue btnaccount;
 	private MyButton_LightBlue btnorg;
@@ -55,18 +55,18 @@ public class NewBookPanel extends WorkPanel implements ActionListener{
 		separator.setBounds(0, 58, 954, 10);
 		add(separator);
 		
-		yearSelect = new MyComboBox<String>();
+		yearSelect = new MyComboBox<Long>();
 		yearSelect.setBounds(113, 11, 74, 31);
 		yearSelect.setEditable(false);
 		add(yearSelect);
 
-		monthSelect = new MyComboBox<String>();
+		monthSelect = new MyComboBox<Long>();
 		monthSelect.setBounds(197, 11, 65, 31);
 		monthSelect.setEditable(false);
 		add(monthSelect);
 		addYearItems(yearSelect, monthSelect);
 		
-		daySelect = new MyComboBox<String>();
+		daySelect = new MyComboBox<Long>();
 		daySelect.setBounds(272, 10, 65, 32);
 		daySelect.setEditable(false);
 		add(daySelect);
@@ -318,7 +318,7 @@ public class NewBookPanel extends WorkPanel implements ActionListener{
 		}
     }
     private void Search(){
-    	long time=Long.parseLong((String)yearSelect.getSelectedItem()+monthSelect.getSelectedItem()+daySelect.getSelectedItem());
+    	long time=(long)yearSelect.getSelectedItem()*10000+(long)monthSelect.getSelectedItem()*100+(long)daySelect.getSelectedItem();
     	NewBookBlService newBookBlService=new NewBookController();
         vo=newBookBlService.find(time);
         table = new JTable();

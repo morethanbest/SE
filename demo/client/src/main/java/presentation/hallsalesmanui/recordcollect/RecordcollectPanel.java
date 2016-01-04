@@ -42,9 +42,9 @@ public class RecordcollectPanel extends WorkPanel implements ActionListener {
 	private DoubleField sumField;
 	private MyTextField manField;
 	private NumberField accountField;
-	private MyComboBox<String> yearSelect;
-	private MyComboBox<String> monthSelect;
-	private MyComboBox<String> daySelect;
+	private MyComboBox<Long> yearSelect;
+	private MyComboBox<Long> monthSelect;
+	private MyComboBox<Long> daySelect;
 	private MyScrollPane scrollPane;
 	private OrderField orderField;
 	private MyButton_LightBlue btnaddorder;
@@ -69,19 +69,19 @@ public class RecordcollectPanel extends WorkPanel implements ActionListener {
 		setLayout(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		
-		yearSelect = new MyComboBox<String>();
+		yearSelect = new MyComboBox<Long>();
 		yearSelect.setBounds(186, 96, 80, 21);
 		yearSelect.setEditable(false);
 		add(yearSelect);
 
-		monthSelect = new MyComboBox<String>();
+		monthSelect = new MyComboBox<Long>();
 		monthSelect.setBounds(276, 96, 65, 21);
 		monthSelect.setEditable(false);
 		add(monthSelect);
 		
 		addYearItems(yearSelect, monthSelect);
 
-		daySelect = new MyComboBox<String>();
+		daySelect = new MyComboBox<Long>();
 		daySelect.setBounds(351, 96, 65, 21);
 		daySelect.setEditable(false);
 		add(daySelect);
@@ -253,16 +253,14 @@ public class RecordcollectPanel extends WorkPanel implements ActionListener {
 			DefaultTableModel tableModel = (DefaultTableModel) table
 					.getModel();
 			tableModel.addRow(new String[] { orderField.getText() });
+			list.add(orderField.getText());
 			orderField.setText("");
 		} else if (e.getSource().equals(btnhandin)) {
 			if (!checkFormat())
 				return;
 			RecordCollectBlService recordCollectBlService = new RecordcollectController();
 			String id = recordCollectBlService.getid(orgcode);
-			long collectiontime = Long.parseLong((String) yearSelect
-					.getSelectedItem()
-					+ monthSelect.getSelectedItem()
-					+ daySelect.getSelectedItem());
+			long collectiontime = (long)yearSelect.getSelectedItem()*10000+(long)monthSelect.getSelectedItem()*100+(long)daySelect.getSelectedItem();				
 			double collectionsum = Double.parseDouble(sumField.getText());
 			String collectionman = manField.getText();
 			String accountcode = accountField.getText();
@@ -299,12 +297,13 @@ public class RecordcollectPanel extends WorkPanel implements ActionListener {
 		sumField.setText("");
 		manField.setText("");
 		accountField.setText("");
-		list.removeAll(list);
-		vo = null;
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		System.out.println(list.size());
 		for (int i = list.size() - 1; i >= 0; i--) {
 			tableModel.removeRow(i);
 		}
+		list.removeAll(list);
+		vo = null;
 	}
 
 	private boolean createTip(String str) {

@@ -372,6 +372,11 @@ public class HallLoadPanel extends WorkPanel {
 				+ (Long) monthBox.getSelectedItem() * 100
 				+ (Long) dateBox.getSelectedItem();
 		moterLabel.setText(hallLoadBlService.getid(orgCode, date));
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		for(int i=0;i<tableModel.getRowCount();i++){
+			tableModel.removeRow(i);
+		}
+		
 	}
 
 	private boolean createTip(String str) {

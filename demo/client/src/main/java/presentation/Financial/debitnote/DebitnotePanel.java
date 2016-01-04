@@ -37,9 +37,9 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 	private List<OrganizationVO> orglist;
     private DebitnoteVO vo;
     private MyButton_LightBlue btnSearchByOrg;
-	private MyComboBox<String> yearSelect;
-	private MyComboBox<String> monthSelect;
-	private MyComboBox<String> daySelect;
+	private MyComboBox<Long> yearSelect;
+	private MyComboBox<Long> monthSelect;
+	private MyComboBox<Long> daySelect;
 	private MyButton_LightBlue btnSearchByDay;
 	private MyTextField sumField;
     private MyTextField manField;
@@ -64,19 +64,19 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 		scrollPane.setBounds(10, 81, 304, 326);
 		add(scrollPane);
 
-		yearSelect = new MyComboBox<String>();
+		yearSelect = new MyComboBox<Long>();
 		yearSelect.setBounds(552, 0, 74, 31);
 		yearSelect.setEditable(false);
 		add(yearSelect);
 
-		monthSelect = new MyComboBox<String>();
+		monthSelect = new MyComboBox<Long>();
 		monthSelect.setBounds(636, 0, 65, 31);
 		monthSelect.setEditable(false);
 		add(monthSelect);
 
 		addYearItems(yearSelect, monthSelect);
 		
-		daySelect = new MyComboBox<String>();
+		daySelect = new MyComboBox<Long>();
 		daySelect.setBounds(711, 0, 65, 32);
 		daySelect.setEditable(false);
 		add(daySelect);
