@@ -191,7 +191,7 @@ public class TransferUpdatePanel extends WorkPanel {
 				orderField.setText("");
 			}
 		});
-		button_1.setBounds(851, 252, 61, 27);
+		button_1.setBounds(813, 252, 99, 27);
 		add(button_1);
 
 		button_2 = new MyButton_LightBlue("删除该条");
@@ -233,7 +233,7 @@ public class TransferUpdatePanel extends WorkPanel {
 
 		orderField = new OrderField();
 		orderField.setColumns(10);
-		orderField.setBounds(636, 253, 199, 24);
+		orderField.setBounds(642, 253, 163, 24);
 		add(orderField);
 		
 		JLabel label_1 = new JLabel("中转编号：");
@@ -350,6 +350,7 @@ public class TransferUpdatePanel extends WorkPanel {
 		manageField.setText(vo.getSupervisor());
 		departureLabel.setText(vo.getDepartrue());
 		destinBox.setSelectedItem(vo.getDestination());
+		fareField.setText(Double.toString(vo.getfee()));
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		for (int i = 0; i < tableModel.getRowCount(); i++) {
 			tableModel.removeRow(i);

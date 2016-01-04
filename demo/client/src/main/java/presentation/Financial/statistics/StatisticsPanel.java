@@ -87,7 +87,7 @@ public class StatisticsPanel extends WorkPanel implements ActionListener {
 		daySelectstart.setEditable(false);
 		daySelectstart.setEnabled(true);
 		add(daySelectstart);
-		addDateItems(daySelectstart,monthSelectstart,yearSelectstart);
+		addDateItems(yearSelectstart,monthSelectstart,daySelectstart);
 		ItemListener startlistener = new ItemListener() {
 
 			@Override
@@ -128,7 +128,7 @@ public class StatisticsPanel extends WorkPanel implements ActionListener {
 		daySelectend.setEditable(false);
 		daySelectend.setEnabled(true);
 		add(daySelectend);
-		addDateItems(daySelectend,monthSelectend,yearSelectend);
+		addDateItems(yearSelectend,monthSelectend,daySelectend);
 		
 		ItemListener endlistener = new ItemListener() {
 
@@ -434,12 +434,12 @@ public class StatisticsPanel extends WorkPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(btnsearch)){
-			long starttime=Long.parseLong((String)yearSelectstart.getSelectedItem())*10000+
-					Long.parseLong((String)monthSelectstart.getSelectedItem())*100+
-					Long.parseLong((String)daySelectstart.getSelectedItem());
-			long endtime=Long.parseLong((String)yearSelectend.getSelectedItem())*10000+
-					Long.parseLong((String)monthSelectend.getSelectedItem())*100+
-					Long.parseLong((String)daySelectend.getSelectedItem());
+			long starttime=(long)yearSelectstart.getSelectedItem()*10000+
+                    (long)monthSelectstart.getSelectedItem()*100+
+                    (long)daySelectstart.getSelectedItem();
+			long endtime=(long)yearSelectend.getSelectedItem()*10000+
+                    (long)monthSelectend.getSelectedItem()*100+
+                    (long)daySelectend.getSelectedItem();
 			getStatistics(starttime, endtime);
 			displayinTable();
 		}
