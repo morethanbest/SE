@@ -113,12 +113,12 @@ public class RecordcollectPanel extends WorkPanel implements ActionListener {
 		add(scrollPane);
 
 		orderField = new OrderField();
-		orderField.setBounds(611, 302, 199, 25);
+		orderField.setBounds(617, 302, 177, 25);
 		add(orderField);
 		orderField.setColumns(10);
 
 		btnaddorder = new MyButton_LightBlue("增加订单");
-		btnaddorder.setBounds(822, 301, 93, 27);
+		btnaddorder.setBounds(802, 301, 113, 27);
 		add(btnaddorder);
 
 		btnhandin = new MyButton_LightBlue("提交");
@@ -149,7 +149,7 @@ public class RecordcollectPanel extends WorkPanel implements ActionListener {
 				parent.getRc().refreshList();
 			}
 		});
-		button.setBounds(701, 402, 137, 27);
+		button.setBounds(701, 402, 152, 27);
 		add(button);
 
 		label = new JLabel("收款信息：");

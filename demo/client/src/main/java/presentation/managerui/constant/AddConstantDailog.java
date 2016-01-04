@@ -225,7 +225,7 @@ public class AddConstantDailog extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("取消");
+				MyButton_LightBlue cancelButton = new MyButton_LightBlue("取消");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

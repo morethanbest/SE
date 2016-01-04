@@ -63,7 +63,7 @@ public class UserPanel extends WorkPanel implements ActionListener{
 		add(btnSearch);
 		
 		btnAdd = new MyButton_LightBlue("增加账号");
-		btnAdd.setBounds(677, 16, 93, 23);
+		btnAdd.setBounds(677, 16, 116, 23);
 		add(btnAdd);
 		
 		JLabel label_1 = new JLabel("用户名：");

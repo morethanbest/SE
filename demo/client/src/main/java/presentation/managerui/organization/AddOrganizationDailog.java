@@ -16,6 +16,7 @@ import businesslogic.managerbl.ConstantsPack.ConstantsController;
 import businesslogicservice.managerblservice.ConstantsBlService;
 import po.ResultMessage;
 import presentation.enums.OrganizationType;
+import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.MyTextField;
 import presentation.mycomp.mycombobox.MyComboBox;
 import presentation.tip.TipDialog;
@@ -62,7 +63,7 @@ public class AddOrganizationDailog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
-				JButton okButton = new JButton("OK");
+				MyButton_LightBlue okButton = new MyButton_LightBlue("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(nameField.getText().equals("")){

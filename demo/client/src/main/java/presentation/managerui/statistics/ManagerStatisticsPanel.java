@@ -61,12 +61,12 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 		
 		//开始时间
 		startLabel = new JLabel();
-		startLabel.setBounds(20, 20, 100, 21);
+		startLabel.setBounds(20, 10, 100, 21);
 		startLabel.setText("开始时间点");
 		add(startLabel);
 		
 		yearSelectstart = new MyComboBox<String>();
-		yearSelectstart.setBounds(110, 20, 100, 21);
+		yearSelectstart.setBounds(105, 10, 100, 21);
 		yearSelectstart.setEditable(false);
 		yearSelectstart.setEnabled(true);
 		add(yearSelectstart);
@@ -79,14 +79,14 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 			}
 		};
 		monthSelectstart = new MyComboBox<String>();
-		monthSelectstart.setBounds(225, 20, 65, 21);
+		monthSelectstart.setBounds(215, 10, 65, 21);
 		monthSelectstart.setEditable(false);
 		monthSelectstart.setEnabled(true);
 		add(monthSelectstart);
 		addmonthItem(monthSelectstart);
 		
 		daySelectstart = new MyComboBox<String>();
-		daySelectstart.setBounds(305, 20, 65, 21);
+		daySelectstart.setBounds(290, 10, 65, 21);
 		daySelectstart.setEditable(false);
 		daySelectstart.setEnabled(true);
 		add(daySelectstart);
@@ -98,13 +98,13 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 		
 		//结束时间
 		endLabel=new JLabel();
-		endLabel.setBounds(420, 20, 100, 21);
+		endLabel.setBounds(415, 10, 100, 21);
 		endLabel.setText("结束时间点");
 		add(endLabel);
 		
 		
 		yearSelectend = new MyComboBox<String>();
-		yearSelectend.setBounds(515, 20, 100, 21);
+		yearSelectend.setBounds(512, 10, 100, 21);
 		yearSelectend.setEditable(false);
 		yearSelectend.setEnabled(true);
 		add(yearSelectend);
@@ -117,14 +117,14 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 			}
 		};
 		monthSelectend = new MyComboBox<String>();
-		monthSelectend.setBounds(630, 20, 65, 21);
+		monthSelectend.setBounds(622, 10, 65, 21);
 		monthSelectend.setEditable(false);
 		monthSelectend.setEnabled(true);
 		add(monthSelectend);
 		addmonthItem(monthSelectend);
 		
 		daySelectend = new MyComboBox<String>();
-		daySelectend.setBounds(710, 20, 65, 21);
+		daySelectend.setBounds(697, 10, 65, 21);
 		daySelectend.setEditable(false);
 		daySelectend.setEnabled(true);
 		add(daySelectend);
@@ -135,7 +135,7 @@ public class ManagerStatisticsPanel extends WorkPanel implements ActionListener 
 		
 		//加入搜索按钮
 		btnsearch=new MyButton_LightBlue("");
-		btnsearch.setBounds(810, 19, 76, 23);
+		btnsearch.setBounds(802, 9, 86, 31);
 		btnsearch.setText("生成");
 		btnsearch.addActionListener(this);
 		add(btnsearch);

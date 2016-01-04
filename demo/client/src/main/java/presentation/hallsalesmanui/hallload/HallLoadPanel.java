@@ -217,12 +217,12 @@ public class HallLoadPanel extends WorkPanel {
 				orderField.setText("");
 			}
 		});
-		button_1.setBounds(827, 252, 85, 27);
+		button_1.setBounds(804, 252, 108, 27);
 		add(button_1);
 
 		orderField = new OrderField();
 		orderField.setColumns(10);
-		orderField.setBounds(636, 253, 181, 24);
+		orderField.setBounds(642, 253, 154, 24);
 		add(orderField);
 		
 		MyButton_LightBlue button_2 = new MyButton_LightBlue("删除该条");

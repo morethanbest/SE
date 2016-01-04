@@ -57,7 +57,7 @@ public class AccountPanel extends WorkPanel implements ActionListener{
 		add(btnSearch);
 		
 		btnadd = new MyButton_LightBlue("增加账户");
-		btnadd.setBounds(632, 17, 93, 23);
+		btnadd.setBounds(632, 17, 108, 23);
 		add(btnadd);
 		
 		JLabel label_1 = new JLabel("账户信息：");

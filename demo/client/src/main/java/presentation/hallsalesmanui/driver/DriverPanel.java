@@ -79,7 +79,7 @@ public class DriverPanel extends WorkPanel implements ActionListener {
 		add(BTNsearchByCode);
 		
 		BTNadd = new MyButton_LightBlue("增加司机信息");
-		BTNadd.setBounds(681, 13, 121, 23);
+		BTNadd.setBounds(681, 13, 141, 23);
 		add(BTNadd);
 		
 		MyScrollPane scrollPane = new MyScrollPane();

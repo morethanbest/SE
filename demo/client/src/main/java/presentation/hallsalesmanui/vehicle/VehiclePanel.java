@@ -66,7 +66,7 @@ public class VehiclePanel extends WorkPanel implements ActionListener {
 		add(btnSearchByCode);
 		
 		btnAddVehicle = new MyButton_LightBlue("增加车辆信息");
-		btnAddVehicle.setBounds(681, 13, 121, 23);
+		btnAddVehicle.setBounds(681, 13, 143, 23);
 		add(btnAddVehicle);
 		
 		JLabel label = new JLabel("车辆代号：");

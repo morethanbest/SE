@@ -112,7 +112,7 @@ public class NewBookPanel extends WorkPanel implements ActionListener{
 		add(btnvehicle);
 		
 		btncreate = new MyButton_LightBlue("期初建账");
-		btncreate.setBounds(641, 7, 93, 31);
+		btncreate.setBounds(641, 7, 107, 31);
 		add(btncreate);
 		
 		yearSelect.addItemListener(listener);

@@ -179,7 +179,7 @@ public class CenterLoadPanel extends WorkPanel {
 				fareLabel.setText(centerloadBlService.getfee(barcodes, city, city) + "");
 			}
 		});
-		button_1.setBounds(500, 255, 93, 27);
+		button_1.setBounds(480, 255, 113, 27);
 		add(button_1);
 		
 		ItemListener listener = new ItemListener() {

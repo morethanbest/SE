@@ -158,7 +158,7 @@ public class GoodRecievingPanel extends WorkPanel {
 				parent.getGc().refreshList();
 			}
 		});
-		button_1.setBounds(756, 336, 136, 27);
+		button_1.setBounds(742, 336, 150, 27);
 		add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{yearBox, monthBox, dateBox, typeBox, codeField, destinBox, stateBox}));
 	}
