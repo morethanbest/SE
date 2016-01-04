@@ -35,7 +35,7 @@ public class StockinCheckPanel extends WorkPanel {
 	/**
 	 * Create the panel.
 	 */
-	public StockinCheckPanel(JPanel parent, CardLayout card, StockinUpdatePanel child, String orgCode) {
+	public StockinCheckPanel(JPanel parent, CardLayout card, StockinUpdatePanel child, String orgCode,StockinPanel stockinPanel) {
 		this.orgCode = orgCode;
 		controller = new InboundController();
 		setLayout(null);
@@ -89,6 +89,7 @@ public class StockinCheckPanel extends WorkPanel {
 		back = new MyButton_LightBlue("返回");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				stockinPanel.checkAvailable();
 				card.previous(parent);
 			}
 		});

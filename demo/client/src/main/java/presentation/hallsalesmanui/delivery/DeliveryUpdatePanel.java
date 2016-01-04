@@ -93,7 +93,7 @@ public class DeliveryUpdatePanel extends WorkPanel {
 		update.setBounds(359, 276, 113, 27);
 		add(update);
 
-		JButton button_1 = new JButton("恢复原值");
+		MyButton_LightBlue button_1 = new MyButton_LightBlue("恢复原值");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				init(vo);
@@ -102,7 +102,7 @@ public class DeliveryUpdatePanel extends WorkPanel {
 		button_1.setBounds(486, 276, 113, 27);
 		add(button_1);
 
-		JButton button_2 = new JButton("返回");
+		MyButton_LightBlue button_2 = new MyButton_LightBlue("返回");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.previous(parent.getSwitcher());

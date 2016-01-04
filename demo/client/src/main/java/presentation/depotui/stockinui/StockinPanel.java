@@ -298,7 +298,7 @@ public class StockinPanel extends WorkPanel {
 		
 	}
 	
-	private void checkAvailable(){
+	public void checkAvailable(){
 		if(quBox.getSelectedItem() != null && paiBox.getSelectedItem() != null && jiaBox.getSelectedItem() != null && weiBox.getSelectedItem() != null){
 			location = new CommodityLocation(getBlockIndex((String) quBox.getSelectedItem()),
 					(Long) paiBox.getSelectedItem(), (Long) jiaBox.getSelectedItem(),

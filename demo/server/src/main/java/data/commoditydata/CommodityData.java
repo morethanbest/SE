@@ -103,8 +103,8 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 	public List<Long> getCommodityNumber(String orgcode, long begin, long end) throws RemoteException {
 		// TODO Auto-generated method stub
 		List<Long> list=new ArrayList<Long>();
-		list.add(CommodityDB.getinnumber(orgcode, begin, end));
 		list.add(CommodityDB.getoutnumber(orgcode, begin, end));
+		list.add(CommodityDB.getinnumber(orgcode, begin, end));
 		list.add(CommodityDB.getAllNum(orgcode));
 		return list;
 	}
@@ -131,7 +131,15 @@ public class CommodityData extends UnicastRemoteObject implements CommodityDataS
 		}
 		
 	}
-
+//	public static void main(String[] args){
+//		try{
+//			CommodityData data=new CommodityData();
+//			CommodityPO po=data.getCommodityByCode("0250", "0000000001");
+//			data.setOuttime(po, 20160104);
+//		}catch(Exception e){
+//			
+//		}
+//	}
 
 	
 }

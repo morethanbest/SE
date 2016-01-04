@@ -72,8 +72,8 @@ public class CommodityDB {
 			pst.setLong(3,po.getOuttime());
 			pst.setString(4, po.getDestination());
 			pst.setBytes(5, location);
-			pst.setString(6, po.getId());
-			pst.setLong(7, po.getLocation().getBlocknum());
+			pst.setLong(6, po.getLocation().getBlocknum());
+			pst.setString(7, po.getId());
 			int result = pst.executeUpdate();
 			if (result == -1) {
 				dbh.close();// 关闭连接
@@ -169,7 +169,7 @@ public class CommodityDB {
 		long number=0;
 		dbh=new DBHelper();
 		try {
-			sql = "select id from CommodityPO where id like ? and ?<intime<?";
+			sql = "select id from CommodityPO where id like ? and ?<=intime and intime<=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, "%"+orgcode+"%");
 			pst.setLong(2, starttime);
@@ -193,7 +193,7 @@ public class CommodityDB {
 			long number=0;
 			dbh=new DBHelper();
 			try {
-				sql = "select id from CommodityPO where id like ? and ?<outtime<?";
+				sql = "select id from CommodityPO where id like ? and ?<=outtime and outtime<=?";
 				pst = dbh.prepare(sql);
 				pst.setString(1, "%"+orgcode+"%");
 				pst.setLong(2, starttime);
@@ -219,7 +219,7 @@ public class CommodityDB {
 		dbh=new DBHelper();
 		try {
 			sql = "select id,ordercode,intime,outtime,destination,Location from CommodityPO where id like ? and outtime < 0 and "
-					+ "?<= intime <=?";
+					+ "?<= intime and intime<=?";
 			pst = dbh.prepare(sql);
 			pst.setString(1, "%"+orgcode+"%");
 			pst.setLong(2, starttime);
@@ -323,7 +323,7 @@ public class CommodityDB {
 		try {
 			pst.setString(1, "%"+orgcode+"%");
 			ret=pst.executeQuery();
-			if(ret.next()){
+			while(ret.next()){
 				if(ret.getString(1).startsWith(orgcode))
 					number++;
 			}
@@ -338,6 +338,10 @@ public class CommodityDB {
 
 	public static void main(String[] args) {
 		initialize();
+//		System.out.println(getoutnumber("0250", 20160104, 20160104));
+//		CommodityPO po=getbyCode("0250","0000000001");
+//		po.setOuttime(-1);
+//		update(po);
 //		CommodityPO po=new CommodityPO("0250001","a",20150422,-1,"b",new CommodityLocation(1,1,1,1));
 //		if(write(po)==ResultMessage.success)
 //			System.out.println("write success");

@@ -3,6 +3,8 @@ package data.database.commodityDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor;
+
 import data.database.DBHelper;
 import po.ResultMessage;
 
@@ -51,6 +53,7 @@ public class StopPointDB {
 	
 	public static long getlastStoppoint(String orgcodeanddate) {			//根据机构号和时间得到最新的stoppoint
 		long number=Long.parseLong(orgcodeanddate+"0000");
+		orgcodeanddate=orgcodeanddate.substring(1,orgcodeanddate.length());
 		try {
 			dbh = new DBHelper();
 			sql = "select id from StopPoint where id like ?";
@@ -68,5 +71,8 @@ public class StopPointDB {
 		return number;
 
 	}
-
+	public static void main(String[] args){
+		initialize();
+//		System.out.println(getlastStoppoint("025020160105"));
+	}
 }

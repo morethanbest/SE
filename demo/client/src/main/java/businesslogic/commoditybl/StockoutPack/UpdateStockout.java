@@ -37,7 +37,6 @@ public class UpdateStockout {
 
     public ResultMessage passupdate(){
         String orgcode=id.substring(0,id.length()-7);//////////////////////////get orgcode   may run wrong
-
         if(formstate==Formstate.checked){
             this.formstate=Formstate.checked;
             CommodityDataService data2=RMIHelper.getCommoditydata();
@@ -50,7 +49,10 @@ public class UpdateStockout {
             }
 
             try {
-                data2.setOuttime(po,outtime);
+            	po.setOuttime(outtime);
+                if(ResultMessage.success==data2.setOuttime(po,outtime)){
+                	System.out.println(po.getOuttime());
+                }
             } catch (RemoteException e) {
                 System.out.println("stock out update commmodity set out time failed!!!");
                 e.printStackTrace();

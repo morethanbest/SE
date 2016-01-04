@@ -87,8 +87,8 @@ public class DepotPanel extends PersonPanel implements ActionListener {
 		add(switcher);
 
 		StockinUpdatePanel inu = new StockinUpdatePanel(this, card);
-		inc = new StockinCheckPanel(switcher, card, inu, orgCode);
 		in = new StockinPanel(orgCode, city, this, card);
+		inc = new StockinCheckPanel(switcher, card, inu, orgCode,in);
 		
 		StockoutUpdatePanel outu = new StockoutUpdatePanel(this, card);
 		outc = new StockoutCheckPanel(switcher, card, outu, orgCode);

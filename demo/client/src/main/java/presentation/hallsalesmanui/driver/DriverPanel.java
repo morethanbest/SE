@@ -398,7 +398,6 @@ public class DriverPanel extends WorkPanel implements ActionListener {
 		DriverBlService driverBlService=new DriverController();
 		DriverVO VO=null;
 		VO = driverBlService.getDriverbyDN(driverNumber, orgcode);
-		System.out.println(VO.getDrivername());
 		return VO;
 	}
 	
@@ -413,11 +412,15 @@ public class DriverPanel extends WorkPanel implements ActionListener {
 	public void displayInTable(List<DriverVO> list){
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);
-		for(DriverVO vo:list){
-			String[] rowString =new String[2];
-			rowString[0]=vo.getDrivername();
-			rowString[1]=vo.getDrivercode();
-			tableModel.addRow(rowString);
+		try{
+			for(DriverVO vo:list){
+				String[] rowString =new String[2];
+				rowString[0]=vo.getDrivername();
+				rowString[1]=vo.getDrivercode();
+				tableModel.addRow(rowString);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	@Override

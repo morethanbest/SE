@@ -76,7 +76,7 @@ public class StockTakingPanel extends WorkPanel {
 		scrollPane.setViewportView(table);
 		
 		label = new JLabel("本次盘点批号：");
-		label.setBounds(14, 3, 105, 18);
+		label.setBounds(14, 3, 220, 18);
 		add(label);
 		
 		button = new MyButton_LightBlue("开始盘点");
@@ -91,6 +91,7 @@ public class StockTakingPanel extends WorkPanel {
 				list3 = stocktakingBlService.Stocktaking(orgCode, date, Block.truck.getBlocknum()).getList();
 				list4 = stocktakingBlService.Stocktaking(orgCode, date, Block.flexible.getBlocknum()).getList();
 				selectToDisplay();
+				label.setText("本次盘点批号："+stocktakingBlService.getId(orgCode, date));
 			}
 		});
 		button.setBounds(581, -1, 113, 27);
