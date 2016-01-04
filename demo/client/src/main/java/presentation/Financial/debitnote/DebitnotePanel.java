@@ -347,7 +347,7 @@ public class DebitnotePanel extends WorkPanel implements ActionListener{
 	}
 	private void refreshListByday(){
 		DebitnoteBlService debitnoteBlService=new DebitnoteController();
-		long date=(long)yearSelect.getSelectedItem()+(long)monthSelect.getSelectedItem()+(long)daySelect.getSelectedItem();
+		long date=(long)yearSelect.getSelectedItem()*10000+(long)monthSelect.getSelectedItem()*100+(long)daySelect.getSelectedItem();
 		vo=debitnoteBlService.getRecordcollectbydate(date);
 		displayInTable();
 	}
