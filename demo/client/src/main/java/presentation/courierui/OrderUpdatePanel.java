@@ -67,6 +67,7 @@ public class OrderUpdatePanel extends PersonPanel {
 	private OrderBlService controller;
 	private MyButton_LightBlue back;
 	private JLabel orderCode;
+	private JLabel order;
 	private OrderVO temp;
 	private JLabel label_3;
 	private JLabel label_4;
@@ -302,6 +303,10 @@ public class OrderUpdatePanel extends PersonPanel {
 		separator_4.setBounds(14, 68, 954, 1);
 		add(separator_4);
 
+		order = new JLabel("订单编号");
+		order.setBounds(50, 37, 100, 18);
+		add(order);
+		
 		orderCode = new JLabel("");
 		orderCode.setBounds(107, 37, 314, 18);
 		add(orderCode);
@@ -474,7 +479,7 @@ public class OrderUpdatePanel extends PersonPanel {
 	
 	public void init(OrderVO vo){
 		this.temp = vo;
-		orderCode.setText("订单编号" + vo.getOrdercode());
+		orderCode.setText( vo.getOrdercode());
 		fareField.setText(vo.getTotalfee() + "");
 		
 		snameField.setText(vo.getSendername());

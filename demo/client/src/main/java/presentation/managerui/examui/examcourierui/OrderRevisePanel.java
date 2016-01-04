@@ -10,6 +10,7 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
@@ -22,6 +23,7 @@ import businesslogicservice.managerblservice.ExamOrdersBlService;
 import businesslogicservice.managerblservice.OrganizationBlService;
 import po.Formstate;
 import po.Ordertype;
+import po.ResultMessage;
 import presentation.enums.OrderTypes;
 import presentation.enums.PackageTypes;
 import presentation.managerui.examui.ExamPanel;
@@ -29,6 +31,7 @@ import presentation.mycomp.MyButton_LightBlue;
 import presentation.mycomp.MyTextField;
 import presentation.mycomp.WorkPanel;
 import presentation.mycomp.mycombobox.MyComboBox;
+import presentation.tip.TipDialog;
 import vo.CityVO;
 import vo.OrderVO;
 import vo.OrganizationVO;
@@ -97,7 +100,7 @@ public class OrderRevisePanel extends WorkPanel {
 		addCityItems(scityBox);
 
 		sareaBox = new MyComboBox<String>();
-		sareaBox.setBounds(449, 51, 86, 24);
+		sareaBox.setBounds(449, 51, 138, 24);
 		add(sareaBox);
 		addOrganizationItems(scityBox, sareaBox);
 
@@ -145,7 +148,7 @@ public class OrderRevisePanel extends WorkPanel {
 		addCityItems(rcityBox);
 
 		rareaBox = new MyComboBox<String>();
-		rareaBox.setBounds(449, 157, 86, 24);
+		rareaBox.setBounds(449, 157, 138, 24);
 		add(rareaBox);
 		addOrganizationItems(rcityBox, rareaBox);
 
@@ -246,7 +249,7 @@ public class OrderRevisePanel extends WorkPanel {
 					double volume = Double.parseDouble(volumeField.getText());
 					double fare = Double.parseDouble(fareField.getText());
 //原本的添加单据要删掉
-					ea.updateOrderForm(
+					ResultMessage resultMessage =ea.updateOrderForm(
 							new OrderVO(snameField.getText(), saddress,
 									sjobField.getText(), stelField.getText(),
 									sphoneField.getText(),
@@ -258,6 +261,15 @@ public class OrderRevisePanel extends WorkPanel {
 									orderCode.getText(),
 									getOrderType((String) orderBox
 											.getSelectedItem()), fare, temp.getFormstate()));
+					if(resultMessage==ResultMessage.success){
+						TipDialog tipDialog=new TipDialog("修改成功！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}else {
+						TipDialog tipDialog=new TipDialog("修改失败！");
+						tipDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						tipDialog.setVisible(true);	
+					}
 				} catch (NumberFormatException e1) {
 					System.out.println("wronginput");
 				}
