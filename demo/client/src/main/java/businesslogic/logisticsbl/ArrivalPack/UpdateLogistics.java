@@ -88,7 +88,7 @@ public class UpdateLogistics {
 
 
     public ResultMessage updatebycenter(ArrivalVO vo,String orgcode){
-        if(vo.getFormstate()!= Formstate.pass){
+        if(vo.getFormstate()!= Formstate.checked){
             return ResultMessage.failure;
         }
 

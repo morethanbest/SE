@@ -30,7 +30,7 @@ public class RecordtransUpdateLogistics {
             try {
                 newpo=dataserv.findLogisticsInfo(allbar.get(i));
 
-                String nowstate="发往"+vo.getDepartrue();
+                String nowstate="发往"+vo.getDestination();
                 List<String> history=newpo.getHistory();
                 history.add(nowstate);
                 newpo.setHistory(history);

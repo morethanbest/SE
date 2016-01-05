@@ -252,7 +252,8 @@ public class RecordcollectDB {
 	}
 
 	public static void main(String[] args) {
-		initialize();
+		System.out.println(getbyhall("025001").size());
+//		initialize();
 //		List<String >list=new ArrayList<String>();
 //		list.add("123");
 //		RecordcollectPO po=new RecordcollectPO("0250001",20150522,"123",2,"sunchao",list,Formstate.checked);

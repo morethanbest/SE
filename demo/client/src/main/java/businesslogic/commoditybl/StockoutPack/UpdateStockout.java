@@ -51,7 +51,6 @@ public class UpdateStockout {
             try {
             	po.setOuttime(outtime);
                 if(ResultMessage.success==data2.setOuttime(po,outtime)){
-                	System.out.println(po.getOuttime());
                 }
             } catch (RemoteException e) {
                 System.out.println("stock out update commmodity set out time failed!!!");

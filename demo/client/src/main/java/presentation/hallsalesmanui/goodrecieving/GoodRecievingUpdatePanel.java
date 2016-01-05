@@ -159,7 +159,7 @@ public class GoodRecievingUpdatePanel extends WorkPanel {
 		label_2.setBounds(54, 149, 82, 18);
 		add(label_2);
 		
-		JLabel label_3 = new JLabel("目的地：");
+		JLabel label_3 = new JLabel("出发地：");
 		label_3.setBounds(448, 70, 71, 18);
 		add(label_3);
 		

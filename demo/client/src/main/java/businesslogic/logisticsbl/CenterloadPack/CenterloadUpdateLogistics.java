@@ -17,7 +17,7 @@ public class CenterloadUpdateLogistics {
 
     public ResultMessage updatehistory(CenterloadVO vo)
     {
-        if(vo.getFormstate()!= Formstate.pass){
+        if(vo.getFormstate()!= Formstate.checked){
             return ResultMessage.failure;
         }
 

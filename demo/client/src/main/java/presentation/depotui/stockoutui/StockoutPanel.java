@@ -187,7 +187,7 @@ public class StockoutPanel extends WorkPanel {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				addOrganizationItems(orgBox);
-
+				addTransportTypeItems();
 			}
 		});
 
@@ -239,17 +239,27 @@ public class StockoutPanel extends WorkPanel {
 		if (typeBox.getSelectedIndex() == 1) {
 			orgList = organizationBlService
 					.getOrganizationbyType(Organizationtype.transfercenter);
+			for (OrganizationVO org : orgList) {
+				orgSelect.addItem(org.getName());
+			}
 		} else {
 			orgList = organizationBlService.getOrganizationbyCity(city);
+			for (OrganizationVO org : orgList) {
+				if(org.getType()==Organizationtype.hall)
+					orgSelect.addItem(org.getName());
+			}
 		}
-		for (OrganizationVO org : orgList) {
-			orgSelect.addItem(org.getName());
-		}
+		
 	}
 
 	private void addTransportTypeItems() {
-		for (TransportTypes transport : TransportTypes.values()) {
-			transportBox.addItem(transport.getName());
+		transportBox.removeAllItems();
+		if (typeBox.getSelectedIndex() == 0) {
+			transportBox.addItem(TransportTypes.Bus.getName());
+		}else{
+			for (TransportTypes transport : TransportTypes.values()) {
+				transportBox.addItem(transport.getName());
+			}
 		}
 	}
 	

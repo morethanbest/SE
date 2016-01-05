@@ -50,7 +50,7 @@ public class GoodsRecevingController implements GoodsRecevingBlService{
     @Override
     public ResultMessage updateFromCenter(GoodsReceivingVO vo, String orgname) {
         GoodsRevUpdateLogistics updatelog=new GoodsRevUpdateLogistics();
-        updatelog.updatabyhall(vo,orgname);////////////////////////////////////////////
+        updatelog.updatebycenter(vo, orgname);////////////////////////////////////////////
 
         ResultMessage result=update(vo);
         return result;

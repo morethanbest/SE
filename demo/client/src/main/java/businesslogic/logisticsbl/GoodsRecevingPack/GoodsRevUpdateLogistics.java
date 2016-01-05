@@ -85,7 +85,7 @@ public class GoodsRevUpdateLogistics {
 
 
     public ResultMessage updatebycenter(GoodsReceivingVO vo,String orgname){
-        if(vo.getFormstate()!= Formstate.pass){
+        if(vo.getFormstate()!= Formstate.checked){
             return ResultMessage.failure;
         }
         GoodsReceivingFormDataService dataserv= RMIHelper.getGoodsreceiving();
